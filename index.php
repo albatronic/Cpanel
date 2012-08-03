@@ -98,7 +98,6 @@ if (file_exists($config['twig']['motor'])) {
     die("NO SE PUEDE ENCONTRAR EL MOTOR TWIG");
 
 
-
 // ------------------------------------------------
 // COMPROBAR DISPOSITIVO DE NAVEGACION
 // ------------------------------------------------
@@ -191,7 +190,8 @@ $twig->loadTemplate($result['template'])
         ->display(array(
             'values' => $result['values'],
             'app'    => $app,
-            'user'   => new Usuarios($_SESSION['USER']['user']['id']),
+            'layout' => '_global/layout.html.twig',
+            //'user'   => new Usuarios($_SESSION['iu']),
         ));
 
 //------------------------------------------------------------

@@ -8,7 +8,7 @@
  * que pueden contener las propiedades de las entidades.
  *
  * El método fetchAll() devuelve los valores para que
- * los formulario rendericen los desplegables de valores
+ * los formularios rendericen los desplegables de valores
  *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @copyright Informatica ALBATRONIC, SL

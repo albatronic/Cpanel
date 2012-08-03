@@ -1,0 +1,5 @@
+{# TEMPLATE Perfiles/form.html.twig #}
+{# Muestra los campos editables de la entidad #}
+
+{{ macro.input('Perfil','Etiqueta','text',values.controller ~ '[Perfil]',values.controller ~ '_Perfil',datos.Perfil,'50','CampoTextoLargo') }}
+{% include '_global/FormComunes.html.twig' %}

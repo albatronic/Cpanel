@@ -16,7 +16,7 @@ config:
   app:
     name: CPanel
     url: http://localhost/cpanel
-    path: /
+    path: /cpanel
     framework: bin/albatronic/
   # CONEXIONES A LAS BASES DE DATOS
   conections:
@@ -54,7 +54,7 @@ config:
       bin/jpgraph/src/jpgraph_bar.php
   # MOTOR DE TEMPLATES
   twig:
-    motor: Twig-1.7.0/lib/Twig/Autoloader.php
+    motor: bin/Twig-1.7.0/lib/Twig/Autoloader.php
     templates_folder: modules
     debug_mode: true
     cache_folder: tmp

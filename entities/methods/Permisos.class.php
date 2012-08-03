@@ -1,19 +1,16 @@
 <?php
+/**
+ * @author Sergio Perez <sergio.perez@albatronic.com>
+ * @copyright INFORMATICA ALBATRONIC SL
+ * @date 03.08.2012 21:15:37
+ */
 
 /**
- * Description of Permisos
- *
- * @author Sergio Pérez <sergio.perez@albatronic.com>
- * @copyright Informática ALBATRONIC, SL
- * @date 04-nov-2011
- *
+ * @orm:Entity(permisos)
  */
 class Permisos extends PermisosEntity {
-
-    public function __toString() {
-        return $this->getPermisos();
-    }
-
+	public function __toString() {
+		return $this->getIDPermiso();
+	}
 }
-
 ?>

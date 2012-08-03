@@ -3,14 +3,18 @@
 /**
  * Description of IndexController
  *
- * @since 03-08-2012
- * @author Sergio Perez <sergio.perez@albatronic.com>
+ * @author Sergio Pérez <sergio.perez@albatronic.com>
+ * @copyright Informática ALBATRONIC, SL
+ * @date 3-Agosto-2012
+ *
  */
 class IndexController {
-    
+
     public function IndexAction() {
-        
+        $values = array();
+        return array('template' => 'Index/Index.html.twig', 'values' => $values);
     }
+
 }
 
 ?>

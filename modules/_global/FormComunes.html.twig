@@ -1,0 +1,26 @@
+{# CAMPOS COMUNES A TODOS LOS FORMULARIOS #}
+
+{{ macro.textarea('Observaciones','Etiqueta',values.controller ~ '[Observaciones]',values.controller ~ '_Observaciones',datos.Observaciones,none,none,'TextArea')}}
+{{ macro.input('PrimaryKeyMD5','Etiqueta','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo') }}
+{{ macro.select('EsPredeterminado','Etiqueta',values.controller ~ '[EsPredeterminado]',values.controller ~ '_EsPredeterminado',none,datos.EsPredeterminado.EsPredeterminado,datos.EsPredeterminado.fetchAll(),'Select')}}
+{{ macro.select('Revisado','Etiqueta',values.controller ~ '[Revisado]',values.controller ~ '_Revisado',none,datos.Revisado.Revisado,datos.Revisado.fetchAll(),'Select')}}
+{{ macro.select('Publicar','Etiqueta',values.controller ~ '[Publicar]',values.controller ~ '_Publicar',none,datos.Publicar.Publicar,datos.Publicar.fetchAll(),'Select')}}
+{{ macro.fecha('VigenteDesde','Etiqueta',values.controller ~ '[VigenteDesde]',values.controller ~ '_VigenteDesde',datos.VigenteDesde,'19','LiteralFechaHora') }}
+{{ macro.fecha('VigenteHasta','Etiqueta',values.controller ~ '[VigenteHasta]',values.controller ~ '_VigenteHasta',datos.VigenteHasta,'19','LiteralFechaHora') }}
+{{ macro.select('Deleted','Etiqueta',values.controller ~ '[Deleted]',values.controller ~ '_Deleted',none,datos.Deleted.Deleted,datos.Deleted.fetchAll(),'Select')}}
+{{ macro.input('DeletedBy','Etiqueta','text',values.controller ~ '[DeletedBy]',values.controller ~ '_DeletedBy',datos.DeletedBy,'4','CampoUnidades') }}
+{{ macro.fecha('DeletedAt','Etiqueta',values.controller ~ '[DeletedAt]',values.controller ~ '_DeletedAt',datos.DeletedAt,'19','LiteralFechaHora') }}
+{{ macro.select('Privacidad','Etiqueta',values.controller ~ '[Privacidad]',values.controller ~ '_Privacidad',none,datos.Privacidad.Privacidad,datos.Privacidad.fetchAll(),'Select')}}
+{{ macro.input('Orden','Etiqueta','text',values.controller ~ '[Orden]',values.controller ~ '_Orden',datos.Orden,'11','CampoImporte') }}
+{{ macro.input('Imagenes','Etiqueta','text',values.controller ~ '[Imagenes]',values.controller ~ '_Imagenes',datos.Imagenes,'255','CampoTextoLargo') }}
+{{ macro.fecha('FechaPublicacion','Etiqueta',values.controller ~ '[FechaPublicacion]',values.controller ~ '_FechaPublicacion',datos.FechaPublicacion,'19','LiteralFechaHora') }}
+{{ macro.input('UrlAmigable','Etiqueta','text',values.controller ~ '[UrlAmigable]',values.controller ~ '_UrlAmigable',datos.UrlAmigable,'255','CampoTextoLargo') }}
+{{ macro.input('NumeroVisitas','Etiqueta','text',values.controller ~ '[NumeroVisitas]',values.controller ~ '_NumeroVisitas',datos.NumeroVisitas,'11','CampoImporte') }}
+{{ macro.input('MetatagTitle','Etiqueta','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,'255','CampoTextoLargo') }}
+{{ macro.input('MetatagKeywords','Etiqueta','text',values.controller ~ '[MetatagKeywords]',values.controller ~ '_MetatagKeywords',datos.MetatagKeywords,'255','CampoTextoLargo') }}
+{{ macro.input('MetatagDescription','Etiqueta','text',values.controller ~ '[MetatagDescription]',values.controller ~ '_MetatagDescription',datos.MetatagDescription,'255','CampoTextoLargo') }}
+{{ macro.select('MetatagTitleSimple','Etiqueta',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',none,datos.MetatagTitleSimple.MetatagTitleSimple,datos.MetatagTitleSimple.fetchAll(),'Select')}}
+{{ macro.select('MetatagTitlePosicion','Etiqueta',values.controller ~ '[MetatagTitlePosicion]',values.controller ~ '_MetatagTitlePosicion',none,datos.MetatagTitlePosicion.MetatagTitlePosicion,datos.MetatagTitlePosicion.fetchAll(),'Select')}}
+{{ macro.select('MostrarEnMapaWeb','Etiqueta',values.controller ~ '[MostrarEnMapaWeb]',values.controller ~ '_MostrarEnMapaWeb',none,datos.MostrarEnMapaWeb.MostrarEnMapaWeb,datos.MostrarEnMapaWeb.fetchAll(),'Select')}}
+{{ macro.input('ImportanciaMapaWeb','Etiqueta','text',values.controller ~ '[ImportanciaMapaWeb]',values.controller ~ '_ImportanciaMapaWeb',datos.ImportanciaMapaWeb,'5','CampoTextoCorto') }}
+{{ macro.input('ChangeFreqMapaWeb','Etiqueta','text',values.controller ~ '[ChangeFreqMapaWeb]',values.controller ~ '_ChangeFreqMapaWeb',datos.ChangeFreqMapaWeb,'25','CampoTextoCorto') }}

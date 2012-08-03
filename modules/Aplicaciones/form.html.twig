@@ -1,0 +1,7 @@
+{# TEMPLATE Aplicaciones/form.html.twig #}
+{# Muestra los campos editables de la entidad #}
+
+{{ macro.input('CodigoApp','Etiqueta','text',values.controller ~ '[CodigoApp]',values.controller ~ '_CodigoApp',datos.CodigoApp,'15','CampoTextoCorto') }}
+{{ macro.input('NombreApp','Etiqueta','text',values.controller ~ '[NombreApp]',values.controller ~ '_NombreApp',datos.NombreApp,'100','CampoTextoLargo') }}
+{{ macro.input('Descripcion','Etiqueta','text',values.controller ~ '[Descripcion]',values.controller ~ '_Descripcion',datos.Descripcion,'100','CampoTextoLargo') }}
+{% include '_global/FormComunes.html.twig' %}

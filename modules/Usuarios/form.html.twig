@@ -1,0 +1,18 @@
+{# TEMPLATE Usuarios/form.html.twig #}
+{# Muestra los campos editables de la entidad #}
+
+{{ macro.select('IDPerfil','Etiqueta',values.controller ~ '[IDPerfil]',values.controller ~ '_IDPerfil',none,datos.IDPerfil.IDPerfil,datos.IDPerfil.fetchAll('IDPerfil'),'Select')}}
+{{ macro.input('IDRol','Etiqueta','text',values.controller ~ '[IDRol]',values.controller ~ '_IDRol',datos.IDRol,'11','CampoImporte') }}
+{{ macro.input('IDEmpresa','Etiqueta','text',values.controller ~ '[IDEmpresa]',values.controller ~ '_IDEmpresa',datos.IDEmpresa,'11','CampoImporte') }}
+{{ macro.input('IDTipoUsuario','Etiqueta','text',values.controller ~ '[IDTipoUsuario]',values.controller ~ '_IDTipoUsuario',datos.IDTipoUsuario,'11','CampoImporte') }}
+{{ macro.input('Login','Etiqueta','text',values.controller ~ '[Login]',values.controller ~ '_Login',datos.Login,'50','CampoTextoLargo') }}
+{{ macro.input('Password','Etiqueta','text',values.controller ~ '[Password]',values.controller ~ '_Password',datos.Password,'100','CampoTextoLargo') }}
+{{ macro.input('Email','Etiqueta','text',values.controller ~ '[Email]',values.controller ~ '_Email',datos.Email,'100','CampoTextoLargo') }}
+{{ macro.input('TelefonoMovil','Etiqueta','text',values.controller ~ '[TelefonoMovil]',values.controller ~ '_TelefonoMovil',datos.TelefonoMovil,'25','CampoTextoCorto') }}
+{{ macro.input('Nombre','Etiqueta','text',values.controller ~ '[Nombre]',values.controller ~ '_Nombre',datos.Nombre,'100','CampoTextoLargo') }}
+{{ macro.input('Apellidos','Etiqueta','text',values.controller ~ '[Apellidos]',values.controller ~ '_Apellidos',datos.Apellidos,'100','CampoTextoLargo') }}
+{{ macro.select('CambioPassword','Etiqueta',values.controller ~ '[CambioPassword]',values.controller ~ '_CambioPassword',none,datos.CambioPassword.CambioPassword,datos.CambioPassword.fetchAll(),'Select')}}
+{{ macro.input('Ips','Etiqueta','text',values.controller ~ '[Ips]',values.controller ~ '_Ips',datos.Ips,'255','CampoTextoLargo') }}
+{{ macro.input('NLogin','Etiqueta','text',values.controller ~ '[NLogin]',values.controller ~ '_NLogin',datos.NLogin,'4','CampoUnidades') }}
+{{ macro.fecha('UltimoLogin','Etiqueta',values.controller ~ '[UltimoLogin]',values.controller ~ '_UltimoLogin',datos.UltimoLogin,'19','LiteralFechaHora') }}
+{% include '_global/FormComunes.html.twig' %}

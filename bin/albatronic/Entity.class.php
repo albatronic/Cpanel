@@ -11,33 +11,7 @@
  * @since 10-jun-2011
  *
  */
-class Entity {
-
-    /**
-     * @orm:Column(type="integer")
-     * @assert:NotBlank(groups="cursos")
-     * @var entities\Agentes
-     */
-    protected $CreatedBy = '0';
-
-    /**
-     * @orm:Column(type="datetime")
-     * @assert:NotBlank(groups="cursos")
-     */
-    protected $CreatedAt = '0000-00-00 00:00:00';
-
-    /**
-     * @orm:Column(type="integer")
-     * @assert:NotBlank(groups="cursos")
-     * @var entities\Agentes
-     */
-    protected $ModifiedBy = '0';
-
-    /**
-     * @orm:Column(type="datetime")
-     * @assert:NotBlank(groups="cursos")
-     */
-    protected $ModifiedAt = '0000-00-00 00:00:00';
+class Entity extends EntityComunes {
 
     /**
      * Objeto de conexion a la base de datos
@@ -216,8 +190,42 @@ class Entity {
     }
 
     /**
-     * Borra un registro (delete).
+     * Marca como borrado un registro.
+     * 
+     * Hace las validaciones de integridad previas al borrado pero NO
+     * hace el borrado físico.
+     * 
+     * @return bollean
+     */
+    public function delete() {
+
+        $validacion = $this->validaBorrado();
+
+        if ($validacion) {
+            $this->conecta();
+
+            if (is_resource($this->_dbLink)) {
+                // Auditoria
+                $this->setDeletedAt(date('Y-m-d H:i:s'));
+                $this->setDeletedBy($_SESSION['USER']['user']['id']);
+                $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET `Deleted` = '1' WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
+                if (!$this->_em->query($query))
+                    $this->_errores = $this->_em->getError();
+                $this->_em->desConecta();
+            } else
+                $this->_errores = $this->_em->getError();
+            unset($this->_em);
+            $validacion = (count($this->_errores) == 0);
+        }
+
+        return $validacion;
+    }
+
+    /**
+     * Borra físicamente un registro (delete).
+     * 
      * Antes de borrar realiza validaciones de integridad de datos
+     * 
      * @return boolean
      */
     public function erase() {
@@ -510,42 +518,6 @@ class Entity {
     public function getNumberOfDocuments() {
         $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue());
         return $docs->getNumberOfDocuments();
-    }
-
-    public function setCreatedBy($CreateBy) {
-        $this->CreatedBy = $CreateBy;
-    }
-
-    public function getCreatedBy() {
-        if (!($this->CreatedBy instanceof Agentes))
-            $this->CreatedBy = new Agentes($this->CreatedBy);
-        return $this->CreatedBy;
-    }
-
-    public function setCreatedAt($CreatedAt) {
-        $this->CreatedAt = $CreatedAt;
-    }
-
-    public function getCreatedAt() {
-        return $this->CreatedAt;
-    }
-
-    public function setModifiedBy($ModifiedBy) {
-        $this->ModifiedBy = $ModifiedBy;
-    }
-
-    public function getModifiedBy() {
-        if (!($this->ModifiedBy instanceof Agentes))
-            $this->ModifiedBy = new Agentes($this->ModifiedBy);
-        return $this->ModifiedBy;
-    }
-
-    public function setModifiedAt($ModifiedAt) {
-        $this->ModifiedAt = $ModifiedAt;
-    }
-
-    public function getModifiedAt() {
-        return $this->ModifiedAt;
     }
 
     /**

@@ -1,0 +1,5 @@
+{# TEMPLATE Tiposusuarios/form.html.twig #}
+{# Muestra los campos editables de la entidad #}
+
+{{ macro.input('TipoUsuario','Etiqueta','text',values.controller ~ '[TipoUsuario]',values.controller ~ '_TipoUsuario',datos.TipoUsuario,'50','CampoTextoLargo') }}
+{% include '_global/FormComunes.html.twig' %}

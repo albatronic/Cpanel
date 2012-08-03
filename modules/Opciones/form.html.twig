@@ -1,0 +1,9 @@
+{# TEMPLATE Opciones/form.html.twig #}
+{# Muestra los campos editables de la entidad #}
+
+{{ macro.select('CodigoApp','Etiqueta',values.controller ~ '[CodigoApp]',values.controller ~ '_CodigoApp',none,datos.CodigoApp.CodigoApp,datos.CodigoApp.fetchAll('CodigoApp'),'Select')}}
+{{ macro.input('Nivel','Etiqueta','text',values.controller ~ '[Nivel]',values.controller ~ '_Nivel',datos.Nivel,'4','CampoUnidades') }}
+{{ macro.input('PerteneceA','Etiqueta','text',values.controller ~ '[PerteneceA]',values.controller ~ '_PerteneceA',datos.PerteneceA,'4','CampoUnidades') }}
+{{ macro.input('Titulo','Etiqueta','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'100','CampoTextoLargo') }}
+{{ macro.input('Descripcion','Etiqueta','text',values.controller ~ '[Descripcion]',values.controller ~ '_Descripcion',datos.Descripcion,'100','CampoTextoLargo') }}
+{% include '_global/FormComunes.html.twig' %}

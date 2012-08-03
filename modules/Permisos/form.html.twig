@@ -1,0 +1,7 @@
+{# TEMPLATE Permisos/form.html.twig #}
+{# Muestra los campos editables de la entidad #}
+
+{{ macro.input('IDPerfil','Etiqueta','text',values.controller ~ '[IDPerfil]',values.controller ~ '_IDPerfil',datos.IDPerfil,'11','CampoImporte') }}
+{{ macro.input('IDOpcion','Etiqueta','text',values.controller ~ '[IDOpcion]',values.controller ~ '_IDOpcion',datos.IDOpcion,'11','CampoImporte') }}
+{{ macro.input('Permisos','Etiqueta','text',values.controller ~ '[Permisos]',values.controller ~ '_Permisos',datos.Permisos,'255','CampoTextoLargo') }}
+{% include '_global/FormComunes.html.twig' %}
