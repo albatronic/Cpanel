@@ -2,13 +2,13 @@
 
 /**
  * Description of EntityComunes
- * 
+ *
  * Definicion de propiedades y métodos comunes a todas las entidades de datos
  *
  * @date 03-08-2012
  * @author Sergio Perez <sergio.perez@albatronic.com>
  */
-class EntityComunes {
+class EntityComunes extends Entity {
 
     /**
      * @orm:Column(type="string")
@@ -37,20 +37,17 @@ class EntityComunes {
 
     /**
      * @orm:Column(type="datetime")
-     * @assert:NotBlank(groups="aplicaciones")
      */
     protected $VigenteDesde;
 
     /**
      * @orm:Column(type="datetime")
-     * @assert:NotBlank(groups="aplicaciones")
      */
     protected $VigenteHasta;
 
     /**
      * @orm:Column(type="integer")
-     * @assert:NotBlank(groups="cursos")
-     * @var entities\Agentes
+     * @var entities\CoreUsuarios
      */
     protected $CreatedBy = '0';
 
@@ -62,8 +59,7 @@ class EntityComunes {
 
     /**
      * @orm:Column(type="integer")
-     * @assert:NotBlank(groups="cursos")
-     * @var entities\Agentes
+     * @var entities\CoreUsuarios
      */
     protected $ModifiedBy = '0';
 
@@ -80,6 +76,7 @@ class EntityComunes {
 
     /**
      * @orm:Column(type="integer")
+     * @var entities\CoreUsuarios
      */
     protected $DeletedBy = '0';
 
@@ -97,11 +94,6 @@ class EntityComunes {
      * @orm:Column(type="integer")
      */
     protected $Orden;
-
-    /**
-     * @orm:Column(type="string")
-     */
-    protected $Imagenes;
 
     /**
      * @orm:Column(type="datetime")
@@ -156,7 +148,7 @@ class EntityComunes {
     /**
      * @orm:Column(type="string")
      */
-    protected $ChangeFreqMapaWeb = '0';
+    protected $ChangeFreqMapaWeb = '';
 
     public function setObservaciones($Observaciones) {
         $this->Observaciones = trim($Observaciones);
@@ -225,8 +217,8 @@ class EntityComunes {
     }
 
     public function getCreatedBy() {
-        if (!($this->CreatedBy instanceof Usuarios))
-            $this->CreatedBy = new Usuarios($this->CreatedBy);
+        if (!($this->CreatedBy instanceof CoreUsuarios))
+            $this->CreatedBy = new CoreUsuarios($this->CreatedBy);
         return $this->CreatedBy;
     }
 
@@ -243,8 +235,8 @@ class EntityComunes {
     }
 
     public function getModifiedBy() {
-        if (!($this->ModifiedBy instanceof Usuarios))
-            $this->ModifiedBy = new Usuarios($this->ModifiedBy);
+        if (!($this->ModifiedBy instanceof CoreUsuarios))
+            $this->ModifiedBy = new CoreUsuarios($this->ModifiedBy);
         return $this->ModifiedBy;
     }
 
@@ -271,8 +263,8 @@ class EntityComunes {
     }
 
     public function getDeletedBy() {
-        if (!($this->DeletedBy instanceof Usuarios))
-            $this->DeletedBy = new Usuarios($this->DeletedBy);
+        if (!($this->DeletedBy instanceof CoreUsuarios))
+            $this->DeletedBy = new CoreUsuarios($this->DeletedBy);
         return $this->DeletedBy;
     }
 
@@ -289,8 +281,8 @@ class EntityComunes {
     }
 
     public function getPrivacidad() {
-        if (!($this->Privacidad instanceof ValoresSN))
-            $this->Privacidad = new ValoresSN($this->Privacidad);
+        if (!($this->Privacidad instanceof ValoresPrivacidad))
+            $this->Privacidad = new ValoresPrivacidad($this->Privacidad);
         return $this->Privacidad;
     }
 
@@ -300,14 +292,6 @@ class EntityComunes {
 
     public function getOrden() {
         return $this->Orden;
-    }
-
-    public function setImagenes($Imagenes) {
-        $this->Imagenes = trim($Imagenes);
-    }
-
-    public function getImagenes() {
-        return $this->Imagenes;
     }
 
     public function setFechaPublicacion($FechaPublicacion) {
@@ -373,8 +357,8 @@ class EntityComunes {
     }
 
     public function getMetatagTitlePosicion() {
-        if (!($this->MetatagTitlePosicion instanceof ValoresDchIzq))
-            $this->MetatagTitlePosicion = new ValoresDchIzq($this->MetatagTitlePosicion);
+        if (!($this->MetatagTitlePosicion instanceof ValoresDchaIzq))
+            $this->MetatagTitlePosicion = new ValoresDchaIzq($this->MetatagTitlePosicion);
         return $this->MetatagTitlePosicion;
     }
 

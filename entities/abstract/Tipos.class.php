@@ -8,7 +8,7 @@
  * que pueden contener las propiedades de las entidades.
  *
  * El método fetchAll() devuelve los valores para que
- * los formularios rendericen los desplegables de valores
+ * los formulario rendericen los desplegables de valores
  *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @copyright Informatica ALBATRONIC, SL
@@ -35,9 +35,10 @@ class Tipos {
         }
     }
 
-    public function fetchAll() {
+    public function fetchAll($default = true) {
 
-        $this->tipos[] = array('Id'=>'', 'Value'=>':: Indique valor');
+        if ($default)
+            $this->tipos[] = array('Id' => '', 'Value' => ':: Indique valor');
 
         return $this->tipos;
     }

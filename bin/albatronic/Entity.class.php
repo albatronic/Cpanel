@@ -11,7 +11,7 @@
  * @since 10-jun-2011
  *
  */
-class Entity extends EntityComunes {
+class Entity  {
 
     /**
      * Objeto de conexion a la base de datos
@@ -62,9 +62,9 @@ class Entity extends EntityComunes {
 
     /**
      * Realiza la conexión a la base de datos apoyándose en EntityManager
-     * 
+     *
      * Y establece los valores de las propiedades
-     * 
+     *
      *   * $this->_dbLink
      *   * $this->_dataBaseName
      */
@@ -158,6 +158,9 @@ class Entity extends EntityComunes {
             // Auditoria
             $this->setCreatedAt(date('Y-m-d H:i:s'));
             $this->setCreatedBy($_SESSION['USER']['user']['id']);
+            $this->setFechaPublicacion(date('Y-m-d H:i:s'));
+            $this->setVigenteDesde($_SESSION['varEntorno']['VigenteDesde']);
+            $this->setVigenteHasta($_SESSION['varEntorno']['VigenteHasta']);
 
             // Compongo las columnas y los valores iterando el objeto
             $columns = '';
@@ -182,6 +185,8 @@ class Entity extends EntityComunes {
             } else {
                 $lastId = $this->_em->getInsertId();
                 $this->setPrimaryKeyValue($lastId);
+                $this->setOrden($lastId);
+                $this->save();
             }
             $this->_em->desConecta();
         }
@@ -191,10 +196,10 @@ class Entity extends EntityComunes {
 
     /**
      * Marca como borrado un registro.
-     * 
+     *
      * Hace las validaciones de integridad previas al borrado pero NO
      * hace el borrado físico.
-     * 
+     *
      * @return bollean
      */
     public function delete() {
@@ -223,9 +228,9 @@ class Entity extends EntityComunes {
 
     /**
      * Borra físicamente un registro (delete).
-     * 
+     *
      * Antes de borrar realiza validaciones de integridad de datos
-     * 
+     *
      * @return boolean
      */
     public function erase() {
@@ -268,14 +273,14 @@ class Entity extends EntityComunes {
 
     /**
      * Valida la información cargada en las propiedades del objeto
-     * respecto a las reglas pasadas en el array $rules y que 
+     * respecto a las reglas pasadas en el array $rules y que
      * provienen del nodo <validator> del archivo config.yml
      * correspondiente al controller del objeto.
      *
      * Tambien hace la validación lógica.
      *
      * Carga los array de errores y alertas si procede.
-     * 
+     *
      * @param array $rules Array con las reglas de validacion
      * @return boolean True si hay errores
      */
@@ -342,7 +347,7 @@ class Entity extends EntityComunes {
      * Este método lo debe implementar la entidad que lo necesite
      */
     protected function validaLogico() {
-        
+
     }
 
     /**
@@ -352,7 +357,7 @@ class Entity extends EntityComunes {
      * donde se definen las entidades que referencian a esta
      *
      * Si hay errores carga el array $this->_errores
-     * 
+     *
      * @return boolean
      */
     protected function validaBorrado() {
@@ -382,15 +387,19 @@ class Entity extends EntityComunes {
      * @param string $columnas Relacion de las columnas seperadas por coma
      * @param string $condicion Condicion de filtrado que se utiliza en la clausula where (sin WHERE)
      * @param string $orderBy Ordenacion, debe incluir la/s columna/s y el tipo ASC/DESC (sin ORDER BY)
+     * @param boolean $showDeleted Devolver o no los registros marcados como borrados, por defecto no se devuelven
      * @return array $rows Array con las columnas devueltas
      */
-    public function cargaCondicion($columnas = '*', $condicion = '1=1', $orderBy = '') {
+    public function cargaCondicion($columnas = '*', $condicion = '(1=1)', $orderBy = '', $showDeleted = FALSE) {
         $this->conecta();
 
         if (is_resource($this->_dbLink)) {
 
             if ($orderBy != '')
                 $orderBy = 'ORDER BY ' . $orderBy;
+
+            if ($showDeleted == FALSE)
+                $condicion .= " AND (Deleted = '0')";
 
             $query = "SELECT {$columnas} FROM `{$this->_tableName}` WHERE ({$condicion}) {$orderBy}";
             $this->_em->query($query);
@@ -429,9 +438,9 @@ class Entity extends EntityComunes {
 
     /**
      * Devuelve un array con todos los registros de la entidad
-     * 
+     *
      * Cada elemento tiene la primarykey y el valor de $column
-     * 
+     *
      * Si no se indica valor para $column, se mostrará los valores
      * de la primarykey
      *
@@ -443,8 +452,12 @@ class Entity extends EntityComunes {
      *      '0' => array('Id' => valor primaryKey, 'Value'=> valor de la columna $column),
      *      '1' => .......
      * )
+     *
+     * @param string $column El nombre de columna a mostrar
+     * @param boolean $default Si se añade o no el valor 'Indique Valor'
+     * @return array Array de valores Id, Value
      */
-    public function fetchAll($column = '') {
+    public function fetchAll($column = '', $default = true) {
         if ($column == '')
             $column = $this->getPrimaryKeyName();
 
@@ -458,13 +471,16 @@ class Entity extends EntityComunes {
             $this->_em->desConecta();
             unset($this->_em);
         }
-        $rows[] = array('Id' => '', Value => ':: Indique un Valor');
+
+        if ($default == TRUE)
+            $rows[] = array('Id' => '', Value => ':: Indique un Valor');
+
         return $rows;
     }
 
     /**
      * Localiza el primer registro en orden ascendente segun la Primary Key
-     * 
+     *
      * @return mixed el valor de la primary key de menor valor
      */
     public function getFirst() {
@@ -483,7 +499,7 @@ class Entity extends EntityComunes {
 
     /**
      * Localiza el ultimo registro en orden ascendente segun la Primary Key
-     * 
+     *
      * @return mixed el valor de la primary key de mayor valor
      */
     public function getLast() {
@@ -512,7 +528,7 @@ class Entity extends EntityComunes {
 
     /**
      * Devuelve el número de documentos asociados a la entidad
-     * 
+     *
      * @return integer El número de documentos
      */
     public function getNumberOfDocuments() {
@@ -524,7 +540,7 @@ class Entity extends EntityComunes {
      * Devuelve un array cuyo índice es el nombre de la propiedad
      * y el valor es el valor de dicha propiedad
      * No devuelve las propiedades que empiezan por guión bajo "_"
-     * 
+     *
      * @return array Array con los valores de las propiedades de la entidad
      */
     public function iterator() {
@@ -594,7 +610,7 @@ class Entity extends EntityComunes {
     /**
      * Devuelve un valor numérico indicando el número
      * de registros obtenidos en la última consulta.
-     * 
+     *
      * @return integer
      */
     public function getStatus() {
@@ -642,7 +658,7 @@ class Entity extends EntityComunes {
 
     /**
      * Devuelve el nombre de la clase
-     * 
+     *
      * @return string El nombre de la clase
      */
     public function getClassName() {

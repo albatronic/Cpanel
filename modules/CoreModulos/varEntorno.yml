@@ -1,0 +1,97 @@
+# Module: CoreModulos
+# Document : modules\CoreModulos\varEntorno.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 26.08.2012 02:46:37
+#
+---
+CoreModulos:
+  numMaxRegistros: 100
+
+  image1:
+    visible: TRUE
+    caption: image1
+    width: 
+    height: 
+  image2:
+    visible: FALSE
+    caption: image2
+    width: 
+    height: 
+  image3:
+    visible: FALSE
+    caption: image3
+    width: 
+    height: 
+  image4:
+    visible: FALSE
+    caption: image4
+    width: 
+    height: 
+  image5:
+    visible: FALSE
+    caption: image5
+    width: 
+    height: 
+
+  mostrarGestionSlug: FALSE
+
+  mostrarUrlAmigable: TRUE
+
+  mostrarGestionMapaWeb:
+    mostrar: FALSE
+    mostrarEnMapaWeb: TRUE
+    mostrarImportanciaMapaWeb: 0,5
+    frecuenciaCambio: monthly
+
+  mostrarNumeroVisitas: TRUE
+
+  mostrarGestionMeta:
+    mostrar: TRUE
+    titlePosition: 
+    titleSimple: 
+
+  columns:
+    -
+      field: CodigoApp
+      mostrar: TRUE
+      default: 
+      caption: CodigoApp
+      permiso: 
+    -
+      field: NombreModulo
+      mostrar: TRUE
+      default: 
+      caption: NombreModulo
+      permiso: 
+    -
+      field: Nivel
+      mostrar: TRUE
+      default: 
+      caption: Nivel
+      permiso: 
+    -
+      field: PerteneceA
+      mostrar: TRUE
+      default: 
+      caption: PerteneceA
+      permiso: 
+    -
+      field: Titulo
+      mostrar: TRUE
+      default: 
+      caption: Titulo
+      permiso: 
+    -
+      field: Descripcion
+      mostrar: TRUE
+      default: 
+      caption: Descripcion
+      permiso: 
+    -
+      field: Funcionalidades
+      mostrar: TRUE
+      default: 
+      caption: Funcionalidades
+      permiso: 

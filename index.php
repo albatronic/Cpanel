@@ -15,7 +15,7 @@
  * </IfModule>
  *
  * MAS INFO: http://httpd.apache.org/docs/2.0/es/
- * 
+ *
  * LAS PETICIONES DEBEN SER EN EL FORMATO:
  * http://www.sitioweb.com/apppath/controller/action/resto de valores...
  *
@@ -60,10 +60,10 @@ include_once $app['framework'] . "Autoloader.class.php";
 Autoloader::setCacheFilePath(APP_PATH . 'tmp/class_path_cache.txt');
 Autoloader::excludeFolderNamesMatchingRegex('/^CVS|\..*$/');
 Autoloader::setClassPaths(array(
-            $app['framework'],
-            'entities/',
-            'lib/',
-        ));
+    $app['framework'],
+    'entities/',
+    'lib/',
+));
 spl_autoload_register(array('Autoloader', 'loadClass'));
 
 //----------------------------------------------------------------
@@ -110,6 +110,9 @@ if (!$_SESSION['browser']) {
     unset($browser);
 }
 
+// ----------------------------------------------------------------
+// CARGAR LO QUE VIENE EN EL REQUEST
+// ----------------------------------------------------------------
 $rq = new Request();
 
 // ----------------------------------------------------------------
@@ -117,40 +120,52 @@ $rq = new Request();
 // ----------------------------------------------------------------
 setlocale(LC_MONETARY, $rq->getLanguage());
 
-//-----------------------------------------------------------------
-// INSTANCIAR UN OBJETO DE LA CLASE REQUEST PARA TENER DISPONIBLES
-// TODOS LOS VALORES QUE CONSTITUYEN LA PETICION E IDENTIFICAR
-// SI LA PETICION ES 'GET' O 'POST', ASI COMO EL CONTROLADOR Y
-// ACCION SOLICITADA.
-//-----------------------------------------------------------------
-switch ($rq->getMethod()) {
-    case 'GET':
-        $request = $rq->getParameters($app['path']);
-        $request['METHOD'] = "GET";
-        $controller = ucfirst($request[0]);
-        $action = $request[1];
-        break;
+if ($rq->isOldBrowser()) {
 
-    case 'POST':
-        $request = $rq->getRequest();
-        $request['METHOD'] = "POST";
-        $controller = ucfirst($request['controller']);
-        $action = $request['action'];
-        break;
+    $controller = 'OldBrowser';
+    $action = 'Index';
+
+} else {
+
+        //-----------------------------------------------------------------
+        // INSTANCIAR UN OBJETO DE LA CLASE REQUEST PARA TENER DISPONIBLES
+        // TODOS LOS VALORES QUE CONSTITUYEN LA PETICION E IDENTIFICAR
+        // SI LA PETICION ES 'GET' O 'POST', ASI COMO EL CONTROLADOR Y
+        // ACCION SOLICITADA.
+        //-----------------------------------------------------------------
+        switch ($rq->getMethod()) {
+
+            case 'GET':
+                $request = $rq->getParameters($app['path']);
+                $request['METHOD'] = "GET";
+                $controller = ucfirst($request[0]);
+                $action = $request[1];
+                break;
+
+            case 'POST':
+                $request = $rq->getRequest();
+                $request['METHOD'] = "POST";
+                $controller = ucfirst($request['controller']);
+                $action = $request['action'];
+                break;
+        }
+
+    if (!isset($_SESSION['USER']) and ($controller != 'Login')) {
+
+        $controller = "Login";
+        $action = "Index";
+
+    }
 }
 
-// Si en la peticion no viene controller ni action, las pongo a 'Index'
-if ($controller == '')
-    $controller = 'Index';
-if ($action == '')
-    $action = "Index";
 
-
-// Si no existe el controller lo pongo a 'Index'
+// Validar que el controlador requerido exista.
+// En caso contrario fuerzo el controlador Index
 $fileController = "modules/" . $controller . "/" . $controller . "Controller.class.php";
 if (!file_exists($fileController)) {
     $controller = "Index";
-    $fileController = "modules/Index/IndexController.class.php";
+    $action = "Index";
+    $fileController = "modules/{$controller}/{$controller}Controller.class.php";
 }
 
 $clase = $controller . "Controller";
@@ -189,9 +204,10 @@ if (!file_exists($config['twig']['templates_folder'] . '/' . $result['template']
 $twig->loadTemplate($result['template'])
         ->display(array(
             'values' => $result['values'],
-            'app'    => $app,
+            'app' => $app,
             'layout' => '_global/layout.html.twig',
-            //'user'   => new Usuarios($_SESSION['iu']),
+            'user' => new CoreUsuarios($_SESSION['USER']['user']['id']),
+            'project' => $_SESSION['project'],
         ));
 
 //------------------------------------------------------------

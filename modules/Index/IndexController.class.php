@@ -8,11 +8,16 @@
  * @date 3-Agosto-2012
  *
  */
-class IndexController {
+class IndexController extends Controller {
+
+    protected $entity = "Index";
 
     public function IndexAction() {
-        $values = array();
-        return array('template' => 'Index/Index.html.twig', 'values' => $values);
+
+        return array(
+            'template' => $this->entity . '/index.html.twig',
+            'values' => $this->values
+        );
     }
 
 }

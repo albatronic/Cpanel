@@ -1,0 +1,13 @@
+{#
+  Module: CoreFuncionalidades
+  Document : modules\CoreFuncionalidades\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 26.08.2012 02:46:37
+#}
+
+{{ macro.select('IDModulo','field_title',values.controller ~ '[IDModulo]',values.controller ~ '_IDModulo',none,datos.IDModulo.IDModulo,datos.IDModulo.fetchAll('NombreModulo'),'Select','1')}}
+{{ macro.input('Funcionalidades','field_title','text',values.controller ~ '[Funcionalidades]',values.controller ~ '_Funcionalidades',datos.Funcionalidades,'255','CampoTextoLargo','2') }}
+
+{% include '_global/fieldsComunes.html.twig' %}

@@ -1,0 +1,137 @@
+# Module: CoreUsuarios
+# Document : modules\CoreUsuarios\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 26.08.2012 02:46:37
+#
+---
+listados:
+  -
+    title: CoreUsuarios
+    order_by: IDUsuario ASC
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: 10, 10, 15, 10
+    body_font: Courier, ,8
+    columns:
+      -
+        title: IDPerfil
+        field: IDPerfil
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: IDRol
+        field: IDRol
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: IDTipoUsuario
+        field: IDTipoUsuario
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Login
+        field: Login
+        length: 50
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Password
+        field: Password
+        length: 100
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Email
+        field: Email
+        length: 100
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: TelefonoMovil
+        field: TelefonoMovil
+        length: 25
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Nombre
+        field: Nombre
+        length: 100
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Apellidos
+        field: Apellidos
+        length: 100
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: CambioPassword
+        field: CambioPassword
+        length: 1
+        align: L
+        type: tinyint
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Ips
+        field: Ips
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: NLogin
+        field: NLogin
+        length: 4
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: UltimoLogin
+        field: UltimoLogin
+        length: 10
+        align: R
+        type: datetime
+        total: NO
+        formula: null
+        format: null

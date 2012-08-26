@@ -9,9 +9,6 @@
  * @copyright Informatica ALBATRONIC, SL
  * @since 24.05.2011
  */
-
-
-
 class Form {
 
     protected $moduleName;
@@ -22,7 +19,7 @@ class Form {
      * @param string $moduleName Nombre del modulo
      * @param string $archivoYaml Nombre del archivo que tiene los parametros
      */
-    public function __construct($moduleName, $archivoYaml='config.yml') {
+    public function __construct($moduleName, $archivoYaml = 'config.yml') {
         $this->moduleName = $moduleName;
         $file = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/modules/" . $this->moduleName . "/" . $archivoYaml;
         $this->yaml = sfYaml::load($file);
@@ -35,8 +32,32 @@ class Form {
      * @param string $node El nombre del nodo solicitado
      * @return array Array con el nodo indicado
      */
-    private function getNode($node) {
+    public function getNode($node) {
         return $this->yaml[$this->moduleName][$node];
+    }
+
+    /**
+     * Devuelve un array con las variables WEB
+     * Nodo YAML <includesVarWeb>
+     * @return array
+     */
+    public function getVarweb() {
+
+        $vW = array();
+
+        $includes = $this->getNode('includesVarWeb');
+        if (is_array($includes)) {
+
+            foreach ($includes as $include) {
+                $yml = sfYaml::load($include);
+                $nodo = $yml['varWeb'];
+                foreach ($nodo as $key => $value) {
+                    $vW[$key] = $value;
+                }
+            }
+        }
+
+        return $vW;
     }
 
     /**
@@ -247,7 +268,7 @@ class Form {
      * Devuelve un array con las columnas del FILTRO del listado:
      * el índice es el nombre de la columna y el valor es el título
      * Nodo YAML <columns><column>
-     * @return array 
+     * @return array
      */
     public function getListArrayColumns() {
         $columns = array();
@@ -263,7 +284,7 @@ class Form {
 
     /**
      * Recibe el nombre del campo y devuelve su titulo
-     * 
+     *
      * @param string $fieldName El nombre del campo (nodo field)
      * @return string El titulo de la columna
      */
@@ -314,9 +335,9 @@ class Form {
     /**
      * Devuelve un array con los filtros adicionales que se construiran
      * en el FiltroGenerico.html.twig
-     * 
+     *
      * El indice del array indica el orden en el que se mostraran los filtros
-     * 
+     *
      * El array es de la forma:
      * array(
      *      field   => Nombre de la columna de la tabla por la que filtrar
@@ -327,7 +348,7 @@ class Form {
      *                 Se construirá un select llamando al método fetchAll de la
      *                 entidad indicada.
      * )
-     *      
+     *
      * @return array $filters Los filtros adicionales
      */
     public function getFilters() {
@@ -398,14 +419,14 @@ class Form {
      * Devuelve un array con los tipos de listados que están configurados
      * para el modulo y que están definidos en NOMBREMODULO/listados.xml
      * y que pueden ser accedidos por el usuario en curso en base a su perfil
-     * 
+     *
      * En el nodo <idPerfil> se indican los IDs (separados por comas) de los perfiles que tendrán acceso
      * al listado. Si el nodo está vacio, se entiende que pueden acceder todos.
      *
      * En el array devuelto solo se indica el Id y el title del listado.
      * Para obtener los parametros concretos de cada listado se debe utilizar
      * el método getFormatoListado($idListado)
-     * 
+     *
      * @return array $formatos Array con los tipos/formatos de listados disponibles
      */
     public function getFormatosListados() {

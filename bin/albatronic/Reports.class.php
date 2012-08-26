@@ -537,7 +537,7 @@ class ListadoPDF extends FPDF {
                 $this->Cell(20, 4, $filtro['Column'], 0, 0);
                 $this->Cell(0, 4, $filtro['Value'], 0, 1);
             }
-            $this->Line($this->GetX(), $this->GetY(), 190, $this->GetY());            
+            $this->Line($this->GetX(), $this->GetY(), $this->getPrintablePageWidth(), $this->GetY());           
         }
 
         // Para los títulos pongo el mismo font que para el cuerpo del listado

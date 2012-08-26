@@ -1,0 +1,47 @@
+# Module: CorePermisos
+# Document : modules\CorePermisos\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 26.08.2012 02:46:37
+#
+---
+listados:
+  -
+    title: CorePermisos
+    order_by: IDPermiso ASC
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: 10, 10, 15, 10
+    body_font: Courier, ,8
+    columns:
+      -
+        title: IDPerfil
+        field: IDPerfil
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: NombreModulo
+        field: NombreModulo
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Funcionalidades
+        field: Funcionalidades
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null

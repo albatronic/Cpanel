@@ -1,0 +1,27 @@
+{# Description Login/layout.htmltwig  #}
+
+{# author Sergio Pérez <sergio.perez@albatronic.com> #}
+{# copyright Informática ALBATRONIC, SL #}
+{# date 23-agosto-2012 13:46 #}
+
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+    	{% include "_global/metainformacion.html.twig" %}
+	{% include values.twigCss %}
+	{% include values.twigJs %}
+    </head>
+
+    <body id="theme-default" class="full_block">
+        <div id="login_page">
+            <div class="login_container">
+
+                {% block contenido %}
+                {% endblock %}
+
+            </div>
+        </div>
+    </body>
+
+</html>

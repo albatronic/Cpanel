@@ -1,0 +1,79 @@
+# Module: CoreTiposfuncionalidad
+# Document : modules\CoreTiposfuncionalidad\varEntorno.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 26.08.2012 02:46:37
+#
+---
+CoreTiposfuncionalidad:
+  numMaxRegistros: 100
+
+  image1:
+    visible: TRUE
+    caption: image1
+    width: 
+    height: 
+  image2:
+    visible: FALSE
+    caption: image2
+    width: 
+    height: 
+  image3:
+    visible: FALSE
+    caption: image3
+    width: 
+    height: 
+  image4:
+    visible: FALSE
+    caption: image4
+    width: 
+    height: 
+  image5:
+    visible: FALSE
+    caption: image5
+    width: 
+    height: 
+
+  mostrarGestionSlug: FALSE
+
+  mostrarUrlAmigable: TRUE
+
+  mostrarGestionMapaWeb:
+    mostrar: FALSE
+    mostrarEnMapaWeb: TRUE
+    mostrarImportanciaMapaWeb: 0,5
+    frecuenciaCambio: monthly
+
+  mostrarNumeroVisitas: TRUE
+
+  mostrarGestionMeta:
+    mostrar: TRUE
+    titlePosition: 
+    titleSimple: 
+
+  columns:
+    -
+      field: CodigoFuncionalidad
+      mostrar: TRUE
+      default: 
+      caption: CodigoFuncionalidad
+      permiso: 
+    -
+      field: Titulo
+      mostrar: TRUE
+      default: 
+      caption: Titulo
+      permiso: 
+    -
+      field: Descripcion
+      mostrar: TRUE
+      default: 
+      caption: Descripcion
+      permiso: 
+    -
+      field: EsEstandar
+      mostrar: TRUE
+      default: 1
+      caption: EsEstandar
+      permiso: 

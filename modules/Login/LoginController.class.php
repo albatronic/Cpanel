@@ -8,150 +8,137 @@
  * @date 28-may-2011
  *
  */
+class LoginController extends Controller {
 
-class LoginController {
-
-    /**
-     * Variables enviadas en el request por POST o por GET
-     * @var array
-     */
-    protected $request;
+    protected $entity = "Login";
+    protected $semilla = "verano";
 
     public function __construct($request) {
-        $this->request = $request;
+
+        parent::__construct($request);
+
+        unset($_SESSION['USER']);
+
+        $fileConfig = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/config/config.yml";
+
+        if (file_exists($fileConfig)) {
+            $yaml = sfYaml::load($fileConfig);
+            $projects = $yaml['config']['conections'];
+        } else {
+            $this->error[] = "Login: ERROR AL LEER EL ARCHIVO DE CONFIGURACION. NO EXISTE\n";
+        }
+
+        $this->values['titulo'] = 'Iniciar sesión';
+        $this->values['projects'] = $projects;
+        $this->values['user'] = $this->request['user'];
+        $this->values['password'] = $this->request['password'];
+    }
+
+    public function IndexAction() {
+
+        return array(
+            'template' => $this->entity . "/login.html.twig",
+            'values' => $this->values,
+        );
     }
 
     public function LoginAction() {
-        unset($_SESSION['USER']);
 
-        $user = new Usuarios();
-        $rows = $user->cargaCondicion('*', "Login='" . $this->request['user'] . "' and Activo='1'");
+        $user = new CoreUsuarios();
+        $usuario = $user->find("Login", $this->request['user']);
+        unset($user);
 
-        if ($user->getStatus()) {
-            $user = new Usuarios($rows[0]['IDUsuario']);
-            if ($user->getPassword() == md5($this->request['password'])) {
-                $menu = new Menu($user->getIDPerfil()->getIDPerfil());
-                $empresas = $user->getEmpresas();
+        if ($usuario->getLogin() != '') {
+            if ($usuario->getPassword() == md5($this->request['password'] . $this->semilla)) {
 
                 $_SESSION['USER'] = array(
                     'user' => array(
-                        'id' => $user->getIDUsuario(),
-                        'Nombre' => $user->getNombre(),
-                        'IDPerfil' => $user->getIDPerfil()->getIDPerfil(),
+                        'id' => $usuario->getIDUsuario(),
+                        'Nombre' => $usuario->getNombreApellidos(),
+                        'IDPerfil' => $usuario->getIDPerfil()->getIDPerfil(),
                     ),
-                    'empresas' => $empresas,
-                    'sucursales' => $user->getSucursales($empresas[0]['Id']),
-                    'menu' => $menu->getArrayMenu(),
                 );
+                $_SESSION['project'] = $this->values['projects'][$this->request['project']];
 
-
-                //Activar la empresa y sucursal por defecto
-                if (count($_SESSION['USER']['empresas'])) {
-                    $_SESSION['emp'] = $_SESSION['USER']['empresas'][0]['Id'];
-                    $empresa = new Empresas($_SESSION['emp']);
-                    $_SESSION['ver'] = $empresa->getIDVersion()->getIDTipo();
-                }
-                if (count($_SESSION['USER']['sucursales']))
-                    $_SESSION['suc'] = $_SESSION['USER']['sucursales'][0]['Id'];
-
-                //Desactivar el TPV
-                unset($_SESSION['tpv']);
-                
                 //Actualizar el registro de entradas
-                $user->setIDEmpresa($user->getIDEmpresa()->getIDEmpresa());
-                $user->setIDSucursal($user->getIDSucursal()->getIDSucursal());
-                $user->setPassword($this->request['password']);
-                $user->setIDPerfil($user->getIDPerfil()->getIDPerfil());
-                $user->setNLogin($user->getNLogin() + 1);
-                $user->setUltimoLogin(date('Y-m-d H:i:s'));
-                $user->save();
+                $usuario->setNLogin($usuario->getNLogin() + 1);
+                $usuario->setUltimoLogin(date('Y-m-d H:i:s'));
+                $usuario->save();
 
-                // Cargo las aplicaciones disponibles
-                $config = sfYaml::load('config/config.yml');
-                $values['apps'] = $config['config']['apps'];
-                $template = $this->entity . "Login/Apps.html.twig";
+                // Ejecuto el controlador index y recojo sus valores
+                include_once 'modules/Index/IndexController.class.php';
+                $controlador = new IndexController($this->request);
+                $array = $controlador->IndexAction();
+                unset($controlador);
+                $this->values = $array['values'];
+                $template = $array['template'];
             } else {
-                $values = array('loginMensaje' => 'Password Incorrecta');
-                $template = "Index/Index.html.twig";
+                $this->values['mensaje'] = 'Password Incorrecta';
+                $template = $this->entity . "/login.html.twig";
             }
         } else {
-            $values = array('loginMensaje' => 'Usuario no registrado');
-            $template = "Index/Index.html.twig";
+            $this->values['mensaje'] = 'Usuario no registrado';
+            $template = $this->entity . "/login.html.twig";
         }
 
-        return array('template' => $template, 'values' => $values,);
+        return array(
+            'template' => $template,
+            'values' => $this->values,
+        );
     }
 
     /**
      * Olvidó la contraseña
+     *
+     * Regenera la contraseña del usuario y se la envía por email
+     *
      */
     public function ForgotAction() {
+
         switch ($this->request['METHOD']) {
             case 'GET':
-                $template = $this->entity . "/Login/forgot.html.twig";
+                $this->values['mensaje'] = "Indique el usuario";
+                $template = $this->entity . "/forgot.html.twig";
                 break;
 
             case 'POST':
-                $usu = new Usuarios();
-                $rows = $usu->cargaCondicion('*', "EMail='" . $this->request['EMail'] . "'");
-                $usu = new Usuarios($rows[0]['IDUsuario']);
-                if ($usu->getIDUsuario() != '') {
+                $user = new CoreUsuarios();
+                $usuario = $user->find("Login", $this->request['user']);
+                unset($user);
+
+                if ($usuario->getIDUsuario() != '') {
                     $passw = new Password(6);
                     $nueva = $passw->genera();
                     unset($passw);
-                    $usu->setPassword($nueva);
-                    $usu->save();
+                    $usuario->setPassword(md5($nueva . $this->semilla));
+                    $usuario->save();
 
                     $config = sfYaml::load('config/config.yml');
 
-                    $to = $this->request['EMail'];
-                    $subject = " Paswword regenerada";
+                    $to = $usuario->getEmail();
+                    $subject = " Password regenerada";
                     $message = "<p>" . $config['config']['app']['name'] . "</p><p>Le ha sido generada una contrase&ntilde;a nueva de acceso al sistema.</p>" .
                             "<p>La contrase&ntilde;a nueva es: " . $nueva . "</p>";
 
                     $mail = new Mail();
-                    $values['mensaje'] = $mail->send($to, '', 'Administrador', $subject, $message, array());
+                    $this->values['mensaje'] = $mail->send($to, '', 'Administrador Cpanel', $subject, $message, array());
                     unset($mail);
-                } else
-                    $values['mensaje'] = "Ese EMail no consta en nuestra base de datos.";
 
-                unset($usu);
+                    $template = $this->entity . "/index.html.twig";
+                } else {
+                    $this->values['mensaje'] = "Ese usuario no consta en nuestra base de datos.";
+                    $template = $this->entity . "/forgot.html.twig";
+                }
 
-                $template = $this->entity . "/Login/forgot.html.twig";
+                unset($usuario);
+
+
                 break;
         }
 
-        return array('template' => $template, 'values' => $values,);
+        return array('template' => $template, 'values' => $this->values,);
     }
 
-    /* ESTA FUNCION ES PARA CUANDO SE ENTRA DESDE EL PORTAL DE APLICACIONES
-      public function LoginAction()
-      {
-      $em = new entityManager("portal");
-      $em->query("select * from portal.users where EMail='".$this->request['user']."'");
-      $row = $em->fetchResult();
-      $usuario = $row[0];
-
-      if($usuario){
-      if($usuario['Password']==$this->request['password']){
-      $query="select apps.* from apps,users_apps where users_apps.IDUser='".$usuario['IDUser']."' and users_apps.IDApp=apps.IDApp";
-      $em->query($query);
-      $apps = $em->fetchResult();
-
-      $values = array('usuario'=>$usuario,'apps'=>$apps);
-      $template = "_global/Apps.html.twig";
-      } else {
-      $values = array('loginMensaje'=>'Password Incorrecta');
-      $template = "Index/Index.html.twig";
-      }
-      } else {
-      $values = array('loginMensaje'=>'Usuario no registrado');
-      $template = "Index/Index.html.twig";
-      }
-
-      return array('template'=>$template,'values'=>$values,);
-      }
-     */
 }
 
 ?>

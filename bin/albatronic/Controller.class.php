@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Controlador genérico para el mantenimiento de entidades de datos
+ * Description of Controller
  *
- * @author Sergio Pérez <sergio.perez@albatronic.com>
- * @copyright Informática ALBATRONIC SL
- * @version 1.0 26.05.2011
+ * Controlador común a todos los módulos del CPanel
+ *
+ * @author Sergio Perea <sergio.perez@albatronic.com>
+ * @date 24-agosto-2012 19:39
  */
 class Controller {
 
@@ -24,13 +25,6 @@ class Controller {
     protected $form;
 
     /**
-     * Objeto de la clase 'listado' donde se guarda y gestiona
-     * toda la información relativa al listado por pantalla
-     * @var listado
-     */
-    protected $listado;
-
-    /**
      * Valores a devolver al controlador principal para
      * que los renderice con el twig correspondiente
      * @var array
@@ -44,12 +38,18 @@ class Controller {
      */
     protected $permisos;
 
+    /**
+     * Array con las variables Web del modulo
+     * @var array
+     */
+    protected $varWeb;
+
     public function __construct($request) {
 
         // Cargar lo que viene en el request
         $this->request = $request;
 
-        // Cargar la configuracion del modulo (modules/moduloName/config.yaml)
+        // Cargar la configuracion del modulo (modules/moduloName/config.yml)
         $this->form = new Form($this->entity);
 
         // Instanciar el objeto listado con los parametros del modulo
@@ -58,12 +58,12 @@ class Controller {
 
         // Cargar los permisos.
         // Si la entidad no está sujeta a control de permisos, se habilitan todos
-        if ($this->form->getPermissionControl()) {
-            if ($this->parentEntity == '')
-                $this->permisos = new ControlAcceso($this->entity);
-            else
-                $this->permisos = new ControlAcceso($this->parentEntity);
-        } else
+        //if ($this->form->getPermissionControl()) {
+        //    if ($this->parentEntity == '')
+        //        $this->permisos = new ControlAcceso($this->entity);
+        //    else
+        //        $this->permisos = new ControlAcceso($this->parentEntity);
+        //} else
             $this->permisos = new ControlAcceso();
 
         $this->values['titulo'] = $this->form->getTitle();
@@ -79,19 +79,19 @@ class Controller {
             'filter' => $this->listado->getFilter(),
         );
 
-        // Si se ha indicado una entidad en el config.yml del controlador
-        // pero no se ha definido la conexion, se muestra un error
-        if (($this->form->getEntity()) and (!$this->form->getConection())) {
-            echo "No se ha definido la conexión para la entidad: " . $this->entity;
-        }
+        $includesHead = $this->form->getNode('includesHead');
 
-        // QUITAR LOS COMENTARIOS PARA Actualizar los favoritos para el usuario
-        //if ($this->form->getFavouriteControl())
-        //    $this->actualizaFavoritos();
+        $this->values['twigCss'] = $includesHead['twigCss'];
+        $this->values['twigJs'] = $includesHead['twigJs'];
+
     }
 
-    public function indexAction() {
-        return array('template' => $this->entity . '/index.html.twig', 'values' => $this->values);
+    public function IndexAction() {
+
+        return array(
+            'template' => $this->entity . "/index.html.twig",
+            'values' => $this->values,
+        );
     }
 
     /**
@@ -119,10 +119,10 @@ class Controller {
                     if ($datos->getStatus()) {
                         $this->values['datos'] = $datos;
                         $this->values['errores'] = $datos->getErrores();
-                        return array('template' => $this->entity . '/edit.html.twig', 'values' => $this->values);
+                        return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                     } else {
                         $this->values['errores'] = array("Valor no encontrado. El objeto que busca no existe. Es posible que haya sido eliminado por otro usuario.");
-                        return array('template' => $this->entity . '/new.html.twig', 'values' => $this->values);
+                        return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                     }
                 } else {
                     return array('template' => '_global/forbiden.html.twig');
@@ -155,7 +155,7 @@ class Controller {
                                 $this->values['alertas'] = $datos->getAlertas();
                             }
                             $this->values['datos'] = $datos;
-                            return array('template' => $this->entity . '/edit.html.twig', 'values' => $this->values);
+                            return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                         } else {
                             return array('template' => '_global/forbiden.html.twig');
                         }
@@ -170,13 +170,13 @@ class Controller {
                                 $this->values['datos'] = $datos;
                                 $this->values['errores'] = array();
                                 unset($datos);
-                                return array('template' => $this->entity . '/new.html.twig', 'values' => $this->values);
+                                return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                             } else {
                                 $this->values['datos'] = $datos;
                                 $this->values['errores'] = $datos->getErrores();
                                 $this->values['alertas'] = $datos->getAlertas();
                                 unset($datos);
-                                return array('template' => $this->entity . '/edit.html.twig', 'values' => $this->values);
+                                return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                             }
                         } else {
                             return array('template' => '_global/forbiden.html.twig');
@@ -209,7 +209,7 @@ class Controller {
                     $datos = new $this->entity();
                     $this->values['datos'] = $datos;
                     $this->values['errores'] = array();
-                    return array('template' => $this->entity . '/new.html.twig', 'values' => $this->values);
+                    return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                     break;
 
                 case 'POST': //CREAR NUEVO REGISTRO
@@ -233,15 +233,15 @@ class Controller {
                         $this->values['datos'] = $datos;
 
                         if ($this->values['errores']) {
-                            return array('template' => $this->entity . '/new.html.twig', 'values' => $this->values);
+                            return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                         } else {
-                            return array('template' => $this->entity . '/edit.html.twig', 'values' => $this->values);
+                            return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                         }
                     } else {
                         $this->values['datos'] = $datos;
                         $this->values['errores'] = $datos->getErrores();
                         $this->values['alertas'] = $datos->getAlertas();
-                        return array('template' => $this->entity . '/new.html.twig', 'values' => $this->values);
+                        return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                     }
                     break;
             }
@@ -256,7 +256,7 @@ class Controller {
      * nodo <help_file> del config.yml del controlador
      * Si no existiera, se muestra un template indicando esta
      * circunstancia
-     * 
+     *
      * @return array con el template a renderizar
      */
     public function helpAction() {
@@ -390,8 +390,8 @@ class Controller {
     /**
      * Sube o quita del servidor los documentos (imagenes, etc) asociados
      * a la entidad.
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function DocumentoAction() {
 
@@ -435,7 +435,7 @@ class Controller {
         }
 
         $this->values['datos'] = new $this->entity($this->request[$this->entity][$this->form->getPrimaryKey()]);
-        return array('template' => $this->entity . '/edit.html.twig', 'values' => $this->values);
+        return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
     }
 
     /**
@@ -443,7 +443,7 @@ class Controller {
      * LLeva un contador de accesos para cada agente-url
      *
      * Si el acceso es al propio contralador de favoritos, no se tiene en cuenta
-     * 
+     *
      */
     protected function actualizaFavoritos() {
 
@@ -502,7 +502,7 @@ class Controller {
 
     /**
      * Genera un documento pdf
-     * 
+     *
      * @param string $tipoDocumento El tipo de documento: albaranes, pedidos, etc.
      * @param array $idsDocumento Array con los ids de la entidad a imprimir. Ej. id de albaran, pedido, etc.
      * @param integer $formato El formato del documento (defecto=0)
@@ -529,7 +529,6 @@ class Controller {
 
         return $fichero;
     }
-
 }
 
 ?>

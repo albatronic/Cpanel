@@ -1,24 +1,36 @@
-{# Login/forgot.html.twig #}
-{% extends "_global/layout.html.twig" %}
+{# Description Login/forgot.htmltwig  #}
 
-{% block content %}
-<div class="panel1" style="width: 950px;">
-<p id="titulo">Regenerar la contrase&ntilde;a</p>
+{# author Sergio Pérez <sergio.perez@albatronic.com> #}
+{# copyright Informática ALBATRONIC, SL #}
+{# date 23-agosto-2012 13:46 #}
 
-{% if not values.mensaje %}
-    <p style="text-align:justify;margin-top:40px;margin-bottom:20px;">
-        Indique su cuenta de correo electr&oacute;nico y le enviaremos la nueva contrase&ntilde;a.
-    </p>
-    <form name="forgot" method="post">
-	<input name="controller" value="Login" type="hidden">
-	<input name="action" value="forgot" type="hidden">
-        <div style="float:left;padding-right:10px;">EMail</div>
-        <div style="margin-left:20px;margin-bottom:20px;"><input name="EMail" id="EMail" type="text" size="50" value="{{ values.EMail }}"></div>
-	<input type="submit" value="Enviar" class="submit">
-    </form>
-{% else %}
-    <p class="MensajeError">{{values.mensaje}}</p>
-{% endif %}
-</div>
+{% extends "Login/index.html.twig" %}
+
+{% block contenido %}
+
+<form action="forgot" method="post">
+    <input name="controller" value="Login" type="hidden" />
+    <input name="action" value="forgot" type="hidden" />
+    <div class="login_form">
+        <h3 class="blue_d">¿Olvidó su Contraseña?</h3>
+        <ul>
+            <li class="login_mensaje_error">
+                {{values.mensaje}}
+            </li>
+
+            <li class="login_pass">
+                <input name="user" id="user" type="text" value="{{ values.user }}" />
+            </li>
+
+        </ul>
+    </div>
+    <input class="login_btn blue_lgel" name="" value="Enviar" type="submit" />
+    <ul class="login_opt_link">
+    </ul>
+</form>
+
+<script language='JavaScript' type='text/javascript'>
+document.getElementById('user').focus();
+</script>
 
 {% endblock %}

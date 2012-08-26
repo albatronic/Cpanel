@@ -1,0 +1,83 @@
+# Module: CoreModulos
+# Document : modules\CoreModulos\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 26.08.2012 02:46:37
+#
+---
+listados:
+  -
+    title: CoreModulos
+    order_by: IDModulo ASC
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: 10, 10, 15, 10
+    body_font: Courier, ,8
+    columns:
+      -
+        title: CodigoApp
+        field: CodigoApp
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: NombreModulo
+        field: NombreModulo
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Nivel
+        field: Nivel
+        length: 4
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: PerteneceA
+        field: PerteneceA
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Titulo
+        field: Titulo
+        length: 100
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Descripcion
+        field: Descripcion
+        length: 100
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Funcionalidades
+        field: Funcionalidades
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null

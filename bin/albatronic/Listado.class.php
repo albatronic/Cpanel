@@ -171,7 +171,7 @@ class Listado {
      *      'WHERE'    =>
      *      'ORDER BY' =>
      * )
-     * 
+     *
      * @return array arrayQuery Array con los elementos que componen el query
      */
     public function makeQuery($aditionalFilter = '') {
@@ -462,14 +462,14 @@ class Listado {
                 $align = "L";
             $formato = trim((string) $value['format']);
             $total = ( strtoupper(trim((string) $value['total'])) == 'YES' );
-            
+
             $params = explode(",",trim($value['params']));
             $parametrosMetodo = "";
             foreach ($params as $valor)
                 $parametrosMetodo .= "{$valor},";
 
             $parametrosMetodo = substr($parametrosMetodo, 0, -1);
-            
+
             $configLinea[$value['field']] = array(
                 'field' => $value['field'],
                 'params' => $parametrosMetodo,
@@ -544,7 +544,7 @@ class Listado {
                 if ($value['params'])
                     $texto = trim($objeto->{"get$value[field]"}($value['params']));
                 else
-                    $texto = trim($objeto->{"get$value[field]"}());                    
+                    $texto = trim($objeto->{"get$value[field]"}());
                 if ($value['formato'])
                     $texto = sprintf($value['formato'], $texto);
 
@@ -604,7 +604,7 @@ class Listado {
 
         $archivo = Archivo::getTemporalFileName();
         if ($archivo) $pdf->Output ($archivo, 'F');
-        
+
         unset($objeto);
         unset($pdf);
 
@@ -1018,6 +1018,7 @@ class listadoPDF extends FPDF {
 
     //Cabecera de página
     function Header() {
+        /**
         $empresa = new Empresas($_SESSION['emp']);
         $sucursal = new Sucursales($_SESSION['suc']);
 
@@ -1028,6 +1029,7 @@ class listadoPDF extends FPDF {
         $this->Cell(0, 5, $sucursal->getNombre(), 0, 1, "R");
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(0, 5, $this->opciones['title'], 0, 1, "C");
+         */
 
         // Pintar la leyenda del filtro en la primera pagina
         if ($this->page == 1) {

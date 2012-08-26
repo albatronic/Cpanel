@@ -2,25 +2,52 @@
 ---
 config:
   debug_mode: false
+
   # PARA MOSTRAR O NO EL BOTON DE LA AUDITORIA DE LOS FORMULARIOS
   audit_mode: true
+
   # CONTROL DE ACCESO POR IP
   ip_control: true
+
   # FORMATOS DE EXPORTACION DE INFORMACION
   export_types:
     - xls
     - xml
     - cvs
     - Yaml
+
   # ENTORNO DE LA APLICACION
   app:
     name: CPanel
     url: http://localhost/cpanel
     path: /cpanel
     framework: bin/albatronic/
+
   # CONEXIONES A LAS BASES DE DATOS
   conections:
-    datos001:
+    cpanel:
+      title: Modo local, todos los proyectos
+      dbEngine: mysql
+      host: localhost
+      user: cpanel
+      password: cpanel
+      database: cpanel
+    kaia:
+      title: La página de kaia
+      folder: kaia
+      dbEngine: mysql
+      host: localhost
+      user: kaia
+      password: kaia
+      database: kaia
+    galapago:
+      title: La pagina de galapago
+      folder: galapago
+      dbEngine: mysql
+      host: localhost
+      password: galapago
+      database: galapago
+    datos:
       dbEngine: mysql
       host: localhost
       user: cpanel
@@ -33,17 +60,20 @@ config:
     plugin_file: PhpMailer.class.php
     motor: PhpMailer
     socket: smtp
-    host: mail.dominio.com
+    host: mail.albatronic.com
     smtp_auth: true
-    user_name: info@dominio.com
-    password: 
-    from: info@dominio.com
-    from_name: NOMBRE
+    user_name: info@albatronic.com
+    password: i1234o
+    from: info@albatronic.com
+    from_name: INFO
     timeout: 30
+
   # MOTOR PARA DOCUMENTOS EXCEL
   excel: /bin/PHPExcel/PHPExcel.php
+
   # MOTOR PARA GENERAR DOCUMENTOS PDF
   pdf: bin/pdf/fpdf.class.php
+
   # MOTOR PARA GRAFICOS DE BARRAS
   graph:
     -
@@ -52,6 +82,7 @@ config:
       bin/jpgraph/src/jpgraph_line.php
     -
       bin/jpgraph/src/jpgraph_bar.php
+
   # MOTOR DE TEMPLATES
   twig:
     motor: bin/Twig-1.7.0/lib/Twig/Autoloader.php

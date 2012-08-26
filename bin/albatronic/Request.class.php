@@ -17,37 +17,52 @@ class Request {
      * @var array
      */
     private $parameters;
+
     /**
      * Método empleado en la peticion:
      * GET, POST, COOKIE
      * @var string
      */
     private $method;
+
     /**
      * Parámetros que viene por POST
      * @var array
      */
     private $request;
+
     /**
      * Lenguaje aceptado
      * @var string
      */
     private $acceptLanguage;
+
     /**
      * Direccion IP del visitante
      * @var string
      */
     private $remoteAddr;
+
     /**
      * Navegador
      * @var string
      */
     private $userAgent;
+
     /**
      * Tipo de contenido
      * @var string
      */
     private $contentType;
+
+    /**
+     * Array con los nombre de los navegadores obsoletos
+     * @var array
+     */
+    private $oldBrowsers = array(
+        'MSIE 7',
+        'MSIE 6',
+    );
 
     public function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];
@@ -74,6 +89,21 @@ class Request {
     }
 
     /**
+     * Devuelve la url amigable
+     * 
+     * @param string $appPath El path de la web
+     * @return string La url amigable sin el dominio, sin el path de la web
+     */
+    public function getUrlAmigable($appPath) {
+        // Cojo la url, incluido el path a la aplicacion
+        $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        // A la url le quito la parte del path a la aplicacion
+        $urlSinPath = str_replace($appPath, "", $url);
+
+        return $urlSinPath;
+    }
+
+    /**
      * Devuelve un array con los valores enviados por GET de la url amigable.
      * 
      * IMPORTANTE:
@@ -91,9 +121,9 @@ class Request {
     public function getParameters($appPath) {
 
         $this->parameters = array();
-        
+
         // Cojo la url, incluido el path a la aplicacion
-        $url = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
+        $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         // A la url le quito la parte del path a la aplicacion
         $params = str_replace($appPath, "", $url);
         // Troceo los parámetros y los meto en un array.
@@ -128,13 +158,13 @@ class Request {
     public function getLanguage() {
         return $this->acceptLanguage;
     }
-    
+
     /**
      * Devuelve un string con el idiona aceptado por el cliente con 2 caracteres
      * @return string El lenguaje expresado en 2 caracteres
      */
     public function getShortLanguage() {
-        return substr($this->acceptLanguage,0,2);
+        return substr($this->acceptLanguage, 0, 2);
     }
 
     /**
@@ -161,5 +191,30 @@ class Request {
         return $this->contentType;
     }
 
+    /**
+     * Devuelve true si el navegador es antiguo
+     * 
+     *   Se consideran browsers antiguos los definidos en el array $this->oldBrowsers, 
+     *   actualmente son:
+     * 
+     *   - MSIE 6
+     *   - MSIE 7
+     * 
+     * @return boolean 
+     */
+    public function isOldBrowser() {
+
+        $isOld = false;
+
+        foreach ($this->oldBrowsers as $value) {
+            $isOld = ( strpos($this->getUserAgent(), $value) != 0 );
+            if ($isOld)
+                break;
+        }
+
+        return $isOld;
+    }
+
 }
+
 ?>

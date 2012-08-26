@@ -1,0 +1,44 @@
+{#
+  Module: CoreModulos
+  Document : modules\CoreModulos\form.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 26.08.2012 02:46:37
+#}
+
+{% extends values.controller ~ '/index.html.twig' %}
+
+{% if values.datos.getPrimaryKeyValue == '' %} {% set action = 'new' %} {% else %} {% set action = 'edit' %} {% endif %}
+{% if action == 'new' %} {% block navegador %}{% endblock %} {% endif %}
+
+{% block mantenimiento %}
+<div class="grid_container">
+    <div class="grid_12 full_block">
+        <div class="widget_wrap">
+
+            <div class="widget_top">
+                <span class="h_icon list_image"></span>
+                <h6>{{values.titulo}}</h6>
+            </div>
+
+            <div class="widget_content">
+	<form name="manto_{{ values.controller}}" id="manto_{{ values.controller }}" action="" method="POST" enctype="multipart/form-data" class="form_container left_label">
+		<input name="controller" value="{{ values.controller }}" type="hidden" />
+		<input name="action" id="action" value="{{action}}" type="hidden" />
+		<input name="{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]" value="{{values.datos.getPrimaryKeyValue}}" type="hidden" />
+		{% if action == 'new' %} {% include '_global/comandosCreate.html.twig' %} {% endif %}
+		{% if action == 'edit' %} {% include '_global/comandosSaveDelete.html.twig' %} {% endif %}
+		{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
+		{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
+
+		<ul>
+			{% include values.controller ~ "/fields.html.twig" with {'datos': values.datos} %}
+		</ul>
+	</form>
+
+</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

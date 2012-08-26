@@ -3,20 +3,24 @@
 {# label: MUESTRA UN <DIV> CONTENIENDO EL TEXTO value Y APLICANDO LA CLASE class #}
 {# ----------------------------------------------------------------------------- #}
 {% macro label(value,class) %}
-<div class="{{ class|default('Etiqueta') }}">{{ value }}</div>
+<label class="{{ class|default('field_title') }}">{{ value }}</label>
 {% endmacro %}
 
 {# input: MUESTRA UN <INPUT> #}
 {# ------------------------- #}
-{% macro input(label,classLabel, type, name, id, value, maxLength, class, extra, onchange) %}
-<div class="Item" id="div_{{id}}">
+{% macro input(label,classLabel, type, name, id, value, maxLength, class, tabindex, extra, onchange) %}
+<li>
+    <div class="form_grid_12" id="div_{{id|default(name)}}">
     {% if label %}
         {{ _self.label(label,classLabel) }}
     {% endif %}
+    <div class="form_input">
     <input type="{{ type|default('text') }}" name="{{ name }}" id="{{ id|default(name)}}"
            value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
-           class="{{ class }}" {{extra}} onchange="{{ onchange }}"/>
+           class="tip_top" title="{{ tip }}" tabindex="{{ tabindex }}" {{extra}} onchange="{{ onchange }}"/>
 </div>
+    </div>
+</li>
 {% endmacro %}
 
 {# cc: CUENTA CORRIENTE #}
@@ -55,6 +59,7 @@
 {# cif: MUESTRA UN <INPUT> #}
 {# ------------------------- #}
 {% macro cif(label,classLabel, type, name, id, value, class) %}
+
 <div class="Item" id="div_{{id}}">
     {% if label %}
         {{ _self.label(label,classLabel) }}
@@ -67,30 +72,39 @@
 
 {# textarea: MUESTRA UN <TEXTAREA> #}
 {# ------------------------------- #}
-{% macro textarea(label, classLabel, name, id, value, rows, cols, class) %}
-<div class="Item" id="div_{{id}}">
+{% macro textarea(label, classLabel, name, id, value, rows, cols, class, tabindex) %}
+<li>
+<div class="form_grid_12" id="div_{{id|default(name)}}">
     {% if label %}
         {{ _self.label(label,classLabel) }}
     {% endif %}
-    <textarea name="{{ name }}" id="{{ id|default(name)}}"
-              rows="{{ rows|default(10) }}"
-              cols="{{ cols|default(10) }}"
-              class="{{ class }}">
+    <div class="form_input">
+        <textarea  name="{{ name }}"
+                   id="{{ id|default(name)}}"
+                   class="{{ class |default('input_grow') }}"
+                   rows="{{ rows|default(5) }}"
+                   cols="{{ cols|default(75) }}"
+                   tabindex="{{ tabindex }}">
         {{value}}
     </textarea>
 </div>
+</div>
+</li>
 {% endmacro %}
 
 {# select: MUESTRA UN <SELECT> #}
 {# --------------------------- #}
-{% macro select(label, classLabel, name, id, size, defecto, opciones, class, popup, onchange, onblur) %}
-<div class="Item" id="div_{{id}}">
+{% macro select(label, classLabel, name, id, width, defecto, opciones, class, tabindex, popup, onchange, onblur) %}
+<li>
+    <div class="form_grid_12" id="div_{{id|default(name)}}">
     {% if label %}
         {{ _self.label(label,classLabel) }}
     {% endif %}
-    <select name="{{ name }}" id="{{ id|default(name)}}" size="{{ size|default(1) }}" class="{{ class }}" onchange="{{onchange}}" onblur="{{onblur}}" >
+        <div class="form_input">
+
+            <select data-placeholder="Indique un valor" name="{{ name }}" id="{{ id|default(name)}}" style=" width:{{ width|default(200) }}px;" class="{{ class|default('chzn-select') }}" onchange="{{onchange}}" onblur="{{onblur}}" tabindex="{{tabindex}}" >
         {% for value in opciones %}
-            <option value="{{ value.Id }}" {% if (value.Id==defecto) %} SELECTED {%endif%}>
+                    <option value="{{ value.Id }}" {% if (value.Id==defecto) %} SELECTED {% endif %}>
                 {{value.Value}}
             </option>
         {% endfor %}
@@ -99,6 +113,9 @@
         {{ _self.linkimg(popup) }}
     {% endif %}
 </div>
+    </div>
+</li>
+
 {% endmacro %}
 
 {# img: MUESTRA UNA IMAGEN #}
@@ -120,17 +137,29 @@
 {% endmacro%}
 
 {# fecha: MUESTRA UN INPUT DE TIPO FECHA. UTILIZA UN POPUP DE CALENDARIO #}
-{% macro fecha(label,classLabel,name,id,value,size,class,extra) %}
-<div class="Item">
+{% macro fecha(label, classLabel, name, id, value, size, class, tabindex, extra) %}
+<li>
+    <div class="form_grid_12" id="div_{{id|default(name)}}">
 {% if label %}
     {{ _self.label(label,classLabel) }}
 {% endif %}
-    <script>$(function() {$( "#{{id|default(label)}}" ).datepicker({changeMonth: true, changeYear: true, showWeek: true, firstDay: 1});});</script>
-    <input name="{{name}}" type="text" id="{{id|default(label)}}" value="{{value}}"
-           size="{{ size|default("10")}}" class="{{ class|default("calendario")}}"
-           onKeyUp="this.value=formateafecha(this.value);" {{extra}}
+        <div class="form_input">
+            <div class=" form_grid_2 alpha">
+                <input name="{{name}}"
+                       id="{{id|default(name)}}"
+                       type="text"
+                       value="{{value}}"
+                       size="{{ size|default(10)}}"
+                       class="{{ class|default('datepicker') }}"
+                       onKeyUp="this.value=formateafecha(this.value);"
+                       tabindex="{{tabindex}}"
+                       {{extra}}
     />
 </div>
+            <span class="clear"></span>
+        </div>
+    </div>
+</li>
 {% endmacro %}
 
 {# foco: PONE EL FOCO EN EL ID INDICADO #}
@@ -153,7 +182,7 @@ document.getElementById('{{id}}').focus();
     {{textoLink}}
 </a>
 {% endmacro %}
-    
+
 {# botonDocumento: ABRE UNA VENTANA EMERGENTE MOSTRANDO LOS POSIBLES FORMATOS DEL DOCUMENTO #}
 {% macro botonDocumento(path,documento,controller,id)%}
 <a href="javascript:;" title= "Imprimir" onclick="window.open('{{path}}/_Emergente/formatosDocumentos/{{documento}}/{{controller}}/{{id}}','Documento','width=690,height=600,status=false,resizable=1');">

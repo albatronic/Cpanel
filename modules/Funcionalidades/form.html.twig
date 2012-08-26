@@ -1,6 +1,0 @@
-{# TEMPLATE Funcionalidades/form.html.twig #}
-{# Muestra los campos editables de la entidad #}
-
-{{ macro.select('IDOpcion','Etiqueta',values.controller ~ '[IDOpcion]',values.controller ~ '_IDOpcion',none,datos.IDOpcion.IDOpcion,datos.IDOpcion.fetchAll('IDOpcion'),'Select')}}
-{{ macro.input('Funcionalidades','Etiqueta','text',values.controller ~ '[Funcionalidades]',values.controller ~ '_Funcionalidades',datos.Funcionalidades,'255','CampoTextoLargo') }}
-{% include '_global/FormComunes.html.twig' %}
