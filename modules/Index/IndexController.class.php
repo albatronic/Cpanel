@@ -16,7 +16,7 @@ class IndexController extends Controller {
 
         return array(
             'template' => $this->entity . '/index.html.twig',
-            'values' => $this->values
+            'values' => $this->values,
         );
     }
 

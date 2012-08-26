@@ -228,14 +228,14 @@ document.getElementById('{{id}}').focus();
 {% include "ExpedirLineas/detalleExpedicion.html.twig" with {'lineaEntidad': lineaEntidad} %}
 {% endmacro %}
 
-{# Muestra los documentos de la entidad#}
-{% macro documentos(entidad,idEntidad) %}
+{# Muestra los documentos/imagenes de la entidad#}
+{% macro documentos(entidad, idEntidad, tipo) %}
 <div>
     <input name="document" type="file" id="document" size="20" class="Comando">
     <input name="accion" type="submit" value="Enviar" class="Comando" onclick="$('#action').val('Documento')">
     <input name="documentoBorrar" id="documentoBorrar" value="" type="hidden" />
 </div>
 <div id="Documentos" style="margin-top: 10px;"></div>
-<script>documentos('{{entidad}}', '{{idEntidad}}', 'Documentos');</script>
+<script>documentos('{{entidad}}', '{{idEntidad}}', 'Documentos', '{{tipo}}');</script>
 <div style="clear:both;"></div>
 {% endmacro %}

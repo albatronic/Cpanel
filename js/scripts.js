@@ -2,8 +2,8 @@
  * Script js propios
  */
 
-    var primerslap=false;
-    var segundoslap=false;
+var primerslap=false;
+var segundoslap=false;
 
 function IsNumeric(valor){
 
@@ -96,4 +96,22 @@ function formateafecha(fecha){
         }
     }
     return (fecha);
+}
+
+/**
+ * Carga vía ajax los documentos/imagenes de una entidad
+ *
+ * @param string entidad El nombre de la entidad
+ * @param integer idEntidad El id de la entidad
+ * @param string idDiv El id del div que se recargará
+ * @param string tipo El tipo de documento (documents, images)
+ */
+function documentos(entidad, idEntidad, idDiv, tipo) {
+    var url        = appPath + '/lib/documentos.php';
+    var parametros = 'idEntidad='+idEntidad+'&entidad='+entidad+'&tipo='+tipo;
+
+    // Coloco un gif "Cargando..." en la capa
+    $('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
+
+    jQuery('#'+idDiv).load(url, parametros);
 }

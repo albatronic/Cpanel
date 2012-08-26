@@ -1,0 +1,119 @@
+# Module: CoreImagenes
+# Document : modules\CoreImagenes\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 26.08.2012 20:01:33
+#
+---
+listados:
+  -
+    title: CoreImagenes
+    order_by: Id ASC
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: 10, 10, 15, 10
+    body_font: Courier, ,8
+    columns:
+      -
+        title: Entidad
+        field: Entidad
+        length: 50
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: IdEntidad
+        field: IdEntidad
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: EsGaleria
+        field: EsGaleria
+        length: 1
+        align: L
+        type: tinyint
+        total: NO
+        formula: null
+        format: null
+      -
+        title: PathName
+        field: PathName
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: TextoPie
+        field: TextoPie
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Title
+        field: Title
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Alt
+        field: Alt
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: IDTipoMime
+        field: IDTipoMime
+        length: 10
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Peso
+        field: Peso
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Alto
+        field: Alto
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Ancho
+        field: Ancho
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null

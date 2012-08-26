@@ -1,25 +1,30 @@
-{# CAMPOS COMUNES A TODOS LOS FORMULARIOS #}
+{#
+  CAMPOS COMUNES A TODOS LOS FORMULARIOS
 
-{{ macro.textarea('Observaciones','field_title',values.controller ~ '[Observaciones]',values.controller ~ '_Observaciones',datos.Observaciones,none,none,'textarea',none)}}
+  EL TABINDEX EMPIEZA EN 100
+#}
+
+
+{{ macro.textarea('Observaciones','field_title',values.controller ~ '[Observaciones]',values.controller ~ '_Observaciones',datos.Observaciones,none,none,'textarea',100)}}
 {# macro.input('PrimaryKeyMD5','field_title','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo') #}
-{{ macro.select('Es Predeterminado','field_title',values.controller ~ '[EsPredeterminado]',values.controller ~ '_EsPredeterminado',none,datos.EsPredeterminado.IDTipo,datos.EsPredeterminado.fetchAll(0),'chzn-select',none)}}
-{{ macro.select('Revisado','field_title',values.controller ~ '[Revisado]',values.controller ~ '_Revisado',none,datos.Revisado.IDTipo,datos.Revisado.fetchAll(0),'chzn-select',none)}}
-{{ macro.select('Publicar','field_title',values.controller ~ '[Publicar]',values.controller ~ '_Publicar',none,datos.Publicar.IDTipo,datos.Publicar.fetchAll(0),'chzn-select',none)}}
-{{ macro.fecha('Vigente Desde','field_title',values.controller ~ '[VigenteDesde]',values.controller ~ '_VigenteDesde',datos.VigenteDesde,'19','datepicker') }}
-{{ macro.fecha('Vigente Hasta','field_title',values.controller ~ '[VigenteHasta]',values.controller ~ '_VigenteHasta',datos.VigenteHasta,'19','datepicker') }}
-{# macro.input('Borrado','field_title','text',values.controller ~ '[Deleted]',values.controller ~ '_Deleted',datos.Deleted.Descripcion,none,none,none,'disabled')#}
-{# macro.input('Borrado por','field_title','text',values.controller ~ '[DeletedBy]',values.controller ~ '_DeletedBy',datos.DeletedBy,none,none,none,'disabled') #}
-{# macro.fecha('Fecha Borrado','field_title',values.controller ~ '[DeletedAt]',values.controller ~ '_DeletedAt',datos.DeletedAt,'19','datepicker',none,'disabled') #}
-{{ macro.select('Privacidad','field_title',values.controller ~ '[Privacidad]',values.controller ~ '_Privacidad',none,datos.Privacidad.IDTipo,datos.Privacidad.fetchAll(0),'chzn-select',none)}}
-{{ macro.input('Orden','field_title','text',values.controller ~ '[Orden]',values.controller ~ '_Orden',datos.Orden) }}
-{{ macro.fecha('Fecha Publicación','field_title',values.controller ~ '[FechaPublicacion]',values.controller ~ '_FechaPublicacion',datos.FechaPublicacion,'19','datepicker') }}
-{{ macro.input('Url Amigable','field_title','text',values.controller ~ '[UrlAmigable]',values.controller ~ '_UrlAmigable',datos.UrlAmigable,'255','CampoTextoLargo') }}
-{{ macro.input('Número de Visitas','field_title','text',values.controller ~ '[NumeroVisitas]',values.controller ~ '_NumeroVisitas',datos.NumeroVisitas,'11','CampoImporte') }}
-{{ macro.input('Metatag Title','field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,'255','CampoTextoLargo') }}
-{{ macro.input('Metatag Keywords','field_title','text',values.controller ~ '[MetatagKeywords]',values.controller ~ '_MetatagKeywords',datos.MetatagKeywords,'255','CampoTextoLargo') }}
-{{ macro.input('Metatag Description','field_title','text',values.controller ~ '[MetatagDescription]',values.controller ~ '_MetatagDescription',datos.MetatagDescription,'255','CampoTextoLargo') }}
-{{ macro.select('Metatag TitleSimple','field_title',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',none,datos.MetatagTitleSimple.IDTipo,datos.MetatagTitleSimple.fetchAll(0),'chzn-select',none)}}
-{{ macro.select('Metatag TitlePosicion','field_title',values.controller ~ '[MetatagTitlePosicion]',values.controller ~ '_MetatagTitlePosicion',none,datos.MetatagTitlePosicion.IDTipo,datos.MetatagTitlePosicion.fetchAll(0),'chzn-select',none)}}
-{{ macro.select('Mostrar en MapaWeb','field_title',values.controller ~ '[MostrarEnMapaWeb]',values.controller ~ '_MostrarEnMapaWeb',none,datos.MostrarEnMapaWeb.IDTipo,datos.MostrarEnMapaWeb.fetchAll(0),'chzn-select',none)}}
-{{ macro.input('Importancia en MapaWeb','field_title','text',values.controller ~ '[ImportanciaMapaWeb]',values.controller ~ '_ImportanciaMapaWeb',datos.ImportanciaMapaWeb,'5','CampoTextoCorto') }}
-{{ macro.select('ChangeFreq en MapaWeb','field_title',values.controller ~ '[ChangeFreqMapaWeb]',values.controller ~ '_ChangeFreqMapaWeb',none,datos.ChangeFreqMapaWeb.IDTipo,datos.ChangeFreqMapaWeb.fetchAll(0),'chzn-select',none) }}
+{{ macro.select('Es Predeterminado','field_title',values.controller ~ '[EsPredeterminado]',values.controller ~ '_EsPredeterminado',none,datos.EsPredeterminado.IDTipo,datos.EsPredeterminado.fetchAll(0),'chzn-select',101)}}
+{{ macro.select('Revisado','field_title',values.controller ~ '[Revisado]',values.controller ~ '_Revisado',none,datos.Revisado.IDTipo,datos.Revisado.fetchAll(0),'chzn-select',102)}}
+{{ macro.select('Publicar','field_title',values.controller ~ '[Publicar]',values.controller ~ '_Publicar',none,datos.Publicar.IDTipo,datos.Publicar.fetchAll(0),'chzn-select',103)}}
+{{ macro.fecha('Vigente Desde','field_title',values.controller ~ '[VigenteDesde]',values.controller ~ '_VigenteDesde',datos.VigenteDesde,'19','datepicker',104) }}
+{{ macro.fecha('Vigente Hasta','field_title',values.controller ~ '[VigenteHasta]',values.controller ~ '_VigenteHasta',datos.VigenteHasta,'19','datepicker',105) }}
+{# macro.input('Borrado','field_title','text',values.controller ~ '[Deleted]',values.controller ~ '_Deleted',datos.Deleted.Descripcion,none,none,106,'disabled')#}
+{# macro.input('Borrado por','field_title','text',values.controller ~ '[DeletedBy]',values.controller ~ '_DeletedBy',datos.DeletedBy,none,none,107,'disabled') #}
+{# macro.fecha('Fecha Borrado','field_title',values.controller ~ '[DeletedAt]',values.controller ~ '_DeletedAt',datos.DeletedAt,'19','datepicker',108,'disabled') #}
+{{ macro.select('Privacidad','field_title',values.controller ~ '[Privacidad]',values.controller ~ '_Privacidad',none,datos.Privacidad.IDTipo,datos.Privacidad.fetchAll(0),'chzn-select',109)}}
+{{ macro.input('Orden','field_title','text',values.controller ~ '[Orden]',values.controller ~ '_Orden',datos.Orden,none,none,110) }}
+{{ macro.fecha('Fecha Publicación','field_title',values.controller ~ '[FechaPublicacion]',values.controller ~ '_FechaPublicacion',datos.FechaPublicacion,'19','datepicker',111) }}
+{{ macro.input('Url Amigable','field_title','text',values.controller ~ '[UrlAmigable]',values.controller ~ '_UrlAmigable',datos.UrlAmigable,'255','CampoTextoLargo',112) }}
+{{ macro.input('Número de Visitas','field_title','text',values.controller ~ '[NumeroVisitas]',values.controller ~ '_NumeroVisitas',datos.NumeroVisitas,'11','CampoImporte',113) }}
+{{ macro.input('Metatag Title','field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,'255','CampoTextoLargo',114) }}
+{{ macro.input('Metatag Keywords','field_title','text',values.controller ~ '[MetatagKeywords]',values.controller ~ '_MetatagKeywords',datos.MetatagKeywords,'255','CampoTextoLargo',115) }}
+{{ macro.input('Metatag Description','field_title','text',values.controller ~ '[MetatagDescription]',values.controller ~ '_MetatagDescription',datos.MetatagDescription,'255','CampoTextoLargo',116) }}
+{{ macro.select('Metatag TitleSimple','field_title',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',none,datos.MetatagTitleSimple.IDTipo,datos.MetatagTitleSimple.fetchAll(0),'chzn-select',117)}}
+{{ macro.select('Metatag TitlePosicion','field_title',values.controller ~ '[MetatagTitlePosicion]',values.controller ~ '_MetatagTitlePosicion',none,datos.MetatagTitlePosicion.IDTipo,datos.MetatagTitlePosicion.fetchAll(0),'chzn-select',118)}}
+{{ macro.select('Mostrar en MapaWeb','field_title',values.controller ~ '[MostrarEnMapaWeb]',values.controller ~ '_MostrarEnMapaWeb',none,datos.MostrarEnMapaWeb.IDTipo,datos.MostrarEnMapaWeb.fetchAll(0),'chzn-select',119)}}
+{{ macro.input('Importancia en MapaWeb','field_title','text',values.controller ~ '[ImportanciaMapaWeb]',values.controller ~ '_ImportanciaMapaWeb',datos.ImportanciaMapaWeb,'5','CampoTextoCorto',120) }}
+{{ macro.select('ChangeFreq en MapaWeb','field_title',values.controller ~ '[ChangeFreqMapaWeb]',values.controller ~ '_ChangeFreqMapaWeb',none,datos.ChangeFreqMapaWeb.IDTipo,datos.ChangeFreqMapaWeb.fetchAll(0),'chzn-select',121) }}

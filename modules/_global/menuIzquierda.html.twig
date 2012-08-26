@@ -16,6 +16,18 @@
         </ul>
 
         <ul id="sidenav" class="accordion_mnu collapsible">
+        {% for aplicacion in menu %}
+            <li><a href="#"><span class="nav_icon blocks_images"></span> {{aplicacion.titulo}}<span class="up_down_arrow">&nbsp;</span></a>
+                <ul class="acitem">
+                    {% for modulo in aplicacion.modulos %}
+                    <li><a href="{{app.path}}/{{modulo.controller}}"><span class="list-icon">&nbsp;</span>{{modulo.titulo}}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <ul id="sidenav" class="accordion_mnu collapsible">
 
             <li><a href="#"><span class="nav_icon computer_imac"></span> Dashboard y ponemos un texto largo<span class="up_down_arrow">&nbsp;</span></a>
                 <ul class="acitem">

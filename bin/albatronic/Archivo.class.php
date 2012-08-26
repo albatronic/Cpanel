@@ -190,40 +190,40 @@ class Archivo {
 
     /**
      * Genera un nombre de archivo aleatorio (md5) para crearlo en la
-     * carpeta docs/docsEEE/pdfs/XX/nombreDeArchivo.pdf
-     * 
+     * carpeta docs/docsPPP/pdfs/XX/nombreDeArchivo.pdf
+     *
      * Donde:
-     * 
-     *  * EEE es el id de la empresa en curso
-     * 
-     *  * XX es el nombre de subcarpeta que se creará si no existe y se 
+     *
+     *  * PPP es el nombre del proyecto en curso
+     *
+     *  * XX es el nombre de subcarpeta que se creará si no existe y se
      *    obtiene con los dos primeros caracteres del nombre de archivo
-     * 
+     *
      *  * nombreDeArchivo se obtiene en base a la función MD5
-     * 
+     *
      * Si el método ha sido capaz de generar (si no existía) la carpeta XX, devuelve
      * un string con el nombre de archivo completo, en caso contrario devuelve vacío
-     * 
+     *
      * Uso:
-     * 
+     *
      *   $fichero = Archivo::getTemporalFileName();
      *   echo $fichero; -> docs/docs001/pdfs/a0/a0asdasdfasd.pdf
-     * 
+     *
      * @return string El nombre de archivo con el path completo
      */
     static function getTemporalFileName() {
         $fileName = md5($_SESSION['USER']['user']['iu'] . date('d-m-Y H:i:s'));
         $prefijoCarpeta = substr($fileName, 0, 2);
-        $path = "docs/docs" . $_SESSION['emp'] . "/pdfs/" . $prefijoCarpeta;
+        $path = "docs/docs" . $_SESSION['project']['folder'] . "/pdfs/" . $prefijoCarpeta;
         $archivo = $path . "/" . $fileName . ".pdf";
         if (!is_dir($path))
             $ok = mkdir($path);
         if (!is_dir($path))
             $archivo = '';
-        
+
         return $archivo;
     }
-    
+
     /**
      * Sube un archivo al servidor
      *
@@ -308,7 +308,7 @@ class Archivo {
     /**
      * Devuelve un array con los errores producidos
      * durante la carga del archivo
-     * 
+     *
      * @return array Array con los errores
      */
     public function getErrores() {
@@ -317,7 +317,7 @@ class Archivo {
 
     /**
      * Obtiene las partes que componen el nombre del archivo $path
-     * @param string $path 
+     * @param string $path
      */
     private function getPathInfo($path) {
 
@@ -382,8 +382,8 @@ class Archivo {
     /**
      * Establece el carácter que envuelve cada columna
      * Por defecto vacio
-     * 
-     * @param char(1) $char 
+     *
+     * @param char(1) $char
      */
     public function setColumnsEnclosure($char) {
         $this->columnsEnclosure = $char;

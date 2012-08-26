@@ -54,8 +54,8 @@ class LoginController extends Controller {
                 $_SESSION['USER'] = array(
                     'user' => array(
                         'id' => $usuario->getIDUsuario(),
-                        'Nombre' => $usuario->getNombreApellidos(),
-                        'IDPerfil' => $usuario->getIDPerfil()->getIDPerfil(),
+                        'nombre' => $usuario->getNombreApellidos(),
+                        'idPerfil' => $usuario->getIDPerfil()->getIDPerfil(),
                     ),
                 );
                 $_SESSION['project'] = $this->values['projects'][$this->request['project']];
@@ -64,6 +64,8 @@ class LoginController extends Controller {
                 $usuario->setNLogin($usuario->getNLogin() + 1);
                 $usuario->setUltimoLogin(date('Y-m-d H:i:s'));
                 $usuario->save();
+
+                $_SESSION['USER']['menu'] = $usuario->getArrayMenu();
 
                 // Ejecuto el controlador index y recojo sus valores
                 include_once 'modules/Index/IndexController.class.php';

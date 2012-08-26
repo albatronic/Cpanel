@@ -2,9 +2,9 @@
 
 /*
  * Genera el codigo HTML para mostrar los documentos de una entidad
- * 
+ *
  * Es llamado por AJAX
- * 
+ *
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright Informatica ALBATRONIC
  * @since 27.05.2011
@@ -17,8 +17,8 @@ if (!file_exists('../config/config.yml')) {
     exit;
 }
 
-if (file_exists("../../../app/bin/yaml/lib/sfYaml.php")) {
-    include "../../../app/bin/yaml/lib/sfYaml.php";
+if (file_exists("../bin/yaml/lib/sfYaml.php")) {
+    include "../bin/yaml/lib/sfYaml.php";
 } else {
     echo "NO EXISTE LA CLASE PARA LEER ARCHIVOS YAML";
     exit;
@@ -44,11 +44,12 @@ Autoloader::setClassPaths(array(
 ));
 spl_autoload_register(array('Autoloader', 'loadClass'));
 
-$id = $_GET['id'];
+$idEntidad = $_GET['idEntidad'];
 $entidad = $_GET['entidad'];
+$tipo = $_GET['tipo'];
 
-$objeto = new $entidad($id);
-$arrayDocs = $objeto->getDocuments();
+$objeto = new $entidad($idEntidad);
+$arrayDocs = $objeto->getDocuments($tipo);
 unset($objeto);
 
 $tag = '';
@@ -65,6 +66,7 @@ if (is_array($arrayDocs)) {
             $tag .= "</a>";
             $tag .= "</div>";
             $tag .= "<div>";
+            $tag .= "<input name='tipo' value='{$tipo}' type='hidden' />";
             $tag .= "<input name='accion' value='Quitar' type='submit' class='Comando' style='width: 100px;' onclick=\"$('#action').val('Documento');$('#documentoBorrar').val('" . $doc->getBaseName() . "')\" />";
             $tag .= "</div>";
             $tag .= "</div>";

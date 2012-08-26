@@ -64,7 +64,7 @@ class Controller {
         //    else
         //        $this->permisos = new ControlAcceso($this->parentEntity);
         //} else
-            $this->permisos = new ControlAcceso();
+        $this->permisos = new ControlAcceso();
 
         $this->values['titulo'] = $this->form->getTitle();
         $this->values['ayuda'] = $this->form->getHelpFile();
@@ -83,7 +83,6 @@ class Controller {
 
         $this->values['twigCss'] = $includesHead['twigCss'];
         $this->values['twigJs'] = $includesHead['twigJs'];
-
     }
 
     public function IndexAction() {
@@ -395,19 +394,29 @@ class Controller {
      */
     public function DocumentoAction() {
 
+        $tipo = $this->request['tipo'];
+        if ($tipo == '')
+            $tipo = "images";
+
+        $idEntidad = $this->request[$this->entity][$this->form->getPrimaryKey()];
+
         switch ($this->request['accion']) {
             case 'Enviar':
                 if ($this->values['permisos']['A']) {
 
-                    $path = "docs/docs" . $_SESSION['emp'] . "/images/" . $this->entity . "/" . $this->request[$this->entity][$this->form->getPrimaryKey()] . "_" . date('His');
+                    $path = "docs/docs" . $_SESSION['project']['folder'] . "/" . $tipo . "/" . $this->entity . "/" . $idEntidad . "_" . date('His');
                     $archivo = new Archivo($path);
 
                     if ($archivo->upLoad($_FILES['document'])) {
-                        // Actualiza el registro de documentos
-                        $doc = new Documentos();
+                        // Actualiza el registro de documentos/imagenes
+                        if ($tipo == 'documents')
+                            $doc = new CoreDocumentos();
+                        else
+                            $doc = new CoreImagenes();
+
                         $doc->setEntidad($this->entity);
-                        $doc->setIdEntidad($this->request[$this->entity][$this->form->getPrimaryKey()]);
-                        $doc->setPathName($destino);
+                        $doc->setIdEntidad($idEntidad);
+                        $doc->setPathName($path);
                         $doc->create();
                         unset($doc);
                     } else
@@ -420,12 +429,18 @@ class Controller {
 
             case 'Quitar':
                 if ($this->values['permisos']['B']) {
-                    $fileName = "docs/docs" . $_SESSION['emp'] . "/images/" . $this->entity . "/" . $this->request['documentoBorrar'];
+                    $fileName = "docs/docs" . $_SESSION['project']['folder'] . "/" . $tipo . "/" . $this->entity . "/" . $this->request['documentoBorrar'];
                     if (file_exists($fileName)) {
                         if (unlink($fileName)) {
-                            $doc = new Documentos();
-                            $doc->erase();
+                            // Borro la entrada en el registro de documentos o imagenes
+                            if ($tipo == 'documents')
+                                $doc = new CoreDocumentos();
+                            else
+                                $doc = new CoreImagenes();
+                            $objeto = $doc->getObjeto($this->entity, $idEntidad, $fileName);
+                            $objeto->erase();
                             unset($doc);
+                            unset($objeto);
                         }
                     }
                 } else {
@@ -434,7 +449,7 @@ class Controller {
                 break;
         }
 
-        $this->values['datos'] = new $this->entity($this->request[$this->entity][$this->form->getPrimaryKey()]);
+        $this->values['datos'] = new $this->entity($idEntidad);
         return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
     }
 
@@ -529,6 +544,7 @@ class Controller {
 
         return $fichero;
     }
+
 }
 
 ?>

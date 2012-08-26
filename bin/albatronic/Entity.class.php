@@ -517,12 +517,13 @@ class Entity  {
     }
 
     /**
-     * Devuelve un array de objetos "documentos" asociados a la entidad
+     * Devuelve un array con objetos documentos asociados
+     * a la entidad e id de entidad en curso
      *
-     * @return array
+     * @return array Array de objetos documentos
      */
-    public function getDocuments() {
-        $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue());
+    public function getDocuments($tipo='images') {
+        $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue(), $tipo);
         return $docs->getDocuments();
     }
 
@@ -531,8 +532,8 @@ class Entity  {
      *
      * @return integer El número de documentos
      */
-    public function getNumberOfDocuments() {
-        $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue());
+    public function getNumberOfDocuments($tipo='images') {
+        $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue(), $tipo);
         return $docs->getNumberOfDocuments();
     }
 
