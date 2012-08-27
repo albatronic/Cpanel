@@ -1,0 +1,20 @@
+{#
+  Module: CoreUrlamigables
+  Document : modules\CoreUrlamigables\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 27.08.2012 20:59:40
+#}
+
+{{ macro.input('Controller','field_title','text',values.controller ~ '[Controller]',values.controller ~ '_Controller',datos.Controller,'255','CampoTextoLargo','1') }}
+{{ macro.input('Action','field_title','text',values.controller ~ '[Action]',values.controller ~ '_Action',datos.Action,'255','CampoTextoLargo','2') }}
+{{ macro.input('Template','field_title','text',values.controller ~ '[Template]',values.controller ~ '_Template',datos.Template,'255','CampoTextoLargo','3') }}
+{{ macro.input('Parametros','field_title','text',values.controller ~ '[Parametros]',values.controller ~ '_Parametros',datos.Parametros,'255','CampoTextoLargo','4') }}
+{{ macro.input('IDEntidad','field_title','text',values.controller ~ '[IDEntidad]',values.controller ~ '_IDEntidad',datos.IDEntidad,'11','CampoImporte','5') }}
+{{ macro.input('Entidad','field_title','text',values.controller ~ '[Entidad]',values.controller ~ '_Entidad',datos.Entidad,'255','CampoTextoLargo','6') }}
+{{ macro.input('NumeroVisitas','field_title','text',values.controller ~ '[NumeroVisitas]',values.controller ~ '_NumeroVisitas',datos.NumeroVisitas,'11','CampoImporte','7') }}
+
+{% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_Controller') }}

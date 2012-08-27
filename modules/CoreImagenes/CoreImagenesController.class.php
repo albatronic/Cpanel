@@ -3,7 +3,7 @@
 * CONTROLLER FOR CoreImagenes
 * @author: Sergio Perez <sergio.perez@albatronic.com>
 * @copyright: INFORMATICA ALBATRONIC SL 
-* @date 26.08.2012 20:01:33
+* @date 27.08.2012 20:59:40
 
 * Extiende a la clase controller
 */

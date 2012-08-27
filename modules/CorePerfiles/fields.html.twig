@@ -4,9 +4,11 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 26.08.2012 02:46:37
+  date 27.08.2012 20:59:40
 #}
 
 {{ macro.input('Perfil','field_title','text',values.controller ~ '[Perfil]',values.controller ~ '_Perfil',datos.Perfil,'50','CampoTextoLargo','1') }}
 
 {% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_Perfil') }}

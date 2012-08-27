@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 26.08.2012 02:46:37
+# @date 27.08.2012 20:59:40
 #
 ---
 CoreRoles:
@@ -35,6 +35,12 @@ CoreRoles:
       entity: ValoresSN
     -
       entity: ValoresPrivacidad
+    -
+      entity: ValoresDchaIzq
+    -
+      entity: ValoresChangeFreq
+  fieldGeneratorUrlFriendly: Rol
+  fieldGeneratorMetatagTitle: Rol
   columns:
     -
       title: IDRol
@@ -306,26 +312,6 @@ CoreRoles:
         max: null
         message: Valor Requerido
     -
-      title: NumeroVisitas
-      field: NumeroVisitas
-      filter: NO
-      list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: integer
-        length: 11
-        min: null
-        max: null
-        message: Valor Requerido
-    -
       title: MetatagTitle
       field: MetatagTitle
       filter: NO
@@ -430,7 +416,7 @@ CoreRoles:
       aditional_filter:
         order: 6
         caption: MetatagTitlePosicion
-        entity: ValoresSN
+        entity: ValoresDchaIzq
         method: fetchAll
         params: Descripcion
         type: select
@@ -455,7 +441,7 @@ CoreRoles:
         title: null
         target: null
         link: null
-      default: 0
+      default: 1
       aditional_filter:
         order: 7
         caption: MostrarEnMapaWeb
@@ -484,7 +470,7 @@ CoreRoles:
         title: null
         target: null
         link: null
-      default: 
+      default: 0,5
       validator:
         nullable: YES
         type: string
@@ -504,7 +490,16 @@ CoreRoles:
         title: null
         target: null
         link: null
-      default: 0
+      default: monthly
+      aditional_filter:
+        order: 8
+        caption: ChangeFreqMapaWeb
+        entity: ValoresChangeFreq
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
       validator:
         nullable: YES
         type: string

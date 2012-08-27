@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 26.08.2012 20:01:33
+ * @date 27.08.2012 21:03:13
  */
 
 /**
@@ -18,23 +18,18 @@ class CoreImagenesEntity extends EntityComunes {
 	protected $Id;
 	/**
 	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="core_imagenes")
 	 */
 	protected $Entidad;
 	/**
 	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="core_imagenes")
 	 */
 	protected $IdEntidad;
 	/**
 	 * @orm:Column(type="tinyint")
-	 * @assert:NotBlank(groups="core_imagenes")
-	 * @var entities\ValoresSN
 	 */
 	protected $EsGaleria = '0';
 	/**
 	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="core_imagenes")
 	 */
 	protected $PathName;
 	/**
@@ -51,23 +46,18 @@ class CoreImagenesEntity extends EntityComunes {
 	protected $Alt;
 	/**
 	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="core_imagenes")
-	 * @var entities\TiposMime
 	 */
 	protected $IDTipoMime;
 	/**
 	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="core_imagenes")
 	 */
 	protected $Peso = '0';
 	/**
 	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="core_imagenes")
 	 */
 	protected $Alto = '0';
 	/**
 	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="core_imagenes")
 	 */
 	protected $Ancho = '0';
 	/**
@@ -97,7 +87,6 @@ class CoreImagenesEntity extends EntityComunes {
 	 */
 	protected $_childEntities = array(
 			'ValoresSN',
-			'TiposMime',
 			'ValoresPrivacidad',
 			'ValoresDchaIzq',
 			'ValoresChangeFreq',
@@ -167,8 +156,6 @@ class CoreImagenesEntity extends EntityComunes {
 		$this->IDTipoMime = trim($IDTipoMime);
 	}
 	public function getIDTipoMime(){
-		if (!($this->IDTipoMime instanceof TiposMime))
-			$this->IDTipoMime = new TiposMime($this->IDTipoMime);
 		return $this->IDTipoMime;
 	}
 

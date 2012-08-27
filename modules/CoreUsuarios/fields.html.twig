@@ -4,7 +4,7 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 26.08.2012 02:46:37
+  date 27.08.2012 20:59:41
 #}
 
 {{ macro.select('IDPerfil','field_title',values.controller ~ '[IDPerfil]',values.controller ~ '_IDPerfil',none,datos.IDPerfil.IDPerfil,datos.IDPerfil.fetchAll('IDPerfil'),'Select','1')}}
@@ -22,3 +22,5 @@
 {{ macro.fecha('UltimoLogin','field_title',values.controller ~ '[UltimoLogin]',values.controller ~ '_UltimoLogin',datos.UltimoLogin,'19','datepicker','13')}}
 
 {% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_IDPerfil') }}

@@ -4,10 +4,13 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 26.08.2012 02:46:37
+  date 27.08.2012 20:59:40
 #}
 
-{{ macro.select('IDModulo','field_title',values.controller ~ '[IDModulo]',values.controller ~ '_IDModulo',none,datos.IDModulo.IDModulo,datos.IDModulo.fetchAll('NombreModulo'),'Select','1')}}
+{{ macro.select('IDModulo','field_title',values.controller ~ '[IDModulo]',values.controller ~ '_IDModulo',none,datos.IDModulo.IDModulo,datos.IDModulo.fetchAll('IDModulo'),'Select','1')}}
 {{ macro.input('Funcionalidades','field_title','text',values.controller ~ '[Funcionalidades]',values.controller ~ '_Funcionalidades',datos.Funcionalidades,'255','CampoTextoLargo','2') }}
+{{ macro.input('NumeroVisitas','field_title','text',values.controller ~ '[NumeroVisitas]',values.controller ~ '_NumeroVisitas',datos.NumeroVisitas,'11','CampoImporte','3') }}
 
 {% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_IDModulo') }}

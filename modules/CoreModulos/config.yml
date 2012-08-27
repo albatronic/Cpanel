@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 26.08.2012 02:46:37
+# @date 27.08.2012 20:59:40
 #
 ---
 CoreModulos:
@@ -37,6 +37,12 @@ CoreModulos:
       entity: ValoresSN
     -
       entity: ValoresPrivacidad
+    -
+      entity: ValoresDchaIzq
+    -
+      entity: ValoresChangeFreq
+  fieldGeneratorUrlFriendly: CodigoApp
+  fieldGeneratorMetatagTitle: CodigoApp
   columns:
     -
       title: IDModulo
@@ -437,26 +443,6 @@ CoreModulos:
         max: null
         message: Valor Requerido
     -
-      title: NumeroVisitas
-      field: NumeroVisitas
-      filter: NO
-      list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: integer
-        length: 11
-        min: null
-        max: null
-        message: Valor Requerido
-    -
       title: MetatagTitle
       field: MetatagTitle
       filter: NO
@@ -561,7 +547,7 @@ CoreModulos:
       aditional_filter:
         order: 7
         caption: MetatagTitlePosicion
-        entity: ValoresSN
+        entity: ValoresDchaIzq
         method: fetchAll
         params: Descripcion
         type: select
@@ -586,7 +572,7 @@ CoreModulos:
         title: null
         target: null
         link: null
-      default: 0
+      default: 1
       aditional_filter:
         order: 8
         caption: MostrarEnMapaWeb
@@ -615,7 +601,7 @@ CoreModulos:
         title: null
         target: null
         link: null
-      default: 
+      default: 0,5
       validator:
         nullable: YES
         type: string
@@ -635,7 +621,16 @@ CoreModulos:
         title: null
         target: null
         link: null
-      default: 0
+      default: monthly
+      aditional_filter:
+        order: 9
+        caption: ChangeFreqMapaWeb
+        entity: ValoresChangeFreq
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
       validator:
         nullable: YES
         type: string

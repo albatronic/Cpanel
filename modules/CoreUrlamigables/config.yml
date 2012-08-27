@@ -1,0 +1,209 @@
+# Module: CoreUrlamigables
+# Document : modules\CoreUrlamigables\config.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 27.08.2012 20:59:40
+#
+---
+CoreUrlamigables:
+  includesHead:
+    twigCss: _global/css.html.twig
+    twigJs: _global/js.html.twig
+  login_required: YES
+  permission_control: YES
+  favourite_control: NO
+  help_file: help.html.twig
+  title: CoreUrlamigables
+  id_video: coreurlamigables
+  url_video: null
+  conection: 'cpanel'
+  entity: CoreUrlamigables
+  table: core_urlamigables
+  primarykey: IDUrlAmigable
+  records_per_page: 15
+  order_by:
+    -
+      title: IDUrlAmigable a-z
+      criteria: IDUrlAmigable ASC
+    -
+      title: IDUrlAmigable z-a
+      criteria: IDUrlAmigable DESC
+  search_default: IDUrlAmigable
+  referenced_entities:
+  fieldGeneratorUrlFriendly: UrlAmigable
+  fieldGeneratorMetatagTitle: UrlAmigable
+  columns:
+    -
+      title: IDUrlAmigable
+      field: IDUrlAmigable
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+    -
+      title: UrlAmigable
+      field: UrlAmigable
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 255
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Controller
+      field: Controller
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 255
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Action
+      field: Action
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 255
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Template
+      field: Template
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 255
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Parametros
+      field: Parametros
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 255
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: IDEntidad
+      field: IDEntidad
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: integer
+        length: 11
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Entidad
+      field: Entidad
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 255
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: NumeroVisitas
+      field: NumeroVisitas
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: integer
+        length: 11
+        min: null
+        max: null
+        message: Valor Requerido

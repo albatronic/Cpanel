@@ -4,7 +4,7 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 26.08.2012 02:46:37
+  date 27.08.2012 20:59:40
 #}
 
 {{ macro.select('CodigoApp','field_title',values.controller ~ '[CodigoApp]',values.controller ~ '_CodigoApp',none,datos.CodigoApp.CodigoApp,datos.CodigoApp.fetchAll('CodigoApp'),'Select','1')}}
@@ -16,3 +16,5 @@
 {{ macro.input('Funcionalidades','field_title','text',values.controller ~ '[Funcionalidades]',values.controller ~ '_Funcionalidades',datos.Funcionalidades,'255','CampoTextoLargo','7') }}
 
 {% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_CodigoApp') }}

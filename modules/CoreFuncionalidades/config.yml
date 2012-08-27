@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 26.08.2012 02:46:37
+# @date 27.08.2012 20:59:40
 #
 ---
 CoreFuncionalidades:
@@ -37,6 +37,8 @@ CoreFuncionalidades:
       entity: ValoresSN
     -
       entity: ValoresPrivacidad
+  fieldGeneratorUrlFriendly: IDModulo
+  fieldGeneratorMetatagTitle: IDModulo
   columns:
     -
       title: IDFuncionalidad
@@ -50,12 +52,12 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
     -
-      title: Modulo
+      title: IDModulo
       field: IDModulo
       filter: NO
-      list: YES
+      list: NO
       form: YES
       link:
         route: null
@@ -63,10 +65,10 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       aditional_filter:
         order: 1
-        caption: Modulo
+        caption: IDModulo
         entity: CoreModulos
         method: fetchAll
         params: Descripcion
@@ -84,7 +86,7 @@ CoreFuncionalidades:
       title: Funcionalidades
       field: Funcionalidades
       filter: YES
-      list: YES
+      list: NO
       form: YES
       link:
         route: null
@@ -92,7 +94,7 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -112,11 +114,11 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
-        length:
+        length: 
         min: null
         max: null
         message: Valor Requerido
@@ -219,11 +221,11 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: NO
         type: datetime
-        length:
+        length: 
         min: null
         max: null
         message: Valor Requerido
@@ -239,11 +241,11 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: NO
         type: datetime
-        length:
+        length: 
         min: null
         max: null
         message: Valor Requerido
@@ -288,7 +290,7 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: integer
@@ -308,11 +310,11 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: datetime
-        length:
+        length: 
         min: null
         max: null
         message: Valor Requerido
@@ -328,7 +330,7 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -339,7 +341,7 @@ CoreFuncionalidades:
     -
       title: NumeroVisitas
       field: NumeroVisitas
-      filter: NO
+      filter: YES
       list: NO
       form: YES
       link:
@@ -348,7 +350,7 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: integer
@@ -368,7 +370,7 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -388,7 +390,7 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -408,7 +410,7 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -515,7 +517,7 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string

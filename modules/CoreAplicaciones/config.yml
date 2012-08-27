@@ -3,20 +3,18 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 26.08.2012 02:46:37
+# @date 27.08.2012 20:59:40
 #
 ---
 CoreAplicaciones:
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
-  fieldGeneratorUrlFriendly: NombreApp
-  fieldGeneratorMetatagTitle: NombreApp
   login_required: YES
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Gestión de Aplicaciones
+  title: CoreAplicaciones
   id_video: coreaplicaciones
   url_video: null
   conection: 'cpanel'
@@ -37,6 +35,12 @@ CoreAplicaciones:
       entity: ValoresSN
     -
       entity: ValoresPrivacidad
+    -
+      entity: ValoresDchaIzq
+    -
+      entity: ValoresChangeFreq
+  fieldGeneratorUrlFriendly: CodigoApp
+  fieldGeneratorMetatagTitle: CodigoApp
   columns:
     -
       title: IDApp
@@ -50,12 +54,12 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
     -
-      title: Codigo
+      title: CodigoApp
       field: CodigoApp
       filter: YES
-      list: YES
+      list: NO
       form: YES
       link:
         route: null
@@ -63,7 +67,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -72,10 +76,10 @@ CoreAplicaciones:
         max: null
         message: Valor Requerido
     -
-      title: Nombre
+      title: NombreApp
       field: NombreApp
       filter: YES
-      list: YES
+      list: NO
       form: YES
       link:
         route: null
@@ -83,7 +87,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -92,10 +96,10 @@ CoreAplicaciones:
         max: null
         message: Valor Requerido
     -
-      title: Descripción
+      title: Descripcion
       field: Descripcion
       filter: YES
-      list: YES
+      list: NO
       form: YES
       link:
         route: null
@@ -103,7 +107,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -123,11 +127,11 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
-        length:
+        length: 
         min: null
         max: null
         message: Valor Requerido
@@ -230,11 +234,11 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: NO
         type: datetime
-        length:
+        length: 
         min: null
         max: null
         message: Valor Requerido
@@ -250,11 +254,11 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: NO
         type: datetime
-        length:
+        length: 
         min: null
         max: null
         message: Valor Requerido
@@ -299,7 +303,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: integer
@@ -319,11 +323,11 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: datetime
-        length:
+        length: 
         min: null
         max: null
         message: Valor Requerido
@@ -339,31 +343,11 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
         length: 250
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: NumeroVisitas
-      field: NumeroVisitas
-      filter: NO
-      list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default:
-      validator:
-        nullable: YES
-        type: integer
-        length: 11
         min: null
         max: null
         message: Valor Requerido
@@ -379,7 +363,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -399,7 +383,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -419,7 +403,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 
       validator:
         nullable: YES
         type: string
@@ -472,7 +456,7 @@ CoreAplicaciones:
       aditional_filter:
         order: 6
         caption: MetatagTitlePosicion
-        entity: ValoresSN
+        entity: ValoresDchaIzq
         method: fetchAll
         params: Descripcion
         type: select
@@ -497,7 +481,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 0
+      default: 1
       aditional_filter:
         order: 7
         caption: MostrarEnMapaWeb
@@ -526,7 +510,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 0,5
       validator:
         nullable: YES
         type: string
@@ -546,7 +530,16 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 0
+      default: monthly
+      aditional_filter:
+        order: 8
+        caption: ChangeFreqMapaWeb
+        entity: ValoresChangeFreq
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
       validator:
         nullable: YES
         type: string

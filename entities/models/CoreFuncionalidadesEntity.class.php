@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 24.08.2012 17:27:15
+ * @date 27.08.2012 21:03:13
  */
 
 /**
@@ -25,6 +25,10 @@ class CoreFuncionalidadesEntity extends EntityComunes {
 	 * @orm:Column(type="string")
 	 */
 	protected $Funcionalidades;
+	/**
+	 * @orm:Column(type="integer")
+	 */
+	protected $NumeroVisitas;
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string
@@ -79,6 +83,13 @@ class CoreFuncionalidadesEntity extends EntityComunes {
 	}
 	public function getFuncionalidades(){
 		return $this->Funcionalidades;
+	}
+
+	public function setNumeroVisitas($NumeroVisitas){
+		$this->NumeroVisitas = $NumeroVisitas;
+	}
+	public function getNumeroVisitas(){
+		return $this->NumeroVisitas;
 	}
 
 } // END class core_funcionalidades

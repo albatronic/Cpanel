@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 24.08.2012 17:27:15
+ * @date 27.08.2012 21:03:13
  */
 
 /**
@@ -99,10 +99,11 @@ class CoreUsuariosEntity extends EntityComunes {
 	protected $_childEntities = array(
 			'CorePerfiles',
 			'CoreRoles',
-			'CoreEmpresas',
 			'CoreTiposusuarios',
 			'ValoresSN',
 			'ValoresPrivacidad',
+			'ValoresDchaIzq',
+			'ValoresChangeFreq',
 		);
 	/**
 	 * GETTERS Y SETTERS

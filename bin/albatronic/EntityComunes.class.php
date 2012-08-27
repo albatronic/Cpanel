@@ -377,6 +377,10 @@ class EntityComunes extends Entity {
         return $this->ChangeFreqMapaWeb;
     }
 
+    public function getNumeroVisitas() {
+
+    }
+
 }
 
 ?>
