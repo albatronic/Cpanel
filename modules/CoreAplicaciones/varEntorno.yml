@@ -7,67 +7,69 @@
 #
 ---
 CoreAplicaciones:
-  numMaxRegistros: 100
+  numMaxRecords: 100
 
   image1:
     visible: TRUE
     caption: image1
-    width: 
-    height: 
+    width:
+    height:
   image2:
     visible: FALSE
     caption: image2
-    width: 
-    height: 
+    width:
+    height:
   image3:
     visible: FALSE
     caption: image3
-    width: 
-    height: 
+    width:
+    height:
   image4:
     visible: FALSE
     caption: image4
-    width: 
-    height: 
+    width:
+    height:
   image5:
     visible: FALSE
     caption: image5
-    width: 
-    height: 
+    width:
+    height:
 
-  mostrarGestionSlug: FALSE
+  showManageSlug: FALSE
 
-  mostrarUrlAmigable: TRUE
+  showUrlFriendly: TRUE
+  fieldGeneratorUrlFriendly: NombreApp
 
-  mostrarGestionMapaWeb:
+  showManageSiteMap:
     mostrar: FALSE
     mostrarEnMapaWeb: TRUE
     mostrarImportanciaMapaWeb: 0,5
     frecuenciaCambio: monthly
 
-  mostrarNumeroVisitas: TRUE
+  showCountVisit: TRUE
 
-  mostrarGestionMeta:
+  showManageMeta:
     mostrar: TRUE
-    titlePosition: 
-    titleSimple: 
+    titlePosition:
+    titleSimple:
+  fieldGeneratorMetatagTitle: NombreApp
 
   columns:
     -
       field: CodigoApp
-      mostrar: TRUE
-      default: 
+      show: TRUE
+      default:
       caption: CodigoApp
-      permiso: 
+      permission:
     -
       field: NombreApp
-      mostrar: TRUE
-      default: 
+      show: TRUE
+      default:
       caption: NombreApp
-      permiso: 
+      permission:
     -
       field: Descripcion
-      mostrar: TRUE
-      default: 
+      show: TRUE
+      default:
       caption: Descripcion
-      permiso: 
+      permission:

@@ -16,8 +16,8 @@
         </ul>
 
         <ul id="sidenav" class="accordion_mnu collapsible">
-        {% for aplicacion in menu %}
-            <li><a href="#"><span class="nav_icon blocks_images"></span> {{aplicacion.titulo}}<span class="up_down_arrow">&nbsp;</span></a>
+        {% for key,aplicacion in menu %}
+            <li><a href="{{app.path}}/index/{{key}}"><span class="nav_icon blocks_images"></span> {{aplicacion.titulo}}<span class="up_down_arrow">&nbsp;</span></a>
                 <ul class="acitem">
                     {% for modulo in aplicacion.modulos %}
                     <li><a href="{{app.path}}/{{modulo.controller}}"><span class="list-icon">&nbsp;</span>{{modulo.titulo}}</a></li>

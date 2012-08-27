@@ -10,11 +10,13 @@ CoreAplicaciones:
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
+  fieldGeneratorUrlFriendly: NombreApp
+  fieldGeneratorMetatagTitle: NombreApp
   login_required: YES
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: CoreAplicaciones
+  title: Gestión de Aplicaciones
   id_video: coreaplicaciones
   url_video: null
   conection: 'cpanel'

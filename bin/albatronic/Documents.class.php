@@ -27,14 +27,14 @@ class Documents {
      * Tipos de documentos permitidos
      * @var array
      */
-    static $tipos = array(
+    protected $tipos = array(
         'documents',
         'images',
     );
 
     public function __construct($entidad, $id, $tipo = 'documents') {
 
-        if (in_array($tipo, $tipos)) {
+        if (in_array($tipo, $this->tipos)) {
             $this->entidad = $entidad;
             $this->path = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/docs/docs" . $_SESSION['emp'] . "/" . $tipo . "/" . $this->entidad . "/" . $id . "_*.*";
 

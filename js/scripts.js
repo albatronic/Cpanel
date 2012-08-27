@@ -5,6 +5,24 @@
 var primerslap=false;
 var segundoslap=false;
 
+/**
+ * Para las solapas
+ */
+$(function() {
+    $( "#tabs" ).tabs();
+});
+
+/**
+ * Para el efecto acordeón
+ */
+$(function() {
+    $( "#accordion" ).accordion({
+        autoHeight: false,
+        navigation: true,
+        collapsible: true
+    });
+});
+
 function IsNumeric(valor){
 
     var log=valor.length;
@@ -114,4 +132,11 @@ function documentos(entidad, idEntidad, idDiv, tipo) {
     $('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
 
     jQuery('#'+idDiv).load(url, parametros);
+}
+
+/**
+ * Submitea el formulario en curso
+ */
+function submitForm() {
+    window.form.submit();
 }

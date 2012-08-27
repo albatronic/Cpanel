@@ -36,6 +36,7 @@ class CoreUsuarios extends CoreUsuariosEntity {
         $appAnterior = '';
         foreach($rows as $row) {
 
+            $icono = '';
             $app = explode("/",$row['NombreModulo']);
 
             if ($app[0] != $appAnterior) {
@@ -43,26 +44,30 @@ class CoreUsuarios extends CoreUsuariosEntity {
                 $aplicacion = new CoreAplicaciones();
                 $aplicacion = $aplicacion->find("CodigoApp", $app[0]);
 
-                $imagen = new CoreImagenes();
-                $imagen = $imagen->getImagen();
+                $iconos = $aplicacion->getDocuments('images');
+                if (is_object($iconos[0])) $icono = $iconos[0]->getFullPath();
+
                 $menu[$app[0]] = array(
                     'titulo' => $aplicacion->getNombreApp(),
                     'descripcion' => $aplicacion->getDescripcion(),
-                    'icono' => $imagen->getPathName(),
+                    'icono' => $icono,
                 );
                 unset($aplicacion);
-                unset($imagen);
 
             } else {
 
                 $modulo = new CoreModulos();
                 $modulo = $modulo->find('NombreModulo',$row['NombreModulo']);
+
+                $iconos = $modulo->getDocuments('images');
+                if (is_object($iconos[0])) $icono = $iconos[0]->getFullPath();
+
                 $menu[$app[0]]['modulos'][$app[1]] = array(
                     'titulo' => $modulo->getTitulo(),
                     'descripcion' => $modulo->getDescripcion(),
                     'funcinalidades' => $row['Funcionalidades'],
                     'controller' => $app[0] . $app[1],
-                    'icono' =>'',
+                    'icono' =>$icono,
                 );
                 unset($modulo);
 

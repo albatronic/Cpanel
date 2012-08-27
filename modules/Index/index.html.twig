@@ -4,4 +4,14 @@
 
 {% block content %}
 
+{% if values.menu.tipo == 'apps' %}
+    {% for key,value in values.menu.apps %}
+        <a href="{{app.path}}/index/{{key}}">{{key}} - {{value.titulo}}<img src="{{value.icono}}" alt="" title="" /></a>
+    {% endfor %}
+{% else %}
+    {% for key,value in values.menu.modulos %}
+        <a href="{{app.path}}/{{value.controller}}">{{key}} - {{value.titulo}}<img src="{{value.icono}}" alt="" title="" /></a>
+    {% endfor %}
+{% endif %}
+
 {% endblock %}

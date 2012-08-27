@@ -106,11 +106,6 @@ class EntityComunes extends Entity {
     protected $UrlAmigable;
 
     /**
-     * @orm:Column(type="integer")
-     */
-    protected $NumeroVisitas;
-
-    /**
      * @orm:Column(type="string")
      */
     protected $MetatagTitle;
@@ -308,14 +303,6 @@ class EntityComunes extends Entity {
 
     public function getUrlAmigable() {
         return $this->UrlAmigable;
-    }
-
-    public function setNumeroVisitas($NumeroVisitas) {
-        $this->NumeroVisitas = $NumeroVisitas;
-    }
-
-    public function getNumeroVisitas() {
-        return $this->NumeroVisitas;
     }
 
     public function setMetatagTitle($MetatagTitle) {
