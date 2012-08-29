@@ -1,0 +1,13 @@
+{# Description of  #}
+
+{# author Sergio Pérez <sergio.perez@albatronic.com> #}
+{# copyright Informática ALBATRONIC, SL #}
+{# date ${date} ${time} #}
+
+{% extends values.controller ~ '/form.html.twig' %}
+
+{% block variables %}
+{{ macro.input('Título','field_title','text','VarProEnv[titulo]','VarProEnv_titulo',values.datos.titulo,'4','CampoUnidades','1') }}
+{{ macro.fecha('Vigente Desde','field_title','VarProEnv[vigenteDesde]','VarProEnv_videnteDesde',values.datos.vigenteDesde,'19','datepicker','2')}}
+{{ macro.fecha('Vigente Hasta','field_title','VarProEnv[vigenteHasta]','VarProEnv_videnteHasta',values.datos.vigenteHasta,'19','datepicker','2')}}
+{% endblock%}

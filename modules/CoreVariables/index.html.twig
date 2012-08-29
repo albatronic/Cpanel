@@ -1,0 +1,19 @@
+{#
+  Module: CoreVariables
+  Document : modules\CoreVariables\index.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 27.08.2012 20:59:40
+#}
+
+{% extends layout %}
+
+{% block title parent() ~ ' - '  ~ values.titulo %}
+
+{% block content %}
+	{% include '_global/tituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}
+
+	{% block mantenimiento %}
+	{% endblock %}
+{% endblock %}

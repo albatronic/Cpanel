@@ -23,10 +23,17 @@ config:
     path: /cpanel
     framework: bin/albatronic/
 
-  # CONEXIONES A LAS BASES DE DATOS
+  # PROYECTOS Y CONEXIONES A LAS BASES DE DATOS
+  # LA CARPETA DE CADA PROYECTO SE INDICA EL NODO FOLDER Y SE ENTIENDE
+  # RESPECTO AL DOCUMENT_ROOT Y NO AL CPANEL
+  #
+  # EN PRODUCCION EL FOLDER SERÁ "/"
   conections:
     cpanel:
       title: Modo local, todos los proyectos
+      description:
+      prefix: MANOLO
+      folder:
       dbEngine: mysql
       host: localhost
       user: cpanel
@@ -34,7 +41,9 @@ config:
       database: cpanel
     kaia:
       title: La página de kaia
-      folder: kaia
+      description:
+      prefix: kaia
+      folder: /kaia
       dbEngine: mysql
       host: localhost
       user: kaia
@@ -42,17 +51,13 @@ config:
       database: kaia
     galapago:
       title: La pagina de galapago
-      folder: galapago
+      description:
+      prefix: galapago
+      folder: /galapago
       dbEngine: mysql
       host: localhost
       password: galapago
       database: galapago
-    datos:
-      dbEngine: mysql
-      host: localhost
-      user: cpanel
-      password: cpanel
-      database: cpanel
 
   # MOTOR DE ENVIO DE CORREOS
   mailer:
