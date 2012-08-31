@@ -58,13 +58,13 @@ class Controller {
 
         // Cargar los permisos.
         // Si la entidad no está sujeta a control de permisos, se habilitan todos
-        //if ($this->form->getPermissionControl()) {
-        //    if ($this->parentEntity == '')
-        //        $this->permisos = new ControlAcceso($this->entity);
-        //    else
-        //        $this->permisos = new ControlAcceso($this->parentEntity);
-        //} else
-        $this->permisos = new ControlAcceso();
+        if ($this->form->getPermissionControl()) {
+            if ($this->parentEntity == '')
+                $this->permisos = new ControlAcceso($this->entity);
+            else
+                $this->permisos = new ControlAcceso($this->parentEntity);
+        } else
+            $this->permisos = new ControlAcceso();
 
         $this->values['titulo'] = $this->form->getTitle();
         $this->values['ayuda'] = $this->form->getHelpFile();
@@ -106,7 +106,7 @@ class Controller {
 
         switch ($this->request["METHOD"]) {
             case 'GET':
-                if ($this->values['permisos']['C']) {
+                if ($this->values['permisos']['CO']) {
                     //SI EN LA POSICION 3 DEL REQUEST VIENE ALGO,
                     //SE ENTIENDE QUE ES EL VALOR DE LA CLAVE PARA LINKAR CON LA ENTIDAD PADRE
                     //ESTO SE UTILIZA PARA LOS FORMULARIOS PADRE->HIJO
@@ -136,7 +136,7 @@ class Controller {
 
                 switch ($this->request['accion']) {
                     case 'Guardar': //GUARDAR DATOS
-                        if ($this->values['permisos']['A']) {
+                        if ($this->values['permisos']['UP']) {
                             // Cargo la entidad
                             $datos = new $this->entity($this->request[$this->entity][$this->form->getPrimaryKey()]);
                             // Vuelco los datos del request
@@ -161,7 +161,7 @@ class Controller {
                         break;
 
                     case 'Borrar': //BORRAR DATOS
-                        if ($this->values['permisos']['B']) {
+                        if ($this->values['permisos']['DE']) {
                             $datos = new $this->entity($this->request[$this->entity][$this->form->getPrimaryKey()]);
 
                             if ($datos->erase()) {
@@ -196,7 +196,7 @@ class Controller {
      */
     public function newAction() {
 
-        if ($this->values['permisos']['I']) {
+        if ($this->values['permisos']['IN']) {
             switch ($this->request["METHOD"]) {
                 case 'GET': //MOSTRAR FORMULARIO VACIO
                     //SI EN LA POSICION 2 DEL REQUEST VIENE ALGO,
@@ -281,7 +281,7 @@ class Controller {
      */
     public function listAction($aditionalFilter = '') {
 
-        if ($this->values['permisos']['C']) {
+        if ($this->values['permisos']['CO']) {
             $this->values['listado'] = $this->listado->getAll($aditionalFilter);
             $template = $this->entity . '/list.html.twig';
         } else {
@@ -299,7 +299,7 @@ class Controller {
      */
     public function listadoAction($aditionalFilter = '') {
 
-        if ($this->values['permisos']['L']) {
+        if ($this->values['permisos']['LI']) {
             // Lee la configuracion del listado
             $formato = new Form($this->entity, 'listados.yml');
             $parametros = $formato->getFormatoListado($this->request['formatoListado']);
@@ -319,7 +319,7 @@ class Controller {
      * @return array Template y valores
      */
     public function imprimirAction() {
-        if ($this->values['permisos']['L']) {
+        if ($this->values['permisos']['LI']) {
 
             if ($this->request['METHOD'] == 'GET') {
                 $idDocumento = $this->request['2'];
@@ -359,7 +359,7 @@ class Controller {
      */
     public function exportarAction($aditionalFilter = '') {
 
-        if ($this->values['permisos']['E']) {
+        if ($this->values['permisos']['EX']) {
 
             if ($this->values['export']['title'] == '')
                 $this->values['export']['title'] = $this->entity;
@@ -402,7 +402,7 @@ class Controller {
 
         switch ($this->request['accion']) {
             case 'Enviar':
-                if ($this->values['permisos']['A']) {
+                if ($this->values['permisos']['UP']) {
 
                     $path = "docs/docs" . $_SESSION['project']['folder'] . "/" . $tipo . "/" . $this->entity . "/" . $idEntidad . "_" . date('His');
                     $archivo = new Archivo($path);
@@ -428,7 +428,7 @@ class Controller {
                 break;
 
             case 'Quitar':
-                if ($this->values['permisos']['B']) {
+                if ($this->values['permisos']['DE']) {
                     $fileName = "docs/docs" . $_SESSION['project']['folder'] . "/" . $tipo . "/" . $this->entity . "/" . $this->request['documentoBorrar'];
                     if (file_exists($fileName)) {
                         if (unlink($fileName)) {

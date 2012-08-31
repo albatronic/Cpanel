@@ -32,7 +32,6 @@ config:
     cpanel:
       title: Modo local, todos los proyectos
       description:
-      prefix: MANOLO
       folder:
       dbEngine: mysql
       host: localhost
@@ -42,7 +41,6 @@ config:
     kaia:
       title: La página de kaia
       description:
-      prefix: kaia
       folder: /kaia
       dbEngine: mysql
       host: localhost
@@ -52,7 +50,6 @@ config:
     galapago:
       title: La pagina de galapago
       description:
-      prefix: galapago
       folder: /galapago
       dbEngine: mysql
       host: localhost

@@ -39,6 +39,7 @@ class CoreVariablesController {
      */
     protected $permisos;
     protected $entity = "CoreVariables";
+
     protected $tipos = array('Web', 'Env');
     protected $ambitos = array('Pro', 'App', 'Mod');
 
@@ -50,18 +51,13 @@ class CoreVariablesController {
         // Cargar la configuracion del modulo (modules/moduloName/config.yml)
         $this->form = new Form($this->entity);
 
-        // Cargar los permisos.
-        // Si la entidad no está sujeta a control de permisos, se habilitan todos
-        //if ($this->form->getPermissionControl()) {
-        //    if ($this->parentEntity == '')
-        //        $this->permisos = new ControlAcceso($this->entity);
-        //    else
-        //        $this->permisos = new ControlAcceso($this->parentEntity);
-        //} else
-        $this->permisos = new ControlAcceso();
-
         $this->values['ayuda'] = $this->form->getHelpFile();
-        $this->values['permisos'] = $this->permisos->getPermisos();
+
+        // Desactivo los permisos de creación y borrado
+        $this->values['permisos']['IN'] = FALSE;
+        $this->values['permisos']['DE'] = FALSE;
+        $this->values['permisos']['UP'] = TRUE;
+
         $this->values['request'] = $this->request;
 
         $includesHead = $this->form->getNode('includesHead');
@@ -115,7 +111,7 @@ class CoreVariablesController {
             case 'App':
                 $app = new CoreAplicaciones();
                 $app = $app->find('CodigoApp', $nombre);
-                $this->values['titulo'] = 'Variables ' . $tipo . ' de la Aplicación "' . $app->getNombreApp(). '"';
+                $this->values['titulo'] = 'Variables ' . $tipo . ' de la Aplicación "' . $app->getNombreApp() . '"';
                 unset($app);
                 $template = $nombre . '/fieldsVar' . $tipo . '.html.twig';
                 $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . "/config/varApp_" . $nombre;
@@ -123,7 +119,7 @@ class CoreVariablesController {
             case 'Mod':
                 $modulo = new CoreModulos();
                 $modulo = $modulo->find('NombreModulo', $nombre);
-                $this->values['titulo'] = 'Variables ' . $tipo . ' del Módulo "' . $modulo->getTitulo(). '"';
+                $this->values['titulo'] = 'Variables ' . $tipo . ' del Módulo "' . $modulo->getTitulo() . '"';
                 unset($modulo);
                 $template = $nombre . '/fieldsVar' . $tipo . '.html.twig';
                 $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . '/modules/' . $nombre . '/var_' . $nombre;
@@ -131,7 +127,7 @@ class CoreVariablesController {
             default:
         }
 
-        $archivoDatos  .=  "_{$tipo}.yml";
+        $archivoDatos .= "_{$tipo}.yml";
 
         if (file_exists($archivoDatos)) {
             $datos = sfYaml::load($archivoDatos);
@@ -150,9 +146,9 @@ class CoreVariablesController {
         );
     }
 
-    public function GuardarAction() {
+    public function EditAction() {
 
-        if ($this->request['METHOD'] == 'POST') {
+        if (($this->request['METHOD'] == 'POST') and ($this->request['accion'] == 'Guardar')) {
             $tipo = $this->request['tipo'];
             $ambito = $this->request['ambito'];
             $nombre = $this->request['nombre'];
@@ -178,6 +174,28 @@ class CoreVariablesController {
             return array('template' => '_global/forbiden.html.twig', array());
     }
 
+    /**
+     * Muestra el template de ayuda asociado al controlador
+     * El nombre del template de ayuda está definido en el
+     * nodo <help_file> del config.yml del controlador
+     * Si no existiera, se muestra un template indicando esta
+     * circunstancia
+     *
+     * @return array con el template a renderizar
+     */
+    public function helpAction() {
+        $template = $this->entity . '/' . $this->form->getHelpFile();
+        $file = "modules/" . $template;
+        if (!is_file($file) or ($this->form->getHelpFile() == '')) {
+            $template = "_help/noFound.html.twig";
+        }
+
+        $values['title'] = $this->form->getTitle();
+        $values['idVideo'] = $this->form->getIdVideo();
+        $values['urlVideo'] = $this->form->getUrlVideo();
+
+        return array('template' => $template, 'values' => $values);
+    }
 }
 
 ?>

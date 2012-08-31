@@ -1,5 +1,5 @@
 {# Template para el link Crear #}
-{% if values.permisos['I'] %}
+{% if values.permisos['IN'] %}
 <a href="#" onclick="getElementById('accion_{{values.controller}}').value='Crear'; submitForm('manto_{{ values.controller}}');">
     <img src="{{app.path}}/images/barraherramientas/save_cmd.png" alt="Guardar" title="Guardar" />
 </a>

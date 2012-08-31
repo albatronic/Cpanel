@@ -101,7 +101,7 @@ class Reports extends Controller {
 
     public function makeReportAction() {
 
-        if ($this->values['permisos']['L']) {
+        if ($this->values['permisos']['LI']) {
 
             $this->idReport = $this->request['idReport'];
             $this->breakFields = explode(",", trim($this->reports[$this->idReport]['break_fields']));

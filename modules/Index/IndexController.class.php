@@ -14,6 +14,8 @@ class IndexController extends Controller {
 
     public function IndexAction() {
 
+        $this->values['permisos']['IN'] = FALSE;
+
         $aplicacion = $this->request[1];
 
         if ($aplicacion != '') {

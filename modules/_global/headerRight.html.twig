@@ -1,11 +1,12 @@
 {# _global/headerRight.html.twig #}
 
 <div id="top_notification">
+
+{% if action == '' %} {% include '_global/linkNew.html.twig' %} {% endif %}
 {% if action == 'new' %} {% include '_global/linkCreate.html.twig' %} {% endif %}
 {% if action == 'edit' %} {% include '_global/linkSaveDelete.html.twig' %} {% endif %}
-{% include '_global/linkNew.html.twig' %}
+
 {% include '_global/linkHelp.html.twig' %}
-<a href="{{app.path}}/Login">
-    <img src="{{app.path}}/images/alert.png" alt="Cerrar Sesión" title="Cerrar Sesión">
-</a>
+{% include '_global/linkLogout.html.twig' %}
+
 </div>

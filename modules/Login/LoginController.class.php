@@ -55,10 +55,11 @@ class LoginController extends Controller {
                     'user' => array(
                         'id' => $usuario->getIDUsuario(),
                         'nombre' => $usuario->getNombreApellidos(),
-                        'idPerfil' => $usuario->getIDPerfil()->getIDPerfil(),
+                        'IDPerfil' => $usuario->getIDPerfil()->getIDPerfil(),
                     ),
                 );
                 $_SESSION['project'] = $this->values['projects'][$this->request['project']];
+                $_SESSION['project']['name'] = $this->request['project'];
 
                 //Actualizar el registro de entradas
                 $usuario->setNLogin($usuario->getNLogin() + 1);
