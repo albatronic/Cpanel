@@ -1,12 +1,11 @@
 {# _global/headerRight.html.twig #}
 
 <div id="top_notification">
-<a href="#" onclick="submitForm();">
-<img src="{{app.path}}/images/barraherramientas/guardar.png" alt="Guardar" title="Guardar">
-</a>
-<img src="{{app.path}}/images/barraherramientas/guardar.png" alt="Guardar" title="Guardar">
-<img src="{{app.path}}/images/barraherramientas/guardar.png" alt="Guardar" title="Guardar">
+{% if action == 'new' %} {% include '_global/linkCreate.html.twig' %} {% endif %}
+{% if action == 'edit' %} {% include '_global/linkSaveDelete.html.twig' %} {% endif %}
+{% include '_global/linkNew.html.twig' %}
+{% include '_global/linkHelp.html.twig' %}
 <a href="{{app.path}}/Login">
-    <img src="{{app.path}}/images/barraherramientas/guardar.png" alt="Cerrar Sesión" title="Cerrar Sesión">
+    <img src="{{app.path}}/images/alert.png" alt="Cerrar Sesión" title="Cerrar Sesión">
 </a>
 </div>

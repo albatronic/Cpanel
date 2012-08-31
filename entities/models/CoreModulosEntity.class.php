@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 27.08.2012 21:03:13
+ * @date 30.08.2012 18:13:36
  */
 
 /**
@@ -65,6 +65,7 @@ class CoreModulosEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_parentEntities = array(
+			array('SourceColumn' => 'NombreModulo', 'ParentEntity' => 'CorePermisos', 'ParentColumn' => 'NombreModulo'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

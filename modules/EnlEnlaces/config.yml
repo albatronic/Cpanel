@@ -1,0 +1,667 @@
+# Module: EnlEnlaces
+# Document : modules\EnlEnlaces\config.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 30.08.2012 18:13:37
+#
+---
+EnlEnlaces:
+  includesHead:
+    twigCss: _global/css.html.twig
+    twigJs: _global/js.html.twig
+  login_required: YES
+  permission_control: YES
+  favourite_control: NO
+  help_file: help.html.twig
+  title: EnlEnlaces
+  id_video: enlenlaces
+  url_video: null
+  conection: 'cpanel'
+  entity: EnlEnlaces
+  table: enl_enlaces
+  primarykey: IDEnlace
+  records_per_page: 15
+  order_by:
+    -
+      title: IDEnlace a-z
+      criteria: IDEnlace ASC
+    -
+      title: IDEnlace z-a
+      criteria: IDEnlace DESC
+  search_default: IDEnlace
+  referenced_entities:
+    -
+      entity: EnlSecciones
+    -
+      entity: ValoresSN
+    -
+      entity: ValoresPrivacidad
+    -
+      entity: ValoresDchaIzq
+    -
+      entity: ValoresChangeFreq
+  fieldGeneratorUrlFriendly: IDSeccion
+  fieldGeneratorMetatagTitle: IDSeccion
+  columns:
+    -
+      title: IDEnlace
+      field: IDEnlace
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+    -
+      title: IDSeccion
+      field: IDSeccion
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      aditional_filter:
+        order: 1
+        caption: IDSeccion
+        entity: EnlSecciones
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: integer
+        length: 11
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Titulo
+      field: Titulo
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 255
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Subtitulo
+      field: Subtitulo
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 255
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Url
+      field: Url
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 255
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: TargetBlank
+      field: TargetBlank
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0
+      aditional_filter:
+        order: 2
+        caption: TargetBlank
+        entity: ValoresSN
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: tinyint
+        length: 1
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: EsHttps
+      field: EsHttps
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0
+      aditional_filter:
+        order: 3
+        caption: EsHttps
+        entity: ValoresSN
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: tinyint
+        length: 1
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: EsUrlInterna
+      field: EsUrlInterna
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0
+      aditional_filter:
+        order: 4
+        caption: EsUrlInterna
+        entity: ValoresSN
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: tinyint
+        length: 1
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Observaciones
+      field: Observaciones
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: EsPredeterminado
+      field: EsPredeterminado
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0
+      aditional_filter:
+        order: 5
+        caption: EsPredeterminado
+        entity: ValoresSN
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: tinyint
+        length: 1
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Revisado
+      field: Revisado
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0
+      aditional_filter:
+        order: 6
+        caption: Revisado
+        entity: ValoresSN
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: tinyint
+        length: 1
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Publicar
+      field: Publicar
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0
+      aditional_filter:
+        order: 7
+        caption: Publicar
+        entity: ValoresSN
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: tinyint
+        length: 1
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: VigenteDesde
+      field: VigenteDesde
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: NO
+        type: datetime
+        length: 
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: VigenteHasta
+      field: VigenteHasta
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: NO
+        type: datetime
+        length: 
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Privacidad
+      field: Privacidad
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0
+      aditional_filter:
+        order: 8
+        caption: Privacidad
+        entity: ValoresPrivacidad
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: tinyint
+        length: 1
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Orden
+      field: Orden
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: integer
+        length: 11
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: FechaPublicacion
+      field: FechaPublicacion
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: datetime
+        length: 
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: UrlAmigable
+      field: UrlAmigable
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 250
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: MetatagTitle
+      field: MetatagTitle
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 250
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: MetatagKeywords
+      field: MetatagKeywords
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 250
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: MetatagDescription
+      field: MetatagDescription
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: YES
+        type: string
+        length: 250
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: MetatagTitleSimple
+      field: MetatagTitleSimple
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0
+      aditional_filter:
+        order: 9
+        caption: MetatagTitleSimple
+        entity: ValoresSN
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: tinyint
+        length: 1
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: MetatagTitlePosicion
+      field: MetatagTitlePosicion
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0
+      aditional_filter:
+        order: 10
+        caption: MetatagTitlePosicion
+        entity: ValoresDchaIzq
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: tinyint
+        length: 1
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: MostrarEnMapaWeb
+      field: MostrarEnMapaWeb
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 1
+      aditional_filter:
+        order: 11
+        caption: MostrarEnMapaWeb
+        entity: ValoresSN
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: tinyint
+        length: 1
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: ImportanciaMapaWeb
+      field: ImportanciaMapaWeb
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0,5
+      validator:
+        nullable: YES
+        type: string
+        length: 5
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: ChangeFreqMapaWeb
+      field: ChangeFreqMapaWeb
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: monthly
+      aditional_filter:
+        order: 12
+        caption: ChangeFreqMapaWeb
+        entity: ValoresChangeFreq
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: YES
+        type: string
+        length: 25
+        min: null
+        max: null
+        message: Valor Requerido

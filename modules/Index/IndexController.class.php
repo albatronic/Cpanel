@@ -34,7 +34,7 @@ class IndexController extends Controller {
                     );
             }
         }
-print_r($this->values);
+
         return array(
             'template' => $this->entity . '/index.html.twig',
             'values' => $this->values,

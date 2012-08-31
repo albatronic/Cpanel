@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 27.08.2012 21:03:13
+ * @date 30.08.2012 18:13:36
  */
 
 /**
@@ -40,6 +40,8 @@ class CorePerfilesEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_parentEntities = array(
+			array('SourceColumn' => 'IDPerfil', 'ParentEntity' => 'CorePermisos', 'ParentColumn' => 'IDPerfil'),
+			array('SourceColumn' => 'IDPerfil', 'ParentEntity' => 'CoreUsuarios', 'ParentColumn' => 'IDPerfil'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

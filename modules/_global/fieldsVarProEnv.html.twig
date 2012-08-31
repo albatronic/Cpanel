@@ -1,4 +1,4 @@
-{# Description of  #}
+{# VARIABLES DE ENTORNO DEL PROYECTO  #}
 
 {# author Sergio Pérez <sergio.perez@albatronic.com> #}
 {# copyright Informática ALBATRONIC, SL #}
@@ -7,7 +7,10 @@
 {% extends values.controller ~ '/form.html.twig' %}
 
 {% block variables %}
-{{ macro.input('Título','field_title','text','VarProEnv[titulo]','VarProEnv_titulo',values.datos.titulo,'4','CampoUnidades','1') }}
-{{ macro.fecha('Vigente Desde','field_title','VarProEnv[vigenteDesde]','VarProEnv_videnteDesde',values.datos.vigenteDesde,'19','datepicker','2')}}
-{{ macro.fecha('Vigente Hasta','field_title','VarProEnv[vigenteHasta]','VarProEnv_videnteHasta',values.datos.vigenteHasta,'19','datepicker','2')}}
+{{ macro.input('Título','field_title','text','datos[titulo]',none,values.datos.titulo,'100','CampoUnidades','1') }}
+{{ macro.input('Url','field_title','text','datos[Url]',none,values.datos.Url,'100','CampoUnidades','2') }}
+{{ macro.input('Email Webmaster','field_title','text','datos[eMailWebMaster]',none,values.datos.eMailWebMaster,'100','CampoUnidades','3') }}
+{{ macro.input('Email Super Administrador','field_title','text','datos[eMailSuperAdministrador]',none,values.datos.eMailSuperAdministrador,'100','CampoUnidades','4') }}
+{{ macro.fecha('Vigente Desde','field_title','datos[vigenteDesde]',none,values.datos.vigenteDesde,'19','datepicker','5')}}
+{{ macro.fecha('Vigente Hasta','field_title','datos[vigenteHasta]',none,values.datos.vigenteHasta,'19','datepicker','6')}}
 {% endblock%}

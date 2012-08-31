@@ -1,0 +1,83 @@
+# Module: EnlEnlaces
+# Document : modules\EnlEnlaces\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 30.08.2012 18:13:37
+#
+---
+listados:
+  -
+    title: EnlEnlaces
+    order_by: IDEnlace ASC
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: 10, 10, 15, 10
+    body_font: Courier, ,8
+    columns:
+      -
+        title: IDSeccion
+        field: IDSeccion
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Titulo
+        field: Titulo
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Subtitulo
+        field: Subtitulo
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Url
+        field: Url
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: TargetBlank
+        field: TargetBlank
+        length: 1
+        align: L
+        type: tinyint
+        total: NO
+        formula: null
+        format: null
+      -
+        title: EsHttps
+        field: EsHttps
+        length: 1
+        align: L
+        type: tinyint
+        total: NO
+        formula: null
+        format: null
+      -
+        title: EsUrlInterna
+        field: EsUrlInterna
+        length: 1
+        align: L
+        type: tinyint
+        total: NO
+        formula: null
+        format: null

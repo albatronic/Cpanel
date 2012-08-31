@@ -1,0 +1,19 @@
+{#
+  Module: EnlSecciones
+  Document : modules\EnlSecciones\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 30.08.2012 18:13:37
+#}
+
+{{ macro.input('Seccion','field_title','text',values.controller ~ '[Seccion]',values.controller ~ '_Seccion',datos.Seccion,'255','CampoTextoLargo','1') }}
+{{ macro.input('Subtitulo','field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
+{{ macro.select('TipoSeccion','field_title',values.controller ~ '[TipoSeccion]',values.controller ~ '_TipoSeccion',none,datos.TipoSeccion.TipoSeccion,datos.TipoSeccion.fetchAll('IDTipo'),'Select','3')}}
+{{ macro.select('PerteneceA','field_title',values.controller ~ '[PerteneceA]',values.controller ~ '_PerteneceA',none,datos.PerteneceA.PerteneceA,datos.PerteneceA.fetchAll('IDSeccion'),'Select','4')}}
+{{ macro.input('IDEntidad','field_title','text',values.controller ~ '[IDEntidad]',values.controller ~ '_IDEntidad',datos.IDEntidad,'11','CampoImporte','5') }}
+{{ macro.input('Entidad','field_title','text',values.controller ~ '[Entidad]',values.controller ~ '_Entidad',datos.Entidad,'255','CampoTextoLargo','6') }}
+
+{% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_Seccion') }}

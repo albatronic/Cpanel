@@ -11,12 +11,12 @@
     {% endif %}
 
     <div class="FiltroAdicional">
-        <div style="float: left; width: 90px; border-bottom: 1px dotted grey; margin-right: 3px;">{{value.caption}}:</div>
+        <div style="float: left; width: 140px; margin-right: 3px;">&nbsp;&nbsp;{{value.caption}}:</div>
 
-        <div style="float: left;">
+        <div style="float: left; height: 25px;">
         {% if value.type == 'select' %}
             <input name="filter[columnsSelected][{{i}}]" value="{{value.field}}" type="hidden"/>
-            <select name="filter[valuesSelected][{{i}}]" id="filter_valuesSelected_{{i}}" {{ value.event }} style="width: 100px;">
+            <select name="filter[valuesSelected][{{i}}]" id="filter_valuesSelected_{{i}}" {{ value.event }} style="width: 120px;">
                 {% for objeto in value.values  %}
                 <option value="{{ objeto.Id }}" {% if objeto.Id == valor %} SELECTED {% endif %}>{{ objeto.Value }}</option>
                 {% endfor %}
@@ -56,6 +56,8 @@
 {% endfor %}
 
 <div style='clear:both'></div>
+
+<div style="margin-top: 5px; margin-left:20px; width: 290px;">
 <input class="FiltrosAdicionalesComando" type="buttom" value="Consultar"
       onclick="
           $('#div_listado').html('<div class=ListadoAnimation><img src={{app.path}}/images/loadingAnimation.gif /></div>');
@@ -65,4 +67,5 @@
 <input class="FiltrosAdicionalesComando" type="buttom" value="Cerrar"
       onclick="getElementById('FiltrosAdicionales').style.display='none';"
 />
+</div>
 </div>

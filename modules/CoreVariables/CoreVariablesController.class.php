@@ -91,20 +91,14 @@ class CoreVariablesController {
      * Si no viene nada en el request, no se mostrar
      * @return array Array(template,values)
      */
-    public function indexAction() {
+    public function indexAction($tipo = '', $ambito = '', $nombre = '') {
 
-        switch ($this->request['METHOD']) {
-            case 'GET' :
-                $tipo = $this->request[1];
-                $ambito = $this->request[2];
-                $nombre = $this->request[3];
-                break;
-            case 'POST':
-                $tipo = $this->request['tipo'];
-                $ambito = $this->request['ambito'];
-                $nombre = $this->request['nombre'];
-                break;
-        }
+        if ($tipo == '')
+            $tipo = $this->request[1];
+        if ($ambito == '')
+            $ambito = $this->request[2];
+        if ($nombre == '')
+            $nombre = $this->request[3];
 
         if (!in_array($tipo, $this->tipos))
             $tipo = $this->tipos[0];
@@ -114,49 +108,74 @@ class CoreVariablesController {
 
         switch ($ambito) {
             case 'Pro':
-                $this->values['titulo'] = 'Variables ' . $tipo . ' del Proyecto';
+                $this->values['titulo'] = 'Variables ' . $tipo . ' del Proyecto "' . $_SESSION['project']['title'] . '"';
                 $template = '_global/fieldsVarPro' . $tipo . '.html.twig';
-                $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . '/config/varPro' . $tipo . '.yml';
+                $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . '/config/varPro';
                 break;
             case 'App':
-                $this->values['titulo'] = 'Variables ' . $tipo . ' de la Aplicación';
-                $template = $_SESSION['project']['prefix'] . '/fieldsVar' . $nombre . $tipo . '.html.twig';
-                $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . '/config/varApps.yml';
+                $app = new CoreAplicaciones();
+                $app = $app->find('CodigoApp', $nombre);
+                $this->values['titulo'] = 'Variables ' . $tipo . ' de la Aplicación "' . $app->getNombreApp(). '"';
+                unset($app);
+                $template = $nombre . '/fieldsVar' . $tipo . '.html.twig';
+                $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . "/config/varApp_" . $nombre;
                 break;
             case 'Mod':
-                $this->values['titulo'] = 'Variables ' . $tipo . ' del Módulo';
+                $modulo = new CoreModulos();
+                $modulo = $modulo->find('NombreModulo', $nombre);
+                $this->values['titulo'] = 'Variables ' . $tipo . ' del Módulo "' . $modulo->getTitulo(). '"';
+                unset($modulo);
                 $template = $nombre . '/fieldsVar' . $tipo . '.html.twig';
-                $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . '/modules/' . $nombre . '/var' . $tipo . 'yml';
+                $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . '/modules/' . $nombre . '/var_' . $nombre;
                 break;
             default:
         }
 
-        switch ($this->request['METHOD']) {
+        $archivoDatos  .=  "_{$tipo}.yml";
 
-            case 'GET':
-                if (file_exists($archivoDatos)) {
-                    $datos = sfYaml::load($archivoDatos);
-                }
-                break;
+        if (file_exists($archivoDatos)) {
+            $datos = sfYaml::load($archivoDatos);
+        } else
+            $datos = array();
 
-            case 'POST':
-                $datos = $this->request['datos'];
-                $datosYml = sfYaml::dump($datos);
-                $fp = @fopen($archivoDatos, "w");
-                if ($fp) {
-                    fwrite($fp, $datosYml);
-                    fclose($fp);
-                } else
-                    echo 'Error al crear el archivo ' . $archivoDatos;
-                break;
-        }
-
+        $this->values['tipo'] = $tipo;
+        $this->values['ambito'] = $ambito;
+        $this->values['nombre'] = $nombre;
+        $this->values['archivoDatos'] = $archivoDatos;
         $this->values['datos'] = $datos;
 
         return array(
             'template' => $template,
             'values' => $this->values,
         );
+    }
+
+    public function GuardarAction() {
+
+        if ($this->request['METHOD'] == 'POST') {
+            $tipo = $this->request['tipo'];
+            $ambito = $this->request['ambito'];
+            $nombre = $this->request['nombre'];
+            $archivoDatos = $this->request['archivoDatos'];
+
+            $cabecera = "# {$archivoDatos}\n";
+            $cabecera .= "# Fecha : " . date('d-m-Y H:i:s') . "\n";
+            $cabecera .= "# Usuario: " . $_SESSION['USER']['user']['id'] . " " . $_SESSION['USER']['user']['nombre'] . "\n\n";
+            $datosYml = $cabecera;
+
+            $datos = $this->request['datos'];
+            if (is_array($datos)) {
+                $cuerpo = sfYaml::dump($datos);
+                $datosYml .= $cuerpo;
+            }
+
+            $archivo = new Archivo($archivoDatos);
+            if (!$archivo->write($datosYml))
+                $this->values['errores'][] = 'Error al crear el archivo ' . $archivoDatos;
+            unset($archivo);
+            return $this->indexAction($tipo, $ambito, $nombre);
+        } else
+            return array('template' => '_global/forbiden.html.twig', array());
     }
 
 }

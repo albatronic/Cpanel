@@ -1,0 +1,57 @@
+/*
+    Document   : propios
+    Created on : 29-ago-2012, 20:11:10
+    Author     : sergio
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.FiltrosAdicionales {
+    position: absolute;
+    z-index: 99;
+    top: 2px;
+    right: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    background-color: #eee;
+    font-size: 11px;
+    border: 1px solid grey;
+    width: 290px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+.FiltrosAdicionalesComando {
+    float: left;
+    width: 85px;
+    margin: 5px 5px 5px 8px;
+    text-align: center;
+    font-weight: bold;
+    padding: 3px;
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+.FiltroAdicional {
+    height: 25px;
+    margin-right: 5px;
+    margin-top: 2px;
+    padding: 3px;
+    float: left;
+}
+
+.MensajeError{
+    font-size: 12px;
+    font-family: Arial, Helvetica, serif;
+    color: black;
+    padding: 10px 10px 10px 55px;
+    margin: 5px;
+    background-color: #ff9900;
+    background-image: url('../images/iconos/error.png');
+    background-position: 10px 50%;
+    background-repeat: no-repeat;
+}
+
+.TituloError{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+

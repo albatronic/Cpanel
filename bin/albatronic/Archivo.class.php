@@ -189,6 +189,15 @@ class Archivo {
     }
 
     /**
+     * Devuelve el tamañano del archivo
+     *
+     * @return double EL tamaño del archivo en bytes
+     */
+    public function getSize() {
+        return $this->size;
+    }
+
+    /**
      * Genera un nombre de archivo aleatorio (md5) para crearlo en la
      * carpeta docs/docsPPP/pdfs/XX/nombreDeArchivo.pdf
      *
@@ -329,13 +338,51 @@ class Archivo {
     }
 
     /**
-     * Abre el fichero en modo $mode
+     * Abre el archivo indicado en el constructor en modo $mode
+     * y pone en $this->fp el manejador
+     *
      * @param string $mode
-     * @return boolean
+     * @return boolean TRUE si se abrió con éxito
      */
     public function open($mode = "r") {
         $this->fp = fopen($this->fullPath, $mode);
         return ($this->fp != false);
+    }
+
+    /**
+     * Lee el archivo indicado en el constructor
+     * y devuelve su contenido. Si no se pudo abrir, devuelve FALSE
+     *
+     * @return string La cadena de texto leida o FALSE
+     */
+    public function read() {
+
+        $cadena = '';
+
+        if ($this->open('r')) {
+            $cadena = fread($this->fp, $this->getSize());
+            $this->close();
+        }
+        return $cadena;
+    }
+
+    /**
+     * Escribe en el archivo indicado en el constructor
+     * la cadena de texto $datos
+     *
+     * @param string $datos La cadena de texto a escribir
+     * @return boolean TRUE si la escritura se hizo con éxito
+     */
+    public function write($datos) {
+
+        $ok = FALSE;
+
+        if ($this->open('w')) {
+            $ok = fwrite($this->fp, $datos);
+            $this->close();
+        }
+
+        return $ok;
     }
 
     /**

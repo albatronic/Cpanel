@@ -137,6 +137,6 @@ function documentos(entidad, idEntidad, idDiv, tipo) {
 /**
  * Submitea el formulario en curso
  */
-function submitForm() {
-    window.form.submit();
+function submitForm(formulario) {
+    $('#'+formulario).submit();
 }

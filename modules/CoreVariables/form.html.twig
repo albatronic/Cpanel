@@ -13,17 +13,15 @@
 <div class="grid_container">
     <div class="grid_12 full_block">
         <div class="widget_wrap">
-
-            <div class="widget_top">
-                <span class="h_icon list_image"></span>
-                <h6>{{values.titulo}}</h6>
-            </div>
-
-            <div class="widget_content">
+        <div class="widget_content">
 	<form name="manto_{{ values.controller}}" id="manto_{{ values.controller }}" action="" method="POST" class="form_container left_label">
 		<input name="controller" value="{{ values.controller }}" type="hidden" />
-		<input name="action" id="action" value="save" type="hidden" />
-		{% include '_global/comandosSaveDelete.html.twig' %}
+		<input name="action" id="action_{{ values.controller }}" value="Guardar" type="hidden" />
+                <input name="tipo" value="{{ values.tipo }}" type="hidden" />
+                <input name="ambito" value="{{ values.ambito }}" type="hidden" />
+                <input name="nombre" value="{{ values.nombre }}" type="hidden" />
+                <input name="archivoDatos" value="{{ values.archivoDatos}}" type="hidden" />
+
 		{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
 		{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 
@@ -31,9 +29,9 @@
                     {% block variables %}
                     {% endblock %}
 		</ul>
+                <input type="submit" value="Guardar" />
 	</form>
-
-</div>
+        </div>
         </div>
     </div>
 </div>

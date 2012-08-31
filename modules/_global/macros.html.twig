@@ -17,7 +17,7 @@
     <div class="form_input">
     <input type="{{ type|default('text') }}" name="{{ name }}" id="{{ id|default(name)}}"
            value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
-           class="tip_top" title="{{ tip }}" tabindex="{{ tabindex }}" {{extra}} onchange="{{ onchange }}"/>
+           class="tip_top" title="{{ tip }}" tabindex="{{ tabindex }}" onchange="{{ onchange }}" {{extra}} />
 </div>
     </div>
 </li>
@@ -151,7 +151,7 @@
                        value="{{value}}"
                        size="{{ size|default(10)}}"
                        class="{{ class|default('datepicker') }}"
-                       onKeyUp="this.value=formateafecha(this.value);"
+                       {#onKeyUp="this.value=formateafecha(this.value);"#}
                        tabindex="{{tabindex}}"
                        {{extra}}
     />

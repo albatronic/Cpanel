@@ -1,0 +1,13 @@
+{# VARIABLES DE ENTORNO DEL MODULO EnlEnlaces  #}
+
+{# author Sergio Pérez <sergio.perez@albatronic.com> #}
+{# copyright Informática ALBATRONIC, SL #}
+{# date ${date} ${time} #}
+
+{% extends values.controller ~ '/form.html.twig' %}
+
+{% block variables %}
+{{ macro.input('Título Modulo','field_title','text','datos[titulo]',none,values.datos.titulo,'100','CampoUnidades','1') }}
+{{ macro.input('Url Modulo','field_title','text','datos[Url]',none,values.datos.Url,'100','CampoUnidades','2') }}
+{% endblock%}
+

@@ -1,12 +1,12 @@
-# Module: CoreFuncionalidades
-# Document : modules\CoreFuncionalidades\varEntorno.yml
+# Module: EnlEnlaces
+# Document : modules\EnlEnlaces\varEntorno.yml
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 27.08.2012 20:59:40
+# @date 30.08.2012 18:13:37
 #
 ---
-CoreFuncionalidades:
+EnlEnlaces:
   numMaxRegistros: 100
 
   image1:
@@ -54,20 +54,44 @@ CoreFuncionalidades:
 
   columns:
     -
-      field: IDModulo
+      field: IDSeccion
       mostrar: TRUE
       default: 
-      caption: IDModulo
+      caption: IDSeccion
       permiso: 
     -
-      field: Funcionalidades
+      field: Titulo
       mostrar: TRUE
       default: 
-      caption: Funcionalidades
+      caption: Titulo
       permiso: 
     -
-      field: NumeroVisitas
+      field: Subtitulo
       mostrar: TRUE
       default: 
-      caption: NumeroVisitas
+      caption: Subtitulo
+      permiso: 
+    -
+      field: Url
+      mostrar: TRUE
+      default: 
+      caption: Url
+      permiso: 
+    -
+      field: TargetBlank
+      mostrar: TRUE
+      default: 0
+      caption: TargetBlank
+      permiso: 
+    -
+      field: EsHttps
+      mostrar: TRUE
+      default: 0
+      caption: EsHttps
+      permiso: 
+    -
+      field: EsUrlInterna
+      mostrar: TRUE
+      default: 0
+      caption: EsUrlInterna
       permiso: 

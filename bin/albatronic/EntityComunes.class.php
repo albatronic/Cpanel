@@ -192,19 +192,29 @@ class EntityComunes extends Entity {
     }
 
     public function setVigenteDesde($VigenteDesde) {
-        $this->VigenteDesde = $VigenteDesde;
+        $date = new Fecha($VigenteDesde);
+        $this->VigenteDesde = $date->getFechaTime();
+        unset($date);
     }
 
     public function getVigenteDesde() {
-        return $this->VigenteDesde;
+        $date = new Fecha($this->VigenteDesde);
+        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
+        unset($date);
+        return $ddmmaaaahhmmss;
     }
 
     public function setVigenteHasta($VigenteHasta) {
-        $this->VigenteHasta = $VigenteHasta;
+        $date = new Fecha($VigenteHasta);
+        $this->VigenteHasta = $date->getFechaTime();
+        unset($date);
     }
 
     public function getVigenteHasta() {
-        return $this->VigenteHasta;
+        $date = new Fecha($this->VigenteHasta);
+        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
+        unset($date);
+        return $ddmmaaaahhmmss;
     }
 
     public function setCreatedBy($CreateBy) {
@@ -290,11 +300,16 @@ class EntityComunes extends Entity {
     }
 
     public function setFechaPublicacion($FechaPublicacion) {
-        $this->FechaPublicacion = $FechaPublicacion;
+        $date = new Fecha($FechaPublicacion);
+        $this->FechaPublicacion = $date->getFechaTime();
+        unset($date);
     }
 
     public function getFechaPublicacion() {
-        return $this->FechaPublicacion;
+        $date = new Fecha($this->FechaPublicacion);
+        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
+        unset($date);
+        return $ddmmaaaahhmmss;
     }
 
     public function setUrlAmigable($UrlAmigable) {
@@ -377,8 +392,21 @@ class EntityComunes extends Entity {
         return $this->ChangeFreqMapaWeb;
     }
 
-    public function getNumeroVisitas() {
+    public function setNumeroVisitas() {
 
+    }
+
+    /**
+     * Devuelve el número de visitas que ha tenido este objeto
+     * El valor está en la entidad CoreUrlAmigables
+     *
+     * @return integer El número de visitas
+     */
+    public function getNumeroVisitas() {
+        $url = new CoreUrlamigables();
+        $rows = $url->cargaCondicion("NumeroVisitas", "Entidad='{$this->getClassName()}' AND IDEntidad='{$this->getPrimaryKeyValue()}'");
+        unset($url);
+        return $rows[0]['NumeroVisitas'];
     }
 
 }

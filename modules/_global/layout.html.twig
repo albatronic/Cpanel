@@ -23,6 +23,10 @@
 
         </div>
 
+        <div class="page_title_user">
+		{{project.title}} | {{user.NombreApellidos}} &nbsp;&nbsp;
+	</div>
+
         <div id="container">
 
                 <div id="header" class="blue_lin">
@@ -41,7 +45,7 @@
 
                 <div class="page_title">
                     <span class="title_icon"><span class="list_image"></span></span>
-                    <h3>estamos en el Home, jejeje</h3>
+                    <h3>{{ values.titulo }}</h3>
                 </div>
 
 
@@ -52,8 +56,6 @@
                 </div>
 
         </div>
-        <div class="page_title_user">
-		{{project.title}} | {{user.NombreApellidos}} &nbsp;&nbsp;
-	</div>
+
     </body>
 </html>
