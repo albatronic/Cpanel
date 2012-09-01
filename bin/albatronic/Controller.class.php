@@ -5,7 +5,7 @@
  *
  * Controlador común a todos los módulos del CPanel
  *
- * @author Sergio Perea <sergio.perez@albatronic.com>
+ * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @date 24-agosto-2012 19:39
  */
 class Controller {
@@ -54,7 +54,12 @@ class Controller {
 
         // Instanciar el objeto listado con los parametros del modulo
         // y los eventuales valores del filtro enviados en el request
-        $this->listado = new Listado($this->form, $this->request);
+        if ($this->form->getTieneListado()) {
+            $this->listado = new Listado($this->form, $this->request);
+            $this->values['listado'] = array(
+                'filter' => $this->listado->getFilter(),
+            );
+        }
 
         // Cargar los permisos.
         // Si la entidad no está sujeta a control de permisos, se habilitan todos
@@ -69,14 +74,11 @@ class Controller {
         $this->values['titulo'] = $this->form->getTitle();
         $this->values['ayuda'] = $this->form->getHelpFile();
         $this->values['permisos'] = $this->permisos->getPermisos();
+        $this->values['tieneListado'] = $this->form->getTieneListado();
         $this->values['request'] = $this->request;
         $this->values['linkBy'] = array(
             'id' => $this->form->getLinkBy(),
             'value' => '',
-        );
-
-        $this->values['listado'] = array(
-            'filter' => $this->listado->getFilter(),
         );
 
         $includesHead = $this->form->getNode('includesHead');
@@ -87,8 +89,13 @@ class Controller {
 
     public function IndexAction() {
 
+        if ($this->values['permisos']['AC'])
+            $template = $this->entity . "/index.html.twig";
+        else
+            $template = "_global/forbiden.html.twig";
+
         return array(
-            'template' => $this->entity . "/index.html.twig",
+            'template' => $template,
             'values' => $this->values,
         );
     }
@@ -118,14 +125,15 @@ class Controller {
                     if ($datos->getStatus()) {
                         $this->values['datos'] = $datos;
                         $this->values['errores'] = $datos->getErrores();
-                        return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                     } else {
                         $this->values['errores'] = array("Valor no encontrado. El objeto que busca no existe. Es posible que haya sido eliminado por otro usuario.");
-                        return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                     }
+                    $template = $this->entity . '/form.html.twig';
                 } else {
-                    return array('template' => '_global/forbiden.html.twig');
+                    $template = '_global/forbiden.html.twig';
                 }
+
+                return array('template' => $template, 'values' => $this->values);
                 break;
 
             case 'POST':
@@ -156,7 +164,7 @@ class Controller {
                             $this->values['datos'] = $datos;
                             return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                         } else {
-                            return array('template' => '_global/forbiden.html.twig');
+                            return array('template' => '_global/forbiden.html.twig', 'values' => $this->values);
                         }
                         break;
 
@@ -178,7 +186,7 @@ class Controller {
                                 return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                             }
                         } else {
-                            return array('template' => '_global/forbiden.html.twig');
+                            return array('template' => '_global/forbiden.html.twig', 'values' => $this->values);
                         }
                         break;
                 }
@@ -208,7 +216,7 @@ class Controller {
                     $datos = new $this->entity();
                     $this->values['datos'] = $datos;
                     $this->values['errores'] = array();
-                    return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
+                    $template = $this->entity . '/form.html.twig';
                     break;
 
                 case 'POST': //CREAR NUEVO REGISTRO
@@ -231,22 +239,20 @@ class Controller {
                         $datos = new $this->entity($datos->getPrimaryKeyValue());
                         $this->values['datos'] = $datos;
 
-                        if ($this->values['errores']) {
-                            return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
-                        } else {
-                            return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
-                        }
+                        $template = $this->entity . '/form.html.twig';
                     } else {
                         $this->values['datos'] = $datos;
                         $this->values['errores'] = $datos->getErrores();
                         $this->values['alertas'] = $datos->getAlertas();
-                        return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
+                        $template = $this->entity . '/form.html.twig';
                     }
                     break;
             }
         } else {
-            return array('template' => '_global/forbiden.html.twig');
+            $template = '_global/forbiden.html.twig';
         }
+
+        return array('template' => $template, 'values' => $this->values);
     }
 
     /**
@@ -285,7 +291,7 @@ class Controller {
             $this->values['listado'] = $this->listado->getAll($aditionalFilter);
             $template = $this->entity . '/list.html.twig';
         } else {
-            $template = "_global/forbiden.html.twig";
+            $template = '_global/forbiden.html.twig';
         }
 
         return array('template' => $template, 'values' => $this->values);
@@ -422,8 +428,10 @@ class Controller {
                     } else
                         $this->values['errores'][] = $archivo->getErrores();
                     unset($archivo);
+
+                    $template = $this->entity . '/form.html.twig';
                 } else {
-                    return array('template' => '_global/forbiden.html.twig');
+                    $template = "_global/forbiden.html.twig";
                 }
                 break;
 
@@ -443,14 +451,15 @@ class Controller {
                             unset($objeto);
                         }
                     }
+                    $template = $this->entity . '/form.html.twig';
                 } else {
-                    return array('template' => '_global/forbiden.html.twig');
+                    $template = "_global/forbiden.html.twig";
                 }
                 break;
         }
 
         $this->values['datos'] = new $this->entity($idEntidad);
-        return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
+        return array('template' => $template, 'values' => $this->values);
     }
 
     /**

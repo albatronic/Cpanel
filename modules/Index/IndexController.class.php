@@ -12,9 +12,8 @@ class IndexController extends Controller {
 
     protected $entity = "Index";
 
-    public function IndexAction() {
 
-        $this->values['permisos']['IN'] = FALSE;
+    public function IndexAction() {
 
         $aplicacion = $this->request[1];
 

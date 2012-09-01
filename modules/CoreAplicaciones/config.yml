@@ -14,7 +14,7 @@ CoreAplicaciones:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: CoreAplicaciones
+  title: Aplicaciones
   id_video: coreaplicaciones
   url_video: null
   conection: 'cpanel'
@@ -54,7 +54,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
     -
       title: CodigoApp
       field: CodigoApp
@@ -67,7 +67,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -87,7 +87,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -107,7 +107,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -127,11 +127,11 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -234,11 +234,11 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: NO
         type: datetime
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -254,11 +254,11 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: NO
         type: datetime
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -303,7 +303,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: integer
@@ -323,11 +323,11 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: datetime
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -343,7 +343,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -363,7 +363,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -383,7 +383,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -403,7 +403,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string

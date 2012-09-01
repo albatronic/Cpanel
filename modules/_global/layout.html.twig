@@ -57,5 +57,10 @@
 
         </div>
 
+        {% if values._debugMode %}
+        <div style="clear: both;">
+            <pre>{{values._debugValues}}</pre>
+        </div>
+        {% endif %}
     </body>
 </html>

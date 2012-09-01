@@ -333,6 +333,16 @@ class Form {
     }
 
     /**
+     * Si el formulario debe tener listado, se devuelve TRUE
+     * dependiendo del valor del nodo <feature_list>
+     * 
+     * @return boolean TRUE si el formulario tiene listado
+     */
+    public function getTieneListado() {
+        return ($this->getNode('feature_list') == 'YES');
+    }
+
+    /**
      * Devuelve un array con los filtros adicionales que se construiran
      * en el FiltroGenerico.html.twig
      *

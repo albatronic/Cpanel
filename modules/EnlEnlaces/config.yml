@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:37
+# @date 01.09.2012 04:08:11
 #
 ---
 EnlEnlaces:
@@ -13,11 +13,12 @@ EnlEnlaces:
   login_required: YES
   permission_control: YES
   favourite_control: NO
+  feature_list: NO
   help_file: help.html.twig
   title: EnlEnlaces
   id_video: enlenlaces
   url_video: null
-  conection: 'cpanel'
+  conection: 'datos<?php echo $_SESSION['emp'];?>'
   entity: EnlEnlaces
   table: enl_enlaces
   primarykey: IDEnlace
@@ -56,7 +57,7 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
     -
       title: IDSeccion
       field: IDSeccion
@@ -69,18 +70,18 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       aditional_filter:
         order: 1
         caption: IDSeccion
         entity: EnlSecciones
         method: fetchAll
-        params: Descripcion
+        params: Seccion
         type: select
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -98,9 +99,9 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 255
         min: null
@@ -118,7 +119,7 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -138,7 +139,7 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -169,7 +170,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -198,7 +199,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -227,7 +228,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -245,11 +246,11 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -276,7 +277,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -305,7 +306,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -334,7 +335,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -352,11 +353,11 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: NO
         type: datetime
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -372,11 +373,11 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: NO
         type: datetime
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -403,7 +404,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -421,7 +422,7 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: integer
@@ -441,11 +442,11 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: datetime
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -461,7 +462,7 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -481,7 +482,7 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -501,7 +502,7 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -521,7 +522,7 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -552,7 +553,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -581,7 +582,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -610,7 +611,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -659,7 +660,7 @@ EnlEnlaces:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 25
         min: null

@@ -2,6 +2,7 @@
 
 {% set i = 0 %}
 <div class="FiltrosAdicionales" style="display:none;" id="FiltrosAdicionales">
+    <p style="margin-top: 5px; text-align: center; font-size: 12px;">Filtro Avanzado</p>
 {% for key,value in filter.aditional %}
     {% set i = i+1 %}
     {% if filter.valuesSelected[i] %}
@@ -57,7 +58,7 @@
 
 <div style='clear:both'></div>
 
-<div style="margin-top: 5px; margin-left:20px; width: 290px;">
+<div style="margin-top: 5px; margin-bottom: 10px; margin-left:43px; width: 290px;">
 <input class="FiltrosAdicionalesComando" type="buttom" value="Consultar"
       onclick="
           $('#div_listado').html('<div class=ListadoAnimation><img src={{app.path}}/images/loadingAnimation.gif /></div>');

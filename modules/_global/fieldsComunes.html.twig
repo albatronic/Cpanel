@@ -25,7 +25,9 @@
         {{ macro.select('Privacidad','field_title',values.controller ~ '[Privacidad]',values.controller ~ '_Privacidad',none,datos.Privacidad.IDTipo,datos.Privacidad.fetchAll(0),'chzn-select',109)}}
         {{ macro.input('Orden','field_title','text',values.controller ~ '[Orden]',values.controller ~ '_Orden',datos.Orden,none,none,110) }}
         {{ macro.input('Url Amigable','field_title','text',values.controller ~ '[UrlAmigable]',values.controller ~ '_UrlAmigable',datos.UrlAmigable,'255','CampoTextoLargo',112) }}
+        {% if datos.getPrimaryKeyValue %}
         {{ macro.input('Número de Visitas','field_title','text',values.controller ~ '[NumeroVisitas]',values.controller ~ '_NumeroVisitas',datos.NumeroVisitas,'11','CampoImporte',113, 'disabled') }}
+        {% endif %}
     </div>
     {% if datos.getPrimaryKeyValue %}
     <div id="tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom">

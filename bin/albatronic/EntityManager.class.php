@@ -12,18 +12,16 @@
  * EN CASO CONTRARIO ALMACENA EL MENSAJE DE ERROR PRODUCIDO QUE SE
  * PUEDE CONOCER CON EL METODO getError()
  */
-
-
-
 class EntityManager {
 
     /**
      * Fichero de configuracion de conexiones por defecto
      * Es el fichero que se utilizará si no se indica otro en la
      * llamada al constructor.
-     * @var 
+     * @var
      */
     private $file = "config/config.yml";
+
     /**
      * Link a la conexión establecida
      * @var Link conexion DB
@@ -36,6 +34,7 @@ class EntityManager {
     private $dataBase;
     private $result = null;
     private $affectedRows = null;
+
     /**
      * Guardar el eventual error producido en la conexión
      * @var array
@@ -44,8 +43,15 @@ class EntityManager {
 
     /**
      * Estable la conexion a la base de datos.
-     * Abre el fichero de configuracion '$fileConfig', o en su defecto config/config.xml
+     * Abre el fichero de configuracion '$fileConfig', o en su defecto config/config.yml
      * y lee el nodo $conection donde se definen los parametros de conexion.
+     *
+     * En entorno de poducción los parámetros de conexión se fuerzan a:
+     *
+     *      host    =   localhost
+     *      user    =   $conection
+     *      password=   $conection
+     *      dataBase=   $conection
      *
      * Si la conexion es exitosa, getDblink() devolvera valor y si no getError() nos indica
      * el error producido.
@@ -53,7 +59,7 @@ class EntityManager {
      * @param string $conection Nombre de la conexion
      * @param string $fileConfig Nombre del fichero de configuracion
      */
-    public function __construct($conection, $fileConfig='') {
+    public function __construct($conection, $fileConfig = '') {
         if ($fileConfig == '')
             $fileConfig = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/" . $this->file;
 
@@ -62,10 +68,17 @@ class EntityManager {
 
             $params = $yaml['config']['conections'][$conection];
             $this->dbEngine = $params['dbEngine'];
-            $this->host = $params['host'];
-            $this->user = $params['user'];
-            $this->password = $params['password'];
-            $this->dataBase = $params['database'];
+            if ($_SERVER['SERVER_NAME'] != 'localhost') {
+                $this->host = $params['host'];
+                $this->user = $params['user'];
+                $this->password = $params['password'];
+                $this->dataBase = $params['database'];
+            } else {
+                $this->host = 'localhost';
+                $this->user = $conection;
+                $this->password = $conection;
+                $this->dataBase = $conection;
+            }
             $this->conecta();
         } else {
             $this->error[] = "EntityManager []: ERROR AL LEER EL ARCHIVO DE CONFIGURACION. " . $fileConfig . " NO EXISTE\n";
@@ -209,9 +222,9 @@ class EntityManager {
      * Este metodo es similar a fetchResult.
      * @param integer $limit
      * @param integer $offset
-     * @return array Las filas encontradas 
+     * @return array Las filas encontradas
      */
-    public function fetchResultLimit($limit, $rowNumber='') {
+    public function fetchResultLimit($limit, $rowNumber = '') {
         $rows = array();
         $nfilas = 0;
         if ($rowNumber < 0)
@@ -397,7 +410,7 @@ class EntityManager {
      * @param string $method El nombre del método que capturó el error
      * @param string $error Mensaje de error personalizado (opcional)
      */
-    public function setError($method, $error='') {
+    public function setError($method, $error = '') {
 
         $mensaje = "EntityManager [{$method}]: ";
 
@@ -406,7 +419,7 @@ class EntityManager {
         else {
             switch ($this->dbEngine) {
                 case 'mysql':
-                    switch (mysql_errno ()) {
+                    switch (mysql_errno()) {
                         case '1062':
                             $mensaje .= "Datos duplicados. " . mysql_error();
                             break;

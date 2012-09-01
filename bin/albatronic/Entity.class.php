@@ -188,7 +188,7 @@ class Entity  {
                 $this->setOrden($lastId);
                 $this->save();
             }
-            $this->_em->desConecta();
+
         }
         unset($this->_em);
         return $lastId;

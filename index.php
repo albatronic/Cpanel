@@ -28,7 +28,6 @@
  */
 session_start();
 
-
 if (!file_exists('config/config.yml'))
     die("NO EXISTE EL FICHERO DE CONFIGURACION");
 
@@ -189,7 +188,6 @@ $result['values']['controller'] = $controller;
 if ($config['debug_mode']) {
     $result['values']['_debugMode'] = true;
     $result['values']['_auditMode'] = (string) $config['audit_mode'];
-    $result['values']['_session'] = print_r(array('emp' => $_SESSION['emp'], 'suc' => $_SESSION['suc'], 'tpv' => $_SESSION['tpv']), true);
     $result['values']['_user'] = print_r($_SESSION['USER'], true);
     $result['values']['_debugValues'] = print_r($result['values'], true);
 }
