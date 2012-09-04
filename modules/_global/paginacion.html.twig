@@ -9,7 +9,7 @@
         <img src="{{app.path}}/images/anterior0.gif" width="10px" height="12px" />
     {%endif%}
 
-    <select id="pagina" onChange="$('#Listado').html('<div class=ListadoAnimation><img src={{app.path}}/images/loadingAnimation.gif /></div>');
+    <select id="pagina" onclick="$('#Listado').html('<div class=ListadoAnimation><img src={{app.path}}/images/loadingAnimation.gif /></div>');
         document.getElementById('filter[page{{position}}]').value=pagina.value;submit();" >
         {% for i in range(1, filter.pages, 1) %}
         <option value ="{{ i }}" {% if( i == filter.page)%} selected {%endif%} >{{i}}</option>
@@ -33,7 +33,7 @@
         {% endfor %}
         </select>
     {%endif%}
-            
+
     {% if position == 'izq'%}
         <div style="float: right;">
         {% if values.permisos['EX'] %}
@@ -61,7 +61,7 @@
     {% for key,value in filter.flags %}
         <input name="filter[flags][{{key}}]" value="{{value}}" type="hidden" />
     {% endfor %}
-    
+
     <input type="hidden" name="filter[orderBy]" value="{{ filter.orderBy }}"/>
     <input type="hidden" name="filter[page]" id="filter[page{{position}}]" value="{{filter.page}}"/>
     <input type="hidden" name="filter[recordsPerPage]" value="{{ filter.recordsPerPage }}"/>

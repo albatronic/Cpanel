@@ -13,7 +13,7 @@ EnlEnlaces:
   login_required: YES
   permission_control: YES
   favourite_control: NO
-  feature_list: NO
+  feature_list: YES
   help_file: help.html.twig
   title: EnlEnlaces
   id_video: enlenlaces

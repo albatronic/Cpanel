@@ -135,7 +135,9 @@ function documentos(entidad, idEntidad, idDiv, tipo) {
 }
 
 /**
- * Submitea el formulario en curso
+ * Submitea el formulario pasado como parámetro
+ *
+ * @param string formulario El nombre del formulario a submitear
  */
 function submitForm(formulario) {
     $('#'+formulario).submit();

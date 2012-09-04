@@ -8,7 +8,7 @@ Index:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Inicio
+  title: Menú Prinpical
   id_video: index
   url_video: null
   conection: 'cpanel'

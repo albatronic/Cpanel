@@ -46,22 +46,16 @@ class CoreUsuarios extends CoreUsuariosEntity {
         $appAnterior = '';
         foreach($rows as $row) {
 
-            $icono = '';
-
             if ($row['CodigoApp'] != $appAnterior) {
 
                 $aplicacion = new CoreAplicaciones();
                 $aplicacion = $aplicacion->find("CodigoApp", $row['CodigoApp']);
-
-                $iconos = $aplicacion->getDocuments('images');
-                if (is_object($iconos[0])) $icono = $iconos[0]->getFullPath();
 
                 $menu[$row['CodigoApp']] = array(
                     'titulo' => $aplicacion->getNombreApp(),
                     'descripcion' => $aplicacion->getDescripcion(),
                     'funcinalidades' => $row['Funcionalidades'],
                     'publicar' => $row['Publicar'],
-                    'icono' => $icono,
                 );
                 unset($aplicacion);
 
@@ -70,16 +64,12 @@ class CoreUsuarios extends CoreUsuariosEntity {
                 $modulo = new CoreModulos();
                 $modulo = $modulo->find('NombreModulo',$row['NombreModulo']);
 
-                $iconos = $modulo->getDocuments('images');
-                if (is_object($iconos[0])) $icono = $iconos[0]->getFullPath();
-
                 $menu[$row['CodigoApp']]['modulos'][$row['NombreModulo']] = array(
                     'titulo' => $modulo->getTitulo(),
                     'descripcion' => $modulo->getDescripcion(),
                     'funcinalidades' => $row['Funcionalidades'],
                     'controller' => $row['NombreModulo'],
                     'publicar' => $row['Publicar'],
-                    'icono' =>$icono,
                 );
                 unset($modulo);
 

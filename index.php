@@ -206,6 +206,7 @@ $twig->loadTemplate($result['template'])
             'layout'  => '_global/layout.html.twig',
             'user'    => new CoreUsuarios($_SESSION['USER']['user']['id']),
             'menu'    => $_SESSION['USER']['menu'],
+            'projects'=> $_SESSION['projects'],
             'project' => $_SESSION['project'],
         ));
 

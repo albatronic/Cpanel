@@ -24,7 +24,16 @@
         </div>
 
         <div class="page_title_user">
-		{{project.title}} | {{user.NombreApellidos}} &nbsp;&nbsp;
+            <form name="projectsForm" id="projectsForm" method="POST">
+                <input name="controller" value ="index" type="hidden" />
+                <input name="action" value="changeProject" type="hidden"/>
+                <select class="projectsSelector" name="project" id="projectsSelector" onclick="submit();">
+                {% for key,value in projects %}
+                    <option value="{{key}}" {% if key == project.name %} SELECTED{% endif %}>{{value.title}}</option>
+                {% endfor %}
+            </select>
+            </form>
+            | {{user.NombreApellidos}} &nbsp;&nbsp;
 	</div>
 
         <div id="container">
@@ -41,17 +50,12 @@
                     </div>
                 </div>
 
-
-
                 <div class="page_title">
-                    <span class="title_icon"><span class="list_image"></span></span>
-                    <h3>{{ values.titulo }}</h3>
+                    {% include '_global/menuNavegador.html.twig' %}
                 </div>
-
 
                 <div id="content">
                     {% block content %}
-                    {% include "_global/menuPrincipal.html.twig" %}
                     {% endblock %}
                 </div>
 
@@ -62,5 +66,6 @@
             <pre>{{values._debugValues}}</pre>
         </div>
         {% endif %}
+
     </body>
 </html>

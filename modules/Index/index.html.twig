@@ -1,3 +1,9 @@
+{#
+    index/index.html.twig
+
+    MUESTRA LOS LINKS A LAS APLICACIONES Y MODULOS DISPONIBLES PARA EL USUARIO
+#}
+
 {% extends layout %}
 
 {% block title parent() ~ " - Inicio" %}
@@ -5,13 +11,19 @@
 {% block content %}
 
 {% if values.menu.tipo == 'apps' %}
+
+    {# MUESTROS LAS APLICACIONES #}
     {% for key,value in values.menu.apps %}
-        <a href="{{app.path}}/index/{{key}}">{{key}} - {{value.titulo}}<img src="{{value.icono}}" alt="" title="" /></a>
+        <a href="{{app.path}}/index/{{key}}"><img src="{{app.path}}/images/iconos/{{key}}.jpg" alt="{{value.titulo}}" title="{{value.titulo}}" /></a>
     {% endfor %}
+
 {% else %}
+
+    {# MUESTROS LOS MODULOS DE LA APLICACION EN CURSO #}
     {% for key,value in values.menu.modulos %}
-        <a href="{{app.path}}/{{value.controller}}">{{key}} - {{value.titulo}}<img src="{{value.icono}}" alt="" title="" /></a>
+        <a href="{{app.path}}/{{value.controller}}"><img src="{{app.path}}/images/iconos/{{key}}.jpg" alt="{{value.titulo}}" title="{{value.titulo}}" /></a>
     {% endfor %}
+
 {% endif %}
 
 {% endblock %}

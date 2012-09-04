@@ -10,7 +10,7 @@
 	border-bottom:#000 1px solid;
 }
 #left_bar {
-	width:270px;
+	width:470px;
 	float:left;
 	height:100%;
 	position:relative;
@@ -347,7 +347,7 @@ padding-right:15px;
 .clearfix {
 	display: block;
 }
-/* FORM GRID --------------------------------------------------------------------------------------*/ 
+/* FORM GRID --------------------------------------------------------------------------------------*/
 .form_container {
 	width:100%;
 }

@@ -1,0 +1,27 @@
+# COLUMNAS COMUNES A TODAS LAS TABLAS.
+    Observaciones:        {type: text, default: NULL}
+    PrimaryKeyMD5:        {type: string(100), default: NULL, index: unique}
+    EsPredeterminado:     {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    Revisado:             {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    Publicar:             {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    VigenteDesde:         {type: datetime, notnull: true}
+    VigenteHasta:         {type: datetime, notnull: true}
+    CreatedBy:            {type: integer, notnull: true}
+    CreateAt:             {type: datetime, notnull: true}
+    ModifiedBy:           {type: integer, notnull: true}
+    ModifiedAt:           {type: datetime, notnull: true}
+    Deleted:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    DeletedBy:            {type: integer, notnull: true}
+    DeletedAt:            {type: datetime, notnull: true}
+    Privacidad:           {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresPrivacidad,IDTipo'}
+    Orden:                {type: integer(11), notnull: true, default: 0, index: index}
+    FechaPublicacion:     {type: datetime, default: NULL}
+    UrlAmigable:          {type: string(250), default: NULL}
+    MetatagTitle:         {type: string(250), default: NULL}
+    MetatagKeywords:      {type: string(250), default: NULL}
+    MetatagDescription:   {type: string(250), default: NULL}
+    MetatagTitleSimple:   {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    MetatagTitlePosicion: {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresDchaIzq,IDTipo'}
+    MostrarEnMapaWeb:     {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    ImportanciaMapaWeb:   {type: string(5), notnul: true, default: '0,5'}
+    ChangeFreqMapaWeb:    {type: string(25), notnul: true, default: 'monthly', index: index, comment: 'Abstract,ValoresChangeFreq,IDTipo'}

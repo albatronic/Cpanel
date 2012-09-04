@@ -11,7 +11,7 @@
 class LoginController extends Controller {
 
     protected $entity = "Login";
-    protected $semilla = "verano";
+    protected $semilla;
 
     public function __construct($request) {
 
@@ -24,6 +24,7 @@ class LoginController extends Controller {
         if (file_exists($fileConfig)) {
             $yaml = sfYaml::load($fileConfig);
             $projects = $yaml['config']['conections'];
+            $this->semilla = $yaml['config']['semillaMD5'];
         } else {
             $this->error[] = "Login: ERROR AL LEER EL ARCHIVO DE CONFIGURACION. NO EXISTE\n";
         }
@@ -42,6 +43,15 @@ class LoginController extends Controller {
         );
     }
 
+    /**
+     * Logea al usuario y construye las variables de sesion:
+     *
+     *  * $_SESSION['projects']
+     *  * $_SESSION['projects']
+     *  * $_SESSION['USER']
+     *
+     * @return array Array template, value
+     */
     public function LoginAction() {
 
         $user = new CoreUsuarios();
@@ -58,6 +68,7 @@ class LoginController extends Controller {
                         'IDPerfil' => $usuario->getIDPerfil()->getIDPerfil(),
                     ),
                 );
+                $_SESSION['projects'] = $this->values['projects'];
                 $_SESSION['project'] = $this->values['projects'][$this->request['project']];
                 $_SESSION['project']['name'] = $this->request['project'];
 
@@ -66,6 +77,7 @@ class LoginController extends Controller {
                 $usuario->setUltimoLogin(date('Y-m-d H:i:s'));
                 $usuario->save();
 
+                // Crear la variable de sesion con el array del menu
                 $_SESSION['USER']['menu'] = $usuario->getArrayMenu();
 
                 // Ejecuto el controlador index y recojo sus valores
@@ -124,10 +136,10 @@ class LoginController extends Controller {
                             "<p>La contrase&ntilde;a nueva es: " . $nueva . "</p>";
 
                     $mail = new Mail();
-                    $this->values['mensaje'] = $mail->send($to, '', 'Administrador Cpanel', $subject, $message, array());
+                    $this->values['mensaje'] = $mail->send($to, '', 'Administrador ' . $config['config']['app']['name'], $subject, $message, array());
                     unset($mail);
 
-                    $template = $this->entity . "/index.html.twig";
+                    $template = $this->entity . "/login.html.twig";
                 } else {
                     $this->values['mensaje'] = "Ese usuario no consta en nuestra base de datos.";
                     $template = $this->entity . "/forgot.html.twig";
