@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:36
+# @date 05.09.2012 08:17:43
 #
 ---
 CorePermisos:
@@ -13,23 +13,24 @@ CorePermisos:
   login_required: YES
   permission_control: YES
   favourite_control: NO
+  feature_list: YES
   help_file: help.html.twig
   title: CorePermisos
   id_video: corepermisos
   url_video: null
   conection: 'cpanel'
   entity: CorePermisos
-  table: core_permisos
-  primarykey: IDPermiso
+  table: CorePermisos
+  primarykey: Id
   records_per_page: 15
   order_by:
     -
-      title: IDPermiso a-z
-      criteria: IDPermiso ASC
+      title: Id a-z
+      criteria: Id ASC
     -
-      title: IDPermiso z-a
-      criteria: IDPermiso DESC
-  search_default: IDPermiso
+      title: Id z-a
+      criteria: Id DESC
+  search_default: Id
   referenced_entities:
     -
       entity: CorePerfiles
@@ -43,12 +44,12 @@ CorePermisos:
       entity: ValoresDchaIzq
     -
       entity: ValoresChangeFreq
-  fieldGeneratorUrlFriendly: IDPerfil
-  fieldGeneratorMetatagTitle: IDPerfil
+  fieldGeneratorUrlFriendly: IdPerfil
+  fieldGeneratorMetatagTitle: IdPerfil
   columns:
     -
-      title: IDPermiso
-      field: IDPermiso
+      title: Id
+      field: Id
       filter: NO
       list: NO
       form: YES
@@ -60,8 +61,8 @@ CorePermisos:
         link: null
       default: 
     -
-      title: IDPerfil
-      field: IDPerfil
+      title: IdPerfil
+      field: IdPerfil
       filter: NO
       list: NO
       form: YES
@@ -74,7 +75,7 @@ CorePermisos:
       default: 
       aditional_filter:
         order: 1
-        caption: IDPerfil
+        caption: IdPerfil
         entity: CorePerfiles
         method: fetchAll
         params: Descripcion
@@ -82,9 +83,9 @@ CorePermisos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
-        length: 11
+        length: 4
         min: null
         max: null
         message: Valor Requerido
@@ -111,7 +112,7 @@ CorePermisos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 255
         min: null
@@ -131,7 +132,7 @@ CorePermisos:
         link: null
       default: 
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 255
         min: null
@@ -180,7 +181,7 @@ CorePermisos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -209,7 +210,7 @@ CorePermisos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -238,7 +239,7 @@ CorePermisos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -307,7 +308,7 @@ CorePermisos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -325,9 +326,9 @@ CorePermisos:
         title: null
         target: null
         link: null
-      default: 
+      default: 0
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -456,7 +457,7 @@ CorePermisos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -485,7 +486,7 @@ CorePermisos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -503,7 +504,7 @@ CorePermisos:
         title: null
         target: null
         link: null
-      default: 1
+      default: 0
       aditional_filter:
         order: 9
         caption: MostrarEnMapaWeb
@@ -514,7 +515,7 @@ CorePermisos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -563,7 +564,7 @@ CorePermisos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 25
         min: null

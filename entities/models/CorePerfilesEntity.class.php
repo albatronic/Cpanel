@@ -2,22 +2,23 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 30.08.2012 18:13:36
+ * @date 05.09.2012 08:11:29
  */
 
 /**
- * @orm:Entity(core_perfiles)
+ * @orm:Entity(CorePerfiles)
  */
 class CorePerfilesEntity extends EntityComunes {
 	/**
 	 * @orm:GeneratedValue
 	 * @orm:Id
 	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="core_perfiles")
+	 * @assert:NotBlank(groups="CorePerfiles")
 	 */
-	protected $IDPerfil;
+	protected $Id;
 	/**
 	 * @orm:Column(type="string")
+	 * @assert:NotBlank(groups="CorePerfiles")
 	 */
 	protected $Perfil;
 	/**
@@ -29,19 +30,19 @@ class CorePerfilesEntity extends EntityComunes {
 	 * Nombre de la tabla física
 	 * @var string
 	 */
-	protected $_tableName = 'core_perfiles';
+	protected $_tableName = 'CorePerfiles';
 	/**
 	 * Nombre de la PrimaryKey
 	 * @var string
 	 */
-	protected $_primaryKeyName = 'IDPerfil';
+	protected $_primaryKeyName = 'Id';
 	/**
 	 * Relacion de entidades que dependen de esta
 	 * @var string
 	 */
 	protected $_parentEntities = array(
-			array('SourceColumn' => 'IDPerfil', 'ParentEntity' => 'CorePermisos', 'ParentColumn' => 'IDPerfil'),
-			array('SourceColumn' => 'IDPerfil', 'ParentEntity' => 'CoreUsuarios', 'ParentColumn' => 'IDPerfil'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'CorePermisos', 'ParentColumn' => 'IdPerfil'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'CoreUsuarios', 'ParentColumn' => 'IdPerfil'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende
@@ -56,11 +57,11 @@ class CorePerfilesEntity extends EntityComunes {
 	/**
 	 * GETTERS Y SETTERS
 	 */
-	public function setIDPerfil($IDPerfil){
-		$this->IDPerfil = $IDPerfil;
+	public function setId($Id){
+		$this->Id = $Id;
 	}
-	public function getIDPerfil(){
-		return $this->IDPerfil;
+	public function getId(){
+		return $this->Id;
 	}
 
 	public function setPerfil($Perfil){
@@ -70,6 +71,6 @@ class CorePerfilesEntity extends EntityComunes {
 		return $this->Perfil;
 	}
 
-} // END class core_perfiles
+} // END class CorePerfiles
 
 ?>

@@ -3,13 +3,13 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 01.09.2012 04:08:11
+# @date 04.09.2012 20:32:58
 #
 ---
 listados:
   -
     title: EnlEnlaces
-    order_by: IDEnlace ASC
+    order_by: id ASC
     break_field: null
     idPerfil: null
     orientation: P
@@ -19,8 +19,8 @@ listados:
     body_font: Courier, ,8
     columns:
       -
-        title: IDSeccion
-        field: IDSeccion
+        title: IdSeccion
+        field: IdSeccion
         length: 11
         align: R
         type: integer

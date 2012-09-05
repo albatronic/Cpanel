@@ -185,6 +185,7 @@ class Entity  {
             } else {
                 $lastId = $this->_em->getInsertId();
                 $this->setPrimaryKeyValue($lastId);
+                $this->setPrimaryKeyMD5(md5($lastId));
                 $this->setOrden($lastId);
                 $this->save();
             }

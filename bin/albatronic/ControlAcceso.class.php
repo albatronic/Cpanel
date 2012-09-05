@@ -31,18 +31,20 @@ class ControlAcceso {
      * @var integer
      */
     private $idPerfil;
+
     /**
      * El nombre del Controller
      * @var string
      */
     private $controller;
+
     /**
      * Array asociativo con los tipos de permisos.
      * @var array
      */
     private $permisos = array();
 
-    public function __construct($controller='', $idPerfil='') {
+    public function __construct($controller = '', $idPerfil = '') {
         if ($idPerfil == '') {
             $this->idPerfil = $_SESSION['USER']['user']['IDPerfil'];
         } else {
@@ -62,14 +64,23 @@ class ControlAcceso {
     private function load() {
 
         $permiso = new CorePermisos();
-        $rows = $permiso->cargaCondicion("Funcionalidades","IDPerfil='{$this->idPerfil}' AND NombreModulo='{$this->controller}'");
+        $rows = $permiso->cargaCondicion("Funcionalidades", "IDPerfil='{$this->idPerfil}' AND NombreModulo='{$this->controller}'");
         unset($permiso);
 
         if ($rows[0]['Funcionalidades'] != '') {
-            $aux = explode(',', $rows[0]['Funcionalidades']);
-            foreach ($aux as $value) $this->permisos[$value] = TRUE;
-        }
 
+            $modulo = new CoreModulos();
+            $modulo = $modulo->find('NombreModulo', $this->controller);
+            $this->permisos['enCurso'] = array(
+                'app' => $modulo->getCodigoApp(),
+                'modulo' => $modulo->getNombreModulo(),
+            );
+            unset($modulo);
+
+            $aux = explode(',', $rows[0]['Funcionalidades']);
+            foreach ($aux as $value)
+                $this->permisos[$value] = TRUE;
+        }
     }
 
     /**
@@ -87,7 +98,7 @@ class ControlAcceso {
      */
     public function setPermisos($onOff) {
 
-        $tiposFuncionalidad = new CoreTiposfuncionalidad();
+        $tiposFuncionalidad = new CoreFuncionalidades();
         $rows = $tiposFuncionalidad->cargaCondicion("CodigoFuncionalidad");
         unset($tiposFuncionalidad);
 
@@ -103,7 +114,6 @@ class ControlAcceso {
      */
     public function setPermiso($permiso, $onOff) {
         $this->permisos[$permiso] = $onOff;
-
     }
 
 }

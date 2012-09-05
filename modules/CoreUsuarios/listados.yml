@@ -3,13 +3,13 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:36
+# @date 04.09.2012 20:32:58
 #
 ---
 listados:
   -
     title: CoreUsuarios
-    order_by: IDUsuario ASC
+    order_by: id ASC
     break_field: null
     idPerfil: null
     orientation: P
@@ -19,8 +19,8 @@ listados:
     body_font: Courier, ,8
     columns:
       -
-        title: IDPerfil
-        field: IDPerfil
+        title: IdPerfil
+        field: IdPerfil
         length: 11
         align: R
         type: integer
@@ -28,8 +28,8 @@ listados:
         formula: null
         format: null
       -
-        title: IDRol
-        field: IDRol
+        title: IdRol
+        field: IdRol
         length: 11
         align: R
         type: integer
@@ -37,8 +37,8 @@ listados:
         formula: null
         format: null
       -
-        title: IDTipoUsuario
-        field: IDTipoUsuario
+        title: IdTipoUsuario
+        field: IdTipoUsuario
         length: 11
         align: R
         type: integer
@@ -64,18 +64,9 @@ listados:
         formula: null
         format: null
       -
-        title: Email
-        field: Email
+        title: Apellidos
+        field: Apellidos
         length: 100
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: TelefonoMovil
-        field: TelefonoMovil
-        length: 25
         align: L
         type: string
         total: NO
@@ -91,9 +82,18 @@ listados:
         formula: null
         format: null
       -
-        title: Apellidos
-        field: Apellidos
+        title: Email
+        field: Email
         length: 100
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: TelefonoMovil
+        field: TelefonoMovil
+        length: 25
         align: L
         type: string
         total: NO

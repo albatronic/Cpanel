@@ -2,43 +2,58 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 30.08.2012 18:13:36
+ * @date 05.09.2012 08:11:29
  */
 
 /**
- * @orm:Entity(core_usuarios)
+ * @orm:Entity(CoreUsuarios)
  */
 class CoreUsuariosEntity extends EntityComunes {
 	/**
 	 * @orm:GeneratedValue
 	 * @orm:Id
 	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="core_usuarios")
+	 * @assert:NotBlank(groups="CoreUsuarios")
 	 */
-	protected $IDUsuario;
+	protected $Id;
 	/**
 	 * @orm:Column(type="integer")
+	 * @assert:NotBlank(groups="CoreUsuarios")
 	 * @var entities\CorePerfiles
 	 */
-	protected $IDPerfil;
+	protected $IdPerfil;
 	/**
 	 * @orm:Column(type="integer")
+	 * @assert:NotBlank(groups="CoreUsuarios")
 	 * @var entities\CoreRoles
 	 */
-	protected $IDRol;
+	protected $IdRol;
 	/**
 	 * @orm:Column(type="integer")
-	 * @var entities\CoreTiposusuarios
+	 * @assert:NotBlank(groups="CoreUsuarios")
+	 * @var entities\CoreUsuariosTipos
 	 */
-	protected $IDTipoUsuario;
+	protected $IdTipoUsuario;
 	/**
 	 * @orm:Column(type="string")
+	 * @assert:NotBlank(groups="CoreUsuarios")
 	 */
 	protected $Login;
 	/**
 	 * @orm:Column(type="string")
+	 * @assert:NotBlank(groups="CoreUsuarios")
 	 */
 	protected $Password;
+	/**
+	 * @orm:Column(type="string")
+	 * @assert:NotBlank(groups="CoreUsuarios")
+	 */
+	protected $Apellidos;
+	/**
+	 * @orm:Column(type="string")
+	 * @assert:NotBlank(groups="CoreUsuarios")
+	 */
+	protected $Nombre;
 	/**
 	 * @orm:Column(type="string")
 	 */
@@ -48,15 +63,8 @@ class CoreUsuariosEntity extends EntityComunes {
 	 */
 	protected $TelefonoMovil;
 	/**
-	 * @orm:Column(type="string")
-	 */
-	protected $Nombre;
-	/**
-	 * @orm:Column(type="string")
-	 */
-	protected $Apellidos;
-	/**
 	 * @orm:Column(type="tinyint")
+	 * @assert:NotBlank(groups="CoreUsuarios")
 	 */
 	protected $CambioPassword = '0';
 	/**
@@ -66,11 +74,11 @@ class CoreUsuariosEntity extends EntityComunes {
 	/**
 	 * @orm:Column(type="integer")
 	 */
-	protected $NLogin;
+	protected $NLogin = '0';
 	/**
 	 * @orm:Column(type="datetime")
 	 */
-	protected $UltimoLogin;
+	protected $UltimoLogin = '0000-00-00 00:00:00';
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string
@@ -80,17 +88,18 @@ class CoreUsuariosEntity extends EntityComunes {
 	 * Nombre de la tabla física
 	 * @var string
 	 */
-	protected $_tableName = 'core_usuarios';
+	protected $_tableName = 'CoreUsuarios';
 	/**
 	 * Nombre de la PrimaryKey
 	 * @var string
 	 */
-	protected $_primaryKeyName = 'IDUsuario';
+	protected $_primaryKeyName = 'Id';
 	/**
 	 * Relacion de entidades que dependen de esta
 	 * @var string
 	 */
 	protected $_parentEntities = array(
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'CoreUsuarios', 'ParentColumn' => 'IdTipoUsuario'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende
@@ -99,7 +108,7 @@ class CoreUsuariosEntity extends EntityComunes {
 	protected $_childEntities = array(
 			'CorePerfiles',
 			'CoreRoles',
-			'CoreTiposusuarios',
+			'CoreUsuariosTipos',
 			'ValoresSN',
 			'ValoresPrivacidad',
 			'ValoresDchaIzq',
@@ -108,38 +117,38 @@ class CoreUsuariosEntity extends EntityComunes {
 	/**
 	 * GETTERS Y SETTERS
 	 */
-	public function setIDUsuario($IDUsuario){
-		$this->IDUsuario = $IDUsuario;
+	public function setId($Id){
+		$this->Id = $Id;
 	}
-	public function getIDUsuario(){
-		return $this->IDUsuario;
-	}
-
-	public function setIDPerfil($IDPerfil){
-		$this->IDPerfil = $IDPerfil;
-	}
-	public function getIDPerfil(){
-		if (!($this->IDPerfil instanceof CorePerfiles))
-			$this->IDPerfil = new CorePerfiles($this->IDPerfil);
-		return $this->IDPerfil;
+	public function getId(){
+		return $this->Id;
 	}
 
-	public function setIDRol($IDRol){
-		$this->IDRol = $IDRol;
+	public function setIdPerfil($IdPerfil){
+		$this->IdPerfil = $IdPerfil;
 	}
-	public function getIDRol(){
-		if (!($this->IDRol instanceof CoreRoles))
-			$this->IDRol = new CoreRoles($this->IDRol);
-		return $this->IDRol;
+	public function getIdPerfil(){
+		if (!($this->IdPerfil instanceof CorePerfiles))
+			$this->IdPerfil = new CorePerfiles($this->IdPerfil);
+		return $this->IdPerfil;
 	}
 
-	public function setIDTipoUsuario($IDTipoUsuario){
-		$this->IDTipoUsuario = $IDTipoUsuario;
+	public function setIdRol($IdRol){
+		$this->IdRol = $IdRol;
 	}
-	public function getIDTipoUsuario(){
-		if (!($this->IDTipoUsuario instanceof CoreTiposusuarios))
-			$this->IDTipoUsuario = new CoreTiposusuarios($this->IDTipoUsuario);
-		return $this->IDTipoUsuario;
+	public function getIdRol(){
+		if (!($this->IdRol instanceof CoreRoles))
+			$this->IdRol = new CoreRoles($this->IdRol);
+		return $this->IdRol;
+	}
+
+	public function setIdTipoUsuario($IdTipoUsuario){
+		$this->IdTipoUsuario = $IdTipoUsuario;
+	}
+	public function getIdTipoUsuario(){
+		if (!($this->IdTipoUsuario instanceof CoreUsuariosTipos))
+			$this->IdTipoUsuario = new CoreUsuariosTipos($this->IdTipoUsuario);
+		return $this->IdTipoUsuario;
 	}
 
 	public function setLogin($Login){
@@ -156,6 +165,20 @@ class CoreUsuariosEntity extends EntityComunes {
 		return $this->Password;
 	}
 
+	public function setApellidos($Apellidos){
+		$this->Apellidos = trim($Apellidos);
+	}
+	public function getApellidos(){
+		return $this->Apellidos;
+	}
+
+	public function setNombre($Nombre){
+		$this->Nombre = trim($Nombre);
+	}
+	public function getNombre(){
+		return $this->Nombre;
+	}
+
 	public function setEmail($Email){
 		$this->Email = trim($Email);
 	}
@@ -168,20 +191,6 @@ class CoreUsuariosEntity extends EntityComunes {
 	}
 	public function getTelefonoMovil(){
 		return $this->TelefonoMovil;
-	}
-
-	public function setNombre($Nombre){
-		$this->Nombre = trim($Nombre);
-	}
-	public function getNombre(){
-		return $this->Nombre;
-	}
-
-	public function setApellidos($Apellidos){
-		$this->Apellidos = trim($Apellidos);
-	}
-	public function getApellidos(){
-		return $this->Apellidos;
 	}
 
 	public function setCambioPassword($CambioPassword){
@@ -214,6 +223,6 @@ class CoreUsuariosEntity extends EntityComunes {
 		return $this->UltimoLogin;
 	}
 
-} // END class core_usuarios
+} // END class CoreUsuarios
 
 ?>

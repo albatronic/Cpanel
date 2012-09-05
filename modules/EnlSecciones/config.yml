@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:37
+# @date 05.09.2012 08:17:43
 #
 ---
 EnlSecciones:
@@ -13,28 +13,33 @@ EnlSecciones:
   login_required: YES
   permission_control: YES
   favourite_control: NO
+  feature_list: YES
   help_file: help.html.twig
-  title: EnlSecciones
+  title: Secciones
   id_video: enlsecciones
   url_video: null
   conection: 'cpanel'
   entity: EnlSecciones
-  table: enl_secciones
-  primarykey: IDSeccion
+  table: EnlSecciones
+  primarykey: Id
   records_per_page: 15
   order_by:
     -
-      title: IDSeccion a-z
-      criteria: IDSeccion ASC
+      title: Título a-z
+      criteria: Titulo ASC
     -
-      title: IDSeccion z-a
-      criteria: IDSeccion DESC
-  search_default: IDSeccion
+      title: Titulo z-a
+      criteria: Titulo DESC
+    -
+      title: Orden a-z
+      criteria: Orden ASC
+    -
+      title: Orden z-a
+      criteria: Orden DESC
+  search_default: Id
   referenced_entities:
     -
-      entity: TipoSeccionEnlacesInteres
-    -
-      entity: EnlSecciones
+      entity: TiposSeccionEnlacesInteres
     -
       entity: ValoresSN
     -
@@ -43,12 +48,12 @@ EnlSecciones:
       entity: ValoresDchaIzq
     -
       entity: ValoresChangeFreq
-  fieldGeneratorUrlFriendly: Seccion
-  fieldGeneratorMetatagTitle: Seccion
+  fieldGeneratorUrlFriendly: Titulo
+  fieldGeneratorMetatagTitle: Titulo
   columns:
     -
-      title: IDSeccion
-      field: IDSeccion
+      title: Id
+      field: Id
       filter: NO
       list: NO
       form: YES
@@ -58,12 +63,12 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
     -
-      title: Seccion
-      field: Seccion
+      title: Titulo
+      field: Titulo
       filter: YES
-      list: NO
+      list: YES
       form: YES
       link:
         route: null
@@ -71,9 +76,9 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 255
         min: null
@@ -83,7 +88,7 @@ EnlSecciones:
       title: Subtitulo
       field: Subtitulo
       filter: YES
-      list: NO
+      list: YES
       form: YES
       link:
         route: null
@@ -91,7 +96,7 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -115,14 +120,14 @@ EnlSecciones:
       aditional_filter:
         order: 1
         caption: TipoSeccion
-        entity: TipoSeccionEnlacesInteres
+        entity: TiposSeccionEnlacesInteres
         method: fetchAll
         params: Descripcion
         type: select
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -131,35 +136,6 @@ EnlSecciones:
     -
       title: PerteneceA
       field: PerteneceA
-      filter: NO
-      list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      aditional_filter:
-        order: 2
-        caption: PerteneceA
-        entity: EnlSecciones
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: YES
-        type: integer
-        length: 11
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: IDEntidad
-      field: IDEntidad
       filter: YES
       list: NO
       form: YES
@@ -169,9 +145,9 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -189,11 +165,31 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 255
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: IdEntidad
+      field: IdEntidad
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default:
+      validator:
+        nullable: NO
+        type: integer
+        length: 11
         min: null
         max: null
         message: Valor Requerido
@@ -209,11 +205,11 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -231,7 +227,7 @@ EnlSecciones:
         link: null
       default: 0
       aditional_filter:
-        order: 3
+        order: 2
         caption: EsPredeterminado
         entity: ValoresSN
         method: fetchAll
@@ -240,7 +236,7 @@ EnlSecciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -260,7 +256,7 @@ EnlSecciones:
         link: null
       default: 0
       aditional_filter:
-        order: 4
+        order: 3
         caption: Revisado
         entity: ValoresSN
         method: fetchAll
@@ -269,7 +265,7 @@ EnlSecciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -289,7 +285,7 @@ EnlSecciones:
         link: null
       default: 0
       aditional_filter:
-        order: 5
+        order: 4
         caption: Publicar
         entity: ValoresSN
         method: fetchAll
@@ -298,7 +294,7 @@ EnlSecciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -316,11 +312,11 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: NO
         type: datetime
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -336,11 +332,11 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: NO
         type: datetime
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -358,7 +354,7 @@ EnlSecciones:
         link: null
       default: 0
       aditional_filter:
-        order: 6
+        order: 5
         caption: Privacidad
         entity: ValoresPrivacidad
         method: fetchAll
@@ -367,7 +363,7 @@ EnlSecciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -377,7 +373,7 @@ EnlSecciones:
       title: Orden
       field: Orden
       filter: NO
-      list: NO
+      list: YES
       form: YES
       link:
         route: null
@@ -385,7 +381,7 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default: 0
       validator:
         nullable: YES
         type: integer
@@ -405,11 +401,11 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: datetime
-        length: 
+        length:
         min: null
         max: null
         message: Valor Requerido
@@ -425,7 +421,7 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -445,7 +441,7 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -465,7 +461,7 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -485,7 +481,7 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 
+      default:
       validator:
         nullable: YES
         type: string
@@ -507,7 +503,7 @@ EnlSecciones:
         link: null
       default: 0
       aditional_filter:
-        order: 7
+        order: 6
         caption: MetatagTitleSimple
         entity: ValoresSN
         method: fetchAll
@@ -516,7 +512,7 @@ EnlSecciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -536,7 +532,7 @@ EnlSecciones:
         link: null
       default: 0
       aditional_filter:
-        order: 8
+        order: 7
         caption: MetatagTitlePosicion
         entity: ValoresDchaIzq
         method: fetchAll
@@ -545,7 +541,7 @@ EnlSecciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -563,9 +559,9 @@ EnlSecciones:
         title: null
         target: null
         link: null
-      default: 1
+      default: 0
       aditional_filter:
-        order: 9
+        order: 8
         caption: MostrarEnMapaWeb
         entity: ValoresSN
         method: fetchAll
@@ -574,7 +570,7 @@ EnlSecciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -614,7 +610,7 @@ EnlSecciones:
         link: null
       default: monthly
       aditional_filter:
-        order: 10
+        order: 9
         caption: ChangeFreqMapaWeb
         entity: ValoresChangeFreq
         method: fetchAll
@@ -623,7 +619,7 @@ EnlSecciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 25
         min: null

@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:36
+# @date 05.09.2012 08:17:43
 #
 ---
 CoreRoles:
@@ -13,23 +13,24 @@ CoreRoles:
   login_required: YES
   permission_control: YES
   favourite_control: NO
+  feature_list: YES
   help_file: help.html.twig
   title: CoreRoles
   id_video: coreroles
   url_video: null
   conection: 'cpanel'
   entity: CoreRoles
-  table: core_roles
-  primarykey: IDRol
+  table: CoreRoles
+  primarykey: Id
   records_per_page: 15
   order_by:
     -
-      title: IDRol a-z
-      criteria: IDRol ASC
+      title: Id a-z
+      criteria: Id ASC
     -
-      title: IDRol z-a
-      criteria: IDRol DESC
-  search_default: IDRol
+      title: Id z-a
+      criteria: Id DESC
+  search_default: Id
   referenced_entities:
     -
       entity: ValoresSN
@@ -43,8 +44,8 @@ CoreRoles:
   fieldGeneratorMetatagTitle: Rol
   columns:
     -
-      title: IDRol
-      field: IDRol
+      title: Id
+      field: Id
       filter: NO
       list: NO
       form: YES
@@ -69,7 +70,7 @@ CoreRoles:
         link: null
       default: 
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 50
         min: null
@@ -118,7 +119,7 @@ CoreRoles:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -147,7 +148,7 @@ CoreRoles:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -176,7 +177,7 @@ CoreRoles:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -245,7 +246,7 @@ CoreRoles:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -263,9 +264,9 @@ CoreRoles:
         title: null
         target: null
         link: null
-      default: 
+      default: 0
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -394,7 +395,7 @@ CoreRoles:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -423,7 +424,7 @@ CoreRoles:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -441,7 +442,7 @@ CoreRoles:
         title: null
         target: null
         link: null
-      default: 1
+      default: 0
       aditional_filter:
         order: 7
         caption: MostrarEnMapaWeb
@@ -452,7 +453,7 @@ CoreRoles:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -501,7 +502,7 @@ CoreRoles:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 25
         min: null

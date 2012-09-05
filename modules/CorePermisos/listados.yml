@@ -3,13 +3,13 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:36
+# @date 04.09.2012 20:32:58
 #
 ---
 listados:
   -
     title: CorePermisos
-    order_by: IDPermiso ASC
+    order_by: id ASC
     break_field: null
     idPerfil: null
     orientation: P
@@ -19,9 +19,9 @@ listados:
     body_font: Courier, ,8
     columns:
       -
-        title: IDPerfil
-        field: IDPerfil
-        length: 11
+        title: IdPerfil
+        field: IdPerfil
+        length: 4
         align: R
         type: integer
         total: NO

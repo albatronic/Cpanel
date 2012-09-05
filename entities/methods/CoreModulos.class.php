@@ -2,15 +2,15 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 30.08.2012 18:13:36
+ * @date 04.09.2012 20:32:58
  */
 
 /**
- * @orm:Entity(core_modulos)
+ * @orm:Entity(CoreModulos)
  */
 class CoreModulos extends CoreModulosEntity {
 	public function __toString() {
-		return $this->getIDModulo();
+		return $this->getId();
 	}
 }
 ?>

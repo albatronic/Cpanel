@@ -33,10 +33,10 @@ class CoreUsuarios extends CoreUsuariosEntity {
         if ($em->getDbLink()) {
             $query = "
                 select m.CodigoApp ,p.NombreModulo, p.Funcionalidades, m.Publicar
-                from core_permisos as p, core_modulos as m
+                from CorePermisos as p, CoreModulos as m
                 where  m.NombreModulo = p.NombreModulo and
-                p.IDPerfil = '" . $this->IDPerfil . "'
-                order by p.NombreModulo,p.Orden ASC";
+                p.IDPerfil = '" . $this->IdPerfil . "'
+                order by p.NombreModulo,m.Orden ASC";
             $em->query($query);
             $rows = $em->fetchResult();
             $em->desConecta();

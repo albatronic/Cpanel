@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:36
+# @date 05.09.2012 08:17:43
 #
 ---
 CoreModulos:
@@ -13,23 +13,24 @@ CoreModulos:
   login_required: YES
   permission_control: YES
   favourite_control: NO
+  feature_list: YES
   help_file: help.html.twig
   title: CoreModulos
   id_video: coremodulos
   url_video: null
   conection: 'cpanel'
   entity: CoreModulos
-  table: core_modulos
-  primarykey: IDModulo
+  table: CoreModulos
+  primarykey: Id
   records_per_page: 15
   order_by:
     -
-      title: IDModulo a-z
-      criteria: IDModulo ASC
+      title: Id a-z
+      criteria: Id ASC
     -
-      title: IDModulo z-a
-      criteria: IDModulo DESC
-  search_default: IDModulo
+      title: Id z-a
+      criteria: Id DESC
+  search_default: Id
   referenced_entities:
     -
       entity: CoreAplicaciones
@@ -45,8 +46,8 @@ CoreModulos:
   fieldGeneratorMetatagTitle: CodigoApp
   columns:
     -
-      title: IDModulo
-      field: IDModulo
+      title: Id
+      field: Id
       filter: NO
       list: NO
       form: YES
@@ -80,7 +81,7 @@ CoreModulos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 15
         min: null
@@ -100,7 +101,7 @@ CoreModulos:
         link: null
       default: 
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 255
         min: null
@@ -118,9 +119,9 @@ CoreModulos:
         title: null
         target: null
         link: null
-      default: 
+      default: 0
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 4
         min: null
@@ -160,7 +161,7 @@ CoreModulos:
         link: null
       default: 
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 100
         min: null
@@ -200,7 +201,7 @@ CoreModulos:
         link: null
       default: 
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 255
         min: null
@@ -249,7 +250,7 @@ CoreModulos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -278,7 +279,7 @@ CoreModulos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -307,7 +308,7 @@ CoreModulos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -376,7 +377,7 @@ CoreModulos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -394,9 +395,9 @@ CoreModulos:
         title: null
         target: null
         link: null
-      default: 
+      default: 0
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -525,7 +526,7 @@ CoreModulos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -554,7 +555,7 @@ CoreModulos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -572,7 +573,7 @@ CoreModulos:
         title: null
         target: null
         link: null
-      default: 1
+      default: 0
       aditional_filter:
         order: 8
         caption: MostrarEnMapaWeb
@@ -583,7 +584,7 @@ CoreModulos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -632,7 +633,7 @@ CoreModulos:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 25
         min: null

@@ -3,13 +3,13 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:37
+# @date 04.09.2012 20:32:58
 #
 ---
 listados:
   -
     title: EnlSecciones
-    order_by: IDSeccion ASC
+    order_by: id ASC
     break_field: null
     idPerfil: null
     orientation: P
@@ -19,9 +19,9 @@ listados:
     body_font: Courier, ,8
     columns:
       -
-        title: Seccion
-        field: Seccion
-        length: 255
+        title: Titulo
+        field: Titulo
+        length: 40
         align: L
         type: string
         total: NO
@@ -30,7 +30,7 @@ listados:
       -
         title: Subtitulo
         field: Subtitulo
-        length: 255
+        length: 25
         align: L
         type: string
         total: NO
@@ -39,7 +39,7 @@ listados:
       -
         title: TipoSeccion
         field: TipoSeccion
-        length: 1
+        length: 3
         align: L
         type: tinyint
         total: NO
@@ -55,20 +55,20 @@ listados:
         formula: null
         format: null
       -
-        title: IDEntidad
-        field: IDEntidad
-        length: 11
-        align: R
-        type: integer
+        title: Entidad
+        field: Entidad
+        length: 15
+        align: L
+        type: string
         total: NO
         formula: null
         format: null
       -
-        title: Entidad
-        field: Entidad
-        length: 255
-        align: L
-        type: string
+        title: IdEntidad
+        field: IdEntidad
+        length: 11
+        align: R
+        type: integer
         total: NO
         formula: null
         format: null

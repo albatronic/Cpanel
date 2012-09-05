@@ -1,0 +1,83 @@
+# Module: CoreUrlAmigables
+# Document : modules\CoreUrlAmigables\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 04.09.2012 20:32:58
+#
+---
+listados:
+  -
+    title: CoreUrlAmigables
+    order_by: id ASC
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: 10, 10, 15, 10
+    body_font: Courier, ,8
+    columns:
+      -
+        title: Controller
+        field: Controller
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Action
+        field: Action
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Template
+        field: Template
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Parametros
+        field: Parametros
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Entidad
+        field: Entidad
+        length: 255
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: IdEntidad
+        field: IdEntidad
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null
+      -
+        title: NumeroVisitas
+        field: NumeroVisitas
+        length: 11
+        align: R
+        type: integer
+        total: NO
+        formula: null
+        format: null

@@ -3,13 +3,13 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:36
+# @date 04.09.2012 20:32:58
 #
 ---
 listados:
   -
     title: CoreImagenes
-    order_by: Id ASC
+    order_by: id ASC
     break_field: null
     idPerfil: null
     orientation: P
@@ -21,7 +21,7 @@ listados:
       -
         title: Entidad
         field: Entidad
-        length: 50
+        length: 255
         align: L
         type: string
         total: NO
@@ -82,8 +82,8 @@ listados:
         formula: null
         format: null
       -
-        title: IDTipoMime
-        field: IDTipoMime
+        title: IdTipoMime
+        field: IdTipoMime
         length: 10
         align: L
         type: string

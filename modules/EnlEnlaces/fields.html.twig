@@ -4,17 +4,17 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 01.09.2012 04:08:11
+  date 04.09.2012 20:32:58
 #}
 
-{{ macro.select('IDSeccion','field_title',values.controller ~ '[IDSeccion]',values.controller ~ '_IDSeccion',none,datos.IDSeccion.IDSeccion,datos.IDSeccion.fetchAll('IDSeccion'),'Select','1')}}
+{{ macro.select('Seccion','field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.IdSeccion,datos.IdSeccion.fetchAll('Titulo','0'),'Select','1')}}
 {{ macro.input('Titulo','field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
 {{ macro.input('Subtitulo','field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
 {{ macro.input('Url','field_title','text',values.controller ~ '[Url]',values.controller ~ '_Url',datos.Url,'255','CampoTextoLargo','4') }}
-{{ macro.select('TargetBlank','field_title',values.controller ~ '[TargetBlank]',values.controller ~ '_TargetBlank',none,datos.TargetBlank.TargetBlank,datos.TargetBlank.fetchAll('IDTipo'),'Select','5')}}
-{{ macro.select('EsHttps','field_title',values.controller ~ '[EsHttps]',values.controller ~ '_EsHttps',none,datos.EsHttps.EsHttps,datos.EsHttps.fetchAll('IDTipo'),'Select','6')}}
-{{ macro.select('EsUrlInterna','field_title',values.controller ~ '[EsUrlInterna]',values.controller ~ '_EsUrlInterna',none,datos.EsUrlInterna.EsUrlInterna,datos.EsUrlInterna.fetchAll('IDTipo'),'Select','7')}}
+{{ macro.select('TargetBlank','field_title',values.controller ~ '[TargetBlank]',values.controller ~ '_TargetBlank',none,datos.TargetBlank.TargetBlank,datos.TargetBlank.fetchAll(0),'Select','5')}}
+{{ macro.select('EsHttps','field_title',values.controller ~ '[EsHttps]',values.controller ~ '_EsHttps',none,datos.EsHttps.EsHttps,datos.EsHttps.fetchAll(0),'Select','6')}}
+{{ macro.select('EsUrlInterna','field_title',values.controller ~ '[EsUrlInterna]',values.controller ~ '_EsUrlInterna',none,datos.EsUrlInterna.EsUrlInterna,datos.EsUrlInterna.fetchAll(0),'Select','7')}}
 
 {% include '_global/fieldsComunes.html.twig' %}
 
-{{ macro.foco(values.controller ~ '_IDSeccion') }}
+{{ macro.foco(values.controller ~ '_IdSeccion') }}

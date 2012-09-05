@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:36
+# @date 05.09.2012 08:17:43
 #
 ---
 CoreAplicaciones:
@@ -13,23 +13,24 @@ CoreAplicaciones:
   login_required: YES
   permission_control: YES
   favourite_control: NO
+  feature_list: YES
   help_file: help.html.twig
-  title: Aplicaciones
+  title: CoreAplicaciones
   id_video: coreaplicaciones
   url_video: null
   conection: 'cpanel'
   entity: CoreAplicaciones
-  table: core_aplicaciones
-  primarykey: IDApp
+  table: CoreAplicaciones
+  primarykey: Id
   records_per_page: 15
   order_by:
     -
-      title: IDApp a-z
-      criteria: IDApp ASC
+      title: Id a-z
+      criteria: Id ASC
     -
-      title: IDApp z-a
-      criteria: IDApp DESC
-  search_default: IDApp
+      title: Id z-a
+      criteria: Id DESC
+  search_default: Id
   referenced_entities:
     -
       entity: ValoresSN
@@ -43,8 +44,8 @@ CoreAplicaciones:
   fieldGeneratorMetatagTitle: CodigoApp
   columns:
     -
-      title: IDApp
-      field: IDApp
+      title: Id
+      field: Id
       filter: NO
       list: NO
       form: YES
@@ -69,7 +70,7 @@ CoreAplicaciones:
         link: null
       default:
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 15
         min: null
@@ -89,7 +90,7 @@ CoreAplicaciones:
         link: null
       default:
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 100
         min: null
@@ -158,7 +159,7 @@ CoreAplicaciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -187,7 +188,7 @@ CoreAplicaciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -216,7 +217,7 @@ CoreAplicaciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -285,7 +286,7 @@ CoreAplicaciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -303,7 +304,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default:
+      default: 0
       validator:
         nullable: YES
         type: integer
@@ -434,7 +435,7 @@ CoreAplicaciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -463,7 +464,7 @@ CoreAplicaciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -481,7 +482,7 @@ CoreAplicaciones:
         title: null
         target: null
         link: null
-      default: 1
+      default: 0
       aditional_filter:
         order: 7
         caption: MostrarEnMapaWeb
@@ -492,7 +493,7 @@ CoreAplicaciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -541,7 +542,7 @@ CoreAplicaciones:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 25
         min: null

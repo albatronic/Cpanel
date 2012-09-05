@@ -4,13 +4,14 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 30.08.2012 18:13:36
+  date 04.09.2012 20:32:58
 #}
 
-{{ macro.select('IDModulo','field_title',values.controller ~ '[IDModulo]',values.controller ~ '_IDModulo',none,datos.IDModulo.IDModulo,datos.IDModulo.fetchAll('IDModulo'),'Select','1')}}
-{{ macro.input('Funcionalidades','field_title','text',values.controller ~ '[Funcionalidades]',values.controller ~ '_Funcionalidades',datos.Funcionalidades,'255','CampoTextoLargo','2') }}
-{{ macro.input('NumeroVisitas','field_title','text',values.controller ~ '[NumeroVisitas]',values.controller ~ '_NumeroVisitas',datos.NumeroVisitas,'11','CampoImporte','3') }}
+{{ macro.input('Codigo','field_title','text',values.controller ~ '[Codigo]',values.controller ~ '_Codigo',datos.Codigo,'15','CampoTextoCorto','1') }}
+{{ macro.input('Titulo','field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'100','CampoTextoLargo','2') }}
+{{ macro.input('Descripcion','field_title','text',values.controller ~ '[Descripcion]',values.controller ~ '_Descripcion',datos.Descripcion,'100','CampoTextoLargo','3') }}
+{{ macro.select('EsEstandar','field_title',values.controller ~ '[EsEstandar]',values.controller ~ '_EsEstandar',none,datos.EsEstandar.EsEstandar,datos.EsEstandar.fetchAll('IDTipo'),'Select','4')}}
 
 {% include '_global/fieldsComunes.html.twig' %}
 
-{{ macro.foco(values.controller ~ '_IDModulo') }}
+{{ macro.foco(values.controller ~ '_Codigo') }}

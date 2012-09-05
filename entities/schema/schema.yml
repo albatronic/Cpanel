@@ -1,0 +1,132 @@
+# cpanel/entities/schema.yml
+
+CoreAplicaciones:
+  engine:
+  charSet:
+  comment:
+  columns:
+    CodigoApp:   {type: string(15), notnull: true, index: unique}
+    NombreApp:   {type: string(100), notnull: true}
+    Descripcion: {type: string(100), notnul: true}
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+CoreModulos:
+  columns:
+    CodigoApp:       { type: string(15), notnull: true, index: index, comment: 'db,CoreAplicaciones,CodigoApp' }
+    NombreModulo:    { type: string(255), notnull: true, index: unique }
+    Nivel:           { type: integer(4), notnull: true, default: 0 }
+    PerteneceA:      { type: string(255), notnull: false, default: NULL, index: index}
+    Titulo:          { type: string(100), notnull: true }
+    Descripcion:     { type: string(100), notnull: false, default: NULL }
+    Funcionalidades: { type: string(255), notnull: true }
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+CoreImagenes:
+  columns:
+    Entidad:    { type: string(255), notnull: true}
+    IdEntidad:  { type: integer(11), notnull: true}
+    EsGaleria:  { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    PathName:   { type: string(255), notnull: true}
+    TextoPie:   { type: string(255), notnull: false}
+    Title:      { type: string(255), notnull: false}
+    Alt:        { type: string(255), notnull: false}
+    IdTipoMime: { type: string(10), notnull: false, index: index, comment: 'Abstract,TiposMime,IDTipo' }
+    Peso:       { type: int(11), notnull: true, default: 0}
+    Alto:       { type: int(11), notnull: true, default: 0}
+    Ancho:      { type: int(11), notnull: true, default: 0}
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+CorePerfiles:
+  columns:
+    Perfil: { type: string(50), notnull: true }
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+CorePermisos:
+  columns:
+    IdPerfil:        { type: integer, notnull: true, index: index, comment: 'db,CorePerfiles,Id' }
+    NombreModulo:    { type: string(255), notnull: true, index: index, comment: 'db,CoreModulos,NombreModulo' }
+    Funcionalidades: { type: string(255), notnull: true }
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+CoreRoles:
+  columns:
+    Rol: { type: string(50), notnull: true }
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+CoreFuncionalidades:
+  columns:
+    Codigo: { type: string(15), notnull: true, index: unique}
+    Titulo: { type: string(100), notnull: true}
+    Descripcion: { type: string(100), notnull: false}
+    EsEstandar : { type: boolean, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+CoreUsuariosTipos:
+  columns:
+    Descripcion: { type: string(50), notnull: true}
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+CoreUsuarios:
+  columns:
+    IdPerfil:       {type: int(11), notnull: true, index: index, comment: 'db,CorePerfiles,Id' }
+    IdRol:          {type: int(11), notnull: true, index: index, comment: 'db,CoreRoles,Id' }
+    IdTipoUsuario:  {type: int(11), notnull: true, index: index, comment: 'db,coreUsuariosTipos,Id' }
+    Login:          { type: string(50), notnull: true }
+    Password:       { type: string(100), notnull: true }
+    Apellidos:      { type: string(100), notnull: true, index: index}
+    Nombre:         { type: string(100), notnull: true }
+    Email:          { type: string(100), notnull: false, default: NULL }
+    TelefonoMovil:  { type: string(25), notnull: false, default: NULL }
+    CambioPassword: { type: boolean, notnull: true, default: 0, comment: 'Abstract,ValoresSN,IDTipo' }
+    Ips:            { type: string(255), notnull: false, default: NULL}
+    NLogin:         { type: integer(4), default: 0 }
+    UltimoLogin:    { type: datetime, default: '0000-00-00 00:00:00' }
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+CoreUrlAmigables:
+  columns:
+    Controller:    { type: string(255), notnull: true }
+    Action:        { type: string(255), notnull: true }
+    Template:      { type: string(255), notnull: false, default: NULL }
+    Parametros:    { type: string(255), notnull: false, default: NULL }
+    Entidad:       { type: string(255), notnull: true}
+    IdEntidad:     { type: integer(11), notnull: true}
+    NumeroVisitas: { type: integer(11), notnull: true, default: 0}
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+# ----------------------
+# APP ENLACES DE INTERES
+# ----------------------
+
+EnlSecciones:
+  columns:
+    Titulo:      { type: string(255), notnull: true}
+    Subtitulo:   { type: string(255), notnull: false, default: NULL }
+    TipoSeccion: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,TiposSeccionEnlacesInteres,IDTipo' }
+    PerteneceA:  { type: int(11), notnull: true, comment: 'db, EnlSecciones, Id'}
+    Entidad:     { type: string(255), notnull: true}
+    IdEntidad:   { type: integer(11), notnull: true}
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:
+
+EnlEnlaces:
+  columns:
+    IdSeccion:    { type: int(11), notnull: true, index: index, comment: 'db,EnlSecciones,Id' }
+    Titulo:       { type: string(255), notnull: true }
+    Subtitulo:    { type: string(255), notnull: false, default: NULL }
+    Url:          { type: string(255), notnull: false, default: NULL }
+    TargetBlank:  { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    EsHttps:      { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    EsUrlInterna: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+  relations:

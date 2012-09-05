@@ -403,8 +403,8 @@ class EntityComunes extends Entity {
      * @return integer El número de visitas
      */
     public function getNumeroVisitas() {
-        $url = new CoreUrlamigables();
-        $rows = $url->cargaCondicion("NumeroVisitas", "Entidad='{$this->getClassName()}' AND IDEntidad='{$this->getPrimaryKeyValue()}'");
+        $url = new CoreUrlAmigables();
+        $rows = $url->cargaCondicion("NumeroVisitas", "Entidad='{$this->getClassName()}' AND IdEntidad='{$this->getPrimaryKeyValue()}'");
         unset($url);
         return $rows[0]['NumeroVisitas'];
     }

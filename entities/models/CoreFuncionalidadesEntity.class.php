@@ -2,33 +2,40 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 30.08.2012 18:13:36
+ * @date 05.09.2012 08:11:29
  */
 
 /**
- * @orm:Entity(core_funcionalidades)
+ * @orm:Entity(CoreFuncionalidades)
  */
 class CoreFuncionalidadesEntity extends EntityComunes {
 	/**
 	 * @orm:GeneratedValue
 	 * @orm:Id
 	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="core_funcionalidades")
+	 * @assert:NotBlank(groups="CoreFuncionalidades")
 	 */
-	protected $IDFuncionalidad;
+	protected $Id;
 	/**
-	 * @orm:Column(type="integer")
-	 * @var entities\CoreModulos
+	 * @orm:Column(type="string")
+	 * @assert:NotBlank(groups="CoreFuncionalidades")
 	 */
-	protected $IDModulo;
+	protected $Codigo;
+	/**
+	 * @orm:Column(type="string")
+	 * @assert:NotBlank(groups="CoreFuncionalidades")
+	 */
+	protected $Titulo;
 	/**
 	 * @orm:Column(type="string")
 	 */
-	protected $Funcionalidades;
+	protected $Descripcion;
 	/**
-	 * @orm:Column(type="integer")
+	 * @orm:Column(type="tinyint")
+	 * @assert:NotBlank(groups="CoreFuncionalidades")
+	 * @var entities\ValoresSN
 	 */
-	protected $NumeroVisitas;
+	protected $EsEstandar = '0';
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string
@@ -38,12 +45,12 @@ class CoreFuncionalidadesEntity extends EntityComunes {
 	 * Nombre de la tabla física
 	 * @var string
 	 */
-	protected $_tableName = 'core_funcionalidades';
+	protected $_tableName = 'CoreFuncionalidades';
 	/**
 	 * Nombre de la PrimaryKey
 	 * @var string
 	 */
-	protected $_primaryKeyName = 'IDFuncionalidad';
+	protected $_primaryKeyName = 'Id';
 	/**
 	 * Relacion de entidades que dependen de esta
 	 * @var string
@@ -55,43 +62,51 @@ class CoreFuncionalidadesEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_childEntities = array(
-			'CoreModulos',
 			'ValoresSN',
 			'ValoresPrivacidad',
+			'ValoresDchaIzq',
+			'ValoresChangeFreq',
 		);
 	/**
 	 * GETTERS Y SETTERS
 	 */
-	public function setIDFuncionalidad($IDFuncionalidad){
-		$this->IDFuncionalidad = $IDFuncionalidad;
+	public function setId($Id){
+		$this->Id = $Id;
 	}
-	public function getIDFuncionalidad(){
-		return $this->IDFuncionalidad;
-	}
-
-	public function setIDModulo($IDModulo){
-		$this->IDModulo = $IDModulo;
-	}
-	public function getIDModulo(){
-		if (!($this->IDModulo instanceof CoreModulos))
-			$this->IDModulo = new CoreModulos($this->IDModulo);
-		return $this->IDModulo;
+	public function getId(){
+		return $this->Id;
 	}
 
-	public function setFuncionalidades($Funcionalidades){
-		$this->Funcionalidades = trim($Funcionalidades);
+	public function setCodigo($Codigo){
+		$this->Codigo = trim($Codigo);
 	}
-	public function getFuncionalidades(){
-		return $this->Funcionalidades;
-	}
-
-	public function setNumeroVisitas($NumeroVisitas){
-		$this->NumeroVisitas = $NumeroVisitas;
-	}
-	public function getNumeroVisitas(){
-		return $this->NumeroVisitas;
+	public function getCodigo(){
+		return $this->Codigo;
 	}
 
-} // END class core_funcionalidades
+	public function setTitulo($Titulo){
+		$this->Titulo = trim($Titulo);
+	}
+	public function getTitulo(){
+		return $this->Titulo;
+	}
+
+	public function setDescripcion($Descripcion){
+		$this->Descripcion = trim($Descripcion);
+	}
+	public function getDescripcion(){
+		return $this->Descripcion;
+	}
+
+	public function setEsEstandar($EsEstandar){
+		$this->EsEstandar = $EsEstandar;
+	}
+	public function getEsEstandar(){
+		if (!($this->EsEstandar instanceof ValoresSN))
+			$this->EsEstandar = new ValoresSN($this->EsEstandar);
+		return $this->EsEstandar;
+	}
+
+} // END class CoreFuncionalidades
 
 ?>

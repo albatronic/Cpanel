@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:36
+# @date 05.09.2012 08:17:43
 #
 ---
 CoreFuncionalidades:
@@ -13,36 +13,39 @@ CoreFuncionalidades:
   login_required: YES
   permission_control: YES
   favourite_control: NO
+  feature_list: YES
   help_file: help.html.twig
   title: CoreFuncionalidades
   id_video: corefuncionalidades
   url_video: null
   conection: 'cpanel'
   entity: CoreFuncionalidades
-  table: core_funcionalidades
-  primarykey: IDFuncionalidad
+  table: CoreFuncionalidades
+  primarykey: Id
   records_per_page: 15
   order_by:
     -
-      title: IDFuncionalidad a-z
-      criteria: IDFuncionalidad ASC
+      title: Id a-z
+      criteria: Id ASC
     -
-      title: IDFuncionalidad z-a
-      criteria: IDFuncionalidad DESC
-  search_default: IDFuncionalidad
+      title: Id z-a
+      criteria: Id DESC
+  search_default: Id
   referenced_entities:
-    -
-      entity: CoreModulos
     -
       entity: ValoresSN
     -
       entity: ValoresPrivacidad
-  fieldGeneratorUrlFriendly: IDModulo
-  fieldGeneratorMetatagTitle: IDModulo
+    -
+      entity: ValoresDchaIzq
+    -
+      entity: ValoresChangeFreq
+  fieldGeneratorUrlFriendly: Codigo
+  fieldGeneratorMetatagTitle: Codigo
   columns:
     -
-      title: IDFuncionalidad
-      field: IDFuncionalidad
+      title: Id
+      field: Id
       filter: NO
       list: NO
       form: YES
@@ -54,9 +57,9 @@ CoreFuncionalidades:
         link: null
       default: 
     -
-      title: IDModulo
-      field: IDModulo
-      filter: NO
+      title: Codigo
+      field: Codigo
+      filter: YES
       list: NO
       form: YES
       link:
@@ -66,25 +69,36 @@ CoreFuncionalidades:
         target: null
         link: null
       default: 
-      aditional_filter:
-        order: 1
-        caption: IDModulo
-        entity: CoreModulos
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
       validator:
-        nullable: YES
-        type: integer
-        length: 11
+        nullable: NO
+        type: string
+        length: 15
         min: null
         max: null
         message: Valor Requerido
     -
-      title: Funcionalidades
-      field: Funcionalidades
+      title: Titulo
+      field: Titulo
+      filter: YES
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 
+      validator:
+        nullable: NO
+        type: string
+        length: 100
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: Descripcion
+      field: Descripcion
       filter: YES
       list: NO
       form: YES
@@ -98,7 +112,36 @@ CoreFuncionalidades:
       validator:
         nullable: YES
         type: string
-        length: 255
+        length: 100
+        min: null
+        max: null
+        message: Valor Requerido
+    -
+      title: EsEstandar
+      field: EsEstandar
+      filter: NO
+      list: NO
+      form: YES
+      link:
+        route: null
+        param: null
+        title: null
+        target: null
+        link: null
+      default: 0
+      aditional_filter:
+        order: 1
+        caption: EsEstandar
+        entity: ValoresSN
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
+      validator:
+        nullable: NO
+        type: tinyint
+        length: 1
         min: null
         max: null
         message: Valor Requerido
@@ -145,7 +188,7 @@ CoreFuncionalidades:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -174,7 +217,7 @@ CoreFuncionalidades:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -203,7 +246,7 @@ CoreFuncionalidades:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -272,7 +315,7 @@ CoreFuncionalidades:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -290,9 +333,9 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default: 
+      default: 0
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -335,26 +378,6 @@ CoreFuncionalidades:
         nullable: YES
         type: string
         length: 250
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: NumeroVisitas
-      field: NumeroVisitas
-      filter: YES
-      list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: integer
-        length: 11
         min: null
         max: null
         message: Valor Requerido
@@ -441,7 +464,7 @@ CoreFuncionalidades:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -463,14 +486,14 @@ CoreFuncionalidades:
       aditional_filter:
         order: 7
         caption: MetatagTitlePosicion
-        entity: ValoresSN
+        entity: ValoresDchaIzq
         method: fetchAll
         params: Descripcion
         type: select
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -499,7 +522,7 @@ CoreFuncionalidades:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -517,7 +540,7 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default: 
+      default: 0,5
       validator:
         nullable: YES
         type: string
@@ -537,9 +560,18 @@ CoreFuncionalidades:
         title: null
         target: null
         link: null
-      default: 0
+      default: monthly
+      aditional_filter:
+        order: 9
+        caption: ChangeFreqMapaWeb
+        entity: ValoresChangeFreq
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 25
         min: null

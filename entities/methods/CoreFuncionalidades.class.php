@@ -2,15 +2,15 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 30.08.2012 18:13:36
+ * @date 04.09.2012 20:32:58
  */
 
 /**
- * @orm:Entity(core_funcionalidades)
+ * @orm:Entity(CoreFuncionalidades)
  */
 class CoreFuncionalidades extends CoreFuncionalidadesEntity {
 	public function __toString() {
-		return $this->getIDFuncionalidad();
+		return $this->getId();
 	}
 }
 ?>

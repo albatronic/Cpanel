@@ -1,0 +1,43 @@
+CoreFuncionalidades:
+  1: { Codigo: AC, Titulo: Acceder,       Descripcion: Permiso de Acceso, EsEstandar: 1}
+  2: { Codigo: IN, Titulo: Insertar,      Descripcion: Insertar nuevos valores, EsEstandar: 1}
+  3: { Codigo: UP, Titulo: Actualizar,    Descripcion: Actualizar información, EsEstandar: 1}
+  4: { Codigo: DE, Titulo: Borrar,        Descripcion: Eliminar información, EsEstandar: 1}
+  5: { Codigo: LI, Titulo: Listar,        Descripcion: Listado, EsEstandar: 1}
+  6: { Codigo: CO, Titulo: Consultar,     Descripcion: Consultar información, EsEstandar: 1}
+  7: { Codigo: EX, Titulo: Exportar,      Descripcion: Exportar datos, EsEstandar: 1}
+  8: { Codigo: VW, Titulo: Variables WEB, Descripcion: Variables WEB, EsEstandar: 1}
+
+CoreAplicaciones:
+  1: { CodigoApp: Index, NombreApp: Index }
+  2: { CodigoApp: Core, NombreApp: Aplicacion Core }
+  3: { CodigoApp: Enl,  NombreApp: Enlaces de Interes }
+  4: { CodigoApp: Auto,  NombreApp: Autoescuelas }
+
+CoreModulos:
+  1: { CodigoApp: Index, NombreModulo: Index,           Nivel: 0, PerteneceA: 0,    Publicar: 0, Titulo: Core, Funcionalidades: AC }
+  2: { CodigoApp: Core, NombreModulo: Core,             Nivel: 0, PerteneceA: 0,    Publicar: 0, Titulo: Core, Funcionalidades: AC }
+  3: { CodigoApp: Core, NombreModulo: CoreAplicaciones, Nivel: 1, PerteneceA: Core, Publicar: 0, Titulo: Gestión de Apps, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}
+  4: { CodigoApp: Core, NombreModulo: CoreImagenes,     Nivel: 1, PerteneceA: Core, Publicar: 0, Titulo: Gestión de Imágenes, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}
+
+  5: { CodigoApp: Enl,  NombreModulo: Enl,           Nivel: 0, PerteneceA: 0,    Publicar: 1, Titulo: Enl, Funcionalidades: AC }
+  6: { CodigoApp: Enl,  NombreModulo: EnlSecciones,  Nivel: 1, PerteneceA: Enl,  Publicar: 1, Titulo: Secciones, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}
+  7: { CodigoApp: Enl,  NombreModulo: EnlEnlaces,    Nivel: 1, PerteneceA: Enl,  Publicar: 1, Titulo: Enlaces, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}
+
+  8: { CodigoApp: Auto, NombreModulo: Auto,        Nivel: 0, PerteneceA: 0,    Publicar: 1, Titulo: Auto, Funcionalidades: AC }
+  9: { CodigoApp: Auto, NombreModulo: AutoAlumnos, Nivel: 1, PerteneceA: Auto,  Publicar: 1, Orden: 99, Titulo: Alumnos, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}
+  10: { CodigoApp: Auto, NombreModulo: AutoTest,    Nivel: 1, PerteneceA: Auto,  Publicar: 1, Orden: 100, Titulo: Test, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}
+
+CorePermisos:
+  1: { IdPerfil: 1, NombreModulo: Index, Funcionalidades: 'AC,VW' }
+
+  2: { IdPerfil: 1, NombreModulo: Core, Funcionalidades: 'AC,VW' }
+  3: { IdPerfil: 1, NombreModulo: CoreAplicaciones, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}
+
+  4: { IdPerfil: 1, NombreModulo: Enl, Funcionalidades: 'AC,VW' }
+  5: { IdPerfil: 1, NombreModulo: EnlSecciones, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}
+  6: { IdPerfil: 1, NombreModulo: EnlEnlaces, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}
+
+  7: { IdPerfil: 1, NombreModulo: Auto, Funcionalidades: 'AC,VW' }
+  8: { IdPerfil: 1, NombreModulo: AutoAlumnos, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}
+  9: { IdPerfil: 1, NombreModulo: AutoTest, Funcionalidades: <?php include '../cpanel/entities/schema/funcionalidadesDefecto.yml';?>}

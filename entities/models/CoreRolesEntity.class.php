@@ -2,22 +2,23 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 30.08.2012 18:13:36
+ * @date 05.09.2012 08:11:29
  */
 
 /**
- * @orm:Entity(core_roles)
+ * @orm:Entity(CoreRoles)
  */
 class CoreRolesEntity extends EntityComunes {
 	/**
 	 * @orm:GeneratedValue
 	 * @orm:Id
 	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="core_roles")
+	 * @assert:NotBlank(groups="CoreRoles")
 	 */
-	protected $IDRol;
+	protected $Id;
 	/**
 	 * @orm:Column(type="string")
+	 * @assert:NotBlank(groups="CoreRoles")
 	 */
 	protected $Rol;
 	/**
@@ -29,18 +30,18 @@ class CoreRolesEntity extends EntityComunes {
 	 * Nombre de la tabla física
 	 * @var string
 	 */
-	protected $_tableName = 'core_roles';
+	protected $_tableName = 'CoreRoles';
 	/**
 	 * Nombre de la PrimaryKey
 	 * @var string
 	 */
-	protected $_primaryKeyName = 'IDRol';
+	protected $_primaryKeyName = 'Id';
 	/**
 	 * Relacion de entidades que dependen de esta
 	 * @var string
 	 */
 	protected $_parentEntities = array(
-			array('SourceColumn' => 'IDRol', 'ParentEntity' => 'CoreUsuarios', 'ParentColumn' => 'IDRol'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'CoreUsuarios', 'ParentColumn' => 'IdRol'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende
@@ -55,11 +56,11 @@ class CoreRolesEntity extends EntityComunes {
 	/**
 	 * GETTERS Y SETTERS
 	 */
-	public function setIDRol($IDRol){
-		$this->IDRol = $IDRol;
+	public function setId($Id){
+		$this->Id = $Id;
 	}
-	public function getIDRol(){
-		return $this->IDRol;
+	public function getId(){
+		return $this->Id;
 	}
 
 	public function setRol($Rol){
@@ -69,6 +70,6 @@ class CoreRolesEntity extends EntityComunes {
 		return $this->Rol;
 	}
 
-} // END class core_roles
+} // END class CoreRoles
 
 ?>

@@ -74,6 +74,7 @@ class Controller {
         $this->values['titulo'] = $this->form->getTitle();
         $this->values['ayuda'] = $this->form->getHelpFile();
         $this->values['permisos'] = $this->permisos->getPermisos();
+        $this->values['enCurso'] = $this->values['permisos']['enCurso'];
         $this->values['tieneListado'] = $this->form->getTieneListado();
         $this->values['request'] = $this->request;
         $this->values['linkBy'] = array(
@@ -85,6 +86,10 @@ class Controller {
 
         $this->values['twigCss'] = $includesHead['twigCss'];
         $this->values['twigJs'] = $includesHead['twigJs'];
+
+        // VARIABLES WEB Y DE ENTORNO
+        //print_r($this->values['permisos']);
+
     }
 
     public function IndexAction() {

@@ -341,7 +341,7 @@ class Listado {
     /**
      * Genera un archivo pdf con el listado
      * @param array $parametros Array con los parámetros de configuración del listado
-     * @param string $aditionalFilter
+     * @param string $aditionalFilter Expresion/es booleana de filtro adicional
      * @return string $archivo El nombre completo (con la ruta) del archivo pdf generado
      */
     public function getPdf($parametros, $aditionalFilter = '') {
@@ -1027,9 +1027,10 @@ class listadoPDF extends FPDF {
         $this->Cell(0, 5, $empresa->getRazonSocial(), 0, 1, "R");
         $this->SetFont('Arial', '', 8);
         $this->Cell(0, 5, $sucursal->getNombre(), 0, 1, "R");
+        */
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(0, 5, $this->opciones['title'], 0, 1, "C");
-         */
+
 
         // Pintar la leyenda del filtro en la primera pagina
         if ($this->page == 1) {

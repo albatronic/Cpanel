@@ -7,9 +7,9 @@
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
         <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">General</a></li>
-        {% if datos.getPrimaryKeyValue %}
         <li class="ui-state-default ui-corner-top"><a href="#tabs-2">Fechas</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-3">Meta Información</a></li>
+        {% if datos.getPrimaryKeyValue %}
         <li class="ui-state-default ui-corner-top"><a href="#tabs-4" onclick="cargaImagenes('tabs-4');">Imágenes</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-5" onclick="cargaDocumentos('tabs-5');">Documentos</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-6">Auditoría</a></li>
@@ -29,7 +29,7 @@
         {{ macro.input('Número de Visitas','field_title','text',values.controller ~ '[NumeroVisitas]',values.controller ~ '_NumeroVisitas',datos.NumeroVisitas,'11','CampoImporte',113, 'disabled') }}
         {% endif %}
     </div>
-    {% if datos.getPrimaryKeyValue %}
+
     <div id="tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.fecha('Fecha Publicación','field_title',values.controller ~ '[FechaPublicacion]',values.controller ~ '_FechaPublicacion',datos.FechaPublicacion,'19','datepicker',111) }}
         {{ macro.fecha('Vigente Desde','field_title',values.controller ~ '[VigenteDesde]',values.controller ~ '_VigenteDesde',datos.VigenteDesde,'19','datepicker',104) }}
@@ -45,6 +45,7 @@
         {{ macro.input('Importancia en MapaWeb','field_title','text',values.controller ~ '[ImportanciaMapaWeb]',values.controller ~ '_ImportanciaMapaWeb',datos.ImportanciaMapaWeb,'5','CampoTextoCorto',120) }}
         {{ macro.select('ChangeFreq en MapaWeb','field_title',values.controller ~ '[ChangeFreqMapaWeb]',values.controller ~ '_ChangeFreqMapaWeb',none,datos.ChangeFreqMapaWeb.IDTipo,datos.ChangeFreqMapaWeb.fetchAll(0),'chzn-select',121) }}
     </div>
+    {% if datos.getPrimaryKeyValue %}
     <div id="tabs-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
 
     </div>

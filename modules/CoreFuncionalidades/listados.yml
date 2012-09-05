@@ -3,13 +3,13 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:36
+# @date 04.09.2012 20:32:58
 #
 ---
 listados:
   -
     title: CoreFuncionalidades
-    order_by: IDFuncionalidad ASC
+    order_by: id ASC
     break_field: null
     idPerfil: null
     orientation: P
@@ -19,29 +19,38 @@ listados:
     body_font: Courier, ,8
     columns:
       -
-        title: IDModulo
-        field: IDModulo
-        length: 11
-        align: R
-        type: integer
-        total: NO
-        formula: null
-        format: null
-      -
-        title: Funcionalidades
-        field: Funcionalidades
-        length: 255
+        title: Codigo
+        field: Codigo
+        length: 15
         align: L
         type: string
         total: NO
         formula: null
         format: null
       -
-        title: NumeroVisitas
-        field: NumeroVisitas
-        length: 11
-        align: R
-        type: integer
+        title: Titulo
+        field: Titulo
+        length: 100
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: Descripcion
+        field: Descripcion
+        length: 100
+        align: L
+        type: string
+        total: NO
+        formula: null
+        format: null
+      -
+        title: EsEstandar
+        field: EsEstandar
+        length: 1
+        align: L
+        type: tinyint
         total: NO
         formula: null
         format: null

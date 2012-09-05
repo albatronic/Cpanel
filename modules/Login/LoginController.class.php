@@ -15,7 +15,14 @@ class LoginController extends Controller {
 
     public function __construct($request) {
 
-        parent::__construct($request);
+        // Cargar lo que viene en el request
+        $this->request = $request;
+        // Cargar la configuracion del modulo (modules/moduloName/config.yml)
+        $this->form = new Form($this->entity);
+        $includesHead = $this->form->getNode('includesHead');
+
+        $this->values['twigCss'] = $includesHead['twigCss'];
+        $this->values['twigJs'] = $includesHead['twigJs'];
 
         unset($_SESSION['USER']);
 
@@ -63,9 +70,9 @@ class LoginController extends Controller {
 
                 $_SESSION['USER'] = array(
                     'user' => array(
-                        'id' => $usuario->getIDUsuario(),
+                        'id' => $usuario->getId(),
                         'nombre' => $usuario->getNombreApellidos(),
-                        'IDPerfil' => $usuario->getIDPerfil()->getIDPerfil(),
+                        'IDPerfil' => $usuario->getIDPerfil()->getId(),
                     ),
                 );
                 $_SESSION['projects'] = $this->values['projects'];
@@ -121,7 +128,7 @@ class LoginController extends Controller {
                 $usuario = $user->find("Login", $this->request['user']);
                 unset($user);
 
-                if ($usuario->getIDUsuario() != '') {
+                if ($usuario->getId() != '') {
                     $passw = new Password(6);
                     $nueva = $passw->genera();
                     unset($passw);

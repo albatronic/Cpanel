@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 01.09.2012 04:08:11
+# @date 05.09.2012 08:17:43
 #
 ---
 EnlEnlaces:
@@ -15,22 +15,28 @@ EnlEnlaces:
   favourite_control: NO
   feature_list: YES
   help_file: help.html.twig
-  title: EnlEnlaces
+  title: Enlaces
   id_video: enlenlaces
   url_video: null
-  conection: 'datos<?php echo $_SESSION['emp'];?>'
+  conection: 'cpanel'
   entity: EnlEnlaces
-  table: enl_enlaces
-  primarykey: IDEnlace
+  table: EnlEnlaces
+  primarykey: Id
   records_per_page: 15
   order_by:
     -
-      title: IDEnlace a-z
-      criteria: IDEnlace ASC
+      title: Titulo a-z
+      criteria: IdSeccion,Titulo ASC
     -
-      title: IDEnlace z-a
-      criteria: IDEnlace DESC
-  search_default: IDEnlace
+      title: Titulo z-a
+      criteria: IdSeccion,Titulo DESC
+    -
+      title: Orden a-z
+      criteria: IdSeccion,Orden ASC
+    -
+      title: Orden z-a
+      criteria: IdSeccion,Orden DESC
+  search_default: Titulo
   referenced_entities:
     -
       entity: EnlSecciones
@@ -42,12 +48,12 @@ EnlEnlaces:
       entity: ValoresDchaIzq
     -
       entity: ValoresChangeFreq
-  fieldGeneratorUrlFriendly: IDSeccion
-  fieldGeneratorMetatagTitle: IDSeccion
+  fieldGeneratorUrlFriendly: IdSeccion
+  fieldGeneratorMetatagTitle: IdSeccion
   columns:
     -
-      title: IDEnlace
-      field: IDEnlace
+      title: Id
+      field: Id
       filter: NO
       list: NO
       form: YES
@@ -59,10 +65,10 @@ EnlEnlaces:
         link: null
       default:
     -
-      title: IDSeccion
-      field: IDSeccion
+      title: IdSeccion
+      field: IdSeccion
       filter: NO
-      list: NO
+      list: YES
       form: YES
       link:
         route: null
@@ -73,10 +79,10 @@ EnlEnlaces:
       default:
       aditional_filter:
         order: 1
-        caption: IDSeccion
+        caption: Seccion
         entity: EnlSecciones
         method: fetchAll
-        params: Seccion
+        params: Titulo
         type: select
         operator: =
         event: null
@@ -91,7 +97,7 @@ EnlEnlaces:
       title: Titulo
       field: Titulo
       filter: YES
-      list: NO
+      list: YES
       form: YES
       link:
         route: null
@@ -422,7 +428,7 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default:
+      default: 0
       validator:
         nullable: YES
         type: integer
@@ -600,7 +606,7 @@ EnlEnlaces:
         title: null
         target: null
         link: null
-      default: 1
+      default: 0
       aditional_filter:
         order: 11
         caption: MostrarEnMapaWeb

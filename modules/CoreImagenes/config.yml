@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.08.2012 18:13:36
+# @date 05.09.2012 08:17:43
 #
 ---
 CoreImagenes:
@@ -13,13 +13,14 @@ CoreImagenes:
   login_required: YES
   permission_control: YES
   favourite_control: NO
+  feature_list: YES
   help_file: help.html.twig
   title: CoreImagenes
   id_video: coreimagenes
   url_video: null
   conection: 'cpanel'
   entity: CoreImagenes
-  table: core_imagenes
+  table: CoreImagenes
   primarykey: Id
   records_per_page: 15
   order_by:
@@ -33,6 +34,8 @@ CoreImagenes:
   referenced_entities:
     -
       entity: ValoresSN
+    -
+      entity: TiposMime
     -
       entity: ValoresPrivacidad
     -
@@ -69,9 +72,9 @@ CoreImagenes:
         link: null
       default: 
       validator:
-        nullable: YES
+        nullable: NO
         type: string
-        length: 50
+        length: 255
         min: null
         max: null
         message: Valor Requerido
@@ -89,7 +92,7 @@ CoreImagenes:
         link: null
       default: 
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -118,7 +121,7 @@ CoreImagenes:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -138,7 +141,7 @@ CoreImagenes:
         link: null
       default: 
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 255
         min: null
@@ -205,9 +208,9 @@ CoreImagenes:
         max: null
         message: Valor Requerido
     -
-      title: IDTipoMime
-      field: IDTipoMime
-      filter: YES
+      title: IdTipoMime
+      field: IdTipoMime
+      filter: NO
       list: NO
       form: YES
       link:
@@ -217,8 +220,17 @@ CoreImagenes:
         target: null
         link: null
       default: 
+      aditional_filter:
+        order: 2
+        caption: IdTipoMime
+        entity: TiposMime
+        method: fetchAll
+        params: Descripcion
+        type: select
+        operator: =
+        event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 10
         min: null
@@ -238,7 +250,7 @@ CoreImagenes:
         link: null
       default: 0
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -258,7 +270,7 @@ CoreImagenes:
         link: null
       default: 0
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -278,7 +290,7 @@ CoreImagenes:
         link: null
       default: 0
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -318,7 +330,7 @@ CoreImagenes:
         link: null
       default: 0
       aditional_filter:
-        order: 2
+        order: 3
         caption: EsPredeterminado
         entity: ValoresSN
         method: fetchAll
@@ -327,7 +339,7 @@ CoreImagenes:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -347,7 +359,7 @@ CoreImagenes:
         link: null
       default: 0
       aditional_filter:
-        order: 3
+        order: 4
         caption: Revisado
         entity: ValoresSN
         method: fetchAll
@@ -356,7 +368,7 @@ CoreImagenes:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -376,7 +388,7 @@ CoreImagenes:
         link: null
       default: 0
       aditional_filter:
-        order: 4
+        order: 5
         caption: Publicar
         entity: ValoresSN
         method: fetchAll
@@ -385,7 +397,7 @@ CoreImagenes:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -445,7 +457,7 @@ CoreImagenes:
         link: null
       default: 0
       aditional_filter:
-        order: 5
+        order: 6
         caption: Privacidad
         entity: ValoresPrivacidad
         method: fetchAll
@@ -454,7 +466,7 @@ CoreImagenes:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -472,9 +484,9 @@ CoreImagenes:
         title: null
         target: null
         link: null
-      default: 
+      default: 0
       validator:
-        nullable: YES
+        nullable: NO
         type: integer
         length: 11
         min: null
@@ -594,7 +606,7 @@ CoreImagenes:
         link: null
       default: 0
       aditional_filter:
-        order: 6
+        order: 7
         caption: MetatagTitleSimple
         entity: ValoresSN
         method: fetchAll
@@ -603,7 +615,7 @@ CoreImagenes:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -623,7 +635,7 @@ CoreImagenes:
         link: null
       default: 0
       aditional_filter:
-        order: 7
+        order: 8
         caption: MetatagTitlePosicion
         entity: ValoresDchaIzq
         method: fetchAll
@@ -632,7 +644,7 @@ CoreImagenes:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -650,9 +662,9 @@ CoreImagenes:
         title: null
         target: null
         link: null
-      default: 1
+      default: 0
       aditional_filter:
-        order: 8
+        order: 9
         caption: MostrarEnMapaWeb
         entity: ValoresSN
         method: fetchAll
@@ -661,7 +673,7 @@ CoreImagenes:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: tinyint
         length: 1
         min: null
@@ -701,7 +713,7 @@ CoreImagenes:
         link: null
       default: monthly
       aditional_filter:
-        order: 9
+        order: 10
         caption: ChangeFreqMapaWeb
         entity: ValoresChangeFreq
         method: fetchAll
@@ -710,7 +722,7 @@ CoreImagenes:
         operator: =
         event: null
       validator:
-        nullable: YES
+        nullable: NO
         type: string
         length: 25
         min: null

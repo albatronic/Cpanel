@@ -2,15 +2,15 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 30.08.2012 18:13:37
+ * @date 04.09.2012 20:32:59
  */
 
 /**
- * @orm:Entity(enl_secciones)
+ * @orm:Entity(EnlSecciones)
  */
 class EnlSecciones extends EnlSeccionesEntity {
 	public function __toString() {
-		return $this->getIDSeccion();
+		return $this->getTitulo();
 	}
 }
 ?>

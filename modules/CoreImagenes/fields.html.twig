@@ -4,17 +4,17 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 30.08.2012 18:13:36
+  date 04.09.2012 20:32:58
 #}
 
-{{ macro.input('Entidad','field_title','text',values.controller ~ '[Entidad]',values.controller ~ '_Entidad',datos.Entidad,'50','CampoTextoLargo','1') }}
+{{ macro.input('Entidad','field_title','text',values.controller ~ '[Entidad]',values.controller ~ '_Entidad',datos.Entidad,'255','CampoTextoLargo','1') }}
 {{ macro.input('IdEntidad','field_title','text',values.controller ~ '[IdEntidad]',values.controller ~ '_IdEntidad',datos.IdEntidad,'11','CampoImporte','2') }}
-{{ macro.select('EsGaleria','field_title',values.controller ~ '[EsGaleria]',values.controller ~ '_EsGaleria',none,datos.EsGaleria.EsGaleria,datos.EsGaleria.fetchAll(),'chzn-select','3')}}
+{{ macro.select('EsGaleria','field_title',values.controller ~ '[EsGaleria]',values.controller ~ '_EsGaleria',none,datos.EsGaleria.EsGaleria,datos.EsGaleria.fetchAll('IDTipo'),'Select','3')}}
 {{ macro.input('PathName','field_title','text',values.controller ~ '[PathName]',values.controller ~ '_PathName',datos.PathName,'255','CampoTextoLargo','4') }}
 {{ macro.input('TextoPie','field_title','text',values.controller ~ '[TextoPie]',values.controller ~ '_TextoPie',datos.TextoPie,'255','CampoTextoLargo','5') }}
 {{ macro.input('Title','field_title','text',values.controller ~ '[Title]',values.controller ~ '_Title',datos.Title,'255','CampoTextoLargo','6') }}
 {{ macro.input('Alt','field_title','text',values.controller ~ '[Alt]',values.controller ~ '_Alt',datos.Alt,'255','CampoTextoLargo','7') }}
-{{ macro.input('IDTipoMime','field_title','text',values.controller ~ '[IDTipoMime]',values.controller ~ '_IDTipoMime',datos.IDTipoMime,'10','CampoTextoCorto','8') }}
+{{ macro.select('IdTipoMime','field_title',values.controller ~ '[IdTipoMime]',values.controller ~ '_IdTipoMime',none,datos.IdTipoMime.IdTipoMime,datos.IdTipoMime.fetchAll('IDTipo'),'Select','8')}}
 {{ macro.input('Peso','field_title','text',values.controller ~ '[Peso]',values.controller ~ '_Peso',datos.Peso,'11','CampoImporte','9') }}
 {{ macro.input('Alto','field_title','text',values.controller ~ '[Alto]',values.controller ~ '_Alto',datos.Alto,'11','CampoImporte','10') }}
 {{ macro.input('Ancho','field_title','text',values.controller ~ '[Ancho]',values.controller ~ '_Ancho',datos.Ancho,'11','CampoImporte','11') }}

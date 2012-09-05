@@ -2,34 +2,39 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 30.08.2012 18:13:36
+ * @date 05.09.2012 08:11:29
  */
 
 /**
- * @orm:Entity(core_imagenes)
+ * @orm:Entity(CoreImagenes)
  */
 class CoreImagenesEntity extends EntityComunes {
 	/**
 	 * @orm:GeneratedValue
 	 * @orm:Id
 	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="core_imagenes")
+	 * @assert:NotBlank(groups="CoreImagenes")
 	 */
 	protected $Id;
 	/**
 	 * @orm:Column(type="string")
+	 * @assert:NotBlank(groups="CoreImagenes")
 	 */
 	protected $Entidad;
 	/**
 	 * @orm:Column(type="integer")
+	 * @assert:NotBlank(groups="CoreImagenes")
 	 */
 	protected $IdEntidad;
 	/**
 	 * @orm:Column(type="tinyint")
+	 * @assert:NotBlank(groups="CoreImagenes")
+	 * @var entities\ValoresSN
 	 */
 	protected $EsGaleria = '0';
 	/**
 	 * @orm:Column(type="string")
+	 * @assert:NotBlank(groups="CoreImagenes")
 	 */
 	protected $PathName;
 	/**
@@ -46,18 +51,22 @@ class CoreImagenesEntity extends EntityComunes {
 	protected $Alt;
 	/**
 	 * @orm:Column(type="string")
+	 * @var entities\TiposMime
 	 */
-	protected $IDTipoMime;
+	protected $IdTipoMime;
 	/**
 	 * @orm:Column(type="integer")
+	 * @assert:NotBlank(groups="CoreImagenes")
 	 */
 	protected $Peso = '0';
 	/**
 	 * @orm:Column(type="integer")
+	 * @assert:NotBlank(groups="CoreImagenes")
 	 */
 	protected $Alto = '0';
 	/**
 	 * @orm:Column(type="integer")
+	 * @assert:NotBlank(groups="CoreImagenes")
 	 */
 	protected $Ancho = '0';
 	/**
@@ -69,7 +78,7 @@ class CoreImagenesEntity extends EntityComunes {
 	 * Nombre de la tabla física
 	 * @var string
 	 */
-	protected $_tableName = 'core_imagenes';
+	protected $_tableName = 'CoreImagenes';
 	/**
 	 * Nombre de la PrimaryKey
 	 * @var string
@@ -87,6 +96,7 @@ class CoreImagenesEntity extends EntityComunes {
 	 */
 	protected $_childEntities = array(
 			'ValoresSN',
+			'TiposMime',
 			'ValoresPrivacidad',
 			'ValoresDchaIzq',
 			'ValoresChangeFreq',
@@ -152,11 +162,13 @@ class CoreImagenesEntity extends EntityComunes {
 		return $this->Alt;
 	}
 
-	public function setIDTipoMime($IDTipoMime){
-		$this->IDTipoMime = trim($IDTipoMime);
+	public function setIdTipoMime($IdTipoMime){
+		$this->IdTipoMime = trim($IdTipoMime);
 	}
-	public function getIDTipoMime(){
-		return $this->IDTipoMime;
+	public function getIdTipoMime(){
+		if (!($this->IdTipoMime instanceof TiposMime))
+			$this->IdTipoMime = new TiposMime($this->IdTipoMime);
+		return $this->IdTipoMime;
 	}
 
 	public function setPeso($Peso){
@@ -180,6 +192,6 @@ class CoreImagenesEntity extends EntityComunes {
 		return $this->Ancho;
 	}
 
-} // END class core_imagenes
+} // END class CoreImagenes
 
 ?>
