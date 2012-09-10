@@ -554,7 +554,6 @@ class Form {
         } else {
             // No existe el archivo de variables, por lo tanto cargo los atributos
             // en base al array de correspondencia de atributos predeterminados
-            echo '************************ no existe';
             foreach ($columnasConfig as $keyColumna => $valueColumna)
                 foreach (VariablesEnv::$varEnvMod as $keyVar => $keyColumnaConfig)
                     $atributos[$keyColumna][$keyVar] = $valueColumna[$keyColumnaConfig];

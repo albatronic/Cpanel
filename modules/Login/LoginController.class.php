@@ -61,6 +61,10 @@ class LoginController extends Controller {
      */
     public function LoginAction() {
 
+        $_SESSION['projects'] = $this->values['projects'];
+        $_SESSION['project'] = $this->values['projects'][$this->request['project']];
+        $_SESSION['project']['name'] = $this->request['project'];
+
         $user = new CoreUsuarios();
         $usuario = $user->find("Login", $this->request['user']);
         unset($user);
@@ -75,9 +79,6 @@ class LoginController extends Controller {
                         'IdPerfil' => $usuario->getIDPerfil()->getId(),
                     ),
                 );
-                $_SESSION['projects'] = $this->values['projects'];
-                $_SESSION['project'] = $this->values['projects'][$this->request['project']];
-                $_SESSION['project']['name'] = $this->request['project'];
 
                 //Actualizar el registro de entradas
                 $usuario->setNLogin($usuario->getNLogin() + 1);

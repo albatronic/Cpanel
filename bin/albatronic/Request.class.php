@@ -90,7 +90,7 @@ class Request {
 
     /**
      * Devuelve la url amigable
-     * 
+     *
      * @param string $appPath El path de la web
      * @return string La url amigable sin el dominio, sin el path de la web
      */
@@ -105,12 +105,12 @@ class Request {
 
     /**
      * Devuelve un array con los valores enviados por GET de la url amigable.
-     * 
+     *
      * IMPORTANTE:
      *   No se incluye en el array el path de la aplicación, solo lo parámetros.
-     * 
+     *
      *   Ej: en el caso http://www.demo.com/app/Erp/Clientes/edit/1
-     * 
+     *
      *   Si el path de la aplicacion es "app/Erp", los parametros que se
      *   devuelven son:
      *   array('Clientes','edit','1')
@@ -193,14 +193,14 @@ class Request {
 
     /**
      * Devuelve true si el navegador es antiguo
-     * 
-     *   Se consideran browsers antiguos los definidos en el array $this->oldBrowsers, 
+     *
+     *   Se consideran browsers antiguos los definidos en el array $this->oldBrowsers,
      *   actualmente son:
-     * 
+     *
      *   - MSIE 6
      *   - MSIE 7
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function isOldBrowser() {
 
@@ -215,6 +215,16 @@ class Request {
         return $isOld;
     }
 
+
+    /**
+     * Devuelve TRUE / FALSE dependiendo si estás en entorno
+     * de desarrollo o de producción respectivamente.
+     * 
+     * @return boolean TRUE si estás en entorno desarrollo
+     */
+    public function isDevelopment() {
+        return ( ($_SERVER['SERVER_NAME'] == 'localhost') or (substr($_SERVER['SERVER_NAME'],0,3) != 'www') );
+    }
 }
 
 ?>

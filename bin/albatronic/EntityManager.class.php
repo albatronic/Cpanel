@@ -68,16 +68,17 @@ class EntityManager {
 
             $params = $yaml['config']['conections'][$conection];
             $this->dbEngine = $params['dbEngine'];
-            if ($_SERVER['SERVER_NAME'] != 'localhost') {
-                $this->host = $params['host'];
-                $this->user = $params['user'];
-                $this->password = $params['password'];
-                $this->dataBase = $params['database'];
-            } else {
+
+            if ($_SESSION['EntornoDesarrollo']) {
                 $this->host = 'localhost';
                 $this->user = $conection;
                 $this->password = $conection;
                 $this->dataBase = $conection;
+            } else {
+                $this->host = $params['host'];
+                $this->user = $params['user'];
+                $this->password = $params['password'];
+                $this->dataBase = $params['database'];
             }
             $this->conecta();
         } else {
@@ -92,30 +93,29 @@ class EntityManager {
      * $this->error tendra el mensaje de error.
      */
     private function conecta() {
-        try {
-            switch ($this->dbEngine) {
-                case 'mysql':
-                    $this->dbLink = mysql_connect($this->getHost(), $this->getUser(), $this->getPassword());
-                    if (is_resource($this->dbLink))
-                        mysql_select_db($this->getDataBase(), $this->dbLink);
-                    break;
 
-                case 'mssql':
-                    $this->dbLink = mssql_connect($this->getHost(), $this->getUser(), $this->getPassword());
-                    if (is_resource($this->dbLink))
-                        mssql_select_db($this->getDataBase(), $this->dbLink);
-                    break;
+        switch ($this->dbEngine) {
+            case 'mysql':
+                $this->dbLink = @mysql_connect($this->getHost(), $this->getUser(), $this->getPassword());
+                if (is_resource($this->dbLink))
+                    mysql_select_db($this->getDataBase(), $this->dbLink);
+                break;
 
-                case 'interbase':
-                    $this->dbLink = ibase_connect($this->getHost(), $this->getUser(), $this->getPassword());
-                    break;
-                default:
-                    $this->error[] = "EntityManager [conecta]: Conexión no realizada. No se ha indicado el tipo de base de datos. " . mysql_errno() . " " . mysql_error();
-            }
-        } catch (Exception $ex) {
-            $this->error[] = "EntityManager [conecta]: No se pudo conectar " . $this->getHost() . ":" . $this->getDataBase() . "Error: " . $ex->message;
-            exit;
+            case 'mssql':
+                $this->dbLink = mssql_connect($this->getHost(), $this->getUser(), $this->getPassword());
+                if (is_resource($this->dbLink))
+                    mssql_select_db($this->getDataBase(), $this->dbLink);
+                break;
+
+            case 'interbase':
+                $this->dbLink = ibase_connect($this->getHost(), $this->getUser(), $this->getPassword());
+                break;
+            default:
+                $this->error[] = "EntityManager [conecta]: Conexión no realizada. No se ha indicado el tipo de base de datos. " . mysql_errno() . " " . mysql_error();
         }
+
+        if (!$this->dbLink)
+            $this->error[] = "EntityManager [conecta]: No se pudo conectar " . $this->getHost() . ":" . $this->getDataBase() . "Error: " . mysql_errno() . " " . mysql_error();
     }
 
     /**

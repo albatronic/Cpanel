@@ -29,7 +29,7 @@ class CoreUsuarios extends CoreUsuariosEntity {
 
         $menu = array();
 
-        $em = new EntityManager('cpanel');
+        $em = new EntityManager($_SESSION['project']['name']);
         if ($em->getDbLink()) {
             $query = "
                 select m.CodigoApp ,p.NombreModulo, p.Funcionalidades, m.Publish

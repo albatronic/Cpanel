@@ -157,8 +157,8 @@ class CoreVariablesController {
         }
 
         $template = $variables->getTemplate();
-
-        $this->values['tipo'] = $tipo;
+        
+        $this->values['tipo']   = $tipo;
         $this->values['ambito'] = $ambito;
         $this->values['nombre'] = $nombre;
         $this->values['titulo'] = $variables->getTitulo();

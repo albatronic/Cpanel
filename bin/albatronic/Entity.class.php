@@ -650,7 +650,11 @@ class Entity  {
      * @return string Nombre de la conexión
      */
     public function getConectionName() {
-        return str_replace("#", $_SESSION['emp'], $this->_conectionName);
+
+        $this->_conectionName = $_SESSION['project']['name'];
+        return $_SESSION['project']['name'];
+
+        //return str_replace("cpanel", $_SESSION['project']['name'], $this->_conectionName);
     }
 
     /**
