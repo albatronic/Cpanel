@@ -4,15 +4,14 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 04.09.2012 20:32:58
+  date 10.09.2012 12:31:10
 #}
 
-{{ macro.input('Título','field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
-{{ macro.input('Subtítulo','field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
-{{ macro.select('TipoSeccion','field_title',values.controller ~ '[TipoSeccion]',values.controller ~ '_TipoSeccion',none,datos.TipoSeccion.TipoSeccion,datos.TipoSeccion.fetchAll(0),'Select','3')}}
-{{ macro.input('Pertenece A','field_title','text',values.controller ~ '[PerteneceA]',values.controller ~ '_PerteneceA',datos.PerteneceA,'11','CampoImporte','4') }}
-{{ macro.input('Entidad','field_title','text',values.controller ~ '[Entidad]',values.controller ~ '_Entidad',datos.Entidad,'255','CampoTextoLargo','5') }}
-{{ macro.input('IdEntidad','field_title','text',values.controller ~ '[IdEntidad]',values.controller ~ '_IdEntidad',datos.IdEntidad,'11','CampoImporte','6') }}
+{{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
+{{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
+{{ macro.select(atributos.TipoSeccion,'field_title',values.controller ~ '[TipoSeccion]',values.controller ~ '_TipoSeccion',none,datos.TipoSeccion.TipoSeccion,datos.TipoSeccion.fetchAll('IDTipo'),'chzn-select','3')}}
+{{ macro.input(atributos.Entidad,'field_title','text',values.controller ~ '[Entidad]',values.controller ~ '_Entidad',datos.Entidad,'255','CampoTextoLargo','4') }}
+{{ macro.input(atributos.IdEntidad,'field_title','text',values.controller ~ '[IdEntidad]',values.controller ~ '_IdEntidad',datos.IdEntidad,'11','CampoImporte','5') }}
 
 {% include '_global/fieldsComunes.html.twig' %}
 

@@ -23,12 +23,16 @@
                 <input name="tipo" value="{{ values.tipo }}" type="hidden" />
                 <input name="ambito" value="{{ values.ambito }}" type="hidden" />
                 <input name="nombre" value="{{ values.nombre }}" type="hidden" />
-                <input name="archivoDatos" value="{{ values.archivoDatos}}" type="hidden" />
+                <input name="archivoDatos" value="{{ values.archivoDatos}}" type="text" readonly/>
 
 		{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
 		{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 
 		<ul>
+                    {% if values.templateComun != '' %}
+                        {% include values.templateComun with {'datos': values.datos }%}
+                    {% endif %}
+
                     {% block variables %}
                     {% endblock %}
 		</ul>

@@ -118,7 +118,7 @@ class Entity  {
         if (is_resource($this->_dbLink)) {
             // Auditoria
             $this->setModifiedAt(date('Y-m-d H:i:s'));
-            $this->setModifiedBy($_SESSION['USER']['user']['id']);
+            $this->setModifiedBy($_SESSION['USER']['user']['Id']);
 
             // Compongo los valores iterando el objeto
             $values = '';
@@ -157,10 +157,10 @@ class Entity  {
         if (is_resource($this->_dbLink)) {
             // Auditoria
             $this->setCreatedAt(date('Y-m-d H:i:s'));
-            $this->setCreatedBy($_SESSION['USER']['user']['id']);
-            $this->setFechaPublicacion(date('Y-m-d H:i:s'));
-            $this->setVigenteDesde($_SESSION['varEntorno']['VigenteDesde']);
-            $this->setVigenteHasta($_SESSION['varEntorno']['VigenteHasta']);
+            $this->setCreatedBy($_SESSION['USER']['user']['Id']);
+            $this->setPublishedAt(date('Y-m-d H:i:s'));
+            $this->setActiveTo($_SESSION['varEntorno']['VigenteDesde']);
+            $this->setActiveFrom($_SESSION['varEntorno']['VigenteHasta']);
 
             // Compongo las columnas y los valores iterando el objeto
             $columns = '';
@@ -186,7 +186,7 @@ class Entity  {
                 $lastId = $this->_em->getInsertId();
                 $this->setPrimaryKeyValue($lastId);
                 $this->setPrimaryKeyMD5(md5($lastId));
-                $this->setOrden($lastId);
+                $this->setOrder($lastId);
                 $this->save();
             }
 
@@ -213,7 +213,7 @@ class Entity  {
             if (is_resource($this->_dbLink)) {
                 // Auditoria
                 $this->setDeletedAt(date('Y-m-d H:i:s'));
-                $this->setDeletedBy($_SESSION['USER']['user']['id']);
+                $this->setDeletedBy($_SESSION['USER']['user']['Id']);
                 $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET `Deleted` = '1' WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
                 if (!$this->_em->query($query))
                     $this->_errores = $this->_em->getError();
@@ -278,6 +278,8 @@ class Entity  {
      * provienen del nodo <validator> del archivo config.yml
      * correspondiente al controller del objeto.
      *
+     * Si alguna columna no cumple la regla, le carga el valor por defecto
+     *
      * Tambien hace la validación lógica.
      *
      * Carga los array de errores y alertas si procede.
@@ -288,7 +290,12 @@ class Entity  {
     public function valida(array $rules) {
         unset($this->_errores);
 
+
         foreach ($rules as $key => $value) {
+
+            // Si no tiene valor, le pongo el de por defecto
+            if ($this->{$key} == '') $this->{$key} = $value['default'];
+
             switch ($value['type']) {
                 case 'string':
                     //Validar los items que no pueden ser nulos

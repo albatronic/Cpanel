@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 05.09.2012 08:11:29
+ * @date 08.09.2012 13:51:05
  */
 
 /**
@@ -10,40 +10,34 @@
  */
 class EnlSeccionesEntity extends EntityComunes {
 	/**
-	 * @orm:GeneratedValue
-	 * @orm:Id
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="EnlSecciones")
+	 * @orm GeneratedValue
+	 * @orm Id
+	 * @var integer
+	 * @assert NotBlank(groups="EnlSecciones")
 	 */
 	protected $Id;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="EnlSecciones")
+	 * @var string
+	 * @assert NotBlank(groups="EnlSecciones")
 	 */
 	protected $Titulo;
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $Subtitulo;
 	/**
-	 * @orm:Column(type="tinyint")
-	 * @assert:NotBlank(groups="EnlSecciones")
 	 * @var entities\TiposSeccionEnlacesInteres
+	 * @assert NotBlank(groups="EnlSecciones")
 	 */
 	protected $TipoSeccion = '0';
 	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="EnlSecciones")
-	 */
-	protected $PerteneceA;
-	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="EnlSecciones")
+	 * @var string
+	 * @assert NotBlank(groups="EnlSecciones")
 	 */
 	protected $Entidad;
 	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="EnlSecciones")
+	 * @var integer
+	 * @assert NotBlank(groups="EnlSecciones")
 	 */
 	protected $IdEntidad;
 	/**
@@ -67,7 +61,6 @@ class EnlSeccionesEntity extends EntityComunes {
 	 */
 	protected $_parentEntities = array(
 			array('SourceColumn' => 'Id', 'ParentEntity' => 'EnlEnlaces', 'ParentColumn' => 'IdSeccion'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'EnlSecciones', 'ParentColumn' => 'PerteneceA'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende
@@ -76,7 +69,7 @@ class EnlSeccionesEntity extends EntityComunes {
 	protected $_childEntities = array(
 			'TiposSeccionEnlacesInteres',
 			'ValoresSN',
-			'ValoresPrivacidad',
+			'ValoresPrivacy',
 			'ValoresDchaIzq',
 			'ValoresChangeFreq',
 		);
@@ -111,13 +104,6 @@ class EnlSeccionesEntity extends EntityComunes {
 		if (!($this->TipoSeccion instanceof TiposSeccionEnlacesInteres))
 			$this->TipoSeccion = new TiposSeccionEnlacesInteres($this->TipoSeccion);
 		return $this->TipoSeccion;
-	}
-
-	public function setPerteneceA($PerteneceA){
-		$this->PerteneceA = $PerteneceA;
-	}
-	public function getPerteneceA(){
-		return $this->PerteneceA;
 	}
 
 	public function setEntidad($Entidad){

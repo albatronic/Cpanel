@@ -3,45 +3,24 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 04.09.2012 20:32:58
+# @date 10.09.2012 12:31:09
 #
 ---
 listados:
   -
     title: CoreAplicaciones
-    order_by: id ASC
+    order_by: Id
     break_field: null
     idPerfil: null
     orientation: P
     unit: mm
     format: A4
-    margins: 10, 10, 15, 10
-    body_font: Courier, ,8
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
     columns:
-      -
-        title: CodigoApp
-        field: CodigoApp
-        length: 15
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: NombreApp
-        field: NombreApp
-        length: 100
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: Descripcion
-        field: Descripcion
-        length: 100
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
+      CodigoApp: { title: CodigoApp, length: '15', align: L, type: string, total: NO, formula: null, format: null }
+      NombreApp: { title: NombreApp, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Descripcion: { title: Descripcion, length: '100', align: L, type: string, total: NO, formula: null, format: null }

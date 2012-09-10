@@ -56,5 +56,24 @@
 }
 
 .projectsSelector {
+    width: 190px;
+}
+
+.formVariablesEnv {
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    position: absolute;
+    z-index: 99;
+    top: 2px;
+    right: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    background-color: #eee;
+    font-size: 11px;
+    border: 1px solid grey;
     width: 290px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
 }

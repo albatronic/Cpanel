@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 05.09.2012 08:11:29
+ * @date 08.09.2012 13:51:04
  */
 
 /**
@@ -10,15 +10,15 @@
  */
 class CoreRolesEntity extends EntityComunes {
 	/**
-	 * @orm:GeneratedValue
-	 * @orm:Id
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreRoles")
+	 * @orm GeneratedValue
+	 * @orm Id
+	 * @var integer
+	 * @assert NotBlank(groups="CoreRoles")
 	 */
 	protected $Id;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreRoles")
+	 * @var string
+	 * @assert NotBlank(groups="CoreRoles")
 	 */
 	protected $Rol;
 	/**
@@ -49,7 +49,7 @@ class CoreRolesEntity extends EntityComunes {
 	 */
 	protected $_childEntities = array(
 			'ValoresSN',
-			'ValoresPrivacidad',
+			'ValoresPrivacy',
 			'ValoresDchaIzq',
 			'ValoresChangeFreq',
 		);

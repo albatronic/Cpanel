@@ -23,6 +23,80 @@ $(function() {
     });
 });
 
+/**
+ * Oculta (si existe) el elemento html id
+ * @param id
+ * @return void
+ */
+function ocultarElemento(id) {
+
+    if ($('#'+id).length){
+        $('#'+id).css("display", "none");
+    }
+}
+
+/**
+ * Muestra (si existe) el elemento html id
+ * @param id
+ * @return void
+ */
+function mostrarElemento(id) {
+
+    if ($('#'+id).length){
+        $('#'+id).css("display", "block");
+    }
+}
+
+/**
+ * Muestra / Oculta en el elemento html idDiv (si existe)
+ * un formulario de mantenimiento de las variables de entorno
+ * del modulo y columna indicado en 'modulo_columna'
+ *
+ * En el parámetro 'modulo_columna' debe venir el nombre del módulo y el
+ * de la columna concatenados con guión bajo
+ *
+ * El formulario de mantenimiento se genera en base a la plantilla
+ * 'modules/_global/plantillaFormAjax.html.twig
+ *
+ * @param idDiv Id del elemento html a rellenar
+ * @param modulo_columna El nombre del modulo y de la columna concatenados con guión bajo
+ * @return void
+ */
+function switchVariablesEnv(idDiv, ambito, modulo_columna) {
+
+    var obj = document.getElementById(idDiv);
+    var elementos = modulo_columna.split("_");
+
+    var modulo = elementos[0];
+    var columna = elementos[1];
+
+    if(obj.style.display == 'block')
+        /* Mostrar el div */
+        obj.style.display = 'none'
+    else {
+        /* Mostrar el div */
+        obj.style.display = 'block';
+
+        /* Rellenar el div con ajax */
+        showFormVariablesEnv(idDiv, modulo, columna);
+    }
+}
+
+function showFormVariablesEnv(idDiv, modulo, columna) {
+    var url        = appPath + '/lib/formVariablesEnv.php';
+    var parametros = 'modulo='+modulo+'&columna='+columna;
+
+    // Coloco un gif "Cargando..." en la capa
+    $('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
+
+    jQuery('#'+idDiv).load(url, parametros);
+}
+
+/**
+ * Comprueba si un valor es numérico
+ * @param valor
+ * @return boolean
+ */
 function IsNumeric(valor){
 
     var log=valor.length;
@@ -42,6 +116,12 @@ function IsNumeric(valor){
     }
 }
 
+/**
+ * Recibe un string y lo intenta formatear como una fecha
+ * añadiéndolo las '/' de separación entre el día, mes y año
+ * @param fecha
+ * @return string fecha
+ */
 function formateafecha(fecha){
     var longitud = fecha.length;
     var dia;
@@ -138,6 +218,7 @@ function documentos(entidad, idEntidad, idDiv, tipo) {
  * Submitea el formulario pasado como parámetro
  *
  * @param string formulario El nombre del formulario a submitear
+ * @return void
  */
 function submitForm(formulario) {
     $('#'+formulario).submit();

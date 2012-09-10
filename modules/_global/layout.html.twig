@@ -4,12 +4,13 @@
 <html>
 
     <head>
-    	{% include "_global/metainformacion.html.twig" %}
+    	{% include "_global/metaInformacion.html.twig" %}
 	{% include values.twigCss %}
 
         <!-- Para que esté disponible el path de la app en todos los java scripts -->
         <script type="text/javascript">var appPath = "{{app.path}}";</script>
-
+        <link rel="shortcut icon" href="favicon.ico">
+        
 	{% include values.twigJs %}
     </head>
 

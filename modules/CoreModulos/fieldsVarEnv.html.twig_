@@ -1,0 +1,15 @@
+{#
+   FORMULARIO DE VARIALBES DE ENTORNO DEL MODULO
+
+   Module: CoreModulos
+   Document : modules/CoreModulos/fieldsVarEnv.html.twig
+
+   author: Sergio Pérez <sergio.perez@albatronic.com>
+   copyright: INFORMATICA ALBATRONIC SL
+   date 10.09.2012 12:31:09
+#}
+
+{% extends values.controller ~ '/form.html.twig' %}
+
+{% block variables %}
+{% endblock %}

@@ -32,11 +32,11 @@ class CoreUsuarios extends CoreUsuariosEntity {
         $em = new EntityManager('cpanel');
         if ($em->getDbLink()) {
             $query = "
-                select m.CodigoApp ,p.NombreModulo, p.Funcionalidades, m.Publicar
+                select m.CodigoApp ,p.NombreModulo, p.Funcionalidades, m.Publish
                 from CorePermisos as p, CoreModulos as m
                 where  m.NombreModulo = p.NombreModulo and
-                p.IDPerfil = '" . $this->IdPerfil . "'
-                order by p.NombreModulo,m.Orden ASC";
+                p.IdPerfil = '" . $this->IdPerfil . "'
+                order by p.NombreModulo,m.Order ASC";
             $em->query($query);
             $rows = $em->fetchResult();
             $em->desConecta();
@@ -55,7 +55,7 @@ class CoreUsuarios extends CoreUsuariosEntity {
                     'titulo' => $aplicacion->getNombreApp(),
                     'descripcion' => $aplicacion->getDescripcion(),
                     'funcinalidades' => $row['Funcionalidades'],
-                    'publicar' => $row['Publicar'],
+                    'publicar' => $row['Publish'],
                 );
                 unset($aplicacion);
 
@@ -69,7 +69,7 @@ class CoreUsuarios extends CoreUsuariosEntity {
                     'descripcion' => $modulo->getDescripcion(),
                     'funcinalidades' => $row['Funcionalidades'],
                     'controller' => $row['NombreModulo'],
-                    'publicar' => $row['Publicar'],
+                    'publicar' => $row['Publish'],
                 );
                 unset($modulo);
 

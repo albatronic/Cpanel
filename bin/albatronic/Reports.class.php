@@ -140,7 +140,7 @@ class Reports extends Controller {
         $formatos = array();
 
         if (is_array($this->reports['reports'])) {
-            $perfilUsuario = $_SESSION['USER']['user']['IDPerfil'];
+            $perfilUsuario = $_SESSION['USER']['user']['IdPerfil'];
             foreach ($this->reports['reports'] as $value) {
                 $perfiles = (string) $value['idPerfil'];
                 $arrayPerfiles = explode(',', $perfiles);

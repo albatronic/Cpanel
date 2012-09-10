@@ -46,7 +46,7 @@ class ControlAcceso {
 
     public function __construct($controller = '', $idPerfil = '') {
         if ($idPerfil == '') {
-            $this->idPerfil = $_SESSION['USER']['user']['IDPerfil'];
+            $this->idPerfil = $_SESSION['USER']['user']['IdPerfil'];
         } else {
             $this->idPerfil = $idPerfil;
         }
@@ -64,7 +64,7 @@ class ControlAcceso {
     private function load() {
 
         $permiso = new CorePermisos();
-        $rows = $permiso->cargaCondicion("Funcionalidades", "IDPerfil='{$this->idPerfil}' AND NombreModulo='{$this->controller}'");
+        $rows = $permiso->cargaCondicion("Funcionalidades", "IdPerfil='{$this->idPerfil}' AND NombreModulo='{$this->controller}'");
         unset($permiso);
 
         if ($rows[0]['Funcionalidades'] != '') {
@@ -99,11 +99,11 @@ class ControlAcceso {
     public function setPermisos($onOff) {
 
         $tiposFuncionalidad = new CoreFuncionalidades();
-        $rows = $tiposFuncionalidad->cargaCondicion("CodigoFuncionalidad");
+        $rows = $tiposFuncionalidad->cargaCondicion("Codigo");
         unset($tiposFuncionalidad);
 
         foreach ($rows as $row)
-            $this->setPermiso($row['CodigoFuncionalidad'], $onOff);
+            $this->setPermiso($row['Codigo'], $onOff);
     }
 
     /**

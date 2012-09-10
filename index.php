@@ -199,12 +199,15 @@ if (!file_exists($config['twig']['templates_folder'] . '/' . $result['template']
 }
 
 // Renderizo el template y los valores devueltos por el método
+$twig->addGlobal('user', new CoreUsuarios($_SESSION['USER']['user']['Id']));
+$twig->addGlobal('appPath', $app['path']);
+
 $twig->loadTemplate($result['template'])
         ->display(array(
             'values'  => $result['values'],
             'app'     => $app,
             'layout'  => '_global/layout.html.twig',
-            'user'    => new CoreUsuarios($_SESSION['USER']['user']['id']),
+            //'user'    => new CoreUsuarios($_SESSION['USER']['user']['Id']),
             'menu'    => $_SESSION['USER']['menu'],
             'projects'=> $_SESSION['projects'],
             'project' => $_SESSION['project'],

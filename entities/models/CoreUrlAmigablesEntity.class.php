@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 05.09.2012 08:11:29
+ * @date 08.09.2012 13:51:05
  */
 
 /**
@@ -10,45 +10,40 @@
  */
 class CoreUrlAmigablesEntity extends EntityComunes {
 	/**
-	 * @orm:GeneratedValue
-	 * @orm:Id
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreUrlAmigables")
+	 * @orm GeneratedValue
+	 * @orm Id
+	 * @var integer
+	 * @assert NotBlank(groups="CoreUrlAmigables")
 	 */
 	protected $Id;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreUrlAmigables")
+	 * @var string
+	 * @assert NotBlank(groups="CoreUrlAmigables")
 	 */
 	protected $Controller;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreUrlAmigables")
+	 * @var string
+	 * @assert NotBlank(groups="CoreUrlAmigables")
 	 */
 	protected $Action;
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $Template;
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $Parametros;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreUrlAmigables")
+	 * @var string
+	 * @assert NotBlank(groups="CoreUrlAmigables")
 	 */
 	protected $Entidad;
 	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreUrlAmigables")
+	 * @var integer
+	 * @assert NotBlank(groups="CoreUrlAmigables")
 	 */
 	protected $IdEntidad;
-	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreUrlAmigables")
-	 */
-	protected $NumeroVisitas = '0';
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string
@@ -76,7 +71,7 @@ class CoreUrlAmigablesEntity extends EntityComunes {
 	 */
 	protected $_childEntities = array(
 			'ValoresSN',
-			'ValoresPrivacidad',
+			'ValoresPrivacy',
 			'ValoresDchaIzq',
 			'ValoresChangeFreq',
 		);
@@ -130,13 +125,6 @@ class CoreUrlAmigablesEntity extends EntityComunes {
 	}
 	public function getIdEntidad(){
 		return $this->IdEntidad;
-	}
-
-	public function setNumeroVisitas($NumeroVisitas){
-		$this->NumeroVisitas = $NumeroVisitas;
-	}
-	public function getNumeroVisitas(){
-		return $this->NumeroVisitas;
 	}
 
 } // END class CoreUrlAmigables

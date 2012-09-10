@@ -12,6 +12,40 @@ class IndexController extends Controller {
 
     protected $entity = "Index";
 
+    public function __construct($request) {
+
+        // Cargar lo que viene en el request
+        $this->request = $request;
+
+        // Cargar la configuracion del modulo (modules/moduloName/config.yml)
+        $this->form = new Form($this->entity);
+
+        // Cargar los permisos.
+        // Si la entidad no está sujeta a control de permisos, se habilitan todos
+        if ($this->form->getPermissionControl()) {
+            if ($this->parentEntity == '')
+                $this->permisos = new ControlAcceso($this->entity);
+            else
+                $this->permisos = new ControlAcceso($this->parentEntity);
+        } else
+            $this->permisos = new ControlAcceso();
+
+        $this->values['titulo'] = $this->form->getTitle();
+        $this->values['ayuda'] = $this->form->getHelpFile();
+        $this->values['permisos'] = $this->permisos->getPermisos();
+        $this->values['enCurso'] = $this->values['permisos']['enCurso'];
+        $this->values['request'] = $this->request;
+
+        $includesHead = $this->form->getIncludesHead();
+
+        $this->values['twigCss'] = $includesHead['twigCss'];
+        $this->values['twigJs'] = $includesHead['twigJs'];
+
+        // VARIABLES WEB Y DE ENTORNO
+        //print_r($this->values['permisos']);
+
+    }
+
     /**
      * Crea la variable de sesion $_SESSION['USER']['menu']
      *
@@ -23,6 +57,7 @@ class IndexController extends Controller {
 
         if ($aplicacion != '') {
             // Ha seleccionado una app, hay que mostrar sus modulos públicos (Publicar = 1)
+            $this->values['enCurso']['app'] = $aplicacion;
             $this->values['titulo'] = $_SESSION['USER']['menu'][$aplicacion]['titulo'];
             $this->values['menu']['tipo'] = "modulos";
             $this->values['menu']['perteneceA'] = $aplicacion;
@@ -41,6 +76,10 @@ class IndexController extends Controller {
                     );
                 }
         }
+
+        $this->values['permisos'] = array(
+            'VW' => true,
+        );
 
         return array(
             'template' => $this->entity . '/index.html.twig',

@@ -7,150 +7,216 @@
  *
  * @date 03-08-2012
  * @author Sergio Perez <sergio.perez@albatronic.com>
+ * @copyright (c) Informática ALBATRONIC, SL
  */
 class EntityComunes extends Entity {
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var text
      */
-    protected $Observaciones;
+    protected $Observations;
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var string(100)
      */
     protected $PrimaryKeyMD5;
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
-    protected $EsPredeterminado = '0';
+    protected $IsDefault = '0';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
-    protected $Revisado = '0';
+    protected $Checked = '0';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
-    protected $Publicar = '0';
+    protected $Publish = '0';
 
     /**
-     * @orm:Column(type="datetime")
+     * @orm Column(type="int")
+     * @var integer(11)
      */
-    protected $VigenteDesde;
+    protected $BelongsTo = '0';
 
     /**
-     * @orm:Column(type="datetime")
-     */
-    protected $VigenteHasta;
-
-    /**
-     * @orm:Column(type="integer")
+     * @orm Column(type="integer")
      * @var entities\CoreUsuarios
      */
     protected $CreatedBy = '0';
 
     /**
-     * @orm:Column(type="datetime")
-     * @assert:NotBlank(groups="cursos")
+     * @orm Column(type="datetime")
+     * @assert:NotBlank
+     * @var datetime
      */
     protected $CreatedAt = '0000-00-00 00:00:00';
 
     /**
-     * @orm:Column(type="integer")
+     * @orm Column(type="integer")
      * @var entities\CoreUsuarios
      */
     protected $ModifiedBy = '0';
 
     /**
-     * @orm:Column(type="datetime")
-     * @assert:NotBlank(groups="cursos")
+     * @orm Column(type="datetime")
+     * @assert:NotBlank
+     * @var datetime
      */
     protected $ModifiedAt = '0000-00-00 00:00:00';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
     protected $Deleted = '0';
 
     /**
-     * @orm:Column(type="integer")
+     * @orm Column(type="integer")
      * @var entities\CoreUsuarios
      */
     protected $DeletedBy = '0';
 
     /**
-     * @orm:Column(type="datetime")
+     * @orm Column(type="datetime")
+     * @var datetime
      */
     protected $DeletedAt = '0000-00-00 00:00:00';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresPrivacy
      */
-    protected $Privacidad = '0';
+    protected $Privacy = '0';
 
     /**
-     * @orm:Column(type="integer")
+     * @orm Column(type="integer")
+     * @var integer(11)
      */
-    protected $Orden;
+    protected $Order = '0';
 
     /**
-     * @orm:Column(type="datetime")
+     * @orm Column(type="datetime")
+     * @var datetime
      */
-    protected $FechaPublicacion;
+    protected $PublishedAt = '0000-00-00 00:00:00';
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="datetime")
+     * @var datetime
      */
-    protected $UrlAmigable;
+    protected $ActiveFrom = '0000-00-00 00:00:00';
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="datetime")
+     * @var datetime
+     */
+    protected $ActiveTo = '0000-00-00 00:00:00';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
+     */
+    protected $UrlPrefix;
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $LockUrlPrefix = '0';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
+     */
+    protected $Slug;
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $LockSlug = '0';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
+     */
+    protected $UrlFriendly;
+
+    /**
+     * @orm Column(type="string")
+     * @var entities\ValoresSN
+     */
+    protected $UrlHeritable;
+
+    /**
+     * @orm Column(type="integer")
+     * @var integer(11)
+     */
+    protected $NumberVisits = '0';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
      */
     protected $MetatagTitle;
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var string(255)
      */
     protected $MetatagKeywords;
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var string(255)
      */
     protected $MetatagDescription;
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
     protected $MetatagTitleSimple = '0';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresDchaIzq
      */
-    protected $MetatagTitlePosicion = '0';
+    protected $MetatagTitlePosition = '0';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
-    protected $MostrarEnMapaWeb = '0';
+    protected $ShowOnSitemap = '0';
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var string(5)
      */
-    protected $ImportanciaMapaWeb;
+    protected $ImportanceSitemap = '0,5';
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var entities\ValoresChangeFreq
      */
-    protected $ChangeFreqMapaWeb = '';
+    protected $ChangeFreqSitemap = 'monthly';
 
-    public function setObservaciones($Observaciones) {
-        $this->Observaciones = trim($Observaciones);
+    public function setObservations($Observations) {
+        $this->Observations = trim($Observations);
     }
 
-    public function getObservaciones() {
-        return $this->Observaciones;
+    public function getObservations() {
+        return $this->Observations;
     }
 
     public function setPrimaryKeyMD5($PrimaryKeyMD5) {
@@ -161,60 +227,42 @@ class EntityComunes extends Entity {
         return $this->PrimaryKeyMD5;
     }
 
-    public function setEsPredeterminado($EsPredeterminado) {
-        $this->EsPredeterminado = $EsPredeterminado;
+    public function setIsDefault($IsDefault) {
+        $this->IsDefault = $IsDefault;
     }
 
-    public function getEsPredeterminado() {
-        if (!($this->EsPredeterminado instanceof ValoresSN))
-            $this->EsPredeterminado = new ValoresSN($this->EsPredeterminado);
-        return $this->EsPredeterminado;
+    public function getIsDefault() {
+        if (!($this->IsDefault instanceof ValoresSN))
+            $this->IsDefault = new ValoresSN($this->IsDefault);
+        return $this->IsDefault;
     }
 
-    public function setRevisado($Revisado) {
-        $this->Revisado = $Revisado;
+    public function setChecked($Checked) {
+        $this->Checked = $Checked;
     }
 
-    public function getRevisado() {
-        if (!($this->Revisado instanceof ValoresSN))
-            $this->Revisado = new ValoresSN($this->Revisado);
-        return $this->Revisado;
+    public function getChecked() {
+        if (!($this->Checked instanceof ValoresSN))
+            $this->Checked = new ValoresSN($this->Checked);
+        return $this->Checked;
     }
 
-    public function setPublicar($Publicar) {
-        $this->Publicar = $Publicar;
+    public function setPublish($Publish) {
+        $this->Publish = $Publish;
     }
 
-    public function getPublicar() {
-        if (!($this->Publicar instanceof ValoresSN))
-            $this->Publicar = new ValoresSN($this->Publicar);
-        return $this->Publicar;
+    public function getPublish() {
+        if (!($this->Publish instanceof ValoresSN))
+            $this->Publish = new ValoresSN($this->Publish);
+        return $this->Publish;
     }
 
-    public function setVigenteDesde($VigenteDesde) {
-        $date = new Fecha($VigenteDesde);
-        $this->VigenteDesde = $date->getFechaTime();
-        unset($date);
+    public function setBelongsTo($BelongsTo) {
+        $this->BelongsTo = $BelongsTo;
     }
 
-    public function getVigenteDesde() {
-        $date = new Fecha($this->VigenteDesde);
-        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
-        unset($date);
-        return $ddmmaaaahhmmss;
-    }
-
-    public function setVigenteHasta($VigenteHasta) {
-        $date = new Fecha($VigenteHasta);
-        $this->VigenteHasta = $date->getFechaTime();
-        unset($date);
-    }
-
-    public function getVigenteHasta() {
-        $date = new Fecha($this->VigenteHasta);
-        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
-        unset($date);
-        return $ddmmaaaahhmmss;
+    public function getBelongsTo() {
+        return $this->BelongsTo;
     }
 
     public function setCreatedBy($CreateBy) {
@@ -281,43 +329,132 @@ class EntityComunes extends Entity {
         return $this->DeletedAt;
     }
 
-    public function setPrivacidad($Privacidad) {
-        $this->Privacidad = $Privacidad;
+    public function setPrivacy($Privacy) {
+        $this->Privacy = $Privacy;
     }
 
-    public function getPrivacidad() {
-        if (!($this->Privacidad instanceof ValoresPrivacidad))
-            $this->Privacidad = new ValoresPrivacidad($this->Privacidad);
-        return $this->Privacidad;
+    public function getPrivacy() {
+        if (!($this->Privacy instanceof ValoresPrivacy))
+            $this->Privacy = new ValoresPrivacy($this->Privacy);
+        return $this->Privacy;
     }
 
-    public function setOrden($Orden) {
-        $this->Orden = $Orden;
+    public function setOrder($Order) {
+        $this->Order = $Order;
     }
 
-    public function getOrden() {
-        return $this->Orden;
+    public function getOrder() {
+        return $this->Order;
     }
 
-    public function setFechaPublicacion($FechaPublicacion) {
-        $date = new Fecha($FechaPublicacion);
-        $this->FechaPublicacion = $date->getFechaTime();
+    public function setPublishedAt($PublishedAt) {
+        $date = new Fecha($PublishedAt);
+        $this->PublishedAt = $date->getFechaTime();
         unset($date);
     }
 
-    public function getFechaPublicacion() {
-        $date = new Fecha($this->FechaPublicacion);
+    public function getPublishedAt() {
+        $date = new Fecha($this->PublishedAt);
         $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
         unset($date);
         return $ddmmaaaahhmmss;
     }
 
-    public function setUrlAmigable($UrlAmigable) {
-        $this->UrlAmigable = trim($UrlAmigable);
+    public function setActiveFrom($ActiveFrom) {
+        $date = new Fecha($ActiveFrom);
+        $this->ActiveFrom = $date->getFechaTime();
+        unset($date);
     }
 
-    public function getUrlAmigable() {
-        return $this->UrlAmigable;
+    public function getActiveFrom() {
+        $date = new Fecha($this->ActiveFrom);
+        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
+        unset($date);
+        return $ddmmaaaahhmmss;
+    }
+
+    public function setActiveTo($ActiveTo) {
+        $date = new Fecha($ActiveTo);
+        $this->ActiveTo = $date->getFechaTime();
+        unset($date);
+    }
+
+    public function getActiveTo() {
+        $date = new Fecha($this->ActiveTo);
+        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
+        unset($date);
+        return $ddmmaaaahhmmss;
+    }
+
+    public function setUrlPrefix($UrlPrefix) {
+        $this->UrlPrefix = trim($UrlPrefix);
+    }
+
+    public function getUrlPrefix() {
+        return $this->UrlPrefix;
+    }
+
+    public function setLockUrlPrefix($LockUrlPrefix) {
+        $this->LockUrlPrefix = $LockUrlPrefix;
+    }
+
+    public function getLockUrlPrefix() {
+        if (!($this->LockUrlPrefix instanceof ValoresSN))
+            $this->LockUrlPrefix = new ValoresSN($this->LockUrlPrefix);
+        return $this->LockUrlPrefix;
+    }
+
+    public function setSlug($Slug) {
+        $this->Slug = trim($Slug);
+    }
+
+    public function getSlug() {
+        return $this->Slug;
+    }
+
+    public function setLockSlug($LockSlug) {
+        $this->LockSlug = $LockSlug;
+    }
+
+    public function getLockSlug() {
+        if (!($this->LockSlug instanceof ValoresSN))
+            $this->LockSlug = new ValoresSN($this->LockSlug);
+        return $this->LockSlug;
+    }
+
+    public function setUrlFriendly($UrlFriendly) {
+        $this->UrlFriendly = trim($UrlFriendly);
+    }
+
+    public function getUrlFriendly() {
+        return $this->UrlFriendly;
+    }
+
+    public function setUrlHeritable($UrlHeritable) {
+        $this->UrlHeritable = $UrlHeritable;
+    }
+
+    public function getUrlHeritable() {
+        if (!($this->UrlHeritable instanceof ValoresSN))
+            $this->UrlHeritable = new ValoresSN($this->UrlHeritable);
+        return $this->UrlHeritable;
+    }
+
+    public function setNumberVisits($NumberVisits) {
+        $this->NumberVisits = $NumberVisits;
+    }
+
+    /**
+     * Devuelve el número de visitas que ha tenido este objeto
+     * El valor está en la entidad CoreUrlFriendlys
+     *
+     * @return integer El número de visitas
+     */
+    public function getNumberVisits() {
+        $url = new CoreUrlAmigables();
+        $rows = $url->cargaCondicion("NumberVisits", "Entidad='{$this->getClassName()}' AND IdEntidad='{$this->getPrimaryKeyValue()}'");
+        unset($url);
+        return $rows[0]['NumberVisits'];
     }
 
     public function setMetatagTitle($MetatagTitle) {
@@ -354,59 +491,42 @@ class EntityComunes extends Entity {
         return $this->MetatagTitleSimple;
     }
 
-    public function setMetatagTitlePosicion($MetatagTitlePosicion) {
-        $this->MetatagTitlePosicion = $MetatagTitlePosicion;
+    public function setMetatagTitlePosition($MetatagTitlePosition) {
+        $this->MetatagTitlePosition = $MetatagTitlePosition;
     }
 
-    public function getMetatagTitlePosicion() {
-        if (!($this->MetatagTitlePosicion instanceof ValoresDchaIzq))
-            $this->MetatagTitlePosicion = new ValoresDchaIzq($this->MetatagTitlePosicion);
-        return $this->MetatagTitlePosicion;
+    public function getMetatagTitlePosition() {
+        if (!($this->MetatagTitlePosition instanceof ValoresDchaIzq))
+            $this->MetatagTitlePosition = new ValoresDchaIzq($this->MetatagTitlePosition);
+        return $this->MetatagTitlePosition;
     }
 
-    public function setMostrarEnMapaWeb($MostrarEnMapaWeb) {
-        $this->MostrarEnMapaWeb = $MostrarEnMapaWeb;
+    public function setShowOnSitemap($ShowOnSitemap) {
+        $this->ShowOnSitemap = $ShowOnSitemap;
     }
 
-    public function getMostrarEnMapaWeb() {
-        if (!($this->MostrarEnMapaWeb instanceof ValoresSN))
-            $this->MostrarEnMapaWeb = new ValoresSN($this->MostrarEnMapaWeb);
-        return $this->MostrarEnMapaWeb;
+    public function getShowOnSitemap() {
+        if (!($this->ShowOnSitemap instanceof ValoresSN))
+            $this->ShowOnSitemap = new ValoresSN($this->ShowOnSitemap);
+        return $this->ShowOnSitemap;
     }
 
-    public function setImportanciaMapaWeb($ImportanciaMapaWeb) {
-        $this->ImportanciaMapaWeb = trim($ImportanciaMapaWeb);
+    public function setImportanceSitemap($ImportanceSitemap) {
+        $this->ImportanceSitemap = trim($ImportanceSitemap);
     }
 
-    public function getImportanciaMapaWeb() {
-        return $this->ImportanciaMapaWeb;
+    public function getImportanceSitemap() {
+        return $this->ImportanceSitemap;
     }
 
-    public function setChangeFreqMapaWeb($ChangeFreqMapaWeb) {
-        $this->ChangeFreqMapaWeb = trim($ChangeFreqMapaWeb);
+    public function setChangeFreqSitemap($ChangeFreqSitemap) {
+        $this->ChangeFreqSitemap = $ChangeFreqSitemap;
     }
 
-    public function getChangeFreqMapaWeb() {
-        if (!($this->ChangeFreqMapaWeb instanceof ValoresChangeFreq))
-            $this->ChangeFreqMapaWeb = new ValoresChangeFreq($this->ChangeFreqMapaWeb);
-        return $this->ChangeFreqMapaWeb;
-    }
-
-    public function setNumeroVisitas() {
-
-    }
-
-    /**
-     * Devuelve el número de visitas que ha tenido este objeto
-     * El valor está en la entidad CoreUrlAmigables
-     *
-     * @return integer El número de visitas
-     */
-    public function getNumeroVisitas() {
-        $url = new CoreUrlAmigables();
-        $rows = $url->cargaCondicion("NumeroVisitas", "Entidad='{$this->getClassName()}' AND IdEntidad='{$this->getPrimaryKeyValue()}'");
-        unset($url);
-        return $rows[0]['NumeroVisitas'];
+    public function getChangeFreqSitemap() {
+        if (!($this->ChangeFreqSitemap instanceof ValoresChangeFreq))
+            $this->ChangeFreqSitemap = new ValoresChangeFreq($this->ChangeFreqSitemap);
+        return $this->ChangeFreqSitemap;
     }
 
 }

@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 05.09.2012 08:11:29
+ * @date 08.09.2012 13:51:04
  */
 
 /**
@@ -10,63 +10,61 @@
  */
 class CoreImagenesEntity extends EntityComunes {
 	/**
-	 * @orm:GeneratedValue
-	 * @orm:Id
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreImagenes")
+	 * @orm GeneratedValue
+	 * @orm Id
+	 * @var integer
+	 * @assert NotBlank(groups="CoreImagenes")
 	 */
 	protected $Id;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreImagenes")
+	 * @var string
+	 * @assert NotBlank(groups="CoreImagenes")
 	 */
 	protected $Entidad;
 	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreImagenes")
+	 * @var integer
+	 * @assert NotBlank(groups="CoreImagenes")
 	 */
 	protected $IdEntidad;
 	/**
-	 * @orm:Column(type="tinyint")
-	 * @assert:NotBlank(groups="CoreImagenes")
 	 * @var entities\ValoresSN
+	 * @assert NotBlank(groups="CoreImagenes")
 	 */
 	protected $EsGaleria = '0';
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreImagenes")
+	 * @var string
+	 * @assert NotBlank(groups="CoreImagenes")
 	 */
 	protected $PathName;
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $TextoPie;
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $Title;
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $Alt;
 	/**
-	 * @orm:Column(type="string")
 	 * @var entities\TiposMime
 	 */
 	protected $IdTipoMime;
 	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreImagenes")
+	 * @var integer
+	 * @assert NotBlank(groups="CoreImagenes")
 	 */
 	protected $Peso = '0';
 	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreImagenes")
+	 * @var integer
+	 * @assert NotBlank(groups="CoreImagenes")
 	 */
 	protected $Alto = '0';
 	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreImagenes")
+	 * @var integer
+	 * @assert NotBlank(groups="CoreImagenes")
 	 */
 	protected $Ancho = '0';
 	/**
@@ -97,7 +95,7 @@ class CoreImagenesEntity extends EntityComunes {
 	protected $_childEntities = array(
 			'ValoresSN',
 			'TiposMime',
-			'ValoresPrivacidad',
+			'ValoresPrivacy',
 			'ValoresDchaIzq',
 			'ValoresChangeFreq',
 		);

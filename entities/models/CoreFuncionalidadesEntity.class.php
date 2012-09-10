@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 05.09.2012 08:11:29
+ * @date 08.09.2012 13:51:04
  */
 
 /**
@@ -10,30 +10,29 @@
  */
 class CoreFuncionalidadesEntity extends EntityComunes {
 	/**
-	 * @orm:GeneratedValue
-	 * @orm:Id
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreFuncionalidades")
+	 * @orm GeneratedValue
+	 * @orm Id
+	 * @var integer
+	 * @assert NotBlank(groups="CoreFuncionalidades")
 	 */
 	protected $Id;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreFuncionalidades")
+	 * @var string
+	 * @assert NotBlank(groups="CoreFuncionalidades")
 	 */
 	protected $Codigo;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreFuncionalidades")
+	 * @var string
+	 * @assert NotBlank(groups="CoreFuncionalidades")
 	 */
 	protected $Titulo;
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $Descripcion;
 	/**
-	 * @orm:Column(type="tinyint")
-	 * @assert:NotBlank(groups="CoreFuncionalidades")
 	 * @var entities\ValoresSN
+	 * @assert NotBlank(groups="CoreFuncionalidades")
 	 */
 	protected $EsEstandar = '0';
 	/**
@@ -63,7 +62,7 @@ class CoreFuncionalidadesEntity extends EntityComunes {
 	 */
 	protected $_childEntities = array(
 			'ValoresSN',
-			'ValoresPrivacidad',
+			'ValoresPrivacy',
 			'ValoresDchaIzq',
 			'ValoresChangeFreq',
 		);

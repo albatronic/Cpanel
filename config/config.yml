@@ -26,39 +26,6 @@ config:
   # SEMILLA PARA CONSTRUIR CLAVES MD5
   semillaMD5: verano
 
-  # PROYECTOS Y CONEXIONES A LAS BASES DE DATOS
-  # LA CARPETA DE CADA PROYECTO SE INDICA EL NODO FOLDER Y SE ENTIENDE
-  # RESPECTO AL DOCUMENT_ROOT Y NO AL CPANEL
-  #
-  # EN PRODUCCION EL FOLDER SERÁ "/"
-  conections:
-    cpanel:
-      title: Modo local, todos los proyectos
-      description:
-      folder:
-      dbEngine: mysql
-      host: localhost
-      user: cpanel
-      password: cpanel
-      database: cpanel
-    kaia:
-      title: La página de kaia
-      description:
-      folder: /kaia
-      dbEngine: mysql
-      host: localhost
-      user: kaia
-      password: kaia
-      database: kaia
-    galapago:
-      title: La pagina de galapago
-      description:
-      folder: /galapago
-      dbEngine: mysql
-      host: localhost
-      password: galapago
-      database: galapago
-
   # MOTOR DE ENVIO DE CORREOS
   mailer:
     plugin_dir: bin/PHPMailer_v2.0.0/
@@ -95,3 +62,36 @@ config:
     debug_mode: true
     cache_folder: tmp
     charset: null
+
+  # PROYECTOS Y CONEXIONES A LAS BASES DE DATOS
+  # LA CARPETA DE CADA PROYECTO SE INDICA EL NODO FOLDER Y SE ENTIENDE
+  # RESPECTO AL DOCUMENT_ROOT Y NO AL CPANEL
+  #
+  # EN PRODUCCION EL FOLDER SERÁ "/"
+  conections:
+    cpanel:
+      title: Modo local, todos los proyectos
+      description:
+      folder:
+      dbEngine: mysql
+      host: localhost
+      user: cpanel
+      password: cpanel
+      database: cpanel
+    kaia:
+      title: La página de kaia
+      description:
+      folder: /kaia
+      dbEngine: mysql
+      host: localhost
+      user: kaia
+      password: kaia
+      database: kaia
+    galapago:
+      title: La pagina de galapago
+      description:
+      folder: /galapago
+      dbEngine: mysql
+      host: localhost
+      password: galapago
+      database: galapago

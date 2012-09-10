@@ -3,7 +3,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 05.09.2012 08:11:29
+ * @date 08.09.2012 13:51:04
  */
 
 /**
@@ -12,51 +12,45 @@
 class CoreModulosEntity extends EntityComunes {
 
     /**
-     * @orm:GeneratedValue
-     * @orm:Id
-     * @orm:Column(type="integer")
-     * @assert:NotBlank(groups="CoreModulos")
+     * @orm GeneratedValue
+     * @orm Id
+     * @var integer
+     * @assert NotBlank(groups="CoreModulos")
      */
     protected $Id;
 
     /**
-     * @orm:Column(type="string")
-     * @assert:NotBlank(groups="CoreModulos")
      * @var entities\CoreAplicaciones
+     * @assert NotBlank(groups="CoreModulos")
      */
     protected $CodigoApp;
 
     /**
-     * @orm:Column(type="string")
-     * @assert:NotBlank(groups="CoreModulos")
+     * @var string
+     * @assert NotBlank(groups="CoreModulos")
      */
     protected $NombreModulo;
 
     /**
-     * @orm:Column(type="integer")
-     * @assert:NotBlank(groups="CoreModulos")
+     * @var integer
+     * @assert NotBlank(groups="CoreModulos")
      */
     protected $Nivel = '0';
 
     /**
-     * @orm:Column(type="string")
-     */
-    protected $PerteneceA;
-
-    /**
-     * @orm:Column(type="string")
-     * @assert:NotBlank(groups="CoreModulos")
+     * @var string
+     * @assert NotBlank(groups="CoreModulos")
      */
     protected $Titulo;
 
     /**
-     * @orm:Column(type="string")
+     * @var string
      */
     protected $Descripcion;
 
     /**
-     * @orm:Column(type="string")
-     * @assert:NotBlank(groups="CoreModulos")
+     * @var string
+     * @assert NotBlank(groups="CoreModulos")
      */
     protected $Funcionalidades;
 
@@ -93,7 +87,7 @@ class CoreModulosEntity extends EntityComunes {
     protected $_childEntities = array(
         'CoreAplicaciones',
         'ValoresSN',
-        'ValoresPrivacidad',
+        'ValoresPrivacy',
         'ValoresDchaIzq',
         'ValoresChangeFreq',
     );
@@ -114,6 +108,8 @@ class CoreModulosEntity extends EntityComunes {
     }
 
     public function getCodigoApp() {
+        //if (!($this->CodigoApp instanceof CoreAplicaciones))
+        //	$this->CodigoApp = new CoreAplicaciones($this->CodigoApp);
         return $this->CodigoApp;
     }
 
@@ -131,14 +127,6 @@ class CoreModulosEntity extends EntityComunes {
 
     public function getNivel() {
         return $this->Nivel;
-    }
-
-    public function setPerteneceA($PerteneceA) {
-        $this->PerteneceA = trim($PerteneceA);
-    }
-
-    public function getPerteneceA() {
-        return $this->PerteneceA;
     }
 
     public function setTitulo($Titulo) {

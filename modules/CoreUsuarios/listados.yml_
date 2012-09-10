@@ -1,0 +1,36 @@
+# Module: CoreUsuarios
+# Document : modules\CoreUsuarios\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 10.09.2012 09:38:55
+#
+---
+listados:
+  -
+    title: CoreUsuarios
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      IdPerfil: { title: IdPerfil, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      IdRol: { title: IdRol, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      IdTipoUsuario: { title: IdTipoUsuario, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      Login: { title: Login, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Password: { title: Password, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Apellidos: { title: Apellidos, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Nombre: { title: Nombre, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Email: { title: Email, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      TelefonoMovil: { title: TelefonoMovil, length: '25', align: L, type: string, total: NO, formula: null, format: null }
+      CambioPassword: { title: CambioPassword, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      Ips: { title: Ips, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      NLogin: { title: NLogin, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
+      UltimoLogin: { title: UltimoLogin, length: 10, align: R, type: datetime, total: NO, formula: null, format: null }

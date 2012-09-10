@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of ValoresPrivacidad
+ * Description of ValoresPrivacy
  *
  * INDICA SI UN CONTENIDO ES PRIVADO, PÚBLICO O AMBOS CASOS
  *
@@ -14,7 +14,7 @@
 /**
  * VALORES PRIVADO, PÚBLICO, AMBOS
  */
-class ValoresPrivacidad extends Tipos {
+class ValoresPrivacy extends Tipos {
 
     protected $tipos = array(
         array('Id' => '0', 'Value' => 'Público'),

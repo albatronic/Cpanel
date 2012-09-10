@@ -82,7 +82,7 @@ class Controller {
             'value' => '',
         );
 
-        $includesHead = $this->form->getNode('includesHead');
+        $includesHead = $this->form->getIncludesHead();
 
         $this->values['twigCss'] = $includesHead['twigCss'];
         $this->values['twigJs'] = $includesHead['twigJs'];
@@ -116,7 +116,10 @@ class Controller {
      */
     public function editAction() {
 
+        $this->values['atributos'] = $this->form->getAtributos($this->values['permisos']['enCurso']['modulo']);
+
         switch ($this->request["METHOD"]) {
+
             case 'GET':
                 if ($this->values['permisos']['CO']) {
                     //SI EN LA POSICION 3 DEL REQUEST VIENE ALGO,
@@ -210,6 +213,9 @@ class Controller {
     public function newAction() {
 
         if ($this->values['permisos']['IN']) {
+
+            $this->values['atributos'] = $this->form->getAtributos($this->values['permisos']['enCurso']['modulo']);
+
             switch ($this->request["METHOD"]) {
                 case 'GET': //MOSTRAR FORMULARIO VACIO
                     //SI EN LA POSICION 2 DEL REQUEST VIENE ALGO,
@@ -241,7 +247,7 @@ class Controller {
                         //Recargo el objeto para refrescar las propiedas que
                         //hayan podido ser objeto de algun calculo durante el proceso
                         //de guardado.
-                        $datos = new $this->entity($datos->getPrimaryKeyValue());
+                        if ($datos->getStatus()) $datos = new $this->entity($datos->getPrimaryKeyValue());
                         $this->values['datos'] = $datos;
 
                         $template = $this->entity . '/form.html.twig';
@@ -488,7 +494,7 @@ class Controller {
 
         if (($url != 'Favoritos') and ($url != 'Index')) {
 
-            $idAgente = $_SESSION['USER']['user']['id'];
+            $idAgente = $_SESSION['USER']['user']['Id'];
             $favorito = new Favoritos();
             $rows = $favorito->cargaCondicion("Id", "(IDAgente='{$idAgente}') and (Url='{$url}')");
             $row = $rows[0];
@@ -521,7 +527,7 @@ class Controller {
         $favorito = new Favoritos();
 
         if ($idAgente == '')
-            $idAgente = $_SESSION['USER']['user']['id'];
+            $idAgente = $_SESSION['USER']['user']['Id'];
 
         $favoritos = $favorito->cargaCondicion("*", "IDAgente='{$idAgente}'", "Accesos Desc limit {$nFavoritos}");
         unset($favorito);

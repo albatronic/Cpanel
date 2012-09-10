@@ -3,81 +3,27 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 04.09.2012 20:32:58
+# @date 10.09.2012 12:31:09
 #
 ---
 listados:
   -
     title: CoreUrlAmigables
-    order_by: id ASC
+    order_by: Id
     break_field: null
     idPerfil: null
     orientation: P
     unit: mm
     format: A4
-    margins: 10, 10, 15, 10
-    body_font: Courier, ,8
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
     columns:
-      -
-        title: Controller
-        field: Controller
-        length: 255
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: Action
-        field: Action
-        length: 255
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: Template
-        field: Template
-        length: 255
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: Parametros
-        field: Parametros
-        length: 255
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: Entidad
-        field: Entidad
-        length: 255
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: IdEntidad
-        field: IdEntidad
-        length: 11
-        align: R
-        type: integer
-        total: NO
-        formula: null
-        format: null
-      -
-        title: NumeroVisitas
-        field: NumeroVisitas
-        length: 11
-        align: R
-        type: integer
-        total: NO
-        formula: null
-        format: null
+      Controller: { title: Controller, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Action: { title: Action, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Template: { title: Template, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Parametros: { title: Parametros, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Entidad: { title: Entidad, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      IdEntidad: { title: IdEntidad, length: '11', align: R, type: integer, total: NO, formula: null, format: null }

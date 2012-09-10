@@ -3,81 +3,27 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 04.09.2012 20:32:58
+# @date 10.09.2012 12:31:09
 #
 ---
 listados:
   -
     title: CoreModulos
-    order_by: id ASC
+    order_by: Id
     break_field: null
     idPerfil: null
     orientation: P
     unit: mm
     format: A4
-    margins: 10, 10, 15, 10
-    body_font: Courier, ,8
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
     columns:
-      -
-        title: CodigoApp
-        field: CodigoApp
-        length: 15
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: NombreModulo
-        field: NombreModulo
-        length: 255
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: Nivel
-        field: Nivel
-        length: 4
-        align: R
-        type: integer
-        total: NO
-        formula: null
-        format: null
-      -
-        title: PerteneceA
-        field: PerteneceA
-        length: 255
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: Titulo
-        field: Titulo
-        length: 100
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: Descripcion
-        field: Descripcion
-        length: 100
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
-      -
-        title: Funcionalidades
-        field: Funcionalidades
-        length: 255
-        align: L
-        type: string
-        total: NO
-        formula: null
-        format: null
+      CodigoApp: { title: CodigoApp, length: '15', align: L, type: string, total: NO, formula: null, format: null }
+      NombreModulo: { title: NombreModulo, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Nivel: { title: Nivel, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
+      Titulo: { title: Titulo, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Descripcion: { title: Descripcion, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Funcionalidades: { title: Funcionalidades, length: '255', align: L, type: string, total: NO, formula: null, format: null }

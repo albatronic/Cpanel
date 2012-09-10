@@ -221,7 +221,7 @@ class Archivo {
      * @return string El nombre de archivo con el path completo
      */
     static function getTemporalFileName() {
-        $fileName = md5($_SESSION['USER']['user']['id'] . date('d-m-Y H:i:s'));
+        $fileName = md5($_SESSION['USER']['user']['Id'] . date('d-m-Y H:i:s'));
         $prefijoCarpeta = substr($fileName, 0, 2);
         $path = "docs/docs" . $_SESSION['project']['name'] . "/pdfs/" . $prefijoCarpeta;
         $archivo = $path . "/" . $fileName . ".pdf";

@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 05.09.2012 08:11:29
+ * @date 08.09.2012 13:51:04
  */
 
 /**
@@ -10,24 +10,24 @@
  */
 class CoreAplicacionesEntity extends EntityComunes {
 	/**
-	 * @orm:GeneratedValue
-	 * @orm:Id
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreAplicaciones")
+	 * @orm GeneratedValue
+	 * @orm Id
+	 * @var integer
+	 * @assert NotBlank(groups="CoreAplicaciones")
 	 */
 	protected $Id;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreAplicaciones")
+	 * @var string
+	 * @assert NotBlank(groups="CoreAplicaciones")
 	 */
 	protected $CodigoApp;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreAplicaciones")
+	 * @var string
+	 * @assert NotBlank(groups="CoreAplicaciones")
 	 */
 	protected $NombreApp;
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $Descripcion;
 	/**
@@ -58,7 +58,7 @@ class CoreAplicacionesEntity extends EntityComunes {
 	 */
 	protected $_childEntities = array(
 			'ValoresSN',
-			'ValoresPrivacidad',
+			'ValoresPrivacy',
 			'ValoresDchaIzq',
 			'ValoresChangeFreq',
 		);

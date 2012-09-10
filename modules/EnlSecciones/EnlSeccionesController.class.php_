@@ -1,0 +1,16 @@
+<?php
+/**
+* CONTROLLER FOR EnlSecciones
+* @author: Sergio Perez <sergio.perez@albatronic.com>
+* @copyright: INFORMATICA ALBATRONIC SL 
+* @date 10.09.2012 09:38:56
+
+* Extiende a la clase controller
+*/
+
+class EnlSeccionesController extends Controller {
+
+	protected $entity = "EnlSecciones";
+	protected $parentEntity = "";
+}
+?>

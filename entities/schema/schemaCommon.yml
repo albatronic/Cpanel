@@ -1,0 +1,34 @@
+# COLUMNAS COMUNES A TODAS LAS TABLAS.
+    Observations:         {type: text, default: NULL}
+    PrimaryKeyMD5:        {type: string(100), default: NULL, index: unique}
+    IsDefault:            {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    Checked:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    Publish:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    BelongsTo:            {type: integer(11), notnull: true, default: 0, index: index}
+    CreatedBy:            {type: integer, notnull: true, default: 0}
+    CreatedAt:            {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
+    ModifiedBy:           {type: integer, notnull: true, default: 0}
+    ModifiedAt:           {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
+    Deleted:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    DeletedBy:            {type: integer, notnull: true, default: 0}
+    DeletedAt:            {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
+    Privacy:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresPrivacy,IDTipo'}
+    Order:                {type: integer(11), notnull: true, default: 0, index: index}
+    PublishedAt:          {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
+    ActiveFrom:           {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
+    ActiveTo:             {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
+    UrlPrefix:            {type: string(255), default: NULL}
+    LockUrlPrefix:        {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    Slug:                 {type: string(255), default: NULL}
+    LockSlug   :          {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    UrlFriendly:          {type: string(255), default: NULL}
+    UrlHeritable:         {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    NumberVisits:         {type: integer(11), notnull: true, default: 0}
+    MetatagTitle:         {type: string(255), default: NULL}
+    MetatagKeywords:      {type: string(255), default: NULL}
+    MetatagDescription:   {type: string(255), default: NULL}
+    MetatagTitleSimple:   {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    MetatagTitlePosition: {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresDchaIzq,IDTipo'}
+    ShowOnSitemap:        {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    ImportanceSitemap:    {type: string(5), notnul: true, default: '0,5'}
+    ChangeFreqSitemap:    {type: string(25), notnul: true, default: 'monthly', index: index, comment: 'Abstract,ValoresChangeFreq,IDTipo'}

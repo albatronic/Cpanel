@@ -4,12 +4,12 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 04.09.2012 20:32:58
+  date 10.09.2012 12:31:09
 #}
 
-{{ macro.input('CodigoApp','field_title','text',values.controller ~ '[CodigoApp]',values.controller ~ '_CodigoApp',datos.CodigoApp,'15','CampoTextoCorto','1') }}
-{{ macro.input('NombreApp','field_title','text',values.controller ~ '[NombreApp]',values.controller ~ '_NombreApp',datos.NombreApp,'100','CampoTextoLargo','2') }}
-{{ macro.input('Descripcion','field_title','text',values.controller ~ '[Descripcion]',values.controller ~ '_Descripcion',datos.Descripcion,'100','CampoTextoLargo','3') }}
+{{ macro.input(atributos.CodigoApp,'field_title','text',values.controller ~ '[CodigoApp]',values.controller ~ '_CodigoApp',datos.CodigoApp,'15','CampoTextoCorto','1') }}
+{{ macro.input(atributos.NombreApp,'field_title','text',values.controller ~ '[NombreApp]',values.controller ~ '_NombreApp',datos.NombreApp,'100','CampoTextoLargo','2') }}
+{{ macro.input(atributos.Descripcion,'field_title','text',values.controller ~ '[Descripcion]',values.controller ~ '_Descripcion',datos.Descripcion,'100','CampoTextoLargo','3') }}
 
 {% include '_global/fieldsComunes.html.twig' %}
 

@@ -1,9 +1,9 @@
 # Module: CoreUsuarios
-# Document : modules\CoreUsuarios\config.yml
+# Document : modules/CoreUsuarios/config.yml
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 05.09.2012 08:17:43
+# @date 10.09.2012 12:58:39
 #
 ---
 CoreUsuarios:
@@ -13,780 +13,518 @@ CoreUsuarios:
   login_required: YES
   permission_control: YES
   favourite_control: NO
-  feature_list: YES
   help_file: help.html.twig
   title: CoreUsuarios
   id_video: coreusuarios
   url_video: null
-  conection: 'cpanel'
+  feature_list: YES
+  conection: cpanel
   entity: CoreUsuarios
   table: CoreUsuarios
   primarykey: Id
+  linkBy: ''
   records_per_page: 15
   order_by:
     -
-      title: Id a-z
-      criteria: Id ASC
+      title: 'Id a-z'
+      criteria: 'Id ASC'
     -
-      title: Id z-a
-      criteria: Id DESC
+      title: 'Id z-a'
+      criteria: 'Id DESC'
   search_default: Id
   referenced_entities:
-    -
-      entity: CorePerfiles
-    -
-      entity: CoreRoles
-    -
-      entity: CoreUsuariosTipos
-    -
-      entity: ValoresSN
-    -
-      entity: ValoresPrivacidad
-    -
-      entity: ValoresDchaIzq
-    -
-      entity: ValoresChangeFreq
+    - CorePerfiles
+    - CoreRoles
+    - CoreUsuariosTipos
+    - ValoresSN
+    - ValoresPrivacy
+    - ValoresDchaIzq
+    - ValoresChangeFreq
   fieldGeneratorUrlFriendly: IdPerfil
   fieldGeneratorMetatagTitle: IdPerfil
   columns:
-    -
+    Id:
       title: Id
-      field: Id
+      form: false
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-    -
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+    IdPerfil:
       title: IdPerfil
-      field: IdPerfil
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      aditional_filter:
-        order: 1
-        caption: IdPerfil
-        entity: CorePerfiles
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: integer
-        length: 11
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 1, caption: IdPerfil, entity: CorePerfiles, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IdRol:
       title: IdRol
-      field: IdRol
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      aditional_filter:
-        order: 2
-        caption: IdRol
-        entity: CoreRoles
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: integer
-        length: 11
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 2, caption: IdRol, entity: CoreRoles, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IdTipoUsuario:
       title: IdTipoUsuario
-      field: IdTipoUsuario
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      aditional_filter:
-        order: 3
-        caption: IdTipoUsuario
-        entity: CoreUsuariosTipos
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: integer
-        length: 11
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 3, caption: IdTipoUsuario, entity: CoreUsuariosTipos, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    Login:
       title: Login
-      field: Login
       filter: YES
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: NO
-        type: string
-        length: 50
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
+    Password:
       title: Password
-      field: Password
       filter: YES
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: NO
-        type: string
-        length: 100
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
+    Apellidos:
       title: Apellidos
-      field: Apellidos
       filter: YES
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: NO
-        type: string
-        length: 100
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
+    Nombre:
       title: Nombre
-      field: Nombre
       filter: YES
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: NO
-        type: string
-        length: 100
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
+    Email:
       title: Email
-      field: Email
       filter: YES
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: string
-        length: 100
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
+    TelefonoMovil:
       title: TelefonoMovil
-      field: TelefonoMovil
       filter: YES
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: string
-        length: 25
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    CambioPassword:
       title: CambioPassword
-      field: CambioPassword
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0
-      aditional_filter:
-        order: 4
-        caption: CambioPassword
-        entity: ValoresSN
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: tinyint
-        length: 1
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 4, caption: CambioPassword, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Ips:
       title: Ips
-      field: Ips
       filter: YES
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: string
-        length: 255
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    NLogin:
       title: NLogin
-      field: NLogin
       filter: YES
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0
-      validator:
-        nullable: YES
-        type: integer
-        length: 4
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    UltimoLogin:
       title: UltimoLogin
-      field: UltimoLogin
       filter: YES
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0000-00-00 00:00:00
-      validator:
-        nullable: YES
-        type: datetime
-        length: 
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: Observaciones
-      field: Observaciones
+      form: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    Observations:
+      title: Observations
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: string
-        length: 
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: EsPredeterminado
-      field: EsPredeterminado
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: false, min: null, max: null, message: 'Valor Requerido' }
+    PrimaryKeyMD5:
+      title: PrimaryKeyMD5
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0
-      aditional_filter:
-        order: 5
-        caption: EsPredeterminado
-        entity: ValoresSN
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: tinyint
-        length: 1
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: Revisado
-      field: Revisado
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
+    IsDefault:
+      title: IsDefault
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0
-      aditional_filter:
-        order: 6
-        caption: Revisado
-        entity: ValoresSN
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: tinyint
-        length: 1
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: Publicar
-      field: Publicar
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 5, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Checked:
+      title: Checked
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0
-      aditional_filter:
-        order: 7
-        caption: Publicar
-        entity: ValoresSN
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: tinyint
-        length: 1
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: VigenteDesde
-      field: VigenteDesde
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 6, caption: Checked, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Publish:
+      title: Publish
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: NO
-        type: datetime
-        length: 
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: VigenteHasta
-      field: VigenteHasta
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 7, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    BelongsTo:
+      title: BelongsTo
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: NO
-        type: datetime
-        length: 
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: Privacidad
-      field: Privacidad
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    CreatedBy:
+      title: CreatedBy
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0
-      aditional_filter:
-        order: 8
-        caption: Privacidad
-        entity: ValoresPrivacidad
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: tinyint
-        length: 1
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: Orden
-      field: Orden
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    CreatedAt:
+      title: CreatedAt
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0
-      validator:
-        nullable: NO
-        type: integer
-        length: 11
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: FechaPublicacion
-      field: FechaPublicacion
+      form: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    ModifiedBy:
+      title: ModifiedBy
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: datetime
-        length: 
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: UrlAmigable
-      field: UrlAmigable
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    ModifiedAt:
+      title: ModifiedAt
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: string
-        length: 250
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    Deleted:
+      title: Deleted
+      filter: NO
+      list: NO
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 8, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    DeletedBy:
+      title: DeletedBy
+      filter: NO
+      list: NO
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    DeletedAt:
+      title: DeletedAt
+      filter: NO
+      list: NO
+      form: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    Privacy:
+      title: Privacy
+      filter: NO
+      list: NO
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 9, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Order:
+      title: Order
+      filter: NO
+      list: NO
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    PublishedAt:
+      title: PublishedAt
+      filter: NO
+      list: NO
+      form: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    ActiveFrom:
+      title: ActiveFrom
+      filter: NO
+      list: NO
+      form: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    ActiveTo:
+      title: ActiveTo
+      filter: NO
+      list: NO
+      form: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    UrlPrefix:
+      title: UrlPrefix
+      filter: NO
+      list: NO
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    LockUrlPrefix:
+      title: LockUrlPrefix
+      filter: NO
+      list: NO
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 10, caption: LockUrlPrefix, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Slug:
+      title: Slug
+      filter: NO
+      list: NO
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    LockSlug:
+      title: LockSlug
+      filter: NO
+      list: NO
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 11, caption: LockSlug, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    UrlFriendly:
+      title: UrlFriendly
+      filter: NO
+      list: NO
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    UrlHeritable:
+      title: UrlHeritable
+      filter: NO
+      list: NO
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 12, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    NumberVisits:
+      title: NumberVisits
+      filter: NO
+      list: NO
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    MetatagTitle:
       title: MetatagTitle
-      field: MetatagTitle
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: string
-        length: 250
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    MetatagKeywords:
       title: MetatagKeywords
-      field: MetatagKeywords
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: string
-        length: 250
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    MetatagDescription:
       title: MetatagDescription
-      field: MetatagDescription
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 
-      validator:
-        nullable: YES
-        type: string
-        length: 250
-        min: null
-        max: null
-        message: Valor Requerido
-    -
+      form: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    MetatagTitleSimple:
       title: MetatagTitleSimple
-      field: MetatagTitleSimple
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0
-      aditional_filter:
-        order: 9
-        caption: MetatagTitleSimple
-        entity: ValoresSN
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: tinyint
-        length: 1
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: MetatagTitlePosicion
-      field: MetatagTitlePosicion
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 13, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    MetatagTitlePosition:
+      title: MetatagTitlePosition
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0
-      aditional_filter:
-        order: 10
-        caption: MetatagTitlePosicion
-        entity: ValoresDchaIzq
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: tinyint
-        length: 1
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: MostrarEnMapaWeb
-      field: MostrarEnMapaWeb
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 14, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    ShowOnSitemap:
+      title: ShowOnSitemap
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0
-      aditional_filter:
-        order: 11
-        caption: MostrarEnMapaWeb
-        entity: ValoresSN
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: tinyint
-        length: 1
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: ImportanciaMapaWeb
-      field: ImportanciaMapaWeb
+      form: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 15, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    ImportanceSitemap:
+      title: ImportanceSitemap
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
-      default: 0,5
-      validator:
-        nullable: YES
-        type: string
-        length: 5
-        min: null
-        max: null
-        message: Valor Requerido
-    -
-      title: ChangeFreqMapaWeb
-      field: ChangeFreqMapaWeb
+      form: true
+      default: '0,5'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '5', min: null, max: null, message: 'Valor Requerido' }
+    ChangeFreqSitemap:
+      title: ChangeFreqSitemap
       filter: NO
       list: NO
-      form: YES
-      link:
-        route: null
-        param: null
-        title: null
-        target: null
-        link: null
+      form: true
       default: monthly
-      aditional_filter:
-        order: 12
-        caption: ChangeFreqMapaWeb
-        entity: ValoresChangeFreq
-        method: fetchAll
-        params: Descripcion
-        type: select
-        operator: =
-        event: null
-      validator:
-        nullable: NO
-        type: string
-        length: 25
-        min: null
-        max: null
-        message: Valor Requerido
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 16, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }

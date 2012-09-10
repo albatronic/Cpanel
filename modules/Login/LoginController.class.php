@@ -70,9 +70,9 @@ class LoginController extends Controller {
 
                 $_SESSION['USER'] = array(
                     'user' => array(
-                        'id' => $usuario->getId(),
-                        'nombre' => $usuario->getNombreApellidos(),
-                        'IDPerfil' => $usuario->getIDPerfil()->getId(),
+                        'Id' => $usuario->getId(),
+                        'Nombre' => $usuario->getNombreApellidos(),
+                        'IdPerfil' => $usuario->getIDPerfil()->getId(),
                     ),
                 );
                 $_SESSION['projects'] = $this->values['projects'];

@@ -470,8 +470,8 @@ class Listado {
 
             $parametrosMetodo = substr($parametrosMetodo, 0, -1);
 
-            $configLinea[$value['field']] = array(
-                'field' => $value['field'],
+            $configLinea[$key] = array(
+                'field' => $key,
                 'params' => $parametrosMetodo,
                 'caracteres' => $caracteres,
                 'ancho' => $anchoColumna,
@@ -597,9 +597,9 @@ class Listado {
         $pdf->Cell(0, 4, "Total Registros: " . $nRegistros);
 
         // Leyenda a pie de la última página
-        if ($parametros['legend_text']) {
+        if ($parametros['legend_bottom']) {
             $pdf->SetY(-25);
-            $pdf->Write(4, $parametros['legend_text']);
+            $pdf->Write(4, $parametros['legend_bottom']);
         }
 
         $archivo = Archivo::getTemporalFileName();

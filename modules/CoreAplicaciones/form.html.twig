@@ -4,7 +4,7 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 04.09.2012 20:32:58
+  date 10.09.2012 12:31:09
 #}
 
 {% extends values.controller ~ '/index.html.twig' %}
@@ -25,11 +25,12 @@
 			{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 
 			<ul>
-				{% include values.controller ~ "/fields.html.twig" with {'datos': values.datos} %}
+				{% include values.controller ~ "/fields.html.twig" with {'datos' : values.datos, 'atributos' : values.atributos } %}
 			</ul>
 		</form>
 		</div>
 		</div>
 	</div>
 </div>
+<div id='div_formVariablesEnv' class='formVariablesEnv'></div>
 {% endblock %}

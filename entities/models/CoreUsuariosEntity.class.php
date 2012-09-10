@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 05.09.2012 08:11:29
+ * @date 08.09.2012 13:51:05
  */
 
 /**
@@ -10,73 +10,70 @@
  */
 class CoreUsuariosEntity extends EntityComunes {
 	/**
-	 * @orm:GeneratedValue
-	 * @orm:Id
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreUsuarios")
+	 * @orm GeneratedValue
+	 * @orm Id
+	 * @var integer
+	 * @assert NotBlank(groups="CoreUsuarios")
 	 */
 	protected $Id;
 	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreUsuarios")
 	 * @var entities\CorePerfiles
+	 * @assert NotBlank(groups="CoreUsuarios")
 	 */
 	protected $IdPerfil;
 	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreUsuarios")
 	 * @var entities\CoreRoles
+	 * @assert NotBlank(groups="CoreUsuarios")
 	 */
 	protected $IdRol;
 	/**
-	 * @orm:Column(type="integer")
-	 * @assert:NotBlank(groups="CoreUsuarios")
 	 * @var entities\CoreUsuariosTipos
+	 * @assert NotBlank(groups="CoreUsuarios")
 	 */
 	protected $IdTipoUsuario;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreUsuarios")
+	 * @var string
+	 * @assert NotBlank(groups="CoreUsuarios")
 	 */
 	protected $Login;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreUsuarios")
+	 * @var string
+	 * @assert NotBlank(groups="CoreUsuarios")
 	 */
 	protected $Password;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreUsuarios")
+	 * @var string
+	 * @assert NotBlank(groups="CoreUsuarios")
 	 */
 	protected $Apellidos;
 	/**
-	 * @orm:Column(type="string")
-	 * @assert:NotBlank(groups="CoreUsuarios")
+	 * @var string
+	 * @assert NotBlank(groups="CoreUsuarios")
 	 */
 	protected $Nombre;
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $Email;
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $TelefonoMovil;
 	/**
-	 * @orm:Column(type="tinyint")
-	 * @assert:NotBlank(groups="CoreUsuarios")
+	 * @var tinyint
+	 * @assert NotBlank(groups="CoreUsuarios")
 	 */
 	protected $CambioPassword = '0';
 	/**
-	 * @orm:Column(type="string")
+	 * @var string
 	 */
 	protected $Ips;
 	/**
-	 * @orm:Column(type="integer")
+	 * @var integer
 	 */
 	protected $NLogin = '0';
 	/**
-	 * @orm:Column(type="datetime")
+	 * @var datetime
 	 */
 	protected $UltimoLogin = '0000-00-00 00:00:00';
 	/**
@@ -110,7 +107,7 @@ class CoreUsuariosEntity extends EntityComunes {
 			'CoreRoles',
 			'CoreUsuariosTipos',
 			'ValoresSN',
-			'ValoresPrivacidad',
+			'ValoresPrivacy',
 			'ValoresDchaIzq',
 			'ValoresChangeFreq',
 		);

@@ -8,7 +8,7 @@ CoreAplicaciones:
     CodigoApp:   {type: string(15), notnull: true, index: unique}
     NombreApp:   {type: string(100), notnull: true}
     Descripcion: {type: string(100), notnul: true}
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
 
 CoreModulos:
@@ -16,12 +16,12 @@ CoreModulos:
     CodigoApp:       { type: string(15), notnull: true, index: index, comment: 'db,CoreAplicaciones,CodigoApp' }
     NombreModulo:    { type: string(255), notnull: true, index: unique }
     Nivel:           { type: integer(4), notnull: true, default: 0 }
-    PerteneceA:      { type: string(255), notnull: false, default: NULL, index: index}
     Titulo:          { type: string(100), notnull: true }
     Descripcion:     { type: string(100), notnull: false, default: NULL }
     Funcionalidades: { type: string(255), notnull: true }
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
+    CodigoApp : { ForeignEntity: CoreAplicaciones, ForeignId: CodigoApp }
 
 CoreImagenes:
   columns:
@@ -36,13 +36,15 @@ CoreImagenes:
     Peso:       { type: int(11), notnull: true, default: 0}
     Alto:       { type: int(11), notnull: true, default: 0}
     Ancho:      { type: int(11), notnull: true, default: 0}
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
+    EsGaleria:  { ForeignEntity: ValoresSN, ForeignId: IDTipo }
+    IdTipoMime: { ForeignEntity: TiposMime, ForeignId: IDTipo }
 
 CorePerfiles:
   columns:
     Perfil: { type: string(50), notnull: true }
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
 
 CorePermisos:
@@ -50,35 +52,38 @@ CorePermisos:
     IdPerfil:        { type: integer, notnull: true, index: index, comment: 'db,CorePerfiles,Id' }
     NombreModulo:    { type: string(255), notnull: true, index: index, comment: 'db,CoreModulos,NombreModulo' }
     Funcionalidades: { type: string(255), notnull: true }
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
+    IdPerfil:     { ForeignEntity: CorePerfiles, ForeignId: Id }
+    NombreModulo: { ForeignEntity: CoreModulos, ForeignId: NombreModulo }
 
 CoreRoles:
   columns:
     Rol: { type: string(50), notnull: true }
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
 
 CoreFuncionalidades:
   columns:
-    Codigo: { type: string(15), notnull: true, index: unique}
-    Titulo: { type: string(100), notnull: true}
+    Codigo:      { type: string(15), notnull: true, index: unique}
+    Titulo:      { type: string(100), notnull: true}
     Descripcion: { type: string(100), notnull: false}
     EsEstandar : { type: boolean, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
+    EsEstandar:  { ForeignEntity: ValoresSN, ForeignId: IDTipo }
 
 CoreUsuariosTipos:
   columns:
     Descripcion: { type: string(50), notnull: true}
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
 
 CoreUsuarios:
   columns:
-    IdPerfil:       {type: int(11), notnull: true, index: index, comment: 'db,CorePerfiles,Id' }
-    IdRol:          {type: int(11), notnull: true, index: index, comment: 'db,CoreRoles,Id' }
-    IdTipoUsuario:  {type: int(11), notnull: true, index: index, comment: 'db,coreUsuariosTipos,Id' }
+    IdPerfil:       { type: int(11), notnull: true, index: index, comment: 'db,CorePerfiles,Id' }
+    IdRol:          { type: int(11), notnull: true, index: index, comment: 'db,CoreRoles,Id' }
+    IdTipoUsuario:  { type: int(11), notnull: true, index: index, comment: 'db,CoreUsuariosTipos,Id' }
     Login:          { type: string(50), notnull: true }
     Password:       { type: string(100), notnull: true }
     Apellidos:      { type: string(100), notnull: true, index: index}
@@ -89,8 +94,12 @@ CoreUsuarios:
     Ips:            { type: string(255), notnull: false, default: NULL}
     NLogin:         { type: integer(4), default: 0 }
     UltimoLogin:    { type: datetime, default: '0000-00-00 00:00:00' }
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
+    IdPerfil:       { ForeignEntity: CorePerfiles, ForeignId: Id}
+    IdRol:          { ForeignEntity: CoreRoles, ForeignId: Id}
+    IdTipoUsuario:  { ForeignEntity: CoreUsuariosTipos, ForeignId: Id}
+    CambioPassword: { ForeignEntity: ValoresSN, ForeignId: IDTipo}
 
 CoreUrlAmigables:
   columns:
@@ -100,8 +109,7 @@ CoreUrlAmigables:
     Parametros:    { type: string(255), notnull: false, default: NULL }
     Entidad:       { type: string(255), notnull: true}
     IdEntidad:     { type: integer(11), notnull: true}
-    NumeroVisitas: { type: integer(11), notnull: true, default: 0}
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
 
 # ----------------------
@@ -113,11 +121,11 @@ EnlSecciones:
     Titulo:      { type: string(255), notnull: true}
     Subtitulo:   { type: string(255), notnull: false, default: NULL }
     TipoSeccion: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,TiposSeccionEnlacesInteres,IDTipo' }
-    PerteneceA:  { type: int(11), notnull: true, comment: 'db, EnlSecciones, Id'}
     Entidad:     { type: string(255), notnull: true}
     IdEntidad:   { type: integer(11), notnull: true}
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
+    TipoSeccion: { ForeignEntity: TiposSeccionEnlacesInteres, ForeignId: IDTipo}
 
 EnlEnlaces:
   columns:
@@ -128,5 +136,9 @@ EnlEnlaces:
     TargetBlank:  { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
     EsHttps:      { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
     EsUrlInterna: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
-    <?php include '../cpanel/entities/schema/schemaComunes.yml'; echoln('');?>
+    <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
+    IdSeccion:    { ForeignEntity: EnlSecciones, ForeignId: Id}
+    TargetBlank:  { ForeignEntity: ValoresSN,    ForeignId: IDTipo}
+    EsHttps:      { ForeignEntity: ValoresSN,    ForeignId: IDTipo}
+    EsUrlInterna: { ForeignEntity: ValoresSN,    ForeignId: IDTipo}

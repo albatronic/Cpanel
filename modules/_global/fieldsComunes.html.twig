@@ -2,65 +2,96 @@
   CAMPOS COMUNES A TODOS LOS FORMULARIOS
 
   EL TABINDEX EMPIEZA EN 100
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 09.09.2012 01:51:37
 #}
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
         <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">General</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-2">Fechas</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-3">Meta Información</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-3">Meta</a></li>
         {% if datos.getPrimaryKeyValue %}
         <li class="ui-state-default ui-corner-top"><a href="#tabs-4" onclick="cargaImagenes('tabs-4');">Imágenes</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-5" onclick="cargaDocumentos('tabs-5');">Documentos</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-6">Auditoría</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-7">URLs</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-8">SiteMap</a></li>
         {% endif %}
     </ul>
 
+    {# SOLAPA GENERAL #}
     <div id="tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input('PrimaryKeyMD5','field_title','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo',none,'disabled') }}
-        {{ macro.textarea('Observaciones','field_title',values.controller ~ '[Observaciones]',values.controller ~ '_Observaciones',datos.Observaciones,none,none,'textarea',100)}}
-        {{ macro.select('Es Predeterminado','field_title',values.controller ~ '[EsPredeterminado]',values.controller ~ '_EsPredeterminado',none,datos.EsPredeterminado.IDTipo,datos.EsPredeterminado.fetchAll(0),'chzn-select',101)}}
-        {{ macro.select('Revisado','field_title',values.controller ~ '[Revisado]',values.controller ~ '_Revisado',none,datos.Revisado.IDTipo,datos.Revisado.fetchAll(0),'chzn-select',102)}}
-        {{ macro.select('Publicar','field_title',values.controller ~ '[Publicar]',values.controller ~ '_Publicar',none,datos.Publicar.IDTipo,datos.Publicar.fetchAll(0),'chzn-select',103)}}
-        {{ macro.select('Privacidad','field_title',values.controller ~ '[Privacidad]',values.controller ~ '_Privacidad',none,datos.Privacidad.IDTipo,datos.Privacidad.fetchAll(0),'chzn-select',109)}}
-        {{ macro.input('Orden','field_title','text',values.controller ~ '[Orden]',values.controller ~ '_Orden',datos.Orden,none,none,110) }}
-        {{ macro.input('Url Amigable','field_title','text',values.controller ~ '[UrlAmigable]',values.controller ~ '_UrlAmigable',datos.UrlAmigable,'255','CampoTextoLargo',112) }}
+        {{ macro.input(atributos.UrlFriendly,'field_title','text',values.controller ~ '[UrlFriendly]',values.controller ~ '_UrlFriendly',datos.UrlFriendly,'255','CampoTextoLargo',112,'readonly') }}
+        {% if user.idPerfil == 1 %}
+        {{ macro.input(atributos.PrimaryKeyMD5,'field_title','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo',none,'disabled') }}
+        {{ macro.select(atributos.IsDefault,'field_title',values.controller ~ '[IsDefault]',values.controller ~ '_IsDefault',none,datos.IsDefault.IDTipo,datos.IsDefault.fetchAll(0),'chzn-select',101)}}
+        {% endif %}
+        {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea',100)}}
+        {{ macro.select(atributos.Checked,'field_title',values.controller ~ '[Checked]',values.controller ~ '_Checked',none,datos.Checked.IDTipo,datos.Checked.fetchAll(0),'chzn-select',102)}}
+        {{ macro.select(atributos.Publish,'field_title',values.controller ~ '[Publish]',values.controller ~ '_Publish',none,datos.Publish.IDTipo,datos.Publish.fetchAll(0),'chzn-select',103)}}
+        {{ macro.select(atributos.Privacy,'field_title',values.controller ~ '[Privacy]',values.controller ~ '_Privacy',none,datos.Privacy.IDTipo,datos.Privacy.fetchAll(0),'chzn-select',109)}}
+        {{ macro.input(atributos.Order,'field_title','text',values.controller ~ '[Order]',values.controller ~ '_Order',datos.Order,none,none,110) }}
         {% if datos.getPrimaryKeyValue %}
-        {{ macro.input('Número de Visitas','field_title','text',values.controller ~ '[NumeroVisitas]',values.controller ~ '_NumeroVisitas',datos.NumeroVisitas,'11','CampoImporte',113, 'disabled') }}
+        {{ macro.input(atributos.NumberVisits,'field_title','text',values.controller ~ '[NumberVisits]',values.controller ~ '_NumberVisits',datos.NumberVisits,none,'CampoImporte',113, 'disabled') }}
         {% endif %}
     </div>
 
+    {# SOLAPA FECHAS #}
     <div id="tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.fecha('Fecha Publicación','field_title',values.controller ~ '[FechaPublicacion]',values.controller ~ '_FechaPublicacion',datos.FechaPublicacion,'19','datepicker',111) }}
-        {{ macro.fecha('Vigente Desde','field_title',values.controller ~ '[VigenteDesde]',values.controller ~ '_VigenteDesde',datos.VigenteDesde,'19','datepicker',104) }}
-        {{ macro.fecha('Vigente Hasta','field_title',values.controller ~ '[VigenteHasta]',values.controller ~ '_VigenteHasta',datos.VigenteHasta,'19','datepicker',105) }}
+        {{ macro.fecha(atributos.PublishedAt,'field_title',values.controller ~ '[PublishedAt]',values.controller ~ '_PublishedAt',datos.PublishedAt,'19','datepicker',111) }}
+        {{ macro.fecha(atributos.ActivoFrom,'field_title',values.controller ~ '[ActiveFrom]',values.controller ~ '_ActiveFrom',datos.ActiveFrom,'19','datepicker',104) }}
+        {{ macro.fecha(atributos.ActiveTo,'field_title',values.controller ~ '[ActiveTo]',values.controller ~ '_ActiveTo',datos.ActiveTo,'19','datepicker',105) }}
     </div>
-    <div id="tabs-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.input('Metatag Title','field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,'255','CampoTextoLargo',114) }}
-        {{ macro.input('Metatag Keywords','field_title','text',values.controller ~ '[MetatagKeywords]',values.controller ~ '_MetatagKeywords',datos.MetatagKeywords,'255','CampoTextoLargo',115) }}
-        {{ macro.input('Metatag Description','field_title','text',values.controller ~ '[MetatagDescription]',values.controller ~ '_MetatagDescription',datos.MetatagDescription,'255','CampoTextoLargo',116) }}
-        {{ macro.select('Metatag TitleSimple','field_title',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',none,datos.MetatagTitleSimple.IDTipo,datos.MetatagTitleSimple.fetchAll(0),'chzn-select',117)}}
-        {{ macro.select('Metatag TitlePosicion','field_title',values.controller ~ '[MetatagTitlePosicion]',values.controller ~ '_MetatagTitlePosicion',none,datos.MetatagTitlePosicion.IDTipo,datos.MetatagTitlePosicion.fetchAll(0),'chzn-select',118)}}
-        {{ macro.select('Mostrar en MapaWeb','field_title',values.controller ~ '[MostrarEnMapaWeb]',values.controller ~ '_MostrarEnMapaWeb',none,datos.MostrarEnMapaWeb.IDTipo,datos.MostrarEnMapaWeb.fetchAll(0),'chzn-select',119)}}
-        {{ macro.input('Importancia en MapaWeb','field_title','text',values.controller ~ '[ImportanciaMapaWeb]',values.controller ~ '_ImportanciaMapaWeb',datos.ImportanciaMapaWeb,'5','CampoTextoCorto',120) }}
-        {{ macro.select('ChangeFreq en MapaWeb','field_title',values.controller ~ '[ChangeFreqMapaWeb]',values.controller ~ '_ChangeFreqMapaWeb',none,datos.ChangeFreqMapaWeb.IDTipo,datos.ChangeFreqMapaWeb.fetchAll(0),'chzn-select',121) }}
-    </div>
-    {% if datos.getPrimaryKeyValue %}
-    <div id="tabs-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
 
+    {# SOLAPA META #}
+    <div id="tabs-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.input(atributos.MetatagTitle,'field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,'255','CampoTextoLargo',114) }}
+        {{ macro.input(atributos.MetatagKeywords,'field_title','text',values.controller ~ '[MetatagKeywords]',values.controller ~ '_MetatagKeywords',datos.MetatagKeywords,'255','CampoTextoLargo',115) }}
+        {{ macro.input(atributos.MetatagDescription,'field_title','text',values.controller ~ '[MetatagDescription]',values.controller ~ '_MetatagDescription',datos.MetatagDescription,'255','CampoTextoLargo',116) }}
+        {{ macro.select(atributos.MetatagTitleSimple,'field_title',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',none,datos.MetatagTitleSimple.IDTipo,datos.MetatagTitleSimple.fetchAll(0),'chzn-select',117)}}
+        {{ macro.select(atributos.MetatagTitlePosition,'field_title',values.controller ~ '[MetatagTitlePosition]',values.controller ~ '_MetatagTitlePosition',none,datos.MetatagTitlePosition.IDTipo,datos.MetatagTitlePosition.fetchAll(0),'chzn-select',118)}}
     </div>
+
+    {% if datos.getPrimaryKeyValue %}
+    {# SOLAPA IMAGENES #}
+    <div id="tabs-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    </div>
+
+    {# SOLAPA DOCUMENTOS #}
     <div id="tabs-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
 
     </div>
-    <div id="tabs-6" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.input('Creado por','field_title','text',values.controller ~ '[CreatedBy]',values.controller ~ '_CreatedBy',datos.CreatedBy,none,none,107,'disabled') }}
-        {{ macro.fecha('Fecha Creación','field_title',values.controller ~ '[CreatedAt]',values.controller ~ '_CreatedAt',datos.CreatedAt,'19','datepicker',108,'disabled') }}
-        {{ macro.input('Modificado por','field_title','text',values.controller ~ '[ModifiedBy]',values.controller ~ '_ModifiedBy',datos.ModifiedBy,none,none,107,'disabled') }}
-        {{ macro.fecha('Fecha modificación','field_title',values.controller ~ '[ModifiedAt]',values.controller ~ '_ModifiedAt',datos.ModifiedAt,'19','datepicker',108,'disabled') }}
 
-        {{ macro.input('Borrado','field_title','text',values.controller ~ '[Deleted]',values.controller ~ '_Deleted',datos.Deleted.Descripcion,none,none,106,'disabled') }}
-        {{ macro.input('Borrado por','field_title','text',values.controller ~ '[DeletedBy]',values.controller ~ '_DeletedBy',datos.DeletedBy,none,none,107,'disabled') }}
-        {{ macro.fecha('Fecha Borrado','field_title',values.controller ~ '[DeletedAt]',values.controller ~ '_DeletedAt',datos.DeletedAt,'19','datepicker',108,'disabled') }}
+    {# SOLAPA AUDITORIA #}
+    <div id="tabs-6" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.input(atributos.CreatedBy,'field_title','text',values.controller ~ '[CreatedBy]',values.controller ~ '_CreatedBy',datos.CreatedBy,none,none,107,'disabled') }}
+        {{ macro.fecha(atributos.CreatedAt,'field_title',values.controller ~ '[CreatedAt]',values.controller ~ '_CreatedAt',datos.CreatedAt,'19','datepicker',108,'disabled') }}
+        {{ macro.input(atributos.ModifiedBy,'field_title','text',values.controller ~ '[ModifiedBy]',values.controller ~ '_ModifiedBy',datos.ModifiedBy,none,none,107,'disabled') }}
+        {{ macro.fecha(atributos.ModifiedAt,'field_title',values.controller ~ '[ModifiedAt]',values.controller ~ '_ModifiedAt',datos.ModifiedAt,'19','datepicker',108,'disabled') }}
+
+        {{ macro.input(atributos.Deleted,'field_title','text',values.controller ~ '[Deleted]',values.controller ~ '_Deleted',datos.Deleted.Descripcion,none,none,106,'disabled') }}
+        {{ macro.input(atributos.DeletedBy,'field_title','text',values.controller ~ '[DeletedBy]',values.controller ~ '_DeletedBy',datos.DeletedBy,none,none,107,'disabled') }}
+        {{ macro.fecha(atributos.DeletedAt,'field_title',values.controller ~ '[DeletedAt]',values.controller ~ '_DeletedAt',datos.DeletedAt,'19','datepicker',108,'disabled') }}
+    </div>
+
+    {# SOLAPA URLS #}
+    <div id="tabs-7" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.input(atributos.UrlPrefix,'field_title','text',values.controller ~ '[UrlPrefix]',values.controller ~ '_UrlPrefix',datos.UrlPrefix,'255','CampoTextoLargo',112) }}
+        {{ macro.select(atributos.LockUrlPrefix,'field_title',values.controller ~ '[LockUrlPrefix]',values.controller ~ '_LockUrlPrefix',none,datos.LockUrlPrefix.IDTipo,datos.LockUrlPrefix.fetchAll(0),'chzn-select',117)}}
+        {{ macro.input(atributos.Slug,'field_title','text',values.controller ~ '[Slug]',values.controller ~ '_Slug',datos.Slug,'255','CampoTextoLargo',112) }}
+        {{ macro.select(atributos.LockSlug,'field_title',values.controller ~ '[LockSlug]',values.controller ~ '_LockSlug',none,datos.LockSlug.IDTipo,datos.LockSlug.fetchAll(0),'chzn-select',117)}}
+        {{ macro.select(atributos.UrlHeritable,'field_title',values.controller ~ '[UrlHeritable]',values.controller ~ '_UrlHeritable',none,datos.UrlHeritable.IDTipo,datos.UrlHeritable.fetchAll(0),'chzn-select',117)}}
+        {{ macro.input(atributos.UrlFriendly,'field_title','text',values.controller ~ '[UrlFriendly]',values.controller ~ '_UrlFriendly',datos.UrlFriendly,'255','CampoTextoLargo',112) }}
+    </div>
+
+    {# SOLAPA SITEMAP #}
+    <div id="tabs-8" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.select(atributos.ShowOnSitemap,'field_title',values.controller ~ '[ShowOnSitemap]',values.controller ~ '_ShowOnSitemap',none,datos.ShowOnSitemap.IDTipo,datos.ShowOnSitemap.fetchAll(0),'chzn-select',119)}}
+        {{ macro.input(atributos.ImportanceSitemap,'field_title','text',values.controller ~ '[ImportanceSitemap]',values.controller ~ '_ImportanceSitemap',datos.ImportanceSitemap,'5','CampoTextoCorto',120) }}
+        {{ macro.select(atributos.ChangeFreqSitemap,'field_title',values.controller ~ '[ChangeFreqSitemap]',values.controller ~ '_ChangeFreqSitemap',none,datos.ChangeFreqSitemap.IDTipo,datos.ChangeFreqSitemap.fetchAll(0),'chzn-select',121) }}
     </div>
     {% endif %}
 </div>

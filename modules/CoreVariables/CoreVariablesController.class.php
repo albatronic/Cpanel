@@ -39,9 +39,7 @@ class CoreVariablesController {
      */
     protected $permisos;
     protected $entity = "CoreVariables";
-
-    protected $tipos = array('Web', 'Env');
-    protected $ambitos = array('Pro', 'App', 'Mod');
+    protected $variables;
 
     public function __construct($request) {
 
@@ -53,14 +51,14 @@ class CoreVariablesController {
 
         $this->values['ayuda'] = $this->form->getHelpFile();
 
-        // Desactivo los permisos de creación y borrado
+        // Desactivo los permisos de creación
         $this->values['permisos']['IN'] = FALSE;
-        $this->values['permisos']['DE'] = FALSE;
+        $this->values['permisos']['DE'] = TRUE;
         $this->values['permisos']['UP'] = TRUE;
 
         $this->values['request'] = $this->request;
 
-        $includesHead = $this->form->getNode('includesHead');
+        $includesHead = $this->form->getIncludesHead();
 
         $this->values['twigCss'] = $includesHead['twigCss'];
         $this->values['twigJs'] = $includesHead['twigJs'];
@@ -96,49 +94,78 @@ class CoreVariablesController {
         if ($nombre == '')
             $nombre = $this->request[3];
 
-        if (!in_array($tipo, $this->tipos))
-            $tipo = $this->tipos[0];
+        $objeto = array(
+            'ambito' => $ambito,
+            'tipo' => $tipo,
+            'nombre' => $nombre,
+        );
 
-        if (!in_array($ambito, $this->ambitos))
-            $ambito = $this->ambitos[0];
+        $variables = new CoreVariables($objeto);
+        $this->values['errores'] = $variables->getErrores();
+        $datos = $variables->getDatosYml();
 
-        switch ($ambito) {
-            case 'Pro':
-                $this->values['titulo'] = 'Variables ' . $tipo . ' del Proyecto "' . $_SESSION['project']['title'] . '"';
-                $template = '_global/fieldsVarPro' . $tipo . '.html.twig';
-                $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . '/config/varPro';
-                break;
-            case 'App':
-                $app = new CoreAplicaciones();
-                $app = $app->find('CodigoApp', $nombre);
-                $this->values['titulo'] = 'Variables ' . $tipo . ' de la Aplicación "' . $app->getNombreApp() . '"';
-                unset($app);
-                $template = $nombre . '/fieldsVar' . $tipo . '.html.twig';
-                $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . "/config/varApp_" . $nombre;
-                break;
-            case 'Mod':
-                $modulo = new CoreModulos();
-                $modulo = $modulo->find('NombreModulo', $nombre);
-                $this->values['titulo'] = 'Variables ' . $tipo . ' del Módulo "' . $modulo->getTitulo() . '"';
-                unset($modulo);
-                $template = $nombre . '/fieldsVar' . $tipo . '.html.twig';
-                $archivoDatos = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . '/modules/' . $nombre . '/var_' . $nombre;
-                break;
-            default:
+        if ($ambito == 'Mod') {
+
+            $templateComun = 'CoreVariables/varMod' . $tipo . '.html.twig';
+
+            switch ($tipo) {
+                case 'Env':
+                    // Constuyo array con los nombres de las columnas del modulo(=entidad)
+                    // para mostrar en el template las variables Web/Env de cada columna.
+                    $archivoConfig = new Form($objeto['nombre']);
+                    $columnasEntidad = $archivoConfig->getNode('columns');
+                    unset($archivoConfig);
+                    // Creo el nodo 'columns' creando si no existen o asignado valores por defecto si no tienen
+                    // provinientes del 'config.yml' de cada módulo
+                    // SI SE AÑADE UNA COLUMNA NUEVA EN config.yml TAMBIEN SERÁ AÑADIDA EN EL FORMULARIO DE VARIABLES
+                    if (is_array($columnasEntidad)) {
+                        foreach ($columnasEntidad as $columna => $atributos) {
+                            // Compruebo que exista la columna, si no la creo
+                            if (!is_array($datos['columns'][$columna])) {
+                                $datos['columns'][$columna] = array();
+                            }
+
+                            foreach (VariablesEnv::$varEnvMod as $keyVar => $keyColumnaConfig)
+                                if (!isset($datos['columns'][$columna][$keyVar]))
+                                    $datos['columns'][$columna][$keyVar] = $atributos[$keyColumnaConfig];
+
+                            /** Pongo valores por defecto si no tiene
+                              if (!isset($datos['columns'][$columna]['visible']))
+                              $datos['columns'][$columna]['visible'] = ($atributos['form'] == 'YES');
+                              if (!isset($datos['columns'][$columna]['updatable']))
+                              $datos['columns'][$columna]['updatable'] = ($atributos['form'] == 'YES');
+                              if (!isset($datos['columns'][$columna]['caption']))
+                              $datos['columns'][$columna]['caption'] = $atributos['title'];
+                              if (!isset($datos['columns'][$columna]['default']))
+                              $datos['columns'][$columna]['default'] = $atributos['default'];
+                              if (!isset($datos['columns'][$columna]['permission']))
+                              $datos['columns'][$columna]['permission'] = ''; */
+                            // SI LA COLUMNA ESTA VINCULADA A UNA ENTIDAD, CREA LA LISTA DE VALORES
+                            if ($atributos['aditional_filter']['entity']) {
+                                $entidad = $atributos['aditional_filter']['entity'];
+                                $metodo = $atributos['aditional_filter']['method'];
+                                $objeto = new $entidad();
+                                $listaValores = $objeto->$metodo($atributos['aditional_filter']['params']);
+                                $datos['columns'][$columna]['listaValores'] = $listaValores;
+                            }
+                        }
+                    }
+                    break;
+                case 'Web':
+                    break;
+            }
         }
 
-        $archivoDatos .= "_{$tipo}.yml";
-
-        if (file_exists($archivoDatos)) {
-            $datos = sfYaml::load($archivoDatos);
-        } else
-            $datos = array();
+        $template = $variables->getTemplate();
 
         $this->values['tipo'] = $tipo;
         $this->values['ambito'] = $ambito;
         $this->values['nombre'] = $nombre;
-        $this->values['archivoDatos'] = $archivoDatos;
+        $this->values['titulo'] = $variables->getTitulo();
+        $this->values['archivoDatos'] = $variables->getPathYml();
         $this->values['datos'] = $datos;
+        $this->values['templateComun'] = $templateComun;
+        unset($variables);
 
         return array(
             'template' => $template,
@@ -148,54 +175,49 @@ class CoreVariablesController {
 
     public function EditAction() {
 
-        if (($this->request['METHOD'] == 'POST') and ($this->request['accion'] == 'Guardar')) {
-            $tipo = $this->request['tipo'];
-            $ambito = $this->request['ambito'];
-            $nombre = $this->request['nombre'];
-            $archivoDatos = $this->request['archivoDatos'];
+        if ($this->request['METHOD'] == 'POST') {
 
-            $cabecera = "# {$archivoDatos}\n";
-            $cabecera .= "# Fecha : " . date('d-m-Y H:i:s') . "\n";
-            $cabecera .= "# Usuario: " . $_SESSION['USER']['user']['id'] . " " . $_SESSION['USER']['user']['nombre'] . "\n\n";
-            $datosYml = $cabecera;
+            $objeto = array(
+                'tipo' => $this->request['tipo'],
+                'ambito' => $this->request['ambito'],
+                'nombre' => $this->request['nombre'],
+            );
 
-            $datos = $this->request['datos'];
-            if (is_array($datos)) {
-                $cuerpo = sfYaml::dump($datos);
-                $datosYml .= $cuerpo;
+            switch ($this->request['accion']) {
+
+                case 'Guardar':
+                    if ($this->values['permisos']['UP']) {
+                        $variables = new CoreVariables($objeto);
+                        $variables->setDatosYml($this->request['datos']);
+                        $variables->save();
+                        $this->values['errores'] = $variables->getErrores();
+                        unset($variables);
+
+                        return $this->indexAction($objeto['tipo'], $objeto['ambito'], $objeto['nombre']);
+                    } else {
+                        return array('template' => '_global/forbiden.html.twig', 'values' => $this->values);
+                    }
+
+                    break;
+
+                case 'Borrar':
+                    if ($this->values['permisos']['DE']) {
+                        $variables = new CoreVariables($objeto);
+                        $variables->delete();
+                        $this->values['errores'] = $variables->getErrores();
+                        unset($variables);
+
+                        return $this->indexAction($objeto['tipo'], $objeto['ambito'], $objeto['nombre']);
+                    } else {
+                        return array('template' => '_global/forbiden.html.twig', 'values' => $this->values);
+                    }
+
+                    break;
             }
-
-            $archivo = new Archivo($archivoDatos);
-            if (!$archivo->write($datosYml))
-                $this->values['errores'][] = 'Error al crear el archivo ' . $archivoDatos;
-            unset($archivo);
-            return $this->indexAction($tipo, $ambito, $nombre);
         } else
             return array('template' => '_global/forbiden.html.twig', array());
     }
 
-    /**
-     * Muestra el template de ayuda asociado al controlador
-     * El nombre del template de ayuda está definido en el
-     * nodo <help_file> del config.yml del controlador
-     * Si no existiera, se muestra un template indicando esta
-     * circunstancia
-     *
-     * @return array con el template a renderizar
-     */
-    public function helpAction() {
-        $template = $this->entity . '/' . $this->form->getHelpFile();
-        $file = "modules/" . $template;
-        if (!is_file($file) or ($this->form->getHelpFile() == '')) {
-            $template = "_help/noFound.html.twig";
-        }
-
-        $values['title'] = $this->form->getTitle();
-        $values['idVideo'] = $this->form->getIdVideo();
-        $values['urlVideo'] = $this->form->getUrlVideo();
-
-        return array('template' => $template, 'values' => $values);
-    }
 }
 
 ?>

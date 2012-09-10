@@ -1,7 +1,7 @@
 	$(function() {
-	
+
 	/*==JQUERY SELECTBOX==*/
-	$(".chzn-select").chosen(); 
+	$(".chzn-select").chosen();
 	$(".chzn-select-deselect").chosen({allow_single_deselect: true});
 	/*==JQUERY UNIFORM==*/
 	$(".checkbox,.rem_me,.radio,input[type='file']").uniform();
@@ -14,9 +14,9 @@
 	$('#spinnerdisable').spinner({ min: -100, max: 100 });
 	$('#spinnermaxlen').spinner();
 	$('#spinner5').spinner();
-	$('#spinnercurrency').spinner({prefix: '$', group: ',', step: 0.01, largeStep: 1, min: -1000000, max: 1000000});	
+	$('#spinnercurrency').spinner({prefix: '$', group: ',', step: 0.01, largeStep: 1, min: -1000000, max: 1000000});
 	$('#spinnerconfig').spinner({min: -1000, max: 1000, step: 1, increment: 'fast'});
-	
+
 	/*==UI Shortable==*/
 	$(".switch_bar ul,#sidenav, #primary_nav ul").sortable();
 	$(".switch_bar ul,#sidenav, #primary_nav ul").disableSelection();
@@ -33,17 +33,17 @@
 		titleTarget: '#top_tabby',
 		validate: true
 	});
-	
-		
+
+
 	/*===================
 	LIST-ACCORDION
-	===================*/	  
+	===================*/
 
 	$('#list-accordion').accordion({
 		header: ".title",
 		autoheight: false
 	});
-	
+
 	$('#stepy_form').validate({
 					errorPlacement: function(error, element) {
 						$('#stepy_form div.stepy-error').append(error);
@@ -55,7 +55,7 @@
 						'email':			{ required:  'Email field is requerid!' },
 					}
 				});
-				
+
 		$('#left_stepy').stepy({
 		backLabel: 'Back',
 		nextLabel: 'Next',
@@ -66,8 +66,8 @@
 		titleClick: true,
 		titleTarget: '#left_title',
 		validate: true
-	});		
-				
+	});
+
 			$('#left_stepy').validate({
 					errorPlacement: function(error, element) {
 						$('#left_stepy div.stepy-error').append(error);
@@ -78,8 +78,8 @@
 						'name':		{ required:  'name field is required!' },
 						'password':			{ required:  'pass field is requerid!' },
 					}
-				});	
-				
+				});
+
 	$('#stepy_no_validation').stepy({
 		backLabel: 'Back',
 		nextLabel: 'Next',
@@ -90,11 +90,11 @@
 		titleClick: true,
 		titleTarget: '#tabby_no_validation',
 		validate: true
-	});		
-	
+	});
+
   $('#valid').stepy({
-	  
-		
+
+
 		backLabel:      'Backward',
   block:          true,
   errorImage:     true,
@@ -102,7 +102,7 @@
   titleClick:     true,
   validate:       true
 	});
-	
+
 	$('#valid').validate({
 					errorPlacement: function(error, element) {
 						$('#valid div.stepy-error').append(error);
@@ -124,34 +124,34 @@
 						'day':			{ required:  'Day field is requerid!' },
 					}
 				});
-				
-				
-				
-				
 
-	/*==AUTO GROW TEXTBOX==*/	
+
+
+
+
+	/*==AUTO GROW TEXTBOX==*/
 	 $(".input_grow").autoGrow();
-	
+
 	/*==INPUT MASK==*/
 	$("#date").mask("99/99/9999");
 	$("#phone").mask("(999) 999-9999");
 	$("#mobile").mask("(999) 999-9999");
 	$("#tin").mask("99-9999999");
-	$("#ssn").mask("999-99-9999");	
+	$("#ssn").mask("999-99-9999");
 
 	/*======================
 	ACCORDION MENU
 	========================*/
 	$('.accordion_mnu').initMenu();
-	
+
 	/*======================
 	DUAL LIST
-	========================*/	
+	========================*/
      $.configureBoxes();
-	 
+
 	/*======================
 	PROGRESS BAR
-	========================*/		 
+	========================*/
 	 $( "#probar_blue" ).progressbar({
 			value: 37
 		});
@@ -178,16 +178,16 @@
 		});
 	/*======================
 	RATY
-	========================*/	
+	========================*/
 	  $('#star').raty({
 		half:  true,
 		start: 3.3
 	  });
-	  
+
 	/*======================
 	DATEPICKER
-	========================*/	
-	$( ".datepicker" ).datepicker();  
+	========================*/
+	$( ".datepicker" ).datepicker();
 
 
 	/*END*/
@@ -198,61 +198,61 @@
 	$('.on_off :checkbox').iphoneStyle();
 		$('.disabled :checkbox').iphoneStyle();
 		$('.long_tiny :checkbox').iphoneStyle({ checkedLabel: 'Very Long Text', uncheckedLabel: 'Tiny' });
-		
+
 		var onchange_checkbox = ($('.onchange :checkbox')).iphoneStyle({
-		  onChange: function(elem, value) { 
+		  onChange: function(elem, value) {
 			$('span#status').html(value.toString());
 		  }
 		});
 
-	
-	
-		
+
+
+
 	/*======================
 	iBUTTON Radio/Check Box
 	========================*/
-	
+
 	$(".cb-enable").click(function(){
 		  var parent = $(this).parents('.switch');
 		  $('.cb-disable',parent).removeClass('selected');
 		  $(this).addClass('selected');
 		  $('.checkbox',parent).attr('checked', true);
 	});
-	
+
 	$(".cb-disable").click(function(){
 		var parent = $(this).parents('.switch');
 		$('.cb-enable',parent).removeClass('selected');
 		$(this).addClass('selected');
 		$('.checkbox',parent).attr('checked', false);
 	});
-	
-		
-	
+
+
+
 
 	/*======================
 	INPUT LIMITER
 	========================*/
-	
+
 	$('.limiter').inputlimiter({limit: 100});
-	
-   
+
+
 	/*======================
 	Tags Input
-	========================*/ 
+	========================*/
 			$('#tags_1').tagsInput({
 				width:'99%',
 				'defaultText':'add a test tag'
 				});
 
-	
-	
+
+
 	/*======================
 	DROPDOWN
 	========================*/
 	$('.dropdown-toggle').dropdown()
-	
 
-	
+
+
 	/*======================
 	BREADCRUMB
 	========================*/
@@ -260,32 +260,32 @@
 	$("#breadCrumb1").jBreadCrumb();
 	$("#breadCrumb2").jBreadCrumb();
 	$("#breadCrumb3").jBreadCrumb();
-	
-	
-	
+
+
+
 	/*======================
 	Sticky
 	========================*/
 	$('.s_noty').click(function(){
-		
+
 	$('.s_noty').sticky('This is Simple Note');
 	});
 	$('.i_noty').click(function(){
-		
+
 	$('.i_noty').sticky();
 	});
-	
+
 	$('.click_noty_btn').click(function(){
-		
+
 	$('.sticky_html').sticky();
 	});
-	
+
 	$('.custom_n').click(function(){
-		
+
 	$('.sticky_custom').sticky();
 	});
-	
-	
+
+
 	/*======================
 	TREEVIEW
 	========================*/
@@ -299,64 +299,64 @@
 			persist: "location"
 		});
 	})
-	
+
 	/*==============================
 	  NOTY TOP
 	================================*/
-	
+
 	$('.alert_t').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'top',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			type:'alert',
-			
+
 			 });
 		  });
 
 	$('.error_t').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'top',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'error', 
+			type : 'error',
 			 });
 		  });
-		  
+
 	$('.success_t').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'top',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'success', 
+			type : 'success',
 			 });
 		  });
-		  
+
 	$('.info_t').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'top',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'information', 
+			type : 'information',
 			 });
 		  });
-	
+
 	$('.confirm_t').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'top',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			buttons: [
 				{type: 'button green', text: 'Ok', click: function($noty) {
-		  
+
 					// this = button element
 					// $noty = $noty element
-		  
+
 					$noty.close();
 					noty({force: true, text: 'You clicked "Ok" button', type: 'success'});
 				  }
@@ -367,7 +367,7 @@
 				  }
 				}
 				],
-			 type : 'success', 
+			 type : 'success',
 			 });
 		  });
 
@@ -375,60 +375,60 @@
 	/*==============================
 	  NOTY CENTER
 	================================*/
-	
+
 	$('.alert_c').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'center',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			type:'alert',
-			
+
 			 });
 		  });
 
 	$('.error_c').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'center',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'error', 
+			type : 'error',
 			 });
 		  });
-		  
+
 	$('.success_c').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'center',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'success', 
+			type : 'success',
 			 });
 		  });
-		  
+
 	$('.info_c').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'center',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'information', 
+			type : 'information',
 			 });
 		  });
-	
+
 	$('.confirm_c').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'center',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			buttons: [
 				{type: 'button green', text: 'Ok', click: function($noty) {
-		  
+
 					// this = button element
 					// $noty = $noty element
-		  
+
 					$noty.close();
 					noty({force: true, text: 'You clicked "Ok" button', type: 'success',layout : 'center',modal : true,});
 				  }
@@ -439,68 +439,68 @@
 				  }
 				}
 				],
-			 type : 'success', 
+			 type : 'success',
 			 });
 		  });
-	
+
 	/*==============================
 	  NOTY BOTTOM
 	================================*/
-	
+
 	$('.alert_b').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottom',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			type:'alert',
 			closeButton : true,
-			
+
 			 });
 		  });
 
 	$('.error_b').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottom',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'error', 
+			type : 'error',
 			 });
 		  });
-		  
+
 	$('.success_b').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottom',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'success', 
+			type : 'success',
 			 });
 		  });
-		  
+
 	$('.info_b').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottom',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'information', 
+			type : 'information',
 			 });
 		  });
-	
+
 	$('.confirm_b').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottom',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			buttons: [
 				{type: 'button green', text: 'Ok', click: function($noty) {
-		  
+
 					// this = button element
 					// $noty = $noty element
-		  
+
 					$noty.close();
 					noty({force: true, text: 'You clicked "Ok" button', type: 'success',layout : 'bottom',modal : true,});
 				  }
@@ -511,68 +511,68 @@
 				  }
 				}
 				],
-			 type : 'success', 
+			 type : 'success',
 			 });
 		  });
-	
-	
+
+
 	/*==============================
 	  NOTY TOP LEFT
 	================================*/
-	
+
 	$('.alert_tl').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topLeft',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			type:'alert',
-			
+
 			 });
 		  });
 
 	$('.error_tl').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topLeft',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'error', 
+			type : 'error',
 			 });
 		  });
-		  
+
 	$('.success_tl').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topLeft',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'success', 
+			type : 'success',
 			 });
 		  });
-		  
+
 	$('.info_tl').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topLeft',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'information', 
+			type : 'information',
 			 });
 		  });
-	
+
 	$('.confirm_tl').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topLeft',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			buttons: [
 				{type: 'button green', text: 'Ok', click: function($noty) {
-		  
+
 					// this = button element
 					// $noty = $noty element
-		  
+
 					$noty.close();
 					noty({force: true, text: 'You clicked "Ok" button', type: 'success',layout : 'topLeft',modal : true,});
 				  }
@@ -583,67 +583,67 @@
 				  }
 				}
 				],
-			 type : 'success', 
+			 type : 'success',
 			 });
 		  });
-	
+
 	/*==============================
 	  NOTY TOP CENTER
 	================================*/
-	
+
 	$('.alert_tc').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topCenter',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			type:'alert',
-			
+
 			 });
 		  });
 
 	$('.error_tc').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topCenter',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'error', 
+			type : 'error',
 			 });
 		  });
-		  
+
 	$('.success_tc').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topCenter',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'success', 
+			type : 'success',
 			 });
 		  });
-		  
+
 	$('.info_tc').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topCenter',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'information', 
+			type : 'information',
 			 });
 		  });
-	
+
 	$('.confirm_tc').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topCenter',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			buttons: [
 				{type: 'button green', text: 'Ok', click: function($noty) {
-		  
+
 					// this = button element
 					// $noty = $noty element
-		  
+
 					$noty.close();
 					noty({force: true, text: 'You clicked "Ok" button', type: 'success',layout : 'topCenter',modal : true,});
 				  }
@@ -654,67 +654,67 @@
 				  }
 				}
 				],
-			 type : 'success', 
+			 type : 'success',
 			 });
 		  });
-	
+
 	/*==============================
 	  NOTY TOP RIGHT
 	================================*/
-	
+
 	$('.alert_tr').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topRight',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			type:'alert',
-			
+
 			 });
 		  });
 
 	$('.error_tr').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topRight',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'error', 
+			type : 'error',
 			 });
 		  });
-		  
+
 	$('.success_tr').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topRight',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'success', 
+			type : 'success',
 			 });
 		  });
-		  
+
 	$('.info_tr').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topRight',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'information', 
+			type : 'information',
 			 });
 		  });
-	
+
 	$('.confirm_tr').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'topRight',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			buttons: [
 				{type: 'button green', text: 'Ok', click: function($noty) {
-		  
+
 					// this = button element
 					// $noty = $noty element
-		  
+
 					$noty.close();
 					noty({force: true, text: 'You clicked "Ok" button', type: 'success',layout : 'topRight',modal : true,});
 				  }
@@ -725,68 +725,68 @@
 				  }
 				}
 				],
-			 type : 'success', 
+			 type : 'success',
 			 });
 		  });
-		  
-		  
+
+
 	/*==============================
 	  NOTY BOTTOM RIGHT
 	================================*/
-	
+
 	$('.alert_br').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottomRight',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			type:'alert',
-			
+
 			 });
 		  });
 
 	$('.error_br').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottomRight',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'error', 
+			type : 'error',
 			 });
 		  });
-		  
+
 	$('.success_br').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottomRight',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'success', 
+			type : 'success',
 			 });
 		  });
-		  
+
 	$('.info_br').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottomRight',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'information', 
+			type : 'information',
 			 });
 		  });
-	
+
 	$('.confirm_br').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottomRight',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			buttons: [
 				{type: 'button green', text: 'Ok', click: function($noty) {
-		  
+
 					// this = button element
 					// $noty = $noty element
-		  
+
 					$noty.close();
 					noty({force: true, text: 'You clicked "Ok" button', type: 'success',layout : 'bottomRight',modal : true,});
 				  }
@@ -797,68 +797,68 @@
 				  }
 				}
 				],
-			 type : 'success', 
+			 type : 'success',
 			 });
 		  });
-		  
-		  
+
+
 	/*==============================
 	  NOTY BOTTOM LEFT
 	================================*/
-	
+
 	$('.alert_bl').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottomLeft',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			type:'alert',
-			
+
 			 });
 		  });
 
 	$('.error_bl').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottomLeft',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'error', 
+			type : 'error',
 			 });
 		  });
-		  
+
 	$('.success_bl').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottomLeft',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'success', 
+			type : 'success',
 			 });
 		  });
-		  
+
 	$('.info_bl').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottomLeft',
 			text: 'noty - a jquery notification library!',
 			modal : true,
-			type : 'information', 
+			type : 'information',
 			 });
 		  });
-	
+
 	$('.confirm_bl').click(function() {
-		
+
 		var noty_id = noty({
 			layout : 'bottomLeft',
 			text: 'noty - a jquery notification library!',
 			modal : true,
 			buttons: [
 				{type: 'button green', text: 'Ok', click: function($noty) {
-		  
+
 					// this = button element
 					// $noty = $noty element
-		  
+
 					$noty.close();
 					noty({force: true, text: 'You clicked "Ok" button', type: 'success',layout : 'bottomLeft',modal : true,});
 				  }
@@ -869,36 +869,36 @@
 				  }
 				}
 				],
-			 type : 'success', 
+			 type : 'success',
 			 });
 		  });
-	
+
 	/*======================
 	DRILL MINEU
-	========================*/	
+	========================*/
 
     	// BUTTONS
     	$('.fg-button').hover(
     		function(){ $(this).removeClass('ui-state-default').addClass('ui-state-focus'); },
     		function(){ $(this).removeClass('ui-state-focus').addClass('ui-state-default'); }
     	);
-    	
-    	// MENUS    	
-		$('#flat').menu({ 
+
+    	// MENUS
+		$('#flat').menu({
 			content: $('#flat').next().html(), // grab content from this page
-			showSpeed: 400 
+			showSpeed: 400
 		});
-		
+
 		$('#hierarchy').menu({
 			content: $('#hierarchy').next().html(),
 			crumbDefaultText: ' '
 		});
-		
+
 		$('#hierarchybreadcrumb').menu({
 			content: $('#hierarchybreadcrumb').next().html(),
 			backLink: false
 		});
-		
+
 		// or from an external source
 		$.get('menuContent.html', function(data){ // grab content from another page
 			$('#flyout').menu({ content: data, flyOut: true });
@@ -907,16 +907,16 @@
 /*Colapsible Widget*/
 $(".collapsible_widget").collapse({ head : ".widget_top",
                 group : ".widget_content", show: function(){
-				
+
                     this.animate({
-                        opacity: 'toggle', 
+                        opacity: 'toggle',
                         height: 'toggle'
                     }, 300);
                 },
                 hide : function() {
-                    
+
                     this.animate({
-                        opacity: 'toggle', 
+                        opacity: 'toggle',
                         height: 'toggle'
                     }, 300);
                 }
@@ -934,7 +934,7 @@ $(".collapsible_widget").collapse({ head : ".widget_top",
 		});
 		$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
 			" - $" + $( "#slider-range" ).slider( "values", 1 ) );
-	
+
 	$( "#master" ).slider({
 			value: 60,
 			orientation: "horizontal",
@@ -952,24 +952,24 @@ $(".collapsible_widget").collapse({ head : ".widget_top",
 				orientation: "vertical"
 			});
 		});
-	
-	
-	
-			
+
+
+
+
 //CLE EDITOR
-		
+
 		$("#txt_editor").cleditor({
-		width:"100%", 
+		width:"100%",
 		height:"100%",
 		bodyStyle: "margin: 10px; font: 12px Arial,Verdana; cursor:text"
 	});
-	
+
 //TIPSY
 $('.tip_top').tipsy({
 	title: 'title',
 	fade: 'out',     // fade tooltips in/out?
     gravity: 's', });// nw | n | ne | w | e | sw | s | se
-	
+
 	$('.go_to a').tipsy({
 	title: 'title',
 	fade: 'out',     // fade tooltips in/out?
@@ -995,7 +995,7 @@ $('.tipRight').tipsy({
 	title: 'title',
 	fade: 'out',     // fade tooltips in/out?
     gravity: 'w', });// nw | n | ne | w | e | sw | s | se
-	
+
 $('.tipBot').tipsy({
 	title: 'title',
 	fade: 'out',     // fade tooltips in/out?
@@ -1005,7 +1005,7 @@ $('.tipTopL').tipsy({
 	title: 'title',
 	fade: 'out',     // fade tooltips in/out?
     gravity: 'sw', });// nw | n | ne | w | e | sw | s | se
-	
+
 $('.tipTopR').tipsy({
 	title: 'title',
 	fade: 'out',     // fade tooltips in/out?
@@ -1032,7 +1032,7 @@ $('.post_action_bar a, .invoice_action_bar a').tipsy({
     gravity: 's', });// nw | n | ne | w | e | sw | s | se
 
 
-//MIN Chart 
+//MIN Chart
 
   $("span.pie").peity("pie",{
 	  diameter: 150,
@@ -1148,8 +1148,8 @@ $('.post_action_bar a, .invoice_action_bar a').tipsy({
 
     // we will just set interval of updating to 1 sec
     $('#progress3,#progress_n').anim_progressbar({interval: 1000});
-	
-	
+
+
 	/*colorbox*/
 				$(".group1").colorbox({rel:'group1'});
 				$(".portfolio a").colorbox();
@@ -1158,8 +1158,8 @@ $('.post_action_bar a, .invoice_action_bar a').tipsy({
 				$(".ajax").colorbox();
 				$(".youtube").colorbox({iframe:true, innerWidth:425, innerHeight:344});
 				$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
-					
-					
+
+
 					/*
  * SimpleModal Confirm Modal Dialog
  * http://www.ericmmartin.com/projects/simplemodal/
@@ -1190,7 +1190,7 @@ function confirm(message, callback) {
 		closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
 		position: ["20%",],
 		overlayId: 'confirm-overlay',
-		containerId: 'confirm-container', 
+		containerId: 'confirm-container',
 		onShow: function (dialog) {
 			var modal = this;
 
@@ -1228,14 +1228,14 @@ jQuery(function ($) {
 		container: null,
 		init: function () {
 			$("input.osx, a.osx").click(function (e) {
-				e.preventDefault();	
+				e.preventDefault();
 
 				$("#osx-modal-content").modal({
 					overlayId: 'osx-overlay',
 					containerId: 'osx-container',
 					closeHTML: null,
 					minHeight: 80,
-					opacity: 65, 
+					opacity: 65,
 					position: ['0',],
 					overlayClose: true,
 					onOpen: OSX.open,
@@ -1256,7 +1256,7 @@ jQuery(function ($) {
 							+ title.height()
 							+ 20; // padding
 						d.container.animate(
-							{height: h}, 
+							{height: h},
 							200,
 							function () {
 								$("div.close", self.container).show();
@@ -1310,25 +1310,25 @@ jQuery(function ($) {
 // color picker
 
 $('.colorpicker').colorpicker();
-$('#widget_tab ul').idTabs(); 
-$('#widget_leftTab ul').idTabs(function(id,list,set){ 
-    $("a",set).removeClass("p_selected") 
-    .filter("[href='"+id+"']",set).addClass("p_selected"); 
-    for(i in list) 
-      $(list[i]).hide(); 
-    $(id).fadeIn(); 
-    return false; 
+$('#widget_tab ul').idTabs();
+$('#widget_leftTab ul').idTabs(function(id,list,set){
+    $("a",set).removeClass("p_selected")
+    .filter("[href='"+id+"']",set).addClass("p_selected");
+    for(i in list)
+      $(list[i]).hide();
+    $(id).fadeIn();
+    return false;
   });
-  
-$("#adv2").idTabs(function(id,list,set){ 
-    $("a",set).removeClass("selected") 
-    .filter("[href='"+id+"']",set).addClass("selected"); 
-    for(i in list) 
-      $(list[i]).hide(); 
-    $(id).fadeIn(); 
-    return false; 
-  }); 
-  
+
+$("#adv2").idTabs(function(id,list,set){
+    $("a",set).removeClass("selected")
+    .filter("[href='"+id+"']",set).addClass("selected");
+    for(i in list)
+      $(list[i]).hide();
+    $(id).fadeIn();
+    return false;
+  });
+
   $("#commentForm").validate();
   $("#regitstraion_form").validate({
 	  rules: {
@@ -1371,9 +1371,9 @@ $("#adv2").idTabs(function(id,list,set){
 			agree: "Please accept our policy"
 		}
 		});
-  
+
   $(function() {
-	
+
 	var container = $('div.container');
 	// validate the form when it is submitted
 	var validator = $("#form2").validate({
@@ -1382,27 +1382,27 @@ $("#adv2").idTabs(function(id,list,set){
 		wrapper: 'li',
 		meta: "validate"
 	});
-	
-	
+
+
 });
-	
-  
+
+
   $("#form103").validate();
 
-  
+
 $(".elem_extend").EnableMultiField({
 	linkText: 'Add More',
     linkClass: 'addMoreFields',
 	removeLinkText: 'Remove',
-    removeLinkClass: 'removeFields',
-	
+    removeLinkClass: 'removeFields'
+
 	});
 
 
 $('.item .delete').click(function(){
-		
+
 		var elem = $(this).closest('.item');
-		
+
 		$.confirm({
 			'title'		: 'Delete Confirmation',
 			'message'	: 'You are about to delete this item. <br />It cannot be restored at a later time! Continue?',
@@ -1419,15 +1419,15 @@ $('.item .delete').click(function(){
 				}
 			}
 		});
-		
+
 	});
 
 
 
 $('.confirm_dialog').click(function(){
-		
-		
-		
+
+
+
 		$.confirm({
 			'title'		: 'Delete Confirmation',
 			'message'	: 'You are about to delete this item. <br />It cannot be restored at a later time! Continue?',
@@ -1441,7 +1441,7 @@ $('.confirm_dialog').click(function(){
 				}
 			}
 		});
-		
+
 	});
 
 
@@ -1449,42 +1449,42 @@ $('.confirm_dialog').click(function(){
 $('.circle').mosaic({
 					opacity		:	0.8			//Opacity for overlay (0-1)
 				});
-				
+
 				$('.fade').mosaic();
-				
+
 				$('.bar').mosaic({
 					animation	:	'slide'		//fade or slide
 				});
-				
+
 				$('.bar2').mosaic({
 					animation	:	'slide'		//fade or slide
 				});
-				
+
 				$('.bar3').mosaic({
 					animation	:	'slide',	//fade or slide
 					anchor_y	:	'top'		//Vertical anchor position
 				});
-				
+
 				$('.cover').mosaic({
 					animation	:	'slide',	//fade or slide
 					hover_x		:	'400px'		//Horizontal position on hover
 				});
-				
+
 				$('.cover2').mosaic({
 					animation	:	'slide',	//fade or slide
 					anchor_y	:	'top',		//Vertical anchor position
 					hover_y		:	'80px'		//Vertical position on hover
 				});
-				
+
 				$('.cover3').mosaic({
 					animation	:	'slide',	//fade or slide
 					hover_x		:	'400px',	//Horizontal position on hover
 					hover_y		:	'300px'		//Vertical position on hover
 				});
-		 
 
-	
-	
+
+
+
 	$("#suggest1").focus().autocomplete(cities);
 	$("#month").autocomplete(months, {
 		minChars: 0,
@@ -1495,7 +1495,7 @@ $('.circle').mosaic({
 		scrollHeight: 220,
 		formatItem: function(data, i, total) {
 			// don't show the current month in the list of values (for whatever reason)
-			if ( data[0] == months[new Date().getMonth()] ) 
+			if ( data[0] == months[new Date().getMonth()] )
 				return false;
 			return data[0];
 		}
@@ -1515,28 +1515,28 @@ $('.circle').mosaic({
 			return row.to;
 		}
 	});
-	$('.checkall').checkAll('.tr_select input:checkbox');	
-	
+	$('.checkall').checkAll('.tr_select input:checkbox');
+
 	});
-	
+
 $(function(){
 
 	// Blur images on mouse over
-	$(".portfolio a").hover( function(){ 
-		$(this).children("img").animate({ opacity: 0.75 }, "fast"); 
-	}, function(){ 
-		$(this).children("img").animate({ opacity: 1.0 }, "slow"); 
-	}); 
-	
+	$(".portfolio a").hover( function(){
+		$(this).children("img").animate({ opacity: 0.75 }, "fast");
+	}, function(){
+		$(this).children("img").animate({ opacity: 1.0 }, "slow");
+	});
+
 
 	// Clone portfolio items to get a second collection for Quicksand plugin
 	var $portfolioClone = $(".portfolio").clone();
-	
+
 	// Attempt to call Quicksand on every click event handler
 	$(".filter a").click(function(e){
-		
-		$(".filter li").removeClass("current");	
-		
+
+		$(".filter li").removeClass("current");
+
 		// Get the class attribute value of the clicked link
 		var $filterClass = $(this).parent().attr("class");
 
@@ -1545,20 +1545,20 @@ $(function(){
 		} else {
 			var $filteredPortfolio = $portfolioClone.find("li[data-type~=" + $filterClass + "]");
 		}
-		
+
 		// Call quicksand
-		$(".portfolio").quicksand( $filteredPortfolio, { 
-			duration: 800, 
-			easing: 'easeInOutQuad' 
+		$(".portfolio").quicksand( $filteredPortfolio, {
+			duration: 800,
+			easing: 'easeInOutQuad'
 		}, function(){
-			
+
 			// Blur newly cloned portfolio items on mouse over and apply prettyPhoto
-			$(".portfolio a").hover( function(){ 
-				$(this).children("img").animate({ opacity: 0.75 }, "fast"); 
-			}, function(){ 
-				$(this).children("img").animate({ opacity: 1.0 }, "slow"); 
-			}); 
-			
+			$(".portfolio a").hover( function(){
+				$(this).children("img").animate({ opacity: 0.75 }, "fast");
+			}, function(){
+				$(this).children("img").animate({ opacity: 1.0 }, "slow");
+			});
+
 		});
 
 
@@ -1621,66 +1621,66 @@ $(function() {
 				remote: jQuery.format("{0} is already in use")
 			}
 		},
-		
+
 		// set this class to error-labels to indicate valid fields
 		success: function(label) {
 			// set &nbsp; as text for IE
 			label.html("&nbsp;").addClass("checked");
 		}
 	});
-	
-	
+
+
 
 });
-	
-	
 
-			
+
+
+
 	/*======================
 	DATA TABLE
 	========================*/
 	$(function() {
-	 $('.data_tbl').dataTable({   
+	 $('.data_tbl').dataTable({
 	"sPaginationType": "full_numbers",
 	"iDisplayLength": 10,
 	"oLanguage": {
-        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
+        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>"
     },
 	 "sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
-	 
+
 	});
 	$("div.table_top select").addClass('tbl_length');
 	$(".tbl_length").chosen({
-		disable_search_threshold: 4	
+		disable_search_threshold: 4
 	});
-		
+
 	});
-	
-	
+
+
 	$(function() {
-	
-	$('#data_tbl_tools').dataTable({   
+
+	$('#data_tbl_tools').dataTable({
 "sPaginationType": "full_numbers",
 					"iDisplayLength": 10,
 					"oLanguage": {
-					"sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
+					"sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>"
 					},
 					"sDom":  '<"table_top"fl<"clear">>,<"tbl_tools"CT<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>',
-				
+
 					"oTableTools": {
 						"sSwfPath": "swf/copy_cvs_xls_pdf.swf"
 					}
 				} );
 					$("div.table_top select").addClass('tbl_length');
 					$(".tbl_length").chosen({
-						disable_search_threshold: 4	
-					});		
+						disable_search_threshold: 4
+					});
 	});
-	
 
-	
+
+
 	$(function() {
-	$('#action_tbl').dataTable({   
+	$('#action_tbl').dataTable({
 	 "aoColumnDefs": [
 						{ "bSortable": false, "aTargets": [ 0 , 7 ] }
 					],
@@ -1688,36 +1688,36 @@ $(function() {
 	"sPaginationType": "full_numbers",
 	"iDisplayLength": 10,
 	"oLanguage": {
-        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
+        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>"
     },
 	 "sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
-	 
+
 	});
 	$("div.table_top select").addClass('tbl_length');
 	$(".tbl_length").chosen({
-		disable_search_threshold: 4	
+		disable_search_threshold: 4
 	});
-		
+
 	});
-	
+
 	$(function() {
-	
-	$('.data_editable').dataTable({   
+
+	$('.data_editable').dataTable({
 	"sPaginationType": "full_numbers",
 	"iDisplayLength": 10,
 	"oLanguage": {
-        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
+        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>"
     },
 	 "sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
 	  /*
         "fnDrawCallback": function () {
             $('.data_editable tbody td').editable();
         },*/
-	 
+
 	});
 	$("div.table_top select").addClass('tbl_length');
 	$(".tbl_length").chosen({
-		disable_search_threshold: 4	
+		disable_search_threshold: 4
 	});
 	    /* Apply the jEditable handlers to the table */
     $('.data_editable td').editable( '../examples_support/editable_ajax.php', {
@@ -1731,14 +1731,14 @@ $(function() {
                 "column": oTable.fnGetPosition( this )[2]
             };
         }
-    } );		
-			
+    } );
+
 	});
-	
-	
+
+
 	$(function() {
-	
-	$('.data_tbl_search').dataTable({   
+
+	$('.data_tbl_search').dataTable({
 	  "bPaginate": false,
         "bLengthChange": false,
         "bFilter": true,
@@ -1746,17 +1746,17 @@ $(function() {
         "bInfo": false,
         "bAutoWidth": false,
 	"oLanguage": {
-        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
+        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",
     },
 	 "sDom": '<"table_top"fl<"clear">>,<"table_content"t>'
-	 
-	});		
-		
-	
-	
+
 	});
-	
-	
+
+
+
+	});
+
+
 	/* Formating function for row details */
 function fnFormatDetails ( oTable, nTr )
 {
@@ -1766,32 +1766,32 @@ function fnFormatDetails ( oTable, nTr )
     sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
     sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
     sOut += '</table>';
-     
+
     return sOut;
 }
- 
+
 $(function() {
     /*
      * Insert a 'details' column to the table
      */
     var nCloneTh = document.createElement( 'th' );
     var nCloneTd = document.createElement( 'td' );
-    nCloneTd.innerHTML = '<img src="images/details_open.png">';
+    nCloneTd.innerHTML = '<img src="'+appPath+'"/images/details_open.png">';
     nCloneTd.className = "center";
-     
+
     $('.tbl_details thead tr').each( function () {
         this.insertBefore( nCloneTh, this.childNodes[0] );
     } );
-     
+
     $('.tbl_details tbody tr').each( function () {
         this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
     } );
-     
+
     /*
      * Initialse DataTables, with no sorting on the 'details' column
      */
     var oTable = $('.tbl_details').dataTable( {
-		
+
         "aoColumnDefs": [
             { "bSortable": false, "aTargets": [ 0 ] }
         ],
@@ -1799,18 +1799,18 @@ $(function() {
 		"sPaginationType": "full_numbers",
 	"iDisplayLength": 10,
 	"oLanguage": {
-        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
+        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>"
     },
 	 "sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
 
-		
-		
+
+
     });
 	$("div.table_top select").addClass('tbl_length');
 	$(".tbl_length").chosen({
-		disable_search_threshold: 4	
+		disable_search_threshold: 4
 	});
-     
+
     /* Add event listener for opening and closing details
      * Note that the indicator for showing which row is open is not controlled by DataTables,
      * rather it is done here
@@ -1820,28 +1820,28 @@ $(function() {
         if ( oTable.fnIsOpen(nTr) )
         {
             /* This row is already open - close it */
-            this.src = "images/details_open.png";
+            this.src = appPath + "/images/details_open.png";
             oTable.fnClose( nTr );
         }
         else
         {
             /* Open this row */
-            this.src = "images/details_close.png";
+            this.src = appPath + "/images/details_close.png";
             oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
         }
     } );
 } );
-	
+
 
 
 
  $(function() {
                 /* tells us if we dragged the box */
                 var dragged = false;
-				
+
                 /* timeout for moving the mox when scrolling the window */
                 var moveBoxTimeout;
-				
+
                 /* make the actionsBox draggable */
                 $('#actionsBox').draggable({
                     start: function(event, ui) {
@@ -1856,7 +1856,7 @@ $(function() {
                         $actionsBox.data('distanceTop',parseFloat($actionsBox.css('top'),10) - $(document).scrollTop());
                     }
                 });
-				
+
                 /*
                 when clicking on an input (checkbox),
                 change the class of the table row,
@@ -1870,7 +1870,7 @@ $(function() {
                         $this.parents('tr:first').removeClass('selected');
                     showActionsBox();
                 });
-				
+
                 function showActionsBox(){
                     /* number of checked inputs */
                     var BoxesChecked = $('#action_tbl input:checked').length;
@@ -1904,7 +1904,7 @@ $(function() {
                         });
                     }
                 }
-				
+
                 /*
                 when scrolling, move the box to the right place
                  */
@@ -1912,7 +1912,7 @@ $(function() {
                     clearTimeout(moveBoxTimeout);
                     moveBoxTimeout = setTimeout(showActionsBox,500);
                 });
-				
+
                 /* open sub box menu for other actions */
                 $('#toggleBoxMenu').toggle(
                 function(e){
@@ -1924,7 +1924,7 @@ $(function() {
                     $('#actionsBox .submenu').stop(true,true).slideUp();
                 }
             );
-				
+
                 /*
                 close the actions box menu:
                 hides it, and then removes the element from the DOM,
@@ -1935,7 +1935,7 @@ $(function() {
                         $(this).remove();
                     });
                 });
-				
+
                 /*
                 as an example, for all the actions (className:box_action)
                 alert the values of the checked inputs
@@ -1949,4 +1949,3 @@ $(function() {
                     alert('checked inputs:\n'+ids);
                 });
             });
-			

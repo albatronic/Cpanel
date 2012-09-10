@@ -1,26 +1,63 @@
+{#
+    MACROS DE USO COMUN EN TODO EL PROYECTO
 
+    TODAS LAS MACROS LLEVAN UN CONTROL DE VISIBILIDAD, DE TAL FORMA
+    QUE SI EL 'FLAG' DE VISIBILIDAD ES FALSE, LA MACRO NO SE EJECUTA
+
+    ESTO SE CONSIGUE CON EL PARAMETRO 'atributos' QUE ES UN ARRAY DE N ELEMENTOS,
+    POR EL MOMENTO SON:
+
+        caption     : El texto que se utiliza para construir el LABEL
+
+        visible     : Es el flag de visibilidad, si vale '1' se ejecuta la macro
+
+        varEnv      : Es una flag que indica si se debe o no mostrar el link para las variables de entorno
+                      Si está vacio, se muestra (siempre y cuando el usuario tenga permisos)
+
+        default     : El valor por defecto. No se está usando hasta el momento
+
+        permission  : String con los permisos. Aquí tampoco se usan
+
+
+    @author: Sergio Pérez <sergio.perez@albatronic.com>
+    @date: 9-sep-2012
+    @copyright: Informática ALBATRONIC, SL
+
+#}
 
 {# label: MUESTRA UN <DIV> CONTENIENDO EL TEXTO value Y APLICANDO LA CLASE class #}
 {# ----------------------------------------------------------------------------- #}
-{% macro label(value,class) %}
-<label class="{{ class|default('field_title') }}">{{ value }}</label>
+{% macro label(atributos, class, name, id) %}
+<label class="{{ class|default('field_title') }}"
+    {% if (atributos.varEnv == '') and (user.getIdPerfil.Id == '1') %}
+         style="cursor: pointer;"
+         title='Editar Variables de Entorno de {{name}}' alt='Variables de Entorno de {{name}}'
+         onclick="switchVariablesEnv('div_formVariablesEnv','Mod','{{id}}');"
+    {% endif %}
+    >
+    {{ atributos.caption }}
+</label>
 {% endmacro %}
 
 {# input: MUESTRA UN <INPUT> #}
 {# ------------------------- #}
-{% macro input(label,classLabel, type, name, id, value, maxLength, class, tabindex, extra, onchange) %}
+{% macro input(atributos, classLabel, type, name, id, value, maxLength, class, tabIndex, extra, onchange) %}
+{% if atributos.visible == '1' %}
 <li>
     <div class="form_grid_12" id="div_{{id|default(name)}}">
-    {% if label %}
-        {{ _self.label(label,classLabel) }}
+
+    {% if atributos.caption %}
+        {{ _self.label(atributos, classLabel, name, id) }}
     {% endif %}
+
     <div class="form_input">
     <input type="{{ type|default('text') }}" name="{{ name }}" id="{{ id|default(name)}}"
            value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
-           class="tip_top" title="{{ tip }}" tabindex="{{ tabindex }}" onchange="{{ onchange }}" {{extra}} />
-</div>
+           class="tip_top" title="{{ tip }}" tabindex="{{ tabIndex }}" onchange="{{ onchange }}" {{extra}} />
+    </div>
     </div>
 </li>
+{% endif %}
 {% endmacro %}
 
 {# cc: CUENTA CORRIENTE #}
@@ -58,26 +95,39 @@
 
 {# cif: MUESTRA UN <INPUT> #}
 {# ------------------------- #}
-{% macro cif(label,classLabel, type, name, id, value, class) %}
+{% macro cif(atributos,classLabel, type, name, id, value, class) %}
+{% if atributos.visible == '1'%}
+<li>
+    <div class="form_grid_12" id="div_{{id|default(name)}}">
 
-<div class="Item" id="div_{{id}}">
-    {% if label %}
-        {{ _self.label(label,classLabel) }}
+    {% if atributos.caption %}
+        {{ _self.label(atributos, classLabel, name, id) }}
     {% endif %}
-    <input type="{{ type|default('text') }}" name="{{ name }}"  id="{{ id|default(name)}}"
-           value="{{ value }}" class="{{ class }}" maxlength="15"
-           onchange="ValidaNif('manto','{{name}}');" />
-</div>
+
+    <div class="form_input">
+        <input type="{{ type|default('text') }}" name="{{ name }}" id="{{ id|default(name)}}"
+           value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
+           class="tip_top" title="{{ tip }}" tabindex="{{ tabIndex }}"
+           onchange="ValidaNif('manto','{{name}}');"
+           {{extra}}
+        />
+    </div>
+    </div>
+</li>
+{% endif %}
 {% endmacro %}
 
 {# textarea: MUESTRA UN <TEXTAREA> #}
 {# ------------------------------- #}
-{% macro textarea(label, classLabel, name, id, value, rows, cols, class, tabindex) %}
+{% macro textarea(atributos, classLabel, name, id, value, rows, cols, class, tabindex) %}
+{% if atributos.visible == '1' %}
 <li>
 <div class="form_grid_12" id="div_{{id|default(name)}}">
-    {% if label %}
-        {{ _self.label(label,classLabel) }}
+
+    {% if atributos.caption %}
+        {{ _self.label(atributos, classLabel, name, id) }}
     {% endif %}
+
     <div class="form_input">
         <textarea  name="{{ name }}"
                    id="{{ id|default(name)}}"
@@ -90,21 +140,24 @@
 </div>
 </div>
 </li>
+{% endif %}
 {% endmacro %}
 
 {# select: MUESTRA UN <SELECT> #}
 {# --------------------------- #}
-{% macro select(label, classLabel, name, id, width, defecto, opciones, class, tabindex, popup, onchange, onblur) %}
+{% macro select(atributos, classLabel, name, id, width, defecto, opciones, class, tabindex, popup, onchange, onblur) %}
+{% if atributos.visible == '1' %}
 <li>
     <div class="form_grid_12" id="div_{{id|default(name)}}">
-    {% if label %}
-        {{ _self.label(label,classLabel) }}
-    {% endif %}
-        <div class="form_input">
 
-            <select data-placeholder="Indique un valor" name="{{ name }}" id="{{ id|default(name)}}" style=" width:{{ width|default(200) }}px;" class="{{ class|default('chzn-select') }}" onchange="{{onchange}}" onblur="{{onblur}}" tabindex="{{tabindex}}" >
+    {% if atributos.caption %}
+        {{ _self.label(atributos, classLabel, name, id) }}
+    {% endif %}
+
+    <div class="form_input">
+    <select data-placeholder="Indique un valor" name="{{ name }}" id="{{ id|default(name)}}" style="width:{{width|default(200)}}px;" class="{{ class|default('chzn-select') }}" onchange="{{onchange}}" onblur="{{onblur}}" tabindex="{{tabindex}}" >
         {% for value in opciones %}
-                    <option value="{{ value.Id }}" {% if (value.Id==defecto) %} SELECTED {% endif %}>
+            <option value="{{ value.Id }}" {% if (value.Id==defecto) %} SELECTED {% endif %}>
                 {{value.Value}}
             </option>
         {% endfor %}
@@ -112,10 +165,10 @@
     {% if popup %}
         {{ _self.linkimg(popup) }}
     {% endif %}
-</div>
+    </div>
     </div>
 </li>
-
+{% endif %}
 {% endmacro %}
 
 {# img: MUESTRA UNA IMAGEN #}
@@ -137,15 +190,18 @@
 {% endmacro%}
 
 {# fecha: MUESTRA UN INPUT DE TIPO FECHA. UTILIZA UN POPUP DE CALENDARIO #}
-{% macro fecha(label, classLabel, name, id, value, size, class, tabindex, extra) %}
+{% macro fecha(atributos, classLabel, name, id, value, size, class, tabindex, extra) %}
+{% if atributos.visible == '1' %}
 <li>
     <div class="form_grid_12" id="div_{{id|default(name)}}">
-{% if label %}
-    {{ _self.label(label,classLabel) }}
-{% endif %}
-        <div class="form_input">
-            <div class=" form_grid_2 alpha">
-                <input name="{{name}}"
+
+    {% if atributos.caption %}
+        {{ _self.label(atributos, classLabel, name, id) }}
+    {% endif %}
+
+    <div class="form_input">
+        <div class=" form_grid_2 alpha">
+            <input name="{{name}}"
                        id="{{id|default(name)}}"
                        type="text"
                        value="{{value}}"
@@ -154,12 +210,13 @@
                        {#onKeyUp="this.value=formateafecha(this.value);"#}
                        tabindex="{{tabindex}}"
                        {{extra}}
-    />
-</div>
-            <span class="clear"></span>
+            />
+        </div>
+        <span class="clear"></span>
         </div>
     </div>
 </li>
+{% endif%}
 {% endmacro %}
 
 {# foco: PONE EL FOCO EN EL ID INDICADO #}
