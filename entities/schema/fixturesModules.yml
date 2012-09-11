@@ -10,17 +10,12 @@ CoreFuncionalidades:
 
 CoreAplicaciones:
   Index: { CodigoApp: Index, NombreApp: Index }
-  Core : { CodigoApp: Core,  NombreApp: Aplicacion Core }
   Enl  : { CodigoApp: Enl,   NombreApp: Enlaces de Interes }
   Auto : { CodigoApp: Auto,  NombreApp: Autoescuelas }
 
 CoreModulos:
   Index1: { CodigoApp: Index, NombreModulo: Index,           Nivel: 0, BelongsTo: 0,    Publish: 0, Titulo: Index, Funcionalidades: 'AC,VW' }
   Index2: { CodigoApp: Index, NombreModulo: IndexContenidosFijos, Nivel: 1, BelongsTo: Index, Publish: 1, Titulo: Gestión de Contenidos Fijos, Funcionalidades: AC }
-
-  Core1: { CodigoApp: Core, NombreModulo: Core,             Nivel: 0, BelongsTo: 0,    Publish: 0, Titulo: Core, Funcionalidades: 'AC' }
-  Core2: { CodigoApp: Core, NombreModulo: CoreAplicaciones, Nivel: 1, BelongsTo: Core, Publish: 0, Titulo: Gestión de Apps, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Core3: { CodigoApp: Core, NombreModulo: CoreImagenes,     Nivel: 1, BelongsTo: Core, Publish: 0, Titulo: Gestión de Imágenes, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
 
   Enl1: { CodigoApp: Enl,  NombreModulo: Enl,           Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Enl, Funcionalidades: AC }
   Enl2: { CodigoApp: Enl,  NombreModulo: EnlSecciones,  Nivel: 1, BelongsTo: Enl,  Publish: 1, Titulo: Secciones, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
@@ -34,14 +29,9 @@ CorePermisos:
   Index1: { IdPerfil: 1, NombreModulo: Index, Funcionalidades: 'AC,VW' }
   Index2: { IdPerfil: 1, NombreModulo: IndexContenidosFijos, Funcionalidades: 'AC,UP'}
 
-  Core1: { IdPerfil: 1, NombreModulo: Core, Funcionalidades: 'AC,VW' }
-  Core2: { IdPerfil: 1, NombreModulo: CoreAplicaciones, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Core3: { IdPerfil: 1, NombreModulo: CoreAplicaciones, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
-
   Enl1: { IdPerfil: 1, NombreModulo: Enl, Funcionalidades: 'AC,VW' }
   Enl2: { IdPerfil: 1, NombreModulo: EnlSecciones, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
   Enl3: { IdPerfil: 1, NombreModulo: EnlEnlaces, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
-
 
   Enl11: { IdPerfil: 2, NombreModulo: Enl, Funcionalidades: 'AC,VW' }
   Enl21: { IdPerfil: 2, NombreModulo: EnlSecciones, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}

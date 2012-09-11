@@ -16,7 +16,7 @@ class CoreVariables {
     protected $titulo;
     protected $template;
     protected $pathProject;
-    protected $errores = array();
+    protected $errores;
     protected $ok = FALSE;
 
     /**
@@ -110,8 +110,9 @@ class CoreVariables {
     }
 
     /**
-     * Actualiza un nodo del objeto
-     * NO GUARDA, la actualización se produce el array que está en memoria
+     * Actualiza un nodo del objeto.
+     *
+     * NO GUARDA, la actualización se produce el array que está en memoria.
      *
      * @param string $nombreNodo El nombre del nodo
      * @param array $nodo Array con los valores del nodo
@@ -150,6 +151,7 @@ class CoreVariables {
     public function setColumn($nombreColumna, array $valores) {
         $this->objeto['datos']['columns'][$nombreColumna] = $valores;
     }
+
     /**
      * Almacena las variables en un archivo en base a
      * lo contenido en $this->objeto
@@ -171,7 +173,7 @@ class CoreVariables {
         $archivo = new Archivo($this->objeto['pathYml']);
         $ok = $archivo->write($datosYml);
         if (!$ok)
-            $this->errores[] = "Error al crear el archivo {$this->objeto['pathYml']}";
+            $this->errores = $archivo->getErrores();
         unset($archivo);
 
         return $ok;
@@ -183,12 +185,15 @@ class CoreVariables {
      */
     public function delete() {
 
-        $ok = @unlink($this->objeto['pathYml']);
-
-        if (!$ok) $this->errores[] = "Error al borrar el archivo {$this->objeto['pathYml']}";
+        $archivo = new Archivo($this->objeto['pathYml']);
+        $ok = $archivo->delete();
+        if (!$ok)
+            $this->errores = $archivo->getErrores();
+        unset($archivo);
 
         return $ok;
     }
+
     /**
      * Devuelve un array con los errores producidos
      *
@@ -230,7 +235,7 @@ class CoreVariables {
 
                 case 'Mod':
                     //$archivoDatos = "/modules/{$objeto['nombre']}/var_{$objeto['nombre']}";
-                    $archivoDatos = "/modules/{$objeto['nombre']}/var";
+                    $archivoDatos = "/config/varMod_{$objeto['nombre']}";
                     $modulo = new CoreModulos();
                     $modulo = $modulo->find('NombreModulo', $objeto['nombre']);
                     $this->titulo = 'Variables ' . $objeto['tipo'] . ' del Módulo "' . $modulo->getTitulo() . '"';

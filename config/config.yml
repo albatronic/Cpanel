@@ -69,15 +69,6 @@ config:
   #
   # EN PRODUCCION EL FOLDER SERÁ "/"
   conections:
-    cpanel:
-      title: Modo local, todos los proyectos
-      description:
-      folder:
-      dbEngine: mysql
-      host: localhost
-      user: cpanel
-      password: cpanel
-      database: cpanel
     kaia:
       title: La página de kaia
       description:

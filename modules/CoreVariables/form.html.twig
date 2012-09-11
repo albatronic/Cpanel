@@ -29,14 +29,16 @@
 		{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 
 		<ul>
-                    {% if values.templateComun != '' %}
-                        {% include values.templateComun with {'datos': values.datos }%}
-                    {% endif %}
-
-                    {% block variables %}
-                    {% endblock %}
+                    {% include values.template %}
 		</ul>
 
+		<ul>
+                    <h4>CREAR VARIABLE</h4>
+                    {{ macro.input({'caption':'Nombre','visible':'1','varEnv':'0'},'field_title','text','nueva[name]','nueva_name',none,'25','CampoTextoCorto','1') }}
+                    {{ macro.input({'caption':'Caption','visible':'1','varEnv':'0'},'field_title','text','nueva[caption]','nueva_caption',none,'25','CampoTextoCorto','1') }}
+                    {{ macro.input({'caption':'Valor','visible':'1','varEnv':'0'},'field_title','text','nueva[value]','nueva_value',none,'25','CampoTextoCorto','1') }}
+                    <input name="" type="submit" value="Crear" onclick="getElementById('action_{{ values.controller }}').value='new'; submitForm('manto_{{ values.controller }}');" />
+                </ul>
 	</form>
         </div>
         </div>

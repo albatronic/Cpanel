@@ -51,10 +51,12 @@ class CoreVariablesController {
 
         $this->values['ayuda'] = $this->form->getHelpFile();
 
-        // Desactivo los permisos de creación
-        $this->values['permisos']['IN'] = FALSE;
-        $this->values['permisos']['DE'] = TRUE;
-        $this->values['permisos']['UP'] = TRUE;
+        // LE DOY PERMISOS SOLO AL SUPER
+        if ($_SESSION['USER']['user']['IdPerfil'] == 1) {
+            $this->values['permisos']['IN'] = FALSE;
+            $this->values['permisos']['DE'] = TRUE;
+            $this->values['permisos']['UP'] = TRUE;
+        }
 
         $this->values['request'] = $this->request;
 
@@ -89,8 +91,13 @@ class CoreVariablesController {
 
         if ($tipo == '')
             $tipo = $this->request[1];
+        if ($tipo == '')
+            $tipo = 'Env';
+
         if ($ambito == '')
             $ambito = $this->request[2];
+        if ($ambito == '')
+            $ambito = 'Pro';
         if ($nombre == '')
             $nombre = $this->request[3];
 
@@ -101,12 +108,10 @@ class CoreVariablesController {
         );
 
         $variables = new CoreVariables($objeto);
-        $this->values['errores'] = $variables->getErrores();
+        $this->values['errores'] = array_merge((array) $this->values['errores'], (array) $variables->getErrores());
         $datos = $variables->getDatosYml();
 
         if ($ambito == 'Mod') {
-
-            $templateComun = 'CoreVariables/varMod' . $tipo . '.html.twig';
 
             switch ($tipo) {
                 case 'Env':
@@ -156,19 +161,19 @@ class CoreVariablesController {
             }
         }
 
-        $template = $variables->getTemplate();
-        
+        //$template = $variables->getTemplate();
+
         $this->values['tipo']   = $tipo;
         $this->values['ambito'] = $ambito;
         $this->values['nombre'] = $nombre;
         $this->values['titulo'] = $variables->getTitulo();
         $this->values['archivoDatos'] = $variables->getPathYml();
         $this->values['datos'] = $datos;
-        $this->values['templateComun'] = $templateComun;
+        $this->values['template'] = 'CoreVariables/varMod' . $tipo . '.html.twig';
         unset($variables);
 
         return array(
-            'template' => $template,
+            'template' => $this->entity . "/form.html.twig", //$templateComun,
             'values' => $this->values,
         );
     }
@@ -183,12 +188,30 @@ class CoreVariablesController {
                 'nombre' => $this->request['nombre'],
             );
 
+            if ($ambito == 'Mod')
+                $templateComun = 'CoreVariables/varMod' . $tipo . '.html.twig';
+
             switch ($this->request['accion']) {
 
                 case 'Guardar':
                     if ($this->values['permisos']['UP']) {
                         $variables = new CoreVariables($objeto);
                         $variables->setDatosYml($this->request['datos']);
+                        $variables->save();
+                        $this->values['errores'] = $variables->getErrores();
+                        unset($variables);
+
+                        return $this->indexAction($objeto['tipo'], $objeto['ambito'], $objeto['nombre']);
+                    } else {
+                        return array('template' => '_global/forbiden.html.twig', 'values' => $this->values);
+                    }
+
+                    break;
+
+                case 'Guardar Columna':
+                    if ($this->values['permisos']['UP']) {
+                        $variables = new CoreVariables($objeto);print_r($this->request);
+                        $variables->setNode($this->request['columna'], $this->request['datos']);
                         $variables->save();
                         $this->values['errores'] = $variables->getErrores();
                         unset($variables);
@@ -216,6 +239,47 @@ class CoreVariablesController {
             }
         } else
             return array('template' => '_global/forbiden.html.twig', array());
+    }
+
+    /**
+     * Crea un registro nuevo
+     *
+     * Si viene por GET muestra un template vacio
+     * Si viene por POST crea un registro
+     *
+     * @return array con el template y valores a renderizar
+     */
+    public function newAction() {
+
+        if ($_SESSION['USER']['user']['IdPerfil'] == 1) {
+            $objeto = array(
+                'tipo' => $this->request['tipo'],
+                'ambito' => $this->request['ambito'],
+                'nombre' => $this->request['nombre'],
+            );
+            $variables = new CoreVariables($objeto);
+            $template = $variables->getTemplate();
+
+            $this->values['tipo'] = $this->request['tipo'];
+            $this->values['ambito'] = $this->request['ambito'];
+            $this->values['nombre'] = $this->request['nombre'];
+            $this->values['titulo'] = $variables->getTitulo();
+            $this->values['archivoDatos'] = $variables->getPathYml();
+
+            $datos = $this->request['datos'];
+            $nueva = $this->request['nueva'];
+            $datos[$nueva['name']] = array(
+                'caption' => $nueva['caption'],
+                'value' => $nueva['value'],
+            );
+            $variables->setDatosYml($datos);
+            $variables->save();
+            $this->errores = $variables->getErrores();
+            unset($variables);
+            return $this->indexAction($objeto['tipo'], $objeto['ambito'], $objeto['nombre']);
+        } else {
+            return array('template' => '_global/forbiden.html.twig', 'values' => $this->values);
+        }
     }
 
 }

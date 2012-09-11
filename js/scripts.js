@@ -19,9 +19,18 @@ $(function() {
     $( "#accordion" ).accordion({
         autoHeight: false,
         navigation: true,
-        collapsible: true
+        collapsible: true,
+        animated: 'bounceslide'
     });
 });
+
+function guardarVariables(valores) {
+
+    var nValores = valores.length;
+
+    alert(nValores);
+}
+
 
 /**
  * Oculta (si existe) el elemento html id

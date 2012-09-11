@@ -6,6 +6,7 @@
     date 7-SEP-2012 18:02
 #}
 
-
-{{ macro.input('Número Noticias en Portada','field_title','text','datos[numNewsHome]','datos_numNewsHome',datos.numNewsHome,'15','CampoTextoCorto','1') }}
-{{ macro.input('Criterio Orden','field_title','text','datos[OrderCriteria]','datos_OrderCriteria',datos.OrderCriteria,'15','CampoTextoCorto','1') }}
+{% for name,atributos in values.datos %}
+    <input name="datos[{{name}}][caption]" value="{{atributos.caption}}" type="hidden" />
+    {{ macro.input({'caption':'['~name~'] '~atributos.caption,'visible':'1','varEnv':'0'},'field_title','text','datos['~name~'][value]',none,atributos.value,'50','CampoTextoCorto','1') }}
+{% endfor %}

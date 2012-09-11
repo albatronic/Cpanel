@@ -53,9 +53,10 @@ spl_autoload_register(array('Autoloader', 'loadClass'));
 $modulo = $_GET['modulo'];
 $columna = $_GET['columna'];
 $tipo = 'Env';
+$ambito = 'Mod';
 
 $objeto = array(
-    'ambito' => 'Mod',
+    'ambito' => $ambito,
     'tipo' => $tipo,
     'nombre' => $modulo,
 );
@@ -65,40 +66,62 @@ $archivoYml = $variables->getPathYml();
 $variablesColumna = $variables->getColumn($columna);
 unset($variables);
 
+$valores = new ValoresSN();
+$listaValoresSN = $valores->fetchAll(0);
+unset($valores);
+
 if (is_array($variablesColumna)) {
     //Leer la plantilla para el formulario
-    $plantillaHtml = new Archivo($_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/modules/_global/plantillaFormAjax.html.twig");
+    $plantillaHtml = new Archivo($_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/modules/CoreVariables/plantillaFormAjax.html.twig");
     $html = $plantillaHtml->read();
     unset($plantillaHtml);
 
     $titulo = "Variables {$tipo} de '{$columna}'";
+    // Construir el <input> de cada variable de entorno
     foreach ($variablesColumna as $key => $value) {
-        $tag .= "<div class='form_grid_12'>\n
+        $tag .= "<li>\n<div class='form_grid_12'>\n
                  \t<label class='field_title'>{$key}</label>\n
                  \t<div class='form_input'>\n";
 
-        $tag .= "<input type='text' name='datos[{$key}]' id='{$key}' value='{$value}' size='10'>\n";
+        switch ($key) {
+            case 'visible':
+            case 'updatable':
+                $listaValores = $listaValoresSN;
+                break;
+            default:
+                $listaValores = '';
+        }
 
-        $tag .= "\t</div>\n</div>\n";
+        if ($listaValores) {
+            $tag .= "<select name='datos[{$key}]' id='{$key}' class='chzn-select'>\n";
+            foreach ($listaValoresSN as $valueLista) {
+                $tag .= "<option value='{$valueLista['Id']}'";
+                if ($value == $valueLista['Id']) $tag .= " SELECTED";
+                $tag .= ">{$valueLista['Value']}</option>\n";
+            }
+            $tag .= "</select>\n";
+        } else {
+            $tag .= "<input type='text' name='datos[{$key}]' id='{$key}' value='{$value}' size='10'>\n";
+        }
+
+        $tag .= "\t</div>\n</div>\n</li>\n";
+
+        $valoresAjax .= "";
     }
 
 
     // Poner el código generado en la plantilla
     $html = str_replace('{{values.variables}}', $tag, $html);
     $html = str_replace('{{values.titulo}}', $titulo, $html);
-    $html = str_replace('{{values.controller}}', $modulo, $html);
-    $html = str_replace('{{values.modulo}}', $modulo, $html);
     $html = str_replace('{{values.tipo}}', $tipo, $html);
     $html = str_replace('{{values.ambito}}', $ambito, $html);
+    $html = str_replace('{{values.nombre}}', $modulo, $html);
     $html = str_replace('{{values.columna}}', $columna, $html);
-    $html = str_replace('{{values.archivoYml}}', $archivoYml, $html);
+    $html = str_replace('{{values.archivoDatos}}', $archivoYml, $html);
+    $html = str_replace('{{values.valoresAjax}}', json_encode($variablesColumna), $html);
 } else
     $html = "<p>No se ha podido localizar el archivo de variables ({$archivoYml}) , puede que aún no haya sido inicializado</p>";
 
 
-/**
- * DEVUELVE EL SELECT CONSTRUIDO
- */
 echo $html;
-//------------------------------------------------------------------------------
 ?>

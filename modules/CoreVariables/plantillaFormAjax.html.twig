@@ -1,0 +1,29 @@
+<div style="text-align: center;"><h4>{{values.titulo}}</h4></div>
+
+<div class="grid_container">
+    <div class="grid_12 full_block">
+        <div class="widget_wrap">
+        <div class="widget_content">
+	<div class="form_container left_label">
+		<input name="controller" value="CoreVariables" type="hidden" />
+                <input name="action" id="action_CoreVariables" value="Edit" type="hidden" />
+                <input name="tipo" value="{{values.tipo}}" type="text" />
+                <input name="ambito" value="{{values.ambito}}" type="text" />
+                <input name="nombre" value="{{values.nombre}}" type="text" />
+                <input name="columna" value="{{values.columna}}" type="text" />
+                <input name="archivoDatos" value="{{values.archivoDatos}}" type="text" readonly/>
+
+		<ul>
+                    {{values.variables}}
+		</ul>
+{{values.valoresAjax}}
+                <div style="margin-top: 10px; margin-bottom: 5px; text-align: center;">
+                    <button onclick="guardarVariables({{values.valoresAjax}});">Guardar</button>
+                    <button onclick="guardarVariables([ ['primero',['a','b','c']], ['segundo','d'] ]);">Guardar</button>
+                    <button onclick="ocultarElemento('div_formVariablesEnv');">Cerrar</button>
+                </div>
+	</div>
+        </div>
+        </div>
+    </div>
+</div>

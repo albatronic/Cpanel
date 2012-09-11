@@ -345,7 +345,12 @@ class Archivo {
      * @return boolean TRUE si se abrió con éxito
      */
     public function open($mode = "r") {
-        $this->fp = fopen($this->fullPath, $mode);
+
+        $this->fp = @fopen($this->fullPath, $mode);
+
+        if (!$this->fp)
+            $this->errores[] = "Error al acceder al archivo {$this->fullPath}";
+
         return ($this->fp != false);
     }
 
@@ -381,6 +386,21 @@ class Archivo {
             $ok = fwrite($this->fp, $datos);
             $this->close();
         }
+
+        return $ok;
+    }
+
+    /**
+     * Borra físicamente el archivo
+     *
+     * @return boolean TRUE si se borró
+     */
+    public function delete() {
+
+        $ok = @unlink($this->fullPath);
+
+        if (!$ok)
+            $this->errores[] = "Error al borrar el archivo {$this->fullPath}";
 
         return $ok;
     }
