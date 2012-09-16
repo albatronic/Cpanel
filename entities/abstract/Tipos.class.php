@@ -42,10 +42,11 @@ class Tipos {
      * Si el parametro $default es TRUE, se añade un elemento más
      * a la lista con Id vacío y Value = ':: Indique valor'
      *
+     * @param string $nada Sin uso, es para compatibilizar la llamada al método con los demás fetchAll
      * @param boolean $default Si es TRUE se añade a la lista un elemento vacio
      * @return array Array de valores
      */
-    public function fetchAll($default = true) {
+    public function fetchAll($nada, $default = true) {
 
         if ($default)
             $this->tipos[] = array('Id' => '', 'Value' => ':: Indique valor');

@@ -1,12 +1,18 @@
 {#
-    VARIABLES DE ENTORNO COMUNES A TODOS LOS MODULOS +
-    LAS DE LAS COLUMNAS DE LA ENTIDAD CONCRETA QUE VIENEN EN values.columnas
+    VARIABLES DE ENTORNO COMUNES A TODOS LOS MODULOS. VIENEN EN values.datos +
+    LAS DE LAS COLUMNAS DE LA ENTIDAD CONCRETA. VIENEN EN values.datos.columns +
+    LAS ESPECIFICAS DE CADA MODULO QUE ESTAN DEFINIDAS EN modules/NOMBREMODULO/varEnv.yml. VIENEN EN values.datos.especificas +
+    LAS DE CONTROL DE VISIBILIDAD DE LAS VARIABLES WEB. VIENEN EN values.datos.showVarWeb
+
 
     author Sergio Pérez <sergio.perez@albatronic.com>
     copyright Informática ALBATRONIC, SL
     date 7-SEP-2012 18:02
 #}
 
+{% extends 'CoreVariables/form.html.twig' %}
+
+{% block template %}
 
 {# DEFINICION DE CONSTANTE CUYOS VALORES PUEDEN SER ADQUIRIDOS POR LOS CAMPOS ------------------------ #}
 
@@ -20,15 +26,17 @@
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 
         <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Global</a></li>
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-urlAmigable">URL Amigable</a></li>
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-siteMap">SiteMap</a></li>
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-meta">Meta</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-urlAmigable">URL Amigable</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-siteMap">SiteMap</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-meta">Meta</a></li>
 
         {% for i in 1..nImagenes %}
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-imagen{{i}}">Imagen {{i}}</a></li>
+        <li class="ui-state-default ui-corner-tope"><a href="#tabs-imagen{{i}}">Imagen {{i}}</a></li>
         {% endfor %}
 
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-columnas">Columnas</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-columnas">Columnas</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-varWeb">VW</a></li>
     </ul>
 
     {# GLOBAL #}
@@ -63,10 +71,10 @@
     {# IMAGENES #}
     {% for i in 1..nImagenes %}
     <div id="tabs-imagen{{i}}" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.select({'caption':'Visible','visible':'1','varEnv':'0'},'field_title','datos[image' ~ i ~ '][visible]','datos__image' ~ i ~ '_visible',none,values.datos.image[i].visible,ValoresSN,'chzn-select')}}
-        {{ macro.input({'caption':'Caption','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][caption]','datos__image'~i~'_caption',values.datos.image[i].caption,'15','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'Width','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][width]','datos__image'~i~'_width',values.datos.image[i].width,'15','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'Height','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][height]','datos__image'~i~'_height',values.datos.image[i].height,'15','CampoTextoCorto','1') }}
+        {{ macro.select({'caption':'Visible','visible':'1','varEnv':'0'},'field_title','datos[image' ~ i ~ '][visible]','datos_image' ~ i ~ '_visible',none,values.datos.image[i].visible,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'Caption','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][caption]','datos_image'~i~'_caption',values.datos.image[i].caption,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'Width','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][width]','datos_image'~i~'_width',values.datos.image[i].width,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'Height','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][height]','datos_image'~i~'_height',values.datos.image[i].height,'15','CampoTextoCorto','1') }}
     </div>
     {% endfor %}
 
@@ -124,4 +132,30 @@
             {% endfor %}
         </div>
     </div>
+
+    {# VARIABLES DE ENTORNO ESPECIFICAS AL MODULO EN CURSO nombreModulo/varEnv.yml #}
+    <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {% for nombre,atributos in values.datos.especificas %}
+            {{ macro.input(
+                {'caption':'['~nombre~'] '~atributos.caption,'visible':'1','varEnv':'0'},
+                'field_title',
+                'text',
+                'datos[especificas]['~nombre~']',
+                'datos_especificas_'~nombre,
+                atributos.value,
+                '50',
+                'CampoTextoCorto'
+                )
+            }}
+        {% endfor %}
+    </div>
+
+    {# CONTROL VISIBILIDAD VARIABLES WEB #}
+    <div id="tabs-varWeb" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {% for nombre,valor in values.datos.showVarWeb %}
+            {{ macro.select({'caption':'Es visible ['~nombre~']','visible':'1','varEnv':'0'},'field_title','datos[showVarWeb]['~nombre~']','datos_showVarWeb_'~nombre,none,valor,ValoresSN,'chzn-select')}}
+        {% endfor %}
+    </div>
 </div>
+
+{% endblock %}

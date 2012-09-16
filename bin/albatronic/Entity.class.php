@@ -465,7 +465,7 @@ class Entity  {
      * @param boolean $default Si se añade o no el valor 'Indique Valor'
      * @return array Array de valores Id, Value
      */
-    public function fetchAll($column = '', $default = true) {
+    public function fetchAll($column = '', $default = TRUE) {
         if ($column == '')
             $column = $this->getPrimaryKeyName();
 

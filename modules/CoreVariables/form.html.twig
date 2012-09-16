@@ -11,6 +11,13 @@
 
 {% set action = 'edit' %}
 
+{% set ValoresTipos = {
+        '0':{'Id':'input','Value':'Input'},
+        '1':{'Id':'select','Value':'Select'},
+        '2':{'Id':'textarea','Value':'Textarea'}
+    }
+%}
+
 {% block mantenimiento %}
 <div class="grid_container">
     <div class="grid_12 full_block">
@@ -29,16 +36,9 @@
 		{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 
 		<ul>
-                    {% include values.template %}
+                    {% block template %}{% endblock %}
 		</ul>
 
-		<ul>
-                    <h4>CREAR VARIABLE</h4>
-                    {{ macro.input({'caption':'Nombre','visible':'1','varEnv':'0'},'field_title','text','nueva[name]','nueva_name',none,'25','CampoTextoCorto','1') }}
-                    {{ macro.input({'caption':'Caption','visible':'1','varEnv':'0'},'field_title','text','nueva[caption]','nueva_caption',none,'25','CampoTextoCorto','1') }}
-                    {{ macro.input({'caption':'Valor','visible':'1','varEnv':'0'},'field_title','text','nueva[value]','nueva_value',none,'25','CampoTextoCorto','1') }}
-                    <input name="" type="submit" value="Crear" onclick="getElementById('action_{{ values.controller }}').value='new'; submitForm('manto_{{ values.controller }}');" />
-                </ul>
 	</form>
         </div>
         </div>

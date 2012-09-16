@@ -96,7 +96,8 @@ if (is_array($variablesColumna)) {
             $tag .= "<select name='datos[{$key}]' id='{$key}' class='chzn-select'>\n";
             foreach ($listaValoresSN as $valueLista) {
                 $tag .= "<option value='{$valueLista['Id']}'";
-                if ($value == $valueLista['Id']) $tag .= " SELECTED";
+                if ($value == $valueLista['Id'])
+                    $tag .= " SELECTED";
                 $tag .= ">{$valueLista['Value']}</option>\n";
             }
             $tag .= "</select>\n";
@@ -106,9 +107,10 @@ if (is_array($variablesColumna)) {
 
         $tag .= "\t</div>\n</div>\n</li>\n";
 
-        $valoresAjax .= "";
+        $valoresAjax .= "['{$key}','{$value}'],";
     }
-
+    
+    $valoresAjax = "[ " . substr($valoresAjax, 0, -1) . " ]";
 
     // Poner el código generado en la plantilla
     $html = str_replace('{{values.variables}}', $tag, $html);
@@ -118,7 +120,7 @@ if (is_array($variablesColumna)) {
     $html = str_replace('{{values.nombre}}', $modulo, $html);
     $html = str_replace('{{values.columna}}', $columna, $html);
     $html = str_replace('{{values.archivoDatos}}', $archivoYml, $html);
-    $html = str_replace('{{values.valoresAjax}}', json_encode($variablesColumna), $html);
+    $html = str_replace('{{values.valoresAjax}}', $valoresAjax, $html);
 } else
     $html = "<p>No se ha podido localizar el archivo de variables ({$archivoYml}) , puede que aún no haya sido inicializado</p>";
 

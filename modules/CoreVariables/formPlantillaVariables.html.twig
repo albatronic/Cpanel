@@ -1,0 +1,78 @@
+{% set ValoresSN = { '0':{'Id':'0','Value':'No'}, '1':{'Id':'1','Value':'Si'} }  %}
+
+{% extends '_global/layoutPopUp.html.twig' %}
+
+{% block content %}
+        <div style="text-align: center;"><h4>{{values.titulo}}</h4></div>
+        <div id="resultado"></div>
+        <div class="grid_container">
+            <div class="grid_12 full_block">
+                <div class="widget_wrap">
+                    <div class="widget_content">
+                        <div class="form_container left_label">
+                            <form name="plantillaVariables" id="plantillaVariables" action="" method="POST">
+                            <input name="controller" value="CoreVariables" type="hidden" />
+                            <input name="action" id="action_CoreVariables" value="EditNode" type="hidden" />
+                            <input name="tipo" id="tipo" value="{{values.tipo}}" type="hidden" />
+                            <input name="ambito" id="ambito" value="{{values.ambito}}" type="hidden" />
+                            <input name="nombre" id="nombre" value="{{values.nombre}}" type="hidden" />
+                            <input name="columna" id="columna" value="{{values.columna}}" type="hidden" />
+                            <input name="archivoDatos" value="{{values.archivoDatos}}" type="hidden" readonly/>
+
+                            {% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
+                            {% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
+
+                            <ul>
+                    {% set hayListaValores = (values.datos.listaValores is iterable) %}
+
+                    {% for variable,valor in values.datos %}
+                        {% if variable != 'listaValores' %}
+                        <p>
+                        {% if ( (hayListaValores and (variable == 'default') ) or ( (variable == 'visible') or (variable == 'updatable') ) ) %}
+                            {% if (variable == 'default') %}
+                                {% set listaValores = values.datos.listaValores %}
+                            {% else %}
+                                {% set listaValores = ValoresSN %}
+                            {% endif %}
+                            {{ macro.select(
+                                {'caption':variable,'visible':'1','varEnv':'0'},
+                                'field_title',
+                                'datos['~variable~']',
+                                'datos_'~ variable,
+                                none,
+                                valor,
+                                listaValores,
+                                'chzn-select'
+                                )
+                            }}
+                        {% else %}
+                            {{ macro.input(
+                                {'caption':variable,'visible':'1','varEnv':'0'},
+                                'field_title',
+                                'text',
+                                'datos['~variable~']',
+                                'datos_'~ variable,
+                                valor,
+                                '255',
+                                'CampoTextoCorto',
+                                '1'
+                                )
+                            }}
+                        {% endif %}
+                        </p>
+                        {% endif %}
+                    {% endfor %}
+                            </ul>
+
+                            <div style="margin-top: 10px; margin-bottom: 5px; text-align: center;">
+                                <input name="accion" value="Guardar" type ="submit" />
+                                <button onclick="window.close();">Cerrar</button>
+                            </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

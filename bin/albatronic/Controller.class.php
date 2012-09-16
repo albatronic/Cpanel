@@ -89,7 +89,6 @@ class Controller {
 
         // VARIABLES WEB Y DE ENTORNO
         //print_r($this->values['permisos']);
-
     }
 
     public function IndexAction() {

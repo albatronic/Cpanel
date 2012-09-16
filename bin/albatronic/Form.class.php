@@ -508,7 +508,7 @@ class Form {
     /**
      * Devuelve un array con los atributos de cada columna del módulo $modulo
      *
-     * Los atributos son: caption, visible, updatable, default, permission, tip
+     * Los atributos son: caption, visible, updatable, default, permission, help
      *
      * Los valores de los atributos se obtienen  de las variables de entorno del módulo,
      * y si no existen, se cargan del config.yml correspondiente
@@ -526,12 +526,7 @@ class Form {
         // LUEGO LOS SUSTITUYO POR LOS ESPECIFICOS QUE ESTAN EN LAS VAR DE ENTORNO DE PROYECTO
         // DE TAL MANERA QUE PREVALECEN LOS DEFINIDOS EN LAS VARIABLES DE ENTORNO, PERO
         // SI NO EXISTIERA LA VARIABLE DE ENTORNO CORRESPONDIENTE ENTONCES PONGO LA DEL CONFIG.
-        $objeto = array(
-            'ambito' => 'Mod',
-            'tipo' => 'Env',
-            'nombre' => $modulo,
-        );
-        $variables = new CoreVariables($objeto);
+        $variables = new CoreVariables('Mod', 'Env', $modulo);
         $archivoYml = $variables->getPathYml();
 
         if (file_exists($archivoYml)) {
@@ -543,13 +538,6 @@ class Form {
                     if (!isset($atributos[$key][$keyConfig]))
                         $atributos[$key][$keyConfig] = $valueConfig;
                 }
-                /**
-                  if ($atributos[$key]['caption'] === '')
-                  $atributos[$key]['caption'] = $columnasConfig[$key]['title'];
-                  if (!isset($atributos[$key]['updatable']))
-                  $atributos[$key]['updatable'] = TRUE;
-                  if ($atributos[$key]['tip'] === '')
-                  $atributos[$key]['tip'] = $columnasConfig[$key]['help']; */
             }
         } else {
             // No existe el archivo de variables, por lo tanto cargo los atributos
@@ -558,7 +546,17 @@ class Form {
                 foreach (VariablesEnv::$varEnvMod as $keyVar => $keyColumnaConfig)
                     $atributos[$keyColumna][$keyVar] = $valueColumna[$keyColumnaConfig];
         }
+
         unset($variables);
+
+        // Si el usuario es super pongo la visibilidad a TRUE
+        if ($_SESSION['USER']['user']['Id'] == '1')
+            foreach ($atributos as $key => $value)
+                if (! $atributos[$key]['visible']) {
+                    $atributos[$key]['visible'] = '1';
+                    $atributos[$key]['caption'] .= " (oculta)";
+                }
+
         return $atributos;
     }
 

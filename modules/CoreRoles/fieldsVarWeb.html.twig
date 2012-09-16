@@ -1,13 +1,16 @@
 {#
-  Module: CoreRoles
-  Document : modules\CoreRoles\fieldsVarWeb.html.twig
+   VARIABLES WEB ESPECIFICAS DEL MODULO
 
-  author: Sergio Pérez <sergio.perez@albatronic.com>
-  copyright: INFORMATICA ALBATRONIC SL
-  date 10.09.2012 12:31:09
+   Module: CoreRoles
+   Document : modules/CoreRoles/fieldsvarEnv.html.twig
+
+   author: Sergio Pérez <sergio.perez@albatronic.com>
+   copyright: INFORMATICA ALBATRONIC SL
+   date 15.09.2012 13:15:41
 #}
 
-{% extends values.controller  ~ '/form.html.twig' %}
+{% extends 'CoreVariables/fieldsVarModWeb.html.twig' %}
 
-{% block variables %}
+{% block template %}
+<h6>Para añadir variables web específicas debes editar el formulario 'CoreRoles/fieldsVarWeb.html.twig' del módulo</h6>
 {% endblock %}

@@ -32,7 +32,7 @@
     {% if (atributos.varEnv == '') and (user.getIdPerfil.Id == '1') %}
          style="cursor: pointer;"
          title='Editar Variables de Entorno de {{name}}' alt='Variables de Entorno de {{name}}'
-         onclick="switchVariablesEnv('div_formVariablesEnv','Mod','{{id}}');"
+         onclick="popUpVariablesEnv('Env','Mod','{{id}}');"
     {% endif %}
     >
     {{ atributos.caption }}

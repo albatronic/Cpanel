@@ -1,0 +1,12 @@
+## VARIABLES WEB ESPECIFICAS
+##
+## author Sergio Pérez <sergio.perez@albatronic.com>
+## copyright Informática ALBATRONIC, SL
+## date ${date} ${time}
+---
+
+# ejemplo:
+#
+#  nombreVariable: Caption
+vwespe1: Primera web espe
+vwespe2: Segunda web espe

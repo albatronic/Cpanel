@@ -9,7 +9,7 @@
 
 {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
 {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
-{{ macro.select(atributos.TipoSeccion,'field_title',values.controller ~ '[TipoSeccion]',values.controller ~ '_TipoSeccion',none,datos.TipoSeccion.TipoSeccion,datos.TipoSeccion.fetchAll('IDTipo'),'chzn-select','3')}}
+{{ macro.select(atributos.TipoSeccion,'field_title',values.controller ~ '[TipoSeccion]',values.controller ~ '_TipoSeccion',none,datos.TipoSeccion.TipoSeccion,datos.TipoSeccion.fetchAll(none,0),'chzn-select','3')}}
 {{ macro.input(atributos.Entidad,'field_title','text',values.controller ~ '[Entidad]',values.controller ~ '_Entidad',datos.Entidad,'255','CampoTextoLargo','4') }}
 {{ macro.input(atributos.IdEntidad,'field_title','text',values.controller ~ '[IdEntidad]',values.controller ~ '_IdEntidad',datos.IdEntidad,'11','CampoImporte','5') }}
 

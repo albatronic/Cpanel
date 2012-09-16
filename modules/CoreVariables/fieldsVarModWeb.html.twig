@@ -1,0 +1,45 @@
+{#
+    VARIABLES WEB COMUNES A TODOS LOS MODULOS +
+    MAS LAS ESPECIFICAS DE CADA MODULO QUE ESTAN DEFINIDAS
+    EN modules/NOMBREMODULO/varWeb.yml
+
+    author Sergio Pérez <sergio.perez@albatronic.com>
+    copyright Informática ALBATRONIC, SL
+    date 7-SEP-2012 18:02
+#}
+
+
+{% extends 'CoreVariables/form.html.twig' %}
+
+{% block template %}
+
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-especificas">Específicas</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-global">Globales</a></li>
+    </ul>
+
+    {# VARIABLES WEB ESPECIFICAS AL MODULO EN CURSO nombreModulo/varWeb.yml #}
+    <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {% for nombre,atributos in values.datos.especificas %}
+            {{ macro.input(
+                {'caption':'['~nombre~'] '~atributos.caption,'visible':'1','varEnv':'0'},
+                'field_title',
+                'text',
+                'datos[especificas]['~nombre~']',
+                'datos_especificas_'~nombre,
+                atributos.value,
+                '50',
+                'CampoTextoCorto'
+                )
+            }}
+        {% endfor %}
+    </div>
+
+    {# VARIABLES WEB GLOBALES A TODOS LOS MODULOS #}
+    <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+
+    </div>
+</div>
+
+{% endblock %}

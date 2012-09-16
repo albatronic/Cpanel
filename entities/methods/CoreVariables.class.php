@@ -3,6 +3,12 @@
 /**
  * GESTION DE VARIABLES WEB Y DE ENTORNO
  *
+ * CONSTRUYE EL OBJETO VARIABLES EN BASE AL ambito, tipo y nombre
+ *
+ * SUS MÉTODOS PERMITEN EDITARLAS, BORRARLAS Y GUARDARLAS EN LOS
+ * ARCHIVOS YML DEL PROYECTO
+ *
+ *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @copyright Informática ALBATRONIC, SL
  * @date 09-sep-2012 12:48:45
@@ -13,6 +19,7 @@ class CoreVariables {
     protected $ambitosDeVariables = array('Pro', 'App', 'Mod');
     protected $objeto = array();
     protected $pathYml = FALSE;
+    protected $fileEspecificas;
     protected $titulo;
     protected $template;
     protected $pathProject;
@@ -20,26 +27,22 @@ class CoreVariables {
     protected $ok = FALSE;
 
     /**
-     * Recibe un array y construye el objeto variables correspondiente
+     * Construye el objeto variables correspondiente al ámbito, tipo y nombre
      *
-     * El array debe tener al menos dos elementos:
-     *
-     *      ambito => El ámbito de la variable: 'Pro', 'App', 'Mod'
-     *
-     *      tipo   => El tipo de variable: 'Web', 'Env'
-     *
-     * @param array $objeto
+     * @param string $ambito El ambito de las variables: Pro, App ó Mod
+     * @param string $tipo El tipo de variable: Env, Web
+     * @param string $nombre El nombre de la app o del modulo según $ambito
      */
-    public function __construct(array $objeto) {
+    public function __construct($ambito, $tipo, $nombre='') {
 
         $this->pathProject = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'];
 
-        if ($this->valida($objeto)) {
+        if ($this->valida($ambito, $tipo, $nombre)) {
 
             $this->objeto = array(
-                'ambito' => $objeto['ambito'],
-                'tipo' => $objeto['tipo'],
-                'nombre' => $objeto['nombre'],
+                'ambito' => $ambito,
+                'tipo' => $tipo,
+                'nombre' => $nombre,
                 'pathYml' => $this->getPathYml(),
                 'template' => $this->getTemplate(),
                 'titulo' => $this->getTitulo(),
@@ -48,6 +51,19 @@ class CoreVariables {
         }
     }
 
+    /**
+     * Devuelve el array objeto que contiene todos los valores:
+     *
+     *      ambito =>
+     *      tipo =>
+     *      nombre =>
+     *      pathYml =>  la ruta completa al archivo yml de variables
+     *      template => el nombre del template a utilizar para mostrar las variables
+     *      titulo => string con el titulo a mostrar en el template
+     *      datos   => array con las variables y sus valores
+     *
+     * @return array Array con el objeto completo
+     */
     public function getObjeto() {
         return $this->objeto;
     }
@@ -90,13 +106,13 @@ class CoreVariables {
      */
     public function getDatosYml() {
 
-        $yml = array();
+        $arrayYml = array();
 
         if (file_exists($this->pathYml)) {
-            $yml = sfYaml::load($this->pathYml);
+            $arrayYml = sfYaml::load($this->pathYml);
         }
 
-        return $yml;
+        return $arrayYml;
     }
 
     /**
@@ -107,6 +123,23 @@ class CoreVariables {
     public function setDatosYml(array $variables) {
 
         $this->objeto['datos'] = $variables;
+    }
+
+    /**
+     * Devuelve un array con la definicion de las variables especificas
+     * del objeto en curso
+     *
+     * @return array Array de variables
+     */
+    public function getArrayEspecificas() {
+
+        $arrayEspecificas = array();
+
+        if (file_exists($this->fileEspecificas))
+            $arrayEspecificas = sfYaml::load($this->fileEspecificas);
+
+        return $arrayEspecificas;
+
     }
 
     /**
@@ -156,6 +189,9 @@ class CoreVariables {
      * Almacena las variables en un archivo en base a
      * lo contenido en $this->objeto
      *
+     * Si son variables Web de Módulo, también pone la visibilidad
+     * en las variables de entorno de dicho módulo
+     *
      * @return boolean TRUE si se guardó correctamente
      */
     public function save() {
@@ -166,7 +202,7 @@ class CoreVariables {
         $datosYml = $cabecera;
 
         if (is_array($this->objeto['datos'])) {
-            $cuerpo = sfYaml::dump($this->objeto['datos'], 1);
+            $cuerpo = sfYaml::dump($this->objeto['datos'], 3);
             $datosYml .= $cuerpo;
         }
 
@@ -174,6 +210,9 @@ class CoreVariables {
         $ok = $archivo->write($datosYml);
         if (!$ok)
             $this->errores = $archivo->getErrores();
+        elseif ( ($this->objeto['ambito'] == 'Mod') and ($this->objeto['tipo'] == 'Web') )
+            $this->ponVisibilidad();
+
         unset($archivo);
 
         return $ok;
@@ -189,6 +228,9 @@ class CoreVariables {
         $ok = $archivo->delete();
         if (!$ok)
             $this->errores = $archivo->getErrores();
+        elseif ( ($this->objeto['ambito'] == 'Mod') and ($this->objeto['tipo'] == 'Web') )
+            $this->quitaVisibilidad();
+
         unset($archivo);
 
         return $ok;
@@ -208,39 +250,41 @@ class CoreVariables {
      * correspondan a alguno de los valores posibles definidos
      * en $this->ambitosdeVariables y $this->tiposDeVariables respectivamente
      *
-     * @param array $objeto El objeto
+     * @param string $ambito El ambito de las variables: Pro, App ó Mod
+     * @param string $tipo El tipo de variable: Env, Web
+     * @param string $nombre El nombre de la app o del modulo
      *
      * @return boolean TRUE si el ambito y tipo son válidos
      */
-    private function valida($objeto) {
+    private function valida($ambito, $tipo, $nombre) {
 
-        $this->ok = ( (in_array($objeto['ambito'], $this->ambitosDeVariables)) and (in_array($objeto['tipo'], $this->tiposDeVariables)) );
+        $this->ok = ( (in_array($ambito, $this->ambitosDeVariables)) and (in_array($tipo, $this->tiposDeVariables)) );
 
         if ($this->ok) {
-            switch ($objeto['ambito']) {
+            switch ($ambito) {
                 case 'Pro':
                     $archivoDatos = "/config/varPro";
-                    $this->titulo = 'Variables ' . $objeto['tipo'] . ' del Proyecto "' . $_SESSION['project']['title'] . '"';
-                    $this->template = "_global/fieldsVarPro{$objeto['tipo']}.html.twig";
+                    $this->titulo = 'Variables ' . $tipo . ' del Proyecto "' . $_SESSION['project']['title'] . '"';
+                    $this->template = "CoreVariables/fieldsVarPro{$tipo}.html.twig";
                     break;
 
                 case 'App':
-                    $archivoDatos = "/config/varApp_{$objeto['nombre']}";
+                    $archivoDatos = "/config/varApp_{$nombre}";
                     $app = new CoreAplicaciones();
-                    $app = $app->find('CodigoApp', $objeto['nombre']);
-                    $this->titulo = 'Variables ' . $objeto['tipo'] . ' de la Aplicación "' . $app->getNombreApp() . '"';
+                    $app = $app->find('CodigoApp', $nombre);
+                    $this->titulo = 'Variables ' . $tipo . ' de la Aplicación "' . $app->getNombreApp() . '"';
                     unset($app);
-                    $this->template = "{$objeto['nombre']}/fieldsVar{$objeto['tipo']}.html.twig";
+                    $this->template = "{$nombre}/fieldsVar{$tipo}.html.twig";
                     break;
 
                 case 'Mod':
-                    //$archivoDatos = "/modules/{$objeto['nombre']}/var_{$objeto['nombre']}";
-                    $archivoDatos = "/config/varMod_{$objeto['nombre']}";
+                    $archivoDatos = "/config/varMod_{$nombre}";
                     $modulo = new CoreModulos();
-                    $modulo = $modulo->find('NombreModulo', $objeto['nombre']);
-                    $this->titulo = 'Variables ' . $objeto['tipo'] . ' del Módulo "' . $modulo->getTitulo() . '"';
+                    $modulo = $modulo->find('NombreModulo', $nombre);
+                    $this->titulo = 'Variables ' . $tipo . ' del Módulo "' . $modulo->getTitulo() . '"';
                     unset($modulo);
-                    $this->template = "{$objeto['nombre']}/fieldsVar{$objeto['tipo']}.html.twig";
+                    $this->template = "CoreVariables/fieldsVar{$ambito}{$tipo}.html.twig";
+                    $this->fileEspecificas = APP_PATH."modules/{$nombre}/var{$tipo}.yml";
                     break;
 
                 default:
@@ -248,7 +292,7 @@ class CoreVariables {
             }
 
             if ($archivoDatos) {
-                $this->pathYml = "{$this->pathProject}{$archivoDatos}_{$objeto['tipo']}.yml";
+                $this->pathYml = "{$this->pathProject}{$archivoDatos}_{$tipo}.yml";
             } else {
                 $this->pathYml = false;
                 $this->errores[] = "No se ha podido construir el nombre del archivo de variables en base a los parámetros recibibos (Ambito={$this->objeto['ambito']}, Tipo={$this->objeto['tipo']}, Nombre={$this->objeto['nombre']})";
@@ -260,6 +304,45 @@ class CoreVariables {
         return $this->ok;
     }
 
+    /**
+     * Quita las variables de entorno del modulo en curso
+     * relativas al control de visibilidad de sus variables web
+     *
+     * @return void
+     */
+    private function quitaVisibilidad() {
+
+        $variables = new CoreVariables('Mod','Env',$this->objeto['nombre']);
+        $variables->setNode('showVarWeb', array());
+        $variables->save();
+        unset($variables);
+
+    }
+
+    /**
+     * Pone las variables de entorno del modulo en curso
+     * relativas al control de visibilidad de sus variables web
+     *
+     * Respeta los valores que hubiera en el yml del proyecto respecto
+     * a las variables web definidas.
+     *
+     * @return void
+     */
+    private function ponVisibilidad() {
+
+        $variables = new CoreVariables('Mod','Env',$this->objeto['nombre']);
+        $valoresActuales = $variables->getNode('showVarWeb');
+
+        foreach ($this->objeto['datos']['especificas'] as $key => $value) {
+            if (!isset($valoresActuales[$key])) $valores[$key] = 0;
+            else $valores[$key] = $valoresActuales[$key];
+        }
+
+        $variables->setNode('showVarWeb', $valores);
+        $variables->save();
+
+        unset($variables);
+    }
 }
 
 ?>

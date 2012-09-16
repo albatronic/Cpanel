@@ -1,12 +1,35 @@
-{# VARIABLES DE ENTORNO DE LA APP  #}
+{# VARIABLES DE ENTORNO A NIVEL DE APLICACION #}
 
 {# author Sergio Pérez <sergio.perez@albatronic.com> #}
 {# copyright Informática ALBATRONIC, SL #}
-{# date ${date} ${time} #}
+{# 12.sep.2012 11:16 #}
 
-{% extends values.controller ~ '/form.html.twig' %}
+{% extends 'CoreVariables/form.html.twig' %}
 
-{% block variables %}
-{{ macro.input('Título App','field_title','text','datos[titulo]',none,values.datos.titulo,'100','CampoUnidades','1') }}
-{{ macro.input('Url App','field_title','text','datos[Url]',none,values.datos.Url,'100','CampoUnidades','2') }}
-{% endblock%}
+{% block template %}
+
+{{ macro.input(
+    {'caption':'Título','visible':'1','varEnv':'0'},
+    'field_title',
+    'text',
+    'datos[title]',
+    none,
+    values.datos.title,
+    '50',
+    'CampoTextoCorto',
+    '1')
+}}
+
+{{ macro.input(
+    {'caption':'Url','visible':'1','varEnv':'0'},
+    'field_title',
+    'text',
+    'datos[url]',
+    none,
+    values.datos.url,
+    '50',
+    'CampoTextoCorto',
+    '1')
+}}
+
+{% endblock %}

@@ -5,31 +5,33 @@
 var primerslap=false;
 var segundoslap=false;
 
-/**
- * Para las solapas
- */
-$(function() {
-    $( "#tabs" ).tabs();
-});
 
-/**
- * Para el efecto acordeón
- */
-$(function() {
+$(function(){
+
+    /**
+     * Para las solapas
+     */
+    $( "#tabs" ).tabs();
+
+    /**
+     * Para el efecto acordeón
+     */
     $( "#accordion" ).accordion({
         autoHeight: false,
         navigation: true,
         collapsible: true,
         animated: 'bounceslide'
     });
+
+    $("#usersSelector").change(function () {
+        submitForm('layoutForm');
+    });
+
+    $("#projectsSelector").change(function () {
+        submitForm('layoutForm');
+    });
+
 });
-
-function guardarVariables(valores) {
-
-    var nValores = valores.length;
-
-    alert(nValores);
-}
 
 
 /**
@@ -57,48 +59,27 @@ function mostrarElemento(id) {
 }
 
 /**
- * Muestra / Oculta en el elemento html idDiv (si existe)
+ * Muestra un popUp con las variables de entorno
  * un formulario de mantenimiento de las variables de entorno
  * del modulo y columna indicado en 'modulo_columna'
  *
  * En el parámetro 'modulo_columna' debe venir el nombre del módulo y el
  * de la columna concatenados con guión bajo
  *
- * El formulario de mantenimiento se genera en base a la plantilla
- * 'modules/_global/plantillaFormAjax.html.twig
  *
  * @param idDiv Id del elemento html a rellenar
  * @param modulo_columna El nombre del modulo y de la columna concatenados con guión bajo
  * @return void
  */
-function switchVariablesEnv(idDiv, ambito, modulo_columna) {
+function popUpVariablesEnv(tipo, ambito, modulo_columna) {
 
-    var obj = document.getElementById(idDiv);
     var elementos = modulo_columna.split("_");
 
     var modulo = elementos[0];
     var columna = elementos[1];
+    var url = appPath + '/CoreVariables/EditNode/'+ambito+'/'+tipo+'/'+modulo+'/'+columna;
 
-    if(obj.style.display == 'block')
-        /* Mostrar el div */
-        obj.style.display = 'none'
-    else {
-        /* Mostrar el div */
-        obj.style.display = 'block';
-
-        /* Rellenar el div con ajax */
-        showFormVariablesEnv(idDiv, modulo, columna);
-    }
-}
-
-function showFormVariablesEnv(idDiv, modulo, columna) {
-    var url        = appPath + '/lib/formVariablesEnv.php';
-    var parametros = 'modulo='+modulo+'&columna='+columna;
-
-    // Coloco un gif "Cargando..." en la capa
-    $('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
-
-    jQuery('#'+idDiv).load(url, parametros);
+    window.open(url,'Variables','width=490,height=500,resizable=yes,scrollbars=yes');
 }
 
 /**

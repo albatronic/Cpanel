@@ -43,7 +43,6 @@ class IndexController extends Controller {
 
         // VARIABLES WEB Y DE ENTORNO
         //print_r($this->values['permisos']);
-
     }
 
     /**
@@ -92,45 +91,30 @@ class IndexController extends Controller {
      *
      * @return array Array template, values
      */
-    public function changeProjectAction() {
+    public function ChangeProjectUserAction() {
 
         $_SESSION['project'] = $_SESSION['projects'][$this->request['project']];
         $_SESSION['project']['name'] = $this->request['project'];
 
-        return $this->IndexAction();
-    }
-
-    /**
-     * Cambio de usuario realizando un logeo interno
-     * sin comprobar password
-     *
-     * @return array Array template, values
-     */
-    public function changeUser() {
-
-        $user = new CoreUsuarios();
-        $usuario = $user->find("Login", $this->request['user']);
-        unset($user);
-
+        $usuario = new CoreUsuarios($this->request['user']);
         if ($usuario->getLogin() != '') {
             $_SESSION['USER'] = array(
                 'user' => array(
-                    'id' => $usuario->getIDUsuario(),
+                    'Id' => $usuario->getId(),
                     'nombre' => $usuario->getNombreApellidos(),
-                    'IDPerfil' => $usuario->getIDPerfil()->getIDPerfil(),
+                    'IdPerfil' => $usuario->getIdPerfil()->getId(),
                 ),
+                'menu' => $usuario->getArrayMenu(),
             );
-
-            // Crear la variable de sesion con el array del menu
-            $_SESSION['USER']['menu'] = $usuario->getArrayMenu();
 
             return $this->IndexAction();
         } else {
             $this->values['mensaje'] = 'Usuario no registrado';
-            $template = $this->entity . "/login.html.twig";
+            $template = "Login/login.html.twig";
             return array('template' => $template, 'values' => $this->values);
         }
 
+        return $this->IndexAction();
     }
 
 }

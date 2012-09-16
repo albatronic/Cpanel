@@ -19,7 +19,7 @@ class VariablesEnv {
         'caption' => 'title',
         'default' => 'default',
         'visible' => 'form',
-        'updatable' => 'form',
+        'updatable' => 'updatable',
         'help' => 'help',
         'permission' => 'permission',
     );

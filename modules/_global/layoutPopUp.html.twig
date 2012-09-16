@@ -1,0 +1,35 @@
+{% import "_global/macros.html.twig" as macro %}
+
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+    	{% include "_global/metaInformacion.html.twig" %}
+	{% include values.twigCss %}
+
+        <!-- Para que esté disponible el path de la app en todos los java scripts -->
+        <script type="text/javascript">var appPath = "{{app.path}}";</script>
+
+	{% include values.twigJs %}
+    </head>
+
+    <body id="theme-default" class="full_block">
+
+
+
+
+                <div id="content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+
+
+
+        {% if values._debugMode %}
+        <div style="clear: both;">
+            <pre>{{values._debugValues}}</pre>
+        </div>
+        {% endif %}
+
+    </body>
+</html>
