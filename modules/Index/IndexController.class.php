@@ -56,6 +56,11 @@ class IndexController extends Controller {
 
         if ($aplicacion != '') {
             // Ha seleccionado una app, hay que mostrar sus modulos públicos (Publicar = 1)
+
+            $permisos = new ControlAcceso($aplicacion);
+            $this->values['permisos'] = $permisos->getPermisos();
+            unset($permisos);
+
             $this->values['enCurso']['app'] = $aplicacion;
             $this->values['titulo'] = $_SESSION['USER']['menu'][$aplicacion]['titulo'];
             $this->values['menu']['tipo'] = "modulos";
@@ -65,6 +70,11 @@ class IndexController extends Controller {
                     $this->values['menu']['modulos'][$key] = $value;
         } else {
             // No ha seleccionado ninguna app, hay que mostrar todas las apps públicas (Publicar = 1)
+
+            $this->values['permisos'] = array(
+                'VW' => true,
+            );
+
             $this->values['titulo'] = 'Apps disponibles';
             $this->values['menu']['tipo'] = 'apps';
             foreach ($_SESSION['USER']['menu'] as $key => $value)
@@ -75,10 +85,6 @@ class IndexController extends Controller {
                     );
                 }
         }
-
-        $this->values['permisos'] = array(
-            'VW' => true,
-        );
 
         return array(
             'template' => $this->entity . '/index.html.twig',

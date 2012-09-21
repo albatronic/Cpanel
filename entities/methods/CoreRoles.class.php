@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
@@ -9,8 +10,11 @@
  * @orm:Entity(CoreRoles)
  */
 class CoreRoles extends CoreRolesEntity {
-	public function __toString() {
-		return $this->getId();
-	}
+
+    public function __toString() {
+        return $this->getId();
+    }
+
 }
+
 ?>

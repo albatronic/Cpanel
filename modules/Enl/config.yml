@@ -1,5 +1,6 @@
 # CONFIG A NIVEL DE APP
+# App: Enl
 ---
 
-defaultValueUrlFriendly:
-
+Enl:
+  urlPrefix: enlaces

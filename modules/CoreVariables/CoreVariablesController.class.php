@@ -51,15 +51,34 @@ class CoreVariablesController {
 
         $this->values['ayuda'] = $this->form->getHelpFile();
 
-        // LE DOY PERMISOS SOLO AL SUPER
-        if ($_SESSION['USER']['user']['IdPerfil'] == '1') {
-            $this->values['permisos']['IN'] = FALSE;
-            $this->values['permisos']['DE'] = TRUE;
-            $this->values['permisos']['UP'] = TRUE;
-            $this->values['permisos']['VW'] = TRUE;
+        // PARA DE QUÉ APP O MODULO ESTOY VIENDO LAS VARIABLES
+        if ($this->request['METHOD'] == 'GET') {
+            $ambito = $this->request['2'];
+            $this->permisos = new ControlAcceso($this->request['3']);
+        } else {
+            $ambito = $this->request['ambito'];
+            $this->permisos = new ControlAcceso($this->request['nombre']);
         }
 
-        $this->values['enCurso'] = array('app' => 'CoreVariables', 'modulo' => 'CoreVariables');
+        $this->values['permisos'] = $this->permisos->getPermisos();
+        $this->values['enCurso'] = $this->values['permisos']['enCurso'];
+        if ($this->values['enCurso']['app'] == $this->values['enCurso']['modulo'])
+            $this->values['enCurso']['modulo'] = '';
+        // --------------------------------------------------------
+        //
+        // LE DOY PERMISOS SOLO AL SUPER
+        if ($_SESSION['USER']['user']['IdPerfil'] == '1') {
+            $this->values['permisos']['permisosModulo']['IN'] = FALSE;
+            $this->values['permisos']['permisosModulo']['DE'] = TRUE;
+            $this->values['permisos']['permisosModulo']['UP'] = TRUE;
+            $this->values['permisos']['permisosModulo']['VW'] = TRUE;
+        } else {
+            $this->values['permisos']['permisosModulo']['IN'] = FALSE;
+            $this->values['permisos']['permisosModulo']['DE'] = FALSE;
+            $this->values['permisos']['permisosModulo']['UP'] = TRUE;
+            if (!isset($this->values['enCurso']['app']))
+                $this->values['permisos']['permisosModulo']['VW'] = TRUE;
+        }
         $this->values['request'] = $this->request;
 
         $includesHead = $this->form->getIncludesHead();
@@ -91,6 +110,7 @@ class CoreVariablesController {
      */
     public function indexAction($ambito = '', $tipo = '', $nombre = '') {
 
+
         if ($tipo == '')
             $tipo = $this->request[1];
         if ($tipo == '')
@@ -104,49 +124,66 @@ class CoreVariablesController {
         if ($nombre == '')
             $nombre = $this->request[3];
 
-        $this->variables = new CoreVariables($ambito, $tipo, $nombre);
-        $this->values['errores'] = array_merge((array) $this->values['errores'], (array) $this->variables->getErrores());
-        $datos = $this->variables->getDatosYml();
+        // PUEDE VER LAS VARIABLES DE ENTORNO Y WEB ÚNICAMENTE SI ES DE PERFIL 1
+        // PUEDE VER LAS VARIABLES WEB SI TIENE PERMISO
+        $idPerfil = $_SESSION['USER']['user']['IdPerfil'];
+        $permiso = ( ($idPerfil == '1') or ( ($tipo == 'Web') and ($this->values['permisos']['permisosModulo']['VW'])) );
 
-        if ($ambito == 'Mod') {
+        if ($permiso) {
+            $this->variables = new CoreVariables($ambito, $tipo, $nombre);
+            $this->values['errores'] = array_merge((array) $this->values['errores'], (array) $this->variables->getErrores());
+            $datos = $this->variables->getDatosYml();
 
-            switch ($tipo) {
-                case 'Env':
-                    // Constuyo array con los nombres de las columnas del modulo(=entidad)
-                    // para mostrar en el template las variables Web/Env de cada columna.
-                    $archivoConfig = new Form($nombre);
-                    $columnasConfig = $archivoConfig->getNode('columns');
-                    unset($archivoConfig);
-                    // Creo el nodo 'columns' creando si no existen o asignado valores por defecto si no tienen
-                    // provinientes del 'config.yml' de cada módulo
-                    // SI SE AÑADE UNA COLUMNA NUEVA EN config.yml TAMBIEN SERÁ AÑADIDA EN EL FORMULARIO DE VARIABLES
-                    if (is_array($columnasConfig)) {
-                        foreach ($columnasConfig as $columnaConfig => $atributosConfig) {
-                            $valoresActuales = $datos['columns'][$columnaConfig];
-                            $datos['columns'][$columnaConfig] = $this->ponAtributos($valoresActuales, $atributosConfig);
+            switch ($ambito) {
+
+                case 'Pro':
+                    break;
+
+                case 'App':
+                    $this->ponValoresDefecto($ambito, $tipo, $nombre, $datos);
+
+                    // Variables especificas
+                    $datos['especificas'] = $this->getEspecificas($datos['especificas']);
+                    break;
+
+                case 'Mod':
+                    if ($tipo == 'Env') {
+
+                        $this->ponValoresDefecto($ambito, $tipo, $nombre, $datos);
+
+                        // Constuyo array con los nombres de las columnas del modulo(=entidad)
+                        // para mostrar en el template las variables Web/Env de cada columna.
+                        $archivoConfig = new Form($nombre);
+                        $columnasConfig = $archivoConfig->getNode('columns');
+
+                        unset($archivoConfig);
+                        // Creo el nodo 'columns' creando si no existen o asignado valores por defecto si no tienen
+                        // provinientes del 'config.yml' de cada módulo
+                        // SI SE AÑADE UNA COLUMNA NUEVA EN config.yml TAMBIEN SERÁ AÑADIDA EN EL FORMULARIO DE VARIABLES
+                        if (is_array($columnasConfig)) {
+                            foreach ($columnasConfig as $columnaConfig => $atributosConfig) {
+                                $valoresActuales = $datos['columns'][$columnaConfig];
+                                $datos['columns'][$columnaConfig] = $this->ponAtributos((array) $valoresActuales, $atributosConfig);
+                            }
                         }
                     }
 
                     // Variables especificas
                     $datos['especificas'] = $this->getEspecificas($datos['especificas']);
                     break;
-
-                case 'Web':
-                    // Variables especificas
-                    $datos['especificas'] = $this->getEspecificas($datos['especificas']);
-                    break;
             }
-        }
 
-        $template = $this->variables->getTemplate();
-        $this->values['tipo'] = $tipo;
-        $this->values['ambito'] = $ambito;
-        $this->values['nombre'] = $nombre;
-        $this->values['titulo'] = $this->variables->getTitulo();
-        $this->values['archivoDatos'] = $this->variables->getPathYml();
-        $this->values['datos'] = $datos;
-        $this->values['template'] = $this->variables->getTemplate();
-        unset($this->variables);
+            $template = $this->variables->getTemplate();
+            $this->values['tipo'] = $tipo;
+            $this->values['ambito'] = $ambito;
+            $this->values['nombre'] = $nombre;
+            $this->values['titulo'] = $this->variables->getTitulo();
+            $this->values['archivoDatos'] = $this->variables->getPathYml();
+            $this->values['datos'] = $datos;
+            $this->values['template'] = $this->variables->getTemplate();
+            unset($this->variables);
+        } else
+            $template = '_global/forbiden.html.twig';
 
         return array(
             'template' => $template,
@@ -174,7 +211,10 @@ class CoreVariablesController {
             switch ($this->request['accion']) {
 
                 case 'Guardar':
-                    if ($this->values['permisos']['UP']) {
+                    if ($this->values['permisos']['permisosModulo']['UP']) {
+
+                        $this->ponValoresDefecto($ambito, $tipo, $nombre, $this->request['datos']);
+
                         $variables = new CoreVariables($ambito, $tipo, $nombre);
                         $variables->setDatosYml($this->request['datos']);
                         $variables->save();
@@ -189,7 +229,7 @@ class CoreVariablesController {
                     break;
 
                 case 'Borrar':
-                    if ($this->values['permisos']['DE']) {
+                    if ($this->values['permisos']['permisosModulo']['DE']) {
                         $variables = new CoreVariables($ambito, $tipo, $nombre);
                         $variables->delete();
                         $this->values['errores'] = $variables->getErrores();
@@ -279,6 +319,54 @@ class CoreVariablesController {
     }
 
     /**
+     * Pone los valores por defecto de las variables en base a los establecido
+     * en el config de la app o módulo
+     *
+     * @param string $ambito
+     * @param string $tipo
+     * @param string $nombre
+     * @param array $datos
+     * @return void
+     */
+    private function ponValoresDefecto($ambito, $tipo, $nombre, &$datos) {
+
+        switch ($ambito) {
+            case 'App':
+
+                if ($tipo == 'Env') {
+                    if ($datos['globales']['urlPrefix'] == '') {
+                        $archivoConfig = new Form($nombre);
+                        $datos['globales']['urlPrefix'] = $archivoConfig->getNode('urlPrefix');
+                        unset($archivoConfig);
+                    }
+                }
+                break;
+
+            case 'Mod':
+
+                if ($tipo == 'Env') {
+                    $archivoConfig = new Form($nombre);
+                    if ($datos['controller'] == '')
+                        $datos['controller'] = $archivoConfig->getNode('controller');
+                    if ($datos['action'] == '')
+                        $datos['action'] = $archivoConfig->getNode('action');
+                    if ($datos['template'] == '')
+                        $datos['template'] = $archivoConfig->getNode('template');
+                    if ($datos['parametros'] == '')
+                        $datos['parametros'] = $archivoConfig->getNode('parametros');
+
+                    if ($datos['fieldGeneratorUrlFriendly'] == '')
+                        $datos['fieldGeneratorUrlFriendly'] = $archivoConfig->getNode('fieldGeneratorUrlFriendly');
+                    if ($datos['fieldGeneratorMetatagTitle'] == '')
+                        $datos['fieldGeneratorMetatagTitle'] = $archivoConfig->getNode('fieldGeneratorMetatagTitle');
+
+                    unset($archivoConfig);
+                }
+                break;
+        }
+    }
+
+    /**
      * Recibos dos array:
      *
      *      el primero tiene los atributos y valores que hay en el archivo
@@ -323,7 +411,7 @@ class CoreVariablesController {
 
     /**
      * Construye un array con las variables específicas en base
-     * a los establecido en el archivo yml del módulo y los valores
+     * a los establecido en el archivo yml de la app o del módulo y los valores
      * definidos en el proyecto.
      *
      * @param type $datosEspecificas
@@ -353,7 +441,7 @@ class CoreVariablesController {
     private function getShowVarWeb($datosShowVarWeb) {
 
         foreach ($this->variables->getNode('showVarWeb') as $key => $value) {
-            $valorActual = $datosEspecificas[$key];
+            $valorActual = $datosShowVarWeb[$key];
 
             $showVarWeb[$key] = array(
                 'value' => $valorActual,

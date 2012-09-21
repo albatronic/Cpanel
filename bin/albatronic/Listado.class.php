@@ -261,6 +261,8 @@ class Listado {
         if ($aditionalFilter != '')
             $filtro .= " AND (" . $aditionalFilter . ")";
 
+        $filtro .= " AND (Deleted = '0')";
+
         $arrayQuery = array(
             "SELECT" => $this->form->getDataBaseName() . "." . $this->form->getTable() . ".*", // . $this->form->getPrimaryKey(),
             "FROM" => $tablas,

@@ -3,13 +3,27 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 15.09.2012 12:06:25
+# @date 19.09.2012 19:46:57
 #
 ---
 EnlSecciones:
+  app: Enl
+  isModuleRoot: 1
+  linkModule:
+    fromColumn:
+    toEntity:
+    toColumn:
+
+  # Valores a inserta en la tabla de url amigables
+  controller: CONTROLADOR
+  action: ACTION
+  template: TEMPLATE
+  parametros: PARAMETROS
+
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
+
   login_required: YES
   permission_control: YES
   favourite_control: NO
@@ -22,7 +36,6 @@ EnlSecciones:
   entity: EnlSecciones
   table: EnlSecciones
   primarykey: Id
-  linkBy: ''
   records_per_page: 15
   order_by:
     -
@@ -54,7 +67,7 @@ EnlSecciones:
     Titulo:
       title: Titulo
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -65,7 +78,7 @@ EnlSecciones:
     Subtitulo:
       title: Subtitulo
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -171,11 +184,11 @@ EnlSecciones:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: null
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     CreatedBy:
       title: CreatedBy
       filter: NO
@@ -283,7 +296,7 @@ EnlSecciones:
       list: NO
       visible: true
       updatable: true
-      default: '0000-00-00 00:00:00'
+      default: ''
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
@@ -359,7 +372,7 @@ EnlSecciones:
     UrlFriendly:
       title: UrlFriendly
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -373,7 +386,7 @@ EnlSecciones:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: '1'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
@@ -401,6 +414,18 @@ EnlSecciones:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    LockMetatagTitle:
+      title: LockMetatagTitle
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: 1
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 10, caption: LockMetatagTitle, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MetatagKeywords:
       title: MetatagKeywords
       filter: NO
@@ -433,7 +458,7 @@ EnlSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 10, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      aditional_filter: { order: 11, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MetatagTitlePosition:
       title: MetatagTitlePosition
@@ -445,7 +470,7 @@ EnlSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 11, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      aditional_filter: { order: 12, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ShowOnSitemap:
       title: ShowOnSitemap
@@ -457,7 +482,7 @@ EnlSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 12, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      aditional_filter: { order: 13, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ImportanceSitemap:
       title: ImportanceSitemap
@@ -480,5 +505,5 @@ EnlSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 13, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      aditional_filter: { order: 14, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }

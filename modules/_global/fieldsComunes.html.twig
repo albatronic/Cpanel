@@ -10,63 +10,84 @@
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">General</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-2">Fechas</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-3">Meta</a></li>
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-general">General</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-fechas">Fechas</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-meta">Meta</a></li>
         {% if datos.getPrimaryKeyValue %}
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-4" onclick="cargaImagenes('tabs-4');">Imágenes</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-5" onclick="cargaDocumentos('tabs-5');">Documentos</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-6">Auditoría</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-7">URLs</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-8">SiteMap</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-imagenes" onclick="cargaImagenes('tabs-4');">Imágenes</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-documentos" onclick="cargaDocumentos('tabs-5');">Documentos</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-urls">URLs</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-sitemap">SiteMap</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-auditoria">Auditoría</a></li>
         {% endif %}
     </ul>
 
     {# SOLAPA GENERAL #}
-    <div id="tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input(atributos.UrlFriendly,'field_title','text',values.controller ~ '[UrlFriendly]',values.controller ~ '_UrlFriendly',datos.UrlFriendly,'255','CampoTextoLargo',112,'readonly') }}
+    <div id="tabs-general" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input(atributos.Id,'field_title','text',values.controller ~ '[Id]',values.controller ~ '_Id',datos.primaryKeyValue,none,none,110,'disabled') }}
         {% if user.idPerfil == 1 %}
-        {{ macro.input(atributos.PrimaryKeyMD5,'field_title','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo',none,'disabled') }}
-        {{ macro.select(atributos.IsDefault,'field_title',values.controller ~ '[IsDefault]',values.controller ~ '_IsDefault',none,datos.IsDefault.IDTipo,datos.IsDefault.fetchAll(none,0),'chzn-select',101)}}
+            {{ macro.input(atributos.PrimaryKeyMD5,'field_title','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo',none,'disabled') }}
+            {{ macro.select(atributos.IsDefault,'field_title',values.controller ~ '[IsDefault]',values.controller ~ '_IsDefault',none,datos.IsDefault.IDTipo,datos.IsDefault.fetchAll(none,0),'chzn-select',101)}}
         {% endif %}
+        {{ macro.select(atributos.BelongsTo,'field_title',values.controller ~ '[BelongsTo]',values.controller ~ '_BelongsTo',none,datos.BelongsTo.getPrimaryKeyValue,datos.fetchAll('Titulo'),'chzn-select',110) }}
         {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea',100)}}
         {{ macro.select(atributos.Checked,'field_title',values.controller ~ '[Checked]',values.controller ~ '_Checked',none,datos.Checked.IDTipo,datos.Checked.fetchAll(none,0),'chzn-select',102)}}
         {{ macro.select(atributos.Publish,'field_title',values.controller ~ '[Publish]',values.controller ~ '_Publish',none,datos.Publish.IDTipo,datos.Publish.fetchAll(none,0),'chzn-select',103)}}
         {{ macro.select(atributos.Privacy,'field_title',values.controller ~ '[Privacy]',values.controller ~ '_Privacy',none,datos.Privacy.IDTipo,datos.Privacy.fetchAll(none,0),'chzn-select',109)}}
         {{ macro.input(atributos.Order,'field_title','text',values.controller ~ '[Order]',values.controller ~ '_Order',datos.Order,none,none,110) }}
         {% if datos.getPrimaryKeyValue %}
-        {{ macro.input(atributos.NumberVisits,'field_title','text',values.controller ~ '[NumberVisits]',values.controller ~ '_NumberVisits',datos.NumberVisits,none,'CampoImporte',113, 'disabled') }}
+            {{ macro.input(atributos.NumberVisits,'field_title','text',values.controller ~ '[NumberVisits]',values.controller ~ '_NumberVisits',datos.NumberVisits,none,'CampoImporte',113, 'disabled') }}
         {% endif %}
     </div>
 
     {# SOLAPA FECHAS #}
-    <div id="tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    <div id="tabs-fechas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.fecha(atributos.PublishedAt,'field_title',values.controller ~ '[PublishedAt]',values.controller ~ '_PublishedAt',datos.PublishedAt,'19','datepicker',111) }}
-        {{ macro.fecha(atributos.ActivoFrom,'field_title',values.controller ~ '[ActiveFrom]',values.controller ~ '_ActiveFrom',datos.ActiveFrom,'19','datepicker',104) }}
+        {{ macro.fecha(atributos.ActiveFrom,'field_title',values.controller ~ '[ActiveFrom]',values.controller ~ '_ActiveFrom',datos.ActiveFrom,'19','datepicker',104) }}
         {{ macro.fecha(atributos.ActiveTo,'field_title',values.controller ~ '[ActiveTo]',values.controller ~ '_ActiveTo',datos.ActiveTo,'19','datepicker',105) }}
     </div>
 
     {# SOLAPA META #}
-    <div id="tabs-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.input(atributos.MetatagTitle,'field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,'255','CampoTextoLargo',114) }}
-        {{ macro.input(atributos.MetatagKeywords,'field_title','text',values.controller ~ '[MetatagKeywords]',values.controller ~ '_MetatagKeywords',datos.MetatagKeywords,'255','CampoTextoLargo',115) }}
-        {{ macro.input(atributos.MetatagDescription,'field_title','text',values.controller ~ '[MetatagDescription]',values.controller ~ '_MetatagDescription',datos.MetatagDescription,'255','CampoTextoLargo',116) }}
+    <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.select(atributos.LockMetatagTitle,'field_title',values.controller ~ '[LockMetatagTitle]',values.controller ~ '_LockMetatagTitle',none,datos.LockMetatagTitle.IDTipo,datos.LockMetatagTitle.fetchAll(none,0),'chzn-select',117)}}
+        {% if datos.LockMetatagTitle.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
+        {{ macro.input(atributos.MetatagTitle,'field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,none,none,110, disabled) }}
+        {{ macro.textarea(atributos.MetatagDescription, 'field_title', values.controller ~ '[MetatagDescription]', values.controller ~ '_MetatagDescription', datos.MetatagDescription, none, none, 'textarea',115) }}
+        {{ macro.textarea(atributos.MetatagKeywords, 'field_title', values.controller ~ '[MetatagKeywords]', values.controller ~ '_MetatagKeywords', datos.MetatagKeywords, none, none, 'textarea',116) }}
         {{ macro.select(atributos.MetatagTitleSimple,'field_title',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',none,datos.MetatagTitleSimple.IDTipo,datos.MetatagTitleSimple.fetchAll(none,0),'chzn-select',117)}}
         {{ macro.select(atributos.MetatagTitlePosition,'field_title',values.controller ~ '[MetatagTitlePosition]',values.controller ~ '_MetatagTitlePosition',none,datos.MetatagTitlePosition.IDTipo,datos.MetatagTitlePosition.fetchAll(none,0),'chzn-select',118)}}
     </div>
 
     {% if datos.getPrimaryKeyValue %}
     {# SOLAPA IMAGENES #}
-    <div id="tabs-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    <div id="tabs-imagenes" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
     </div>
 
     {# SOLAPA DOCUMENTOS #}
-    <div id="tabs-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    <div id="tabs-documentos" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    </div>
 
+    {# SOLAPA URLS #}
+    <div id="tabs-urls" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.select(atributos.LockUrlPrefix,'field_title',values.controller ~ '[LockUrlPrefix]',values.controller ~ '_LockUrlPrefix',none,datos.LockUrlPrefix.IDTipo,datos.LockUrlPrefix.fetchAll(none,0),'chzn-select',117)}}
+        {% if datos.LockUrlPrefix.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
+        {{ macro.input(atributos.UrlPrefix,'field_title','text',values.controller ~ '[UrlPrefix]',values.controller ~ '_UrlPrefix',datos.UrlPrefix,'255','CampoTextoLargo',112,disabled) }}
+        {{ macro.select(atributos.LockSlug,'field_title',values.controller ~ '[LockSlug]',values.controller ~ '_LockSlug',none,datos.LockSlug.IDTipo,datos.LockSlug.fetchAll(none,0),'chzn-select',117)}}
+        {% if datos.LockSlug.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
+        {{ macro.input(atributos.Slug,'field_title','text',values.controller ~ '[Slug]',values.controller ~ '_Slug',datos.Slug,'255','CampoTextoLargo',112, disabled) }}
+        {{ macro.input(atributos.UrlFriendly,'field_title','text',values.controller ~ '[UrlFriendly]',values.controller ~ '_UrlFriendly',datos.UrlFriendly,'255','CampoTextoLargo',112,'DISABLED') }}
+        {{ macro.select(atributos.UrlHeritable,'field_title',values.controller ~ '[UrlHeritable]',values.controller ~ '_UrlHeritable',none,datos.UrlHeritable.IDTipo,datos.UrlHeritable.fetchAll(none,0),'chzn-select',117)}}
+    </div>
+
+    {# SOLAPA SITEMAP #}
+    <div id="tabs-sitemap" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.select(atributos.ShowOnSitemap,'field_title',values.controller ~ '[ShowOnSitemap]',values.controller ~ '_ShowOnSitemap',none,datos.ShowOnSitemap.IDTipo,datos.ShowOnSitemap.fetchAll(none,0),'chzn-select',119)}}
+        {{ macro.input(atributos.ImportanceSitemap,'field_title','text',values.controller ~ '[ImportanceSitemap]',values.controller ~ '_ImportanceSitemap',datos.ImportanceSitemap,'5','CampoTextoCorto',120) }}
+        {{ macro.select(atributos.ChangeFreqSitemap,'field_title',values.controller ~ '[ChangeFreqSitemap]',values.controller ~ '_ChangeFreqSitemap',none,datos.ChangeFreqSitemap.IDTipo,datos.ChangeFreqSitemap.fetchAll(none,0),'chzn-select',121) }}
     </div>
 
     {# SOLAPA AUDITORIA #}
-    <div id="tabs-6" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    <div id="tabs-auditoria" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
         {{ macro.input(atributos.CreatedBy,'field_title','text',values.controller ~ '[CreatedBy]',values.controller ~ '_CreatedBy',datos.CreatedBy,none,none,107,'disabled') }}
         {{ macro.fecha(atributos.CreatedAt,'field_title',values.controller ~ '[CreatedAt]',values.controller ~ '_CreatedAt',datos.CreatedAt,'19','datepicker',108,'disabled') }}
         {{ macro.input(atributos.ModifiedBy,'field_title','text',values.controller ~ '[ModifiedBy]',values.controller ~ '_ModifiedBy',datos.ModifiedBy,none,none,107,'disabled') }}
@@ -74,26 +95,9 @@
 
         {{ macro.input(atributos.Deleted,'field_title','text',values.controller ~ '[Deleted]',values.controller ~ '_Deleted',datos.Deleted.Descripcion,none,none,106,'disabled') }}
         {% if datos.Deleted.IDTipo %}
-        {{ macro.input(atributos.DeletedBy,'field_title','text',values.controller ~ '[DeletedBy]',values.controller ~ '_DeletedBy',datos.DeletedBy,none,none,107,'disabled') }}
-        {{ macro.fecha(atributos.DeletedAt,'field_title',values.controller ~ '[DeletedAt]',values.controller ~ '_DeletedAt',datos.DeletedAt,'19','datepicker',108,'disabled') }}
+            {{ macro.input(atributos.DeletedBy,'field_title','text',values.controller ~ '[DeletedBy]',values.controller ~ '_DeletedBy',datos.DeletedBy,none,none,107,'disabled') }}
+            {{ macro.fecha(atributos.DeletedAt,'field_title',values.controller ~ '[DeletedAt]',values.controller ~ '_DeletedAt',datos.DeletedAt,'19','datepicker',108,'disabled') }}
         {% endif %}
-    </div>
-
-    {# SOLAPA URLS #}
-    <div id="tabs-7" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.input(atributos.UrlPrefix,'field_title','text',values.controller ~ '[UrlPrefix]',values.controller ~ '_UrlPrefix',datos.UrlPrefix,'255','CampoTextoLargo',112) }}
-        {{ macro.select(atributos.LockUrlPrefix,'field_title',values.controller ~ '[LockUrlPrefix]',values.controller ~ '_LockUrlPrefix',none,datos.LockUrlPrefix.IDTipo,datos.LockUrlPrefix.fetchAll(none,0),'chzn-select',117)}}
-        {{ macro.input(atributos.Slug,'field_title','text',values.controller ~ '[Slug]',values.controller ~ '_Slug',datos.Slug,'255','CampoTextoLargo',112) }}
-        {{ macro.select(atributos.LockSlug,'field_title',values.controller ~ '[LockSlug]',values.controller ~ '_LockSlug',none,datos.LockSlug.IDTipo,datos.LockSlug.fetchAll(none,0),'chzn-select',117)}}
-        {{ macro.select(atributos.UrlHeritable,'field_title',values.controller ~ '[UrlHeritable]',values.controller ~ '_UrlHeritable',none,datos.UrlHeritable.IDTipo,datos.UrlHeritable.fetchAll(none,0),'chzn-select',117)}}
-        {{ macro.input(atributos.UrlFriendly,'field_title','text',values.controller ~ '[UrlFriendly]',values.controller ~ '_UrlFriendly',datos.UrlFriendly,'255','CampoTextoLargo',112) }}
-    </div>
-
-    {# SOLAPA SITEMAP #}
-    <div id="tabs-8" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.select(atributos.ShowOnSitemap,'field_title',values.controller ~ '[ShowOnSitemap]',values.controller ~ '_ShowOnSitemap',none,datos.ShowOnSitemap.IDTipo,datos.ShowOnSitemap.fetchAll(none,0),'chzn-select',119)}}
-        {{ macro.input(atributos.ImportanceSitemap,'field_title','text',values.controller ~ '[ImportanceSitemap]',values.controller ~ '_ImportanceSitemap',datos.ImportanceSitemap,'5','CampoTextoCorto',120) }}
-        {{ macro.select(atributos.ChangeFreqSitemap,'field_title',values.controller ~ '[ChangeFreqSitemap]',values.controller ~ '_ChangeFreqSitemap',none,datos.ChangeFreqSitemap.IDTipo,datos.ChangeFreqSitemap.fetchAll(none,0),'chzn-select',121) }}
     </div>
     {% endif %}
 </div>

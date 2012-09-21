@@ -1,11 +1,11 @@
 {# Template para los comandos Guardar y Borrar registro #}
-{% if values.permisos['UP'] %}
+{% if values.permisos.permisosModulo['UP'] %}
 <a href="#" onclick="getElementById('accion_{{values.controller}}').value='Guardar'; submitForm('manto_{{ values.controller}}');" title="Guardar">
     <img src="{{app.path}}/images/barraherramientas/save_cmd.png" alt="Guardar" title="Guardar" />
 </a>
 {% endif %}
 
-{% if values.permisos['DE'] %}
+{% if values.permisos.permisosModulo['DE'] %}
 <a href="#" onclick="if (!confirm('¿Desea borrar el registro?')) {return false;} else {getElementById('accion_{{values.controller}}').value='Borrar';} submitForm('manto_{{ values.controller}}');" title="Borrar">
     <img src="{{app.path}}/images/barraherramientas/trash_cmd.png" alt="Borrar" title="Borrar" />
 </a>

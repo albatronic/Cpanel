@@ -103,6 +103,7 @@ CoreUsuarios:
 
 CoreUrlAmigables:
   columns:
+    UrlAmigable:   { type: string(255), notnull: true, index: Unique }
     Controller:    { type: string(255), notnull: true }
     Action:        { type: string(255), notnull: true }
     Template:      { type: string(255), notnull: false, default: NULL }

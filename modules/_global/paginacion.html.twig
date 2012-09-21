@@ -36,13 +36,13 @@
 
     {% if position == 'izq'%}
         <div style="float: right;">
-        {% if values.permisos['EX'] %}
+        {% if values.permisos.permisosModulo['EX'] %}
             <img style="float:right; cursor: pointer; margin-left: 3px;" src="{{app.path}}/images/ico_excel.gif" width="18px" height="17px" title="Exportar..." alt="Exportar..."
                  onclick="$('#dialog').dialog('open');"
             />
             {% include "_Emergente/dialogoExportar.html.twig" with {'filter': filter, 'export_types': values.listado.export_types} %}
         {%endif%}
-        {% if values.permisos['LI'] %}
+        {% if values.permisos.permisosModulo['LI'] %}
             <img style="float:right; cursor: pointer;" src="{{app.path}}/images/icon_printgreen.gif" width="37px" height="21px" title="Imprimir..." alt="Imprimir..."
                  onClick="$('#action{{position}}').val('listado');
                           $('#Listado').html('<div class=ListadoAnimation><img src={{app.path}}/images/loadingAnimation.gif /></div>');

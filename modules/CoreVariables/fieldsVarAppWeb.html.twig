@@ -1,13 +1,8 @@
-{#
-    VARIABLES WEB COMUNES A TODOS LOS MODULOS +
-    MAS LAS ESPECIFICAS DE CADA MODULO QUE ESTAN DEFINIDAS
-    EN modules/NOMBREMODULO/varWeb.yml
+{# VARIABLES WEB A NIVEL DE APP  #}
 
-    author Sergio Pérez <sergio.perez@albatronic.com>
-    copyright Informática ALBATRONIC, SL
-    date 7-SEP-2012 18:02
-#}
-
+{# author Sergio Pérez <sergio.perez@albatronic.com> #}
+{# copyright Informática ALBATRONIC, SL #}
+{# 12.sep.2012 11:16 #}
 
 {% extends 'CoreVariables/form.html.twig' %}
 
@@ -21,17 +16,17 @@
 
     {# VARIABLES WEB GLOBALES A TODOS LOS MODULOS #}
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {% if user.IdPerfil == '1' %} {% set prefijo = '[globales][vwglobal1]' %} {% else %} {% set prefijo = '' %} {% endif %}
+        {% if user.IdPerfil == '1' %} {% set prefijo = '[globales][webName]' %} {% else %} {% set prefijo = '' %} {% endif %}
         {{ macro.input(
-            {'caption': prefijo~' Var Web Global1','visible':'1','varEnv':'0'},
+            {'caption':prefijo~' Nombre de la Web','visible':'1','varEnv':'0'},
             'field_title',
             'text',
-            'datos[globales][vwglobal1]',
-            'datos_globales_vwglobal2',
-            values.datos.globales.vwglobal1,
+            'datos[globales][webName]',
+            'datos_globales_webName',
+            values.datos.globales.webName,
             '50',
-            'CampoTextoCorto'
-            )
+            'CampoTextoCorto',
+            '1')
         }}
     </div>
 
@@ -54,5 +49,4 @@
     </div>
 
 </div>
-
 {% endblock %}

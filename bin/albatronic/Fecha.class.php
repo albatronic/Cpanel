@@ -11,6 +11,7 @@
  *
  * RECIBE UNA FECHA EN CUALQUIERA DE LOS SIGUIENTES FORMATOS:
  * ddmmaaa, dd-mm-aaaa, dd/mm/aaaa, dd.mm.aaaa, aaaa-mm-dd, aaaa/mm/dd, aaaa.mm.dd
+ * ddmmaaa hh:mm:ss, dd/mm/aaaa hh:mm:ss, etc
  * y lo almacena en $fecha en formato aaaa-mm-dd.
  *
  * SI NO SE INDICA FECHA, SE PONE LA DEL DÍA EN CURSO.
@@ -30,21 +31,32 @@ class Fecha {
     private $time = '00:00:00';
     private $esDateTime = FALSE;
     private $plantilla = array(
+        "([0-9]{1,2})([0-9]{1,2})([0-9]{4}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", //ddmmaaaa hh:mm:ss
+        "([0-9]{1,2})/([0-9]{1,2})/([0-9]{4}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", //dd/mm/aaaa hh:mm:ss
+        "([0-9]{1,2})-([0-9]{1,2})-([0-9]{4}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", //dd-mm-aaaa hh:mm:ss
+        "([0-9]{1,2}).([0-9]{1,2}).([0-9]{4}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", //dd.mm.aaaa hh:mm:ss
+
+        "([0-9]{4})([0-9]{1,2})([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", //aaaammdd hh:mm:ss
+        "([0-9]{4})/([0-9]{1,2})/([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", //aaaa/mm/dd hh:mm:ss
+        "([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", //aaaa-mm-dd hh:mm:ss
+        "([0-9]{4}).([0-9]{1,2}).([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", //aaaa.mm.dd hh:mm:ss
+
         "([0-9]{1,2})([0-9]{1,2})([0-9]{4})", //ddmmaaaa
         "([0-9]{1,2})-([0-9]{1,2})-([0-9]{4})", //dd-mm-aaaa
         "([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})", //dd/mm/aaaa
         "([0-9]{1,2}).([0-9]{1,2}).([0-9]{4})", //dd.mm.aaaa
+
+        "([0-9]{4})([0-9]{1,2})([0-9]{1,2})", //aaaammdd
         "([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", //aaaa-mm-dd
         "([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})", //aaaa/mm/dd
         "([0-9]{4}).([0-9]{1,2}).([0-9]{1,2})", //aaaa.mm.dd
-        "([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", //aaaa-mm-dd hh:mm:ss
     );
 
     public function __construct($fecha = '') {
         $formatoCorrecto = 0;
 
         if ($fecha == '')
-            $fecha = date('d-m-Y');
+            $fecha = date('d-m-Y H:i:s');
 
         //Buscar en que formato viene la fecha. Lo indicará el valor del índice $i
         for ($i = 0; $i < count($this->plantilla); $i++) {
@@ -56,22 +68,23 @@ class Fecha {
 
         if ($formatoCorrecto) {
             switch ($i) {
-                case '0':
+                case '0': // Formato datetime ddmmaaaa
                 case '1':
                 case '2':
                 case '3':
                     $this->dia = $registro[1];
                     $this->mes = $registro[2];
                     $this->anio = $registro[3];
+                    $this->hora = $registro[4];
+                    $this->minutos = $registro[5];
+                    $this->segundos = $registro[6];
+                    $this->time = $this->hora . ":" . $this->minutos . ":" . $this->segundos;
+                    $this->esDateTime = TRUE;
                     break;
-                case '4':
+                case '4': // Formato datetime aaaammdd
                 case '5':
                 case '6':
-                    $this->dia = $registro[3];
-                    $this->mes = $registro[2];
-                    $this->anio = $registro[1];
-                    break;
-                case '7': // Formato timedate
+                case '7':
                     $this->dia = $registro[3];
                     $this->mes = $registro[2];
                     $this->anio = $registro[1];
@@ -80,6 +93,23 @@ class Fecha {
                     $this->segundos = $registro[6];
                     $this->time = $this->hora . ":" . $this->minutos . ":" . $this->segundos;
                     $this->esDateTime = TRUE;
+                    break;
+                case '8': // Formato date ddmmaaaa
+                case '9':
+                case '10':
+                case '11':
+                    $this->dia = $registro[1];
+                    $this->mes = $registro[2];
+                    $this->anio = $registro[3];
+                    break;
+                case '12': // Formato date aaammdd
+                case '13':
+                case '14':
+                case '15':
+                    $this->dia = $registro[3];
+                    $this->mes = $registro[2];
+                    $this->anio = $registro[1];
+                    break;
             }
             $this->fecha = $this->anio . "-" . $this->mes . "-" . $this->dia;
         } else
@@ -213,7 +243,7 @@ class Fecha {
      */
     public function getddmmaaaahhmmss() {
         if ($this->fecha)
-            return $this->dia . "/" . $this->mes . "/" . $this->anio . " " . $this->hora . ":" . $this->minuto . ":" . $this->segundo;
+            return $this->dia . "/" . $this->mes . "/" . $this->anio . " " . $this->hora . ":" . $this->minutos . ":" . $this->segundos;
         else
             return "00/00/0000 00:00:00";
     }

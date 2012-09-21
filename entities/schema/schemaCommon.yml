@@ -14,7 +14,7 @@
     DeletedAt:            {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     Privacy:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresPrivacy,IDTipo'}
     Order:                {type: integer(11), notnull: true, default: 0, index: index}
-    PublishedAt:          {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
+    PublishedAt:          {type: datetime, notnull: true, default: ''}
     ActiveFrom:           {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     ActiveTo:             {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     UrlPrefix:            {type: string(255), default: NULL}
@@ -22,9 +22,10 @@
     Slug:                 {type: string(255), default: NULL}
     LockSlug   :          {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     UrlFriendly:          {type: string(255), default: NULL}
-    UrlHeritable:         {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    UrlHeritable:         {type: tinyint, notnull: true, default: 1, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     NumberVisits:         {type: integer(11), notnull: true, default: 0}
     MetatagTitle:         {type: string(255), default: NULL}
+    LockMetatagTitle:     {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     MetatagKeywords:      {type: string(255), default: NULL}
     MetatagDescription:   {type: string(255), default: NULL}
     MetatagTitleSimple:   {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}

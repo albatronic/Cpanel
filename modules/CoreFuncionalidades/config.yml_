@@ -3,10 +3,11 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 12.09.2012 19:53:10
+# @date 19.09.2012 10:55:59
 #
 ---
 CoreFuncionalidades:
+  app: ''
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
@@ -18,12 +19,13 @@ CoreFuncionalidades:
   id_video: corefuncionalidades
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection: 'datos<?php echo $_SESSION[''emp''];?>'
   entity: CoreFuncionalidades
   table: CoreFuncionalidades
   primarykey: Id
   linkBy: ''
   records_per_page: 15
+  isModuleRoot: 0
   order_by:
     -
       title: 'Id a-z'
@@ -93,7 +95,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: EsEstandar, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 1, caption: EsEstandar, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Observations:
       title: Observations
@@ -127,7 +129,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 2, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 2, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Checked:
       title: Checked
@@ -139,7 +141,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 3, caption: Checked, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 3, caption: Checked, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Publish:
       title: Publish
@@ -151,7 +153,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 4, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 4, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     BelongsTo:
       title: BelongsTo
@@ -218,7 +220,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 5, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 5, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     DeletedBy:
       title: DeletedBy
@@ -252,7 +254,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 6, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 6, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Order:
       title: Order
@@ -319,7 +321,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 7, caption: LockUrlPrefix, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 7, caption: LockUrlPrefix, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Slug:
       title: Slug
@@ -342,7 +344,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 8, caption: LockSlug, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 8, caption: LockSlug, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     UrlFriendly:
       title: UrlFriendly
@@ -361,11 +363,11 @@ CoreFuncionalidades:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: '1'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 9, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 9, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
       title: NumberVisits
@@ -389,6 +391,18 @@ CoreFuncionalidades:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    LockMetatagTitle:
+      title: LockMetatagTitle
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 10, caption: LockMetatagTitle, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MetatagKeywords:
       title: MetatagKeywords
       filter: NO
@@ -421,7 +435,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 10, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 11, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MetatagTitlePosition:
       title: MetatagTitlePosition
@@ -433,7 +447,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 11, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 12, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ShowOnSitemap:
       title: ShowOnSitemap
@@ -445,7 +459,7 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 12, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 13, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ImportanceSitemap:
       title: ImportanceSitemap
@@ -468,5 +482,5 @@ CoreFuncionalidades:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 13, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, operator: '=', event: null }
+      aditional_filter: { order: 14, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }

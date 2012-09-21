@@ -1,12 +1,12 @@
-## VARIABLES WEB ESPECIFICAS
-##
-## author Sergio Pérez <sergio.perez@albatronic.com>
-## copyright Informática ALBATRONIC, SL
-## date ${date} ${time}
----
-
+# VARIABLES WEB ESPECIFICAS DEL MODULO EnlSecciones
+#
+# Module: EnlSecciones
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright Informática ALBATRONIC, SL
+# date 17-09-2012 19:56:27
+#
 # ejemplo:
 #
-#  nombreVariable: Caption
-vwespe1: Primera web espe
-vwespe2: Segunda web espe
+# nombreVariable: el texto del caption
+---
+varWebEspeModSecciones: hola

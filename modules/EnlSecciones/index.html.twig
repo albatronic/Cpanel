@@ -13,7 +13,7 @@
 
 {% block content %}
 	{% block filtro %}
-	{% if values.permisos['CO'] and values.tieneListado %}
+	{% if values.permisos.permisosModulo['CO'] and values.tieneListado %}
 		{% include '_global/filtroGenericoWrapper.html.twig' with {'filter': values.listado.filter} %}
 	{% endif %}
 	{% endblock %}

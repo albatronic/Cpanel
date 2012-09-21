@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 08.09.2012 13:51:05
+ * @date 18.09.2012 17:45:10
  */
 
 /**
@@ -16,6 +16,11 @@ class CoreUrlAmigablesEntity extends EntityComunes {
 	 * @assert NotBlank(groups="CoreUrlAmigables")
 	 */
 	protected $Id;
+	/**
+	 * @var string
+	 * @assert NotBlank(groups="CoreUrlAmigables")
+	 */
+	protected $UrlAmigable;
 	/**
 	 * @var string
 	 * @assert NotBlank(groups="CoreUrlAmigables")
@@ -83,6 +88,13 @@ class CoreUrlAmigablesEntity extends EntityComunes {
 	}
 	public function getId(){
 		return $this->Id;
+	}
+
+	public function setUrlAmigable($UrlAmigable){
+		$this->UrlAmigable = trim($UrlAmigable);
+	}
+	public function getUrlAmigable(){
+		return $this->UrlAmigable;
 	}
 
 	public function setController($Controller){

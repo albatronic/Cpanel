@@ -11,7 +11,7 @@
  * @since 10-jun-2011
  *
  */
-class Entity  {
+class Entity {
 
     /**
      * Objeto de conexion a la base de datos
@@ -84,7 +84,7 @@ class Entity  {
             $this->conecta();
 
             if (is_resource($this->_dbLink)) {
-                $query = "SELECT * FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE `{$this->_primaryKeyName}`='{$this->getPrimaryKeyValue()}'";
+                $query = "SELECT * FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE (`{$this->_primaryKeyName}`='{$this->getPrimaryKeyValue()}') AND (Deleted = '0')";
 
                 if ($this->_em->query($query)) {
                     $this->setStatus($this->_em->numRows());
@@ -158,9 +158,6 @@ class Entity  {
             // Auditoria
             $this->setCreatedAt(date('Y-m-d H:i:s'));
             $this->setCreatedBy($_SESSION['USER']['user']['Id']);
-            $this->setPublishedAt(date('Y-m-d H:i:s'));
-            $this->setActiveTo($_SESSION['varEntorno']['VigenteDesde']);
-            $this->setActiveFrom($_SESSION['varEntorno']['VigenteHasta']);
 
             // Compongo las columnas y los valores iterando el objeto
             $columns = '';
@@ -189,7 +186,6 @@ class Entity  {
                 $this->setOrder($lastId);
                 $this->save();
             }
-
         }
         unset($this->_em);
         return $lastId;
@@ -212,9 +208,8 @@ class Entity  {
 
             if (is_resource($this->_dbLink)) {
                 // Auditoria
-                $this->setDeletedAt(date('Y-m-d H:i:s'));
-                $this->setDeletedBy($_SESSION['USER']['user']['Id']);
-                $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET `Deleted` = '1' WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
+                $fecha = date('Y-m-d H:i:s');
+                $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET `Deleted` = '1', `DeletedAt` = '{$fecha}', `DeletedBy` = '{$_SESSION['USER']['user']['Id']}' WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
                 if (!$this->_em->query($query))
                     $this->_errores = $this->_em->getError();
                 $this->_em->desConecta();
@@ -256,8 +251,10 @@ class Entity  {
     }
 
     /**
-     * Carga las propiedades del objeto con los valores pasados en el array.
+     * Carga las propiedades del objeto con los valores pasados en el array $datos.
+     *
      * Los índices del array deben coincidir con los nombre de las propiedades.
+     *
      * Las propiedades que no tengan correspondencia con elementos del array
      * no serán cargadas.
      *
@@ -266,9 +263,28 @@ class Entity  {
      *
      * @param array $datos
      */
-    public function bind($datos) {
+    public function bind(array $datos) {
         foreach ($datos as $key => $value) {
             $this->{"set$key"}($value);
+        }
+    }
+
+    /**
+     * Carga las propiedades del objeto con los valores pasados en el array $valores.
+     *
+     * El array $valores tendrá tantos elmentos como columnas, y para cada elemento
+     * debe haber un subelemento llamado 'default', cuyo valor será el que se cargue.
+     *
+     * Los índices del array deben coincidir con los nombre de las propiedades.
+     *
+     * Las propiedades que no tengan correspondencia con elementos del array
+     * no serán cargadas.
+     *
+     * @param array $valores Array con los valores pon defecto
+     */
+    public function setDefaultValues(array $valores) {
+        foreach ($valores as $key => $values) {
+            $this->{"set$key"}($values['default']);
         }
     }
 
@@ -294,7 +310,8 @@ class Entity  {
         foreach ($rules as $key => $value) {
 
             // Si no tiene valor, le pongo el de por defecto
-            if ($this->{$key} == '') $this->{$key} = $value['default'];
+            if ($this->{$key} == '')
+                $this->{$key} = $value['default'];
 
             switch ($value['type']) {
                 case 'string':
@@ -426,14 +443,21 @@ class Entity  {
      *
      * @param string $columna El nombre de la columna
      * @param variant $valor El valor a buscar
+     * @param boolean $showDeleted Devolver o no los registros marcados como borrados, por defecto no se devuelven
      * @return this El objeto encontrado
      */
-    public function find($columna, $valor) {
+    public function find($columna, $valor, $showDeleted = FALSE) {
+
+        $condicion = "({$columna} = '{$valor}')";
+
+        if ($showDeleted == FALSE)
+            $condicion .= " AND (Deleted = '0')";
+
         $this->conecta();
 
         if (is_resource($this->_dbLink)) {
 
-            $query = "SELECT {$this->_primaryKeyName} FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE ({$columna} = '{$valor}')";
+            $query = "SELECT {$this->_primaryKeyName} FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE ({$condicion})";
             $this->_em->query($query);
             $this->setStatus($this->_em->numRows());
             $rows = $this->_em->fetchResult();
@@ -446,6 +470,8 @@ class Entity  {
 
     /**
      * Devuelve un array con todos los registros de la entidad
+     *
+     * No devuelve los objetos marcados como borrados
      *
      * Cada elemento tiene la primarykey y el valor de $column
      *
@@ -466,13 +492,14 @@ class Entity  {
      * @return array Array de valores Id, Value
      */
     public function fetchAll($column = '', $default = TRUE) {
+
         if ($column == '')
             $column = $this->getPrimaryKeyName();
 
         $this->conecta();
 
         if (is_resource($this->_dbLink)) {
-            $query = "SELECT " . $this->getPrimaryKeyName() . " as Id, $column as Value FROM `{$this->_dataBaseName}`.`{$this->_tableName}` ORDER BY $column ASC";
+            $query = "SELECT " . $this->getPrimaryKeyName() . " as Id, $column as Value FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE (Deleted = '0') ORDER BY $column ASC";
             $this->_em->query($query);
             $rows = $this->_em->fetchResult();
             $this->setStatus($this->_em->numRows());
@@ -480,8 +507,10 @@ class Entity  {
             unset($this->_em);
         }
 
-        if ($default == TRUE)
+        if ($default == TRUE) {
             $rows[] = array('Id' => '', Value => ':: Indique un Valor');
+            sort($rows);
+        }
 
         return $rows;
     }
@@ -495,7 +524,7 @@ class Entity  {
         $this->conecta();
 
         if (is_resource($this->_dbLink)) {
-            $query = "SELECT `{$this->getPrimaryKeyName()}` FROM `{$this->_dataBaseName}`.`{$this->_tableName}` ORDER BY `{$this->getPrimaryKeyName()}` ASC Limit 1";
+            $query = "SELECT `{$this->getPrimaryKeyName()}` FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE (Deleted = '0') ORDER BY `{$this->getPrimaryKeyName()}` ASC Limit 1";
             $this->_em->query($query);
             $row = $this->_em->fetchResult();
             $this->setStatus($this->_em->numRows());
@@ -514,7 +543,7 @@ class Entity  {
         $this->conecta();
 
         if (is_resource($this->_dbLink)) {
-            $query = "SELECT `{$this->getPrimaryKeyName()}` FROM `{$this->_dataBaseName}`.`{$this->_tableName}` ORDER BY `{$this->getPrimaryKeyName()}` DESC Limit 1";
+            $query = "SELECT `{$this->getPrimaryKeyName()}` FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE (Deleted = '0') ORDER BY `{$this->getPrimaryKeyName()}` DESC Limit 1";
             $this->_em->query($query);
             $row = $this->_em->fetchResult();
             $this->setStatus($this->_em->numRows());
@@ -530,7 +559,7 @@ class Entity  {
      *
      * @return array Array de objetos documentos
      */
-    public function getDocuments($tipo='images') {
+    public function getDocuments($tipo = 'images') {
         $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue(), $tipo);
         return $docs->getDocuments();
     }
@@ -540,7 +569,7 @@ class Entity  {
      *
      * @return integer El número de documentos
      */
-    public function getNumberOfDocuments($tipo='images') {
+    public function getNumberOfDocuments($tipo = 'images') {
         $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue(), $tipo);
         return $docs->getNumberOfDocuments();
     }

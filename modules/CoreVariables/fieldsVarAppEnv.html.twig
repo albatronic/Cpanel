@@ -1,13 +1,8 @@
-{#
-    VARIABLES WEB COMUNES A TODOS LOS MODULOS +
-    MAS LAS ESPECIFICAS DE CADA MODULO QUE ESTAN DEFINIDAS
-    EN modules/NOMBREMODULO/varWeb.yml
+{# VARIABLES DE ENTORNO A NIVEL DE APLICACION #}
 
-    author Sergio Pérez <sergio.perez@albatronic.com>
-    copyright Informática ALBATRONIC, SL
-    date 7-SEP-2012 18:02
-#}
-
+{# author Sergio Pérez <sergio.perez@albatronic.com> #}
+{# copyright Informática ALBATRONIC, SL #}
+{# 12.sep.2012 11:16 #}
 
 {% extends 'CoreVariables/form.html.twig' %}
 
@@ -21,26 +16,46 @@
 
     {# VARIABLES WEB GLOBALES A TODOS LOS MODULOS #}
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {% if user.IdPerfil == '1' %} {% set prefijo = '[globales][vwglobal1]' %} {% else %} {% set prefijo = '' %} {% endif %}
         {{ macro.input(
-            {'caption': prefijo~' Var Web Global1','visible':'1','varEnv':'0'},
+            {'caption':'[globales][title] Título','visible':'1','varEnv':'0'},
             'field_title',
             'text',
-            'datos[globales][vwglobal1]',
-            'datos_globales_vwglobal2',
-            values.datos.globales.vwglobal1,
+            'datos[globales][title]',
+            'datos_globales_title',
+            values.datos.globales.title,
             '50',
-            'CampoTextoCorto'
-            )
+            'CampoTextoCorto',
+            '1')
+        }}
+        {{ macro.input(
+            {'caption':'[globales][url] Url','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[globales][url]',
+            'datos_globales_url',
+            values.datos.globales.url,
+            '50',
+            'CampoTextoCorto',
+            '1')
+        }}
+        {{ macro.input(
+            {'caption':'[globales][urlPrefix] Prefijo de la Url','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[globales][urlPrefix]',
+            'datos_globales_urlPrefix',
+            values.datos.globales.urlPrefix,
+            '50',
+            'CampoTextoCorto',
+            '1')
         }}
     </div>
 
     {# VARIABLES WEB ESPECIFICAS AL MODULO EN CURSO nombreModulo/varWeb.yml #}
     <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {% for nombre,atributos in values.datos.especificas %}
-            {% if user.IdPerfil == '1' %} {% set prefijo = '[especificas]['~nombre~']' %} {% else %} {% set prefijo = '' %} {% endif %}
             {{ macro.input(
-                {'caption':prefijo~' '~atributos.caption,'visible':'1','varEnv':'0'},
+                {'caption':'[especificas]['~nombre~'] '~atributos.caption,'visible':'1','varEnv':'0'},
                 'field_title',
                 'text',
                 'datos[especificas]['~nombre~']',
@@ -54,5 +69,4 @@
     </div>
 
 </div>
-
 {% endblock %}

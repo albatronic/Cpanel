@@ -1,4 +1,4 @@
-## VARIABLES WEB ESPECIFICAS DEL MODULO
+## VARIABLES WEB ESPECIFICAS DE LA APP
 ##
 ## author Sergio Pérez <sergio.perez@albatronic.com>
 ## copyright Informática ALBATRONIC, SL
@@ -8,6 +8,5 @@
 # ejemplo:
 #
 #  nombreVariable: Caption
-vwespe1: Primera web espe
-vwespe2: Segunda web espe
-vwespe3: Otra variable web de prueba
+vwEspeApp1: Primera web espe
+vwEspeApp2: Segunda web espe

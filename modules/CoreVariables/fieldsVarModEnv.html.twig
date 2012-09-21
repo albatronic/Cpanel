@@ -16,7 +16,7 @@
 
 {# DEFINICION DE CONSTANTE CUYOS VALORES PUEDEN SER ADQUIRIDOS POR LOS CAMPOS ------------------------ #}
 
-{% set nImagenes = 5 %}
+{% set nImagenes = 3 %}
 {% set ValoresSN = { '0':{'Id':'0','Value':'No'}, '1':{'Id':'1','Value':'Si'} }  %}
 {% set ValoresIzqDcha = { '0':{'Id':'0','Value':'Izquierda'}, '1':{'Id':'1','Value':'Derecha'} }  %}
 
@@ -36,45 +36,47 @@
 
         <li class="ui-state-default ui-corner-top"><a href="#tabs-columnas">Columnas</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-controller">Controller</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-varWeb">VW</a></li>
     </ul>
 
     {# GLOBAL #}
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input({'caption':'Número máximo registros','visible':'1','varEnv':'0'},'field_title','text','datos[numMaxRecords]','datos_numMaxRecords',values.datos.numMaxRecords,'15','CampoTextoCorto','1') }}
-        {{ macro.select({'caption':'Mostrar Id','visible':'1','varEnv':'0'},'field_title','datos[showId]','datos_showId',none,values.datos.showId,ValoresSN,'chzn-select')}}
-        {{ macro.select({'caption':'Mostrar número visitas','visible':'1','varEnv':'0'},'field_title','datos[showNumberVisits]','datos_showNumberVisits',none,values.datos.showNumberVisits,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[isModuleRoot] Es el módulo padre','visible':'1','varEnv':'0'},'field_title','datos[isModuleRoot]','datos_isModuleRoot',none,values.datos.isModuleRoot,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'[numMaxRecords] Número máximo registros','visible':'1','varEnv':'0'},'field_title','text','datos[numMaxRecords]','datos_numMaxRecords',values.datos.numMaxRecords,'15','CampoTextoCorto','1') }}
+        {{ macro.select({'caption':'[showNumberVisits] Mostrar número visitas','visible':'1','varEnv':'0'},'field_title','datos[showNumberVisits]','datos_showNumberVisits',none,values.datos.showNumberVisits,ValoresSN,'chzn-select')}}
     </div>
 
     {# URL AMIGABLE #}
     <div id="tabs-urlAmigable" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.select({'caption':'Generar Url amigable','visible':'1','varEnv':'0'},'field_title','datos[generateUrlFriendly]','datos_generateUrlFriendly',none,values.datos.generateUrlFriendly,ValoresSN,'chzn-select')}}
-        {{ macro.select({'caption':'Mostrar gestión Slug','visible':'1','varEnv':'0'},'field_title','datos[showSlugManagement]','datos_showSlugManagement',none,values.datos.showSlugManagement,ValoresSN,'chzn-select')}}
-        {{ macro.select({'caption':'Mostrar Url amigable','visible':'1','varEnv':'0'},'field_title','datos[showUrlFriendly]','datos_showUrlFriendly',none,values.datos.showUrlFriendly,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'[fieldGeneratorUrlFriendly] Campo generador URL amigable','visible':'1','varEnv':'0'},'field_title','text','datos[fieldGeneratorUrlFriendly]','datos_fieldGeneratorUrlFriendly',values.datos.fieldGeneratorUrlFriendly,'15','CampoTextoCorto','1') }}
+        {{ macro.select({'caption':'[showSlugManagement] Mostrar gestión Slug','visible':'1','varEnv':'0'},'field_title','datos[showSlugManagement]','datos_showSlugManagement',none,values.datos.showSlugManagement,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[showUrlFriendly] Mostrar Url amigable','visible':'1','varEnv':'0'},'field_title','datos[showUrlFriendly]','datos_showUrlFriendly',none,values.datos.showUrlFriendly,ValoresSN,'chzn-select')}}
     </div>
 
     {# MOSTAR GESTION SITEMAP #}
     <div id="tabs-siteMap" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.select({'caption':'Mostrar gestión Sitemap','visible':'1','varEnv':'0'},'field_title','datos[showSiteMapManagement][show]','datos_showSiteMapManagement_show',none,values.datos.showSiteMapManagement.show,ValoresSN,'chzn-select')}}
-        {{ macro.select({'caption':'Mostrar en Sitemap','visible':'1','varEnv':'0'},'field_title','datos[showSiteMapManagement][showAtSiteMap]','datos_showSiteMapManagement_showAtSiteMap',none,values.datos.showSiteMapManagement.showAtSiteMap,ValoresSN,'chzn-select')}}
-        {{ macro.select({'caption':'Mostrar importancia Sitemap','visible':'1','varEnv':'0'},'field_title','datos[showSiteMapManagement][showImportanceSiteMap]','datos_showSiteMapManagement_showImportanceSiteMap',none,values.datos.showSiteMapManagement.showImportanceSiteMap,ValoresSN,'chzn-select')}}
-        {{ macro.input({'caption':'Frecuencia de cambio','visible':'1','varEnv':'0'},'field_title','text','datos[showSiteMapManagement][frecuencyChange]','datos_showSiteMapManagement_frecuencyChange',values.datos.showSiteMapManagement.frecuencyChange,'15','CampoTextoCorto','1') }}
+        {{ macro.select({'caption':'[showSiteMapManagement][show] Mostrar gestión Sitemap','visible':'1','varEnv':'0'},'field_title','datos[showSiteMapManagement][show]','datos_showSiteMapManagement_show',none,values.datos.showSiteMapManagement.show,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[showSiteMapManagement][showAtSiteMap] Mostrar en Sitemap','visible':'1','varEnv':'0'},'field_title','datos[showSiteMapManagement][showAtSiteMap]','datos_showSiteMapManagement_showAtSiteMap',none,values.datos.showSiteMapManagement.showAtSiteMap,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[showSiteMapManagement][showImportanceSiteMap] Mostrar importancia Sitemap','visible':'1','varEnv':'0'},'field_title','datos[showSiteMapManagement][showImportanceSiteMap]','datos_showSiteMapManagement_showImportanceSiteMap',none,values.datos.showSiteMapManagement.showImportanceSiteMap,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'[showSiteMapManagement][frecuencyChange] Frecuencia de cambio','visible':'1','varEnv':'0'},'field_title','text','datos[showSiteMapManagement][frecuencyChange]','datos_showSiteMapManagement_frecuencyChange',values.datos.showSiteMapManagement.frecuencyChange,'15','CampoTextoCorto','1') }}
     </div>
 
     {# MOSTAR GESTION META #}
     <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.select({'caption':'Mostrar gestión Meta','visible':'1','varEnv':'0'},'field_title','datos[showMetaManagement][show]','datos_showMetaManagement_show',none,values.datos.showMetaManagement.show,ValoresSN,'chzn-select')}}
-        {{ macro.select({'caption':'Posición del title','visible':'1','varEnv':'0'},'field_title','datos[showMetaManagement][titlePosition]','datos_showMetaManagement_titlePosition',none,values.datos.showMetaManagement.titlePosition,ValoresIzqDcha,'chzn-select')}}
-        {{ macro.select({'caption':'Title Simple','visible':'1','varEnv':'0'},'field_title','datos[showMetaManagement][titleSimple]','datos_showMetaManagement_titleSimple',none,values.datos.showMetaManagement.titleSimple,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'[fieldGeneratorMetatagTitle] Campo generador Metatag Title','visible':'1','varEnv':'0'},'field_title','text','datos[fieldGeneratorMetatagTitle]','datos_fieldGeneratorMetatagTitle',values.datos.fieldGeneratorMetatagTitle,'15','CampoTextoCorto','1') }}
+        {{ macro.select({'caption':'[showMetaManagement][show] Mostrar gestión Meta','visible':'1','varEnv':'0'},'field_title','datos[showMetaManagement][show]','datos_showMetaManagement_show',none,values.datos.showMetaManagement.show,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[showMetaManagement][titlePosition] Posición del title','visible':'1','varEnv':'0'},'field_title','datos[showMetaManagement][titlePosition]','datos_showMetaManagement_titlePosition',none,values.datos.showMetaManagement.titlePosition,ValoresIzqDcha,'chzn-select')}}
+        {{ macro.select({'caption':'[showMetaManagement][titleSimple] Title Simple','visible':'1','varEnv':'0'},'field_title','datos[showMetaManagement][titleSimple]','datos_showMetaManagement_titleSimple',none,values.datos.showMetaManagement.titleSimple,ValoresSN,'chzn-select')}}
     </div>
 
     {# IMAGENES #}
     {% for i in 1..nImagenes %}
     <div id="tabs-imagen{{i}}" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.select({'caption':'Visible','visible':'1','varEnv':'0'},'field_title','datos[image' ~ i ~ '][visible]','datos_image' ~ i ~ '_visible',none,values.datos.image[i].visible,ValoresSN,'chzn-select')}}
-        {{ macro.input({'caption':'Caption','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][caption]','datos_image'~i~'_caption',values.datos.image[i].caption,'15','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'Width','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][width]','datos_image'~i~'_width',values.datos.image[i].width,'15','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'Height','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][height]','datos_image'~i~'_height',values.datos.image[i].height,'15','CampoTextoCorto','1') }}
+        {{ macro.select({'caption':'[visible] Visible','visible':'1','varEnv':'0'},'field_title','datos[image' ~ i ~ '][visible]','datos_image' ~ i ~ '_visible',none,values.datos.image[i].visible,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'[caption] Caption','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][caption]','datos_image'~i~'_caption',values.datos.image[i].caption,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[width] Width','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][width]','datos_image'~i~'_width',values.datos.image[i].width,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[height] Height','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][height]','datos_image'~i~'_height',values.datos.image[i].height,'15','CampoTextoCorto','1') }}
     </div>
     {% endfor %}
 
@@ -150,10 +152,24 @@
         {% endfor %}
     </div>
 
+    {# CONTROLLER #}
+    <div id="tabs-controller" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input({'caption':'[controller] Controller','visible':'1','varEnv':'0'},'field_title','text','datos[controller]','datos_controller',values.datos.controller,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[action] Action','visible':'1','varEnv':'0'},'field_title','text','datos[action]','datos_action',values.datos.action,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[template] Template','visible':'1','varEnv':'0'},'field_title','text','datos[template]','datos_template',values.datos.template,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[parametros] Parametros','visible':'1','varEnv':'0'},'field_title','text','datos[parametros]','datos_parametros',values.datos.parametros,'50','CampoTextoCorto','1') }}
+     </div>
+
     {# CONTROL VISIBILIDAD VARIABLES WEB #}
     <div id="tabs-varWeb" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {% for nombre,valor in values.datos.showVarWeb %}
-            {{ macro.select({'caption':'Es visible ['~nombre~']','visible':'1','varEnv':'0'},'field_title','datos[showVarWeb]['~nombre~']','datos_showVarWeb_'~nombre,none,valor,ValoresSN,'chzn-select')}}
+        <h5>Globales</h5>
+        {% for nombre,valor in values.datos.showVarWeb.globales %}
+            {{ macro.select({'caption':'Es visible [showVarWeb][globales]['~nombre~']','visible':'1','varEnv':'0'},'field_title','datos[showVarWeb][globales]['~nombre~']','datos_showVarWeb_globales_'~nombre,none,valor,ValoresSN,'chzn-select')}}
+        {% endfor %}
+
+        <h5>Específicas</h5>
+        {% for nombre,valor in values.datos.showVarWeb.especificas %}
+            {{ macro.select({'caption':'Es visible [showVarWeb][especificas]['~nombre~']','visible':'1','varEnv':'0'},'field_title','datos[showVarWeb][especificas]['~nombre~']','datos_showVarWeb_especificas_'~nombre,none,valor,ValoresSN,'chzn-select')}}
         {% endfor %}
     </div>
 </div>

@@ -60,6 +60,7 @@ class EntityManager {
      * @param string $fileConfig Nombre del fichero de configuracion
      */
     public function __construct($conection, $fileConfig = '') {
+
         if ($fileConfig == '')
             $fileConfig = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/" . $this->file;
 

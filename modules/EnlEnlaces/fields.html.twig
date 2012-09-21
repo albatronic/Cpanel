@@ -7,13 +7,13 @@
   date 10.09.2012 12:31:10
 #}
 
-{{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.IdSeccion,datos.IdSeccion.fetchAll('Id'),'chzn-select','1')}}
+{{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion,datos.IdSeccion.fetchAll('Titulo',0),'chzn-select','1')}}
 {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
 {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
 {{ macro.input(atributos.Url,'field_title','text',values.controller ~ '[Url]',values.controller ~ '_Url',datos.Url,'255','CampoTextoLargo','4') }}
-{{ macro.select(atributos.TargetBlank,'field_title',values.controller ~ '[TargetBlank]',values.controller ~ '_TargetBlank',none,datos.TargetBlank.TargetBlank,datos.TargetBlank.fetchAll('IDTipo'),'chzn-select','5')}}
-{{ macro.select(atributos.EsHttps,'field_title',values.controller ~ '[EsHttps]',values.controller ~ '_EsHttps',none,datos.EsHttps.EsHttps,datos.EsHttps.fetchAll('IDTipo'),'chzn-select','6')}}
-{{ macro.select(atributos.EsUrlInterna,'field_title',values.controller ~ '[EsUrlInterna]',values.controller ~ '_EsUrlInterna',none,datos.EsUrlInterna.EsUrlInterna,datos.EsUrlInterna.fetchAll('IDTipo'),'chzn-select','7')}}
+{{ macro.select(atributos.TargetBlank,'field_title',values.controller ~ '[TargetBlank]',values.controller ~ '_TargetBlank',none,datos.TargetBlank.TargetBlank,datos.TargetBlank.fetchAll(none,0),'chzn-select','5')}}
+{{ macro.select(atributos.EsHttps,'field_title',values.controller ~ '[EsHttps]',values.controller ~ '_EsHttps',none,datos.EsHttps.EsHttps,datos.EsHttps.fetchAll(none,0),'chzn-select','6')}}
+{{ macro.select(atributos.EsUrlInterna,'field_title',values.controller ~ '[EsUrlInterna]',values.controller ~ '_EsUrlInterna',none,datos.EsUrlInterna.EsUrlInterna,datos.EsUrlInterna.fetchAll(none,0),'chzn-select','7')}}
 
 {% include '_global/fieldsComunes.html.twig' %}
 

@@ -77,9 +77,18 @@ class ControlAcceso {
             );
             unset($modulo);
 
+            // Permisos del módulo
             $aux = explode(',', $rows[0]['Funcionalidades']);
             foreach ($aux as $value)
-                $this->permisos[$value] = TRUE;
+                $this->permisos['permisosModulo'][$value] = TRUE;
+
+            // Permisos de la app
+            $permiso = new CorePermisos();
+            $rows = $permiso->cargaCondicion("Funcionalidades", "IdPerfil='{$this->idPerfil}' AND NombreModulo='{$this->permisos['enCurso']['app']}'");
+            unset($permiso);
+            $aux = explode(',', $rows[0]['Funcionalidades']);
+            foreach ($aux as $value)
+                $this->permisos['permisosApp'][$value] = TRUE;
         }
     }
 

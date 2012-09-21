@@ -5,38 +5,39 @@
     {# SI ES SUPER MUESTRO VARIABLES DE ENTORNO #}
 
     {# VARIABLES DE ENTORNO Y WEB DEL PROYECTO#}
-    {% if user.idPerfil == 1 %}
+    {% if user.idPerfil.Id == 1 %}
         <li><a href="{{app.path}}/CoreVariables/Env/Pro/{{project.name}}" title="Variables de Entorno Proyecto {{project.name}}"><span class="icon_block m_dashboard">Variables de Entorno del Proyecto {{project.name}}</span></a></li>
     {% endif %}
-    {% if values.permisos['VW'] %}
+    {% if values.permisos.permisosModulo['VW'] %}
         <li><a href="{{app.path}}/CoreVariables/Web/Pro/{{project.name}}" title="Variables Web Proyecto {{project.name}}"><span class="icon_block m_events">Variables Web del Proyecto {{project.name}}</span></a></li>
     {% endif %}
 
     {# VARIABLES DE ENTORNO Y WEB DE LA APP #}
-    {% if ( (values.enCurso.app != 'Index') and (values.enCurso.app != 'CoreVariables') ) %}
-        {% if user.idPerfil == 1 %}
+    {% if ( (values.enCurso.app != '') and (values.enCurso.app != 'Index') and (values.enCurso.app != 'CoreVariables') ) %}
+        {% if user.idPerfil.Id == 1 %}
             <li><a href="{{app.path}}/CoreVariables/Env/App/{{values.enCurso.app}}" title="Variables de Entorno App {{values.enCurso.app}}"><span class="icon_block m_dashboard">Variables de Entorno de la App {{values.enCurso.app}}</span></a></li>
         {% endif %}
-        {% if values.permisos['VW'] %}
+        {% if values.permisos.permisosApp['VW'] %}
             <li><a href="{{app.path}}/CoreVariables/Web/App/{{values.enCurso.app}}" title="Variables Web App {{values.enCurso.app}}"><span class="icon_block m_events">Variables Web de la App {{values.enCurso.app}}</span></a></li>
         {% endif %}
     {% endif %}
 
     {# VARIABLES DE ENTORNO Y WEB DEL MODULO #}
-    {% if ( (values.enCurso.modulo != 'Index') and (values.enCurso.modulo != 'CoreVariables') ) %}
+    {% if ( (values.enCurso.modulo != '') and (values.enCurso.modulo != 'Index') and (values.enCurso.modulo != 'CoreVariables') ) %}
         {# VARIABLES WEB DEL MODULO #}
-        {% if user.idPerfil == 1 %}
+        {% if user.idPerfil.Id == 1 %}
             <li><a href="{{app.path}}/CoreVariables/Env/Mod/{{values.enCurso.modulo}}" title="Variables de Entorno Modulo {{values.enCurso.modulo}}"><span class="icon_block m_dashboard">Variables de Entorno del Módulo {{values.enCurso.modulo}}</span></a></li>
         {% endif %}
-        {% if values.permisos['VW'] %}
+        {% if values.permisos.permisosModulo['VW'] %}
             <li><a href="{{app.path}}/CoreVariables/Web/Mod/{{values.enCurso.modulo}}" title="Variables Web Modulo {{values.enCurso.modulo}}"><span class="icon_block m_events">Variables Web del Módulo {{values.enCurso.modulo}}</span></a></li>
         {% endif %}
     {% endif %}
 
-
+{#
         <li><a href="#" title="Events"><span class="icon_block m_events">Events</span></a></li>
         <li><a href="#" title="Address Book"><span class="icon_block p_book">Address Book</span></a></li>
         <li><a href="#" title="Media"><span class="icon_block m_media">Media</span></a></li>
         <li><a href="#" title="Settings"><span class="icon_block m_settings">Settings</span></a></li>
+#}
     </ul>
 </div>

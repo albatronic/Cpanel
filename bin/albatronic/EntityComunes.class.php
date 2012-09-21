@@ -155,7 +155,7 @@ class EntityComunes extends Entity {
      * @orm Column(type="string")
      * @var entities\ValoresSN
      */
-    protected $UrlHeritable;
+    protected $UrlHeritable = '1';
 
     /**
      * @orm Column(type="integer")
@@ -168,6 +168,12 @@ class EntityComunes extends Entity {
      * @var string(255)
      */
     protected $MetatagTitle;
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $LockMetatagTitle = '';
 
     /**
      * @orm Column(type="string")
@@ -262,6 +268,10 @@ class EntityComunes extends Entity {
     }
 
     public function getBelongsTo() {
+
+        if (!($this->BelongsTo instanceof $this))
+            $this->BelongsTo = new $this($this->BelongsTo);
+
         return $this->BelongsTo;
     }
 
@@ -463,6 +473,16 @@ class EntityComunes extends Entity {
 
     public function getMetatagTitle() {
         return $this->MetatagTitle;
+    }
+
+    public function setLockMetatagTitle($LockMetatagTitle) {
+        $this->LockMetatagTitle = $LockMetatagTitle;
+    }
+
+    public function getLockMetatagTitle() {
+        if (!($this->LockMetatagTitle instanceof ValoresSN))
+            $this->LockMetatagTitle = new ValoresSN($this->LockMetatagTitle);
+        return $this->LockMetatagTitle;
     }
 
     public function setMetatagKeywords($MetatagKeywords) {

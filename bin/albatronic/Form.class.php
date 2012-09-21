@@ -85,7 +85,8 @@ class Form {
      * @return string
      */
     public function getConection() {
-        return $this->getNode('conection');
+        return $_SESSION['project']['name'];
+        //return $this->getNode('conection');
     }
 
     /**

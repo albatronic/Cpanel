@@ -33,7 +33,7 @@ class CoreVariables {
      * @param string $tipo El tipo de variable: Env, Web
      * @param string $nombre El nombre de la app o del modulo según $ambito
      */
-    public function __construct($ambito, $tipo, $nombre='') {
+    public function __construct($ambito, $tipo, $nombre = '') {
 
         $this->pathProject = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'];
 
@@ -68,6 +68,15 @@ class CoreVariables {
         return $this->objeto;
     }
 
+    /**
+     * Devuelve un array con los valores de las variables que
+     * están en el proyecto en curso
+     * 
+     * @return array Array con los valores de las variables
+     */
+    public function getValores() {
+        return $this->objeto['datos'];
+    }
     /**
      * Devuelve el fullpath del archivo yml
      * correspondiente a las variables en curso
@@ -139,7 +148,6 @@ class CoreVariables {
             $arrayEspecificas = sfYaml::load($this->fileEspecificas);
 
         return $arrayEspecificas;
-
     }
 
     /**
@@ -210,7 +218,7 @@ class CoreVariables {
         $ok = $archivo->write($datosYml);
         if (!$ok)
             $this->errores = $archivo->getErrores();
-        elseif ( ($this->objeto['ambito'] == 'Mod') and ($this->objeto['tipo'] == 'Web') )
+        elseif (($this->objeto['ambito'] == 'Mod') and ($this->objeto['tipo'] == 'Web'))
             $this->ponVisibilidad();
 
         unset($archivo);
@@ -228,7 +236,7 @@ class CoreVariables {
         $ok = $archivo->delete();
         if (!$ok)
             $this->errores = $archivo->getErrores();
-        elseif ( ($this->objeto['ambito'] == 'Mod') and ($this->objeto['tipo'] == 'Web') )
+        elseif (($this->objeto['ambito'] == 'Mod') and ($this->objeto['tipo'] == 'Web'))
             $this->quitaVisibilidad();
 
         unset($archivo);
@@ -274,7 +282,8 @@ class CoreVariables {
                     $app = $app->find('CodigoApp', $nombre);
                     $this->titulo = 'Variables ' . $tipo . ' de la Aplicación "' . $app->getNombreApp() . '"';
                     unset($app);
-                    $this->template = "{$nombre}/fieldsVar{$tipo}.html.twig";
+                    $this->template = "CoreVariables/fieldsVar{$ambito}{$tipo}.html.twig";
+                    $this->fileEspecificas = APP_PATH . "modules/{$nombre}/var{$tipo}.yml";
                     break;
 
                 case 'Mod':
@@ -284,7 +293,7 @@ class CoreVariables {
                     $this->titulo = 'Variables ' . $tipo . ' del Módulo "' . $modulo->getTitulo() . '"';
                     unset($modulo);
                     $this->template = "CoreVariables/fieldsVar{$ambito}{$tipo}.html.twig";
-                    $this->fileEspecificas = APP_PATH."modules/{$nombre}/var{$tipo}.yml";
+                    $this->fileEspecificas = APP_PATH . "modules/{$nombre}/var{$tipo}.yml";
                     break;
 
                 default:
@@ -312,11 +321,10 @@ class CoreVariables {
      */
     private function quitaVisibilidad() {
 
-        $variables = new CoreVariables('Mod','Env',$this->objeto['nombre']);
+        $variables = new CoreVariables('Mod', 'Env', $this->objeto['nombre']);
         $variables->setNode('showVarWeb', array());
         $variables->save();
         unset($variables);
-
     }
 
     /**
@@ -330,19 +338,28 @@ class CoreVariables {
      */
     private function ponVisibilidad() {
 
-        $variables = new CoreVariables('Mod','Env',$this->objeto['nombre']);
+        $variables = new CoreVariables('Mod', 'Env', $this->objeto['nombre']);
         $valoresActuales = $variables->getNode('showVarWeb');
 
-        foreach ($this->objeto['datos']['especificas'] as $key => $value) {
-            if (!isset($valoresActuales[$key])) $valores[$key] = 0;
-            else $valores[$key] = $valoresActuales[$key];
-        }
+        foreach ($this->objeto['datos']['globales'] as $key => $value)
+            if (!isset($valoresActuales['globales'][$key]))
+                $valores['globales'][$key] = 0;
+            else
+                $valores['globales'][$key] = $valoresActuales['globales'][$key];
+
+        foreach ($this->objeto['datos']['especificas'] as $key => $value)
+            if (!isset($valoresActuales['especificas'][$key]))
+                $valores['especificas'][$key] = 0;
+            else
+                $valores['especificas'][$key] = $valoresActuales['especificas'][$key];
+
 
         $variables->setNode('showVarWeb', $valores);
         $variables->save();
 
         unset($variables);
     }
+
 }
 
 ?>

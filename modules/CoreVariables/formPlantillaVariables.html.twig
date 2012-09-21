@@ -1,3 +1,8 @@
+{#
+    FORMULARIO POPUP DE EDICION DE LOS ATRIBUTOS
+    DE UNA VARIABLE DE ENTORNO
+#}
+
 {% set ValoresSN = { '0':{'Id':'0','Value':'No'}, '1':{'Id':'1','Value':'Si'} }  %}
 
 {% extends '_global/layoutPopUp.html.twig' %}
@@ -54,8 +59,7 @@
                                 'datos_'~ variable,
                                 valor,
                                 '255',
-                                'CampoTextoCorto',
-                                '1'
+                                'CampoTextoCorto'
                                 )
                             }}
                         {% endif %}

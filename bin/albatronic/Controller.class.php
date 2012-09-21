@@ -39,10 +39,40 @@ class Controller {
     protected $permisos;
 
     /**
+     * String con el nombre de la app a la que pertenece el módulo
+     * @var string
+     */
+    protected $app;
+
+    /**
+     * Indica si es el módulo raiz de la app
+     * @var boolean
+     */
+    protected $isModuleRoot;
+
+    /**
      * Array con las variables Web del modulo
      * @var array
      */
-    protected $varWeb;
+    protected $varWebMod;
+
+    /**
+     * Array con las variables de entorno del modulo
+     * @var array
+     */
+    protected $varEnvMod;
+
+    /**
+     * Array con las variables Web de la app
+     * @var array
+     */
+    protected $varWebApp;
+
+    /**
+     * Array con las variables de entorno de la app
+     * @var array
+     */
+    protected $varEnvApp;
 
     public function __construct($request) {
 
@@ -51,6 +81,12 @@ class Controller {
 
         // Cargar la configuracion del modulo (modules/moduloName/config.yml)
         $this->form = new Form($this->entity);
+
+        // Pongo la app a la que pertenece
+        $this->app = $this->form->getNode('app');
+
+        // Pongo si es o no el modulo raiz de la app
+        $this->isModuleRoot = $this->form->getNode('isModuleRoot');
 
         // Instanciar el objeto listado con los parametros del modulo
         // y los eventuales valores del filtro enviados en el request
@@ -87,13 +123,25 @@ class Controller {
         $this->values['twigCss'] = $includesHead['twigCss'];
         $this->values['twigJs'] = $includesHead['twigJs'];
 
-        // VARIABLES WEB Y DE ENTORNO
-        //print_r($this->values['permisos']);
+        // Cargar las variables de entorno y web de la app y del modulo
+        $variables = new CoreVariables('Mod', 'Env', $this->entity);
+        $this->varEnvMod = $variables->getValores();
+
+        $variables = new CoreVariables('Mod', 'Web', $this->entity);
+        $this->varWebMod = $variables->getValores();
+        unset($variables);
+
+        $variables = new CoreVariables('App', 'Env', $this->app);
+        $this->varEnvApp = $variables->getValores();
+
+        $variables = new CoreVariables('App', 'Web', $this->app);
+        $this->varWebApp = $variables->getValores();
+        unset($variables);
     }
 
     public function IndexAction() {
 
-        if ($this->values['permisos']['AC'])
+        if ($this->values['permisos']['permisosModulo']['AC'])
             $template = $this->entity . "/index.html.twig";
         else
             $template = "_global/forbiden.html.twig";
@@ -120,7 +168,7 @@ class Controller {
         switch ($this->request["METHOD"]) {
 
             case 'GET':
-                if ($this->values['permisos']['CO']) {
+                if ($this->values['permisos']['permisosModulo']['CO']) {
                     //SI EN LA POSICION 3 DEL REQUEST VIENE ALGO,
                     //SE ENTIENDE QUE ES EL VALOR DE LA CLAVE PARA LINKAR CON LA ENTIDAD PADRE
                     //ESTO SE UTILIZA PARA LOS FORMULARIOS PADRE->HIJO
@@ -151,14 +199,16 @@ class Controller {
 
                 switch ($this->request['accion']) {
                     case 'Guardar': //GUARDAR DATOS
-                        if ($this->values['permisos']['UP']) {
+                        if ($this->values['permisos']['permisosModulo']['UP']) {
                             // Cargo la entidad
                             $datos = new $this->entity($this->request[$this->entity][$this->form->getPrimaryKey()]);
                             // Vuelco los datos del request
                             $datos->bind($this->request[$this->entity]);
+
                             if ($datos->valida($this->form->getRules())) {
                                 $this->values['alertas'] = $datos->getAlertas();
-                                $datos->save();
+                                if ($datos->save())
+                                    $this->gestionUrlMeta(&$datos);
 
                                 //Recargo el objeto para refrescar las propiedas que
                                 //hayan podido ser objeto de algun calculo durante el proceso
@@ -175,11 +225,18 @@ class Controller {
                         }
                         break;
 
-                    case 'Borrar': //BORRAR DATOS
-                        if ($this->values['permisos']['DE']) {
+                    case 'Borrar': //MARCA EL OBJETO COMO BORRADO, PERO NO BORRA FÍSICAMENTE
+                        if ($this->values['permisos']['permisosModulo']['DE']) {
                             $datos = new $this->entity($this->request[$this->entity][$this->form->getPrimaryKey()]);
 
-                            if ($datos->erase()) {
+                            if ($datos->delete()) {
+                                // Borrar la eventual url amigable
+                                $url = new CoreUrlAmigables();
+                                $row = $url->cargaCondicion("Id", "Entidad='{$this->entity}' and IdEntidad='{$datos->getPrimaryKeyValue()}'");
+                                $url = new CoreUrlAmigables($row[0]['Id']);
+                                $url->erase();
+                                unset($url);
+
                                 $datos = new $this->entity();
                                 $this->values['datos'] = $datos;
                                 $this->values['errores'] = array();
@@ -211,7 +268,7 @@ class Controller {
      */
     public function newAction() {
 
-        if ($this->values['permisos']['IN']) {
+        if ($this->values['permisos']['permisosModulo']['IN']) {
 
             $this->values['atributos'] = $this->form->getAtributos($this->values['permisos']['enCurso']['modulo']);
 
@@ -224,6 +281,7 @@ class Controller {
                         $this->values['linkBy']['value'] = $this->request['2'];
 
                     $datos = new $this->entity();
+                    $datos->setDefaultValues($this->varEnvMod['columns']);
                     $this->values['datos'] = $datos;
                     $this->values['errores'] = array();
                     $template = $this->entity . '/form.html.twig';
@@ -239,14 +297,19 @@ class Controller {
                     $datos->bind($this->request[$this->entity]);
 
                     if ($datos->valida($this->form->getRules())) {
-                        $datos->create();
+                        $lastId = $datos->create();
                         $this->values['errores'] = $datos->getErrores();
                         $this->values['alertas'] = $datos->getAlertas();
 
                         //Recargo el objeto para refrescar las propiedas que
                         //hayan podido ser objeto de algun calculo durante el proceso
-                        //de guardado.
-                        if ($datos->getStatus()) $datos = new $this->entity($datos->getPrimaryKeyValue());
+                        //de guardado y pongo valores por defecto (urlamigable, etc)
+                        if ($lastId) {
+                            $datos = new $this->entity($lastId);
+                            $this->gestionUrlMeta($datos);
+                            $this->values['errores'] = $datos->getErrores();
+                            $this->values['alertas'] = $datos->getAlertas();
+                        }
                         $this->values['datos'] = $datos;
 
                         $template = $this->entity . '/form.html.twig';
@@ -297,7 +360,7 @@ class Controller {
      */
     public function listAction($aditionalFilter = '') {
 
-        if ($this->values['permisos']['CO']) {
+        if ($this->values['permisos']['permisosModulo']['CO']) {
             $this->values['listado'] = $this->listado->getAll($aditionalFilter);
             $template = $this->entity . '/list.html.twig';
         } else {
@@ -315,7 +378,7 @@ class Controller {
      */
     public function listadoAction($aditionalFilter = '') {
 
-        if ($this->values['permisos']['LI']) {
+        if ($this->values['permisos']['permisosModulo']['LI']) {
             // Lee la configuracion del listado
             $formato = new Form($this->entity, 'listados.yml');
             $parametros = $formato->getFormatoListado($this->request['formatoListado']);
@@ -335,7 +398,7 @@ class Controller {
      * @return array Template y valores
      */
     public function imprimirAction() {
-        if ($this->values['permisos']['LI']) {
+        if ($this->values['permisos']['permisosModulo']['LI']) {
 
             if ($this->request['METHOD'] == 'GET') {
                 $idDocumento = $this->request['2'];
@@ -375,7 +438,7 @@ class Controller {
      */
     public function exportarAction($aditionalFilter = '') {
 
-        if ($this->values['permisos']['EX']) {
+        if ($this->values['permisos']['permisosModulo']['EX']) {
 
             if ($this->values['export']['title'] == '')
                 $this->values['export']['title'] = $this->entity;
@@ -418,7 +481,7 @@ class Controller {
 
         switch ($this->request['accion']) {
             case 'Enviar':
-                if ($this->values['permisos']['UP']) {
+                if ($this->values['permisos']['permisosModulo']['UP']) {
 
                     $path = "docs/docs" . $_SESSION['project']['folder'] . "/" . $tipo . "/" . $this->entity . "/" . $idEntidad . "_" . date('His');
                     $archivo = new Archivo($path);
@@ -446,7 +509,7 @@ class Controller {
                 break;
 
             case 'Quitar':
-                if ($this->values['permisos']['DE']) {
+                if ($this->values['permisos']['permisosModulo']['DE']) {
                     $fileName = "docs/docs" . $_SESSION['project']['folder'] . "/" . $tipo . "/" . $this->entity . "/" . $this->request['documentoBorrar'];
                     if (file_exists($fileName)) {
                         if (unlink($fileName)) {
@@ -562,6 +625,168 @@ class Controller {
         }
 
         return $fichero;
+    }
+
+    /**
+     * Crea o actualiza la url amigable y el metatagTitle
+     *
+     * @param array $datos
+     */
+    private function gestionUrlMeta($datos) {
+
+        $urlAmigable = $this->calculaUrlAmigable($datos);
+
+        $metatagTitle = $this->calculaMetatagTitle($datos);
+
+        if (count($urlAmigable) or ($metatagTitle != '')) {
+
+            if ($urlAmigable != '') {
+                $datos->setUrlPrefix($urlAmigable['prefix']);
+                $datos->setSlug($urlAmigable['slug']);
+                $datos->setUrlFriendly($urlAmigable['url']);
+            }
+
+            if ($metatagTitle != '') {
+                $datos->setMetatagTitle($metatagTitle);
+            }
+
+            $datos->save();
+        }
+    }
+
+    private function calculaUrlAmigable($datos) {
+
+        $urlPrefix = '';
+        $urlAmigable = '';
+        $slug = '';
+
+        $columnaSlug = $this->varEnvMod['fieldGeneratorUrlFriendly'];
+
+        // Si hay que generar la url amigable
+        if ($columnaSlug) {
+
+            $bloqueoUrlPrefix = ( $datos->getLockUrlPrefix() == '1' );
+            $bloqueoSlug = ( $datos->getLockSlug() == '1' );
+            $perteneceA = $datos->getBelongsTo()->getPrimaryKeyValue();
+
+            // CALCULAR EL PREFIJO DE LA URL -----------------------------------
+            //
+            // Si está bloqueado el prefijo, se calcula
+            if ($bloqueoUrlPrefix) {
+
+                if ($this->isModuleRoot) {
+                    // Es el módulo padre de la app
+                    if ($perteneceA) {
+                        $objetoPadre = new $this->entity($perteneceA);
+                        if ($objetoPadre->getUrlHeritable() == '1') {
+                            $urlPrefix = $objetoPadre->getUrlFriendly();
+                        } else {
+                            $urlPrefix = "/" . $this->varEnvApp['globales']['urlPrefix'];
+                        }
+                        unset($objetoPadre);
+                    } else {
+                        $urlPrefix = "/" . $this->varEnvApp['globales']['urlPrefix'];
+                    }
+                } else {
+                    // No es el módulo padre de la app. Miro a ver si
+                    // está linkado con otro módulo
+                    $linkModule = $this->form->getNode('linkModule');
+                    if (($linkModule['fromColumn'] != '') and ($linkModule['toEntity'] != '') and ($linkModule['toColumn'] != '')) {
+                        // Está linkado con otro módulo. El prefijo será la url amigable
+                        // del padre si es heradable
+
+                        $moduloPadre = new $linkModule['toEntity']($datos->getColumnValue($linkModule['fromColumn']));
+                        if ($moduloPadre->getUrlHeritable() == '1') {
+                            $urlPrefix = $moduloPadre->getUrlFriendly();
+                        } else {
+                            $urlPrefix = "/" . $this->varEnvApp['globales']['urlPrefix'];
+                        }
+                        unset($moduloPadre);
+                    }
+                }
+            } else {
+                // Si no está bloqueado, se toma el indicado por el usuario y se limpia
+                $urlPrefix = Textos::limpia($datos->getUrlPrefix());
+                if ($urlPrefix) $urlPrefix = "/" . $urlPrefix;
+            }
+            // -----------------------------------------------------------------
+            // CALCULAR EL SLUG ------------------------------------------------
+            //
+            // Si está bloquedo el slug, se calcula
+            if ($bloqueoSlug) {
+                $slug = $datos->{"get$columnaSlug"}();
+            } else {
+                // Si no está bloqueado, se toma el indicado por el usuario
+                $slug = $datos->getSlug();
+            }
+
+            $slug = Textos::limpia($slug);
+            // -----------------------------------------------------------------
+            // Construir la url amigable
+            if ($urlPrefix != '')
+                $urlAmigable = "{$urlPrefix}";
+            $urlAmigable .= "/{$slug}";
+
+
+            $urls = new CoreUrlAmigables();
+            $rows = $urls->cargaCondicion("Id", "Entidad='{$this->entity}' and IdEntidad='{$datos->getPrimaryKeyValue()}'");
+            $idUrl = $rows[0]['Id'];
+
+            if (!$idUrl) {
+                $urls->setUrlAmigable($this->entity . $datos->getPrimaryKeyValue());
+                $urls->setController($this->varEnvMod['controller']);
+                $urls->setAction($this->varEnvMod['action']);
+                $urls->setTemplate($this->varEnvMod['template']);
+                $urls->setParametros($this->varEnvMod['parametros']);
+                $urls->setEntidad($this->entity);
+                $urls->setIdEntidad($datos->getPrimaryKeyValue());
+                $idUrl = $urls->create();
+            }
+
+            $rows = $urls->cargaCondicion("Id, Entidad, IdEntidad", "(UrlAmigable='{$urlAmigable}')");
+            $row = $rows[0];
+            if (($row['Id']) and ($row['Entidad'] != "{$this->entity}" or $row['IdEntidad'] != "{$datos->getPrimaryKeyValue()}")) {
+                // Ya existe esa url amigable, le pongo al final el id
+                $urlAmigable .= "-" . $idUrl;
+                $slug .= "-" . $idUrl;
+            }
+            $urls = new CoreUrlAmigables($idUrl);
+            $urls->setUrlAmigable($urlAmigable);
+            $urls->setController($this->varEnvMod['controller']);
+            $urls->setAction($this->varEnvMod['action']);
+            $urls->setTemplate($this->varEnvMod['template']);
+            $urls->setParametros($this->varEnvMod['parametros']);
+            $urls->setEntidad($this->entity);
+            $urls->setIdEntidad($datos->getPrimaryKeyValue());
+            $urls->save();
+        }
+
+        $array = array();
+
+        if ($urlPrefix . $urlAmigable . $slug)
+            $array = array(
+                'prefix' => $urlPrefix,
+                'url' => $urlAmigable,
+                'slug' => $slug,
+            );
+
+        return $array;
+    }
+
+    private function calculaMetatagTitle($datos) {
+
+        // Obtener el metatagtitle
+
+        $bloqueoMetatagTitle = ($datos->getLockMetatagTitle()->getIDTipo() == '1');
+
+        if ($bloqueoMetatagTitle) {
+            $columnaMetatagTitle = $this->varEnvMod['fieldGeneratorMetatagTitle'];
+            if ($columnaMetatagTitle != '')
+                $metatagTitle = $datos->{"get$columnaMetatagTitle"}();
+        } else
+            $metatagTitle = $datos->getMetatagTitle();
+
+        return $metatagTitle;
     }
 
 }

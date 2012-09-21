@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 10.09.2012 12:31:09
+# @date 18.09.2012 17:41:43
 #
 ---
 listados:
@@ -21,6 +21,7 @@ listados:
     print_interline: null
     legend_bottom: null
     columns:
+      UrlAmigable: { title: UrlAmigable, length: '255', align: L, type: string, total: NO, formula: null, format: null }
       Controller: { title: Controller, length: '255', align: L, type: string, total: NO, formula: null, format: null }
       Action: { title: Action, length: '255', align: L, type: string, total: NO, formula: null, format: null }
       Template: { title: Template, length: '255', align: L, type: string, total: NO, formula: null, format: null }
