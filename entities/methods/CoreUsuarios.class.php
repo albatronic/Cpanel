@@ -36,7 +36,7 @@ class CoreUsuarios extends CoreUsuariosEntity {
                 from CorePermisos as p, CoreModulos as m
                 where  m.NombreModulo = p.NombreModulo and
                 p.IdPerfil = '" . $this->IdPerfil . "'
-                order by p.NombreModulo,m.Order ASC";
+                order by p.NombreModulo,m.SortOrder ASC";
             $em->query($query);
             $rows = $em->fetchResult();
             $em->desConecta();

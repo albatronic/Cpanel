@@ -553,7 +553,7 @@ class Form {
         // Si el usuario es super pongo la visibilidad a TRUE
         if ($_SESSION['USER']['user']['Id'] == '1')
             foreach ($atributos as $key => $value)
-                if (! $atributos[$key]['visible']) {
+                if (!$atributos[$key]['visible']) {
                     $atributos[$key]['visible'] = '1';
                     $atributos[$key]['caption'] .= " (oculta)";
                 }

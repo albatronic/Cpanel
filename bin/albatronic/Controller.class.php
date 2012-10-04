@@ -74,6 +74,12 @@ class Controller {
      */
     protected $varEnvApp;
 
+    /**
+     * Array con las variables de entorno del proyecto
+     * @var array
+     */
+    protected $varEnvPro;
+
     public function __construct($request) {
 
         // Cargar lo que viene en el request
@@ -124,19 +130,31 @@ class Controller {
         $this->values['twigJs'] = $includesHead['twigJs'];
 
         // Cargar las variables de entorno y web de la app y del modulo
+        $variables = new CoreVariables('Pro', 'Env');
+        $this->varEnvPro = $variables->getValores();
+        $this->values['varEnvPro'] = $this->varEnvPro;
+
         $variables = new CoreVariables('Mod', 'Env', $this->entity);
         $this->varEnvMod = $variables->getValores();
+        $this->values['varEnvMod'] = $this->varEnvMod;
 
         $variables = new CoreVariables('Mod', 'Web', $this->entity);
         $this->varWebMod = $variables->getValores();
-        unset($variables);
+        $this->values['varWebMod'] = $this->varWebMod;
 
         $variables = new CoreVariables('App', 'Env', $this->app);
         $this->varEnvApp = $variables->getValores();
+        $this->values['varEnvApp'] = $this->varEnvApp;
 
         $variables = new CoreVariables('App', 'Web', $this->app);
         $this->varWebApp = $variables->getValores();
+        $this->values['varWebApp'] = $this->varWebApp;
         unset($variables);
+
+
+        $this->values['atributos'] = $this->form->getAtributos($this->values['permisos']['enCurso']['modulo']);
+
+        ($this->request['solapaActiva'] == '') ? $this->values['solapaActiva'] = 'general' : $this->values['solapaActiva'] = $this->request['solapaActiva'];
     }
 
     public function IndexAction() {
@@ -163,8 +181,6 @@ class Controller {
      */
     public function editAction() {
 
-        $this->values['atributos'] = $this->form->getAtributos($this->values['permisos']['enCurso']['modulo']);
-
         switch ($this->request["METHOD"]) {
 
             case 'GET':
@@ -176,7 +192,8 @@ class Controller {
                         $this->values['linkBy']['value'] = $this->request['3'];
 
                     //MOSTRAR DATOS. El ID viene en la posicion 2 del request
-                    $datos = new $this->entity($this->request[2]);
+                    $datos = new $this->entity();
+                    $datos = $datos->find('PrimaryKeyMD5', $this->request[2]);
                     if ($datos->getStatus()) {
                         $this->values['datos'] = $datos;
                         $this->values['errores'] = $datos->getErrores();
@@ -230,13 +247,6 @@ class Controller {
                             $datos = new $this->entity($this->request[$this->entity][$this->form->getPrimaryKey()]);
 
                             if ($datos->delete()) {
-                                // Borrar la eventual url amigable
-                                $url = new CoreUrlAmigables();
-                                $row = $url->cargaCondicion("Id", "Entidad='{$this->entity}' and IdEntidad='{$datos->getPrimaryKeyValue()}'");
-                                $url = new CoreUrlAmigables($row[0]['Id']);
-                                $url->erase();
-                                unset($url);
-
                                 $datos = new $this->entity();
                                 $this->values['datos'] = $datos;
                                 $this->values['errores'] = array();
@@ -270,8 +280,6 @@ class Controller {
 
         if ($this->values['permisos']['permisosModulo']['IN']) {
 
-            $this->values['atributos'] = $this->form->getAtributos($this->values['permisos']['enCurso']['modulo']);
-
             switch ($this->request["METHOD"]) {
                 case 'GET': //MOSTRAR FORMULARIO VACIO
                     //SI EN LA POSICION 2 DEL REQUEST VIENE ALGO,
@@ -281,7 +289,7 @@ class Controller {
                         $this->values['linkBy']['value'] = $this->request['2'];
 
                     $datos = new $this->entity();
-                    $datos->setDefaultValues($this->varEnvMod['columns']);
+                    $datos->setDefaultValues((array) $this->varEnvMod['columns']);
                     $this->values['datos'] = $datos;
                     $this->values['errores'] = array();
                     $template = $this->entity . '/form.html.twig';
@@ -471,36 +479,128 @@ class Controller {
      *
      * @return array
      */
-    public function DocumentoAction() {
+    public function ImagenAction() {
 
-        $tipo = $this->request['tipo'];
-        if ($tipo == '')
-            $tipo = "images";
+        $rules = array(
+            'forbidenTypes' => split(",", $this->varEnvPro['forbidenTypes']),
+            'maxFileSize' => $this->varEnvMod['maxImageSize'], // Tamaño expresado en bytes
+        );
 
         $idEntidad = $this->request[$this->entity][$this->form->getPrimaryKey()];
 
         switch ($this->request['accion']) {
-            case 'Enviar':
+            case 'EnviarMaster':
                 if ($this->values['permisos']['permisosModulo']['UP']) {
 
-                    $path = "docs/docs" . $_SESSION['project']['folder'] . "/" . $tipo . "/" . $this->entity . "/" . $idEntidad . "_" . date('His');
-                    $archivo = new Archivo($path);
+                    // Validar el tamaño y tipo de documento
+                    $doc = new CoreDocs();
+                    $doc->setArrayDoc($_FILES['imagenMaster']);
+                    if (!$doc->valida($rules))
+                        $this->values['errores'] = $doc->getErrores();
 
-                    if ($archivo->upLoad($_FILES['document'])) {
-                        // Actualiza el registro de documentos/imagenes
-                        if ($tipo == 'documents')
-                            $doc = new CoreDocumentos();
-                        else
-                            $doc = new CoreImagenes();
+                    $datos = new $this->entity($idEntidad);
+                    $columnaSlug = $this->varEnvMod['fieldGeneratorUrlFriendly'];
+                    $slug = $datos->{"get$columnaSlug"}();
+                    unset($datos);
 
-                        $doc->setEntidad($this->entity);
-                        $doc->setIdEntidad($idEntidad);
-                        $doc->setPathName($path);
-                        $doc->create();
-                        unset($doc);
-                    } else
-                        $this->values['errores'][] = $archivo->getErrores();
-                    unset($archivo);
+                    if ($slug == '')
+                        $this->values['errores'][] = "No se ha indicado el título";
+
+                    if (count($this->values['errores']) == '0') {
+
+                        // Borrar las eventuales imagenes que existieran
+                        $img = new CoreDocs();
+                        $img->borraDocs($this->entity, $idEntidad, 'image%');
+                        unset($img);
+
+                        foreach ($this->varEnvMod['images'] as $key => $value)
+                            if ($value['visible'] == '1') {
+
+                                $_FILES['imagenMaster']['maxWidth'] = $value['width'];
+                                $_FILES['imagenMaster']['maxHeight'] = $value['height'];
+
+                                $doc = new CoreDocs();
+                                $doc->setEntity($this->entity);
+                                $doc->setIdEntity($idEntidad);
+                                $doc->setPathName($this->entity . $idEntidad);
+                                $doc->setName($idEntidad);
+                                $doc->setTitle($slug);
+                                $doc->setType('image' . $key);
+                                $doc->setArrayDoc($_FILES['imagenMaster']);
+                                $doc->setIsThumbnail(0);
+                                $ok = $doc->create();
+                                if (!$ok)
+                                    $this->values['errores'] = $doc->getErrores();
+
+                                // Subir Miniatura
+                                if (($ok) and ($value['generateThumbnail'] == '1')) {
+                                    $_FILES['imagenMaster']['maxWidth'] = $value['widthThumbnail'];
+                                    $_FILES['imagenMaster']['maxHeight'] = $value['heightThumbnail'];
+                                    $doc = new CoreDocs();
+                                    $doc->setEntity($this->entity);
+                                    $doc->setIdEntity($idEntidad);
+                                    $doc->setPathName($this->entity . $idEntidad);
+                                    $doc->setName($idEntidad);
+                                    $doc->setTitle($slug);
+                                    $doc->setType('image' . $key);
+                                    $doc->setArrayDoc($_FILES['imagenMaster']);
+                                    $doc->setIsThumbnail(1);
+                                    $doc->create();
+                                }
+                            }
+                    }
+
+                    $template = $this->entity . '/form.html.twig';
+                } else {
+                    $template = "_global/forbiden.html.twig";
+                }
+                break;
+
+            case 'EnviarImagen':
+                if ($this->values['permisos']['permisosModulo']['UP']) {
+
+                    $datos = new $this->entity($idEntidad);
+                    $columnaSlug = $this->varEnvMod['fieldGeneratorUrlFriendly'];
+                    $slug = $datos->{"get$columnaSlug"}();
+                    unset($datos);
+
+                    $idImagen = $this->request['idImagenEnviar'];
+                    $tipo = $this->request['image'][$idImagen]['Tipo'];
+
+                    if ($slug == '')
+                        $this->values['errores'][] = "No se ha indicado el título";
+                    if ($_FILES[$tipo]['error'] != '0')
+                        $this->values['errores'][] = "Hay un error en el archivo a subir, puede que supera el tamaño máximo permitido.";
+
+                    if (count($this->values['errores']) == '0') {
+
+                        $archivo = new Archivo($_FILES[$tipo]['tmp_name']);
+
+                        if ($archivo->upLoad($_FILES[$tipo], $rules)) {
+
+                            // Subir Imagen
+                            $atributos = array(
+                                'width' => $this->varEnvMod['images'][$idImagen + 1]['width'],
+                                'height' => $this->varEnvMod['images'][$idImagen + 1]['height'],
+                            );
+                            $img = new CoreImagenes();
+                            $ok = $img->sube($this->entity, $idEntidad, $tipo, $_FILES[$tipo], $atributos, $slug, FALSE);
+                            unset($img);
+
+                            // Subir Miniatura
+                            if (($ok) and ($this->varEnvMod['images'][$idImagen + 1]['generateThumbnail'] == '1')) {
+                                $atributos = array(
+                                    'width' => $this->varEnvMod['images'][$idImagen + 1]['widthThumbnail'],
+                                    'height' => $this->varEnvMod['images'][$idImagen + 1]['heightThumbnail'],
+                                );
+                                $img = new CoreImagenes();
+                                $img->sube($this->entity, $idEntidad, $tipo, $_FILES[$tipo], $atributos, $slug, TRUE);
+                                unset($img);
+                            }
+                        } else
+                            $this->values['errores'] = $archivo->getErrores();
+                        unset($archivo);
+                    }
 
                     $template = $this->entity . '/form.html.twig';
                 } else {
@@ -510,20 +610,47 @@ class Controller {
 
             case 'Quitar':
                 if ($this->values['permisos']['permisosModulo']['DE']) {
-                    $fileName = "docs/docs" . $_SESSION['project']['folder'] . "/" . $tipo . "/" . $this->entity . "/" . $this->request['documentoBorrar'];
-                    if (file_exists($fileName)) {
-                        if (unlink($fileName)) {
-                            // Borro la entrada en el registro de documentos o imagenes
-                            if ($tipo == 'documents')
-                                $doc = new CoreDocumentos();
-                            else
-                                $doc = new CoreImagenes();
-                            $objeto = $doc->getObjeto($this->entity, $idEntidad, $fileName);
-                            $objeto->erase();
-                            unset($doc);
-                            unset($objeto);
-                        }
-                    }
+                    $idImagen = $this->request['idImagenEnviar'];
+                    $tipo = $this->request['image'][$idImagen]['Tipo'];
+                    $img = new CoreImagenes();
+                    $img->quita($this->entity, $idEntidad, $tipo);
+                    $template = $this->entity . '/form.html.twig';
+                } else {
+                    $template = "_global/forbiden.html.twig";
+                }
+                break;
+
+            case 'GuardarCambios':
+                if ($this->values['permisos']['permisosModulo']['UP']) {
+
+                    $idImagen = $this->request['idImagenEnviar'] + 1;
+                    $tipo = "image" . $idImagen;
+                    $atributos = array(
+                        'width' => $this->varEnvMod['images'][$idImagen]['width'],
+                        'height' => $this->varEnvMod['images'][$idImagen]['height'],
+                    );
+
+                    $title = trim($this->request['image'][$idImagen - 1]['Title']);
+                    $name = trim($this->request['image'][$idImagen - 1]['Name']);
+                    if (($title == '') or ($name == '')) {
+                        $datos = new $this->entity($idEntidad);
+                        $columnaSlug = $this->varEnvMod['fieldGeneratorUrlFriendly'];
+                        $slug = $datos->{"get$columnaSlug"}();
+                        unset($datos);
+
+                        if ($title == '')
+                            $title = $slug;
+                        if ($name == '')
+                            $name = $slug;
+                    } $slug = $name;
+
+                    if ($slug != '') {
+                        $img = new CoreImagenes();
+                        $img->cambiaNombre($this->entity, $idEntidad, $tipo, $title, $slug, $this->request['image'][$idImagen - 1]['ShowCaption']);
+                        unset($img);
+                    } else
+                        $this->values['errores'][] = "No se ha indicado el título y/o el nombre";
+
                     $template = $this->entity . '/form.html.twig';
                 } else {
                     $template = "_global/forbiden.html.twig";
@@ -707,7 +834,8 @@ class Controller {
             } else {
                 // Si no está bloqueado, se toma el indicado por el usuario y se limpia
                 $urlPrefix = Textos::limpia($datos->getUrlPrefix());
-                if ($urlPrefix) $urlPrefix = "/" . $urlPrefix;
+                if ($urlPrefix)
+                    $urlPrefix = "/" . $urlPrefix;
             }
             // -----------------------------------------------------------------
             // CALCULAR EL SLUG ------------------------------------------------
@@ -729,35 +857,35 @@ class Controller {
 
 
             $urls = new CoreUrlAmigables();
-            $rows = $urls->cargaCondicion("Id", "Entidad='{$this->entity}' and IdEntidad='{$datos->getPrimaryKeyValue()}'");
+            $rows = $urls->cargaCondicion("Id", "Entity='{$this->entity}' and IdEntity='{$datos->getPrimaryKeyValue()}'");
             $idUrl = $rows[0]['Id'];
 
             if (!$idUrl) {
-                $urls->setUrlAmigable($this->entity . $datos->getPrimaryKeyValue());
+                $urls->setUrlFriendly($this->entity . $datos->getPrimaryKeyValue());
                 $urls->setController($this->varEnvMod['controller']);
                 $urls->setAction($this->varEnvMod['action']);
                 $urls->setTemplate($this->varEnvMod['template']);
-                $urls->setParametros($this->varEnvMod['parametros']);
-                $urls->setEntidad($this->entity);
-                $urls->setIdEntidad($datos->getPrimaryKeyValue());
+                $urls->setParameters($this->varEnvMod['parametros']);
+                $urls->setEntity($this->entity);
+                $urls->setIdEntity($datos->getPrimaryKeyValue());
                 $idUrl = $urls->create();
             }
 
-            $rows = $urls->cargaCondicion("Id, Entidad, IdEntidad", "(UrlAmigable='{$urlAmigable}')");
+            $rows = $urls->cargaCondicion("Id, Entity, IdEntity", "(UrlFriendly='{$urlAmigable}')");
             $row = $rows[0];
-            if (($row['Id']) and ($row['Entidad'] != "{$this->entity}" or $row['IdEntidad'] != "{$datos->getPrimaryKeyValue()}")) {
+            if (($row['Id']) and ($row['Entity'] != "{$this->entity}" or $row['IdEntity'] != "{$datos->getPrimaryKeyValue()}")) {
                 // Ya existe esa url amigable, le pongo al final el id
                 $urlAmigable .= "-" . $idUrl;
                 $slug .= "-" . $idUrl;
             }
             $urls = new CoreUrlAmigables($idUrl);
-            $urls->setUrlAmigable($urlAmigable);
+            $urls->setUrlFriendly($urlAmigable);
             $urls->setController($this->varEnvMod['controller']);
             $urls->setAction($this->varEnvMod['action']);
             $urls->setTemplate($this->varEnvMod['template']);
-            $urls->setParametros($this->varEnvMod['parametros']);
-            $urls->setEntidad($this->entity);
-            $urls->setIdEntidad($datos->getPrimaryKeyValue());
+            $urls->setParameters($this->varEnvMod['parametros']);
+            $urls->setEntity($this->entity);
+            $urls->setIdEntity($datos->getPrimaryKeyValue());
             $urls->save();
         }
 

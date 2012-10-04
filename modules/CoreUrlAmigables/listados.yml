@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 18.09.2012 17:41:43
+# @date 30.09.2012 16:42:34
 #
 ---
 listados:
@@ -21,10 +21,10 @@ listados:
     print_interline: null
     legend_bottom: null
     columns:
-      UrlAmigable: { title: UrlAmigable, length: '255', align: L, type: string, total: NO, formula: null, format: null }
       Controller: { title: Controller, length: '255', align: L, type: string, total: NO, formula: null, format: null }
       Action: { title: Action, length: '255', align: L, type: string, total: NO, formula: null, format: null }
       Template: { title: Template, length: '255', align: L, type: string, total: NO, formula: null, format: null }
-      Parametros: { title: Parametros, length: '255', align: L, type: string, total: NO, formula: null, format: null }
-      Entidad: { title: Entidad, length: '255', align: L, type: string, total: NO, formula: null, format: null }
-      IdEntidad: { title: IdEntidad, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      Parameters: { title: Parameters, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Entity: { title: Entity, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      IdEntity: { title: IdEntity, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      SortOrder: { title: SortOrder, length: '11', align: R, type: integer, total: NO, formula: null, format: null }

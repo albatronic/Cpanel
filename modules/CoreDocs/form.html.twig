@@ -1,0 +1,70 @@
+{#
+  Module: CoreDocs
+  Document : modules\CoreDocs\form.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 30.09.2012 21:04:21
+#}
+
+{% extends values.controller ~ '/index.html.twig' %}
+
+{% block listado %}
+<div class=''>
+
+    <table width='100%'>
+        <tr class='Titulos'>
+            <td class='Item'>Orden</td>
+            <td class='Item'>Imagen</td>
+            <td class='Item'>Título</td>
+            <td class='Item'>Nombre</td>
+            <td class='Item'>Pie Foto</td>
+            <td>&nbsp;</td>
+        </tr>
+
+        <tbody class="">
+            {% for key,objeto in values.listado.data %}
+            {% set puntero = key %}
+            <form name="linea{{puntero}}" action="" method="POST" enctype="multipart/form-data">
+                <input name="controller" value="{{values.controller}}" type="hidden" />
+                <input name="action" id="action" value="edit" type="hidden" />
+                <input name="CoreDocs[Id]" value="{{ objeto.Id }}" type="hidden" />
+                <input name="CoreDocs[Entity]" value="{{ objeto.Entity }}" type="hidden" />
+                <input name="CoreDocs[IdEntity]" value="{{ objeto.IdEntity }}" type="hidden" />
+                <input name="CoreDocs[Type]" value="{{ objeto.Type }}" type="hidden" />
+                <input name="accion" id="accion{{puntero}}" value="" type="hidden" />
+                <tr style="border: 1px dotted;">
+                    <td><input name="CoreDocs[SortOrder]" id="CoreDocs_SortOrder{{puntero}}" value="{{objeto.SortOrder}}" type="text" maxlength="3" style="width:40px;"  /></td>
+                    <td>
+                        {% if objeto.PathName != '' %}
+                        <img src="{{project.folder}}/{{objeto.PathName}}" width="70px;" /><br />
+                        {% endif %}
+                        <input name="imagen{{puntero}}" id="imagen{{puntero}}" type="file" />
+                    </td>
+                    <td><input name="CoreDocs[Title]" id="CoreDocs_Title{{puntero}}" value="{{objeto.Title}}" type="text" maxlength="255" style="width:170px;" /></td>
+                    <td><input name="CoreDocs[Name]" id="CoreDocs_Name{{puntero}}" value="{{objeto.Name}}" type="text" maxlength="255" style="width:170px;" /></td>
+                    <td>
+                        <select name="CoreDocs[ShowCaption]">
+                            {% for value in objeto.ShowCaption.fetchAll('Descripcion',0)%}
+                                <option value="{{value.Id}}" {%if value.Id == objeto.ShowCaption.IDTipo%} SELECTED{%endif%}>{{value.Value}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td align="center">
+                        {% if objeto.Id > 0 %}
+                        <input type="image" src="{{app.path}}/images/botonsave.png" onclick="getElementById('accion{{puntero}}').value='G';" alt="Guardar" title="Guardar Imagen" />
+                        <input type="image" src="{{app.path}}/images/papelera.gif" onclick="if (!confirm('Desea eliminar la imagen?')) {return false;} else {getElementById('accion{{puntero}}').value='B';}" alt="Borrar" title="Borrar Linea" />
+                        {% else %}
+                        <input type="image" src="{{app.path}}/images/nuevo.png" onclick="getElementById('action').value='new';" alt="Nuevo" title="Crear imagen" />
+                        {% endif %}
+                    </td>
+                </tr>
+            </form>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{{ macro.foco('Codigo0') }}
+{% endblock %}

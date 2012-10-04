@@ -19,11 +19,13 @@ class Tipos {
 
     private $IDTipo;
     private $Descripcion;
+    private $tipo;
 
-    public function __construct($IDTipo=null) {
+    public function __construct($IDTipo = null) {
         if (isset($IDTipo)) {
             foreach ($this->tipos as $key => $value) {
                 if ($value['Id'] == $IDTipo) {
+                    $this->tipo = $value;
                     $this->IDTipo = $this->tipos[$key]['Id'];
                     $this->Descripcion = $this->tipos[$key]['Value'];
                     return;
@@ -62,9 +64,14 @@ class Tipos {
         return $this->Descripcion;
     }
 
+    public function getTipo() {
+        return $this->tipo;
+    }
+
     public function __toString() {
         return $this->IDTipo;
     }
 
 }
+
 ?>

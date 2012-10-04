@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 18.09.2012 17:45:10
+ * @date 30.09.2012 16:42:34
  */
 
 /**
@@ -20,11 +20,6 @@ class CoreUrlAmigablesEntity extends EntityComunes {
 	 * @var string
 	 * @assert NotBlank(groups="CoreUrlAmigables")
 	 */
-	protected $UrlAmigable;
-	/**
-	 * @var string
-	 * @assert NotBlank(groups="CoreUrlAmigables")
-	 */
 	protected $Controller;
 	/**
 	 * @var string
@@ -38,17 +33,22 @@ class CoreUrlAmigablesEntity extends EntityComunes {
 	/**
 	 * @var string
 	 */
-	protected $Parametros;
+	protected $Parameters;
 	/**
 	 * @var string
 	 * @assert NotBlank(groups="CoreUrlAmigables")
 	 */
-	protected $Entidad;
+	protected $Entity;
 	/**
 	 * @var integer
 	 * @assert NotBlank(groups="CoreUrlAmigables")
 	 */
-	protected $IdEntidad;
+	protected $IdEntity;
+	/**
+	 * @var integer
+	 * @assert NotBlank(groups="CoreUrlAmigables")
+	 */
+	protected $SortOrder = '0';
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string
@@ -90,13 +90,6 @@ class CoreUrlAmigablesEntity extends EntityComunes {
 		return $this->Id;
 	}
 
-	public function setUrlAmigable($UrlAmigable){
-		$this->UrlAmigable = trim($UrlAmigable);
-	}
-	public function getUrlAmigable(){
-		return $this->UrlAmigable;
-	}
-
 	public function setController($Controller){
 		$this->Controller = trim($Controller);
 	}
@@ -118,25 +111,32 @@ class CoreUrlAmigablesEntity extends EntityComunes {
 		return $this->Template;
 	}
 
-	public function setParametros($Parametros){
-		$this->Parametros = trim($Parametros);
+	public function setParameters($Parameters){
+		$this->Parameters = trim($Parameters);
 	}
-	public function getParametros(){
-		return $this->Parametros;
-	}
-
-	public function setEntidad($Entidad){
-		$this->Entidad = trim($Entidad);
-	}
-	public function getEntidad(){
-		return $this->Entidad;
+	public function getParameters(){
+		return $this->Parameters;
 	}
 
-	public function setIdEntidad($IdEntidad){
-		$this->IdEntidad = $IdEntidad;
+	public function setEntity($Entity){
+		$this->Entity = trim($Entity);
 	}
-	public function getIdEntidad(){
-		return $this->IdEntidad;
+	public function getEntity(){
+		return $this->Entity;
+	}
+
+	public function setIdEntity($IdEntity){
+		$this->IdEntity = $IdEntity;
+	}
+	public function getIdEntity(){
+		return $this->IdEntity;
+	}
+
+	public function setSortOrder($SortOrder){
+		$this->SortOrder = $SortOrder;
+	}
+	public function getSortOrder(){
+		return $this->SortOrder;
 	}
 
 } // END class CoreUrlAmigables

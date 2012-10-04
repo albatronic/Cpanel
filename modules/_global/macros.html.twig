@@ -31,9 +31,9 @@
 <label class="{{ class|default('field_title') }}"
     {% if (atributos.varEnv == '') and (user.getIdPerfil.Id == '1') %}
          style="cursor: pointer;"
-         title='Editar Variables de Entorno de {{name}}' alt='Variables de Entorno de {{name}}'
          onclick="popUpVariablesEnv('Env','Mod','{{id}}');"
     {% endif %}
+    title='{{atributos.help}}'
     >
     {{ atributos.caption }}
 </label>
@@ -53,7 +53,9 @@
     <div class="form_input">
     <input type="{{ type|default('text') }}" name="{{ name }}" id="{{ id|default(name)}}"
            value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
-           class="tip_top" title="{{ tip }}" tabindex="{{ tabIndex }}" onchange="{{ onchange }}" {{extra}} />
+           class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}" onchange="{{ onchange }}" {{extra}}
+           {% if atributos.updatable == '0' %} disabled {% endif %}
+    />
     </div>
     </div>
 </li>
@@ -134,7 +136,9 @@
                    class="{{ class |default('input_grow') }}"
                    rows="{{ rows|default(5) }}"
                    cols="{{ cols|default(75) }}"
-                   tabindex="{{ tabindex }}">
+                   tabindex="{{ tabindex }}"
+                   {% if atributos.updatable == '0' %} disabled {% endif %}
+                   >
         {{value}}
         </textarea>
     </div>
@@ -155,7 +159,13 @@
     {% endif %}
 
     <div class="form_input">
-    <select data-placeholder="Indique un valor" name="{{ name }}" id="{{ id|default(name)}}" style="width:{{width|default(200)}}px;" class="{{ class|default('chzn-select') }}" onchange="{{onchange}}" onblur="{{onblur}}" tabindex="{{tabindex}}" >
+    <select data-placeholder="Indique un valor" name="{{ name }}" id="{{ id|default(name)}}"
+            style="width:{{width|default(200)}}px;"
+            class="{{ class|default('chzn-select') }}"
+            onchange="{{onchange}}"
+            onblur="{{onblur}}"
+            tabindex="{{tabindex}}"
+            {% if atributos.updatable == '0' %} disabled {% endif %} >
         {% for value in opciones %}
             <option value="{{ value.Id }}" {% if (value.Id==defecto) %} SELECTED {% endif %}>
                 {{value.Value}}
@@ -210,6 +220,7 @@
                        {#onKeyUp="this.value=formateafecha(this.value);"#}
                        tabindex="{{tabindex}}"
                        {{extra}}
+                       {% if atributos.updatable == '0' %} disabled {% endif %}
             />
         </div>
         <span class="clear"></span>

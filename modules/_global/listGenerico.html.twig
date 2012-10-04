@@ -25,7 +25,7 @@
                     {% for key,objeto in listado.data %}
                         <tr>
                             <td class="center tr_select">
-                                <a href='{{app.path}}/{{controller}}/Edit/{{objeto.getPrimaryKeyValue()}}' title='Editar ...'>
+                                <a href='{{app.path}}/{{controller}}/Edit/{{objeto.PrimaryKeyMD5}}' title='Editar ...'>
                                     <img src="{{app.path}}/images/botoneditar.png" width="16px" height="16px" />
                                 <a>
                             </td>

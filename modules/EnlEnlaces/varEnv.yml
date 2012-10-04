@@ -1,12 +1,11 @@
-# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO
+# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO EnlEnlaces
 #
+# Module: EnlEnlaces
 # author Sergio Pérez <sergio.perez@albatronic.com>
 # copyright Informática ALBATRONIC, SL
-# date ${date} ${time}
----
-
+# date 01-10-2012 02:19:06
+#
 # ejemplo:
 #
-#  nombreVariable: Caption
-espe1: Especifica1
-espe2: Especifica2
+# nombreVariable: el texto del caption
+---

@@ -1,14 +1,22 @@
 <?php
 
 /**
- * Description of Thumb
+ * Clase para tratamiento de imágenes.
+ *
+ * Permite recortar imágenes sin cambiar su proporcionaliadad
+ *
+ * Ej. de uso:
+ *
+ * $myThumb = new Gd();
+ * $myThumb->load('pathToSourceImage');
+ * $myThumb->crop(50,50,'right');
+ * $myThumb->save('pathToTargetImage');
  *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @copyright Informática ALBATRONIC, SL
- * @since 30-mar-2012
- *
+ * @date 29-sep-2012 12:46:13
  */
-class Thumb {
+class Gd {
 
     var $image;
     var $type;
@@ -16,13 +24,14 @@ class Thumb {
     var $height;
 
     /**
-     * Cargar la imagen desde fichero o URL
+     * Carga la imagen y lee su tipo, anchura y altura
      *
-     * @param string $name
+     * @param string $imagePath path completo de la imagen
      */
-    function loadImage($name) {
+    public function loadImage($imagePath) {
 
-        $info = getimagesize($name);
+        //---Tomar las dimensiones de la imagen
+        $info = getimagesize($imagePath);
 
         $this->width = $info[0];
         $this->height = $info[1];
@@ -31,57 +40,72 @@ class Thumb {
         //---Dependiendo del tipo de imagen crear una nueva imagen
         switch ($this->type) {
             case IMAGETYPE_JPEG:
-                $this->image = imagecreatefromjpeg($name);
+                $this->image = imagecreatefromjpeg($imagePath);
                 break;
             case IMAGETYPE_GIF:
-                $this->image = imagecreatefromgif($name);
+                $this->image = imagecreatefromgif($imagePath);
                 break;
             case IMAGETYPE_PNG:
-                $this->image = imagecreatefrompng($name);
+                $this->image = imagecreatefrompng($imagePath);
                 break;
         }
     }
 
-    //---Método de guardar la imagen
-    function save($name, $quality = 100) {
+    /**
+     * Guarda la imagen en el path indicado en $name
+     *
+     * @param string $name Path de la imagen destino
+     * @param integer $quality Calidad de la imagen destino (0 a 100)
+     * @return boolean TRUE si éxito al guardar
+     */
+    public function save($name, $quality = 100) {
+
+        $ok = FALSE;
 
         //---Guardar la imagen en el tipo de archivo correcto
         switch ($this->type) {
             case IMAGETYPE_JPEG:
-                imagejpeg($this->image, $name, $quality);
+                $ok = imagejpeg($this->image, $name, $quality);
                 break;
             case IMAGETYPE_GIF:
-                imagegif($this->image, $name);
+                $ok = imagegif($this->image, $name);
                 break;
             case IMAGETYPE_PNG:
                 $pngquality = floor(($quality - 10) / 10);
-                imagepng($this->image, $name, $pngquality);
+                $ok = imagepng($this->image, $name, $pngquality);
                 break;
         }
+
+        return $ok;
     }
 
-    //---Método de mostrar la imagen sin salvarla
-    function show() {
+    /**
+     * Muestrar la imagen en el navegador sin salvarla previamente
+     */
+    public function show() {
 
         //---Mostrar la imagen dependiendo del tipo de archivo
         switch ($this->type) {
             case IMAGETYPE_JPEG:
-                header("Content-type: image/jpeg");
                 imagejpeg($this->image);
                 break;
             case IMAGETYPE_GIF:
-                header("Content-type: image/gif");
                 imagegif($this->image);
                 break;
             case IMAGETYPE_PNG:
-                header("Content-type: image/png");
                 imagepng($this->image);
                 break;
         }
     }
 
-    //---Método de redimensionar la imagen sin deformarla
-    function resize($value, $prop) {
+    /**
+     * Redimensiona la imagen en ancho o alto manteniendo sus proporciones
+     * El nuevo tamaño será el indicado en $value
+     *
+     * @param int $value El tamaño destino de la propiedad $prop
+     * @param string $prop La propiedad a redimensionar ( width ó height )
+     */
+    public function resize($value, $prop) {
 
         //---Determinar la propiedad a redimensionar y la propiedad opuesta
         $prop_value = ($prop == 'width') ? $this->width : $this->height;
@@ -107,15 +131,24 @@ class Thumb {
         }
 
         //---Actualizar la imagen y sus dimensiones
-        $info = getimagesize($name);
+        //$info = getimagesize($name);
 
         $this->width = imagesx($image);
         $this->height = imagesy($image);
         $this->image = $image;
     }
 
-    //---Método de extraer una sección de la imagen sin deformarla
-    function crop($cwidth, $cheight, $pos = 'center') {
+    /**
+     * Crea un thumbnail de la imagen con las medidas especificadas y manteniendo
+     * las proporciones visuales de la imagen intactas.
+     *
+     * $pos puede tomar los valors "left", "top", "right", "bottom" o "center"
+     *
+     * @param int $cwidth Anchura del thumbnail
+     * @param int $cheight Altura del thumbnail
+     * @param string $pos Posición desde donde extraer el thumbnail. Defecto 'center'
+     */
+    public function crop($cwidth, $cheight, $pos = 'center') {
 
         //---Dependiendo del tamaño deseado redimensionar primero la imagen a uno de los valores
         if ($cwidth > $cheight) {

@@ -10,15 +10,18 @@
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-general">General</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-fechas">Fechas</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-meta">Meta</a></li>
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'general' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-general" onclick="activaSolapa('general');">General</a></li>
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'fechas' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-fechas" onclick="activaSolapa('fechas');">Fechas</a></li>
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'meta' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-meta" onclick="activaSolapa('meta');">Meta</a></li>
         {% if datos.getPrimaryKeyValue %}
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-imagenes" onclick="cargaImagenes('tabs-4');">Imágenes</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-documentos" onclick="cargaDocumentos('tabs-5');">Documentos</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-urls">URLs</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-sitemap">SiteMap</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-auditoria">Auditoría</a></li>
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'imagenes' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-imagenes" onclick="activaSolapa('imagenes');">Imágenes</a></li>
+        {% if values.varEnvMod.galeria.hayGaleria == '1' %}
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'galeria' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-galeria" onclick="activaSolapa('galeria');cargaGaleria('tabs-galeria');">Galería</a></li>
+        {% endif %}
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'documentos' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-documentos" onclick="activaSolapa('documentos');cargaDocumentos('tabs-documentos');">Documentos</a></li>
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'urls' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-urls" onclick="activaSolapa('urls');">URLs</a></li>
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'sitemap' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-sitemap" onclick="activaSolapa('sitemap');">SiteMap</a></li>
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'auditoria' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-auditoria" onclick="activaSolapa('auditoria');">Auditoría</a></li>
         {% endif %}
     </ul>
 
@@ -34,7 +37,7 @@
         {{ macro.select(atributos.Checked,'field_title',values.controller ~ '[Checked]',values.controller ~ '_Checked',none,datos.Checked.IDTipo,datos.Checked.fetchAll(none,0),'chzn-select',102)}}
         {{ macro.select(atributos.Publish,'field_title',values.controller ~ '[Publish]',values.controller ~ '_Publish',none,datos.Publish.IDTipo,datos.Publish.fetchAll(none,0),'chzn-select',103)}}
         {{ macro.select(atributos.Privacy,'field_title',values.controller ~ '[Privacy]',values.controller ~ '_Privacy',none,datos.Privacy.IDTipo,datos.Privacy.fetchAll(none,0),'chzn-select',109)}}
-        {{ macro.input(atributos.Order,'field_title','text',values.controller ~ '[Order]',values.controller ~ '_Order',datos.Order,none,none,110) }}
+        {{ macro.input(atributos.SortOrder,'field_title','text',values.controller ~ '[SortOrder]',values.controller ~ '_SortOrder',datos.SortOrder,none,none,110) }}
         {% if datos.getPrimaryKeyValue %}
             {{ macro.input(atributos.NumberVisits,'field_title','text',values.controller ~ '[NumberVisits]',values.controller ~ '_NumberVisits',datos.NumberVisits,none,'CampoImporte',113, 'disabled') }}
         {% endif %}
@@ -61,7 +64,64 @@
     {% if datos.getPrimaryKeyValue %}
     {# SOLAPA IMAGENES #}
     <div id="tabs-imagenes" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        <table style="width: 100%;">
+            <tr style="height: 50px;"><td colspan="2">
+            <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxImageSize}}" type="hidden"  />
+            Imágen Master: <input name="imagenMaster" id="imagenMaster" type="file" />
+            <input type="button" value="Enviar"
+               onclick="
+                   $('#action_{{ values.controller }}').val('Imagen');
+                   $('#accion_{{ values.controller }}').val('EnviarMaster');
+                   submitForm('manto_{{ values.controller}}');" />
+            </td></tr>
+
+            <input name="idImagenEnviar" id="idImagenEnviar" value="" type="hidden" />
+            {% for key,imagen in values.datos.getDocuments('image%','IsThumbnail=0') %}
+            <tr>
+                <td align="center" style="width: 50%;">
+                    <img src="{{project.folder}}/docs/{{values.controller}}/{{imagen.Name}}" width="200px" />
+                    <br />{{imagen.getSize}} ({{imagen.Width}} x {{imagen.Height}})<br />
+                    <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxImageSize}}" type="hidden"  />
+                    <input name="{{imagen.Type}}" id="imagen{{key}}" type="file" />
+                    <input type="button" value="Enviar"
+                        onclick="
+                            $('#action_{{ values.controller }}').val('Imagen');
+                            $('#accion_{{ values.controller }}').val('EnviarImagen');
+                            $('#idImagenEnviar').val('{{key}}');
+                            submitForm('manto_{{ values.controller}}');" />
+                    <input type="button" value="Quitar imagen"
+                        onclick="
+                            if (!confirm('¿Desea borrar la imagen?')) {return false;}
+                            else {
+                            $('#action_{{ values.controller }}').val('Imagen');
+                            $('#accion_{{ values.controller }}').val('Quitar');
+                            $('#idImagenEnviar').val('{{key}}');
+                            submitForm('manto_{{ values.controller}}');
+                            }" />
+                </td>
+                <td>
+                    <input name="image[{{key}}][Tipo]" id="image_{{key}}_Tipo" value="{{imagen.Type}}" type="hidden" />
+                    {{ macro.input({'caption':'Título','visible':'1','varEnv':'0'},'field_title','text','image['~key~'][Title]','image_'~key~'_Title',imagen.Title,255,none) }}
+                    {{ macro.input({'caption':'Nombre','visible':'1','varEnv':'0'},'field_title','text','image['~key~'][Name]','image_'~key~'_Name',imagen.Name,255,none) }}
+                    {{ macro.select({'caption':'Mostrar pie de foto','visible':'1','varEnv':'0'},'field_title','image['~key~'][ShowCaption]','image_'~key~'_ShowCaption',none,imagen.ShowCaption.IDTipo,imagen.ShowCaption.fetchAll(none,0),'chzn-select',103)}}
+                    <input type="button" value="Guardar cambios"
+                        onclick="
+                            $('#action_{{ values.controller }}').val('Imagen');
+                            $('#accion_{{ values.controller }}').val('GuardarCambios');
+                            $('#idImagenEnviar').val('{{key}}');
+                            submitForm('manto_{{ values.controller}}');" />
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
+
+    {# SOLAPA GALERIA #}
+    {% if values.varEnvMod.galeria.hayGaleria == '1' %}
+    <div id="tabs-galeria" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+
+    </div>
+    {% endif %}
 
     {# SOLAPA DOCUMENTOS #}
     <div id="tabs-documentos" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
@@ -105,15 +165,19 @@
 
 <script type="text/javascript">
 
-function cargaImagenes(idDiv) {
+function activaSolapa(solapa) {
+    $("#solapaActiva").val(solapa);
+}
 
-    $('#'+idDiv).html("<iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' src='{{app.path}}/CoreImagenes/list/{{datos.IDCliente}}'></iframe>");
+function cargaGaleria(idDiv) {
+
+    $('#'+idDiv).html("<iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' src='{{app.path}}/CoreImagenes/list/{{values.controller}}/{{datos.Id}}'></iframe>");
 
 }
 
 function cargaDocumentos(idDiv) {
 
-    $('#'+idDiv).html("<iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' src='{{app.path}}/CoreDocumentos/list/{{datos.IDCliente}}'></iframe>");
+    $('#'+idDiv).html("<iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' src='{{app.path}}/CoreDocumentos/list/{{values.controller}}/{{datos.Id}}'></iframe>");
 
 }
 

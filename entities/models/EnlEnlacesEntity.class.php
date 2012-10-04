@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 21.09.2012 02:01:44
+ * @date 01.10.2012 02:19:06
  */
 
 /**
@@ -49,6 +49,11 @@ class EnlEnlacesEntity extends EntityComunes {
 	 * @assert NotBlank(groups="EnlEnlaces")
 	 */
 	protected $EsUrlInterna = '0';
+	/**
+	 * @var integer
+	 * @assert NotBlank(groups="EnlEnlaces")
+	 */
+	protected $SortOrder = '0';
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string
@@ -146,6 +151,13 @@ class EnlEnlacesEntity extends EntityComunes {
 		if (!($this->EsUrlInterna instanceof ValoresSN))
 			$this->EsUrlInterna = new ValoresSN($this->EsUrlInterna);
 		return $this->EsUrlInterna;
+	}
+
+	public function setSortOrder($SortOrder){
+		$this->SortOrder = $SortOrder;
+	}
+	public function getSortOrder(){
+		return $this->SortOrder;
 	}
 
 } // END class EnlEnlaces

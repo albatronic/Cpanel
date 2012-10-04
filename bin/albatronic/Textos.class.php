@@ -19,6 +19,7 @@ class Textos {
     static function limpia($texto) {
 
         $tabla = array(
+            '-' => '',
             ' ' => '-',
             'á' => 'a',
             'é' => 'e',
@@ -38,8 +39,7 @@ class Textos {
         // Pasar a minúsculas
         $texto = strtolower($texto);
 
-        // Sustituir caracteres po su correspondencias
-        // según $tabla
+        // Sustituir caracteres po su correspondencias según $tabla
         foreach ($tabla as $key => $value)
             $texto = str_replace($key, $value, $texto);
 

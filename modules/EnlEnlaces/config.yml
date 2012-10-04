@@ -3,23 +3,29 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 19.09.2012 10:57:31
+# @date 01.10.2012 02:19:06
 #
 ---
 EnlEnlaces:
-  app: Enl
+  app: 'Enl'
   isModuleRoot: 0
   linkModule:
-    fromColumn: IdSeccion
-    toEntity: EnlSecciones
-    toColumn: Id
-
-  # Valores a inserta en la tabla de url amigables
+    fromColumn: 'IDSeccion'
+    toEntity: 'EnlSecciones'
+    toColumn: 'Id'
+  maxImageSize: 500
+  galeria:
+    hayGaleria: 0
+    maxWidthImage: '500'
+    maxHeightImage: '400'
+    widthThumbnail: '50'
+    heightThumbnail: '50'
+  fieldGeneratorUrlFriendly: Titulo
+  fieldGeneratorMetatagTitle: Titulo
   controller: CONTROLADOR
   action: ACTION
   template: TEMPLATE
   parametros: PARAMETROS
-
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
@@ -35,6 +41,7 @@ EnlEnlaces:
   entity: EnlEnlaces
   table: EnlEnlaces
   primarykey: Id
+  linkBy: ''
   records_per_page: 15
   order_by:
     -
@@ -50,8 +57,6 @@ EnlEnlaces:
     - ValoresPrivacy
     - ValoresDchaIzq
     - ValoresChangeFreq
-  fieldGeneratorUrlFriendly: Titulo
-  fieldGeneratorMetatagTitle: Titulo
   columns:
     Id:
       title: Id
@@ -303,9 +308,9 @@ EnlEnlaces:
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 9, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
-    Order:
-      title: Order
-      filter: NO
+    SortOrder:
+      title: SortOrder
+      filter: YES
       list: NO
       visible: true
       updatable: true
@@ -364,7 +369,7 @@ EnlEnlaces:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: '1'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
@@ -387,7 +392,7 @@ EnlEnlaces:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: '1'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }

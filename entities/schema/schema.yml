@@ -23,23 +23,24 @@ CoreModulos:
   relations:
     CodigoApp : { ForeignEntity: CoreAplicaciones, ForeignId: CodigoApp }
 
-CoreImagenes:
+CoreDocs:
   columns:
-    Entidad:    { type: string(255), notnull: true}
-    IdEntidad:  { type: integer(11), notnull: true}
-    EsGaleria:  { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
-    PathName:   { type: string(255), notnull: true}
-    TextoPie:   { type: string(255), notnull: false}
-    Title:      { type: string(255), notnull: false}
-    Alt:        { type: string(255), notnull: false}
-    IdTipoMime: { type: string(10), notnull: false, index: index, comment: 'Abstract,TiposMime,IDTipo' }
-    Peso:       { type: int(11), notnull: true, default: 0}
-    Alto:       { type: int(11), notnull: true, default: 0}
-    Ancho:      { type: int(11), notnull: true, default: 0}
+    Entity:      { type: string(255), notnull: true}
+    IdEntity:    { type: integer(11), notnull: true}
+    Type:        { type: string(10), notnull: true, index: index, comment: 'Abstract,TiposDocs,IDTipo' }
+    IsThumbnail: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    PathName:    { type: string(255), notnull: true}
+    Name:        { type: string(255), notnull: true}
+    Extension:   { type: string(10), notnull: false}
+    Title:       { type: string(255), notnull: false}
+    ShowCaption: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    MimeType:    { type: string(50), notnull: false }
+    Size:        { type: int(11), notnull: true, default: 0}
+    Height:      { type: int(11), notnull: true, default: 0}
+    Width:       { type: int(11), notnull: true, default: 0}
     <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
-    EsGaleria:  { ForeignEntity: ValoresSN, ForeignId: IDTipo }
-    IdTipoMime: { ForeignEntity: TiposMime, ForeignId: IDTipo }
+    IdMimeType: { ForeignEntity: TiposMime, ForeignId: IDTipo }
 
 CorePerfiles:
   columns:
@@ -103,13 +104,13 @@ CoreUsuarios:
 
 CoreUrlAmigables:
   columns:
-    UrlAmigable:   { type: string(255), notnull: true, index: Unique }
+    UrlFriendly:   { type: string(255), notnull: true, index: Unique }
     Controller:    { type: string(255), notnull: true }
     Action:        { type: string(255), notnull: true }
     Template:      { type: string(255), notnull: false, default: NULL }
-    Parametros:    { type: string(255), notnull: false, default: NULL }
-    Entidad:       { type: string(255), notnull: true}
-    IdEntidad:     { type: integer(11), notnull: true}
+    Parameters:    { type: string(255), notnull: false, default: NULL }
+    Entity:        { type: string(255), notnull: true}
+    IdEntity:      { type: integer(11), notnull: true}
     <?php include '../cpanel/entities/schema/schemaCommon.yml'; echoln('');?>
   relations:
 

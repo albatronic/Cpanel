@@ -23,13 +23,6 @@ class Archivo {
     private $fullPath = null;
 
     /**
-     * Path relativo a la ubicacion de la app
-     * incluido el nombre y la extension
-     * @var string
-     */
-    private $relativePath = null;
-
-    /**
      * El nombre del archivo (sin el path) incluida la extension
      * @var string
      */
@@ -112,7 +105,6 @@ class Archivo {
             $this->fullPath = $fullPath;
 
             if (file_exists($fullPath)) {
-                $this->relativePath = str_replace($_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/", "", $this->fullPath);
                 $this->size = filesize($this->fullPath);
                 $this->isImage = exif_imagetype($this->fullPath);
 
@@ -124,12 +116,13 @@ class Archivo {
         }
     }
 
+    /**
+     * Devuelve el path completo del archivo
+     *
+     * @return string
+     */
     public function getFullPath() {
         return $this->fullPath;
-    }
-
-    public function getRelativePath() {
-        return $this->relativePath;
     }
 
     /**
@@ -176,25 +169,55 @@ class Archivo {
         return image_type_to_mime_type($this->type);
     }
 
+    /**
+     * Devuelve la anchura del archivo si es una imagen
+     * @return float
+     */
     public function getImageWidth() {
         return $this->imageWidth;
     }
 
+    /**
+     * Devuelve la altura del archivo si es una imagen
+     * @return float
+     */
     public function getImageHeight() {
         return $this->imageHeight;
     }
 
+    /**
+     * Devulve TRUE si es archivo es una imagen
+     *
+     * @return boolean TRUE si es imagen
+     */
     public function getIsImage() {
         return $this->isImage;
     }
 
     /**
-     * Devuelve el tamañano del archivo
+     * Devuelve el tamaño del archivo expresado
+     * en la unidad de medida $unit
      *
-     * @return double EL tamaño del archivo en bytes
+     * @param string $unit La unidad de medida
+     * @return double EL tamaño del archivo
      */
-    public function getSize() {
-        return $this->size;
+    public function getSize($unit = 'byte') {
+
+        switch (strtolower(trim($unit))) {
+            case 'byte':
+                $factor = 1;
+                break;
+            case 'kb':
+                $factor = 1000;
+                break;
+            case 'mb':
+                $factor = 100000;
+                break;
+            default:
+                $factor = 1;
+        }
+
+        return round($this->size / $factor,1);
     }
 
     /**
@@ -234,74 +257,35 @@ class Archivo {
     }
 
     /**
-     * Sube un archivo al servidor
+     * Sube al servidor el archivo indicado en $origen
      *
-     * El archivo destino será el indicado en el constructor y tendrá
-     * la misma extensión que el archivo origen en minúsculas.
-     *
-     * Previa a la carga, se hacen validaciones de tipo y tamaño permitido
-     * en base a los parámetros ULTYP y ULSIZ respectivamente.
+     * El archivo destino será el indicado en el constructor
      *
      * Si hubiera errores de validación o de carga, se pueden recoger con
      * el método getErrores()
      *
-     * @param string $origen EL archivo origen
-     * @return boolean
+     * @param string $origen El archivo origen
+     * @return boolean TRUE si se subió con éxito
      */
     public function upLoad($origen) {
 
         $this->errores = array();
 
-        $subido = false;
-        $prohibido = false;
         $pathDestino = $this->getDirName();
 
         if (!is_dir($pathDestino))
-            $creado = mkdir($pathDestino);
+            @mkdir($pathDestino);
 
         if (is_dir($pathDestino)) {
-            $pathOrigen = pathinfo($origen['name']);
-            $extension = "";
-            $extension = strtolower($pathOrigen['extension']);
-            if ($extension)
-                $extension = "." . $extension;
-            $destino = $pathDestino . "/" . $this->getFileName() . $extension;
-            $origen = $origen['tmp_name'];
-            $tipoArchivo = $origen['type'];
-            //Paso el tamaño a KBytes
-            $tamanoArchivo = round($origen['size'] / 1024);
-
-            //Comprobaciones de tamaño y tipo de archivo
-            $param = new Parametros();
-            $tamanoMaximo = trim($param->find("Codigo", "ULSIZ")->getValor());
-            if (!$tamanoMaximo)
-                $tamanoMaximo = 500;
-            $tiposProhibidos = trim($param->find("Codigo", "ULTYP")->getValor());
-            if ($tiposProhibidos)
-                $tiposProhibidos = explode(",", $tiposProhibidos);
-            else
-                $tiposProhibidos[0] = "application/octet-stream";
-            unset($param);
-
-            $prohibidoTipo = in_array($tipoArchivo, $tiposProhibidos);
-            $prohibidoTamano = ($tamanoArchivo > $tamanoMaximo);
-
-            if ($prohibidoTipo)
-                $this->errores[] = "Ese tipo de archivo (" . $tipoArchivo . ") no esta permitido. Consulte el parametro ULTYP.";
-            if ($prohibidoTamano)
-                $this->errores[] = "El tamaño del archivo (" . $tamanoArchivo . " Kb) supera el limite autorizado (" . $tamanoMaximo . " Kb). Revise el parámetro ULSIZ";
-
-            if ((!$prohibidoTipo) and (!$prohibidoTamano)) {
-                //Sube el archivo al servidor local
-                if (is_uploaded_file($origen)) {
-                    if (copy($origen, $destino))
-                        $this->upLoadedFileName = $destino;
-                    else
-                        $this->errores[] = "Falló la carga del archivo";
-                }
+            //Sube el archivo al servidor local
+            if (is_uploaded_file($origen)) {
+                if (copy($origen, $this->getFullPath()))
+                    $this->upLoadedFileName = $this->getFullPath();
+                else
+                    $this->errores[] = "Falló la carga del archivo";
             }
         } else
-            $this->errores[] = "No se ha podido crear la carpeta para almacenar los documentos";
+            $this->errores[] = "No se ha podido crear la carpeta para almacenar los documentos " . $pathDestino;
 
         return (count($this->errores) == 0);
     }
@@ -333,8 +317,8 @@ class Archivo {
         $path_parts = pathinfo($path);
         $this->dirName = $path_parts['dirname'];
         $this->baseName = $path_parts['basename'];
-        $this->extension = $path_parts['extension'];
         $this->fileName = $path_parts['filename'];
+        $this->extension = $path_parts['extension'];
     }
 
     /**
@@ -391,21 +375,6 @@ class Archivo {
     }
 
     /**
-     * Borra físicamente el archivo
-     *
-     * @return boolean TRUE si se borró
-     */
-    public function delete() {
-
-        $ok = @unlink($this->fullPath);
-
-        if (!$ok)
-            $this->errores[] = "Error al borrar el archivo {$this->fullPath}";
-
-        return $ok;
-    }
-
-    /**
      * Cierra el fichero
      */
     public function close() {
@@ -434,6 +403,21 @@ class Archivo {
      */
     public function writeLine($string) {
         fwrite($this->fp, $string . PHP_EOL);
+    }
+
+    /**
+     * Borra físicamente el archivo
+     *
+     * @return boolean TRUE si se borró
+     */
+    public function delete() {
+
+        $ok = @unlink($this->fullPath);
+
+        if (!$ok)
+            $this->errores[] = "Error al borrar el archivo {$this->fullPath}";
+
+        return $ok;
     }
 
     /**

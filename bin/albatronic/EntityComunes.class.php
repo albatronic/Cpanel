@@ -101,7 +101,7 @@ class EntityComunes extends Entity {
      * @orm Column(type="integer")
      * @var integer(11)
      */
-    protected $Order = '0';
+    protected $SortOrder = '0';
 
     /**
      * @orm Column(type="datetime")
@@ -349,12 +349,12 @@ class EntityComunes extends Entity {
         return $this->Privacy;
     }
 
-    public function setOrder($Order) {
-        $this->Order = $Order;
+    public function setSortOrder($SortOrder) {
+        $this->SortOrder = $SortOrder;
     }
 
-    public function getOrder() {
-        return $this->Order;
+    public function getSortOrder() {
+        return $this->SortOrder;
     }
 
     public function setPublishedAt($PublishedAt) {
@@ -462,7 +462,7 @@ class EntityComunes extends Entity {
      */
     public function getNumberVisits() {
         $url = new CoreUrlAmigables();
-        $rows = $url->cargaCondicion("NumberVisits", "Entidad='{$this->getClassName()}' AND IdEntidad='{$this->getPrimaryKeyValue()}'");
+        $rows = $url->cargaCondicion("NumberVisits", "Entity='{$this->getClassName()}' AND IdEntity='{$this->getPrimaryKeyValue()}'");
         unset($url);
         return $rows[0]['NumberVisits'];
     }

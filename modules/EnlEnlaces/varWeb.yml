@@ -1,13 +1,11 @@
-## VARIABLES WEB ESPECIFICAS DEL MODULO
-##
-## author Sergio Pérez <sergio.perez@albatronic.com>
-## copyright Informática ALBATRONIC, SL
-## date ${date} ${time}
----
-
+# VARIABLES WEB ESPECIFICAS DEL MODULO EnlEnlaces
+#
+# Module: EnlEnlaces
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright Informática ALBATRONIC, SL
+# date 01-10-2012 02:19:06
+#
 # ejemplo:
 #
-#  nombreVariable: Caption
-vwespe1: Primera web espe
-vwespe2: Segunda web espe
-vwespe3: Otra variable web de prueba
+# nombreVariable: el texto del caption
+---

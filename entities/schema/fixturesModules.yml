@@ -10,6 +10,7 @@ CoreFuncionalidades:
 
 CoreAplicaciones:
   Index: { CodigoApp: Index, NombreApp: Index }
+  Core : { CodigoApp: Core, NombreApp: Core }
   Enl  : { CodigoApp: Enl,   NombreApp: Enlaces de Interes }
   Auto : { CodigoApp: Auto,  NombreApp: Autoescuelas }
 
@@ -17,17 +18,23 @@ CoreModulos:
   Index1: { CodigoApp: Index, NombreModulo: Index,           Nivel: 0, BelongsTo: 0,    Publish: 0, Titulo: Index, Funcionalidades: 'AC,VW' }
   Index2: { CodigoApp: Index, NombreModulo: IndexContenidosFijos, Nivel: 1, BelongsTo: Index, Publish: 1, Titulo: Gestión de Contenidos Fijos, Funcionalidades: AC }
 
+  Core1: { CodigoApp: Core, NombreModulo: Core,           Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Core, Funcionalidades: 'AC' }
+  Core2: { CodigoApp: Core, NombreModulo: CoreDocs,   Nivel: 1, BelongsTo: Core, Publish: 1, Titulo: Gestión Documental, Funcionalidades:  <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?> }
+
   Enl1: { CodigoApp: Enl,  NombreModulo: Enl,           Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Enl, Funcionalidades: AC }
   Enl2: { CodigoApp: Enl,  NombreModulo: EnlSecciones,  Nivel: 1, BelongsTo: Enl,  Publish: 1, Titulo: Secciones, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
   Enl3: { CodigoApp: Enl,  NombreModulo: EnlEnlaces,    Nivel: 1, BelongsTo: Enl,  Publish: 1, Titulo: Enlaces, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
 
   Auto1: { CodigoApp: Auto, NombreModulo: Auto,        Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Auto, Funcionalidades: AC }
-  Auto2: { CodigoApp: Auto, NombreModulo: AutoAlumnos, Nivel: 1, BelongsTo: Auto,  Publish: 1, Order: 99, Titulo: Alumnos, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Auto3: { CodigoApp: Auto, NombreModulo: AutoTest,    Nivel: 1, BelongsTo: Auto,  Publish: 1, Order: 100, Titulo: Test, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Auto2: { CodigoApp: Auto, NombreModulo: AutoAlumnos, Nivel: 1, BelongsTo: Auto,  Publish: 1, SortOrder: 99, Titulo: Alumnos, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Auto3: { CodigoApp: Auto, NombreModulo: AutoTest,    Nivel: 1, BelongsTo: Auto,  Publish: 1, SortOrder: 100, Titulo: Test, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
 
 CorePermisos:
   Index1: { IdPerfil: 1, NombreModulo: Index, Funcionalidades: 'AC,VW' }
   Index2: { IdPerfil: 1, NombreModulo: IndexContenidosFijos, Funcionalidades: 'AC,UP'}
+
+  Core1: { IdPerfil: 1, NombreModulo: Core, Funcionalidades: 'AC,VW' }
+  Core2: { IdPerfil: 1, NombreModulo: CoreDocs, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}
 
   Enl1: { IdPerfil: 1, NombreModulo: Enl, Funcionalidades: 'AC,VW' }
   Enl2: { IdPerfil: 1, NombreModulo: EnlSecciones, Funcionalidades: <?php include '../cpanel/entities/schema/defaultFunctionality.yml';?>}

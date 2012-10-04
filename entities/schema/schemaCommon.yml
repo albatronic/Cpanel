@@ -13,14 +13,14 @@
     DeletedBy:            {type: integer, notnull: true, default: 0}
     DeletedAt:            {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     Privacy:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresPrivacy,IDTipo'}
-    Order:                {type: integer(11), notnull: true, default: 0, index: index}
-    PublishedAt:          {type: datetime, notnull: true, default: ''}
+    SortOrder:            {type: integer(11), notnull: true, default: 0, index: index}
+    PublishedAt:          {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     ActiveFrom:           {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     ActiveTo:             {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     UrlPrefix:            {type: string(255), default: NULL}
-    LockUrlPrefix:        {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    LockUrlPrefix:        {type: tinyint, notnull: true, default: 1, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     Slug:                 {type: string(255), default: NULL}
-    LockSlug   :          {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    LockSlug   :          {type: tinyint, notnull: true, default: 1, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     UrlFriendly:          {type: string(255), default: NULL}
     UrlHeritable:         {type: tinyint, notnull: true, default: 1, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     NumberVisits:         {type: integer(11), notnull: true, default: 0}

@@ -34,6 +34,7 @@
         <li class="ui-state-default ui-corner-tope"><a href="#tabs-imagen{{i}}">Imagen {{i}}</a></li>
         {% endfor %}
 
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-galeria">Galería</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-columnas">Columnas</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-controller">Controller</a></li>
@@ -45,6 +46,7 @@
         {{ macro.select({'caption':'[isModuleRoot] Es el módulo padre','visible':'1','varEnv':'0'},'field_title','datos[isModuleRoot]','datos_isModuleRoot',none,values.datos.isModuleRoot,ValoresSN,'chzn-select')}}
         {{ macro.input({'caption':'[numMaxRecords] Número máximo registros','visible':'1','varEnv':'0'},'field_title','text','datos[numMaxRecords]','datos_numMaxRecords',values.datos.numMaxRecords,'15','CampoTextoCorto','1') }}
         {{ macro.select({'caption':'[showNumberVisits] Mostrar número visitas','visible':'1','varEnv':'0'},'field_title','datos[showNumberVisits]','datos_showNumberVisits',none,values.datos.showNumberVisits,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'[maxImageSize] Tamaño máximo imagen (bytes)','visible':'1','varEnv':'0'},'field_title','text','datos[maxImageSize]','datos_maxImageSize',values.datos.maxImageSize,'15','CampoTextoCorto','1') }}
     </div>
 
     {# URL AMIGABLE #}
@@ -73,12 +75,24 @@
     {# IMAGENES #}
     {% for i in 1..nImagenes %}
     <div id="tabs-imagen{{i}}" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.select({'caption':'[visible] Visible','visible':'1','varEnv':'0'},'field_title','datos[image' ~ i ~ '][visible]','datos_image' ~ i ~ '_visible',none,values.datos.image[i].visible,ValoresSN,'chzn-select')}}
-        {{ macro.input({'caption':'[caption] Caption','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][caption]','datos_image'~i~'_caption',values.datos.image[i].caption,'15','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[width] Width','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][width]','datos_image'~i~'_width',values.datos.image[i].width,'15','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[height] Height','visible':'1','varEnv':'0'},'field_title','text','datos[image'~i~'][height]','datos_image'~i~'_height',values.datos.image[i].height,'15','CampoTextoCorto','1') }}
+        {{ macro.select({'caption':'[images]['~i~'][visible] Visible','visible':'1','varEnv':'0'},'field_title','datos[images]['~i~'][visible]','datos_images_' ~ i ~ '_visible',none,values.datos.images[i].visible,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'[images]['~i~'][caption] Caption','visible':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][caption]','datos_images_'~i~'_caption',values.datos.images[i].caption,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[images]['~i~'][width] Width','visible':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][width]','datos_images_'~i~'_width',values.datos.images[i].width,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[images]['~i~'][height] Height','visible':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][height]','datos_images_'~i~'_height',values.datos.images[i].height,'15','CampoTextoCorto','1') }}
+        {{ macro.select({'caption':'[images]['~i~'][generateThumbnail] Generar Thumbnail','visible':'1','varEnv':'0'},'field_title','datos[images]['~i~'][generateThumbnail]','datos_images_' ~ i ~ 'generateThumbnail',none,values.datos.images[i].generateThumbnail,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'[images]['~i~'][widthThumbnail] Anchura Thumbnail','visible':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][widthThumbnail]','datos_images_' ~ i ~ '_widthThumbnail',values.datos.images[i].widthThumbnail,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[images]['~i~'][heightThumbnail] Altura Thumbnail','visible':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][heightThumbnail]','datos_images_' ~ i ~ '_heightThumbnail',values.datos.images[i].heightThumbnail,'15','CampoTextoCorto','1') }}
     </div>
     {% endfor %}
+
+    {# GALERIA #}
+    <div id="tabs-galeria" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.select({'caption':'[galeria][hayGaleria] Hay Galeria','visible':'1','varEnv':'0'},'field_title','datos[galeria][hayGaleria]','datos_galeria_hayGaleria',none,values.datos.galeria.hayGaleria,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'[galeria][maxWidthImage] Anchura máxima imágenes','visible':'1','varEnv':'0'},'field_title','text','datos[galeria][maxWidthImage]','datos_galeria_maxWidthImage',values.datos.galeria.maxWidthImage,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[galeria][maxHeightImage] Altura máxima imágenes','visible':'1','varEnv':'0'},'field_title','text','datos[galeria][maxHeightImage]','datos_galeria_maxHeightImage',values.datos.galeria.maxHeightImage,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[galeria][widthThumbnail] Anchura Thumbnail','visible':'1','varEnv':'0'},'field_title','text','datos[galeria][widthThumbnail]','datos_galeria_widthThumbnail',values.datos.galeria.widthThumbnail,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[galeria][heightThumbnail] Altura Thumbnail','visible':'1','varEnv':'0'},'field_title','text','datos[galeria][heightThumbnail]','datos_galeria_heightThumbnail',values.datos.galeria.heightThumbnail,'15','CampoTextoCorto','1') }}
+    </div>
 
     {# VARIABLES DE ENTORNO DE CADA COLUMNA DE LA ENTIDAD DE DATOS #}
     <div id="tabs-columnas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">

@@ -3,39 +3,45 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 19.09.2012 19:46:57
+# @date 29.09.2012 17:47:10
 #
 ---
 EnlSecciones:
-  app: Enl
+  app: 'Enl'
   isModuleRoot: 1
   linkModule:
-    fromColumn:
-    toEntity:
-    toColumn:
-
-  # Valores a inserta en la tabla de url amigables
+    fromColumn: ''
+    toEntity: ''
+    toColumn: ''
+  maxImageSize: 500
+  galeria:
+    hayGaleria: 0
+    maxWidthImage: '500'
+    maxHeightImage: '400'
+    widthThumbnail: '50'
+    heightThumbnail: '50'
+  fieldGeneratorUrlFriendly: Titulo
+  fieldGeneratorMetatagTitle: Titulo
   controller: CONTROLADOR
   action: ACTION
   template: TEMPLATE
   parametros: PARAMETROS
-
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
-
   login_required: YES
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
   title: EnlSecciones
-  id_video: enlsecciones
+  id_video: enlseccionesOr
   url_video: null
   feature_list: YES
   conection: cpanel
   entity: EnlSecciones
   table: EnlSecciones
   primarykey: Id
+  linkBy: ''
   records_per_page: 15
   order_by:
     -
@@ -51,8 +57,6 @@ EnlSecciones:
     - ValoresPrivacy
     - ValoresDchaIzq
     - ValoresChangeFreq
-  fieldGeneratorUrlFriendly: Titulo
-  fieldGeneratorMetatagTitle: Titulo
   columns:
     Id:
       title: Id
@@ -67,7 +71,7 @@ EnlSecciones:
     Titulo:
       title: Titulo
       filter: YES
-      list: YES
+      list: NO
       visible: true
       updatable: true
       default: null
@@ -78,7 +82,7 @@ EnlSecciones:
     Subtitulo:
       title: Subtitulo
       filter: YES
-      list: YES
+      list: NO
       visible: true
       updatable: true
       default: null
@@ -116,7 +120,7 @@ EnlSecciones:
       visible: true
       updatable: true
       default: null
-      help: null
+      help: Esta campo es de solo lectura
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
@@ -184,11 +188,11 @@ EnlSecciones:
       list: NO
       visible: true
       updatable: true
-      default: null
+      default: '0'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     CreatedBy:
       title: CreatedBy
       filter: NO
@@ -279,8 +283,8 @@ EnlSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 6, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
-    Order:
-      title: Order
+    SortOrder:
+      title: SortOrder
       filter: NO
       list: NO
       visible: true
@@ -296,7 +300,7 @@ EnlSecciones:
       list: NO
       visible: true
       updatable: true
-      default: ''
+      default: '0000-00-00 00:00:00'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
@@ -340,7 +344,7 @@ EnlSecciones:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: '1'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
@@ -363,7 +367,7 @@ EnlSecciones:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: '1'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
@@ -372,7 +376,7 @@ EnlSecciones:
     UrlFriendly:
       title: UrlFriendly
       filter: NO
-      list: YES
+      list: NO
       visible: true
       updatable: true
       default: null
@@ -420,7 +424,7 @@ EnlSecciones:
       list: NO
       visible: true
       updatable: true
-      default: 1
+      default: '0'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }

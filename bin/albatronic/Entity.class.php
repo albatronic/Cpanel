@@ -183,7 +183,7 @@ class Entity {
                 $lastId = $this->_em->getInsertId();
                 $this->setPrimaryKeyValue($lastId);
                 $this->setPrimaryKeyMD5(md5($lastId));
-                $this->setOrder($lastId);
+                $this->setSortOrder($lastId);
                 $this->save();
             }
         }
@@ -212,6 +212,16 @@ class Entity {
                 $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET `Deleted` = '1', `DeletedAt` = '{$fecha}', `DeletedBy` = '{$_SESSION['USER']['user']['Id']}' WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
                 if (!$this->_em->query($query))
                     $this->_errores = $this->_em->getError();
+                else {
+                    // Borrar la eventual url amigable
+                    $url = new CoreUrlAmigables();
+                    $url->borraUrl($this->getClassName(), $this->getPrimaryKeyValue());
+                    unset($url);
+                    // Borrar los eventuales documentos
+                    $doc = new CoreDocs();
+                    $doc->borraDocs($this->getClassName(), $this->getPrimaryKeyValue(), "%");
+                    unset($doc);
+                }
                 $this->_em->desConecta();
             } else
                 $this->_errores = $this->_em->getError();
@@ -240,6 +250,16 @@ class Entity {
                 $query = "DELETE FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
                 if (!$this->_em->query($query))
                     $this->_errores = $this->_em->getError();
+                else {
+                    // Borrar la eventual url amigable
+                    $url = new CoreUrlAmigables();
+                    $url->borraUrl($this->getClassName(), $this->getPrimaryKeyValue());
+                    unset($url);
+                    // Borrar los eventuales documentos
+                    $doc = new CoreDocs();
+                    $doc->borraDocs($this->getClassName(), $this->getPrimaryKeyValue(), "%");
+                    unset($doc);
+                }
                 $this->_em->desConecta();
             } else
                 $this->_errores = $this->_em->getError();
@@ -410,8 +430,8 @@ class Entity {
      * Carga datos en un array en funcion de una condicion where y orderBy
      *
      * @param string $columnas Relacion de las columnas seperadas por coma
-     * @param string $condicion Condicion de filtrado que se utiliza en la clausula where (sin WHERE)
-     * @param string $orderBy Ordenacion, debe incluir la/s columna/s y el tipo ASC/DESC (sin ORDER BY)
+     * @param string $condicion Condicion de filtrado que se utiliza en la clausula where (sin la cláusula WHERE)
+     * @param string $orderBy Ordenacion, debe incluir la/s columna/s y el tipo ASC/DESC (sin la cláusula ORDER BY)
      * @param boolean $showDeleted Devolver o no los registros marcados como borrados, por defecto no se devuelven
      * @return array $rows Array con las columnas devueltas
      */
@@ -557,21 +577,36 @@ class Entity {
      * Devuelve un array con objetos documentos asociados
      * a la entidad e id de entidad en curso
      *
+     * @param string $tipo El tipo de documento, se admite '%'
+     * @param string $criterio Expresión lógica a incluir en el criterio de filtro
+     * @param string $orderCriteria El criterio de ordenación
      * @return array Array de objetos documentos
      */
-    public function getDocuments($tipo = 'images') {
-        $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue(), $tipo);
-        return $docs->getDocuments();
+    public function getDocuments($tipo = 'image%', $criterio = '1', $orderCriteria = 'SortOrder ASC') {
+
+        $docs = new CoreDocs();
+
+        $arrayDocs = $docs->getDocs($this->getClassName(), $this->getPrimaryKeyValue(), $tipo, $criterio, $orderCriteria);
+        unset($docs);
+
+        return $arrayDocs;
     }
 
     /**
      * Devuelve el número de documentos asociados a la entidad
      *
+     * @param string $tipo El tipo de documento, se admite '%'
+     * @param string $criterio Expresión lógica a incluir en el criterio de filtro
      * @return integer El número de documentos
      */
-    public function getNumberOfDocuments($tipo = 'images') {
-        $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue(), $tipo);
-        return $docs->getNumberOfDocuments();
+    public function getNumberOfDocuments($tipo = 'image%', $criterio = '1') {
+
+        $docs = new CoreDocs();
+
+        $nDocs = $docs->getNumberOfDocs($this->getClassName(), $this->getPrimaryKeyValue(), $tipo, $criterio);
+        unset($docs);
+
+        return $nDocs;
     }
 
     /**

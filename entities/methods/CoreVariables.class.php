@@ -71,12 +71,13 @@ class CoreVariables {
     /**
      * Devuelve un array con los valores de las variables que
      * están en el proyecto en curso
-     * 
+     *
      * @return array Array con los valores de las variables
      */
     public function getValores() {
         return $this->objeto['datos'];
     }
+
     /**
      * Devuelve el fullpath del archivo yml
      * correspondiente a las variables en curso
@@ -142,10 +143,11 @@ class CoreVariables {
      */
     public function getArrayEspecificas() {
 
-        $arrayEspecificas = array();
-
         if (file_exists($this->fileEspecificas))
             $arrayEspecificas = sfYaml::load($this->fileEspecificas);
+
+        if (!is_array($arrayEspecificas))
+            $arrayEspecificas = array();
 
         return $arrayEspecificas;
     }

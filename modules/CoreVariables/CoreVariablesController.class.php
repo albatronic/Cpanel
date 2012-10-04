@@ -346,19 +346,23 @@ class CoreVariablesController {
 
                 if ($tipo == 'Env') {
                     $archivoConfig = new Form($nombre);
-                    if ($datos['controller'] == '')
-                        $datos['controller'] = $archivoConfig->getNode('controller');
-                    if ($datos['action'] == '')
-                        $datos['action'] = $archivoConfig->getNode('action');
-                    if ($datos['template'] == '')
-                        $datos['template'] = $archivoConfig->getNode('template');
-                    if ($datos['parametros'] == '')
-                        $datos['parametros'] = $archivoConfig->getNode('parametros');
 
-                    if ($datos['fieldGeneratorUrlFriendly'] == '')
-                        $datos['fieldGeneratorUrlFriendly'] = $archivoConfig->getNode('fieldGeneratorUrlFriendly');
-                    if ($datos['fieldGeneratorMetatagTitle'] == '')
-                        $datos['fieldGeneratorMetatagTitle'] = $archivoConfig->getNode('fieldGeneratorMetatagTitle');
+                    if ($datos['isModuleRoot'] == '') $datos['isModuleRoot'] =  $archivoConfig->getNode('isModuleRoot');
+                    if ($datos['maxImageSize'] == '') $datos['maxImageSize'] = $archivoConfig->getNode('maxImageSize');
+
+                    $galeria = $archivoConfig->getNode('galeria');
+                    if ($datos['galeria']['hayGaleria'] == '') $datos['galeria']['hayGaleria'] = $galeria['hayGaleria'];
+                    if ($datos['galeria']['maxWidthImage'] == '') $datos['galeria']['maxWidthImage'] = $galeria['maxWidthImage'];
+                    if ($datos['galeria']['maxHeightImage'] == '') $datos['galeria']['maxHeightImage'] = $galeria['maxHeightImage'];
+                    if ($datos['galeria']['widthThumbnail'] == '') $datos['galeria']['widthThumbnail'] = $galeria['widthThumbnail'];
+                    if ($datos['galeria']['heightThumbnail'] == '') $datos['galeria']['heightThumbnail'] = $galeria['heightThumbnail'];
+
+                    if ($datos['controller'] == '') $datos['controller'] = $archivoConfig->getNode('controller');
+                    if ($datos['action'] == '') $datos['action'] = $archivoConfig->getNode('action');
+                    if ($datos['template'] == '') $datos['template'] = $archivoConfig->getNode('template');
+                    if ($datos['parametros'] == '') $datos['parametros'] = $archivoConfig->getNode('parametros');
+                    if ($datos['fieldGeneratorUrlFriendly'] == '') $datos['fieldGeneratorUrlFriendly'] = $archivoConfig->getNode('fieldGeneratorUrlFriendly');
+                    if ($datos['fieldGeneratorMetatagTitle'] == '') $datos['fieldGeneratorMetatagTitle'] = $archivoConfig->getNode('fieldGeneratorMetatagTitle');
 
                     unset($archivoConfig);
                 }

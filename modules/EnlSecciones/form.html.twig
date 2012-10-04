@@ -19,6 +19,7 @@
 			<input name="controller" value="{{ values.controller }}" type="hidden" />
 			<input name="action" id="action_{{ values.controller }}" value="{{action}}" type="hidden" />
 			<input name="accion" id="accion_{{ values.controller }}" value="" type="hidden" />
+                        <input name="solapaActiva" id="solapaActiva" value="{{ values.solapaActiva }}" type="hidden" />
 			<input name="{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]" value="{{values.datos.getPrimaryKeyValue}}" type="hidden" />
 
 			{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
