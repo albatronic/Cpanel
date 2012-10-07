@@ -26,6 +26,11 @@ class CoreDocs extends CoreDocsEntity {
 
         $this->_prePath = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . "/";
         parent::__construct($primaryKeyValue);
+
+        $this->_ArrayDoc = array(
+            'name' => $this->Name,
+            'size' => $this->Size,
+        );
     }
 
     public function __toString() {
@@ -34,6 +39,10 @@ class CoreDocs extends CoreDocsEntity {
 
     public function setArrayDoc($arrayDoc) {
         $this->_ArrayDoc = $arrayDoc;
+    }
+
+    public function getArrayDoc() {
+        return $this->_ArrayDoc;
     }
 
     public function save() {
@@ -215,11 +224,20 @@ class CoreDocs extends CoreDocsEntity {
         return count($rows);
     }
 
+    /**
+     * Calcula el nombre amigable y actualiza las
+     * propiedades $this->Name, $this->PathName y $this->Extension
+     *
+     * En base al tipo de documento (imageN, galery, document, etc) se permiten
+     * varios documentos para la misma entidad e idEntidad, o sólo uno.
+     *
+     * Esto viene determinado por el valor 'limit' del array TiposDocs.
+     */
     private function actualizaNombreAmigable() {
 
         $archivo = pathinfo($this->_ArrayDoc['name']);
         $extension = strtolower($archivo['extension']);
-        $this->setName(Textos::limpia($this->Title) . ".{$extension}");
+        $this->setName(Textos::limpia($this->Name) . ".{$extension}");
         $this->setPathName("docs/{$this->Entity}/{$this->Name}");
         $this->setExtension($extension);
 
@@ -238,11 +256,20 @@ class CoreDocs extends CoreDocsEntity {
                 }
                 break;
             case '':
+                // Puede haber n documentos para la misma entidad e idEntidad
+                $doc = new CoreDocs();
+                $rows = $doc->cargaCondicion("Id", "(Name='{$this->Name}')");
+                $row = $rows[0];
+                if (($row['Id']) and ($row['Id'] != $this->Id)) {
+                    // Ya existe esa imagen amigable, le pongo al final el id
+                    $aux = explode(".", $this->Name);
+                    $this->Name = "{$aux[0]}-{$this->Id}.{$aux[1]}";
+                }
                 break;
         }
 
         unset($doc);
-        
+
         $this->setPathName("docs/{$this->Entity}/{$this->Name}");
     }
 
@@ -250,30 +277,111 @@ class CoreDocs extends CoreDocsEntity {
      * Comprueba que el archivo cumple las reglas de validación
      * respecto a tipo y tamaño
      *
+     * Las propiedades del archivo a validar deben estar cargadas
+     * en $this->_ArrayDoc
+     *
      * @param array $rules Array con las reglas de validación
      * @return boolean TRUE si cumple las reglas de validación
      */
-    public function valida(array $rules) {
+    public function validaArchivo(array $rules) {
 
-        // Comprobacion de tamaño
-        $prohibidoTamano = ( ($rules['maxFileSize'] > 0) and ($this->_ArrayDoc['size'] > $rules['maxFileSize']) );
+        if ($this->_ArrayDoc['error'] == '0') {
 
-        // Comprobación de tipo
-        $prohibidoTipo = in_array($this->_ArrayDoc['type'], $rules['forbidenTypes']);
+            // Comprar que no excede el número máximo de documentos permitidos
+            if ($rules['numMaxDocs'] > 0) {
+                $doc = new CoreDocs();
+                $nDocs = $doc->getNumberOfRecords("Type = '{$rules['type']}'");
+                unset($doc);
+                $limiteExcedido = ($nDocs >= $rules['numMaxDocs']);
+            }
 
-        if ($prohibidoTipo)
-            $this->_errores[] = "El tipo de archivo '" . $this->_ArrayDoc['type'] . "' no está permitido.";
-        if ($prohibidoTamano)
-            $this->_errores[] = "El tamaño del archivo (" . $this->_ArrayDoc['size'] / 1024 . " Kb) supera el limite autorizado (" . $rules['maxFileSize'] / 1024 . " Kb).";
+            if (!$limiteExcedido) {
+                // Comprobacion de tamaño
+                $prohibidoTamano = ( ($rules['maxFileSize'] > 0) and ($this->_ArrayDoc['size'] > $rules['maxFileSize']) );
+
+                // Comprobación de tipo
+                $path_parts = pathinfo($this->_ArrayDoc['name']);
+                $extension = strtolower($path_parts['extension']);
+                $prohibidoTipo = !in_array($extension, $rules['allowTypes']);
+
+                if ($prohibidoTipo)
+                    $this->_errores[] = "El tipo de archivo '" . $this->_ArrayDoc['type'] . "' no está permitido.";
+                if ($prohibidoTamano)
+                    $this->_errores[] = "El tamaño del archivo (" . round($this->_ArrayDoc['size'] / 1000,2) . " Kb) supera el limite autorizado (" . $rules['maxFileSize'] / 1000 . " Kb).";
+            } else
+                $this->_errores[] = "Se ha excedido el número máximo de archivos contratado. Por favor, contacte con el web master";
+
+        } else {
+            switch ($this->_ArrayDoc['error']) {
+                case '1' :
+                    $this->_errores[] = "El tamaño del archivo es superior al permitido por el hosting (Cod. Error: {$this->_ArrayDoc['error']}).";
+                    break;
+                case '2' :
+                    $this->_errores[] = "El tamaño del archivo es superior al permitido (Cod. Error: {$this->_ArrayDoc['error']}).";
+                    break;
+                case '3' :
+                    $this->_errores[] = "El archivo fue solo parcialmente subido (Cod. Error: {$this->_ArrayDoc['error']}).";
+                    break;
+                case '4' :
+                    $this->_errores[] = "El archivo no se ha cargado (Cod. Error: {$this->_ArrayDoc['error']}).";
+                    break;
+                case '6' :
+                    $this->_errores[] = "No se ha localizado la carpeta temporal de subidas (Cod. Error: {$this->_ArrayDoc['error']}).";
+                    break;
+                case '7' :
+                    $this->_errores[] = "Hubo un fallo al escribir en el disco (Cod. Error: {$this->_ArrayDoc['error']}).";
+                    break;
+                case '8' :
+                    $this->_errores[] = "La carga del archivo ha sido interrumpida (Cod. Error: {$this->_ArrayDoc['error']}).";
+                    break;
+            }
+        }
 
         return (count($this->_errores) == 0);
     }
 
     /**
-     * Sube el documento al servidor
+     * Valida el objeto
      *
-     * Si es una imagen y se han establecido dimensiones
-     * fijas en $this->_ArrayDoc['width'] y $this->_ArrayDoc['heigth'], se redimensiona
+     * También compruebo que el titulo y el nombre no están vacios, si fuera el caso
+     * los lleno con el valor de la columna indicado en la variable de entorno 'fieldGeneratorUrlFriendly'
+     *
+     * @param array $rules
+     * @return boolean TRUE si el objeto completo pasa la validación
+     */
+    public function valida(array $rules) {
+
+        if ($this->validaArchivo($rules)) {
+
+            // Validar que se haya indicado título y nombre, en su defecto
+            // se toma el indicado por la variable de entorno
+            if (($this->Title == '') or ($this->Name == '')) {
+                $variables = new CoreVariables('Mod', 'Env', $this->getEntity());
+                $varEnv = $variables->getValores();
+                unset($variables);
+                $datos = new $this->Entity($this->IdEntity);
+                $columnaSlug = $varEnv['fieldGeneratorUrlFriendly'];
+                $slug = $datos->{"get$columnaSlug"}();
+                unset($datos);
+
+                if ($this->Title == '')
+                    $this->Title = $slug;
+                if ($this->Name == '')
+                    $this->Name = $slug;
+            } $slug = $this->Name;
+
+            if ($slug == '')
+                $this->_errores[] = "No se ha indicado el título";
+        }
+
+        return (count($this->_errores) == 0);
+    }
+
+    /**
+     * Sube el documento indicado en $this->_ArrayDoc al servidor
+     *
+     * Si es una imagen, la redimensiona se han establecido dimensiones
+     * fijas en $this->_ArrayDoc['width'] y $this->_ArrayDoc['heigth']
      *
      * @return boolean TRUE si se subió con éxito
      */
@@ -287,8 +395,10 @@ class CoreDocs extends CoreDocsEntity {
         if (($ok) and (exif_imagetype($fullPath))) {
             list($ancho, $alto) = getimagesize($fullPath);
 
-            if ( ($this->_ArrayDoc['maxWidth']) and ($ancho > $this->_ArrayDoc['maxWidth']) ) $ancho = $this->_ArrayDoc['maxWidth'];
-            if ( ($this->_ArrayDoc['maxHeight']) and ($alto > $this->_ArrayDoc['maxHeight']) ) $alto = $this->_ArrayDoc['maxHeight'];
+            if (($this->_ArrayDoc['maxWidth']) and ($ancho > $this->_ArrayDoc['maxWidth']))
+                $ancho = $this->_ArrayDoc['maxWidth'];
+            if (($this->_ArrayDoc['maxHeight']) and ($alto > $this->_ArrayDoc['maxHeight']))
+                $alto = $this->_ArrayDoc['maxHeight'];
 
             $img = new Gd();
             $img->loadImage($fullPath);
@@ -303,232 +413,70 @@ class CoreDocs extends CoreDocsEntity {
     }
 
     /**
-     * Sube una imagen al servidor y crea la entrada en la tabla de imagenes
+     * Cambia el nombre de una imagen existente
      *
-     * @param string $entidad El nombre de la entidad
-     * @param integer $idEntidad El id de la entidad
-     * @param string $tipo El tipo de imagen: 'imageN' ó 'galeria'
-     * @param array $imagen Array $_FILE
-     * @param array $medidas Array con los medidas del la variable de entorno
-     * @param string $slug EL titulo sin limpiar
-     * @param boolean $esThumbnail TRUE si es thumbnail
-     * @return boolean TRUE si se subió con éxisto
-     */
-    public function subeDocumentoxxxx($entidad, $idEntidad, $tipo, $imagen, $medidas, $slug, $esThumbnail = FALSE) {
-
-        $ok = FALSE;
-
-        $path = "docs/images/{$entidad}/";
-        $fullPath = $this->_prePath . $path;
-
-        if (!is_dir($fullPath))
-            @mkdir($fullPath);
-
-        if (is_dir($fullPath)) {
-            $slugLimpio = Textos::limpia($slug);
-
-            $img = new CoreImagenes();
-            $rows = $img->cargaCondicion("Id", "Entity='{$entidad}' and IdEntity='{$idEntidad}' and Type='{$tipo}' and IsThumbnail='{$esThumbnail}'");
-            $idImg = $rows[0]['Id'];
-
-            if (!$idImg) {
-                $img->setEntity($entidad);
-                $img->setIdEntity($idEntidad);
-                $img->setType($tipo);
-                $img->setIsThumbnail($esThumbnail);
-                $img->setPathName($entidad . $idEntidad);
-                $img->setName($entidad . $idEntidad);
-                $img->setTitle($slug);
-                $idImg = $img->create();
-            }
-
-            $rows = $img->cargaCondicion("Id, Entity, IdEntity, Type, IsThumbnail", "(Name='{$slugLimpio}')");
-            $row = $rows[0];
-            if (($row['Id']) and ($row['Entity'] != "{$entidad}" or $row['IdEntity'] != "{$idEntidad}" or $row['Type'] != "{$tipo}" or $row['IsThumbnail'] != "{$esThumbnail}")) {
-                // Ya existe esa imagen amigable, le pongo al final el id
-                $slugLimpio .= "-" . $idImg;
-            }
-
-
-            $pathName = $fullPath . $slugLimpio;
-            $img = new Thumbnails();
-            $img->loadImage($imagen['tmp_name']);
-            $img->crop($medidas['width'], $medidas['height']);
-
-            $ok = $img->save($pathName);
-
-            if ($ok) {
-                $archivo = new Archivo($pathName);
-                $img = new CoreImagenes($idImg);
-                $img->setPathName($path . $slugLimpio);
-                $img->setName($slugLimpio);
-                $img->setTitle($slug);
-                $img->setSize($archivo->getSize());
-                $img->setWidth($archivo->getImageWidth());
-                $img->setHeight($archivo->getImageHeight());
-                $img->setMimeType($archivo->getMimeType());
-                $img->save();
-            } else {
-                $img = new CoreImagenes($idImg);
-                $img->erase();
-            }
-
-            unset($archivo);
-            unset($img);
-        }
-
-        return $ok;
-    }
-
-    /**
-     * Sube una imagen al servidor y crea la entrada en la tabla de imagenes
-     *
-     * @param string $entidad El nombre de la entidad
-     * @param integer $idEntidad El id de la entidad
-     * @param string $tipo El tipo de imagen: 'imageN' ó 'galeria'
-     * @param array $imagen Array $_FILE
-     * @param array $medidas Array con los medidas del la variable de entorno
-     * @param string $slug EL titulo sin limpiar
-     * @param boolean $esThumbnail TRUE si es thumbnail
-     * @return integer El id de la imagen subida
-     */
-    public function subeGaleria($idImagen, $entidad, $idEntidad, $tipo, $imagen, $medidas, $slug, $esThumbnail = FALSE) {
-
-        $ok = FALSE;
-
-        $path = "docs/images/{$entidad}/";
-        $fullPath = $this->_prePath . $path;
-
-        if (!is_dir($fullPath))
-            @mkdir($fullPath);
-
-        if (is_dir($fullPath)) {
-            $slugLimpio = Textos::limpia($slug);
-
-            $img = new CoreImagenes();
-            $rows = $img->cargaCondicion("Id", "Entity='{$entidad}' and IdEntity='{$idEntidad}' and Type='{$tipo}' and IsThumbnail='{$esThumbnail}'");
-            $idImg = $rows[0]['Id'];
-
-            if ($idImagen == '') {
-                $img = new CoreImagenes();
-                $img->setEntity($entidad);
-                $img->setIdEntity($idEntidad);
-                $img->setType($tipo);
-                $img->setIsThumbnail($esThumbnail);
-                $img->setPathName($entidad . $idEntidad);
-                $img->setName($entidad . $idEntidad);
-                $img->setTitle($slug);
-                $idImagen = $img->create();
-
-                $rows = $img->cargaCondicion("Id", "(Name='{$slugLimpio}')");
-                if ($rows[0]['Id']) {
-                    // Ya existe esa imagen amigable, le pongo al final el id
-                    $slugLimpio .= "-" . $idImagen;
-                }
-            } else {
-                $img = new CoreImagenes($idImagen);
-
-                $rows = $img->cargaCondicion("Id", "(Name='{$slugLimpio}')");
-                if ($rows[0]['Id'] != $idImagen) {
-                    // Ya existe esa imagen amigable, le pongo al final el id
-                    $slugLimpio .= "-" . $idImagen;
-                }
-            }
-
-
-            if ($imagen['tmp_name']) {
-                $pathName = $fullPath . $slugLimpio;
-                $img = new Thumbnails();
-                $img->loadImage($imagen['tmp_name']);
-                $img->crop($medidas['width'], $medidas['height']);
-                $ok = $img->save($pathName);
-            } else
-                $ok = TRUE;
-
-            if ($ok) {
-                $archivo = new Archivo($pathName);
-                $img = new CoreImagenes($idImagen);
-                $img->setPathName($path . $slugLimpio);
-                $img->setName($slugLimpio);
-                $img->setTitle($slug);
-                $img->setSize($archivo->getSize());
-                $img->setWidth($archivo->getImageWidth());
-                $img->setHeight($archivo->getImageHeight());
-                $img->setMimeType($archivo->getMimeType());
-                $img->save();
-            } else {
-                $img = new CoreImagenes($idImagen);
-                $img->erase();
-            }
-
-            unset($archivo);
-            unset($img);
-        }
-
-        if ($ok)
-            return $idImagen; else
-            return FALSE;
-    }
-
-    /**
-     * Le cambia el nombre a una imagen existente
-     *
-     * Actuliaza el nombre nuevo en la tabla de imagenes y cambia
+     * Actualiza el nombre nuevo en la tabla de imagenes y cambia
      * el nombre al archivo físico
      *
-     * @param string $entidad El nombre de la entidad
-     * @param integer $idEntidad El id de la entidad
-     * @param string $tipo El tipo: imageN
      * @param string $titulo El titulo de la imagen
      * @param string $slug El nombre de la imagen sin limpiar
      * @param booelan $mostrarPieFoto TRUE si se quiere mostrar el titulo en el pie de la imagen
+     * @param array $documento Array con los parametros del documento
+     * @param booelan $idThumbnail
+     * @param integer $orden
      * @return boolean TRUE si se cambió con Exito
      */
-    public function cambiaNombre($entidad, $idEntidad, $tipo, $titulo, $slug, $mostrarPieFoto) {
-        $ok = FALSE;
+    public function actualiza($titulo, $slug, $mostrarPieFoto, $documento, $isThumbnail = 0, $orden = 0) {
 
-        $path = "docs/images/{$entidad}/";
+        $ok = TRUE;
 
-        $slugLimpio = Textos::limpia($slug);
+        // Cargo los datos del objeto antes de cambiarlos
+        $pathNameAnterior = $this->_prePath . $this->getPathName();
 
-        $img = new CoreImagenes();
-        $rows = $img->cargaCondicion("Id", "Entity='{$entidad}' and IdEntity='{$idEntidad}' and Type='{$tipo}' and IsThumbnail='0'");
-        $idImg = $rows[0]['Id'];
-        $imgAnterior = new CoreImagenes($idImg);
-        $pathNameAnterior = $this->_prePath . $imgAnterior->getPathName();
+        // Le cambio el titulo y el showcaption
+        $this->setTitle($titulo);
+        $this->setShowCaption($mostrarPieFoto);
+        $this->setSortOrder($orden);
 
-        $rows = $img->cargaCondicion("Id, Entity, IdEntity, Type, IsThumbnail", "(Name='{$slugLimpio}')");
-        $row = $rows[0];
-        if (($row['Id']) and ($row['Entity'] != "{$entidad}" or $row['IdEntity'] != "{$idEntidad}" or $row['Type'] != "{$tipo}" or $row['IsThumbnail'] != "0")) {
-            // Ya existe esa imagen amigable, le pongo al final el id
-            $slugLimpio .= "-" . $idImg;
+        // Si el nombre propuesto es distinto al que ya tiene y no es Thumbnail
+        // recalculo el nombre amigable, cambio el path y renombro el archivo
+        if (($isThumbnail == '0') and ($this->getName() != $slug)) {
+            $this->setName($slug);
+            $this->actualizaNombreAmigable();
+            $pathNameNuevo = $this->_prePath . $this->getPathName();
+            $ok = @rename($pathNameAnterior, $pathNameNuevo);
         }
 
-        $pathNameNuevo = $this->_prePath . $path . $slugLimpio;
-        $ok = @rename($pathNameAnterior, $pathNameNuevo);
-
-        if ($ok) {
-            $img = new CoreImagenes($idImg);
-            $img->setPathName($path . $slugLimpio);
-            $img->setName($slugLimpio);
-            $img->setTitle($titulo);
-            $img->setShowCaption($mostrarPieFoto);
-            $img->save();
+        if ($documento['tmp_name'] != '') {
+            $this->setArrayDoc($documento);
+            $ok = $this->subeDocumento();
         }
 
-        unset($img);
+        // Si todo ha ido bien, actualizo el objeto
+        if ($ok)
+            $this->save();
+
+        unset($this);
 
         return $ok;
     }
 
-    public function getSize($unit='kb') {
+    /**
+     * Devuelve un string con el tamaño del documento
+     * expresado en la unidad de medida $unit
+     *
+     * @param string $unit La unidad de medida
+     * @return string Texto con ek tamaño y la unidad de medida
+     */
+    public function getSize($unit = 'kb') {
 
         $archivo = new Archivo($this->_prePath . $this->PathName);
         $size = $archivo->getSize($unit);
         unset($archivo);
 
-        return "{$size} ({$unit})";
+        return number_format($size, 2,',','.') . "({$unit})";
     }
+
 }
 
 ?>

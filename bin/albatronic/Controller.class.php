@@ -12,7 +12,7 @@ class Controller {
 
     /**
      * Variables enviadas en el request por POST o por GET
-     * @var request
+     * @var array
      */
     protected $request;
 
@@ -20,7 +20,7 @@ class Controller {
      * Objeto de la clase 'form' con las propiedades y métodos
      * del formulario obtenidos del fichero de configuracion
      * del formulario en curso
-     * @var from
+     * @var array
      */
     protected $form;
 
@@ -82,7 +82,8 @@ class Controller {
 
     public function __construct($request) {
 
-        // Cargar lo que viene en el request
+        // Cargar lo que viene en el request, incluidos los eventuales
+        // ficheros a subir
         $this->request = $request;
 
         // Cargar la configuracion del modulo (modules/moduloName/config.yml)
@@ -482,8 +483,8 @@ class Controller {
     public function ImagenAction() {
 
         $rules = array(
-            'forbidenTypes' => split(",", $this->varEnvPro['forbidenTypes']),
-            'maxFileSize' => $this->varEnvMod['maxImageSize'], // Tamaño expresado en bytes
+            'allowTypes' => split(",", $this->varEnvPro['allowTypes']),
+            'maxFileSize' => $this->varEnvMod['maxSizes']['image'], // Tamaño expresado en bytes
         );
 
         $idEntidad = $this->request[$this->entity][$this->form->getPrimaryKey()];
@@ -492,21 +493,17 @@ class Controller {
             case 'EnviarMaster':
                 if ($this->values['permisos']['permisosModulo']['UP']) {
 
-                    // Validar el tamaño y tipo de documento
-                    $doc = new CoreDocs();
-                    $doc->setArrayDoc($_FILES['imagenMaster']);
-                    if (!$doc->valida($rules))
-                        $this->values['errores'] = $doc->getErrores();
-
+                    $variables = new CoreVariables('Mod', 'Env', $this->entity);
+                    $varEnv = $variables->getValores();
+                    unset($variables);
                     $datos = new $this->entity($idEntidad);
-                    $columnaSlug = $this->varEnvMod['fieldGeneratorUrlFriendly'];
+                    $columnaSlug = $varEnv['fieldGeneratorUrlFriendly'];
                     $slug = $datos->{"get$columnaSlug"}();
                     unset($datos);
 
-                    if ($slug == '')
-                        $this->values['errores'][] = "No se ha indicado el título";
-
-                    if (count($this->values['errores']) == '0') {
+                    $doc = new CoreDocs();
+                    $doc->setArrayDoc($_FILES['imagenMaster']);
+                    if ($doc->validaArchivo($rules)) {
 
                         // Borrar las eventuales imagenes que existieran
                         $img = new CoreDocs();
@@ -523,32 +520,38 @@ class Controller {
                                 $doc->setEntity($this->entity);
                                 $doc->setIdEntity($idEntidad);
                                 $doc->setPathName($this->entity . $idEntidad);
-                                $doc->setName($idEntidad);
+                                $doc->setName($slug);
                                 $doc->setTitle($slug);
                                 $doc->setType('image' . $key);
                                 $doc->setArrayDoc($_FILES['imagenMaster']);
                                 $doc->setIsThumbnail(0);
-                                $ok = $doc->create();
+                                if ($doc->valida($rules))
+                                    $ok = $doc->create();
                                 if (!$ok)
                                     $this->values['errores'] = $doc->getErrores();
 
                                 // Subir Miniatura
                                 if (($ok) and ($value['generateThumbnail'] == '1')) {
+
                                     $_FILES['imagenMaster']['maxWidth'] = $value['widthThumbnail'];
                                     $_FILES['imagenMaster']['maxHeight'] = $value['heightThumbnail'];
                                     $doc = new CoreDocs();
                                     $doc->setEntity($this->entity);
                                     $doc->setIdEntity($idEntidad);
                                     $doc->setPathName($this->entity . $idEntidad);
-                                    $doc->setName($idEntidad);
+                                    $doc->setName($slug);
                                     $doc->setTitle($slug);
                                     $doc->setType('image' . $key);
                                     $doc->setArrayDoc($_FILES['imagenMaster']);
                                     $doc->setIsThumbnail(1);
-                                    $doc->create();
+                                    if ($doc->valida($rules))
+                                        $ok = $doc->create();
+                                    if (!$ok)
+                                        $this->values['errores'] = $doc->getErrores();
                                 }
                             }
-                    }
+                    } else
+                        $this->values['errores'] = $doc->getErrores();
 
                     $template = $this->entity . '/form.html.twig';
                 } else {
@@ -556,52 +559,45 @@ class Controller {
                 }
                 break;
 
-            case 'EnviarImagen':
+            case 'GuardarCambios':
                 if ($this->values['permisos']['permisosModulo']['UP']) {
 
-                    $datos = new $this->entity($idEntidad);
-                    $columnaSlug = $this->varEnvMod['fieldGeneratorUrlFriendly'];
-                    $slug = $datos->{"get$columnaSlug"}();
-                    unset($datos);
-
                     $idImagen = $this->request['idImagenEnviar'];
+
                     $tipo = $this->request['image'][$idImagen]['Tipo'];
+                    $title = trim($this->request['image'][$idImagen]['Title']);
+                    $name = trim($this->request['image'][$idImagen]['Name']);
+                    $showCaption = $this->request['image'][$idImagen]['ShowCaption'];
+                    $sortOrder = $this->request['image'][$idImagen]['SortOrder'];
+                    $documento = $this->request['FILES'][$tipo];
+                    $documento['maxWidth'] = $this->varEnvMod['images'][$idImagen]['width'];
+                    $documento['maxHeight'] = $this->varEnvMod['images'][$idImagen]['height'];
 
-                    if ($slug == '')
-                        $this->values['errores'][] = "No se ha indicado el título";
-                    if ($_FILES[$tipo]['error'] != '0')
-                        $this->values['errores'][] = "Hay un error en el archivo a subir, puede que supera el tamaño máximo permitido.";
+                    if ($documento['tmp_name']) {
+                        $img = new CoreDocs();
+                        $img->setArrayDoc($documento);
+                        $ok = $img->validaArchivo($rules);
+                        if (!$ok)
+                            $this->values['errores'] = $img->getErrores();
+                    } else $ok = 1;
 
-                    if (count($this->values['errores']) == '0') {
+                    if ($ok) {
+                        $img = new CoreDocs($this->request['image'][$idImagen]['Id']);
+                        $ok = $img->actualiza($title, $name, $showCaption, $documento, 0, $sortOrder);
+                        unset($img);
 
-                        $archivo = new Archivo($_FILES[$tipo]['tmp_name']);
-
-                        if ($archivo->upLoad($_FILES[$tipo], $rules)) {
-
-                            // Subir Imagen
-                            $atributos = array(
-                                'width' => $this->varEnvMod['images'][$idImagen + 1]['width'],
-                                'height' => $this->varEnvMod['images'][$idImagen + 1]['height'],
-                            );
-                            $img = new CoreImagenes();
-                            $ok = $img->sube($this->entity, $idEntidad, $tipo, $_FILES[$tipo], $atributos, $slug, FALSE);
+                        // Subir Miniatura
+                        if (($ok) and ($this->varEnvMod['images'][$idImagen]['generateThumbnail'] == '1')) {
+                            $img = new CoreDocs();
+                            $rows = $img->cargaCondicion('Id', "Entity='{$this->entity}' AND IdEntity='{$this->request[$this->entity]['Id']}' AND Type='{$tipo}' AND IsThumbnail='1'");
+                            $img = new CoreDocs($rows[0]['Id']);
+                            $documento['maxWidth'] = $this->varEnvMod['images'][$idImagen]['widthThumbnail'];
+                            $documento['maxHeight'] = $this->varEnvMod['images'][$idImagen]['heightThumbnail'];
+                            $ok = $img->actualiza($title, $name, $showCaption, $documento, 1);
                             unset($img);
-
-                            // Subir Miniatura
-                            if (($ok) and ($this->varEnvMod['images'][$idImagen + 1]['generateThumbnail'] == '1')) {
-                                $atributos = array(
-                                    'width' => $this->varEnvMod['images'][$idImagen + 1]['widthThumbnail'],
-                                    'height' => $this->varEnvMod['images'][$idImagen + 1]['heightThumbnail'],
-                                );
-                                $img = new CoreImagenes();
-                                $img->sube($this->entity, $idEntidad, $tipo, $_FILES[$tipo], $atributos, $slug, TRUE);
-                                unset($img);
-                            }
-                        } else
-                            $this->values['errores'] = $archivo->getErrores();
-                        unset($archivo);
-                    }
-
+                        }
+                    } else
+                        $this->values['errores'] = $img->getErrores();
                     $template = $this->entity . '/form.html.twig';
                 } else {
                     $template = "_global/forbiden.html.twig";
@@ -612,45 +608,9 @@ class Controller {
                 if ($this->values['permisos']['permisosModulo']['DE']) {
                     $idImagen = $this->request['idImagenEnviar'];
                     $tipo = $this->request['image'][$idImagen]['Tipo'];
-                    $img = new CoreImagenes();
-                    $img->quita($this->entity, $idEntidad, $tipo);
-                    $template = $this->entity . '/form.html.twig';
-                } else {
-                    $template = "_global/forbiden.html.twig";
-                }
-                break;
-
-            case 'GuardarCambios':
-                if ($this->values['permisos']['permisosModulo']['UP']) {
-
-                    $idImagen = $this->request['idImagenEnviar'] + 1;
-                    $tipo = "image" . $idImagen;
-                    $atributos = array(
-                        'width' => $this->varEnvMod['images'][$idImagen]['width'],
-                        'height' => $this->varEnvMod['images'][$idImagen]['height'],
-                    );
-
-                    $title = trim($this->request['image'][$idImagen - 1]['Title']);
-                    $name = trim($this->request['image'][$idImagen - 1]['Name']);
-                    if (($title == '') or ($name == '')) {
-                        $datos = new $this->entity($idEntidad);
-                        $columnaSlug = $this->varEnvMod['fieldGeneratorUrlFriendly'];
-                        $slug = $datos->{"get$columnaSlug"}();
-                        unset($datos);
-
-                        if ($title == '')
-                            $title = $slug;
-                        if ($name == '')
-                            $name = $slug;
-                    } $slug = $name;
-
-                    if ($slug != '') {
-                        $img = new CoreImagenes();
-                        $img->cambiaNombre($this->entity, $idEntidad, $tipo, $title, $slug, $this->request['image'][$idImagen - 1]['ShowCaption']);
-                        unset($img);
-                    } else
-                        $this->values['errores'][] = "No se ha indicado el título y/o el nombre";
-
+                    $img = new CoreDocs();
+                    $img->borraDocs($this->entity, $idEntidad, $tipo);
+                    unset($img);
                     $template = $this->entity . '/form.html.twig';
                 } else {
                     $template = "_global/forbiden.html.twig";

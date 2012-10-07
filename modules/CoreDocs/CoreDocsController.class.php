@@ -25,7 +25,7 @@ class CoreDocsController extends Controller {
         $this->values['varWebMod'] = $this->varWebMod;
     }
 
-    public function listAction($entidad='', $idEntidad='') {
+    public function listAction($entidad = '', $idEntidad = '', $tipo = '') {
 
         if ($this->values['permisos']['permisosModulo']['CO']) {
 
@@ -33,18 +33,24 @@ class CoreDocsController extends Controller {
                 $entidad = $this->request[2];
             if ($idEntidad == '')
                 $idEntidad = $this->request[3];
+            if ($tipo == '')
+                $tipo = $this->request[4];
 
-
-            // Añadir una imagen nueva vacia
+            // Leer las variables de entorno del módulo en curso
+            $variables = new CoreVariables('Mod', 'Env', $entidad);
+            $this->varEnvMod = $variables->getValores();
+            unset($variables);
+            //$this->values['varEnvMod'] = $this->varEnvMod;
+            // Añadir un documento nuevo vacio
             $objetoNuevo = new CoreDocs();
             $objetoNuevo->setEntity($entidad);
             $objetoNuevo->setIdEntity($idEntidad);
-            $objetoNuevo->setType('galeria');
+            $objetoNuevo->setType($tipo);
             $lineas[] = $objetoNuevo;
             unset($objetoNuevo);
 
             $lis = new CoreDocs();
-            $filtro = "Entity='{$entidad}' AND IdEntity='{$idEntidad}' AND Type='galeria' AND IsThumbnail='0'";
+            $filtro = "Entity='{$entidad}' AND IdEntity='{$idEntidad}' AND Type='{$tipo}' AND IsThumbnail='0'";
             $rows = $lis->cargaCondicion('Id', $filtro, 'SortOrder ASC');
             foreach ($rows as $row) {
                 $lineas[] = new CoreDocs($row['Id']);
@@ -52,6 +58,19 @@ class CoreDocsController extends Controller {
 
             unset($lis);
 
+            // Tamaño máximo del archivo
+            switch ($tipo) {
+                case 'galery':
+                    $maxFileSize = $this->varEnvMod['maxSizes']['image'];
+                    break;
+                case 'document':
+                case 'video':
+                case 'audio':
+                    $maxFileSize = $this->varEnvMod['maxSizes'][$tipo];
+                    break;
+            }
+
+            $this->values['maxFileSize'] = $maxFileSize;
             $this->values['listado']['data'] = $lineas;
             $template = 'CoreDocs/form.html.twig';
 
@@ -75,32 +94,79 @@ class CoreDocsController extends Controller {
             switch ($this->request["METHOD"]) {
 
                 case 'POST': //CREAR NUEVO REGISTRO
-                    $variables = new CoreVariables('Mod', 'Env', $this->request[$this->entity]['Entity']);
+                    $entidad = $this->request[$this->entity]['Entity'];
+                    $idEntidad = $this->request[$this->entity]['IdEntity'];
+                    $tipo = $this->request[$this->entity]['Type'];
+
+                    $variables = new CoreVariables('Mod', 'Env', $entidad);
                     $this->varEnvMod = $variables->getValores();
-                    $this->values['varEnvMod'] = $this->varEnvMod;
                     unset($variables);
-                    $medidas = array (
-                        'width' => $this->varEnvMod['galeria']['maxWidthImage'],
-                        'height' => $this->varEnvMod['galeria']['maxHeightImage'],
-                    );
+                    $this->values['varEnvMod'] = $this->varEnvMod;
 
                     $datos = new CoreDocs();
                     $datos->bind($this->request['CoreDocs']);
+                    $datos->setArrayDoc($this->request['FILES']['documento']);
 
-                    if ($datos->valida(array())) {
-                        $lastId = $datos->subeGaleria('',$datos->getEntity(), $datos->getIdEntity(), $datos->getType(), $_FILES['imagen0'], $medidas, $datos->getName(), FALSE);
-                        $this->values['alertas'] = $datos->getAlertas();
+                    $rules = $this->getRules($this->request[$this->entity]['Type']);
 
-                        //Recargo el objeto para refrescar las propiedas que
-                        //hayan podido ser objeto de algun calculo durante el proceso
-                        //de guardado.
-                        $datos = new CoreDocs($lastId);
-                        $this->values['datos'] = $datos;
-                    } else {
-                        $this->values['datos'] = $datos;
-                        $this->values['errores'] = $datos->getErrores();
+                    switch ($this->request[$this->entity]['Type']) {
+                        case 'galery':
+                            if ($datos->valida($rules)) {
+                                $documento = $datos->getArrayDoc();
+                                $documento['maxWidth'] = $this->varEnvMod['galery']['maxWidthImage'];
+                                $documento['maxHeight'] = $this->varEnvMod['galery']['maxHeightImage'];
+                                $datos->setArrayDoc($documento);
+                                $lastId = $datos->create();
+                                if (!$lastId)
+                                    $this->values['errores'] = $datos->getErrores();
+
+                                // Subir Miniatura
+                                if (($lastId) and ($this->varEnvMod['galery']['generateThumbnail'] == '1')) {
+                                    $documento = $datos->getArrayDoc();
+                                    $documento['maxWidth'] = $this->varEnvMod['galery']['widthThumbnail'];
+                                    $documento['maxHeight'] = $this->varEnvMod['galery']['heightThumbnail'];
+                                    $datos->setArrayDoc($documento);
+                                    $datos->setIsThumbnail(1);
+                                    $lastId = $datos->create();
+                                }
+                                $this->values['alertas'] = $datos->getAlertas();
+
+                                //Recargo el objeto para refrescar las propiedas que
+                                //hayan podido ser objeto de algun calculo durante el proceso
+                                //de guardado.
+                                $datos = new CoreDocs($lastId);
+                                $this->values['datos'] = $datos;
+                            } else {
+                                $this->values['datos'] = $datos;
+                                $this->values['errores'] = $datos->getErrores();
+                            }
+
+                            break;
+
+                        case 'document':
+                        case 'video':
+                        case 'audio':
+                            if ($datos->valida($rules)) {
+
+                                $lastId = $datos->create();
+                                if (!$lastId)
+                                    $this->values['errores'] = $datos->getErrores();
+
+                                $this->values['alertas'] = $datos->getAlertas();
+
+                                //Recargo el objeto para refrescar las propiedas que
+                                //hayan podido ser objeto de algun calculo durante el proceso
+                                //de guardado.
+                                $datos = new CoreDocs($lastId);
+                                $this->values['datos'] = $datos;
+                            } else {
+                                $this->values['datos'] = $datos;
+                                $this->values['errores'] = $datos->getErrores();
+                            }
+                            break;
                     }
-                    return $this->listAction($datos->getEntity(), $datos->getIdEntity());
+
+                    return $this->listAction($entidad, $idEntidad, $tipo);
                     break;
             }
         } else {
@@ -118,30 +184,46 @@ class CoreDocsController extends Controller {
      */
     public function editAction() {
 
-        $entidad = $this->request[$this->entity]['Entity'];
-        $idEntidad = $this->request[$this->entity]['IdEntity'];
-
         switch ($this->request['accion']) {
             case 'G': //GUARDAR DATOS
                 if ($this->values['permisos']['permisosModulo']['UP']) {
 
-                    $datos = new $this->entity($this->request[$this->entity]['Id']);
-                    $datos->bind($this->request[$this->entity]);
-                    if ($datos->valida()) {
-                        $datos->save();
-                        $this->values['errores'] = $datos->getErrores();
-                        $this->values['alertas'] = $datos->getAlertas();
+                    $id = $this->request[$this->entity]['Id'];
+                    $entidad = $this->request[$this->entity]['Entity'];
+                    $idEntidad = $this->request[$this->entity]['IdEntity'];
+                    $tipo = $this->request[$this->entity]['Type'];
+                    $title = $this->request[$this->entity]['Title'];
+                    $slug = $this->request[$this->entity]['Name'];
+                    $showCaption = $this->request[$this->entity]['ShowCaption'];
+                    $orden = $this->request[$this->entity]['SortOrder'];
+                    $documento = $this->request['FILES']['documento' . $id];
+                    $documento['maxWidth'] = $this->varEnvMod['galery']['maxWidthImage'];
+                    $documento['maxHeight'] = $this->varEnvMod['galery']['maxHeightImage'];
 
-                        //Recargo el objeto para refrescar las propiedas que
-                        //hayan podido ser motivo de algun calculo durante el proceso
-                        //de guardado.
-                        $datos = new $this->entity($this->request[$this->entity][$datos->getPrimaryKeyName()]);
+                    $rules = $this->getRules($this->request[$this->entity]['Type']);
+                    // Para que deje actualizar aunque estemos en el límite del
+                    // número máximo de documentos
+                    $rules['numMaxDocs'] ++;
+
+                    if ($documento['tmp_name']) {
+                        $doc = new CoreDocs();
+                        $doc->setArrayDoc($documento);
+                        $ok = $doc->validaArchivo($rules);
+                        if (!$ok)
+                            $this->values['errores'] = $doc->getErrores();
                     } else
-                        $this->values['errores'] = $datos->getErrores();
+                        $ok = 1;
 
-                    $this->values['datos'] = $datos;
-                    unset($datos);
-                    return $this->listAction($entidad, $idEntidad);
+                    if ($ok) {
+                        $doc = new CoreDocs($id);
+                        $ok = $doc->actualiza($title, $slug, $showCaption, $documento, 0, $orden);
+                    }
+
+                    $this->values['errores'] = $doc->getErrores();
+                    $this->values['alertas'] = $doc->getAlertas();
+                    unset($doc);
+
+                    return $this->listAction($entidad, $idEntidad, $tipo);
                 } else {
                     return array('template' => '_global/forbiden.html.twig');
                 }
@@ -149,23 +231,51 @@ class CoreDocsController extends Controller {
 
             case 'B': //BORRAR DATOS
                 if ($this->values['permisos']['permisosModulo']['DE']) {
-                    $datos = new $this->entity($this->request[$this->entity]['Id']);
 
-                    if ($datos->erase()) {
-                        $datos = new $this->entity();
-                        $this->values['datos'] = $datos;
-                        $this->values['errores'] = array();
-                    } else {
+                    $entidad = $this->request[$this->entity]['Entity'];
+                    $idEntidad = $this->request[$this->entity]['IdEntity'];
+                    $tipo = $this->request[$this->entity]['Type'];
+
+                    $datos = new CoreDocs($this->request[$this->entity]['Id']);
+
+                    if (!$datos->erase()) {
                         $this->values['datos'] = $datos;
                         $this->values['errores'] = $datos->getErrores();
                     }
                     unset($datos);
-                    return $this->listAction($entidad, $idEntidad);
+                    return $this->listAction($entidad, $idEntidad, $tipo);
                 } else {
                     return array('template' => '_global/forbiden.html.twig');
                 }
                 break;
         }
+    }
+
+    private function getRules($tipoDocumento) {
+
+        $rules['allowTypes'] = split(",", $this->varEnvPro['allowTypes']);
+        $rules['type'] = $tipoDocumento;
+
+        switch ($tipoDocumento) {
+            case 'galery':
+                $rules['maxFileSize'] = $this->varEnvMod['maxSizes']['image'];
+                $rules['numMaxDocs'] = $this->varEnvPro['numMaxGalery'];
+                break;
+            case 'document':
+                $rules['maxFileSize'] = $this->varEnvMod['maxSizes']['document'];
+                $rules['numMaxDocs'] = $this->varEnvPro['numMaxDocuments'];
+                break;
+            case 'video':
+                $rules['maxFileSize'] = $this->varEnvMod['maxSizes']['video'];
+                $rules['numMaxDocs'] = $this->varEnvPro['numMaxVideos'];
+                break;
+            case 'audio':
+                $rules['maxFileSize'] = $this->varEnvMod['maxSizes']['audio'];
+                $rules['numMaxDocs'] = $this->varEnvPro['numMaxAudios'];
+                break;
+        }
+
+        return $rules;
     }
 
 }

@@ -3,11 +3,39 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 19.09.2012 10:57:31
+# @date 06.10.2012 19:34:00
 #
 ---
 CoreUsuarios:
   app: ''
+  isModuleRoot: 0
+  linkModule:
+    fromColumn: ''
+    toEntity: ''
+    toColumn: ''
+  numMaxRecords: ''
+  withImages: '0'
+  withGalery: '0'
+  withDocuments: '0'
+  withVideos: 0
+  withAudios: '0'
+  maxSizes:
+    image: '400000'
+    document: ''
+    video: ''
+    audio: ''
+  galery:
+    maxWidthImage: '500'
+    maxHeightImage: '400'
+    generateThumbnail: '0'
+    widthThumbnail: '50'
+    heightThumbnail: '50'
+  fieldGeneratorUrlFriendly: IdPerfil
+  fieldGeneratorMetatagTitle: IdPerfil
+  controller: CONTROLADOR
+  action: ACTION
+  template: TEMPLATE
+  parametros: PARAMETROS
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
@@ -25,7 +53,6 @@ CoreUsuarios:
   primarykey: Id
   linkBy: ''
   records_per_page: 15
-  isModuleRoot: 0
   order_by:
     -
       title: 'Id a-z'
@@ -42,8 +69,6 @@ CoreUsuarios:
     - ValoresPrivacy
     - ValoresDchaIzq
     - ValoresChangeFreq
-  fieldGeneratorUrlFriendly: IdPerfil
-  fieldGeneratorMetatagTitle: IdPerfil
   columns:
     Id:
       title: Id
@@ -361,9 +386,9 @@ CoreUsuarios:
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 9, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
-    Order:
-      title: Order
-      filter: NO
+    SortOrder:
+      title: SortOrder
+      filter: YES
       list: NO
       visible: true
       updatable: true
@@ -422,7 +447,7 @@ CoreUsuarios:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: '1'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
@@ -445,7 +470,7 @@ CoreUsuarios:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: '1'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }

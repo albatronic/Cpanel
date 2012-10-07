@@ -574,6 +574,26 @@ class Entity {
     }
 
     /**
+     * Devuelve el número de registros activos (deleted=0)
+     * que tiene la entidad
+     *
+     * @param string $criterio Clausa para el WHERE para poder contar un subconjunto de registros
+     * @return integer
+     */
+    public function getNumberOfRecords($criterio='1') {
+        $this->conecta();
+
+        if (is_resource($this->_dbLink)) {
+            $query = "SELECT COUNT({$this->getPrimaryKeyName()}) as NumeroDeRegistros FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE ({$criterio}) AND (Deleted = '0')";
+            $this->_em->query($query);
+            $row = $this->_em->fetchResult();
+            $this->_em->desConecta();
+            unset($this->_em);
+        }
+
+        return $row[0]['NumeroDeRegistros'];
+    }
+    /**
      * Devuelve un array con objetos documentos asociados
      * a la entidad e id de entidad en curso
      *

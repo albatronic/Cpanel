@@ -47,18 +47,18 @@ class CoreDocsEntity extends EntityComunes {
      * @var string
      * @assert NotBlank(groups="CoreDocs")
      */
-    protected $PathName;
+    protected $PathName = '';
 
     /**
      * @var string
      * @assert NotBlank(groups="CoreDocs")
      */
-    protected $Name;
+    protected $Name = '';
 
     /**
      * @var string
      */
-    protected $Extension;
+    protected $Extension = '';
 
     /**
      * @var string

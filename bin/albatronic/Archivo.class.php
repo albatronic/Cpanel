@@ -104,14 +104,13 @@ class Archivo {
             $this->getPathInfo($fullPath);
             $this->fullPath = $fullPath;
 
-            if (file_exists($fullPath)) {
+            if (file_exists($this->fullPath)) {
                 $this->size = filesize($this->fullPath);
                 $this->isImage = exif_imagetype($this->fullPath);
+                $this->type = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $this->fullPath);
 
-                if ($this->isImage) {
-                    $this->type = $this->isImage;
+                if ($this->isImage)
                     list($this->imageWidth, $this->imageHeight) = getimagesize($this->fullPath);
-                }
             }
         }
     }
@@ -166,7 +165,8 @@ class Archivo {
     }
 
     public function getMimeType() {
-        return image_type_to_mime_type($this->type);
+        //return image_type_to_mime_type($this->type);
+        return $this->type;
     }
 
     /**
@@ -217,7 +217,7 @@ class Archivo {
                 $factor = 1;
         }
 
-        return round($this->size / $factor,1);
+        return ($this->size / $factor);
     }
 
     /**

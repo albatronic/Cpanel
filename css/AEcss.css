@@ -77,3 +77,9 @@
     -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
 }
+
+.comando{
+	width: 120px;
+	padding: 5px 10px 5px 10px;
+        margin-right: 5px;
+}

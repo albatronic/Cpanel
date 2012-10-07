@@ -348,19 +348,30 @@ class CoreVariablesController {
                     $archivoConfig = new Form($nombre);
 
                     if ($datos['isModuleRoot'] == '') $datos['isModuleRoot'] =  $archivoConfig->getNode('isModuleRoot');
-                    if ($datos['maxImageSize'] == '') $datos['maxImageSize'] = $archivoConfig->getNode('maxImageSize');
+                    if ($datos['numMaxRecords'] == '') $datos['numMaxRecords'] = $archivoConfig->getNode('numMaxRecords');
+                    if ($datos['withImages'] == '') $datos['withImages'] = $archivoConfig->getNode('withImages');
+                    if ($datos['withGalery'] == '') $datos['withGalery'] = $archivoConfig->getNode('withGalery');
+                    if ($datos['withDocuments'] == '') $datos['withDocuments'] = $archivoConfig->getNode('withDocuments');
+                    if ($datos['withVideos'] == '') $datos['withVideos'] = $archivoConfig->getNode('withVideos');
+                    if ($datos['withAudios'] == '') $datos['withAudios'] = $archivoConfig->getNode('withAudios');
 
-                    $galeria = $archivoConfig->getNode('galeria');
-                    if ($datos['galeria']['hayGaleria'] == '') $datos['galeria']['hayGaleria'] = $galeria['hayGaleria'];
-                    if ($datos['galeria']['maxWidthImage'] == '') $datos['galeria']['maxWidthImage'] = $galeria['maxWidthImage'];
-                    if ($datos['galeria']['maxHeightImage'] == '') $datos['galeria']['maxHeightImage'] = $galeria['maxHeightImage'];
-                    if ($datos['galeria']['widthThumbnail'] == '') $datos['galeria']['widthThumbnail'] = $galeria['widthThumbnail'];
-                    if ($datos['galeria']['heightThumbnail'] == '') $datos['galeria']['heightThumbnail'] = $galeria['heightThumbnail'];
+                    $maxSizes = $archivoConfig->getNode('maxSizes');
+                    if ($datos['maxSizes']['image'] == '') $datos['maxSizes']['image'] = $maxSizes['image'];
+                    if ($datos['maxSizes']['document'] == '') $datos['maxSizes']['document'] = $maxSizes['document'];
+                    if ($datos['maxSizes']['video'] == '') $datos['maxSizes']['video'] = $maxSizes['video'];
+                    if ($datos['maxSizes']['audio'] == '') $datos['maxSizes']['audio'] = $maxSizes['audio'];
+
+                    $galery = $archivoConfig->getNode('galery');
+                    if ($datos['galery']['maxWidthImage'] == '') $datos['galery']['maxWidthImage'] = $galery['maxWidthImage'];
+                    if ($datos['galery']['maxHeightImage'] == '') $datos['galery']['maxHeightImage'] = $galery['maxHeightImage'];
+                    if ($datos['galery']['widthThumbnail'] == '') $datos['galery']['widthThumbnail'] = $galery['widthThumbnail'];
+                    if ($datos['galery']['heightThumbnail'] == '') $datos['galery']['heightThumbnail'] = $galery['heightThumbnail'];
 
                     if ($datos['controller'] == '') $datos['controller'] = $archivoConfig->getNode('controller');
                     if ($datos['action'] == '') $datos['action'] = $archivoConfig->getNode('action');
                     if ($datos['template'] == '') $datos['template'] = $archivoConfig->getNode('template');
                     if ($datos['parametros'] == '') $datos['parametros'] = $archivoConfig->getNode('parametros');
+
                     if ($datos['fieldGeneratorUrlFriendly'] == '') $datos['fieldGeneratorUrlFriendly'] = $archivoConfig->getNode('fieldGeneratorUrlFriendly');
                     if ($datos['fieldGeneratorMetatagTitle'] == '') $datos['fieldGeneratorMetatagTitle'] = $archivoConfig->getNode('fieldGeneratorMetatagTitle');
 

@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 29.09.2012 17:47:10
+# @date 06.10.2012 19:34:00
 #
 ---
 EnlSecciones:
@@ -13,11 +13,21 @@ EnlSecciones:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
-  maxImageSize: 500
-  galeria:
-    hayGaleria: 0
+  numMaxRecords: ''
+  withImages: '0'
+  withGalery: '0'
+  withDocuments: '0'
+  withVideos: 0
+  withAudios: '0'
+  maxSizes:
+    image: '400000'
+    document: ''
+    video: ''
+    audio: ''
+  galery:
     maxWidthImage: '500'
     maxHeightImage: '400'
+    generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
   fieldGeneratorUrlFriendly: Titulo
@@ -34,7 +44,7 @@ EnlSecciones:
   favourite_control: NO
   help_file: help.html.twig
   title: EnlSecciones
-  id_video: enlseccionesOr
+  id_video: enlsecciones
   url_video: null
   feature_list: YES
   conection: cpanel
@@ -120,7 +130,7 @@ EnlSecciones:
       visible: true
       updatable: true
       default: null
-      help: Esta campo es de solo lectura
+      help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
@@ -285,7 +295,7 @@ EnlSecciones:
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     SortOrder:
       title: SortOrder
-      filter: NO
+      filter: YES
       list: NO
       visible: true
       updatable: true

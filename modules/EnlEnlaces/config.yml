@@ -3,25 +3,35 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 01.10.2012 02:19:06
+# @date 06.10.2012 19:34:00
 #
 ---
 EnlEnlaces:
   app: 'Enl'
   isModuleRoot: 0
   linkModule:
-    fromColumn: 'IDSeccion'
-    toEntity: 'EnlSecciones'
-    toColumn: 'Id'
-  maxImageSize: 500
-  galeria:
-    hayGaleria: 0
+    fromColumn: ''
+    toEntity: ''
+    toColumn: ''
+  numMaxRecords: ''
+  withImages: '0'
+  withGalery: '0'
+  withDocuments: '0'
+  withVideos: 0
+  withAudios: '0'
+  maxSizes:
+    image: '400000'
+    document: ''
+    video: ''
+    audio: ''
+  galery:
     maxWidthImage: '500'
     maxHeightImage: '400'
+    generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
-  fieldGeneratorUrlFriendly: Titulo
-  fieldGeneratorMetatagTitle: Titulo
+  fieldGeneratorUrlFriendly: IdSeccion
+  fieldGeneratorMetatagTitle: IdSeccion
   controller: CONTROLADOR
   action: ACTION
   template: TEMPLATE
@@ -78,7 +88,7 @@ EnlEnlaces:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: IdSeccion, entity: EnlSecciones, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
+      aditional_filter: { order: 1, caption: IdSeccion, entity: EnlSecciones, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Titulo:
       title: Titulo
@@ -325,7 +335,7 @@ EnlEnlaces:
       list: NO
       visible: true
       updatable: true
-      default: ''
+      default: '0000-00-00 00:00:00'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }

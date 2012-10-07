@@ -14,14 +14,30 @@
         <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'fechas' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-fechas" onclick="activaSolapa('fechas');">Fechas</a></li>
         <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'meta' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-meta" onclick="activaSolapa('meta');">Meta</a></li>
         {% if datos.getPrimaryKeyValue %}
-        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'imagenes' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-imagenes" onclick="activaSolapa('imagenes');">Imágenes</a></li>
-        {% if values.varEnvMod.galeria.hayGaleria == '1' %}
-        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'galeria' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-galeria" onclick="activaSolapa('galeria');cargaGaleria('tabs-galeria');">Galería</a></li>
-        {% endif %}
-        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'documentos' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-documentos" onclick="activaSolapa('documentos');cargaDocumentos('tabs-documentos');">Documentos</a></li>
-        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'urls' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-urls" onclick="activaSolapa('urls');">URLs</a></li>
-        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'sitemap' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-sitemap" onclick="activaSolapa('sitemap');">SiteMap</a></li>
-        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'auditoria' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-auditoria" onclick="activaSolapa('auditoria');">Auditoría</a></li>
+
+            {% if values.varEnvMod.withImages == '1' %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'imagenes' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-imagenes" onclick="activaSolapa('imagenes');">Imágenes</a></li>
+            {% endif %}
+
+            {% if values.varEnvMod.withGalery == '1' %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'galery' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-galery" onclick="cargaSolapa('tabs-galery','galery');">Galería</a></li>
+            {% endif %}
+
+            {% if values.varEnvMod.withDocuments == '1' %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'documents' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-documents" onclick="cargaSolapa('tabs-documents','document');">Documentos</a></li>
+            {% endif %}
+
+            {% if values.varEnvMod.withVideos == '1' %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'videos' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-videos" onclick="cargaSolapa('tabs-videos','video');">Vídeos</a></li>
+            {% endif %}
+
+            {% if values.varEnvMod.withAudios == '1' %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'audios' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-audios" onclick="cargaSolapa('tabs-audios','audio');">Audios</a></li>
+            {% endif %}
+
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'urls' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-urls" onclick="activaSolapa('urls');">URLs</a></li>
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'sitemap' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-sitemap" onclick="activaSolapa('sitemap');">SiteMap</a></li>
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'auditoria' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-auditoria" onclick="activaSolapa('auditoria');">Auditoría</a></li>
         {% endif %}
     </ul>
 
@@ -66,7 +82,7 @@
     <div id="tabs-imagenes" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
         <table style="width: 100%;">
             <tr style="height: 50px;"><td colspan="2">
-            <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxImageSize}}" type="hidden"  />
+            <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
             Imágen Master: <input name="imagenMaster" id="imagenMaster" type="file" />
             <input type="button" value="Enviar"
                onclick="
@@ -76,56 +92,73 @@
             </td></tr>
 
             <input name="idImagenEnviar" id="idImagenEnviar" value="" type="hidden" />
+
             {% for key,imagen in values.datos.getDocuments('image%','IsThumbnail=0') %}
+            {% set puntero = key + 1%}
             <tr>
-                <td align="center" style="width: 50%;">
-                    <img src="{{project.folder}}/docs/{{values.controller}}/{{imagen.Name}}" width="200px" />
+                <td align="center" style="width: 45%;">
+                    <div id="foto{{puntero}}">
+                        <img src="{{project.folder}}/docs/{{values.controller}}/{{imagen.Name}}" width="150px" />
+                    </div>
                     <br />{{imagen.getSize}} ({{imagen.Width}} x {{imagen.Height}})<br />
-                    <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxImageSize}}" type="hidden"  />
-                    <input name="{{imagen.Type}}" id="imagen{{key}}" type="file" />
-                    <input type="button" value="Enviar"
+                    <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
+                    <input name="image{{puntero}}" id="imagen_{{puntero}}_Doc" type="file" onclick="loading('foto{{puntero}}');"/>
+                </td>
+                <td style="vertical-align: top !important;">
+                    <input name="image[{{puntero}}][Tipo]" id="image_{{puntero}}_Tipo" value="{{imagen.Type}}" type="hidden" />
+                    <input name="image[{{puntero}}][Id]" id="image_{{puntero}}_Id" value="{{imagen.Id}}" type="hidden" />
+                    <input name="image[{{puntero}}][SortOrder]" id="image_{{puntero}}_SortOrder" value="{{imagen.SortOrder}}" type="hidden" />
+                    {{ macro.input({'caption':'Título','visible':'1','varEnv':'0'},'field_title','text','image['~puntero~'][Title]','image_'~puntero~'_Title',imagen.Title,255,none) }}
+                    {{ macro.input({'caption':'Nombre','visible':'1','varEnv':'0'},'field_title','text','image['~puntero~'][Name]','image_'~puntero~'_Name',imagen.Name,255,none) }}
+                    {{ macro.select({'caption':'Mostrar pie de foto','visible':'1','varEnv':'0'},'field_title','image['~puntero~'][ShowCaption]','image_'~puntero~'_ShowCaption',none,imagen.ShowCaption.IDTipo,imagen.ShowCaption.fetchAll(none,0),'chzn-select',103)}}
+                    <div style="text-align: center;">
+                    <input type="button" value="Guardar cambios" class="comando"
                         onclick="
                             $('#action_{{ values.controller }}').val('Imagen');
-                            $('#accion_{{ values.controller }}').val('EnviarImagen');
-                            $('#idImagenEnviar').val('{{key}}');
+                            $('#accion_{{ values.controller }}').val('GuardarCambios');
+                            $('#idImagenEnviar').val('{{puntero}}');
                             submitForm('manto_{{ values.controller}}');" />
-                    <input type="button" value="Quitar imagen"
+
+                    <input type="button" value="Borrar imagen" class="comando"
                         onclick="
                             if (!confirm('¿Desea borrar la imagen?')) {return false;}
                             else {
                             $('#action_{{ values.controller }}').val('Imagen');
                             $('#accion_{{ values.controller }}').val('Quitar');
-                            $('#idImagenEnviar').val('{{key}}');
+                            $('#idImagenEnviar').val('{{puntero}}');
                             submitForm('manto_{{ values.controller}}');
                             }" />
-                </td>
-                <td>
-                    <input name="image[{{key}}][Tipo]" id="image_{{key}}_Tipo" value="{{imagen.Type}}" type="hidden" />
-                    {{ macro.input({'caption':'Título','visible':'1','varEnv':'0'},'field_title','text','image['~key~'][Title]','image_'~key~'_Title',imagen.Title,255,none) }}
-                    {{ macro.input({'caption':'Nombre','visible':'1','varEnv':'0'},'field_title','text','image['~key~'][Name]','image_'~key~'_Name',imagen.Name,255,none) }}
-                    {{ macro.select({'caption':'Mostrar pie de foto','visible':'1','varEnv':'0'},'field_title','image['~key~'][ShowCaption]','image_'~key~'_ShowCaption',none,imagen.ShowCaption.IDTipo,imagen.ShowCaption.fetchAll(none,0),'chzn-select',103)}}
-                    <input type="button" value="Guardar cambios"
-                        onclick="
-                            $('#action_{{ values.controller }}').val('Imagen');
-                            $('#accion_{{ values.controller }}').val('GuardarCambios');
-                            $('#idImagenEnviar').val('{{key}}');
-                            submitForm('manto_{{ values.controller}}');" />
+                    </div>
                 </td>
             </tr>
+            <tr style="height: 20px;"></tr>
             {% endfor %}
         </table>
     </div>
 
     {# SOLAPA GALERIA #}
-    {% if values.varEnvMod.galeria.hayGaleria == '1' %}
-    <div id="tabs-galeria" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-
+    {% if values.varEnvMod.withGalery == '1' %}
+    <div id="tabs-galery" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
     </div>
     {% endif %}
 
     {# SOLAPA DOCUMENTOS #}
-    <div id="tabs-documentos" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    {% if values.varEnvMod.withDocuments == '1' %}
+    <div id="tabs-documents" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
     </div>
+    {% endif %}
+
+    {# SOLAPA VIDEOS #}
+    {% if values.varEnvMod.withVideos == '1' %}
+    <div id="tabs-videos" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    </div>
+    {% endif %}
+
+    {# SOLAPA AUDIOS #}
+    {% if values.varEnvMod.withAudios == '1' %}
+    <div id="tabs-audios" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    </div>
+    {% endif %}
 
     {# SOLAPA URLS #}
     <div id="tabs-urls" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
@@ -169,15 +202,10 @@ function activaSolapa(solapa) {
     $("#solapaActiva").val(solapa);
 }
 
-function cargaGaleria(idDiv) {
+function cargaSolapa(solapa, tipo) {
 
-    $('#'+idDiv).html("<iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' src='{{app.path}}/CoreImagenes/list/{{values.controller}}/{{datos.Id}}'></iframe>");
-
-}
-
-function cargaDocumentos(idDiv) {
-
-    $('#'+idDiv).html("<iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' src='{{app.path}}/CoreDocumentos/list/{{values.controller}}/{{datos.Id}}'></iframe>");
+    activaSolapa(tipo);
+    $('#'+solapa).html("<iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' src='{{app.path}}/CoreDocs/list/{{values.controller}}/{{datos.Id}}/" + tipo + "'></iframe>");
 
 }
 

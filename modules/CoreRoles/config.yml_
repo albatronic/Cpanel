@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 19.09.2012 10:55:59
+# @date 19.09.2012 10:57:31
 #
 ---
 CoreRoles:
@@ -19,7 +19,7 @@ CoreRoles:
   id_video: coreroles
   url_video: null
   feature_list: YES
-  conection: 'datos<?php echo $_SESSION[''emp''];?>'
+  conection: cpanel
   entity: CoreRoles
   table: CoreRoles
   primarykey: Id

@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es-ES" lang="es-ES">
-    <head>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>.: {{ app.name }} {% block title %} {{ titulo }} {% endblock %}</title>
@@ -11,15 +11,35 @@
         <!-- Para que esté disponible el path de la app en todos los java scripts -->
         <script type="text/javascript">var appPath = "{{app.path}}";</script>
 
-        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/jquery/menuazulgris.css" />
-        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/jquery/contenedor.css" />
-        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/jquery/formularios.css" />
-        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/jquery/notificaciones.css" />
-        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/jquery/jquery.ui.all.css" />
-        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/jquery/jquery.autocompletar.css" />
-        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/jquery/thickbox.css" media="screen" />
+<link href="{{app.path}}/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/layout.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/themes.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/typography.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/styles.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/jquery.jqplot.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/data-table.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/form.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/ui-elements.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/wizard.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/sprite.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/gradient.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/AEcss.css" rel="stylesheet" type="text/css" />
+<link href="{{app.path}}/css/jquery/jquery.ui.all.css" rel="stylesheet" type="text/css" />
 
-        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery-1.7.1.js"></script>
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="{{app.path}}/css/ie/ie7.css" />
+<![endif]-->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="{{app.path}}/css/ie/ie8.css" />
+<![endif]-->
+<!--[if IE 9]>
+<link rel="stylesheet" type="text/css" href="{{app.path}}/css/ie/ie9.css" />
+<![endif]-->
+
+        <script type="text/javascript" src="{{app.path}}/js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.bgiframe-2.1.2.js"></script>
         <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.core.js"></script>
         <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.widget.js"></script>
@@ -31,10 +51,9 @@
         <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.position.js"></script>
         <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.resizable.js"></script>
         <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery.autocomplete.min.js"></script>
         <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="{{app.path}}/js/script.js"></script>
-        <script type="text/javascript" src="{{app.path}}/js/thickbox.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/AEscripts.js"></script>
 
     </head>
     <body style="background:#eeeeee;">

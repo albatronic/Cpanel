@@ -3,21 +3,31 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.09.2012 16:42:34
+# @date 06.10.2012 19:34:00
 #
 ---
 CoreUrlAmigables:
-  app: 'Core'
+  app: ''
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
-  maxImageSize: 500
-  galeria:
-    hayGaleria: 0
+  numMaxRecords: ''
+  withImages: '0'
+  withGalery: '0'
+  withDocuments: '0'
+  withVideos: 0
+  withAudios: '0'
+  maxSizes:
+    image: '400000'
+    document: ''
+    video: ''
+    audio: ''
+  galery:
     maxWidthImage: '500'
     maxHeightImage: '400'
+    generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
   fieldGeneratorUrlFriendly: UrlFriendly

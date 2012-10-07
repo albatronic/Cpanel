@@ -13,7 +13,10 @@
 {{ macro.input({'caption':'[eMailSuperAdministrator] EMail SuperAdministrador','visible':'1','varEnv':'0'},'field_title','text','datos[eMailSuperAdministrator]','datos_eMailSuperAdministrator',values.datos.eMailSuperAdministrator,'50','CampoTextoCorto','1') }}
 {{ macro.fecha({'caption':'[activeFrom] Vigente desde','visible':'1','varEnv':'0'},'field_title','datos[activeFrom]','datos_activeFrom',values.datos.activeFrom,'19','datepicker') }}
 {{ macro.fecha({'caption':'[activeTo] Vigente hasta','visible':'1','varEnv':'0'},'field_title','datos[activeTo]','datos_activeTo',values.datos.activeTo,'19','datepicker') }}
-{{ macro.input({'caption':'[maxDocuments] Máximo Documentos adjuntos','visible':'1','varEnv':'0'},'field_title','text','datos[maxDocuments]','datos_maxDocuments',values.datos.maxDocuments,'50','CampoTextoCorto','1') }}
-{{ macro.input({'caption':'[maxImagesGalery] Máximo Imágenes Galeria','visible':'1','varEnv':'0'},'field_title','text','datos[maxImagesGalery]','datos_maxImagesGalery',values.datos.maxImagesGalery,'50','CampoTextoCorto','1') }}
-{{ macro.input({'caption':'[maxVideosGalery] Máximo Vídeos Galeria','visible':'1','varEnv':'0'},'field_title','text','datos[maxVideosGalery]','datos_maxVideosGalery',values.datos.maxVideosGalery,'50','CampoTextoCorto','1') }}
+{{ macro.input({'caption':'[allowTypes] Tipos de archivos permitidos (extensiones separadas por coma)','visible':'1','varEnv':'0'},'field_title','text','datos[allowTypes]','datos_allowTypes',values.datos.allowTypes,'100','CampoTextoCorto','1') }}
+{{ macro.input({'caption':'[numMaxPages] Núm. máximo de páginas','visible':'1','varEnv':'0'},'field_title','text','datos[maxPages]','datos_maxPages',values.datos.maxPages,'6','CampoTextoCorto','1') }}
+{{ macro.input({'caption':'[numMaxDocuments] Núm. máx. Documentos','visible':'1','varEnv':'0'},'field_title','text','datos[numMaxDocuments]','datos_numMaxDocuments',values.datos.numMaxDocuments,'6','CampoTextoCorto','1') }}
+{{ macro.input({'caption':'[numMaxGalery] Núm. máx. Imágenes Galeria','visible':'1','varEnv':'0'},'field_title','text','datos[numMaxGalery]','datos_numMaxGalery',values.datos.numMaxGalery,'6','CampoTextoCorto','1') }}
+{{ macro.input({'caption':'[numMaxVideos] Núm. máx. Vídeos Galeria','visible':'1','varEnv':'0'},'field_title','text','datos[numMaxVideos]','datos_numMaxVideos',values.datos.numMaxVideos,'6','CampoTextoCorto','1') }}
+{{ macro.input({'caption':'[numMaxAudios] Núm. máx. Audios Galeria','visible':'1','varEnv':'0'},'field_title','text','datos[numMaxAudios]','datos_numMaxAudios',values.datos.numMaxAudios,'6','CampoTextoCorto','1') }}
 {% endblock %}

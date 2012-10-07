@@ -213,3 +213,11 @@ function documentos(entidad, idEntidad, idDiv, tipo) {
 function submitForm(formulario) {
     $('#'+formulario).submit();
 }
+
+/**
+ * Pone un gif 'loading' en en div 'idDiv'
+ */
+function loading(idDiv) {
+    // Coloco un gif "Cargando..." en la capa
+    $('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
+}

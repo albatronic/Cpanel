@@ -67,6 +67,7 @@ class Request {
     public function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->request = $_REQUEST;
+        $this->request['FILES'] = $_FILES;
         $this->acceptLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
         $this->remoteAddr = $_SERVER['REMOTE_ADDR'];
         $this->userAgent = $_SERVER['HTTP_USER_AGENT'];
@@ -152,6 +153,14 @@ class Request {
     }
 
     /**
+     * Devuelve un array con los ficheros enviados por POST
+     * @return array
+     */
+    public function getFiles() {
+        return $this->request['FILES'];
+    }
+    
+    /**
      * Devuelve un string con el idioma aceptado por el cliente (ej: es-ES)
      * @return string
      */
@@ -219,7 +228,7 @@ class Request {
     /**
      * Devuelve TRUE / FALSE dependiendo si estás en entorno
      * de desarrollo o de producción respectivamente.
-     * 
+     *
      * @return boolean TRUE si estás en entorno desarrollo
      */
     public function isDevelopment() {

@@ -29,9 +29,9 @@ CoreDocs:
     IdEntity:    { type: integer(11), notnull: true}
     Type:        { type: string(10), notnull: true, index: index, comment: 'Abstract,TiposDocs,IDTipo' }
     IsThumbnail: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
-    PathName:    { type: string(255), notnull: true}
-    Name:        { type: string(255), notnull: true}
-    Extension:   { type: string(10), notnull: false}
+    PathName:    { type: string(255), notnull: true, default: ''}
+    Name:        { type: string(255), notnull: true, default: ''}
+    Extension:   { type: string(10), notnull: false, default: ''}
     Title:       { type: string(255), notnull: false}
     ShowCaption: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
     MimeType:    { type: string(50), notnull: false }

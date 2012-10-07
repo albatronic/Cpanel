@@ -145,6 +145,7 @@ if ($rq->isOldBrowser()) {
 
             case 'POST':
                 $request = $rq->getRequest();
+                $request['FILES'] = $rq->getFiles();
                 $request['METHOD'] = "POST";
                 $controller = ucfirst($request['controller']);
                 $action = $request['action'];
@@ -172,12 +173,12 @@ if (!file_exists($fileController)) {
 $clase = $controller . "Controller";
 $metodo = $action . "Action";
 
-//---------------------------------------------------------------
+//------------------------------------------------------------------------------
 // INSTANCIAR EL CONTROLLER REQUERIDO
 // SI EL METODO SOLICITADO EXISTE, LO EJECUTO, SI NO EJECUTO EL METODO INDEX
 // RENDERIZAR EL RESULTADO CON EL TEMPLATE Y DATOS DEVUELTOS
 // SI NO EXISTE EL TEMPLATE DEVUELTO, MUESTRO UNA PAGINA DE ERROR
-//---------------------------------------------------------------
+//------------------------------------------------------------------------------
 include_once $fileController;
 $con = new $clase($request);
 if (!method_exists($con, $metodo))

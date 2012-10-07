@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 19.09.2012 10:55:59
+# @date 19.09.2012 10:57:31
 #
 ---
 CoreAplicaciones:
@@ -19,7 +19,7 @@ CoreAplicaciones:
   id_video: coreaplicaciones
   url_video: null
   feature_list: YES
-  conection: 'datos<?php echo $_SESSION[''emp''];?>'
+  conection: cpanel
   entity: CoreAplicaciones
   table: CoreAplicaciones
   primarykey: Id
