@@ -61,7 +61,7 @@ $objeto = array(
     'nombre' => $modulo,
 );
 
-$variables = new CoreVariables($objeto);
+$variables = new CpanVariables($objeto);
 $archivoYml = $variables->getPathYml();
 $variablesColumna = $variables->getColumn($columna);
 unset($variables);
@@ -72,7 +72,7 @@ unset($valores);
 
 if (is_array($variablesColumna)) {
     //Leer la plantilla para el formulario
-    $plantillaHtml = new Archivo($_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/modules/CoreVariables/plantillaFormAjax.html.twig");
+    $plantillaHtml = new Archivo($_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/modules/CpanVariables/plantillaFormAjax.html.twig");
     $html = $plantillaHtml->read();
     unset($plantillaHtml);
 

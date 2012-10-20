@@ -183,7 +183,8 @@ class Entity {
                 $lastId = $this->_em->getInsertId();
                 $this->setPrimaryKeyValue($lastId);
                 $this->setPrimaryKeyMD5(md5($lastId));
-                $this->setSortOrder($lastId);
+                if ($this->getSortOrder() == '0')
+                    $this->setSortOrder($lastId);
                 $this->save();
             }
         }
@@ -214,11 +215,11 @@ class Entity {
                     $this->_errores = $this->_em->getError();
                 else {
                     // Borrar la eventual url amigable
-                    $url = new CoreUrlAmigables();
+                    $url = new CpanUrlAmigables();
                     $url->borraUrl($this->getClassName(), $this->getPrimaryKeyValue());
                     unset($url);
                     // Borrar los eventuales documentos
-                    $doc = new CoreDocs();
+                    $doc = new CpanDocs();
                     $doc->borraDocs($this->getClassName(), $this->getPrimaryKeyValue(), "%");
                     unset($doc);
                 }
@@ -252,11 +253,11 @@ class Entity {
                     $this->_errores = $this->_em->getError();
                 else {
                     // Borrar la eventual url amigable
-                    $url = new CoreUrlAmigables();
+                    $url = new CpanUrlAmigables();
                     $url->borraUrl($this->getClassName(), $this->getPrimaryKeyValue());
                     unset($url);
                     // Borrar los eventuales documentos
-                    $doc = new CoreDocs();
+                    $doc = new CpanDocs();
                     $doc->borraDocs($this->getClassName(), $this->getPrimaryKeyValue(), "%");
                     unset($doc);
                 }
@@ -316,7 +317,8 @@ class Entity {
      *
      * Si alguna columna no cumple la regla, le carga el valor por defecto
      *
-     * Tambien hace la validación lógica.
+     * Tambien hace la validación lógica y el número máximo de records y
+     * número máximo de páginas contra la tabla urlamigables
      *
      * Carga los array de errores y alertas si procede.
      *
@@ -326,60 +328,75 @@ class Entity {
     public function valida(array $rules) {
         unset($this->_errores);
 
-
-        foreach ($rules as $key => $value) {
-
-            // Si no tiene valor, le pongo el de por defecto
-            if ($this->{$key} == '')
-                $this->{$key} = $value['default'];
-
-            switch ($value['type']) {
-                case 'string':
-                    //Validar los items que no pueden ser nulos
-                    $this->{$key} = trim($this->{$key});
-                    if ($this->{$key} == '') {
-                        $this->_errores[] = $value['title'] . ": " . $value['message'];
-                    }
-                    break;
-
-                case 'integer':
-                case 'decimal':
-                    $valor = $this->{$key};
-                    $minimo = (integer) $value['minimo'];
-                    $maximo = (integer) $value['maximo'];
-                    $controlRango = ($minimo || $maximo);
-
-                    if (is_numeric($valor)) {
-                        if ($controlRango) {
-                            if (($valor < $minimo) || ($valor > $maximo)) {
-                                $this->_errores[] = $value['title'] . ": Valor fuera del rango (" . $minimo . "-" . $maximo . ")";
-                            }
-                        }
-                    } else {
-                        $this->_errores[] = $value['title'] . ": " . $valor . " " . $value['message'];
-                    }
-                    break;
-
-                case 'date':
-                    break;
-
-                case 'datetime':
-                    break;
-
-                case 'cif':
-                    break;
-
-                case 'email':
-                    $email = new Mail();
-                    if (!$email->compruebaEmail($this->{$key})) {
-                        $this->_errores[] = $value['title'] . ": No cumple las reglas de un email correcto.";
-                    }
-                    unset($email);
-                    break;
-            }
+        if ($rules['GLOBALES']['numMaxRecords'] > 0) {
+            if ($this->getNumberOfRecords() > $rules['GLOBALES']['numMaxRecords'])
+                $this->_errores[] = "Ha superado el número máximo de registros contratado. Por favor, consulte con el webmaster";
         }
 
-        $this->validaLogico();
+        if ($rules['GLOBALES']['numMaxPages'] > 0) {
+            $urls = new CpanUrlAmigables();
+            if ($urls->getNumberOfRecords() > $rules['GLOBALES']['numMaxPages'])
+                $this->_errores[] = "Ha superado el número máximo de páginas contratado. Por favor, consulte con el webmaster";
+            unset($urls);
+        }
+
+        unset($rules['GLOBALES']);
+
+        if (count($this->_errores) == 0) {
+            foreach ($rules as $key => $value) {
+
+                // Si no tiene valor, le pongo el de por defecto
+                if ($this->{$key} == '')
+                    $this->{$key} = $value['default'];
+
+                switch ($value['type']) {
+                    case 'string':
+                        //Validar los items que no pueden ser nulos
+                        $this->{$key} = trim($this->{$key});
+                        if ($this->{$key} == '') {
+                            $this->_errores[] = $value['title'] . ": " . $value['message'];
+                        }
+                        break;
+
+                    case 'integer':
+                    case 'decimal':
+                        $valor = $this->{$key};
+                        $minimo = (integer) $value['minimo'];
+                        $maximo = (integer) $value['maximo'];
+                        $controlRango = ($minimo || $maximo);
+
+                        if (is_numeric($valor)) {
+                            if ($controlRango) {
+                                if (($valor < $minimo) || ($valor > $maximo)) {
+                                    $this->_errores[] = $value['title'] . ": Valor fuera del rango (" . $minimo . "-" . $maximo . ")";
+                                }
+                            }
+                        } else {
+                            $this->_errores[] = $value['title'] . ": " . $valor . " " . $value['message'];
+                        }
+                        break;
+
+                    case 'date':
+                        break;
+
+                    case 'datetime':
+                        break;
+
+                    case 'cif':
+                        break;
+
+                    case 'email':
+                        $email = new Mail();
+                        if (!$email->compruebaEmail($this->{$key})) {
+                            $this->_errores[] = $value['title'] . ": No cumple las reglas de un email correcto.";
+                        }
+                        unset($email);
+                        break;
+                }
+            }
+
+            $this->validaLogico();
+        }
 
         return ( count($this->_errores) == 0 );
     }
@@ -540,11 +557,40 @@ class Entity {
      *
      * @return mixed el valor de la primary key de menor valor
      */
-    public function getFirst() {
+    public function getFirstId() {
         $this->conecta();
 
         if (is_resource($this->_dbLink)) {
-            $query = "SELECT `{$this->getPrimaryKeyName()}` FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE (Deleted = '0') ORDER BY `{$this->getPrimaryKeyName()}` ASC Limit 1";
+            $query = "SELECT `{$this->getPrimaryKeyName()}` FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE Deleted = '0' ORDER BY `{$this->getPrimaryKeyName()}` ASC Limit 1";
+            $this->_em->query($query);
+            $row = $this->_em->fetchResult();
+            $this->setStatus($this->_em->numRows());
+            $this->_em->desConecta();
+            unset($this->_em);
+            return($row[0][$this->getPrimaryKeyName()]);
+        }
+    }
+
+    /**
+     * Localiza el primer registro en orden ascendente segun la Primary Key
+     *
+     * @return Entity El objeto cuya primaryKey es menor
+     */
+    public function getFirstObject() {
+        $clase = get_class($this);
+        return new $clase($this->getFirstId());
+    }
+
+    /**
+     * Localiza el ultimo registro en orden ascendente segun la Primary Key
+     *
+     * @return mixed el valor de la primary key de mayor valor
+     */
+    public function getLastId() {
+        $this->conecta();
+
+        if (is_resource($this->_dbLink)) {
+            $query = "SELECT `{$this->getPrimaryKeyName()}` FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE Deleted = '0' ORDER BY `{$this->getPrimaryKeyName()}` DESC Limit 1";
             $this->_em->query($query);
             $row = $this->_em->fetchResult();
             $this->setStatus($this->_em->numRows());
@@ -557,20 +603,11 @@ class Entity {
     /**
      * Localiza el ultimo registro en orden ascendente segun la Primary Key
      *
-     * @return mixed el valor de la primary key de mayor valor
+     * @return Entity El objeto cuya primaryKey es mayor
      */
-    public function getLast() {
-        $this->conecta();
-
-        if (is_resource($this->_dbLink)) {
-            $query = "SELECT `{$this->getPrimaryKeyName()}` FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE (Deleted = '0') ORDER BY `{$this->getPrimaryKeyName()}` DESC Limit 1";
-            $this->_em->query($query);
-            $row = $this->_em->fetchResult();
-            $this->setStatus($this->_em->numRows());
-            $this->_em->desConecta();
-            unset($this->_em);
-            return($row[0][$this->getPrimaryKeyName()]);
-        }
+    public function getLastObject() {
+        $clase = get_class($this);
+        return new $clase($this->getLastId());
     }
 
     /**
@@ -580,7 +617,7 @@ class Entity {
      * @param string $criterio Clausa para el WHERE para poder contar un subconjunto de registros
      * @return integer
      */
-    public function getNumberOfRecords($criterio='1') {
+    public function getNumberOfRecords($criterio = '1') {
         $this->conecta();
 
         if (is_resource($this->_dbLink)) {
@@ -593,6 +630,7 @@ class Entity {
 
         return $row[0]['NumeroDeRegistros'];
     }
+
     /**
      * Devuelve un array con objetos documentos asociados
      * a la entidad e id de entidad en curso
@@ -604,7 +642,7 @@ class Entity {
      */
     public function getDocuments($tipo = 'image%', $criterio = '1', $orderCriteria = 'SortOrder ASC') {
 
-        $docs = new CoreDocs();
+        $docs = new CpanDocs();
 
         $arrayDocs = $docs->getDocs($this->getClassName(), $this->getPrimaryKeyValue(), $tipo, $criterio, $orderCriteria);
         unset($docs);
@@ -621,7 +659,7 @@ class Entity {
      */
     public function getNumberOfDocuments($tipo = 'image%', $criterio = '1') {
 
-        $docs = new CoreDocs();
+        $docs = new CpanDocs();
 
         $nDocs = $docs->getNumberOfDocs($this->getClassName(), $this->getPrimaryKeyValue(), $tipo, $criterio);
         unset($docs);
@@ -735,8 +773,10 @@ class Entity {
      */
     public function getConectionName() {
 
-        $this->_conectionName = $_SESSION['project']['name'];
-        return $_SESSION['project']['name'];
+        if ($this->_conectionName == '') {
+            $this->_conectionName = $_SESSION['project']['conection'];
+        }
+        return $this->_conectionName;
 
         //return str_replace("cpanel", $_SESSION['project']['name'], $this->_conectionName);
     }

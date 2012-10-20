@@ -1,0 +1,24 @@
+{#
+   VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO
+
+   Module: CpanModulos
+   Document : modules/CpanModulos/fieldsVarEnv.html.twig
+
+   author: Sergio Pérez <sergio.perez@albatronic.com>
+   copyright: INFORMATICA ALBATRONIC SL
+   date 15.09.2012 13:26:09
+#}
+
+{% extends 'CpanVariables/fieldsVarModEnv.html.twig' %}
+
+{% block template %}
+<h6>Para añadir variables de entorno específicas debes editar el formulario 'CpanModulos/fieldsVarEnv.html.twig' del módulo</h6>
+{#
+
+    EJEMPLO, copia y pega el ejemplo cambiando CAPTION por el texto del caption y NOMBRE por el nombre de la variable de entorno
+
+{{ macro.input({'caption':'CAPTION','visible':'1','varEnv':'0'},'field_title','text','datos[NOMBRE]','datos_NOMBRE',values.datos.NOMBRE,'15','CampoTextoCorto','1') }}
+
+#}
+
+{% endblock %}

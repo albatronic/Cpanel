@@ -130,28 +130,8 @@ class Controller {
         $this->values['twigCss'] = $includesHead['twigCss'];
         $this->values['twigJs'] = $includesHead['twigJs'];
 
-        // Cargar las variables de entorno y web de la app y del modulo
-        $variables = new CoreVariables('Pro', 'Env');
-        $this->varEnvPro = $variables->getValores();
-        $this->values['varEnvPro'] = $this->varEnvPro;
-
-        $variables = new CoreVariables('Mod', 'Env', $this->entity);
-        $this->varEnvMod = $variables->getValores();
-        $this->values['varEnvMod'] = $this->varEnvMod;
-
-        $variables = new CoreVariables('Mod', 'Web', $this->entity);
-        $this->varWebMod = $variables->getValores();
-        $this->values['varWebMod'] = $this->varWebMod;
-
-        $variables = new CoreVariables('App', 'Env', $this->app);
-        $this->varEnvApp = $variables->getValores();
-        $this->values['varEnvApp'] = $this->varEnvApp;
-
-        $variables = new CoreVariables('App', 'Web', $this->app);
-        $this->varWebApp = $variables->getValores();
-        $this->values['varWebApp'] = $this->varWebApp;
-        unset($variables);
-
+        // CARGAR LAS VARIABLES
+        $this->cargaVariables();
 
         $this->values['atributos'] = $this->form->getAtributos($this->values['permisos']['enCurso']['modulo']);
 
@@ -223,7 +203,8 @@ class Controller {
                             // Vuelco los datos del request
                             $datos->bind($this->request[$this->entity]);
 
-                            if ($datos->valida($this->form->getRules())) {
+                            $rules = $this->form->getRules();
+                            if ($datos->valida($rules)) {
                                 $this->values['alertas'] = $datos->getAlertas();
                                 if ($datos->save())
                                     $this->gestionUrlMeta(&$datos);
@@ -305,7 +286,11 @@ class Controller {
                     $datos = new $this->entity();
                     $datos->bind($this->request[$this->entity]);
 
-                    if ($datos->valida($this->form->getRules())) {
+                    $rules = $this->form->getRules();
+                    $rules['GLOBALES']['numMaxPages'] = $this->varEnvPro['numMaxPages'];
+                    $rules['GLOBALES']['numMaxRecords'] = $this->varEnvMod['numMaxRecords'];
+
+                    if ($datos->valida($rules)) {
                         $lastId = $datos->create();
                         $this->values['errores'] = $datos->getErrores();
                         $this->values['alertas'] = $datos->getAlertas();
@@ -493,7 +478,7 @@ class Controller {
             case 'EnviarMaster':
                 if ($this->values['permisos']['permisosModulo']['UP']) {
 
-                    $variables = new CoreVariables('Mod', 'Env', $this->entity);
+                    $variables = new CpanVariables('Mod', 'Env', $this->entity);
                     $varEnv = $variables->getValores();
                     unset($variables);
                     $datos = new $this->entity($idEntidad);
@@ -501,12 +486,12 @@ class Controller {
                     $slug = $datos->{"get$columnaSlug"}();
                     unset($datos);
 
-                    $doc = new CoreDocs();
+                    $doc = new CpanDocs();
                     $doc->setArrayDoc($_FILES['imagenMaster']);
                     if ($doc->validaArchivo($rules)) {
 
                         // Borrar las eventuales imagenes que existieran
-                        $img = new CoreDocs();
+                        $img = new CpanDocs();
                         $img->borraDocs($this->entity, $idEntidad, 'image%');
                         unset($img);
 
@@ -516,7 +501,7 @@ class Controller {
                                 $_FILES['imagenMaster']['maxWidth'] = $value['width'];
                                 $_FILES['imagenMaster']['maxHeight'] = $value['height'];
 
-                                $doc = new CoreDocs();
+                                $doc = new CpanDocs();
                                 $doc->setEntity($this->entity);
                                 $doc->setIdEntity($idEntidad);
                                 $doc->setPathName($this->entity . $idEntidad);
@@ -526,16 +511,16 @@ class Controller {
                                 $doc->setArrayDoc($_FILES['imagenMaster']);
                                 $doc->setIsThumbnail(0);
                                 if ($doc->valida($rules))
-                                    $ok = $doc->create();
-                                if (!$ok)
+                                    $lastId = $doc->create();
+                                if (!$lastId)
                                     $this->values['errores'] = $doc->getErrores();
 
                                 // Subir Miniatura
-                                if (($ok) and ($value['generateThumbnail'] == '1')) {
+                                if (($lastId) and ($value['generateThumbnail'] == '1')) {
 
                                     $_FILES['imagenMaster']['maxWidth'] = $value['widthThumbnail'];
                                     $_FILES['imagenMaster']['maxHeight'] = $value['heightThumbnail'];
-                                    $doc = new CoreDocs();
+                                    $doc = new CpanDocs();
                                     $doc->setEntity($this->entity);
                                     $doc->setIdEntity($idEntidad);
                                     $doc->setPathName($this->entity . $idEntidad);
@@ -544,6 +529,7 @@ class Controller {
                                     $doc->setType('image' . $key);
                                     $doc->setArrayDoc($_FILES['imagenMaster']);
                                     $doc->setIsThumbnail(1);
+                                    $doc->setBelongsTo($lastId);
                                     if ($doc->valida($rules))
                                         $ok = $doc->create();
                                     if (!$ok)
@@ -564,40 +550,49 @@ class Controller {
 
                     $idImagen = $this->request['idImagenEnviar'];
 
+                    $id = $this->request['image'][$idImagen]['Id'];
                     $tipo = $this->request['image'][$idImagen]['Tipo'];
                     $title = trim($this->request['image'][$idImagen]['Title']);
-                    $name = trim($this->request['image'][$idImagen]['Name']);
+                    $slug = trim($this->request['image'][$idImagen]['Name']);
                     $showCaption = $this->request['image'][$idImagen]['ShowCaption'];
-                    $sortOrder = $this->request['image'][$idImagen]['SortOrder'];
+                    $orden = $this->request['image'][$idImagen]['SortOrder'];
                     $documento = $this->request['FILES'][$tipo];
                     $documento['maxWidth'] = $this->varEnvMod['images'][$idImagen]['width'];
                     $documento['maxHeight'] = $this->varEnvMod['images'][$idImagen]['height'];
 
-                    if ($documento['tmp_name']) {
-                        $img = new CoreDocs();
-                        $img->setArrayDoc($documento);
-                        $ok = $img->validaArchivo($rules);
-                        if (!$ok)
-                            $this->values['errores'] = $img->getErrores();
-                    } else $ok = 1;
-
-                    if ($ok) {
-                        $img = new CoreDocs($this->request['image'][$idImagen]['Id']);
-                        $ok = $img->actualiza($title, $name, $showCaption, $documento, 0, $sortOrder);
-                        unset($img);
-
+                    $doc = new CpanDocs($id);
+                    $doc->setTitle($title);
+                    $doc->setName($slug);
+                    $doc->setShowCaption($showCaption);
+                    $doc->setSortOrder($orden);
+                    if ($documento['name'] != '')
+                        $doc->setArrayDoc($documento);
+                    $doc->setIsThumbnail(0);
+                    if ($doc->valida($rules)) {
+                        $ok = $doc->actualiza();
                         // Subir Miniatura
                         if (($ok) and ($this->varEnvMod['images'][$idImagen]['generateThumbnail'] == '1')) {
-                            $img = new CoreDocs();
-                            $rows = $img->cargaCondicion('Id', "Entity='{$this->entity}' AND IdEntity='{$this->request[$this->entity]['Id']}' AND Type='{$tipo}' AND IsThumbnail='1'");
-                            $img = new CoreDocs($rows[0]['Id']);
-                            $documento['maxWidth'] = $this->varEnvMod['images'][$idImagen]['widthThumbnail'];
-                            $documento['maxHeight'] = $this->varEnvMod['images'][$idImagen]['heightThumbnail'];
-                            $ok = $img->actualiza($title, $name, $showCaption, $documento, 1);
-                            unset($img);
+                            $thumbNail = $doc->getThumbNail();
+                            $thumbNail->setTitle($title);
+                            $thumbNail->setName($slug);
+                            $thumbNail->setShowCaption($showCaption);
+                            $thumbNail->setSortOrder($orden);
+                            $thumbNail->setIsThumbnail(1);
+                            if ($documento['name'] != '') {
+                                $documento['maxWidth'] = $this->varEnvMod['images'][$idImagen]['widthThumbnail'];
+                                $documento['maxHeight'] = $this->varEnvMod['images'][$idImagen]['heightThumbnail'];
+                                $thumbNail->setArrayDoc($documento);
+                            }
+                            if ($thumbNail->valida($rules)) {
+
+                                $ok = $thumbNail->actualiza();
+                            }
+
+
+                            unset($thumbNail);
                         }
-                    } else
-                        $this->values['errores'] = $img->getErrores();
+                    }
+
                     $template = $this->entity . '/form.html.twig';
                 } else {
                     $template = "_global/forbiden.html.twig";
@@ -608,7 +603,7 @@ class Controller {
                 if ($this->values['permisos']['permisosModulo']['DE']) {
                     $idImagen = $this->request['idImagenEnviar'];
                     $tipo = $this->request['image'][$idImagen]['Tipo'];
-                    $img = new CoreDocs();
+                    $img = new CpanDocs();
                     $img->borraDocs($this->entity, $idEntidad, $tipo);
                     unset($img);
                     $template = $this->entity . '/form.html.twig';
@@ -810,13 +805,14 @@ class Controller {
 
             $slug = Textos::limpia($slug);
             // -----------------------------------------------------------------
-            // Construir la url amigable
+            // Construir la url amigable, límito su longitud al valor indicado
+            // en la variable de entorno del proyecto
             if ($urlPrefix != '')
-                $urlAmigable = "{$urlPrefix}";
+                $urlAmigable = $urlPrefix;
             $urlAmigable .= "/{$slug}";
+            $urlAmigable = substr($urlAmigable, 0, $this->varEnvPro['maxLengthUrlsFriendly']);
 
-
-            $urls = new CoreUrlAmigables();
+            $urls = new CpanUrlAmigables();
             $rows = $urls->cargaCondicion("Id", "Entity='{$this->entity}' and IdEntity='{$datos->getPrimaryKeyValue()}'");
             $idUrl = $rows[0]['Id'];
 
@@ -838,7 +834,7 @@ class Controller {
                 $urlAmigable .= "-" . $idUrl;
                 $slug .= "-" . $idUrl;
             }
-            $urls = new CoreUrlAmigables($idUrl);
+            $urls = new CpanUrlAmigables($idUrl);
             $urls->setUrlFriendly($urlAmigable);
             $urls->setController($this->varEnvMod['controller']);
             $urls->setAction($this->varEnvMod['action']);
@@ -877,6 +873,54 @@ class Controller {
         return $metatagTitle;
     }
 
+    private function cargaVariables() {
+
+        // Variables de entorno del proyecto
+        if (!isset($_SESSION['VARIABLES']['EnvPro'])) {
+            $variables = new CpanVariables('Pro', 'Env');
+            $this->varEnvPro = $variables->getValores();
+            $_SESSION['VARIABLES']['EnvPro'] = $this->varEnvPro;
+        } else
+            $this->varEnvPro = $_SESSION['VARIABLES']['EnvPro'];
+        $this->values['varEnvPro'] = $this->varEnvPro;
+
+        // Variables de entorno del modulo
+        if (!isset($_SESSION['VARIABLES']['EnvMod'])) {
+            $variables = new CpanVariables('Mod', 'Env', $this->entity);
+            $this->varEnvMod = $variables->getValores();
+            $_SESSION['VARIABLES']['EnvMod'] = $this->varEnvMod;
+        } else
+            $this->varEnvMod = $_SESSION['VARIABLES']['EnvMod'];
+        $this->values['varEnvMod'] = $this->varEnvMod;
+
+        // Variables web del modulo
+        if (!isset($_SESSION['VARIABLES']['WebMod'])) {
+            $variables = new CpanVariables('Mod', 'Web', $this->entity);
+            $this->varWebMod = $variables->getValores();
+            $_SESSION['VARIABLES']['WebMod'] = $this->varWebMod;
+        } else
+            $this->varWebMod = $_SESSION['VARIABLES']['WebMod'];
+        $this->values['varWebMod'] = $this->varWebMod;
+
+        // Variables de entorno de la app
+        if (!isset($_SESSION['VARIABLES']['EnvApp'])) {
+            $variables = new CpanVariables('App', 'Env', $this->app);
+            $this->varEnvApp = $variables->getValores();
+            $_SESSION['VARIABLES']['EnvApp'] = $this->varEnvApp;
+        } else
+            $this->varEnvApp = $_SESSION['VARIABLES']['EnvApp'];
+        $this->values['varEnvApp'] = $this->varEnvApp;
+
+        // Variables web de la app
+        if (!isset($_SESSION['VARIABLES']['WebApp'])) {
+            $variables = new CpanVariables('App', 'Web', $this->app);
+            $this->varWebApp = $variables->getValores();
+            $_SESSION['VARIABLES']['WebApp'] = $this->varWebApp;
+        } else
+            $this->varWebApp = $_SESSION['VARIABLES']['WebApp'];
+        $this->values['varWebApp'] = $this->varWebApp;
+        unset($variables);
+    }
 }
 
 ?>

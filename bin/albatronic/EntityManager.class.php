@@ -56,34 +56,46 @@ class EntityManager {
      * Si la conexion es exitosa, getDblink() devolvera valor y si no getError() nos indica
      * el error producido.
      *
-     * @param string $conection Nombre de la conexion
+     * @param mixed $conection Nombre de la conexion
      * @param string $fileConfig Nombre del fichero de configuracion
      */
     public function __construct($conection, $fileConfig = '') {
 
-        if ($fileConfig == '')
-            $fileConfig = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/" . $this->file;
+        if (is_array($conection)) {
 
-        if (file_exists($fileConfig)) {
-            $yaml = sfYaml::load($fileConfig);
-
-            $params = $yaml['config']['conections'][$conection];
-            $this->dbEngine = $params['dbEngine'];
-
-            if ($_SESSION['EntornoDesarrollo']) {
-                $this->host = 'localhost';
-                $this->user = $conection;
-                $this->password = $conection;
-                $this->dataBase = $conection;
-            } else {
-                $this->host = $params['host'];
-                $this->user = $params['user'];
-                $this->password = $params['password'];
-                $this->dataBase = $params['database'];
-            }
+            $this->dbEngine = $conection['dbEngine'];
+            $this->host = $conection['host'];
+            $this->user = $conection['user'];
+            $this->password = $conection['password'];
+            $this->dataBase = $conection['database'];
             $this->conecta();
+
         } else {
-            $this->error[] = "EntityManager []: ERROR AL LEER EL ARCHIVO DE CONFIGURACION. " . $fileConfig . " NO EXISTE\n";
+
+            if ($fileConfig == '')
+                $fileConfig = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/" . $this->file;
+
+            if (file_exists($fileConfig)) {
+                $yaml = sfYaml::load($fileConfig);
+
+                $params = $yaml['config']['conections'][$conection];
+                $this->dbEngine = $params['dbEngine'];
+
+                if ($_SESSION['EntornoDesarrollo']) {
+                    $this->host = 'localhost';
+                    $this->user = $conection;
+                    $this->password = $conection;
+                    $this->dataBase = $conection;
+                } else {
+                    $this->host = $params['host'];
+                    $this->user = $params['user'];
+                    $this->password = $params['password'];
+                    $this->dataBase = $params['database'];
+                }
+                $this->conecta();
+            } else {
+                $this->error[] = "EntityManager []: ERROR AL LEER EL ARCHIVO DE CONFIGURACION. " . $fileConfig . " NO EXISTE\n";
+            }
         }
     }
 

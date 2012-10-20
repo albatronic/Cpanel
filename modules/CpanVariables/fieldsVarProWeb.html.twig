@@ -1,0 +1,35 @@
+{# VARIABLES WEB A NIVEL DE PROYECTO  #}
+
+{# author Sergio Pérez <sergio.perez@albatronic.com> #}
+{# copyright Informática ALBATRONIC, SL #}
+{# 12.sep.2012 11:16 #}
+
+{% extends 'CpanVariables/form.html.twig' %}
+
+{% block template %}
+
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">General</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-firmas">Firmas</a></li>
+    </ul>
+
+    <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input({'caption':'[webName] Nombre de la Web','visible':'1','varEnv':'0'},'field_title','text','datos[webName]','datos_webName',values.datos.webName,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[title] Título','visible':'1','varEnv':'0'},'field_title','text','datos[title]','datos_title',values.datos.title,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[keyWords] Keywords','visible':'1','varEnv':'0'},'field_title','text','datos[keyWords]','datos_keyWords',values.datos.keyWords,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[description] Description','visible':'1','varEnv':'0'},'field_title','text','datos[description]','datos_description',values.datos.description,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[author] Author','visible':'1','varEnv':'0'},'field_title','text','datos[author]','datos_author',values.datos.author,'50','CampoTextoCorto','1') }}
+    </div>
+
+    <div id="tabs-firmas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input({'caption':'[signatures][links] Links separados por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][links]','datos_signatures_links',values.datos.signatures.links,'255','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[signatures][locations] Localizaciones geográficas separadas por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][locations]','datos_signatures_links',values.datos.signatures.locations,'255','CampoTextoCorto','1') }}
+
+        {% for language,services in values.datos.signatures.services %}
+            {{ macro.input({'caption':'[signatures][services]['~language~'] Servicios separados por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][services]['~language~']','datos_signatures_services_'~language,services,'70','CampoTextoCorto','1') }}
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

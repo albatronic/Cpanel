@@ -1,0 +1,20 @@
+{#
+  Module: CpanUrlAmigables
+  Document : modules\CpanUrlAmigables\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 30.09.2012 16:42:34
+#}
+
+{{ macro.input(atributos.Controller,'field_title','text',values.controller ~ '[Controller]',values.controller ~ '_Controller',datos.Controller,'255','CampoTextoLargo','1') }}
+{{ macro.input(atributos.Action,'field_title','text',values.controller ~ '[Action]',values.controller ~ '_Action',datos.Action,'255','CampoTextoLargo','2') }}
+{{ macro.input(atributos.Template,'field_title','text',values.controller ~ '[Template]',values.controller ~ '_Template',datos.Template,'255','CampoTextoLargo','3') }}
+{{ macro.input(atributos.Parameters,'field_title','text',values.controller ~ '[Parameters]',values.controller ~ '_Parameters',datos.Parameters,'255','CampoTextoLargo','4') }}
+{{ macro.input(atributos.Entity,'field_title','text',values.controller ~ '[Entity]',values.controller ~ '_Entity',datos.Entity,'255','CampoTextoLargo','5') }}
+{{ macro.input(atributos.IdEntity,'field_title','text',values.controller ~ '[IdEntity]',values.controller ~ '_IdEntity',datos.IdEntity,'11','CampoImporte','6') }}
+{{ macro.input(atributos.SortOrder,'field_title','text',values.controller ~ '[SortOrder]',values.controller ~ '_SortOrder',datos.SortOrder,'11','CampoImporte','7') }}
+
+{% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_Controller') }}

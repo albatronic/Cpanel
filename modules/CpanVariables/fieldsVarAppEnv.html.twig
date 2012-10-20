@@ -1,0 +1,72 @@
+{# VARIABLES DE ENTORNO A NIVEL DE APLICACION #}
+
+{# author Sergio Pérez <sergio.perez@albatronic.com> #}
+{# copyright Informática ALBATRONIC, SL #}
+{# 12.sep.2012 11:16 #}
+
+{% extends 'CpanVariables/form.html.twig' %}
+
+{% block template %}
+
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-global">Globales</a></li>
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-especificas">Específicas</a></li>
+    </ul>
+
+    {# VARIABLES WEB GLOBALES A TODOS LOS MODULOS #}
+    <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input(
+            {'caption':'[globales][title] Título','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[globales][title]',
+            'datos_globales_title',
+            values.datos.globales.title,
+            '50',
+            'CampoTextoCorto',
+            '1')
+        }}
+        {{ macro.input(
+            {'caption':'[globales][url] Url','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[globales][url]',
+            'datos_globales_url',
+            values.datos.globales.url,
+            '50',
+            'CampoTextoCorto',
+            '1')
+        }}
+        {{ macro.input(
+            {'caption':'[globales][urlPrefix] Prefijo de la Url','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[globales][urlPrefix]',
+            'datos_globales_urlPrefix',
+            values.datos.globales.urlPrefix,
+            '50',
+            'CampoTextoCorto',
+            '1')
+        }}
+    </div>
+
+    {# VARIABLES WEB ESPECIFICAS AL MODULO EN CURSO nombreModulo/varWeb.yml #}
+    <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {% for nombre,atributos in values.datos.especificas %}
+            {{ macro.input(
+                {'caption':'[especificas]['~nombre~'] '~atributos.caption,'visible':'1','varEnv':'0'},
+                'field_title',
+                'text',
+                'datos[especificas]['~nombre~']',
+                'datos_especificas_'~nombre,
+                atributos.value,
+                '50',
+                'CampoTextoCorto'
+                )
+            }}
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

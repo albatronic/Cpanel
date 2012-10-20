@@ -125,39 +125,40 @@ if ($rq->isOldBrowser()) {
 
     $controller = 'OldBrowser';
     $action = 'Index';
-
 } else {
 
-        //-----------------------------------------------------------------
-        // INSTANCIAR UN OBJETO DE LA CLASE REQUEST PARA TENER DISPONIBLES
-        // TODOS LOS VALORES QUE CONSTITUYEN LA PETICION E IDENTIFICAR
-        // SI LA PETICION ES 'GET' O 'POST', ASI COMO EL CONTROLADOR Y
-        // ACCION SOLICITADA.
-        //-----------------------------------------------------------------
-        switch ($rq->getMethod()) {
+    //-----------------------------------------------------------------
+    // INSTANCIAR UN OBJETO DE LA CLASE REQUEST PARA TENER DISPONIBLES
+    // TODOS LOS VALORES QUE CONSTITUYEN LA PETICION E IDENTIFICAR
+    // SI LA PETICION ES 'GET' O 'POST', ASI COMO EL CONTROLADOR Y
+    // ACCION SOLICITADA.
+    //-----------------------------------------------------------------
+    switch ($rq->getMethod()) {
 
-            case 'GET':
-                $request = $rq->getParameters($app['path']);
-                $request['METHOD'] = "GET";
-                $controller = ucfirst($request[0]);
-                $action = $request[1];
-                break;
+        case 'GET':
+            $request = $rq->getParameters($app['path']);
+            $request['METHOD'] = "GET";
+            $controller = ucfirst($request[0]);
+            $action = $request[1];
+            break;
 
-            case 'POST':
-                $request = $rq->getRequest();
-                $request['FILES'] = $rq->getFiles();
-                $request['METHOD'] = "POST";
-                $controller = ucfirst($request['controller']);
-                $action = $request['action'];
-                break;
-        }
+        case 'POST':
+            $request = $rq->getRequest();
+            $request['FILES'] = $rq->getFiles();
+            $request['METHOD'] = "POST";
+            $controller = ucfirst($request['controller']);
+            $action = $request['action'];
+            break;
+    }
 
-    if (!isset($_SESSION['USER']) and ($controller != 'Login')) {
+    if (!isset($_SESSION['USER'])) {
 
-        $controller = "Login";
-        $action = "Index";
+        // No está logeado
+        $controller = "Index";
+        $action = "NoLoged";
 
     }
+
 }
 
 
@@ -202,17 +203,17 @@ if (!file_exists($config['twig']['templates_folder'] . '/' . $result['template']
 }
 
 // Renderizo el template y los valores devueltos por el método
-$twig->addGlobal('user', new CoreUsuarios($_SESSION['USER']['user']['Id']));
+$twig->addGlobal('user', new CpanUsuarios($_SESSION['USER']['user']['Id']));
 $twig->addGlobal('appPath', $app['path']);
 
 $twig->loadTemplate($result['template'])
         ->display(array(
-            'values'  => $result['values'],
-            'app'     => $app,
-            'layout'  => '_global/layout.html.twig',
-            //'user'    => new CoreUsuarios($_SESSION['USER']['user']['Id']),
-            'menu'    => $_SESSION['USER']['menu'],
-            'projects'=> $_SESSION['projects'],
+            'values' => $result['values'],
+            'app' => $app,
+            'layout' => '_global/layout.html.twig',
+            //'user'    => new CpanUsuarios($_SESSION['USER']['user']['Id']),
+            'menu' => $_SESSION['USER']['menu'],
+            'projects' => $_SESSION['projects'],
             'project' => $_SESSION['project'],
         ));
 

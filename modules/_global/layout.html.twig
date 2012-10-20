@@ -13,8 +13,9 @@
 	{% include values.twigJs %}
     </head>
 
-    <body id="theme-default" class="full_block">
+    <body id="theme-default" class="full_block"pcae/>
 
+        {% block izquierda %}
         <div id="left_bar">
 
             {% include "_global/menuIconosIzquierda.html.twig" %}
@@ -22,6 +23,7 @@
             {% include "_global/menuIzquierda.html.twig" %}
 
         </div>
+        {% endblock %}
 
         <div class="page_title_user">
             <form name="layoutForm" id="layoutForm" method="POST">
@@ -57,14 +59,18 @@
                         </div>
                     </div>
 
+                    {% block cabeceraDerecha %}
                     <div class="header_right">
                     {% include "_global/headerRight.html.twig" %}
                     </div>
+                    {% endblock %}
                 </div>
 
+                {% block navegador %}
                 <div class="page_title">
                     {% include '_global/menuNavegador.html.twig' %}
                 </div>
+                {% endblock %}
 
                 <div id="content">
                     {% block content %}

@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 08.09.2012 13:51:05
+ * @date 18.10.2012 00:44:21
  */
 
 /**
@@ -44,7 +44,7 @@ class EnlSeccionesEntity extends EntityComunes {
 	 * Nombre de la conexion a la BD
 	 * @var string
 	 */
-	protected $_conectionName = 'cpanel';
+	protected $_conectionName = '';
 	/**
 	 * Nombre de la tabla física
 	 * @var string

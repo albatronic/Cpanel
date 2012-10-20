@@ -63,13 +63,13 @@ class ControlAcceso {
 
     private function load() {
 
-        $permiso = new CorePermisos();
+        $permiso = new CpanPermisos();
         $rows = $permiso->cargaCondicion("Funcionalidades", "IdPerfil='{$this->idPerfil}' AND NombreModulo='{$this->controller}'");
         unset($permiso);
 
         if ($rows[0]['Funcionalidades'] != '') {
 
-            $modulo = new CoreModulos();
+            $modulo = new CpanModulos();
             $modulo = $modulo->find('NombreModulo', $this->controller);
             $this->permisos['enCurso'] = array(
                 'app' => $modulo->getCodigoApp(),
@@ -83,7 +83,7 @@ class ControlAcceso {
                 $this->permisos['permisosModulo'][$value] = TRUE;
 
             // Permisos de la app
-            $permiso = new CorePermisos();
+            $permiso = new CpanPermisos();
             $rows = $permiso->cargaCondicion("Funcionalidades", "IdPerfil='{$this->idPerfil}' AND NombreModulo='{$this->permisos['enCurso']['app']}'");
             unset($permiso);
             $aux = explode(',', $rows[0]['Funcionalidades']);
@@ -107,7 +107,7 @@ class ControlAcceso {
      */
     public function setPermisos($onOff) {
 
-        $tiposFuncionalidad = new CoreFuncionalidades();
+        $tiposFuncionalidad = new CpanFuncionalidades();
         $rows = $tiposFuncionalidad->cargaCondicion("Codigo");
         unset($tiposFuncionalidad);
 

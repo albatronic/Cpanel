@@ -73,7 +73,7 @@ EnlSecciones:
       visible: false
       updatable: false
       filter: NO
-      list: NO
+      list: YES
       default: null
       help: null
       permission: null
@@ -81,7 +81,7 @@ EnlSecciones:
     Titulo:
       title: Titulo
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null

@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 01.10.2012 02:19:06
+ * @date 18.10.2012 00:44:21
  */
 
 /**
@@ -50,15 +50,10 @@ class EnlEnlacesEntity extends EntityComunes {
 	 */
 	protected $EsUrlInterna = '0';
 	/**
-	 * @var integer
-	 * @assert NotBlank(groups="EnlEnlaces")
-	 */
-	protected $SortOrder = '0';
-	/**
 	 * Nombre de la conexion a la BD
 	 * @var string
 	 */
-	protected $_conectionName = 'cpanel';
+	protected $_conectionName = '';
 	/**
 	 * Nombre de la tabla física
 	 * @var string
@@ -151,13 +146,6 @@ class EnlEnlacesEntity extends EntityComunes {
 		if (!($this->EsUrlInterna instanceof ValoresSN))
 			$this->EsUrlInterna = new ValoresSN($this->EsUrlInterna);
 		return $this->EsUrlInterna;
-	}
-
-	public function setSortOrder($SortOrder){
-		$this->SortOrder = $SortOrder;
-	}
-	public function getSortOrder(){
-		return $this->SortOrder;
 	}
 
 } // END class EnlEnlaces

@@ -30,7 +30,7 @@
 
         {% if aplicacion.publicar and (key != appEnCurso) %}
 
-            <li><a href="{{app.path}}/index/{{key}}"><span class="nav_icon computer_imac"></span> {{aplicacion.titulo}}<span class="up_down_arrow">&nbsp;</span></a>
+            <li><a href="{{app.path}}/Index/{{key}}"><span class="nav_icon computer_imac"></span> {{aplicacion.titulo}}<span class="up_down_arrow">&nbsp;</span></a>
             {#<li><a href="{{app.path}}/index/{{key}}"><span class="nav_icon blocks_images"></span> {{aplicacion.titulo}}<span class="up_down_arrow">&nbsp;</span></a>#}
                 <ul class="acitem">
                 {% for modulo in aplicacion.modulos %}

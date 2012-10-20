@@ -527,7 +527,7 @@ class Form {
         // LUEGO LOS SUSTITUYO POR LOS ESPECIFICOS QUE ESTAN EN LAS VAR DE ENTORNO DE PROYECTO
         // DE TAL MANERA QUE PREVALECEN LOS DEFINIDOS EN LAS VARIABLES DE ENTORNO, PERO
         // SI NO EXISTIERA LA VARIABLE DE ENTORNO CORRESPONDIENTE ENTONCES PONGO LA DEL CONFIG.
-        $variables = new CoreVariables('Mod', 'Env', $modulo);
+        $variables = new CpanVariables('Mod', 'Env', $modulo);
         $archivoYml = $variables->getPathYml();
 
         if (file_exists($archivoYml)) {

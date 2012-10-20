@@ -22,9 +22,34 @@ config:
     url: http://localhost/cpanel
     path: /cpanel
     framework: bin/albatronic/
+    urlParent: http://localhost/pcae
 
   # SEMILLA PARA CONSTRUIR CLAVES MD5
   semillaMD5: verano
+
+  # FIRMAS DE LA WEB
+  signatures:
+    links: 'www.articoestudio.com'
+    services:
+      'es': 'Diseño web,Venta Online,Posicionamiento web'
+      'en': 'Web design,eCommerce,SEO'
+      'fr': ''
+    locations: 'Granada,Madrid,Malaga'
+
+  # LONGITUD MÁXIMA PARA LAS URLS Y NOMBRES AMIGABLES
+  maxLengthUrlsFriendly: 50
+  # NUMERO MAXIMO DE PAGINAS
+  numMaxPages: 100
+  # NUMERO MAXIMO DE DOCUMENTOS
+  numMaxDocuments: 0
+  # NUMERO MAXIMO DE IMAGENES EN LA GALERIA
+  numMaxGalery: 0
+  # NUMERO MAXIMO DE VIDEOS
+  numMaxVideos: 0
+  # NUMERO MAXIMO DE AUDIOS
+  numMaxAudios: 0
+  # TIPOS DE ARCHIVOS PERMITIDOS PARA UPLOAD
+  allowTypes: 'jpg,png,gif,pdf,docx,mp3,avi,pps'
 
   # MOTOR DE ENVIO DE CORREOS
   mailer:
@@ -69,20 +94,12 @@ config:
   #
   # EN PRODUCCION EL FOLDER SERÁ "/"
   conections:
-    kaia:
-      title: La página de kaia
+    pcae:
+      title: Portal Cloud Ártico Estudio
       description:
-      folder: /kaia
+      folder: /pcae
       dbEngine: mysql
       host: localhost
-      user: kaia
-      password: kaia
-      database: kaia
-    galapago:
-      title: La pagina de galapago
-      description:
-      folder: /galapago
-      dbEngine: mysql
-      host: localhost
-      password: galapago
-      database: galapago
+      user: pcae
+      password: pcae
+      database: pcae

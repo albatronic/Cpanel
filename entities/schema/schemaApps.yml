@@ -1,0 +1,30 @@
+# ----------------------
+# APP ENLACES DE INTERES
+# ----------------------
+
+EnlSecciones:
+  columns:
+    Titulo:      { type: string(255), notnull: true}
+    Subtitulo:   { type: string(255), notnull: false, default: NULL }
+    TipoSeccion: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,TiposSeccionEnlacesInteres,IDTipo' }
+    Entidad:     { type: string(255), notnull: true}
+    IdEntidad:   { type: integer(11), notnull: true}
+    <?php include '../cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    TipoSeccion: { ForeignEntity: TiposSeccionEnlacesInteres, ForeignId: IDTipo}
+
+EnlEnlaces:
+  columns:
+    IdSeccion:    { type: int(11), notnull: true, index: index, comment: 'db,EnlSecciones,Id' }
+    Titulo:       { type: string(255), notnull: true }
+    Subtitulo:    { type: string(255), notnull: false, default: NULL }
+    Url:          { type: string(255), notnull: false, default: NULL }
+    TargetBlank:  { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    EsHttps:      { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    EsUrlInterna: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    <?php include '../cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IdSeccion:    { ForeignEntity: EnlSecciones, ForeignId: Id}
+    TargetBlank:  { ForeignEntity: ValoresSN,    ForeignId: IDTipo}
+    EsHttps:      { ForeignEntity: ValoresSN,    ForeignId: IDTipo}
+    EsUrlInterna: { ForeignEntity: ValoresSN,    ForeignId: IDTipo}

@@ -49,7 +49,7 @@ class EntityComunes extends Entity {
 
     /**
      * @orm Column(type="integer")
-     * @var entities\CoreUsuarios
+     * @var entities\CpanUsuarios
      */
     protected $CreatedBy = '0';
 
@@ -62,7 +62,7 @@ class EntityComunes extends Entity {
 
     /**
      * @orm Column(type="integer")
-     * @var entities\CoreUsuarios
+     * @var entities\CpanUsuarios
      */
     protected $ModifiedBy = '0';
 
@@ -81,7 +81,7 @@ class EntityComunes extends Entity {
 
     /**
      * @orm Column(type="integer")
-     * @var entities\CoreUsuarios
+     * @var entities\CpanUsuarios
      */
     protected $DeletedBy = '0';
 
@@ -131,7 +131,7 @@ class EntityComunes extends Entity {
      * @orm Column(type="tinyint")
      * @var entities\ValoresSN
      */
-    protected $LockUrlPrefix = '0';
+    protected $LockUrlPrefix = '1';
 
     /**
      * @orm Column(type="string")
@@ -143,7 +143,7 @@ class EntityComunes extends Entity {
      * @orm Column(type="tinyint")
      * @var entities\ValoresSN
      */
-    protected $LockSlug = '0';
+    protected $LockSlug = '1';
 
     /**
      * @orm Column(type="string")
@@ -269,8 +269,10 @@ class EntityComunes extends Entity {
 
     public function getBelongsTo() {
 
-        if (!($this->BelongsTo instanceof $this))
-            $this->BelongsTo = new $this($this->BelongsTo);
+        if (!is_object($this->BelongsTo)) {
+            $clase = $this->getClassName();
+            $this->BelongsTo = new $clase($this->BelongsTo);
+        }
 
         return $this->BelongsTo;
     }
@@ -280,8 +282,8 @@ class EntityComunes extends Entity {
     }
 
     public function getCreatedBy() {
-        if (!($this->CreatedBy instanceof CoreUsuarios))
-            $this->CreatedBy = new CoreUsuarios($this->CreatedBy);
+        if (!($this->CreatedBy instanceof CpanUsuarios))
+            $this->CreatedBy = new CpanUsuarios($this->CreatedBy);
         return $this->CreatedBy;
     }
 
@@ -298,8 +300,8 @@ class EntityComunes extends Entity {
     }
 
     public function getModifiedBy() {
-        if (!($this->ModifiedBy instanceof CoreUsuarios))
-            $this->ModifiedBy = new CoreUsuarios($this->ModifiedBy);
+        if (!($this->ModifiedBy instanceof CpanUsuarios))
+            $this->ModifiedBy = new CpanUsuarios($this->ModifiedBy);
         return $this->ModifiedBy;
     }
 
@@ -326,8 +328,8 @@ class EntityComunes extends Entity {
     }
 
     public function getDeletedBy() {
-        if (!($this->DeletedBy instanceof CoreUsuarios))
-            $this->DeletedBy = new CoreUsuarios($this->DeletedBy);
+        if (!($this->DeletedBy instanceof CpanUsuarios))
+            $this->DeletedBy = new CpanUsuarios($this->DeletedBy);
         return $this->DeletedBy;
     }
 
@@ -456,12 +458,12 @@ class EntityComunes extends Entity {
 
     /**
      * Devuelve el número de visitas que ha tenido este objeto
-     * El valor está en la entidad CoreUrlFriendlys
+     * El valor está en la entidad CpanUrlFriendlys
      *
      * @return integer El número de visitas
      */
     public function getNumberVisits() {
-        $url = new CoreUrlAmigables();
+        $url = new CpanUrlAmigables();
         $rows = $url->cargaCondicion("NumberVisits", "Entity='{$this->getClassName()}' AND IdEntity='{$this->getPrimaryKeyValue()}'");
         unset($url);
         return $rows[0]['NumberVisits'];
