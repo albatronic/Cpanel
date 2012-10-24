@@ -47,7 +47,7 @@ class CommBancosEntity extends EntityComunes {
 	 */
 	protected $_parentEntities = array(
 			array('SourceColumn' => 'Id', 'ParentEntity' => 'CommBancosOficinas', 'ParentColumn' => 'IdBanco'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdBanco'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdBanco'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

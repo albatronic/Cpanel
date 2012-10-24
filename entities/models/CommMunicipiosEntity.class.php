@@ -61,8 +61,8 @@ class CommMunicipiosEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_parentEntities = array(
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdMunicipio'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeUsuarios', 'ParentColumn' => 'IdMunicipio'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdMunicipio'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeUsuarios', 'ParentColumn' => 'IdMunicipio'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

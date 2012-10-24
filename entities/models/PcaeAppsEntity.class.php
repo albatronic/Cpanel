@@ -55,7 +55,7 @@ class PcaeAppsEntity extends EntityComunes {
      */
     protected $_parentEntities = array(
         array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeProyectosApps', 'ParentColumn' => 'IdApp'),
-        array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaePermisos', 'ParentColumn' => 'IdApp'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaePermisos', 'ParentColumn' => 'IdApp'),
     );
 
     /**

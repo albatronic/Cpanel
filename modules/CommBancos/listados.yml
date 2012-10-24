@@ -1,0 +1,25 @@
+# Module: CommBancos
+# Document : modules\CommBancos\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 23.10.2012 03:16:42
+#
+---
+listados:
+  -
+    title: CommBancos
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      Codigo: { title: Codigo, length: '4', align: L, type: string, total: NO, formula: null, format: null }
+      Nombre: { title: Nombre, length: '255', align: L, type: string, total: NO, formula: null, format: null }

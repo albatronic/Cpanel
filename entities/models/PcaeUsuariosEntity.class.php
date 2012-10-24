@@ -96,9 +96,9 @@ class PcaeUsuariosEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_parentEntities = array(
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeControlAcceso', 'ParentColumn' => 'IdUsuario'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaePermisos', 'ParentColumn' => 'IdUsuario'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeEmpresasUsuarios', 'ParentColumn' => 'IdUsuario'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeControlAcceso', 'ParentColumn' => 'IdUsuario'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaePermisos', 'ParentColumn' => 'IdUsuario'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeEmpresasUsuarios', 'ParentColumn' => 'IdUsuario'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

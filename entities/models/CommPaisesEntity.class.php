@@ -64,12 +64,12 @@ class CommPaisesEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_parentEntities = array(
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'CommImpuestos', 'ParentColumn' => 'IdPais'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'CommImpuestos', 'ParentColumn' => 'IdPais'),
 			array('SourceColumn' => 'Id', 'ParentEntity' => 'CommMunicipios', 'ParentColumn' => 'IdPais'),
 			array('SourceColumn' => 'Id', 'ParentEntity' => 'CommProvincias', 'ParentColumn' => 'IdPais'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'CommBancosOficinas', 'ParentColumn' => 'IdPais'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdPais'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeUsuarios', 'ParentColumn' => 'IdPais'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'CommBancosOficinas', 'ParentColumn' => 'IdPais'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdPais'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeUsuarios', 'ParentColumn' => 'IdPais'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

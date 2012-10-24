@@ -47,7 +47,7 @@ CpanDocs:
   id_video: coredocs
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection: Cpanel
   entity: CpanDocs
   table: CpanDocs
   primarykey: Id

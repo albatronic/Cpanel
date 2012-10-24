@@ -209,7 +209,7 @@ class EntityComunes extends Entity {
      * @orm Column(type="string")
      * @var string(5)
      */
-    protected $ImportanceSitemap = '0,5';
+    protected $ImportanceSitemap = '0.5';
 
     /**
      * @orm Column(type="string")

@@ -85,8 +85,12 @@ class Form {
      * @return string
      */
     public function getConection() {
-        return $_SESSION['project']['name'];
-        //return $this->getNode('conection');
+
+        $conection = $this->getNode('conection');
+        if ($conection == '') {
+            $conection = $_SESSION['project']['conection'];
+        }
+        return $conection;
     }
 
     /**
@@ -528,9 +532,8 @@ class Form {
         // DE TAL MANERA QUE PREVALECEN LOS DEFINIDOS EN LAS VARIABLES DE ENTORNO, PERO
         // SI NO EXISTIERA LA VARIABLE DE ENTORNO CORRESPONDIENTE ENTONCES PONGO LA DEL CONFIG.
         $variables = new CpanVariables('Mod', 'Env', $modulo);
-        $archivoYml = $variables->getPathYml();
 
-        if (file_exists($archivoYml)) {
+        if (is_array($variables->getDatosYml())) {
             $arrayColumnas = $variables->getNode('columns');
             foreach ($arrayColumnas as $key => $value) {
                 $atributos[$key] = $value;
@@ -541,7 +544,7 @@ class Form {
                 }
             }
         } else {
-            // No existe el archivo de variables, por lo tanto cargo los atributos
+            // Aún no se han definido las variables, por lo tanto cargo los atributos
             // en base al array de correspondencia de atributos predeterminados
             foreach ($columnasConfig as $keyColumna => $valueColumna)
                 foreach (VariablesEnv::$varEnvMod as $keyVar => $keyColumnaConfig)

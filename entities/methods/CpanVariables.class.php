@@ -15,16 +15,12 @@
  */
 class CpanVariables extends CpanVariablesEntity {
 
-    protected $tiposDeVariables = array('Web', 'Env');
-    protected $ambitosDeVariables = array('Pro', 'App', 'Mod');
-    protected $objeto = array();
-    protected $pathYml = FALSE;     // La url completa al archivo yml de las variables
-    protected $fileEspecificas;
-    protected $titulo;
-    protected $template;
-    protected $pathProject;         // La url al proyecto
-    protected $errores;
-    protected $ok = FALSE;
+    protected $_tiposDeVariables = array('Web', 'Env');
+    protected $_ambitosDeVariables = array('Pro', 'App', 'Mod');
+    protected $_objeto = array();
+    protected $_fileEspecificas;
+    protected $_titulo;
+    protected $_template;
 
     /**
      * Construye el objeto variables correspondiente al ámbito, tipo y nombre
@@ -35,19 +31,17 @@ class CpanVariables extends CpanVariablesEntity {
      */
     public function __construct($ambito, $tipo, $nombre = '') {
 
-        $this->pathProject = $_SESSION['project']['ftp']['server'] . "/" . $_SESSION['project']['ftp']['folder'];
-
         if ($this->valida($ambito, $tipo, $nombre)) {
 
-            $this->objeto = array(
+            $this->_objeto = array(
                 'ambito' => $ambito,
                 'tipo' => $tipo,
                 'nombre' => $nombre,
-                'pathYml' => $this->getPathYml(),
-                'template' => $this->getTemplate(),
-                'titulo' => $this->getTitulo(),
+                'template' => $this->_template,
+                'titulo' => $this->_titulo,
                 'datos' => $this->getDatosYml(),
             );
+
         }
     }
 
@@ -69,7 +63,7 @@ class CpanVariables extends CpanVariablesEntity {
      * @return array Array con el objeto completo
      */
     public function getObjeto() {
-        return $this->objeto;
+        return $this->_objeto;
     }
 
     /**
@@ -79,19 +73,7 @@ class CpanVariables extends CpanVariablesEntity {
      * @return array Array con los valores de las variables
      */
     public function getValores() {
-        return $this->objeto['datos'];
-    }
-
-    /**
-     * Devuelve el fullpath del archivo yml
-     * correspondiente a las variables en curso
-     *
-     * EL QUE TENGA VALOR NO IMPLICA QUE EXISTA FÍSICAMENTE EL ARCHIVO
-     *
-     * @return string El path completo
-     */
-    public function getPathYml() {
-        return $this->pathYml;
+        return $this->_objeto['datos'];
     }
 
     /**
@@ -101,7 +83,7 @@ class CpanVariables extends CpanVariablesEntity {
      * @return string El template
      */
     public function getTemplate() {
-        return $this->template;
+        return $this->_objeto['template'];
     }
 
     /**
@@ -110,43 +92,16 @@ class CpanVariables extends CpanVariablesEntity {
      * @return string El titulo
      */
     public function getTitulo() {
-        return $this->titulo;
+        return $this->_objeto['titulo'];
     }
 
     /**
-     * Devuelve el array completo de variables correspondientes
+     * Devuelve un array con la estructura Yml de las variables
      *
-     * @return array Array con las variables
+     * @return array Array
      */
-    public function getDatosYmlFtp() {
-
-        $arrayYml = array();
-
-        $localFile = "tmp/" . md5($_SESSION['USER']['user']['Id']) . ".yml";
-
-        $ftp = new Ftp(
-                        $_SESSION['project']['ftp']['server'],
-                        $_SESSION['project']['ftp']['user'],
-                        $_SESSION['project']['ftp']['password']
-        );
-        $ok = $ftp->downLoad($this->pathYml, $localFile);
-        if ($ok) {
-            $arrayYml = sfYaml::load($localFile);
-            @unlink($localFile);
-        } else
-            $this->errores = $ftp->getErrores();
-        unset($ftp);
-
-        return $arrayYml;
-    }
-
     public function getDatosYml() {
-
-        $ftp = new Ftp('', '', '');
-        $result = $ftp->getFileContent($this->pathYml);
-        $arrayYml = sfYaml::load($result['result']);
-
-        return $arrayYml;
+        return sfYaml::load($this->getYml());
     }
 
     /**
@@ -155,12 +110,7 @@ class CpanVariables extends CpanVariablesEntity {
      * @param array $variables
      */
     public function setDatosYml(array $variables) {
-
-        $this->objeto['datos'] = $variables;
-    }
-
-    public function getFirma() {
-        return $this->objeto['datos']['firma'];
+        $this->_objeto['datos'] = $variables;
     }
 
     /**
@@ -171,8 +121,8 @@ class CpanVariables extends CpanVariablesEntity {
      */
     public function getArrayEspecificas() {
 
-        if (file_exists($this->fileEspecificas))
-            $arrayEspecificas = sfYaml::load($this->fileEspecificas);
+        if (file_exists($this->_fileEspecificas))
+            $arrayEspecificas = sfYaml::load($this->_fileEspecificas);
 
         if (!is_array($arrayEspecificas))
             $arrayEspecificas = array();
@@ -189,7 +139,7 @@ class CpanVariables extends CpanVariablesEntity {
      * @param array $nodo Array con los valores del nodo
      */
     public function setNode($nombreNodo, array $nodo) {
-        $this->objeto['datos'][$nombreNodo] = $nodo;
+        $this->_objeto['datos'][$nombreNodo] = $nodo;
     }
 
     /**
@@ -199,7 +149,7 @@ class CpanVariables extends CpanVariablesEntity {
      * @return mixed Texto plano o array
      */
     public function getNode($nombreNodo) {
-        return $this->objeto['datos'][$nombreNodo];
+        return $this->_objeto['datos'][$nombreNodo];
     }
 
     /**
@@ -209,7 +159,7 @@ class CpanVariables extends CpanVariablesEntity {
      * @return array Array con los valores de una columna
      */
     public function getColumn($nombreColumna) {
-        return $this->objeto['datos']['columns'][$nombreColumna];
+        return $this->_objeto['datos']['columns'][$nombreColumna];
     }
 
     /**
@@ -220,12 +170,12 @@ class CpanVariables extends CpanVariablesEntity {
      * @param array $valores Array de valores
      */
     public function setColumn($nombreColumna, array $valores) {
-        $this->objeto['datos']['columns'][$nombreColumna] = $valores;
+        $this->_objeto['datos']['columns'][$nombreColumna] = $valores;
     }
 
     /**
      * Almacena las variables en un archivo en base a
-     * lo contenido en $this->objeto
+     * lo contenido en $this->_objeto
      *
      * Si son variables Web de Módulo, también pone la visibilidad
      * en las variables de entorno de dicho módulo
@@ -234,25 +184,17 @@ class CpanVariables extends CpanVariablesEntity {
      */
     public function save() {
 
-        $cabecera = "# {$this->objeto['pathYml']}\n";
-        $cabecera .= "# Fecha : " . date('d-m-Y H:i:s') . "\n";
-        $cabecera .= "# Usuario: " . $_SESSION['USER']['user']['Id'] . " " . $_SESSION['USER']['user']['Nombre'] . "\n\n";
-        $cabecera .= "firma: " . md5(date('d-m-Y H:i:s'));
-        $datosYml = $cabecera;
+        if (is_array($this->_objeto['datos']))
+            $this->setYml(sfYaml::dump($this->_objeto['datos'], 3));
 
-        if (is_array($this->objeto['datos'])) {
-            $cuerpo = sfYaml::dump($this->objeto['datos'], 3);
-            $datosYml .= $cuerpo;
+        if ($this->Id)
+            $ok = parent::save();
+        else {
+            $ok = parent::create();
         }
 
-        $archivo = new Archivo($this->objeto['pathYml']);
-        $ok = $archivo->write($datosYml);
-        if (!$ok)
-            $this->errores = $archivo->getErrores();
-        elseif (($this->objeto['ambito'] == 'Mod') and ($this->objeto['tipo'] == 'Web'))
+        if ($ok and ($this->_objeto['ambito'] == 'Mod') and ($this->_objeto['tipo'] == 'Web'))
             $this->ponVisibilidad();
-
-        unset($archivo);
 
         return $ok;
     }
@@ -263,25 +205,11 @@ class CpanVariables extends CpanVariablesEntity {
      */
     public function delete() {
 
-        $archivo = new Archivo($this->objeto['pathYml']);
-        $ok = $archivo->delete();
-        if (!$ok)
-            $this->errores = $archivo->getErrores();
-        elseif (($this->objeto['ambito'] == 'Mod') and ($this->objeto['tipo'] == 'Web'))
+        $ok = parent::delete();
+        if ($ok and ($this->_objeto['ambito'] == 'Mod') and ($this->_objeto['tipo'] == 'Web'))
             $this->quitaVisibilidad();
 
-        unset($archivo);
-
         return $ok;
-    }
-
-    /**
-     * Devuelve un array con los errores producidos
-     *
-     * @return array Array con errores
-     */
-    public function getErrores() {
-        return $this->errores;
     }
 
     /**
@@ -295,53 +223,53 @@ class CpanVariables extends CpanVariablesEntity {
      *
      * @return boolean TRUE si el ambito y tipo son válidos
      */
-    private function valida($ambito, $tipo, $nombre) {
+    public function valida($ambito, $tipo, $nombre) {
 
-        $this->ok = ( (in_array($ambito, $this->ambitosDeVariables)) and (in_array($tipo, $this->tiposDeVariables)) );
+        $ok = ( (in_array($ambito, $this->_ambitosDeVariables)) and (in_array($tipo, $this->_tiposDeVariables)) );
 
-        if ($this->ok) {
+        if ($ok) {
             switch ($ambito) {
                 case 'Pro':
-                    $archivoDatos = "/config/varPro";
-                    $this->titulo = 'Variables ' . $tipo . ' del Proyecto "' . $_SESSION['project']['title'] . '"';
-                    $this->template = "CpanVariables/fieldsVarPro{$tipo}.html.twig";
+                    $variable = "varPro";
+                    $this->_titulo = 'Variables ' . $tipo . ' del Proyecto "' . $_SESSION['project']['title'] . '"';
+                    $this->_template = "CpanVariables/fieldsVarPro{$tipo}.html.twig";
                     break;
 
                 case 'App':
-                    $archivoDatos = "/config/varApp_{$nombre}";
+                    $variable = "varApp_{$nombre}";
                     $app = new CpanAplicaciones();
                     $app = $app->find('CodigoApp', $nombre);
-                    $this->titulo = 'Variables ' . $tipo . ' de la Aplicación "' . $app->getNombreApp() . '"';
+                    $this->_titulo = 'Variables ' . $tipo . ' de la Aplicación "' . $app->getNombreApp() . '"';
                     unset($app);
-                    $this->template = "CpanVariables/fieldsVar{$ambito}{$tipo}.html.twig";
-                    $this->fileEspecificas = APP_PATH . "modules/{$nombre}/var{$tipo}.yml";
+                    $this->_template = "CpanVariables/fieldsVar{$ambito}{$tipo}.html.twig";
+                    $this->_fileEspecificas = APP_PATH . "modules/{$nombre}/var{$tipo}.yml";
                     break;
 
                 case 'Mod':
-                    $archivoDatos = "/config/varMod_{$nombre}";
+                    $variable = "varMod_{$nombre}";
                     $modulo = new CpanModulos();
                     $modulo = $modulo->find('NombreModulo', $nombre);
-                    $this->titulo = 'Variables ' . $tipo . ' del Módulo "' . $modulo->getTitulo() . '"';
+                    $this->_titulo = 'Variables ' . $tipo . ' del Módulo "' . $modulo->getTitulo() . '"';
                     unset($modulo);
-                    $this->template = "CpanVariables/fieldsVar{$ambito}{$tipo}.html.twig";
-                    $this->fileEspecificas = APP_PATH . "modules/{$nombre}/var{$tipo}.yml";
+                    $this->_template = "CpanVariables/fieldsVar{$ambito}{$tipo}.html.twig";
+                    $this->_fileEspecificas = APP_PATH . "modules/{$nombre}/var{$tipo}.yml";
                     break;
-
-                default:
-                    $archivoDatos = "";
             }
 
-            if ($archivoDatos) {
-                $this->pathYml = "{$this->pathProject}{$archivoDatos}_{$tipo}.yml";
-            } else {
-                $this->pathYml = false;
-                $this->errores[] = "No se ha podido construir el nombre del archivo de variables en base a los parámetros recibibos (Ambito={$this->objeto['ambito']}, Tipo={$this->objeto['tipo']}, Nombre={$this->objeto['nombre']})";
+            $variable .= "_{$tipo}";
+            $rows = $this->cargaCondicion('*', "IdProyectosApps='{$_SESSION['project']['Id']}' AND Variable='{$variable}'");
+
+            if ($rows[0])
+                $this->bind($rows[0]);
+            else {
+                $this->setIdProyectosApps($_SESSION['project']['Id']);
+                $this->setVariable($variable);
             }
         }
         else
             $this->errores[] = "Los valores indicados en ambito y/o tipo no son válidos";
 
-        return $this->ok;
+        return $ok;
     }
 
     /**
@@ -352,7 +280,7 @@ class CpanVariables extends CpanVariablesEntity {
      */
     private function quitaVisibilidad() {
 
-        $variables = new CpanVariables('Mod', 'Env', $this->objeto['nombre']);
+        $variables = new CpanVariables('Mod', 'Env', $this->_objeto['nombre']);
         $variables->setNode('showVarWeb', array());
         $variables->save();
         unset($variables);
@@ -369,16 +297,16 @@ class CpanVariables extends CpanVariablesEntity {
      */
     private function ponVisibilidad() {
 
-        $variables = new CpanVariables('Mod', 'Env', $this->objeto['nombre']);
+        $variables = new CpanVariables('Mod', 'Env', $this->_objeto['nombre']);
         $valoresActuales = $variables->getNode('showVarWeb');
 
-        foreach ($this->objeto['datos']['globales'] as $key => $value)
+        foreach ($this->_objeto['datos']['globales'] as $key => $value)
             if (!isset($valoresActuales['globales'][$key]))
                 $valores['globales'][$key] = 0;
             else
                 $valores['globales'][$key] = $valoresActuales['globales'][$key];
 
-        foreach ($this->objeto['datos']['especificas'] as $key => $value)
+        foreach ($this->_objeto['datos']['especificas'] as $key => $value)
             if (!isset($valoresActuales['especificas'][$key]))
                 $valores['especificas'][$key] = 0;
             else

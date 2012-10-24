@@ -47,7 +47,7 @@ CpanRoles:
   id_video: coreroles
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection: Cpanel
   entity: CpanRoles
   table: CpanRoles
   primarykey: Id

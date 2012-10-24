@@ -18,11 +18,11 @@ config:
 
   # ENTORNO DE LA APLICACION
   app:
-    name: CPanel
-    url: http://localhost/cpanel
-    path: /cpanel
+    name: Cpanel
+    url: http://localhost/Cpanel
+    path: /Cpanel
     framework: bin/albatronic/
-    urlParent: http://localhost/pcae
+    urlParent: http://localhost/Pcae
 
   # SEMILLA PARA CONSTRUIR CLAVES MD5
   semillaMD5: verano
@@ -90,14 +90,14 @@ config:
 
   # PROYECTOS Y CONEXIONES A LAS BASES DE DATOS
   # LA CARPETA DE CADA PROYECTO SE INDICA EL NODO FOLDER Y SE ENTIENDE
-  # RESPECTO AL DOCUMENT_ROOT Y NO AL CPANEL
+  # RESPECTO AL DOCUMENT_ROOT Y NO AL Cpanel
   #
   # EN PRODUCCION EL FOLDER SERÁ "/"
   conections:
     pcae:
       title: Portal Cloud Ártico Estudio
       description:
-      folder: /pcae
+      folder: /Pcae
       dbEngine: mysql
       host: localhost
       user: pcae

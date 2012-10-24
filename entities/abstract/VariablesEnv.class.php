@@ -22,6 +22,7 @@ class VariablesEnv {
         'updatable' => 'updatable',
         'help' => 'help',
         'permission' => 'permission',
+        'editorTiny' => '',
     );
 
 }

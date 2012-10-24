@@ -47,7 +47,7 @@ CpanPerfiles:
   id_video: coreperfiles
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection: Cpanel
   entity: CpanPerfiles
   table: CpanPerfiles
   primarykey: Id

@@ -48,7 +48,7 @@
             {{ macro.input(atributos.PrimaryKeyMD5,'field_title','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo',none,'disabled') }}
             {{ macro.select(atributos.IsDefault,'field_title',values.controller ~ '[IsDefault]',values.controller ~ '_IsDefault',none,datos.IsDefault.IDTipo,datos.IsDefault.fetchAll(none,0),'chzn-select',101)}}
         {% endif %}
-        {{ macro.select(atributos.BelongsTo,'field_title',values.controller ~ '[BelongsTo]',values.controller ~ '_BelongsTo',none,datos.BelongsTo.getPrimaryKeyValue,datos.fetchAll('Titulo'),'chzn-select',110) }}
+        {{ macro.select(atributos.BelongsTo,'field_title',values.controller ~ '[BelongsTo]',values.controller ~ '_BelongsTo',none,datos.BelongsTo.getPrimaryKeyValue,datos.BelongsTo.fetchAll('Titulo'),'chzn-select',110) }}
         {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea',100)}}
         {{ macro.select(atributos.Checked,'field_title',values.controller ~ '[Checked]',values.controller ~ '_Checked',none,datos.Checked.IDTipo,datos.Checked.fetchAll(none,0),'chzn-select',102)}}
         {{ macro.select(atributos.Publish,'field_title',values.controller ~ '[Publish]',values.controller ~ '_Publish',none,datos.Publish.IDTipo,datos.Publish.fetchAll(none,0),'chzn-select',103)}}
@@ -111,6 +111,7 @@
                     {{ macro.input({'caption':'Título','visible':'1','varEnv':'0'},'field_title','text','image['~puntero~'][Title]','image_'~puntero~'_Title',imagen.Title,255,none) }}
                     {{ macro.input({'caption':'Nombre','visible':'1','varEnv':'0'},'field_title','text','image['~puntero~'][Name]','image_'~puntero~'_Name',imagen.Name,255,none) }}
                     {{ macro.select({'caption':'Mostrar pie de foto','visible':'1','varEnv':'0'},'field_title','image['~puntero~'][ShowCaption]','image_'~puntero~'_ShowCaption',none,imagen.ShowCaption.IDTipo,imagen.ShowCaption.fetchAll(none,0),'chzn-select',103)}}
+                    {{ macro.select({'caption':'Publicar','visible':'1','varEnv':'0'},'field_title','image['~puntero~'][Publish]','image_'~puntero~'_Publish',none,imagen.Publish.IDTipo,imagen.Publish.fetchAll(none,0),'chzn-select',104)}}
                     <div style="text-align: center;">
                     <input type="button" value="Guardar cambios" class="comando"
                         onclick="

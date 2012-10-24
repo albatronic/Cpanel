@@ -38,6 +38,7 @@
         <li class="ui-state-default ui-corner-top"><a href="#tabs-columnas">Columnas</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-controller">Controller</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-editorTiny">Editor Tiny</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-varWeb">VW</a></li>
     </ul>
 
@@ -108,7 +109,7 @@
         <div id="accordion" style="margin-top:10px;">
             {% for columna,variables in values.datos.columns %}
                 <h3 style="{% if (variables.visible) %} color: blue; font-weight: bold; {% endif %}">
-                    [{{columna}}] [{{variables.caption}} = {{variables.default }}] [permission: {{variables.permission }}]
+                    [columns][{{columna}}] :: [{{variables.caption}} = {{variables.default }}] [permission: {{variables.permission }}]
                 </h3>
                 <div>
 
@@ -161,7 +162,7 @@
     <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {% for nombre,atributos in values.datos.especificas %}
             {{ macro.input(
-                {'caption':'['~nombre~'] '~atributos.caption,'visible':'1','varEnv':'0'},
+                {'caption':'[especificas]['~nombre~'] '~atributos.caption,'visible':'1','varEnv':'0'},
                 'field_title',
                 'text',
                 'datos[especificas]['~nombre~']',
@@ -181,6 +182,22 @@
         {{ macro.input({'caption':'[template] Template','visible':'1','varEnv':'0'},'field_title','text','datos[template]','datos_template',values.datos.template,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[parametros] Parametros','visible':'1','varEnv':'0'},'field_title','text','datos[parametros]','datos_parametros',values.datos.parametros,'50','CampoTextoCorto','1') }}
      </div>
+
+    {# EDITOR TINY #}
+    <div id="tabs-editorTiny" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.select({'caption':'[editorTiny][biu] Bold,Italic,Underline','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][bui]','datos_editorTiny_bui',none,values.datos.editorTiny.bui,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][alignment] Alineación','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][alignment]','datos_editorTiny_alignment',none,values.datos.editorTiny.alignment,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][lists] Listas','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][lists]','datos_editorTiny_lists',none,values.datos.editorTiny.lists,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][links] Enlaces','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][links]','datos_editorTiny_links',none,values.datos.editorTiny.links,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][images] Imágenes','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][images]','datos_editorTiny_images',none,values.datos.editorTiny.images,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][preview] Vista preliminar','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][preview]','datos_editorTiny_preview',none,values.datos.editorTiny.preview,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][colors] Colores','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][colors]','datos_editorTiny_colors',none,values.datos.editorTiny.colors,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][tables] Tablas','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][tables]','datos_editorTiny_tables',none,values.datos.editorTiny.tables,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][superIndex] Super/sub índices','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][superIndex]','datos_editorTiny_superIndex',none,values.datos.editorTiny.superIndex,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][symbols] Símbolos','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][symbols]','datos_editorTiny_symbols',none,values.datos.editorTiny.symbols,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][media] Media','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][media]','datos_editorTiny_media',none,values.datos.editorTiny.media,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[editorTiny][fullMode] Pantalla completa','visible':'1','varEnv':'0'},'field_title','datos[editorTiny][fullMode]','datos_editorTiny_fullMode',none,values.datos.editorTiny.fullMode,ValoresSN,'chzn-select')}}
+    </div>
 
     {# CONTROL VISIBILIDAD VARIABLES WEB #}
     <div id="tabs-varWeb" class="ui-tabs-panel ui-widget-content ui-corner-bottom">

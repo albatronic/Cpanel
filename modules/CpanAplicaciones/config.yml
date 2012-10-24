@@ -47,7 +47,7 @@ CpanAplicaciones:
   id_video: coreaplicaciones
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection: Cpanel
   entity: CpanAplicaciones
   table: CpanAplicaciones
   primarykey: Id

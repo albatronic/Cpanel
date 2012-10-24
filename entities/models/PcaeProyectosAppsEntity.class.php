@@ -93,7 +93,7 @@ class PcaeProyectosAppsEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_parentEntities = array(
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeControlAcceso', 'ParentColumn' => 'IdProyectoApp'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeControlAcceso', 'ParentColumn' => 'IdProyectoApp'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

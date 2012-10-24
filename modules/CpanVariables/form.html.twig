@@ -32,7 +32,6 @@
                 <input name="tipo" value="{{ values.tipo }}" type="hidden" />
                 <input name="ambito" value="{{ values.ambito }}" type="hidden" />
                 <input name="nombre" value="{{ values.nombre }}" type="hidden" />
-                <input name="archivoDatos" value="{{ values.archivoDatos}}" type="{{type}}" readonly/>
 
 		{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
 		{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
@@ -40,7 +39,6 @@
 		<ul>
                     {% block template %}{% endblock %}
 		</ul>
-
 	</form>
         </div>
         </div>

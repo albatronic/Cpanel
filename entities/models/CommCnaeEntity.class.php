@@ -46,7 +46,7 @@ class CommCnaeEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_parentEntities = array(
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdCNAE'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdCNAE'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

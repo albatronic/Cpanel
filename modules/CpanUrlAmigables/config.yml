@@ -43,11 +43,11 @@ CpanUrlAmigables:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: CpanUrlAmigables
-  id_video: coreurlamigables
+  title: Urls Amigables
+  id_video: cpanurlamigables
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection: ''
   entity: CpanUrlAmigables
   table: CpanUrlAmigables
   primarykey: Id
@@ -79,8 +79,8 @@ CpanUrlAmigables:
       link: { route: null, param: null, title: null, target: null, link: null }
     UrlFriendly:
       title: UrlFriendly
-      filter: NO
-      list: NO
+      filter: YES
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -91,7 +91,7 @@ CpanUrlAmigables:
     Controller:
       title: Controller
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -102,7 +102,7 @@ CpanUrlAmigables:
     Action:
       title: Action
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -113,7 +113,7 @@ CpanUrlAmigables:
     Template:
       title: Template
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -124,7 +124,7 @@ CpanUrlAmigables:
     Parameters:
       title: Parameters
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -135,7 +135,7 @@ CpanUrlAmigables:
     Entity:
       title: Entity
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -146,7 +146,7 @@ CpanUrlAmigables:
     IdEntity:
       title: IdEntity
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -186,7 +186,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Checked:
       title: Checked
@@ -198,7 +197,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 2, caption: Checked, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Publish:
       title: Publish
@@ -210,7 +208,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 3, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     BelongsTo:
       title: BelongsTo
@@ -277,7 +274,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 4, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     DeletedBy:
       title: DeletedBy
@@ -311,7 +307,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 5, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     SortOrder:
       title: SortOrder
@@ -378,7 +373,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 6, caption: LockUrlPrefix, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Slug:
       title: Slug
@@ -401,7 +395,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 7, caption: LockSlug, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     UrlHeritable:
       title: UrlHeritable
@@ -413,7 +406,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 8, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
       title: NumberVisits
@@ -447,7 +439,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 9, caption: LockMetatagTitle, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MetatagKeywords:
       title: MetatagKeywords
@@ -481,7 +472,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 10, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MetatagTitlePosition:
       title: MetatagTitlePosition
@@ -493,7 +483,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 11, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ShowOnSitemap:
       title: ShowOnSitemap
@@ -505,7 +494,6 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 12, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ImportanceSitemap:
       title: ImportanceSitemap
@@ -528,5 +516,4 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 13, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }

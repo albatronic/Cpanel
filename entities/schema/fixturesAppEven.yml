@@ -1,0 +1,14 @@
+# Fixtures app Even. GESTOR DE EVENTOS
+CpanAplicaciones:
+  Even  : { CodigoApp: Even,   NombreApp: Gestor de Eventos }
+
+CpanModulos:
+  Even0: { CodigoApp: Even, NombreModulo: Even,             Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Gestor de Eventos, Funcionalidades: AC }
+  Even1: { CodigoApp: Even, NombreModulo: EvenEventos,      Nivel: 1, BelongsTo: Even,  Publish: 1, Titulo: Eventos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+CpanPermisos:
+  Even1: { IdPerfil: 1, NombreModulo: Even, Funcionalidades: 'AC,VW' }
+  Even2: { IdPerfil: 1, NombreModulo: EvenEventos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+  Even11: { IdPerfil: 2, NombreModulo: Even, Funcionalidades: 'AC,VW' }
+  Even12: { IdPerfil: 2, NombreModulo: EvenEventos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}

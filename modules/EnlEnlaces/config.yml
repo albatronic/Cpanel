@@ -43,11 +43,11 @@ EnlEnlaces:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: EnlEnlaces
+  title: 'Enlaces: Enlaces de Interés'
   id_video: enlenlaces
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection:
   entity: EnlEnlaces
   table: EnlEnlaces
   primarykey: Id
@@ -88,7 +88,7 @@ EnlEnlaces:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: IdSeccion, entity: EnlSecciones, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      aditional_filter: { order: 1, caption: IdSeccion, entity: EnlSecciones, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Titulo:
       title: Titulo

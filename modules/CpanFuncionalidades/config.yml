@@ -47,7 +47,7 @@ CpanFuncionalidades:
   id_video: corefuncionalidades
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection: Cpanel
   entity: CpanFuncionalidades
   table: CpanFuncionalidades
   primarykey: Id

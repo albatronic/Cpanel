@@ -1,0 +1,27 @@
+# FIXTURES DE LA APP COMM. DATOS COMUNES
+CpanAplicaciones:
+  Comm : { CodigoApp: Comm,  NombreApp: Datos Comunes}
+
+CpanModulos:
+  Comm01: { CodigoApp: Comm, NombreModulo: Comm,         Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Comm, Funcionalidades: 'AC' }
+  Comm02: { CodigoApp: Comm, NombreModulo: CommPaises,     Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Paises, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Comm03: { CodigoApp: Comm, NombreModulo: CommProvinicas, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Provincias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Comm04: { CodigoApp: Comm, NombreModulo: CommMunicipios, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Municipios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Comm05: { CodigoApp: Comm, NombreModulo: CommMonedas, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Monedas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Comm06: { CodigoApp: Comm, NombreModulo: CommIdiomas, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Idiomas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Comm07: { CodigoApp: Comm, NombreModulo: CommZonasHorarias, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Zonas Horarias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Comm08: { CodigoApp: Comm, NombreModulo: CommCnae, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Actividades Económicas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Comm09: { CodigoApp: Comm, NombreModulo: CommImpuestos, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Impuestos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Comm10: { CodigoApp: Comm, NombreModulo: CommBancos, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Bancos y oficinas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+
+CpanPermisos:
+  Comm01: { IdPerfil: 1, NombreModulo: Comm, Funcionalidades: 'AC,VW' }
+  Comm02: { IdPerfil: 1, NombreModulo: CommPaises, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Comm03: { IdPerfil: 1, NombreModulo: CommProvincias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Comm04: { IdPerfil: 1, NombreModulo: CommMunicipios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Comm05: { IdPerfil: 1, NombreModulo: CommMonedas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Comm06: { IdPerfil: 1, NombreModulo: CommIdiomas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Comm07: { IdPerfil: 1, NombreModulo: CommZonasHorarias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Comm08: { IdPerfil: 1, NombreModulo: CommCnae, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Comm09: { IdPerfil: 1, NombreModulo: CommImpuestos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Comm10: { IdPerfil: 1, NombreModulo: CommBancos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}

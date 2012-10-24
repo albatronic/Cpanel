@@ -205,7 +205,7 @@ if (!file_exists($config['twig']['templates_folder'] . '/' . $result['template']
 // Renderizo el template y los valores devueltos por el método
 $twig->addGlobal('user', new CpanUsuarios($_SESSION['USER']['user']['Id']));
 $twig->addGlobal('appPath', $app['path']);
-
+$twig->addGlobal('varEnvMod', $result['values']['varEnvMod']);
 $twig->loadTemplate($result['template'])
         ->display(array(
             'values' => $result['values'],

@@ -130,9 +130,9 @@ class PcaeEmpresasEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_parentEntities = array(
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeEmpresasUsuarios', 'ParentColumn' => 'IdEmpresa'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeEmpresasUsuarios', 'ParentColumn' => 'IdEmpresa'),
 			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeProyectos', 'ParentColumn' => 'IdEmpresa'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaePermisos', 'ParentColumn' => 'IdEmpresa'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaePermisos', 'ParentColumn' => 'IdEmpresa'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

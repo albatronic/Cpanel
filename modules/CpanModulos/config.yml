@@ -47,7 +47,7 @@ CpanModulos:
   id_video: coremodulos
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection: Cpanel
   entity: CpanModulos
   table: CpanModulos
   primarykey: Id

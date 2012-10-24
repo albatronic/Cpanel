@@ -3,7 +3,7 @@
 /**
  * Description of Controller
  *
- * Controlador común a todos los módulos del CPanel
+ * Controlador común a todos los módulos del Cpanel
  *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @date 24-agosto-2012 19:39
@@ -284,6 +284,7 @@ class Controller {
                     }
 
                     $datos = new $this->entity();
+                    print_r($this->request[$this->entity]);
                     $datos->bind($this->request[$this->entity]);
 
                     $rules = $this->form->getRules();
@@ -885,12 +886,8 @@ class Controller {
         $this->values['varEnvPro'] = $this->varEnvPro;
 
         // Variables de entorno del modulo
-        if (!isset($_SESSION['VARIABLES']['EnvMod'])) {
-            $variables = new CpanVariables('Mod', 'Env', $this->entity);
-            $this->varEnvMod = $variables->getValores();
-            $_SESSION['VARIABLES']['EnvMod'] = $this->varEnvMod;
-        } else
-            $this->varEnvMod = $_SESSION['VARIABLES']['EnvMod'];
+        $variables = new CpanVariables('Mod', 'Env', $this->entity);
+        $this->varEnvMod = $variables->getValores();
         $this->values['varEnvMod'] = $this->varEnvMod;
 
         // Variables web del modulo
@@ -921,6 +918,7 @@ class Controller {
         $this->values['varWebApp'] = $this->varWebApp;
         unset($variables);
     }
+
 }
 
 ?>

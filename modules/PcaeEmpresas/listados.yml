@@ -1,0 +1,45 @@
+# Module: PcaeEmpresas
+# Document : modules\PcaeEmpresas\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 23.10.2012 02:05:11
+#
+---
+listados:
+  -
+    title: PcaeEmpresas
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      IdGrupo: { title: IdGrupo, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      RazonSocial: { title: RazonSocial, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Cif: { title: Cif, length: '15', align: L, type: string, total: NO, formula: null, format: null }
+      Direccion: { title: Direccion, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      IdMunicipio: { title: IdMunicipio, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      CodigoPostal: { title: CodigoPostal, length: '10', align: L, type: string, total: NO, formula: null, format: null }
+      IdProvincia: { title: IdProvincia, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      IdPais: { title: IdPais, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      Telefono: { title: Telefono, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Fax: { title: Fax, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Web: { title: Web, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      EMail: { title: EMail, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      IdBanco: { title: IdBanco, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      IdOficina: { title: IdOficina, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      DigitoControl: { title: DigitoControl, length: '2', align: L, type: string, total: NO, formula: null, format: null }
+      Cuenta: { title: Cuenta, length: '10', align: L, type: string, total: NO, formula: null, format: null }
+      IBAN: { title: IBAN, length: '34', align: L, type: string, total: NO, formula: null, format: null }
+      SufijoRemesas: { title: SufijoRemesas, length: '2', align: L, type: string, total: NO, formula: null, format: null }
+      DigitosCuentaContable: { title: DigitosCuentaContable, length: '2', align: R, type: integer, total: NO, formula: null, format: null }
+      IdCNAE: { title: IdCNAE, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      RegistroMercantil: { title: RegistroMercantil, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      LicenciaActividad: { title: LicenciaActividad, length: '100', align: L, type: string, total: NO, formula: null, format: null }

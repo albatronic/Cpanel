@@ -1,0 +1,36 @@
+# Module: PcaeUsuarios
+# Document : modules\PcaeUsuarios\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 23.10.2012 01:02:46
+#
+---
+listados:
+  -
+    title: PcaeUsuarios
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      Nombre: { title: Nombre, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Apellidos: { title: Apellidos, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      DNI: { title: DNI, length: '15', align: L, type: string, total: NO, formula: null, format: null }
+      Direccion: { title: Direccion, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      IdMunicipio: { title: IdMunicipio, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      CodigoPostal: { title: CodigoPostal, length: '10', align: L, type: string, total: NO, formula: null, format: null }
+      IdProvincia: { title: IdProvincia, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      IdPais: { title: IdPais, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      Telefono: { title: Telefono, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      EMail: { title: EMail, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Password: { title: Password, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      NLogin: { title: NLogin, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
+      UltimoLogin: { title: UltimoLogin, length: 10, align: R, type: datetime, total: NO, formula: null, format: null }

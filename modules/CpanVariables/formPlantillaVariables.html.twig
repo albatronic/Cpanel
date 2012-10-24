@@ -33,7 +33,7 @@
                     {% for variable,valor in values.datos %}
                         {% if variable != 'listaValores' %}
                         <p>
-                        {% if ( (hayListaValores and (variable == 'default') ) or ( (variable == 'visible') or (variable == 'updatable') ) ) %}
+                        {% if ( (hayListaValores and (variable == 'default') ) or ( (variable == 'visible') or (variable == 'updatable') or (variable == 'editorTiny') ) ) %}
                             {% if (variable == 'default') %}
                                 {% set listaValores = values.datos.listaValores %}
                             {% else %}

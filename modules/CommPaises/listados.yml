@@ -1,0 +1,29 @@
+# Module: CommPaises
+# Document : modules\CommPaises\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 23.10.2012 02:30:16
+#
+---
+listados:
+  -
+    title: CommPaises
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      Codigo: { title: Codigo, length: '2', align: L, type: string, total: NO, formula: null, format: null }
+      Pais: { title: Pais, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      IdMoneda: { title: IdMoneda, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      IdZonaHoraria: { title: IdZonaHoraria, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      Latitud: { title: Latitud, length: false, align: R, type: integer, total: NO, formula: null, format: null }
+      Longitud: { title: Longitud, length: false, align: R, type: integer, total: NO, formula: null, format: null }

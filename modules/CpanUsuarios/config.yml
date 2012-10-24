@@ -47,7 +47,7 @@ CpanUsuarios:
   id_video: coreusuarios
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection: Cpanel
   entity: CpanUsuarios
   table: CpanUsuarios
   primarykey: Id

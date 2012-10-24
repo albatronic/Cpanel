@@ -180,8 +180,8 @@ class CpanVariablesController {
             $this->values['ambito'] = $ambito;
             $this->values['nombre'] = $nombre;
             $this->values['titulo'] = $this->variables->getTitulo();
-            $this->values['archivoDatos'] = $this->variables->getPathYml();
             $this->values['datos'] = $datos;
+            $this->values['yml'] = $this->variables->getYml();
             $this->values['template'] = $this->variables->getTemplate();
             unset($this->variables);
         } else
@@ -268,7 +268,6 @@ class CpanVariablesController {
                     $titulo = "Variables {$this->request['3']} de '{$columna}'";
 
                     $variables = new CpanVariables($ambito, $tipo, $nombre);
-                    $archivoYml = $variables->getPathYml();
                     $variablesColumna = $variables->getColumn($columna);
                     unset($variables);
 
@@ -283,7 +282,6 @@ class CpanVariablesController {
                     $this->values['nombre'] = $nombre;
                     $this->values['columna'] = $columna;
                     $this->values['datos'] = $datos;
-                    $this->values['archivoDatos'] = $archivoYml;
 
                     $template = $this->entity . '/formPlantillaVariables.html.twig';
                     break;
@@ -297,7 +295,6 @@ class CpanVariablesController {
                     $titulo = "Variables {$tipo} de '{$columna}'";
 
                     $variables = new CpanVariables($ambito, $tipo, $nombre);
-                    $archivoYml = $variables->getPathYml();
                     $variables->setColumn($columna, $this->request['datos']);
                     $variables->save();
 
@@ -308,7 +305,6 @@ class CpanVariablesController {
                     $this->values['columna'] = $columna;
                     $this->values['errores'] = $variables->getErrores();
                     $this->values['datos'] = $variables->getColumn($columna);
-                    $this->values['archivoDatos'] = $archivoYml;
                     unset($variables);
 
                     $template = $this->entity . '/formPlantillaVariables.html.twig';
@@ -336,7 +332,7 @@ class CpanVariablesController {
             case 'Pro':
                 switch ($tipo) {
                     case 'Env':
-                        // Leo el config global del cpanel
+                        // Leo el config global del Cpanel
                         $archivoConfig = sfYaml::load('config/config.yml');
                         $valores = $archivoConfig['config'];
                         if ($datos['maxLengthUrlsFriendly'] == '')
@@ -355,7 +351,7 @@ class CpanVariablesController {
                             $datos['numMaxAudios'] = $valores['numMaxAudios'];
                         break;
                     case 'Web' :
-                        // Leo el config global del cpanel
+                        // Leo el config global del Cpanel
                         $archivoConfig = sfYaml::load('config/config.yml');
                         $signatures = $archivoConfig['config']['signatures'];
 

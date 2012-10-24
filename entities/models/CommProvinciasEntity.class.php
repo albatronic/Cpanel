@@ -52,9 +52,9 @@ class CommProvinciasEntity extends EntityComunes {
 	 */
 	protected $_parentEntities = array(
 			array('SourceColumn' => 'Id', 'ParentEntity' => 'CommMunicipios', 'ParentColumn' => 'IdProvincia'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'CommBancosOficinas', 'ParentColumn' => 'IdProvincia'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdProvincia'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeUsuarios', 'ParentColumn' => 'IdProvincia'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'CommBancosOficinas', 'ParentColumn' => 'IdProvincia'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdProvincia'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeUsuarios', 'ParentColumn' => 'IdProvincia'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

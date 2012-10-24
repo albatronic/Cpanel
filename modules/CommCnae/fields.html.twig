@@ -1,0 +1,15 @@
+{#
+  Module: CommCnae
+  Document : modules\CommCnae\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 23.10.2012 03:13:47
+#}
+
+{{ macro.input(atributos.Codigo,'field_title','text',values.controller ~ '[Codigo]',values.controller ~ '_Codigo',datos.Codigo,'10','CampoTextoCorto','1') }}
+{{ macro.input(atributos.Actividad,'field_title','text',values.controller ~ '[Actividad]',values.controller ~ '_Actividad',datos.Actividad,'255','CampoTextoLargo','2') }}
+
+{% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_Codigo') }}

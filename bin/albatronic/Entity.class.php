@@ -198,7 +198,7 @@ class Entity {
      * Hace las validaciones de integridad previas al borrado pero NO
      * hace el borrado físico.
      *
-     * @return bollean
+     * @return boolean
      */
     public function delete() {
 
@@ -778,7 +778,6 @@ class Entity {
         }
         return $this->_conectionName;
 
-        //return str_replace("cpanel", $_SESSION['project']['name'], $this->_conectionName);
     }
 
     /**

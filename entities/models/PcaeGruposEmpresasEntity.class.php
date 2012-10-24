@@ -40,7 +40,7 @@ class PcaeGruposEmpresasEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_parentEntities = array(
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdGrupo'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeEmpresas', 'ParentColumn' => 'IdGrupo'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

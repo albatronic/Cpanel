@@ -1,0 +1,11 @@
+# VARIABLES WEB ESPECIFICAS DEL MODULO CommImpuestos
+#
+# Module: CommImpuestos
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright Informática ALBATRONIC, SL
+# date 23-10-2012 03:07:42
+#
+# ejemplo:
+#
+# nombreVariable: el texto del caption
+---

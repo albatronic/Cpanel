@@ -47,7 +47,7 @@ CpanPermisos:
   id_video: corepermisos
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection: Cpanel
   entity: CpanPermisos
   table: CpanPermisos
   primarykey: Id

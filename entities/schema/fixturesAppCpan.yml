@@ -1,0 +1,17 @@
+# Fixtures app Cpan. GESTOR DEL PANEL DE CONTROL
+CpanAplicaciones:
+  Cpan  : { CodigoApp: Cpan,   NombreApp: Gestor del Panel de Control }
+
+CpanModulos:
+  Cpan0: { CodigoApp: Cpan, NombreModulo: Cpan,             Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Gestor del Panel de Control, Funcionalidades: AC }
+  Cpan1: { CodigoApp: Cpan, NombreModulo: CpanDocs,         Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Gestor de Documentos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan2: { CodigoApp: Cpan, NombreModulo: CpanUrlAmigables, Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Gestor de Urls Amigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+CpanPermisos:
+  Cpan1: { IdPerfil: 1, NombreModulo: Cpan, Funcionalidades: 'AC,VW' }
+  Cpan2: { IdPerfil: 1, NombreModulo: CpanDocs, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan3: { IdPerfil: 1, NombreModulo: CpanUrlAmigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+  Cpan11: { IdPerfil: 2, NombreModulo: Cpan, Funcionalidades: 'AC,VW' }
+  Cpan12: { IdPerfil: 2, NombreModulo: CpanDocs, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan12: { IdPerfil: 2, NombreModulo: CpanUrlAmigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}

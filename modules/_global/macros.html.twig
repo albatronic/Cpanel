@@ -18,6 +18,8 @@
 
         permission  : String con los permisos. Aquí tampoco se usan
 
+        editorTiny  : Es el flag para mostrar un textarea con el editor 'tiny'
+
 
     @author: Sergio Pérez <sergio.perez@albatronic.com>
     @date: 9-sep-2012
@@ -39,26 +41,30 @@
 </label>
 {% endmacro %}
 
-{# input: MUESTRA UN <INPUT> #}
-{# ------------------------- #}
+{# input: MUESTRA UN <INPUT> o <TEXTAREA> dependiendo del atributo 'editorTiny' #}
+{# ---------------------------------------------------------------------------- #}
 {% macro input(atributos, classLabel, type, name, id, value, maxLength, class, tabIndex, extra, onchange) %}
-{% if atributos.visible == '1' %}
-<li>
-    <div class="form_grid_12" id="div_{{id|default(name)}}">
+{% if atributos.editorTiny != '1'%}
+    {% if atributos.visible == '1' %}
+    <li>
+        <div class="form_grid_12" id="div_{{id|default(name)}}">
 
-    {% if atributos.caption %}
-        {{ _self.label(atributos, classLabel, name, id) }}
-    {% endif %}
+        {% if atributos.caption %}
+            {{ _self.label(atributos, classLabel, name, id) }}
+        {% endif %}
 
-    <div class="form_input">
-    <input type="{{ type|default('text') }}" name="{{ name }}" id="{{ id|default(name)}}"
+        <div class="form_input">
+        <input type="{{ type|default('text') }}" name="{{ name }}" id="{{ id|default(name)}}"
            value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
            class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}" onchange="{{ onchange }}" {{extra}}
            {% if atributos.updatable == '0' %} disabled {% endif %}
-    />
-    </div>
-    </div>
-</li>
+        />
+        </div>
+        </div>
+    </li>
+    {% endif %}
+{% else %}
+    {{ _self.textarea(atributos, classLabel, name, id, value, rows, cols, 'elm1', tabindex) }}
 {% endif %}
 {% endmacro %}
 

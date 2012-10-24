@@ -43,11 +43,11 @@ EnlSecciones:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: EnlSecciones
+  title: 'Enlaces: Secciones'
   id_video: enlsecciones
   url_video: null
   feature_list: YES
-  conection: cpanel
+  conection:
   entity: EnlSecciones
   table: EnlSecciones
   primarykey: Id
@@ -73,7 +73,7 @@ EnlSecciones:
       visible: false
       updatable: false
       filter: NO
-      list: YES
+      list: NO
       default: null
       help: null
       permission: null
@@ -90,9 +90,9 @@ EnlSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Subtitulo:
-      title: Subtitulo
+      title: Subtítulo
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -101,9 +101,9 @@ EnlSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     TipoSeccion:
-      title: TipoSeccion
+      title: Tipo Seccion
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -115,7 +115,7 @@ EnlSecciones:
     Entidad:
       title: Entidad
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -126,7 +126,7 @@ EnlSecciones:
     IdEntidad:
       title: IdEntidad
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -171,7 +171,7 @@ EnlSecciones:
     Checked:
       title: Checked
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -183,7 +183,7 @@ EnlSecciones:
     Publish:
       title: Publish
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -296,7 +296,7 @@ EnlSecciones:
     SortOrder:
       title: SortOrder
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -504,7 +504,7 @@ EnlSecciones:
       list: NO
       visible: true
       updatable: true
-      default: '0,5'
+      default: '0.5'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }

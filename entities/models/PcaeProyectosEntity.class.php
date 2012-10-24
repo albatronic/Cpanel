@@ -77,8 +77,8 @@ class PcaeProyectosEntity extends EntityComunes {
 	 */
 	protected $_parentEntities = array(
 			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeProyectosApps', 'ParentColumn' => 'IdProyecto'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeControlAcceso', 'ParentColumn' => 'IdProyectoApp'),
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaePermisos', 'ParentColumn' => 'IdProyecto'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeControlAcceso', 'ParentColumn' => 'IdProyectoApp'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaePermisos', 'ParentColumn' => 'IdProyecto'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

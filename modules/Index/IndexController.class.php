@@ -60,7 +60,7 @@ class IndexController extends Controller {
             $proyectoApp = new PcaeProyectosApps();
             $proyectoApp = $proyectoApp->find('PrimaryKeyMD5', $this->request[1]);
             $_SESSION['project']['Id'] = $proyectoApp->getId();
-            $_SESSION['project']['Titulo'] = $proyectoApp->getIdProyecto()->getProyecto();
+            $_SESSION['project']['title'] = $proyectoApp->getIdProyecto()->getProyecto();
             $_SESSION['project']['conection'] = array(
                 'dbEngine' => $proyectoApp->getDbEngine(),
                 'host' => $proyectoApp->getHost(),
@@ -80,7 +80,7 @@ class IndexController extends Controller {
 
             // Establece el perfil del usuario para el proyecto y carga
             // el menú en base a su perfil
-            $usuario = new CpanUsuarios($_SESSION['USER']['user']['Id']);print_r($usuario);
+            $usuario = new CpanUsuarios($_SESSION['USER']['user']['Id']);
             $_SESSION['USER']['user']['IdPerfil'] = $usuario->getIdPerfil()->getId();
             $_SESSION['USER']['menu'] = $usuario->getArrayMenu();
             unset($usuario);

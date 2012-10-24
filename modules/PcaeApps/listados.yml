@@ -1,0 +1,25 @@
+# Module: PcaeApps
+# Document : modules\PcaeApps\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 23.10.2012 02:08:57
+#
+---
+listados:
+  -
+    title: PcaeApps
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      Aplicacion: { title: Aplicacion, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Url: { title: Url, length: '255', align: L, type: string, total: NO, formula: null, format: null }

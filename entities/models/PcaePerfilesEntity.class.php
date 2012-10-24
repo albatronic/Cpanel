@@ -41,7 +41,7 @@ class PcaePerfilesEntity extends EntityComunes {
 	 * @var string
 	 */
 	protected $_parentEntities = array(
-			array('SourceColumn' => ' Id', 'ParentEntity' => 'PcaeEmpresasUsuarios', 'ParentColumn' => 'IdPerfil'),
+			array('SourceColumn' => 'Id', 'ParentEntity' => 'PcaeEmpresasUsuarios', 'ParentColumn' => 'IdPerfil'),
 		);
 	/**
 	 * Relacion de entidades de las que esta depende

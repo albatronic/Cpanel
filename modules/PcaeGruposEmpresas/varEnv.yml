@@ -1,0 +1,11 @@
+# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO PcaeGruposEmpresas
+#
+# Module: PcaeGruposEmpresas
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright Informática ALBATRONIC, SL
+# date 23-10-2012 02:01:16
+#
+# ejemplo:
+#
+# nombreVariable: el texto del caption
+---

@@ -79,7 +79,7 @@ function popUpVariablesEnv(tipo, ambito, modulo_columna) {
     var columna = elementos[1];
     var url = appPath + '/CpanVariables/EditNode/'+ambito+'/'+tipo+'/'+modulo+'/'+columna;
 
-    window.open(url,'Variables','width=490,height=500,resizable=yes,scrollbars=yes');
+    window.open(url,'Variables','width=490,height=580,resizable=yes,scrollbars=yes');
 }
 
 /**

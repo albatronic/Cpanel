@@ -1,0 +1,17 @@
+# Fixtures app Enl. Enlaces de interés
+CpanAplicaciones:
+  Enl  : { CodigoApp: Enl,   NombreApp: Enlaces de Interes }
+
+CpanModulos:
+  Enl1: { CodigoApp: Enl,  NombreModulo: Enl,           Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Enl, Funcionalidades: AC }
+  Enl2: { CodigoApp: Enl,  NombreModulo: EnlSecciones,  Nivel: 1, BelongsTo: Enl,  Publish: 1, Titulo: Secciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Enl3: { CodigoApp: Enl,  NombreModulo: EnlEnlaces,    Nivel: 1, BelongsTo: Enl,  Publish: 1, Titulo: Enlaces, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+CpanPermisos:
+  Enl1: { IdPerfil: 1, NombreModulo: Enl, Funcionalidades: 'AC,VW' }
+  Enl2: { IdPerfil: 1, NombreModulo: EnlSecciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Enl3: { IdPerfil: 1, NombreModulo: EnlEnlaces, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+  Enl11: { IdPerfil: 2, NombreModulo: Enl, Funcionalidades: 'AC,VW' }
+  Enl21: { IdPerfil: 2, NombreModulo: EnlSecciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Enl31: { IdPerfil: 2, NombreModulo: EnlEnlaces, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}

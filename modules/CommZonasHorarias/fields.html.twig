@@ -1,0 +1,14 @@
+{#
+  Module: CommZonasHorarias
+  Document : modules\CommZonasHorarias\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 23.10.2012 03:10:51
+#}
+
+{{ macro.input(atributos.Zona,'field_title','text',values.controller ~ '[Zona]',values.controller ~ '_Zona',datos.Zona,'255','CampoTextoLargo','1') }}
+
+{# include '_global/fieldsComunes.html.twig' #}
+
+{{ macro.foco(values.controller ~ '_Zona') }}
