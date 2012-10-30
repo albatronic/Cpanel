@@ -15,40 +15,32 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
         return $this->getId();
     }
 
-
     /**
-     * Marca como borrado un registro y borra el archivo asociado.
+     * LLama al método erase
      *
      * @return bollean
      */
     public function delete() {
 
-        $this->conecta();
-
-        if (is_resource($this->_dbLink)) {
-            // Auditoria
-            $fecha = date('Y-m-d H:i:s');
-            $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET `Deleted` = '1', `DeletedAt` = '{$fecha}', `DeletedBy` = '{$_SESSION['USER']['user']['Id']}' WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
-            if (!$this->_em->query($query))
-                $this->_errores = $this->_em->getError();
-
-            $this->_em->desConecta();
-        } else
-            $this->_errores = $this->_em->getError();
-
-        unset($this->_em);
-
-        $ok = (count($this->_errores) == 0);
-
-        return $ok;
+        return $this->erase();
     }
 
     /**
-     * Borra físicamente un registro (delete) y su archivo asociado.
+     * Borra físicamente un registro (delete) y quita los valores
+     * relacionados con la url amigable en la entidad relacionada
      *
      * @return boolean
      */
     public function erase() {
+
+        // Quito de la entidad asociada los valores de la url amigable
+        if (class_exists($this->Entity)) {
+            $entidadAsociada = new $this->Entity($this->IdEntity);
+            $entidadAsociada->setUrlPrefix('');
+            $entidadAsociada->setSlug('');
+            $entidadAsociada->setUrlFriendly('');
+            $entidadAsociada->save();
+        }
 
         $this->conecta();
 
@@ -66,6 +58,39 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
         $ok = (count($this->_errores) == 0);
 
         return $ok;
+    }
+
+    /**
+     * Comprueba que no exista otra url igual
+     */
+    public function validaLogico() {
+
+        $url = new CpanUrlAmigables();
+        $url = $url->find('UrlFriendly', $this->UrlFriendly);
+
+        if ($url->getPrimaryKeyValue() != $this->getPrimaryKeyValue()) {
+            if (!$this->getPrimaryKeyValue())
+                $this->_errores[] = "Ya existe un objeto con esa Url. Entidad = {$url->getEntity()}, IdEntidad= {$url->getIdEntity()}";
+        }
+        unset($url);
+
+        if (count($this->_errores) == 0)
+            $this->actualizaEntidadReferenciada ();
+    }
+
+    public function actualizaEntidadReferenciada() {
+
+        if (class_exists($this->Entity)) {
+            $objeto = new $this->Entity($this->IdEntity);
+            $objeto->setSlug(str_replace("/", "", $this->UrlFriendly));
+            $objeto->setUrlFriendly($this->UrlFriendly);
+            $ok = $objeto->save();
+            unset($objeto);
+        }
+
+        if (!$ok)
+            $this->_errores[] = "No se ha podido actualizar la url en la entidad referenciada '{$this->Entity}({$this->IdEntity})'. Es posible que esa Entidad/IdEntidad no exista.";
+
     }
 
     /**

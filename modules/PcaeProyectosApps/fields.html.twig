@@ -1,0 +1,27 @@
+{#
+  Module: PcaeProyectosApps
+  Document : modules\PcaeProyectosApps\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 25.10.2012 19:10:00
+#}
+
+{{ macro.select(atributos.IdProyecto,'field_title',values.controller ~ '[IdProyecto]',values.controller ~ '_IdProyecto',none,datos.IdProyecto.IdProyecto,datos.IdProyecto.fetchAll('Proyecto',0),'chzn-select','1')}}
+{{ macro.select(atributos.IdApp,'field_title',values.controller ~ '[IdApp]',values.controller ~ '_IdApp',none,datos.IdApp.IdApp,datos.IdApp.fetchAll('Aplicacion',0),'chzn-select','2')}}
+{{ macro.input(atributos.NumeroLicencias,'field_title','text',values.controller ~ '[NumeroLicencias]',values.controller ~ '_NumeroLicencias',datos.NumeroLicencias,'4','CampoUnidades','3') }}
+{{ macro.input(atributos.FtpServer,'field_title','text',values.controller ~ '[FtpServer]',values.controller ~ '_FtpServer',datos.FtpServer,'255','CampoTextoLargo','4') }}
+{{ macro.input(atributos.FtpPort,'field_title','text',values.controller ~ '[FtpPort]',values.controller ~ '_FtpPort',datos.FtpPort,'6','CampoUnidades','5') }}
+{{ macro.input(atributos.FtpFolder,'field_title','text',values.controller ~ '[FtpFolder]',values.controller ~ '_FtpFolder',datos.FtpFolder,'255','CampoTextoLargo','6') }}
+{{ macro.input(atributos.FtpUser,'field_title','text',values.controller ~ '[FtpUser]',values.controller ~ '_FtpUser',datos.FtpUser,'255','CampoTextoLargo','7') }}
+{{ macro.input(atributos.FtpPassword,'field_title','text',values.controller ~ '[FtpPassword]',values.controller ~ '_FtpPassword',datos.FtpPassword,'255','CampoTextoLargo','8') }}
+{{ macro.input(atributos.Url,'field_title','text',values.controller ~ '[Url]',values.controller ~ '_Url',datos.Url,'255','CampoTextoLargo','9') }}
+{{ macro.input(atributos.DbEngine,'field_title','text',values.controller ~ '[DbEngine]',values.controller ~ '_DbEngine',datos.DbEngine,'255','CampoTextoLargo','10') }}
+{{ macro.input(atributos.Host,'field_title','text',values.controller ~ '[Host]',values.controller ~ '_Host',datos.Host,'255','CampoTextoLargo','11') }}
+{{ macro.input(atributos.User,'field_title','text',values.controller ~ '[User]',values.controller ~ '_User',datos.User,'255','CampoTextoLargo','12') }}
+{{ macro.input(atributos.Password,'field_title','text',values.controller ~ '[Password]',values.controller ~ '_Password',datos.Password,'255','CampoTextoLargo','13') }}
+{{ macro.input(atributos.Database,'field_title','text',values.controller ~ '[Database]',values.controller ~ '_Database',datos.Database,'255','CampoTextoLargo','14') }}
+
+{# include '_global/fieldsComunes.html.twig' #}
+
+{{ macro.foco(values.controller ~ '_IdProyecto') }}

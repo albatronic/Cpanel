@@ -69,7 +69,7 @@ class Tipos {
     }
 
     public function __toString() {
-        return $this->IDTipo;
+        return $this->Descripcion;
     }
 
 }

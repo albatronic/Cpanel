@@ -9,11 +9,11 @@
 
 {{ macro.input(atributos.Codigo,'field_title','text',values.controller ~ '[Codigo]',values.controller ~ '_Codigo',datos.Codigo,'2','CampoTextoCorto','1') }}
 {{ macro.input(atributos.Pais,'field_title','text',values.controller ~ '[Pais]',values.controller ~ '_Pais',datos.Pais,'255','CampoTextoLargo','2') }}
-{{ macro.select(atributos.IdMoneda,'field_title',values.controller ~ '[IdMoneda]',values.controller ~ '_IdMoneda',none,datos.IdMoneda.Id,datos.IdMoneda.fetchAll('Moneda'),'chzn-select','3')}}
-{{ macro.select(atributos.IdZonaHoraria,'field_title',values.controller ~ '[IdZonaHoraria]',values.controller ~ '_IdZonaHoraria',none,datos.IdZonaHoraria.Id,datos.IdZonaHoraria.fetchAll('Zona'),'chzn-select','4')}}
+{{ macro.input(atributos.IdMoneda,'field_title','text',values.controller ~ '[IdMoneda]',values.controller ~ '_IdMoneda',datos.IdMoneda.Id,'255','CampoTextoLargo','3','','',['monedas','Moneda',datos.IdMoneda.Moneda]) }}
+{{ macro.input(atributos.IdZonaHoraria,'field_title','text',values.controller ~ '[IdZonaHoraria]',values.controller ~ '_IdZonaHoraria',datos.IdZonaHoraria.Id,'255','CampoTextoLargo','4','','',['zonasHorarias','Zona',datos.IdZonaHoraria.Zona]) }}
 {{ macro.input(atributos.Latitud,'field_title','text',values.controller ~ '[Latitud]',values.controller ~ '_Latitud',datos.Latitud,'255','','5') }}
 {{ macro.input(atributos.Longitud,'field_title','text',values.controller ~ '[Longitud]',values.controller ~ '_Longitud',datos.Longitud,'255','','6') }}
 
-{# include '_global/fieldsComunes.html.twig' #}
+{% include '_global/fieldsComunes.html.twig' %}
 
 {{ macro.foco(values.controller ~ '_Codigo') }}

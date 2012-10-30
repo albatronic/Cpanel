@@ -14,7 +14,7 @@ CommImpuestos:
     toEntity: ''
     toColumn: ''
   numMaxRecords: ''
-  withImages: '0'
+  numberOfImages: '0'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0
@@ -79,9 +79,9 @@ CommImpuestos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
     IdPais:
-      title: Pais
+      title: País
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -166,7 +166,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 2, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     Checked:
       title: Checked
@@ -178,7 +177,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 3, caption: Checked, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     Publish:
       title: Publish
@@ -190,7 +188,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 4, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     BelongsTo:
       title: BelongsTo
@@ -257,7 +254,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 5, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     DeletedBy:
       title: DeletedBy
@@ -291,7 +287,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 6, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     SortOrder:
       title: SortOrder
@@ -358,7 +353,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 7, caption: LockUrlPrefix, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     Slug:
       title: Slug
@@ -381,7 +375,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 8, caption: LockSlug, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     UrlFriendly:
       title: UrlFriendly
@@ -404,7 +397,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 9, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
       title: NumberVisits
@@ -438,7 +430,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 10, caption: LockMetatagTitle, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     MetatagKeywords:
       title: MetatagKeywords
@@ -472,7 +463,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 11, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     MetatagTitlePosition:
       title: MetatagTitlePosition
@@ -484,7 +474,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 12, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     ShowOnSitemap:
       title: ShowOnSitemap
@@ -496,7 +485,6 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 13, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     ImportanceSitemap:
       title: ImportanceSitemap
@@ -519,5 +507,4 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 14, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }

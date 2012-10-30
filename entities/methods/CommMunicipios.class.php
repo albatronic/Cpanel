@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
@@ -9,8 +10,17 @@
  * @orm:Entity(CommMunicipios)
  */
 class CommMunicipios extends CommMunicipiosEntity {
-	public function __toString() {
-		return $this->getId();
-	}
+
+    public function __toString() {
+        return $this->getMunicipio();
+    }
+
+    public function fetchAll($column = '', $default = TRUE) {
+        if ($column == '')
+            $column = 'Municipio';
+        return parent::fetchAll($column, $default);
+    }
+
 }
+
 ?>

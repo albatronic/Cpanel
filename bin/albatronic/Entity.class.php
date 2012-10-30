@@ -409,7 +409,10 @@ class Entity {
      * Este método lo debe implementar la entidad que lo necesite
      */
     protected function validaLogico() {
-
+        if ($this->BelongsTo == $this->getPrimaryKeyValue()) {
+            $this->BelongsTo = '';
+            $this->_alertas[] = "El objeto no puede pertenecer a el mismo";
+        }
     }
 
     /**
@@ -684,6 +687,30 @@ class Entity {
     }
 
     /**
+     * Devuelve con los nombres de las propiedades de la entidad.
+     *
+     * No devuelve las propiedades que empiezan por guión bajo "_"
+     *
+     * El array es del tipo ('Id'=> ..., 'Value'=>....)
+     *
+     * @return array Array con los valores de las propiedades de la entidad
+     */
+    public function getColumnsNames() {
+
+        $columns = array();
+
+        foreach ($this as $key => $value) {
+            if (substr($key, 0, 1) != "_")
+                $columns[] = array(
+                    'Id' => $key,
+                    'Value' => $key
+                );
+        }
+
+        return $columns;
+    }
+
+    /**
      * Le asigna un valor a la propiedad que corresponde
      * a la primaryKey
      * @param variant $primaryKeyValue
@@ -777,7 +804,6 @@ class Entity {
             $this->_conectionName = $_SESSION['project']['conection'];
         }
         return $this->_conectionName;
-
     }
 
     /**

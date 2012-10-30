@@ -1,0 +1,25 @@
+{#
+  Module: GconSecciones
+  Document : modules\GconSecciones\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 29.10.2012 20:07:59
+#}
+
+{{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
+{{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
+{{ macro.textarea(atributos.Introduccion,'field_title',values.controller ~ '[Introduccion]',values.controller ~ '_Introduccion',datos.Introduccion,none,none,'input_grow','3')}}
+{{ macro.select(atributos.MostrarTitulo,'field_title',values.controller ~ '[MostrarTitulo]',values.controller ~ '_MostrarTitulo',none,datos.MostrarTitulo.MostrarTitulo,datos.MostrarTitulo.fetchAll('',0),'chzn-select','4')}}
+{{ macro.select(atributos.MostrarSubtitulo,'field_title',values.controller ~ '[MostrarSubtitulo]',values.controller ~ '_MostrarSubtitulo',none,datos.MostrarSubtitulo.MostrarSubtitulo,datos.MostrarSubtitulo.fetchAll('IDTipo',0),'chzn-select','5')}}
+{{ macro.select(atributos.MostrarIntroduccion,'field_title',values.controller ~ '[MostrarIntroduccion]',values.controller ~ '_MostrarIntroduccion',none,datos.MostrarIntroduccion.MostrarIntroduccion,datos.MostrarIntroduccion.fetchAll('IDTipo',0),'chzn-select','6')}}
+{{ macro.input(atributos.MostrarEnMenuN,'field_title','text',values.controller ~ '[MostrarEnMenuN]',values.controller ~ '_MostrarEnMenuN',datos.MostrarEnMenuN,'255','CampoTextoLargo','7') }}
+{{ macro.input(atributos.EtiquetaWebN,'field_title','text',values.controller ~ '[EtiquetaWebN]',values.controller ~ '_EtiquetaWebN',datos.EtiquetaWebN,'255','CampoTextoLargo','8') }}
+{{ macro.input(atributos.OrdenMenuN,'field_title','text',values.controller ~ '[OrdenMenuN]',values.controller ~ '_OrdenMenuN',datos.OrdenMenuN,'255','CampoTextoLargo','9') }}
+{{ macro.select(atributos.ModoMostrarContenidos,'field_title',values.controller ~ '[ModoMostrarContenidos]',values.controller ~ '_ModoMostrarContenidos',none,datos.ModoMostrarContenidos.ModoMostrarContenidos,datos.ModoMostrarContenidos.fetchAll('IDTipo',0),'chzn-select','10')}}
+{{ macro.select(atributos.CriterioOrdenContenidosHijos,'field_title',values.controller ~ '[CriterioOrdenContenidosHijos]',values.controller ~ '_CriterioOrdenContenidosHijos',none,datos.CriterioOrdenContenidosHijos.CriterioOrdenContenidosHijos,datos.CriterioOrdenContenidosHijos.fetchAll('IDTipo',0),'chzn-select','11')}}
+{{ macro.select(atributos.MostrarSubsecciones,'field_title',values.controller ~ '[MostrarSubsecciones]',values.controller ~ '_MostrarSubsecciones',none,datos.MostrarSubsecciones.MostrarSubsecciones,datos.MostrarSubsecciones.fetchAll('IDTipo',0),'chzn-select','12')}}
+
+{% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_Titulo') }}

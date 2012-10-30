@@ -207,7 +207,7 @@ class Controller {
                             if ($datos->valida($rules)) {
                                 $this->values['alertas'] = $datos->getAlertas();
                                 if ($datos->save())
-                                    $this->gestionUrlMeta(&$datos);
+                                    $this->gestionUrlMeta($datos);
 
                                 //Recargo el objeto para refrescar las propiedas que
                                 //hayan podido ser objeto de algun calculo durante el proceso
@@ -284,7 +284,6 @@ class Controller {
                     }
 
                     $datos = new $this->entity();
-                    print_r($this->request[$this->entity]);
                     $datos->bind($this->request[$this->entity]);
 
                     $rules = $this->form->getRules();
@@ -513,8 +512,11 @@ class Controller {
                                 $doc->setIsThumbnail(0);
                                 if ($doc->valida($rules))
                                     $lastId = $doc->create();
-                                if (!$lastId)
-                                    $this->values['errores'] = $doc->getErrores();
+                                $this->values['errores'] = $doc->getErrores();
+                                if (count($doc->getErrores())) {
+                                    $doc->borraDocs($this->entity, $idEntidad, 'image%');
+                                    $lastId = 0;
+                                }
 
                                 // Subir Miniatura
                                 if (($lastId) and ($value['generateThumbnail'] == '1')) {
@@ -557,6 +559,7 @@ class Controller {
                     $slug = trim($this->request['image'][$idImagen]['Name']);
                     $showCaption = $this->request['image'][$idImagen]['ShowCaption'];
                     $orden = $this->request['image'][$idImagen]['SortOrder'];
+                    $publicar = $this->request['image'][$idImagen]['Publish'];
                     $documento = $this->request['FILES'][$tipo];
                     $documento['maxWidth'] = $this->varEnvMod['images'][$idImagen]['width'];
                     $documento['maxHeight'] = $this->varEnvMod['images'][$idImagen]['height'];
@@ -566,6 +569,7 @@ class Controller {
                     $doc->setName($slug);
                     $doc->setShowCaption($showCaption);
                     $doc->setSortOrder($orden);
+                    $doc->setPublish($publicar);
                     if ($documento['name'] != '')
                         $doc->setArrayDoc($documento);
                     $doc->setIsThumbnail(0);
@@ -717,9 +721,15 @@ class Controller {
      */
     private function gestionUrlMeta($datos) {
 
-        $urlAmigable = $this->calculaUrlAmigable($datos);
+        $objetoAuxuliar = new $this->entity($datos->getPrimaryKeyValue());
 
-        $metatagTitle = $this->calculaMetatagTitle($datos);
+        if ($this->varEnvMod['urlFriendlyManagement'])
+            $urlAmigable = $this->calculaUrlAmigable($objetoAuxuliar);
+
+        if ($this->varEnvMod['metatagTitleManagement'])
+            $metatagTitle = $this->calculaMetatagTitle($objetoAuxuliar);
+
+        unset($objetoAuxuliar);
 
         if (count($urlAmigable) or ($metatagTitle != '')) {
 
@@ -748,8 +758,10 @@ class Controller {
         // Si hay que generar la url amigable
         if ($columnaSlug) {
 
-            $bloqueoUrlPrefix = ( $datos->getLockUrlPrefix() == '1' );
-            $bloqueoSlug = ( $datos->getLockSlug() == '1' );
+            $bloqueoUrlPrefix = ( $datos->getLockUrlPrefix()->getIDTipo() == '1' );
+            $datos->setLockUrlPrefix($bloqueoUrlPrefix);
+            $bloqueoSlug = ( $datos->getLockSlug()->getIDTipo() == '1' );
+            $datos->setLockSlug($bloqueoSlug);
             $perteneceA = $datos->getBelongsTo()->getPrimaryKeyValue();
 
             // CALCULAR EL PREFIJO DE LA URL -----------------------------------
@@ -811,6 +823,7 @@ class Controller {
             if ($urlPrefix != '')
                 $urlAmigable = $urlPrefix;
             $urlAmigable .= "/{$slug}";
+            $urlAmigable = str_replace("//", "/", $urlAmigable);
             $urlAmigable = substr($urlAmigable, 0, $this->varEnvPro['maxLengthUrlsFriendly']);
 
             $urls = new CpanUrlAmigables();
@@ -863,6 +876,7 @@ class Controller {
         // Obtener el metatagtitle
 
         $bloqueoMetatagTitle = ($datos->getLockMetatagTitle()->getIDTipo() == '1');
+        $datos->setLockMetatagTitle($bloqueoMetatagTitle);
 
         if ($bloqueoMetatagTitle) {
             $columnaMetatagTitle = $this->varEnvMod['fieldGeneratorMetatagTitle'];

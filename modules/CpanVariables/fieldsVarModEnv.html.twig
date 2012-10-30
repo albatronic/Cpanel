@@ -16,7 +16,6 @@
 
 {# DEFINICION DE CONSTANTE CUYOS VALORES PUEDEN SER ADQUIRIDOS POR LOS CAMPOS ------------------------ #}
 
-{% set nImagenes = 3 %}
 {% set ValoresSN = { '0':{'Id':'0','Value':'No'}, '1':{'Id':'1','Value':'Si'} }  %}
 {% set ValoresIzqDcha = { '0':{'Id':'0','Value':'Izquierda'}, '1':{'Id':'1','Value':'Derecha'} }  %}
 
@@ -30,7 +29,7 @@
         <li class="ui-state-default ui-corner-top"><a href="#tabs-siteMap">SiteMap</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-meta">Meta</a></li>
 
-        {% for i in 1..nImagenes %}
+        {% for i in 1..values.datos.numberOfImages %}
         <li class="ui-state-default ui-corner-tope"><a href="#tabs-imagen{{i}}">Imagen {{i}}</a></li>
         {% endfor %}
 
@@ -45,9 +44,10 @@
     {# GLOBAL #}
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.select({'caption':'[isModuleRoot] Es el módulo padre','visible':'1','varEnv':'0'},'field_title','datos[isModuleRoot]','datos_isModuleRoot',none,values.datos.isModuleRoot,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[showCommonFields] Mostrar campos comunes','visible':'1','varEnv':'0'},'field_title','datos[showCommonFields]','datos_showCommonFields',none,values.datos.showCommonFields,ValoresSN,'chzn-select')}}
         {{ macro.input({'caption':'[numMaxRecords] Número máximo registros','visible':'1','varEnv':'0'},'field_title','text','datos[numMaxRecords]','datos_numMaxRecords',values.datos.numMaxRecords,'15','CampoTextoCorto','1') }}
         {{ macro.select({'caption':'[showNumberVisits] Mostrar número visitas','visible':'1','varEnv':'0'},'field_title','datos[showNumberVisits]','datos_showNumberVisits',none,values.datos.showNumberVisits,ValoresSN,'chzn-select')}}
-        {{ macro.select({'caption':'[withImages] Hay Imágenes','visible':'1','varEnv':'0'},'field_title','datos[withImages]','datos_withImages',none,values.datos.withImages,ValoresSN,'chzn-select')}}
+        {{ macro.input({'caption':'[numberOfImages] Número de imágenes de diseño (0=sin imágenes)','visible':'1','varEnv':'0'},'field_title','text','datos[numberOfImages]','datos_numberOfImages',values.datos.numberOfImages,'3','CampoTextoCorto','1') }}
         {{ macro.select({'caption':'[withGalery] Hay Galeria','visible':'1','varEnv':'0'},'field_title','datos[withGalery]','datos_withGalery',none,values.datos.withGalery,ValoresSN,'chzn-select')}}
         {{ macro.select({'caption':'[withDocuments] Hay Documentos','visible':'1','varEnv':'0'},'field_title','datos[withDocuments]','datos_withDocuments',none,values.datos.withDocuments,ValoresSN,'chzn-select')}}
         {{ macro.select({'caption':'[withVideos] Hay Videos','visible':'1','varEnv':'0'},'field_title','datos[withVideos]','datos_withVideos',none,values.datos.withVideos,ValoresSN,'chzn-select')}}
@@ -60,7 +60,8 @@
 
     {# URL AMIGABLE #}
     <div id="tabs-urlAmigable" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input({'caption':'[fieldGeneratorUrlFriendly] Campo generador URL amigable','visible':'1','varEnv':'0'},'field_title','text','datos[fieldGeneratorUrlFriendly]','datos_fieldGeneratorUrlFriendly',values.datos.fieldGeneratorUrlFriendly,'15','CampoTextoCorto','1') }}
+        {{ macro.select({'caption':'[urlFriendlyManagement] Gestionar URL amigables','visible':'1','varEnv':'0'},'field_title','datos[urlFriendlyManagement]','datos_urlFriendlyManagement',none,values.datos.urlFriendlyManagement,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[fieldGeneratorUrlFriendly] Campo generador URL amigable','visible':'1','varEnv':'0'},'field_title','datos[fieldGeneratorUrlFriendly]','datos_fieldGeneratorUrlFriendly',none,values.datos.fieldGeneratorUrlFriendly,values.columnas,'chzn-select')}}
         {{ macro.select({'caption':'[showSlugManagement] Mostrar gestión Slug','visible':'1','varEnv':'0'},'field_title','datos[showSlugManagement]','datos_showSlugManagement',none,values.datos.showSlugManagement,ValoresSN,'chzn-select')}}
         {{ macro.select({'caption':'[showUrlFriendly] Mostrar Url amigable','visible':'1','varEnv':'0'},'field_title','datos[showUrlFriendly]','datos_showUrlFriendly',none,values.datos.showUrlFriendly,ValoresSN,'chzn-select')}}
     </div>
@@ -75,14 +76,15 @@
 
     {# MOSTAR GESTION META #}
     <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input({'caption':'[fieldGeneratorMetatagTitle] Campo generador Metatag Title','visible':'1','varEnv':'0'},'field_title','text','datos[fieldGeneratorMetatagTitle]','datos_fieldGeneratorMetatagTitle',values.datos.fieldGeneratorMetatagTitle,'15','CampoTextoCorto','1') }}
+        {{ macro.select({'caption':'[metatagTitleManagement] Gestionar MetatagTitles','visible':'1','varEnv':'0'},'field_title','datos[metatagTitleManagement]','datos_metatagTitleManagement',none,values.datos.metatagTitleManagement,ValoresSN,'chzn-select')}}
+        {{ macro.select({'caption':'[fieldGeneratorMetatagTitle] Campo generador Metatag Title','visible':'1','varEnv':'0'},'field_title','datos[fieldGeneratorMetatagTitle]','datos_fieldGeneratorMetatagTitle',none,values.datos.fieldGeneratorMetatagTitle,values.columnas,'chzn-select')}}
         {{ macro.select({'caption':'[showMetaManagement][show] Mostrar gestión Meta','visible':'1','varEnv':'0'},'field_title','datos[showMetaManagement][show]','datos_showMetaManagement_show',none,values.datos.showMetaManagement.show,ValoresSN,'chzn-select')}}
         {{ macro.select({'caption':'[showMetaManagement][titlePosition] Posición del title','visible':'1','varEnv':'0'},'field_title','datos[showMetaManagement][titlePosition]','datos_showMetaManagement_titlePosition',none,values.datos.showMetaManagement.titlePosition,ValoresIzqDcha,'chzn-select')}}
         {{ macro.select({'caption':'[showMetaManagement][titleSimple] Title Simple','visible':'1','varEnv':'0'},'field_title','datos[showMetaManagement][titleSimple]','datos_showMetaManagement_titleSimple',none,values.datos.showMetaManagement.titleSimple,ValoresSN,'chzn-select')}}
     </div>
 
     {# IMAGENES #}
-    {% for i in 1..nImagenes %}
+    {% for i in 1..values.datos.numberOfImages %}
     <div id="tabs-imagen{{i}}" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.select({'caption':'[images]['~i~'][visible] Visible','visible':'1','varEnv':'0'},'field_title','datos[images]['~i~'][visible]','datos_images_' ~ i ~ '_visible',none,values.datos.images[i].visible,ValoresSN,'chzn-select')}}
         {{ macro.input({'caption':'[images]['~i~'][caption] Caption','visible':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][caption]','datos_images_'~i~'_caption',values.datos.images[i].caption,'15','CampoTextoCorto','1') }}

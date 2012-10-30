@@ -24,7 +24,12 @@ class CpanDocs extends CpanDocsEntity {
 
     public function __construct($primaryKeyValue = '') {
 
-        $this->_prePath = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['project']['folder'] . "/";
+        $this->_prePath = $_SESSION['project']['ftp']['folder'];
+        if ($this->_prePath != '') {
+            if (substr($this->_prePath, -1) != '/')
+                $this->_prePath .= "/";
+        }
+
         parent::__construct($primaryKeyValue);
 
         $this->_ArrayDoc = array(
@@ -44,20 +49,6 @@ class CpanDocs extends CpanDocsEntity {
 
     public function getArrayDoc() {
         return $this->_ArrayDoc;
-    }
-
-    public function save() {
-
-        $archivo = new Archivo($this->_prePath . $this->PathName);
-        $this->setSize($archivo->getSize());
-        $this->setWidth($archivo->getImageWidth());
-        $this->setHeight($archivo->getImageHeight());
-        $this->setMimeType($archivo->getMimeType());
-        unset($archivo);
-
-        $ok = parent::save();
-
-        return $ok;
     }
 
     public function create() {
@@ -134,20 +125,22 @@ class CpanDocs extends CpanDocsEntity {
     }
 
     /**
-     * Borra físicamente el archivo del disco duro
+     * Borra físicamente el archivo del disco del servidor vía FTP
      *
      * @return boolean TRUE si se ha borrado con éxito
      */
     private function borraArchivo() {
 
-        $fullPath = $this->_prePath . $this->getPathName();
-        $archivo = new Archivo($fullPath);
-        $ok = $archivo->delete();
+        $pathInfo = pathinfo($this->PathName);
 
-        if (!$ok)
-            $this->_errores = $archivo->getErrores();
+        $carpetaDestino = $this->_prePath . $pathInfo['dirname'];
 
-        unset($archivo);
+        $ftp = new Ftp($_SESSION['project']['ftp']['server'], $_SESSION['project']['ftp']['user'], $_SESSION['project']['ftp']['password']);
+        $ok = $ftp->delete($carpetaDestino, $this->Name);
+        $this->_errores = $ftp->getErrores();
+        $ftp->close();
+        unset($ftp);
+
 
         return $ok;
     }
@@ -383,7 +376,7 @@ class CpanDocs extends CpanDocsEntity {
     }
 
     /**
-     * Sube el documento indicado en $this->_ArrayDoc al servidor
+     * Sube el documento indicado en $this->_ArrayDoc al servidor via FTP
      *
      * Si es una imagen, la redimensiona se han establecido dimensiones
      * fijas en $this->_ArrayDoc['width'] y $this->_ArrayDoc['heigth']
@@ -392,27 +385,42 @@ class CpanDocs extends CpanDocsEntity {
      */
     private function subeDocumento() {
 
-        $fullPath = $this->_prePath . $this->PathName;
+        $pathInfo = pathinfo($this->PathName);
 
-        $archivo = new Archivo($fullPath);
-        $ok = $archivo->upLoad($this->_ArrayDoc['tmp_name']);
+        $carpetaDestino = $this->_prePath . $pathInfo['dirname'];
 
-        if (($ok) and (exif_imagetype($fullPath))) {
-            list($ancho, $alto) = getimagesize($fullPath);
+        $ok = is_uploaded_file($this->_ArrayDoc['tmp_name']);
 
-            if (($this->_ArrayDoc['maxWidth']) and ($ancho > $this->_ArrayDoc['maxWidth']))
-                $ancho = $this->_ArrayDoc['maxWidth'];
-            if (($this->_ArrayDoc['maxHeight']) and ($alto > $this->_ArrayDoc['maxHeight']))
-                $alto = $this->_ArrayDoc['maxHeight'];
+        if ($ok) {
+            if (exif_imagetype($this->_ArrayDoc['tmp_name'])) {
+                // Tratamiento de la imagen antes de subirla
+                list($ancho, $alto) = getimagesize($this->_ArrayDoc['tmp_name']);
 
-            $img = new Gd();
-            $img->loadImage($fullPath);
-            $img->crop($ancho, $alto);
-            $ok = $img->save($fullPath);
-            unset($img);
+                if (($this->_ArrayDoc['maxWidth']) and ($ancho > $this->_ArrayDoc['maxWidth']))
+                    $ancho = $this->_ArrayDoc['maxWidth'];
+                if (($this->_ArrayDoc['maxHeight']) and ($alto > $this->_ArrayDoc['maxHeight']))
+                    $alto = $this->_ArrayDoc['maxHeight'];
+
+                $img = new Gd();
+                $img->loadImage($this->_ArrayDoc['tmp_name']);
+                $img->crop($ancho, $alto);
+                $ok = $img->save($this->_ArrayDoc['tmp_name']);
+                unset($img);
+
+                $archivo = new Archivo($this->_ArrayDoc['tmp_name']);
+                $this->setSize($archivo->getSize());
+                $this->setWidth($archivo->getImageWidth());
+                $this->setHeight($archivo->getImageHeight());
+                $this->setMimeType($archivo->getMimeType());
+                unset($archivo);
+            }
+
+            $ftp = new Ftp($_SESSION['project']['ftp']['server'], $_SESSION['project']['ftp']['user'], $_SESSION['project']['ftp']['password']);
+            $ok = $ftp->upLoad($carpetaDestino, $this->_ArrayDoc['tmp_name'], $this->Name);
+            $this->_errores = $ftp->getErrores();
+            $ftp->close();
+            unset($ftp);
         }
-
-        unset($archivo);
 
         return $ok;
     }
@@ -437,14 +445,24 @@ class CpanDocs extends CpanDocsEntity {
 
         // Cargo los datos del objeto antes de cambiarlos
         $doc = new CpanDocs($this->getId());
-        $pathNameAnterior = $this->_prePath . $doc->getPathName();
+        $pathName = $doc->getPathName();
+        $nombreAnterior = $doc->getName();
         unset($doc);
 
         // Si el nombre propuesto es distinto al que ya tiene y no es Thumbnail
         // recalculo el nombre amigable, cambio el path y renombro el archivo
         $this->actualizaNombreAmigable();
-        $pathNameNuevo = $this->_prePath . $this->getPathName();
-        $ok = @rename($pathNameAnterior, $pathNameNuevo);
+        $nombreNuevo = $this->getName();
+
+        $pathInfo = pathinfo($pathName);
+
+        $carpetaDestino = $this->_prePath . $pathInfo['dirname'];
+
+        $ftp = new Ftp($_SESSION['project']['ftp']['server'], $_SESSION['project']['ftp']['user'], $_SESSION['project']['ftp']['password']);
+        $ok = $ftp->rename($carpetaDestino, $nombreAnterior, $nombreNuevo);
+        $this->_errores = $ftp->getErrores();
+        $ftp->close();
+        unset($ftp);
 
         if ($this->_ArrayDoc['tmp_name'] != '') {
             $ok = $this->subeDocumento();
@@ -466,46 +484,10 @@ class CpanDocs extends CpanDocsEntity {
     public function getThumbNail() {
 
         $obj = new CpanDocs();
-        $rows = $obj->cargaCondicion('Id',"BelongsTo='{$this->Id}'");
+        $rows = $obj->cargaCondicion('Id', "BelongsTo='{$this->Id}'");
         unset($obj);
 
         return new CpanDocs($rows[0]['Id']);
-
-    }
-
-    public function actualizaXXX($titulo, $slug, $mostrarPieFoto, $documento, $isThumbnail = 0, $orden = 0) {
-
-        $ok = TRUE;
-
-        // Cargo los datos del objeto antes de cambiarlos
-        $pathNameAnterior = $this->_prePath . $this->getPathName();
-
-        // Le cambio el titulo y el showcaption
-        $this->setTitle($titulo);
-        $this->setShowCaption($mostrarPieFoto);
-        $this->setSortOrder($orden);
-
-        // Si el nombre propuesto es distinto al que ya tiene y no es Thumbnail
-        // recalculo el nombre amigable, cambio el path y renombro el archivo
-        if (($isThumbnail == '0') and ($this->getName() != $slug)) {
-            $this->setName($slug);
-            $this->actualizaNombreAmigable();
-            $pathNameNuevo = $this->_prePath . $this->getPathName();
-            $ok = @rename($pathNameAnterior, $pathNameNuevo);
-        }
-
-        if ($documento['tmp_name'] != '') {
-            $this->setArrayDoc($documento);
-            $ok = $this->subeDocumento();
-        }
-
-        // Si todo ha ido bien, actualizo el objeto
-        if ($ok)
-            $this->save();
-
-        unset($this);
-
-        return $ok;
     }
 
     /**

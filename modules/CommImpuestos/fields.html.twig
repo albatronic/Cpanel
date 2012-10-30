@@ -7,7 +7,7 @@
   date 23.10.2012 03:07:42
 #}
 
-{{ macro.select(atributos.IdPais,'field_title',values.controller ~ '[IdPais]',values.controller ~ '_IdPais',none,datos.IdPais.Id,datos.IdPais.fetchAll('Pais'),'chzn-select','1')}}
+{{ macro.input(atributos.IdPais,'field_title','text',values.controller ~ '[IdPais]',values.controller ~ '_IdPais',datos.IdPais.Id,'255','CampoTextoLargo','5','','',['paises','Pais',datos.IdPais.Pais]) }}
 {{ macro.input(atributos.Nombre,'field_title','text',values.controller ~ '[Nombre]',values.controller ~ '_Nombre',datos.Nombre,'255','CampoTextoLargo','2') }}
 {{ macro.input(atributos.Valor,'field_title','text',values.controller ~ '[Valor]',values.controller ~ '_Valor',datos.Valor,'10','CampoImporte','3') }}
 {{ macro.input(atributos.Recargo,'field_title','text',values.controller ~ '[Recargo]',values.controller ~ '_Recargo',datos.Recargo,'10','CampoImporte','4') }}

@@ -172,6 +172,11 @@ class CpanVariablesController {
 
                     // Variables especificas
                     $datos['especificas'] = $this->getEspecificas($datos['especificas']);
+
+                    // Valores para el desplegable de columnas
+                    $entidad = new $nombre();
+                    $this->values['columnas'] = $entidad->getColumnsNames();
+                    unset($entidad);
                     break;
             }
 
@@ -383,10 +388,12 @@ class CpanVariablesController {
 
                     if ($datos['isModuleRoot'] == '')
                         $datos['isModuleRoot'] = $archivoConfig->getNode('isModuleRoot');
+                    if ($datos['showCommonFields'] == '')
+                        $datos['showCommonFields'] = $archivoConfig->getNode('showCommonFields');
                     if ($datos['numMaxRecords'] == '')
                         $datos['numMaxRecords'] = $archivoConfig->getNode('numMaxRecords');
-                    if ($datos['withImages'] == '')
-                        $datos['withImages'] = $archivoConfig->getNode('withImages');
+                    if ($datos['numberOfImages'] == '')
+                        $datos['numberOfImages'] = $archivoConfig->getNode('numberOfImages');
                     if ($datos['withGalery'] == '')
                         $datos['withGalery'] = $archivoConfig->getNode('withGalery');
                     if ($datos['withDocuments'] == '')
@@ -425,8 +432,13 @@ class CpanVariablesController {
                     if ($datos['parametros'] == '')
                         $datos['parametros'] = $archivoConfig->getNode('parametros');
 
+                    if ($datos['urlFriendlyManagement'] == '')
+                        $datos['urlFriendlyManagement'] = $archivoConfig->getNode('urlFriendlyManagement');
                     if ($datos['fieldGeneratorUrlFriendly'] == '')
                         $datos['fieldGeneratorUrlFriendly'] = $archivoConfig->getNode('fieldGeneratorUrlFriendly');
+
+                    if ($datos['metatagTitleManagement'] == '')
+                        $datos['metatagTitleManagement'] = $archivoConfig->getNode('metatagTitleManagement');
                     if ($datos['fieldGeneratorMetatagTitle'] == '')
                         $datos['fieldGeneratorMetatagTitle'] = $archivoConfig->getNode('fieldGeneratorMetatagTitle');
 
@@ -437,7 +449,7 @@ class CpanVariablesController {
     }
 
     /**
-     * Recibos dos array:
+     * Recibe dos array:
      *
      *      el primero tiene los atributos y valores que hay en el archivo
      *      de variables de entorno

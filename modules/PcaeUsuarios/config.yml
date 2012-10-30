@@ -14,7 +14,7 @@ PcaeUsuarios:
     toEntity: ''
     toColumn: ''
   numMaxRecords: ''
-  withImages: '0'
+  numberOfImages: '0'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0
@@ -43,7 +43,7 @@ PcaeUsuarios:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Gestión de Usuarios del Portal Cloud AE
+  title: Usuarios
   id_video: pcaeusuarios
   url_video: null
   feature_list: YES

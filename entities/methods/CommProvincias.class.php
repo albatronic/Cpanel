@@ -10,7 +10,13 @@
  */
 class CommProvincias extends CommProvinciasEntity {
 	public function __toString() {
-		return $this->getId();
+		return $this->getProvincia();
 	}
+
+    public function fetchAll($column = '', $default = TRUE) {
+        if ($column == '')
+            $column = 'Provincia';
+        return parent::fetchAll($column, $default);
+    }
 }
 ?>

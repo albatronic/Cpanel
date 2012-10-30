@@ -18,8 +18,8 @@ if (!file_exists('../config/config.yml')) {
     exit;
 }
 
-if (file_exists("../../../app/bin/yaml/lib/sfYaml.php")) {
-    include "../../../app/bin/yaml/lib/sfYaml.php";
+if (file_exists("../bin/yaml/lib/sfYaml.php")) {
+    include "../bin/yaml/lib/sfYaml.php";
 } else {
     echo "NO EXISTE LA CLASE PARA LEER ARCHIVOS YAML";
     exit;
@@ -39,10 +39,10 @@ include_once "../" . $app['framework'] . "Autoloader.class.php";
 Autoloader::setCacheFilePath(APP_PATH . 'tmp/class_path_cache.txt');
 Autoloader::excludeFolderNamesMatchingRegex('/^CVS|\..*$/');
 Autoloader::setClassPaths(array(
-            '../' . $app['framework'],
-            '../entities/',
-            '../lib/',
-        ));
+    '../' . $app['framework'],
+    '../entities/',
+    '../lib/',
+));
 spl_autoload_register(array('Autoloader', 'loadClass'));
 
 /**
@@ -62,18 +62,56 @@ class Elemento {
 
 switch ($_GET['entidad']) {
 
-    // BUSCA CLIENTES DE LA SUCURSAL EN CURSO POR %RAZONSOCIAL% y $NOMBRECOMERCIAL%
-    case 'clientes':
-        $cliente = new Clientes();
-        $rows = $cliente->fetchClientesSucursal($_GET['idSucursal'], $_GET['term']);
-        unset($cliente);
+    // BUSCA URLS AMIGABLES POR %UrlFriendly%
+    case 'urlsAmigables':
+        $url = new CpanUrlAmigables();
+        $filtro = "UrlFriendly LIKE '%{$_GET['term']}%'";
+        $rows = $url->cargaCondicion("UrlFriendly as Id, UrlFriendly as Value", $filtro, "UrlFriendly");
+        unset($url);
         break;
 
-    // BUSCA PROVEEDORES POR %RAZONSOCIAL%
-    case 'proveedores':
-        $proveedor = new Proveedores();
-        $rows = $proveedor->cargaCondicion("IDProveedor as Id, RazonSocial as Value", "RazonSocial LIKE '%{$_GET['term']}%'", "RazonSocial");
-        unset($proveedor);
+    // BUSCA PAISES POR %Pais%
+    case 'paises':
+        $pais = new CommPaises();
+        $rows = $pais->cargaCondicion("Id as Id, Pais as Value", "Pais LIKE '%{$_GET['term']}%'", "Pais");
+        unset($pais);
+        break;
+
+    // BUSCA PROVINCIAS POR %Provincia%
+    case 'provincias':
+        $filtro = "Provincia LIKE '%{$_GET['term']}%'";
+        if ($_GET['filtroAdicional'])
+            $filtro .= " and IDPais='{$_GET['filtroAdicional']}'";
+
+        $provincia = new CommProvincias();
+        $rows = $provincia->cargaCondicion("Id as Id, Provincia as Value", $filtro, "Provincia");
+        unset($provincia);
+        break;
+
+    // BUSCA MUNICIPIOS POR %Municipio%
+    case 'municipios':
+        $filtro = "Municipio LIKE '%{$_GET['term']}%'";
+        if ($_GET['filtroAdicional'])
+            $filtro .= " and IDProvincia='{$_GET['filtroAdicional']}'";
+        $municipio = new CommMunicipios();
+        $rows = $municipio->cargaCondicion("Id as Id, Municipio as Value", $filtro, "Municipio");
+        unset($municipio);
+        break;
+
+    // BUSCA MONEDAS POR %Moneda%
+    case 'monedas':
+        $filtro = "Moneda LIKE '%{$_GET['term']}%'";
+        $moneda = new CommMonedas();
+        $rows = $moneda->cargaCondicion("Id as Id, Moneda as Value", $filtro, "Moneda");
+        unset($moneda);
+        break;
+
+    // BUSCA MONEDAS POR %Moneda%
+    case 'zonasHorarias':
+        $filtro = "Zona LIKE '%{$_GET['term']}%'";
+        $zona = new CommZonasHorarias();
+        $rows = $zona->cargaCondicion("Id as Id, Zona as Value", $filtro, "Zona");
+        unset($zona);
         break;
 
     // BUSCA ARTICULOS POR %CODIGO%, %DESCRIPCION% Y %CODIGOEAN%
@@ -101,12 +139,12 @@ switch ($_GET['entidad']) {
     // BUSCA LAS UBICACIONES DE UN LOTE EN UN ALMACEN
     // EN $_GET['idSucursal'] VIENE SEPARADOS POR @ EL ID DEL ALMACEN Y EL ID DEL LOTE RESPECTIVAMENTE.
     case 'ubicacionesLote':
-        $valores = explode("@",$_GET['idSucursal']);
+        $valores = explode("@", $_GET['idSucursal']);
         $idAlmacen = $valores[0];
-        $idLote= $valores[1];
+        $idLote = $valores[1];
 
         $lote = new Lotes($idLote);
-        $rows = $lote->getUbicaciones($idAlmacen,"%{$_GET['term']}%");
+        $rows = $lote->getUbicaciones($idAlmacen, "%{$_GET['term']}%");
         unset($lote);
         break;
 
@@ -116,13 +154,13 @@ switch ($_GET['entidad']) {
     // EN $_GET['idSucursal'] VIENE SEPARADOS POR @ EL ID DEL ALMACEN Y EL ID DEL ARTICULO RESPECTIVAMENTE.
     case 'ubicacionesAlmacenArticulo':
 
-        $valores = explode("@",$_GET['idSucursal']);
+        $valores = explode("@", $_GET['idSucursal']);
         $idAlmacen = $valores[0];
-        $idArticulo= $valores[1];
+        $idArticulo = $valores[1];
 
         // Busca las ubicaciones con existencias
         $articulo = new Articulos($idArticulo);
-        $rows = $articulo->getUbicaciones($idAlmacen,"%{$_GET['term']}%");
+        $rows = $articulo->getUbicaciones($idAlmacen, "%{$_GET['term']}%");
         unset($articulo);
         break;
 
@@ -130,7 +168,7 @@ switch ($_GET['entidad']) {
     // EN ESTE CASO UTILIZA LA VARIABLE 'idSucursal' COMO EL ID DE ALMACEN
     case 'ubicacionesAlmacen':
         $idAlmacen = $_GET['idSucursal'];
-        
+
         $almacen = new Almacenes($idAlmacen);
         $rows = $almacen->getUbicaciones("%{$_GET['term']}%");
         unset($almacen);
@@ -141,19 +179,18 @@ switch ($_GET['entidad']) {
     // LOTES QUE SE HAN DEFINIDO PARA EL ARTÍCULO.
     case 'lotesArticulo':
         $idArticulo = $_GET['idSucursal'];
-        
+
         $lotes = new Lotes();
-        $rows = $lotes->fetchAll($idArticulo,'Lote',"%{$_GET['term']}%");
+        $rows = $lotes->fetchAll($idArticulo, 'Lote', "%{$_GET['term']}%");
         unset($lotes);
         break;
-
 }
 
 // Creo el array de obetos que se va a devolver
 // El compo value se codifica en utf8 porque se supone que van caracteres
 $arrayElementos = array();
 foreach ($rows as $value) {
-    array_push($arrayElementos, new Elemento($value["Id"], utf8_encode($value["Value"])));
+    array_push($arrayElementos, new Elemento($value["Id"], $value["Value"]));
 }
 
 // El array creado se devuelve en formato JSON, requerido asi

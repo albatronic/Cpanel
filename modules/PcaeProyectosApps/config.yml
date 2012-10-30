@@ -1,0 +1,624 @@
+# Module: PcaeProyectosApps
+# Document : modules/PcaeProyectosApps/config.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 25.10.2012 19:10:00
+#
+---
+PcaeProyectosApps:
+  app: ''
+  isModuleRoot: 0
+  linkModule:
+    fromColumn: ''
+    toEntity: ''
+    toColumn: ''
+  numMaxRecords: ''
+  numberOfImages: '0'
+  withGalery: '0'
+  withDocuments: '0'
+  withVideos: 0
+  withAudios: '0'
+  maxSizes:
+    image: '400000'
+    document: ''
+    video: ''
+    audio: ''
+  galery:
+    maxWidthImage: '500'
+    maxHeightImage: '400'
+    generateThumbnail: '0'
+    widthThumbnail: '50'
+    heightThumbnail: '50'
+  fieldGeneratorUrlFriendly: IdProyecto
+  fieldGeneratorMetatagTitle: IdProyecto
+  controller: CONTROLADOR
+  action: ACTION
+  template: TEMPLATE
+  parametros: PARAMETROS
+  includesHead:
+    twigCss: _global/css.html.twig
+    twigJs: _global/js.html.twig
+  login_required: YES
+  permission_control: YES
+  favourite_control: NO
+  help_file: help.html.twig
+  title: PcaeProyectosApps
+  id_video: pcaeproyectosapps
+  url_video: null
+  feature_list: YES
+  conection: pcae
+  entity: PcaeProyectosApps
+  table: PcaeProyectosApps
+  primarykey: Id
+  linkBy: ''
+  records_per_page: 15
+  order_by:
+    -
+      title: 'Id a-z'
+      criteria: 'Id ASC'
+    -
+      title: 'Id z-a'
+      criteria: 'Id DESC'
+  search_default: Id
+  referenced_entities:
+    - PcaeProyectos
+    - PcaeApps
+    - ValoresSN
+    - ValoresPrivacy
+    - ValoresDchaIzq
+    - ValoresChangeFreq
+  columns:
+    Id:
+      title: Id
+      visible: false
+      updatable: false
+      filter: NO
+      list: NO
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+    IdProyecto:
+      title: IdProyecto
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 1, caption: IdProyecto, entity: PcaeProyectos, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IdApp:
+      title: IdApp
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 2, caption: IdApp, entity: PcaeApps, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    NumeroLicencias:
+      title: NumeroLicencias
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: '1'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    FtpServer:
+      title: FtpServer
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    FtpPort:
+      title: FtpPort
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: '21'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '6', min: null, max: null, message: 'Valor Requerido' }
+    FtpFolder:
+      title: FtpFolder
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    FtpUser:
+      title: FtpUser
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    FtpPassword:
+      title: FtpPassword
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    Url:
+      title: Url
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    DbEngine:
+      title: DbEngine
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    Host:
+      title: Host
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    User:
+      title: User
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    Password:
+      title: Password
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    Database:
+      title: Database
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    Observations:
+      title: Observations
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: false, min: null, max: null, message: 'Valor Requerido' }
+    PrimaryKeyMD5:
+      title: PrimaryKeyMD5
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
+    IsDefault:
+      title: IsDefault
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 3, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Checked:
+      title: Checked
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 4, caption: Checked, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Publish:
+      title: Publish
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 5, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    BelongsTo:
+      title: BelongsTo
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    CreatedBy:
+      title: CreatedBy
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    CreatedAt:
+      title: CreatedAt
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    ModifiedBy:
+      title: ModifiedBy
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    ModifiedAt:
+      title: ModifiedAt
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    Deleted:
+      title: Deleted
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 6, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    DeletedBy:
+      title: DeletedBy
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    DeletedAt:
+      title: DeletedAt
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    Privacy:
+      title: Privacy
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 7, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    SortOrder:
+      title: SortOrder
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    PublishedAt:
+      title: PublishedAt
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    ActiveFrom:
+      title: ActiveFrom
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    ActiveTo:
+      title: ActiveTo
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    UrlPrefix:
+      title: UrlPrefix
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    LockUrlPrefix:
+      title: LockUrlPrefix
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '1'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 8, caption: LockUrlPrefix, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Slug:
+      title: Slug
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    LockSlug:
+      title: LockSlug
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '1'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 9, caption: LockSlug, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    UrlFriendly:
+      title: UrlFriendly
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    UrlHeritable:
+      title: UrlHeritable
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '1'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 10, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    NumberVisits:
+      title: NumberVisits
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    MetatagTitle:
+      title: MetatagTitle
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    LockMetatagTitle:
+      title: LockMetatagTitle
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 11, caption: LockMetatagTitle, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    MetatagKeywords:
+      title: MetatagKeywords
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    MetatagDescription:
+      title: MetatagDescription
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    MetatagTitleSimple:
+      title: MetatagTitleSimple
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 12, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    MetatagTitlePosition:
+      title: MetatagTitlePosition
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 13, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    ShowOnSitemap:
+      title: ShowOnSitemap
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 14, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    ImportanceSitemap:
+      title: ImportanceSitemap
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0.5'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '5', min: null, max: null, message: 'Valor Requerido' }
+    ChangeFreqSitemap:
+      title: ChangeFreqSitemap
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: monthly
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 15, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }

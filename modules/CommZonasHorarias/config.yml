@@ -14,7 +14,7 @@ CommZonasHorarias:
     toEntity: ''
     toColumn: ''
   numMaxRecords: ''
-  withImages: '0'
+  numberOfImages: '0'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0

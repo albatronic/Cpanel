@@ -1,0 +1,35 @@
+# Module: GconSecciones
+# Document : modules\GconSecciones\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 29.10.2012 20:07:59
+#
+---
+listados:
+  -
+    title: GconSecciones
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      Titulo: { title: Titulo, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Subtitulo: { title: Subtitulo, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Introduccion: { title: Introduccion, length: 20, align: L, type: string, total: NO, formula: null, format: null }
+      MostrarTitulo: { title: MostrarTitulo, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      MostrarSubtitulo: { title: MostrarSubtitulo, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      MostrarIntroduccion: { title: MostrarIntroduccion, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      MostrarEnMenuN: { title: MostrarEnMenuN, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      EtiquetaWebN: { title: EtiquetaWebN, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      OrdenMenuN: { title: OrdenMenuN, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      ModoMostrarContenidos: { title: ModoMostrarContenidos, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      CriterioOrdenContenidosHijos: { title: CriterioOrdenContenidosHijos, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      MostrarSubsecciones: { title: MostrarSubsecciones, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }

@@ -61,6 +61,7 @@ class IndexController extends Controller {
             $proyectoApp = $proyectoApp->find('PrimaryKeyMD5', $this->request[1]);
             $_SESSION['project']['Id'] = $proyectoApp->getId();
             $_SESSION['project']['title'] = $proyectoApp->getIdProyecto()->getProyecto();
+            $_SESSION['project']['url'] = $proyectoApp->getUrl();
             $_SESSION['project']['conection'] = array(
                 'dbEngine' => $proyectoApp->getDbEngine(),
                 'host' => $proyectoApp->getHost(),
@@ -71,6 +72,7 @@ class IndexController extends Controller {
             // Carla la cadena de conexión al servidor ftp del proyecto
             $_SESSION['project']['ftp'] = array(
                 'server' => $proyectoApp->getFtpServer(),
+                'port' => $proyectoApp->getFtpPort(),
                 'folder' => $proyectoApp->getFtpFolder(),
                 'user' => $proyectoApp->getFtpUser(),
                 'password' => $proyectoApp->getFtpPassword(),

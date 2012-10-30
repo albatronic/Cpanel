@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * Clase para gestionar archivos vía FTP
@@ -11,6 +12,8 @@
  *
  * Descargar archivo: $ok = $ftp->downLoad('archivoDelServidor','archivoLocal');
  *
+ * Cerrar sesion: $ftp->close();
+ *
  * Obtener eventuales errores: $array = $ftp->getErrores();
  *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
@@ -22,12 +25,24 @@ class Ftp {
     var $server;
     var $user;
     var $password;
+    var $connectId;
     var $errores = array();
+    var $alertas = array();
 
+    /**
+     * Realiza la conexión al servidor ftp
+     * @param string $server Servidor ftp
+     * @param string $user Usuario ftp
+     * @param string $password Password ftp
+     */
     public function __construct($server, $user, $password) {
+
         $this->server = $server;
         $this->user = $user;
         $this->password = $password;
+
+        $this->connect();
+
     }
 
     /**
@@ -43,15 +58,25 @@ class Ftp {
 
         $this->errores = array();
 
-        $connId = $this->connect();
+        if ($this->connectId) {
 
-        if ($connId) {
-            ftp_chdir($connId, $targetFolder);
-            $ok = @ftp_put($connId, $targetFile, $sourceFile, $transferMode);
-            ftp_close($connId);
+            $ok = $this->chdir($targetFolder);
 
-            if (!$ok)
-                $this->errores[] = "FTP: La carga ha fallado!";
+            if (!$ok) {
+                $this->mkdir($targetFolder);
+                $ok = $this->chdir($targetFolder);
+                echo "Directorio actual ",ftp_pwd($this->connectId);
+            }
+
+            if ($ok) {
+                $ok = @ftp_put($this->connectId, $targetFile, $sourceFile, $transferMode);
+
+                if (!$ok)
+                    $this->errores[] = "FTP: La carga ha fallado!";
+            } else {
+                $this->errores[] = "FTP: No existe el directorio '{$targetFolder}'";
+                print_r($this->errores);
+            }
         }
 
         return (count($this->errores) == 0);
@@ -70,11 +95,8 @@ class Ftp {
 
         $this->errores = array();
 
-        $connId = $this->connect();
-
-        if ($connId) {
-            $ok = @ftp_get($connId, $localFile, $serverFile, $transferMode);
-            ftp_close($connId);
+        if ($this->connectId) {
+            $ok = @ftp_get($this->connectId, $localFile, $serverFile, $transferMode);
 
             if (!$ok)
                 $this->errores[] = "FTP: No se ha podido descargar el archivo '{$serverFile} a '{$localFile}'";
@@ -94,12 +116,10 @@ class Ftp {
 
         $this->errores = array();
 
-        $connId = $this->connect();
+        if ($this->connectId) {
+            ftp_chdir($this->connectId, $folder);
+            $ok = @ftp_delete($this->connectId, $file);
 
-        if ($connId) {
-            ftp_chdir($connId, $folder);
-            $ok = @ftp_delete($connId, $file);
-            ftp_close($connId);
             if (!$ok)
                 $this->errores[] = "FTP: El borrado ha fallado!";
         }
@@ -119,12 +139,9 @@ class Ftp {
 
         $this->errores = array();
 
-        $connId = $this->connect();
-
-        if ($connId) {
-            ftp_chdir($connId, $folder);
-            $ok = @ftp_rename($connId, $oldName, $newName);
-            ftp_close($connId);
+        if ($this->connectId) {
+            ftp_chdir($this->connectId, $folder);
+            $ok = @ftp_rename($this->connectId, $oldName, $newName);
 
             if (!$ok)
                 $this->errores[] = "FTP: El cambio de nombre ha fallado!";
@@ -142,12 +159,9 @@ class Ftp {
     public function mkdir($directory) {
 
         $this->errores = array();
-
-        $connId = $this->connect();
-
-        if ($connId) {
-            $ok = @ftp_mkdir($connId, $directory);
-            ftp_close($connId);
+echo "mkdir ",$this->connectId," ",$directory,"<br />";
+        if ($this->connectId) {
+            $ok = ftp_mkdir($this->connectId, $directory);
 
             if (!$ok)
                 $this->errores[] = "FTP: No se ha podido crear la carpeta '{$directory}'";
@@ -168,17 +182,36 @@ class Ftp {
 
         $this->errores = array();
 
-        $connId = $this->connect();
-
-        if ($connId) {
-            $ok = @ftp_rmdir($connId, $directory);
-            ftp_close($connId);
+        if ($this->connectId) {
+            $ok = @ftp_rmdir($this->connectId, $directory);
 
             if (!$ok)
                 $this->errores[] = "FTP: No se ha podido borrar la carpeta '{$directory}'";
         }
 
         return (count($this->errores) == 0);
+    }
+
+    /**
+     * Cambia de directorio en el servidor vía FTP.
+     *
+     * Si no puedo, pone el warning en el array $this->alertas
+     *
+     * @param string $directory Directorio a donde cambiar
+     * @return boolean TRUE si se cambió al directorio
+     */
+    public function chdir($directory) {
+
+        $this->alertas = array();
+
+        if ($this->connectId) {
+            $ok = @ftp_chdir($this->connectId, $directory);
+
+            if (!$ok)
+                $this->alertas[] = "FTP: No se ha podido cambiar al directorio '{$directory}'";
+        }
+
+        return (count($this->alertas) == 0);
     }
 
     /**
@@ -191,11 +224,8 @@ class Ftp {
     public function listDir($directory, $recursive = FALSE) {
         $this->errores = array();
 
-        $connId = $this->connect();
-
-        if ($connId) {
-            $array = @ftp_rawlist($connId, $directory, $recursive);
-            ftp_close($connId);
+        if ($this->connectId) {
+            $array = @ftp_rawlist($this->connectId, $directory, $recursive);
 
             if (!is_array($array))
                 $this->errores[] = "FTP: Ha fallado el listado de la carpeta '{$directory}'";
@@ -229,7 +259,7 @@ class Ftp {
         curl_close($ch);
 
         if ($result['info']['http_code'] != 200)
-            $this->errores[] = "Error " .$result['info']['http_code'] . ". Se produjo un error al leer el archivo " . $urlFile;
+            $this->errores[] = "Error " . $result['info']['http_code'] . ". Se produjo un error al leer el archivo " . $urlFile;
 
         return array(
             'result' => $result,
@@ -239,20 +269,18 @@ class Ftp {
 
     /**
      * Se conecta al servidor por FTP
-     *
-     * @return boolean TRUE si la conexión fue exitosa
      */
-    private function connect() {
+    public function connect() {
 
-        $connId = ftp_connect($this->server);
-        $ok = @ftp_login($connId, $this->user, $this->password);
+        $this->connectId = ftp_connect($this->server);
+        $ok = ftp_login($this->connectId, $this->user, $this->password);
 
-        if ($ok)
-            return $connId;
-        else {
+        if (!$ok)
             $this->errores[] = "FTP: La conexión ha fallado!";
-            return FALSE;
-        }
+    }
+
+    public function close() {
+        ftp_close($this->connectId);
     }
 
     /**

@@ -5,6 +5,8 @@
     Checked:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     Publish:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     BelongsTo:            {type: integer(11), notnull: true, default: 0, index: index}
+
+    # Auditoria
     CreatedBy:            {type: integer, notnull: true, default: 0}
     CreatedAt:            {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     ModifiedBy:           {type: integer, notnull: true, default: 0}
@@ -12,17 +14,21 @@
     Deleted:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     DeletedBy:            {type: integer, notnull: true, default: 0}
     DeletedAt:            {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
+
     Privacy:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresPrivacy,IDTipo'}
     SortOrder:            {type: integer(11), notnull: true, default: 0, index: index}
     PublishedAt:          {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     ActiveFrom:           {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     ActiveTo:             {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
+
+    # Url amigable
     UrlPrefix:            {type: string(255), default: NULL}
     LockUrlPrefix:        {type: tinyint, notnull: true, default: 1, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     Slug:                 {type: string(255), default: NULL}
     LockSlug   :          {type: tinyint, notnull: true, default: 1, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     UrlFriendly:          {type: string(255), default: NULL}
     UrlHeritable:         {type: tinyint, notnull: true, default: 1, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+
     NumberVisits:         {type: integer(11), notnull: true, default: 0}
     MetatagTitle:         {type: string(255), default: NULL}
     LockMetatagTitle:     {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
@@ -33,3 +39,25 @@
     ShowOnSitemap:        {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     ImportanceSitemap:    {type: string(5), notnul: true, default: '0.5'}
     ChangeFreqSitemap:    {type: string(25), notnul: true, default: 'monthly', index: index, comment: 'Abstract,ValoresChangeFreq,IDTipo'}
+
+    ShowGalery:           {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    ShowDocuments:        {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    ShowRelatedLinks:     {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    ShowRelatedContents:  {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    ShowPublishedAt:      {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+
+    # Los Ids de perfiles de usuario separados por coma que tienen acceso al contenido
+    # por defecto el super y el administrador
+    AccessProfileList:    {type: string(100), notnull: true, default: '1,2'}
+
+    # Url destino
+    UrlTarget:            {type: string(255), default: NULL}
+    UrlParameters:        {type: string(255), default: NULL}
+    UrlRequestMethod:     {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,RequestMethods,IDTipo'}
+    UrlOrigin:            {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,RequestOrigins,IDTipo'}
+    UrlTargetBlank:       {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    UrlIsHttps:           {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+
+    CodigoAppAsociada:    { type: string(15), notnull: false, default: NULL, index: index, comment: 'db,CpanAplicaciones,CodigoApp'}
+    IdAlbumExterno:       { type: bigint(11), notnull: false, default: NULL }
+    IdSliderAsociado:     { type: bigint(11), notnull: false, default: NULL }

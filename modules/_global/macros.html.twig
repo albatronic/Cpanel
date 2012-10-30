@@ -41,10 +41,26 @@
 </label>
 {% endmacro %}
 
-{# input: MUESTRA UN <INPUT> o <TEXTAREA> dependiendo del atributo 'editorTiny' #}
-{# ---------------------------------------------------------------------------- #}
-{% macro input(atributos, classLabel, type, name, id, value, maxLength, class, tabIndex, extra, onchange) %}
-{% if atributos.editorTiny != '1'%}
+{#
+  input: MUESTRA UN <INPUT> o <TEXTAREA> dependiendo del atributo 'editorTiny'
+
+  El parametro 'autoComplete' es opcional, pero se se indica debe ser un array
+  en cuyo caso se generará un doble input autocompletado por ajax. Los valores
+  del array deben ser:
+
+        PRIMERO: Entidad a filtrar (switch case de lib/autoCompletar.php)
+        SEGUNDO: Columna a mostrar en el autocompletado
+        TERCERO: El valor a mostrar en el input visible
+        CUARTO:  Valor para el filtro adicional (para vincular los valores filtrados
+                 a un valor del formulario, p.ej: provincias de un pais)
+
+  Se crearán dos inputs, uno oculto que es donde se pone el valor devuelto por
+  ajax y el otro visible que es donde se genere el autocompletado.
+
+----------------------------------------------------------------------------
+#}
+{% macro input(atributos, classLabel, type, name, id, value, maxLength, class, tabIndex, extra, onchange, autoComplete) %}
+{% if atributos.editorTiny != '1' %}
     {% if atributos.visible == '1' %}
     <li>
         <div class="form_grid_12" id="div_{{id|default(name)}}">
@@ -54,11 +70,26 @@
         {% endif %}
 
         <div class="form_input">
-        <input type="{{ type|default('text') }}" name="{{ name }}" id="{{ id|default(name)}}"
-           value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
-           class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}" onchange="{{ onchange }}" {{extra}}
-           {% if atributos.updatable == '0' %} disabled {% endif %}
-        />
+        {% if not autoComplete %}
+            <input type="{{ type|default('text') }}"
+                   name="{{ name }}"
+                   id="{{ id|default(name)}}"
+                   value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
+                   accept="" class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}" onchange="{{ onchange }}" {{extra}}
+                   accesskey="" {% if atributos.updatable == '0' %} disabled {% endif %}
+            />
+        {% else %}
+            <input type="hidden"
+                   name="{{ name }}"
+                   id="{{ id|default(name)}}"
+                   value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
+            />
+            <input type="{{ type|default('text') }}"
+                   id="{{ id|default(name)}}_autoComplete"
+                   value="{{ autoComplete[2] }}" maxlength="{{ maxLength|default(20) }}"
+                   onkeyup="autoCompletar('{{ id|default(name)}}_autoComplete','{{ id|default(name)}}','{{ id|default(name)}}_autoComplete','{{autoComplete[0]}}','{{autoComplete[1]}}',$('#{{autoComplete[3]}}').val());"
+             />
+        {% endif %}
         </div>
         </div>
     </li>

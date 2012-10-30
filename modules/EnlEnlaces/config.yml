@@ -10,11 +10,11 @@ EnlEnlaces:
   app: 'Enl'
   isModuleRoot: 0
   linkModule:
-    fromColumn: ''
-    toEntity: ''
-    toColumn: ''
+    fromColumn: 'IdSeccion'
+    toEntity: 'EnlSecciones'
+    toColumn: 'Id'
   numMaxRecords: ''
-  withImages: '0'
+  numberOfImages: '0'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0
@@ -79,9 +79,9 @@ EnlEnlaces:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
     IdSeccion:
-      title: IdSeccion
+      title: Sección
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -91,9 +91,9 @@ EnlEnlaces:
       aditional_filter: { order: 1, caption: IdSeccion, entity: EnlSecciones, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Titulo:
-      title: Titulo
+      title: Título
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -102,7 +102,7 @@ EnlEnlaces:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Subtitulo:
-      title: Subtitulo
+      title: Subtítulo
       filter: YES
       list: NO
       visible: true
@@ -115,7 +115,7 @@ EnlEnlaces:
     Url:
       title: Url
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -126,7 +126,7 @@ EnlEnlaces:
     TargetBlank:
       title: TargetBlank
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -136,9 +136,9 @@ EnlEnlaces:
       aditional_filter: { order: 2, caption: TargetBlank, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     EsHttps:
-      title: EsHttps
+      title: Es Https
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -148,9 +148,9 @@ EnlEnlaces:
       aditional_filter: { order: 3, caption: EsHttps, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     EsUrlInterna:
-      title: EsUrlInterna
+      title: Es UrlInterna
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -411,7 +411,7 @@ EnlEnlaces:
     UrlFriendly:
       title: UrlFriendly
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null

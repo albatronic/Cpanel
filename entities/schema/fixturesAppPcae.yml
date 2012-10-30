@@ -8,6 +8,7 @@ CpanModulos:
   Pcae3: { CodigoApp: Pcae, NombreModulo: PcaeGruposEmpresas, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Grupos de Empresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
   Pcae4: { CodigoApp: Pcae, NombreModulo: PcaeEmpresas, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Empresas y Proyectos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
   Pcae5: { CodigoApp: Pcae, NombreModulo: PcaeUsuarios, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Pcae6: { CodigoApp: Pcae, NombreModulo: PcaeProyectosApps, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Proyectos y Apps, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
 
   Index1: { CodigoApp: Index, NombreModulo: Index,           Nivel: 0, BelongsTo: 0,    Publish: 0, Titulo: Index, Funcionalidades: 'AC,VW' }
   Index2: { CodigoApp: Index, NombreModulo: IndexContenidosFijos, Nivel: 1, BelongsTo: Index, Publish: 1, Titulo: Gestión de Contenidos Fijos, Funcionalidades: AC }
@@ -18,6 +19,7 @@ CpanPermisos:
   Pcae3: { IdPerfil: 1, NombreModulo: PcaeGruposEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Pcae4: { IdPerfil: 1, NombreModulo: PcaeEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Pcae5: { IdPerfil: 1, NombreModulo: PcaeUsuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Pcae6: { IdPerfil: 1, NombreModulo: PcaeProyectosApps, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
 
   Index1: { IdPerfil: 1, NombreModulo: Index, Funcionalidades: 'AC,VW' }
   Index2: { IdPerfil: 1, NombreModulo: IndexContenidosFijos, Funcionalidades: 'AC,UP'}

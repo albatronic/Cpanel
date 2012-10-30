@@ -5,7 +5,7 @@ CpanAplicaciones:
 CpanModulos:
   Comm01: { CodigoApp: Comm, NombreModulo: Comm,         Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Comm, Funcionalidades: 'AC' }
   Comm02: { CodigoApp: Comm, NombreModulo: CommPaises,     Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Paises, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
-  Comm03: { CodigoApp: Comm, NombreModulo: CommProvinicas, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Provincias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Comm03: { CodigoApp: Comm, NombreModulo: CommProvincias, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Provincias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
   Comm04: { CodigoApp: Comm, NombreModulo: CommMunicipios, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Municipios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
   Comm05: { CodigoApp: Comm, NombreModulo: CommMonedas, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Monedas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
   Comm06: { CodigoApp: Comm, NombreModulo: CommIdiomas, Nivel: 1, BelongsTo: Comm, Publish: 1, Titulo: Idiomas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }

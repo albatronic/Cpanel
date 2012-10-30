@@ -11,14 +11,21 @@
  */
 class PcaeGruposEmpresas extends PcaeGruposEmpresasEntity {
 
+
     public function __toString() {
-        return $this->getId();
+        return $this->getDescripcion();
+    }
+
+    public function fetchAll($column = '', $default = TRUE) {
+        if ($column == '')
+            $column = 'Descripcion';
+        return parent::fetchAll($column, $default);
     }
 
     /**
      * Devuelve un array de objetos \PcaeEmpresas que
      * constituyen el grupo de empresas en curso.
-     * 
+     *
      * @return array Array de objetos \PcaeEmpresas
      */
     public function getEmpresas() {

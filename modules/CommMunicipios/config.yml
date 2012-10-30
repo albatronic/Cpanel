@@ -14,7 +14,7 @@ CommMunicipios:
     toEntity: ''
     toColumn: ''
   numMaxRecords: ''
-  withImages: '0'
+  numberOfImages: '0'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0
@@ -82,7 +82,7 @@ CommMunicipios:
     IdPais:
       title: País
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -94,7 +94,7 @@ CommMunicipios:
     IdProvincia:
       title: Provincia
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -168,7 +168,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 3, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     Checked:
       title: Checked
@@ -180,7 +179,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 4, caption: Checked, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     Publish:
       title: Publish
@@ -192,7 +190,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 5, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     BelongsTo:
       title: BelongsTo
@@ -259,7 +256,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 6, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     DeletedBy:
       title: DeletedBy
@@ -293,7 +289,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 7, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     SortOrder:
       title: SortOrder
@@ -360,7 +355,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 8, caption: LockUrlPrefix, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     Slug:
       title: Slug
@@ -383,7 +377,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 9, caption: LockSlug, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     UrlFriendly:
       title: UrlFriendly
@@ -406,7 +399,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 10, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
       title: NumberVisits
@@ -440,7 +432,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 11, caption: LockMetatagTitle, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     MetatagKeywords:
       title: MetatagKeywords
@@ -474,7 +465,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 12, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     MetatagTitlePosition:
       title: MetatagTitlePosition
@@ -486,7 +476,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 13, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     ShowOnSitemap:
       title: ShowOnSitemap
@@ -498,7 +487,6 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 14, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     ImportanceSitemap:
       title: ImportanceSitemap
@@ -521,5 +509,4 @@ CommMunicipios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 15, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }

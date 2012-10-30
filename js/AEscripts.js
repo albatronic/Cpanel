@@ -221,3 +221,92 @@ function loading(idDiv) {
     // Coloco un gif "Cargando..." en la capa
     $('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
 }
+
+/*
+ * ----------------------------------------------------------------
+ * FUNCIONES AJAX
+ * ----------------------------------------------------------------
+ * GENERA UN DESPLEGLABE CON TECNOLOGIA AJAX. LOS PARAMETROS SON
+ *
+ * iddiv        -> ID identificador del contenedor que será rellenado con la respuesta (¡¡no vale el atributo name!!)
+ * idselect     -> ID identificador del select que se creará  (¡¡no vale el atributo name!!)
+ * nameselect   -> NAME name del select que se creará (se utiliza para capturar del datos del formulario)
+ * tipo         -> indica el tipo de select. O sea la tabla que se empleará. Ver script 'desplegableAjax.php'
+ * filtro       -> elemento html que contiene el valor por el que filtrar los datos.
+ */
+function DesplegableAjax(iddiv,idselect,nameselect,tipo,filtro) {
+    var url        = appPath + '/lib/desplegableAjax.php';
+    var parametros = 't='+tipo+'&filtro='+filtro+'&idselect='+idselect+'&nameselect='+nameselect;
+
+    // Coloco un gif "Cargando..." en la capa
+    $('#'+iddiv).html("<img src='"+appPath+"/images/loading.gif'>");
+
+    jQuery('#'+iddiv).load(url, parametros);
+}
+
+/*
+ * GENERA UN LISTA DE AUTOCOMPLETADO CON JQUERY. REQUIRE DE LA FUNCION 'devuelve'
+ *
+ * campoAutoCompletar   -> es el id del campo donde se genera el autocompletado
+ * campoId              -> es el id del campo donde se devuelve el id obtenido
+ * campoTexto           -> es el id del campo donde se devuelve el texto obtenido
+ * entidad              -> indica en base a qué entidad de datos se genera el autocompletado
+ * columna              -> la columna de la entidad de datos que se devolverá
+ * filtroAdicional      -> valor para un filtro adicional, es opcional
+ * desplegableAjax      -> array con parametros adicionales para disparar desplegables en cascada
+ */
+function autoCompletar(campoAutoCompletar,campoId,campoTexto,entidad,columna,filtroAdicional,desplegableAjax) {
+
+    $("#"+campoAutoCompletar).autocomplete({
+        source: appPath + "/lib/autoCompletar.php?filtroAdicional=" + filtroAdicional + "&entidad=" + entidad + "&columna=" + columna,
+        minLength: 2,
+        select: function( event, ui ) {
+            devuelve( campoId, ui.item.id, campoTexto, ui.item.value, desplegableAjax );
+        }
+    });
+}
+
+function devuelve( campoId, id, campoTexto, value, desplegableAjax) {
+    $( "#"+campoId ).val(id);
+    $( "#"+campoTexto ).val(value);
+    if (desplegableAjax.length > 0) {
+        var params = desplegableAjax;
+        DesplegableAjax(params[0],params[1],params[2],params[3],id);
+    }
+    $( "#"+campoTexto ).focus();
+}
+
+/*
+ * ----------------------------------------------------------------
+ * FUNCION PARA LOS MENSAJES DE NOTIFICACION
+ * NECESITA:
+ *       notificaciones.css
+ *       habilitar un tag <div id="notificacion"></div> en cualquier
+ *       parte de la pagina, preferiblemente en el layout principal
+ *
+ * $mensaje: es el mensaje de notificacion a mostrar
+ * $tipo:    determina el estilo del mensaje. Los valores posibles son:
+ *           exito,alerta,info,error (que coinciden con los estilos
+ *           definidos en notificaciones.css)
+ *
+ * ----------------------------------------------------------------
+ */
+function notificacion(mensaje,tipo) {
+    var v=0;
+    var errores="";
+    for (var i=0; i<=mensaje.length;i++)
+    {
+        if(mensaje[i]=='#')
+        {
+            errores += '<p>' + mensaje.substring(i, v) + '</p>';
+            v=i+1;
+        }
+    }
+
+    document.getElementById('notificacion').innerHTML = errores;
+    document.getElementById('notificacion').className = tipo+" notificacion";
+
+    setTimeout(function(){
+        $(".notificacion").fadeIn(2000).fadeOut(6000);
+    }, 0000);
+}

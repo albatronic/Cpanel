@@ -14,7 +14,7 @@ CpanUrlAmigables:
     toEntity: ''
     toColumn: ''
   numMaxRecords: ''
-  withImages: '0'
+  numberOfImages: '0'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0
@@ -30,7 +30,9 @@ CpanUrlAmigables:
     generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
+  urlFriendlyManagement: false
   fieldGeneratorUrlFriendly: UrlFriendly
+  metatagTitleManagement: false
   fieldGeneratorMetatagTitle: UrlFriendly
   controller: CONTROLADOR
   action: ACTION
@@ -87,7 +89,7 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Controller:
       title: Controller
       filter: YES
@@ -120,7 +122,7 @@ CpanUrlAmigables:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Parameters:
       title: Parameters
       filter: YES

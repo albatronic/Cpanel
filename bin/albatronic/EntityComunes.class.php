@@ -217,6 +217,86 @@ class EntityComunes extends Entity {
      */
     protected $ChangeFreqSitemap = 'monthly';
 
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $ShowGalery = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $ShowDocuments = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $ShowRelatedLinks = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $ShowRelatedContents = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $ShowPublishedAt = '0';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(100)
+     */
+    protected $AccessProfileList = '1,2';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
+     */
+    protected $UrlTarget = NULL;
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
+     */
+    protected $UrlParameters = NULL;
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\RequestMethods
+     */
+    protected $UrlRequestMethod = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\RequestOrigins
+     */
+    protected $UrlOrigin = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $UrlTargetBlank = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $UrlIsHttps = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\CpanAplicaciones
+     */
+    protected $CodigoAppAsociada = NULL;
+    protected $IdAlbumExterno = NULL;
+    protected $IdSliderAsociado = NULL;
+
     public function setObservations($Observations) {
         $this->Observations = trim($Observations);
     }
@@ -549,6 +629,148 @@ class EntityComunes extends Entity {
         if (!($this->ChangeFreqSitemap instanceof ValoresChangeFreq))
             $this->ChangeFreqSitemap = new ValoresChangeFreq($this->ChangeFreqSitemap);
         return $this->ChangeFreqSitemap;
+    }
+
+    public function setShowGalery($ShowGalery) {
+        $this->ShowGalery = $ShowGalery;
+    }
+
+    public function getShowGalery() {
+        if (!($this->ShowGalery instanceof ValoresSN))
+            $this->ShowGalery = new ValoresSN($this->ShowGalery);
+        return $this->ShowGalery;
+    }
+
+    public function setShowDocuments($ShowDocuments) {
+        $this->ShowDocuments = $ShowDocuments;
+    }
+
+    public function getShowDocuments() {
+        if (!($this->ShowDocuments instanceof ValoresSN))
+            $this->ShowDocuments = new ValoresSN($this->ShowDocuments);
+        return $this->ShowDocuments;
+    }
+
+    public function setShowRelatedLinks($ShowRelatedLinks) {
+        $this->ShowRelatedLinks = $ShowRelatedLinks;
+    }
+
+    public function getShowRelatedLinks() {
+        if (!($this->ShowRelatedLinks instanceof ValoresSN))
+            $this->ShowRelatedLinks = new ValoresSN($this->ShowRelatedLinks);
+        return $this->ShowRelatedLinks;
+    }
+
+    public function setShowRelatedContents($ShowRelatedContents) {
+        $this->ShowRelatedContents = $ShowRelatedContents;
+    }
+
+    public function getShowRelatedContents() {
+        if (!($this->ShowRelatedContents instanceof ValoresSN))
+            $this->ShowRelatedContents = new ValoresSN($this->ShowRelatedContents);
+        return $this->ShowRelatedContents;
+    }
+
+    public function setShowPublishedAt($ShowPublishedAt) {
+        $this->ShowPublishedAt = $ShowPublishedAt;
+    }
+
+    public function getShowPublishedAt() {
+        if (!($this->ShowPublishedAt instanceof ValoresSN))
+            $this->ShowPublishedAt = new ValoresSN($this->ShowPublishedAt);
+        return $this->ShowPublishedAt;
+    }
+
+    public function setAccessProfileList($AccessProfileList) {
+        $this->AccessProfileList = trim($AccessProfileList);
+    }
+
+    public function getAccessProfileList() {
+        return $this->AccessProfileList;
+    }
+
+    public function setUrlTarget($UrlTarget) {
+        $this->UrlTarget = trim($UrlTarget);
+    }
+
+    public function getUrlTarget() {
+        return $this->UrlTarget;
+    }
+
+    public function setUrlParameters($UrlParameters) {
+        $this->UrlParameters = trim($UrlParameters);
+    }
+
+    public function getUrlParameters() {
+        return $this->UrlParameters;
+    }
+
+    public function setUrlRequestMethod($UrlRequestMethod) {
+        $this->UrlRequestMethod = $UrlRequestMethod;
+    }
+
+    public function getUrlRequestMethod() {
+        if (!($this->UrlRequestMethod instanceof RequestMethods))
+            $this->UrlRequestMethod = new RequestMethods($this->UrlRequestMethod);
+        return $this->UrlRequestMethod;
+    }
+
+    public function setUrlOrigin($UrlOrigin) {
+        $this->UrlOrigin = $UrlOrigin;
+    }
+
+    public function getUrlOrigin() {
+        if (!($this->UrlOrigin instanceof RequestOrigins))
+            $this->UrlOrigin = new RequestOrigins($this->UrlOrigin);
+        return $this->UrlOrigin;
+    }
+
+    public function setUrlTargetBlank($UrlTargetBlank) {
+        $this->UrlTargetBlank = $UrlTargetBlank;
+    }
+
+    public function getUrlTargetBlank() {
+        if (!($this->UrlTargetBlank instanceof ValoresSN))
+            $this->UrlTargetBlank = new ValoresSN($this->UrlTargetBlank);
+        return $this->UrlTargetBlank;
+    }
+
+    public function setUrlIsHttps($UrlIsHttps) {
+        $this->UrlIsHttps = $UrlIsHttps;
+    }
+
+    public function getUrlIsHttps() {
+        if (!($this->UrlIsHttps instanceof ValoresSN))
+            $this->UrlIsHttps = new ValoresSN($this->UrlIsHttps);
+        return $this->UrlIsHttps;
+    }
+
+    public function setCodigoAppAsociada($CodigoAppAsociada) {
+        $this->CodigoAppAsociada = $CodigoAppAsociada;
+    }
+
+    public function getCodigoAppAsociada() {
+        if (!($this->CodigoAppAsociada instanceof CpanAplicaciones)) {
+            $app = new CpanAplicaciones();
+            $this->CodigoAppAsociada = $app->find('CodigoApp', $this->CodigoAppAsociada);
+        }
+        return $this->CodigoAppAsociada;
+    }
+
+    public function setIdAlbumExterno($IdAlbumExterno) {
+        $this->IdAlbumExterno = $IdAlbumExterno;
+    }
+
+    public function getIdAlbumExterno() {
+        return $this->IdAlbumExterno;
+    }
+
+    public function setIdSliderAsociado($IdSliderAsociado) {
+        $this->IdSliderAsociado = $IdSliderAsociado;
+    }
+
+    public function getIdSliderAsociado() {
+        return $this->IdSliderAsociado;
     }
 
 }

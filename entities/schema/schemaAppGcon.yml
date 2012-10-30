@@ -1,0 +1,66 @@
+# ------------------------
+# APP GESTOR DE CONTENIDOS
+#
+# DATE: 29-10-2012
+# AUTHOR: SERGIO PEREZ
+# COMPANY: ARTICO ESTUDIO
+# ------------------------
+
+# SECCIONES DE CONTENIDOS
+GconSecciones:
+  comment: Secciones del gestor de contenidos
+  columns:
+    Titulo:                       { type: string(255), notnull: true }
+    Subtitulo:                    { type: string(255), notnull: false, default: NULL }
+    Introduccion:                 { type: text, notnull: false }
+    MostrarTitulo:                { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarSubtitulo:             { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarIntroduccion:          { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarEnMenuN:               { type: string(255), notnull: true, default: '{1,0,0,0,0}' }
+    EtiquetaWebN:                 { type: string(255), notnull: true, default: '{}' }
+    OrdenMenuN:                   { type: string(255), notnull: true, default: '{}' }
+    ModoMostrarContenidos:        { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ModosMostrarContenidos,IDTipo'}
+    CriterioOrdenContenidosHijos: { type: string(255), notnull: true, default: 'SortOrder ASC', index: index, comment: 'abstract,CriteriosOrdenContenidosHijos,IDTipo'}
+    MostrarSubsecciones:          { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+
+# LOS CONTENIDOS PROPIAMENTE DICHOS
+GconContenidos:
+  comment: Contenidos del gestor de contenidos
+  columns:
+    IdSeccion:                    { type: bigint(11),  notnull: true, index: index, comment: 'db,GconSecciones,Id' }
+    Titulo:                       { type: string(255), notnull: true }
+    Subtitulo:                    { type: string(255), notnull: false, default: NULL }
+    Resumen:                      { type: string(500), notnull: false, default: NULL }
+    Desarrollo:                   { type: text, notnull: false, default: NULL }
+    MostrarTituloPortada:         { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarTituloContenido:       { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarSubtituloPortada:      { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarSubtituloContenido:    { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarResumenPortada:        { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarResumenContenido:      { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    BlogPublicar:                 { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    BlogMostrarEnPortada:         { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    BlogPermitirComentarios:      { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    BlogOrden:                    { type: integer(11), notnull: true, default: 0, index: index}
+    NoticiaPublicar:              { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    NoticiaMostrarEnPortada:      { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    NoticiaOrden:                 { type: integer(11), notnull: true, default: 0, index: index}
+    EsEvento:                     { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    # Array de id's de etiquetas definidas en el módulo Etiquetas de Contenidos
+    Etiquetas: { type: string(500), notnull: true, default: '{}' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IdSeccion: { ForeignEntity: GconSecciones, ForeignId: Id }
+
+
+# RELACION 1 A N ENTRE CONTENIDOS.
+# UN CONTENIDO PUEDE ESTAR RELACIONADO CON N CONTENIDOS
+GconContenidosRelacionados:
+  comment: Tabla auxiliar para la relacion 1 a n entre contenidos
+  columns:
+    IdOrigen:      {type: bigint(11), notnull: true, index: index }
+    IdRelacionado: {type: bigint(11), notnull: true, index: index }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
