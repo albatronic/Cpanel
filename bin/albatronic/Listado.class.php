@@ -177,8 +177,12 @@ class Listado {
     public function makeQuery($aditionalFilter = '') {
         //Recorro las columnsSelected del filter para ver
         //qué columnas se han seleccionado y construir el filtro
+
+        // Las tablas involucradas las meto en un array para controlar
+        // que no se repitan en la clausa 'FROM'
         $filtro = '';
-        $tablas = $this->form->getDataBaseName() . "." . $this->form->getTable();
+        $tablas = array();
+        $tablas[$this->form->getDataBaseName() . "." . $this->form->getTable()] = $this->form->getDataBaseName() . "." . $this->form->getTable();
         foreach ($this->filter['columnsSelected'] as $key => $value) {
             if ($this->filter['valuesSelected'][$key] != '') {
                 if ($filtro)
@@ -196,7 +200,7 @@ class Listado {
                             //a la lista de tablas
                             $entidadReferenciada = new $this->filter['aditional'][$key]['entity'] ( );
                             $tablaReferenciada = $entidadReferenciada->getDataBaseName() . "." . $entidadReferenciada->getTableName();
-                            $tablas .= ", " . $tablaReferenciada;
+                            $tablas[$tablaReferenciada] = $tablaReferenciada;
                             //Construir la parte del where para el join
                             $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $this->filter['columnsSelected'][$key] . "=" . $tablaReferenciada . "." . $entidadReferenciada->getPrimaryKeyName() . ")";
                             //Construir el filtro de la columna
@@ -254,18 +258,24 @@ class Listado {
             }
         }
 
-
         if ($filtro == '')
             $filtro = '(1)';
 
         if ($aditionalFilter != '')
             $filtro .= " AND (" . $aditionalFilter . ")";
 
-        $filtro .= " AND (Deleted = '0')";
+        $filtro .= " AND ({$this->form->getDataBaseName()}.{$this->form->getTable()}.Deleted = '0')";
 
+        // Transformo el array de tablas en un string
+        $listaTablas = "";
+        foreach ($tablas as $key => $value) {
+            if ($listaTablas != '')
+                $listaTablas .= ", ";
+            $listaTablas .= $key;
+        }
         $arrayQuery = array(
             "SELECT" => $this->form->getDataBaseName() . "." . $this->form->getTable() . ".*", // . $this->form->getPrimaryKey(),
-            "FROM" => $tablas,
+            "FROM" => $listaTablas,
             "WHERE" => "({$filtro})",
             "ORDER BY" => $this->filter['orderBy'],
                 //"ORDER BY" => $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $this->filter['orderBy'],

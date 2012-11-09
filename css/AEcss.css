@@ -83,3 +83,120 @@
 	padding: 5px 10px 5px 10px;
         margin-right: 5px;
 }
+
+.Titulo{
+    font-size: 12px;
+    text-align: left;
+    vertical-align: middle;
+    color: #585858;
+    background-color: #eeeeee;
+    font-weight: bold;
+    padding: 2px 2px 2px 2px;
+    height: 24px;
+}
+
+/* LISTADO */
+.Listado{
+    display: block;
+    background-color: #eeeeee;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+
+.Listado .Cuerpo{
+    width: 100%;
+    border: 1px solid white;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    background-repeat: repeat-x;
+}
+
+.Listado .Cuerpo .Item { clear: both;  }
+
+.Listado .Cuerpo .Item .Select{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: left;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.Listado .Cuerpo .LinkButtom{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.Listado .Cuerpo .Item{
+    padding-right: 3px;
+}
+
+.Listado .Cuerpo .Par{
+    background-color: #eeeeee;
+}
+
+.Listado .Cuerpo .Impar{
+    background-color: whitesmoke;
+}
+
+.Listado .Cuerpo .ItemListado{
+    color: black;
+}
+
+.Listado .Titulos{
+    color: white;
+    background-color: #4D4D4D;
+    font-weight: bold;
+}
+
+.Listado .Titulos .Item{
+    text-align: center;
+    padding: 2px;
+    font-size: 11px;
+}
+
+.Listado .Paginacion{
+    font-size: 11px;
+    color: black;
+}
+
+.Listado .Paginacion-izq {
+    padding: 5px;
+    border-bottom: 1px solid;
+    text-align: left;
+}
+
+.Listado .Paginacion-der {
+    padding: 5px;
+    border-top: 1px solid;
+    text-align: right;
+}
+
+.Listado .Cabecera{
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle;
+    color: #585858;
+    font-weight: bold;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    padding-left: 3px;
+    padding-bottom: 2px;
+}
+
+.Listado .Pie{
+    background: grey;
+    color: white;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+
+/*ESTILOS PARA LOS ACTION LIST*/
+.Listado a{ color:black;}
+.Listado th{border-style: none; }
+.Listado td{border-style: none; }
+.Listado .Select{border-style: none; }
+.Listado tbody tr:hover td,tbody tr:hover th, tbody tr:hover a{ color: black; background-color: #D9D9D9;}
+.Listado .sin_registros{ font-size: 12px; text-align: center;}
+/*FIN ACTION LIST*/

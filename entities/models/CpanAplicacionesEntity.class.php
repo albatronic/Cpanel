@@ -25,7 +25,7 @@ class CpanAplicacionesEntity extends EntityComunes {
 	 * @var string
 	 * @assert NotBlank(groups="CpanAplicaciones")
 	 */
-	protected $NombreApp;
+	protected $NombreApp = '';
 	/**
 	 * @var string
 	 */

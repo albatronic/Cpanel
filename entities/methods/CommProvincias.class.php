@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
@@ -9,14 +10,17 @@
  * @orm:Entity(CommProvincias)
  */
 class CommProvincias extends CommProvinciasEntity {
-	public function __toString() {
-		return $this->getProvincia();
-	}
+
+    public function __toString() {
+        return $this->getProvincia();
+    }
 
     public function fetchAll($column = '', $default = TRUE) {
         if ($column == '')
             $column = 'Provincia';
         return parent::fetchAll($column, $default);
     }
+
 }
+
 ?>

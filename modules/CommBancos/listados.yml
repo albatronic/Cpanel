@@ -8,7 +8,7 @@
 ---
 listados:
   -
-    title: CommBancos
+    title: Entidades Bancarias
     order_by: Id
     break_field: null
     idPerfil: null
@@ -22,4 +22,4 @@ listados:
     legend_bottom: null
     columns:
       Codigo: { title: Codigo, length: '4', align: L, type: string, total: NO, formula: null, format: null }
-      Nombre: { title: Nombre, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Nombre: { title: Nombre, length: '65', align: L, type: string, total: NO, formula: null, format: null }

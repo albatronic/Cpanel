@@ -12,7 +12,7 @@
 class CommMunicipios extends CommMunicipiosEntity {
 
     public function __toString() {
-        return $this->getMunicipio();
+        return $this->Municipio;
     }
 
     public function fetchAll($column = '', $default = TRUE) {

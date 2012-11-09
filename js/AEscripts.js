@@ -20,6 +20,7 @@ $(function(){
         autoHeight: false,
         navigation: true,
         collapsible: true,
+        active: false,
         animated: 'bounceslide'
     });
 
@@ -79,7 +80,7 @@ function popUpVariablesEnv(tipo, ambito, modulo_columna) {
     var columna = elementos[1];
     var url = appPath + '/CpanVariables/EditNode/'+ambito+'/'+tipo+'/'+modulo+'/'+columna;
 
-    window.open(url,'Variables','width=490,height=580,resizable=yes,scrollbars=yes');
+    window.open(url,'Variables','width=400,height=580,resizable=yes,scrollbars=yes');
 }
 
 /**
@@ -178,7 +179,7 @@ function formateafecha(fecha){
         dia=fecha.substr(0,2);
         mes=fecha.substr(3,2);
         ano=fecha.substr(6,4);
-        // A�o no viciesto y es febrero y el dia es mayor a 28
+        // Año no viciesto y es febrero y el dia es mayor a 28
         if ( (ano%4 != 0) && (mes ==02) && (dia > 28) ) {
             fecha=fecha.substr(0,2)+"/";
         }
@@ -276,6 +277,41 @@ function devuelve( campoId, id, campoTexto, value, desplegableAjax) {
     $( "#"+campoTexto ).focus();
 }
 
+function actualizaContenidoRelacionado(idDiv,idContenidoOrigen,idContenidoRelacionado,onOff) {
+
+    //var url        = appPath + '/lib/contenidosRelacionados.php';
+    var parametros = 'idContenidoOrigen='+idContenidoOrigen+'&idContenidoRelacionado='+idContenidoRelacionado+'&onOff='+onOff;
+
+    // Coloco un gif "Cargando..." en la capa
+    //$('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
+
+$.ajax({
+    url: appPath + '/lib/contenidosRelacionados.php',
+    type: 'GET',
+    async: true,
+    data: parametros
+});
+
+}
+
+function actualizaEtiquetasRelacionadas(idDiv,idContenido,idEtiqueta,onOff) {
+
+
+    var url        = appPath + '/lib/etiquetasRelacionadas.php';
+    var parametros = 'idContenido='+idContenido+'&idEtiqueta='+idEtiqueta+'&onOff='+onOff;
+
+    // Cojo el html que hay en el div
+    var htmlSrc = $('div.'+idDiv).html();
+
+    // Coloco un gif "Cargando..." en la capa
+    $('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
+
+    $('#'+idDiv).load(
+                        url,
+                        parametros,
+                        function() { $('#'+idDiv).html(htmlSrc);}
+                    );
+}
 /*
  * ----------------------------------------------------------------
  * FUNCION PARA LOS MENSAJES DE NOTIFICACION

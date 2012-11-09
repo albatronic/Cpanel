@@ -12,13 +12,13 @@
 class PcaeProyectos extends PcaeProyectosEntity {
 
     public function __toString() {
-        return $this->getId();
+        return $this->getProyecto();
     }
 
     /**
      * Devuelve un array de objetos \PcaeApps
      * asociados al proyecto en curso.
-     * 
+     *
      * @return array Array de objetos \PcaeApps
      */
     public function getApps() {

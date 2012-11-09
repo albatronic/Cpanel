@@ -25,7 +25,7 @@ class CommPaisesEntity extends EntityComunes {
 	 * @var string
 	 * @assert NotBlank(groups="CommPaises")
 	 */
-	protected $Pais;
+	protected $Pais = '';
 	/**
 	 * @var entities\CommMonedas
 	 */

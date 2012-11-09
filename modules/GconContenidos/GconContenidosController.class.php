@@ -3,7 +3,7 @@
 * CONTROLLER FOR GconContenidos
 * @author: Sergio Perez <sergio.perez@albatronic.com>
 * @copyright: INFORMATICA ALBATRONIC SL 
-* @date 29.10.2012 20:11:57
+* @date 30.10.2012 18:45:39
 
 * Extiende a la clase controller
 */

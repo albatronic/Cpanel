@@ -34,13 +34,18 @@
                         {% if variable != 'listaValores' %}
                         <p>
                         {% if ( (hayListaValores and (variable == 'default') ) or ( (variable == 'visible') or (variable == 'updatable') or (variable == 'editorTiny') ) ) %}
+
                             {% if (variable == 'default') %}
                                 {% set listaValores = values.datos.listaValores %}
+                                {% set tipoTag = 'select' %}
                             {% else %}
                                 {% set listaValores = ValoresSN %}
+                                {% set tipoTag = 'checkbox' %}
                             {% endif %}
-                            {{ macro.select(
-                                {'caption':variable,'visible':'1','varEnv':'0'},
+
+                            {% if tipoTag == 'select' %}
+                                {{ macro.select(
+                                {'caption':variable,'visible':'1','updatable':'1','varEnv':'0'},
                                 'field_title',
                                 'datos['~variable~']',
                                 'datos_'~ variable,
@@ -49,10 +54,24 @@
                                 listaValores,
                                 'chzn-select'
                                 )
-                            }}
+                                }}
+                            {% else %}
+                                {{ macro.input(
+                                {'caption':variable,'visible':'1','updatable':'1','varEnv':'0'},
+                                'field_title',
+                                'checkbox',
+                                'datos['~variable~']',
+                                'datos_'~ variable,
+                                valor,
+                                '255',
+                                'CampoTextoCorto'
+                                )
+                                }}
+                            {% endif %}
+
                         {% else %}
                             {{ macro.input(
-                                {'caption':variable,'visible':'1','varEnv':'0'},
+                                {'caption':variable,'visible':'1','updatable':'1','varEnv':'0'},
                                 'field_title',
                                 'text',
                                 'datos['~variable~']',

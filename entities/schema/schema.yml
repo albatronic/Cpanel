@@ -105,6 +105,7 @@ CpanUrlAmigables:
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
+# VARIABLES DE ENTORNO Y WEB DEL PROYECTO, SUBAPPS Y MODULOS
 CpanVariables:
   comment: Variables de entorno y web del proyecto, subapps y modulos
   columns:
@@ -113,3 +114,29 @@ CpanVariables:
     Yml:             { type: text}
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
+
+# ETIQUETAS DE TODOS LOS MODULOS
+CpanEtiquetas:
+  comment: Etiquetas de los modulos
+  columns:
+    IdModulo: { type: bigint(11), notnull: true, index: index, comment: 'db,CpanModulos,Id'}
+    Etiqueta: { type: string(255), notnull: true, index: unique }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IdModulo : { ForeignEntity: CpanModulos, ForeignId: Id }
+
+# VISITIAS
+#id
+
+
+# ITINERARIO VISITAS
+#id
+#idVisita
+#sesion
+#idUsuario null
+#entidad
+#idEntidad
+##fecha y hora en formato unix
+##diferencia formato unix
+#diferencia en formato text
+

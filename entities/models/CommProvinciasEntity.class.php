@@ -30,7 +30,7 @@ class CommProvinciasEntity extends EntityComunes {
 	 * @var string
 	 * @assert NotBlank(groups="CommProvincias")
 	 */
-	protected $Provincia;
+	protected $Provincia = '';
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string

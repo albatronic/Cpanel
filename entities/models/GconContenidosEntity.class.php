@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 29.10.2012 20:09:46
+ * @date 30.10.2012 18:45:39
  */
 
 /**
@@ -108,11 +108,6 @@ class GconContenidosEntity extends EntityComunes {
 	 * @assert NotBlank(groups="GconContenidos")
 	 */
 	protected $EsEvento = '0';
-	/**
-	 * @var string
-	 * @assert NotBlank(groups="GconContenidos")
-	 */
-	protected $Etiquetas = '{}';
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string
@@ -315,13 +310,6 @@ class GconContenidosEntity extends EntityComunes {
 		if (!($this->EsEvento instanceof ValoresSN))
 			$this->EsEvento = new ValoresSN($this->EsEvento);
 		return $this->EsEvento;
-	}
-
-	public function setEtiquetas($Etiquetas){
-		$this->Etiquetas = trim($Etiquetas);
-	}
-	public function getEtiquetas(){
-		return $this->Etiquetas;
 	}
 
 } // END class GconContenidos

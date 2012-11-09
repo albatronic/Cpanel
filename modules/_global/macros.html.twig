@@ -71,13 +71,32 @@
 
         <div class="form_input">
         {% if not autoComplete %}
+            {% if (type == 'checkbox') %}
+            <input name="{{name}}" id="{{ id|default(name)}}" type="hidden" value="{{value}}" />
+            <input type="checkbox"
+                   name="checkbox_{{ name }}"
+                   id="checkbox_{{ id|default(name)}}"
+                   value="{{ value }}"
+                    {% if (value == '1') %} CHECKED {% endif %}
+                   class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
+                   onchange="
+                        {{ onchange }} {{ _self.alertSave }}
+                        if ($('#checkbox_{{ id|default(name)}}').is(':checked')) {$('#{{ id|default(name)}}').val('1');} else {$('#{{ id|default(name)}}').val('0');}
+                   "
+                   {{extra}}
+                   {% if atributos.updatable == '0' %} disabled {% endif %}
+            />
+            {% else %}
             <input type="{{ type|default('text') }}"
                    name="{{ name }}"
                    id="{{ id|default(name)}}"
                    value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
-                   accept="" class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}" onchange="{{ onchange }}" {{extra}}
-                   accesskey="" {% if atributos.updatable == '0' %} disabled {% endif %}
+                   class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
+                   onchange="{{ onchange }} {{ _self.alertSave }}"
+                   {{extra}}
+                   {% if atributos.updatable == '0' %} disabled {% endif %}
             />
+            {% endif %}
         {% else %}
             <input type="hidden"
                    name="{{ name }}"
@@ -87,7 +106,9 @@
             <input type="{{ type|default('text') }}"
                    id="{{ id|default(name)}}_autoComplete"
                    value="{{ autoComplete[2] }}" maxlength="{{ maxLength|default(20) }}"
+                   class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
                    onkeyup="autoCompletar('{{ id|default(name)}}_autoComplete','{{ id|default(name)}}','{{ id|default(name)}}_autoComplete','{{autoComplete[0]}}','{{autoComplete[1]}}',$('#{{autoComplete[3]}}').val());"
+                   onchange = "{{ onchange}} {{ _self.alertSave }}"
              />
         {% endif %}
         </div>
@@ -147,7 +168,7 @@
         <input type="{{ type|default('text') }}" name="{{ name }}" id="{{ id|default(name)}}"
            value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
            class="tip_top" title="{{ tip }}" tabindex="{{ tabIndex }}"
-           onchange="ValidaNif('manto','{{name}}');"
+           onchange="ValidaNif('manto','{{name}}'); {{ _self.alertSave }}"
            {{extra}}
         />
     </div>
@@ -160,6 +181,11 @@
 {# ------------------------------- #}
 {% macro textarea(atributos, classLabel, name, id, value, rows, cols, class, tabindex) %}
 {% if atributos.visible == '1' %}
+{% if atributos.editorTiny == '1'%}
+    <script>
+        tinyMCE.execCommand("mceAddControl", true, "{{ id|default(name)}}");
+    </script>
+{% endif %}
 <li>
 <div class="form_grid_12" id="div_{{id|default(name)}}">
 
@@ -174,6 +200,7 @@
                    rows="{{ rows|default(5) }}"
                    cols="{{ cols|default(75) }}"
                    tabindex="{{ tabindex }}"
+                   onchange="{{ _self.alertSave }}"
                    {% if atributos.updatable == '0' %} disabled {% endif %}
                    >
         {{value}}
@@ -196,22 +223,32 @@
     {% endif %}
 
     <div class="form_input">
-    <select data-placeholder="Indique un valor" name="{{ name }}" id="{{ id|default(name)}}"
-            style="width:{{width|default(200)}}px;"
-            class="{{ class|default('chzn-select') }}"
-            onchange="{{onchange}}"
-            onblur="{{onblur}}"
-            tabindex="{{tabindex}}"
-            {% if atributos.updatable == '0' %} disabled {% endif %} >
-        {% for value in opciones %}
+        {% if (atributos.updatable == '0') %}
+            <input type="hidden" name="{{ name }}" value="{{ defecto }}" />
+        {% endif %}
+        <select data-placeholder="Indique un valor"
+                {% if (atributos.updatable == '1') %}
+                name="{{ name }}" id="{{ id|default(name)}}"
+                {% endif %}
+                {% if (atributos.updatable == '0') %}
+                disabled
+                {% endif %}
+                style="width:{{width|default(200)}}px;"
+                class="{{ class|default('chzn-select') }}"
+                onchange="{{onchange}}"
+                onblur="{{onblur}} {{ _self.alertSave }}"
+                tabindex="{{tabindex}}"
+        >
+            {% for value in opciones %}
             <option value="{{ value.Id }}" {% if (value.Id==defecto) %} SELECTED {% endif %}>
                 {{value.Value}}
             </option>
-        {% endfor %}
-    </select>
-    {% if popup %}
-        {{ _self.linkimg(popup) }}
-    {% endif %}
+            {% endfor %}
+        </select>
+
+        {% if popup %}
+            {{ _self.linkimg(popup) }}
+        {% endif %}
     </div>
     </div>
 </li>
@@ -256,6 +293,7 @@
                        class="{{ class|default('datepicker') }}"
                        {#onKeyUp="this.value=formateafecha(this.value);"#}
                        tabindex="{{tabindex}}"
+                       onchange = "{{ _self.alertSave }}"
                        {{extra}}
                        {% if atributos.updatable == '0' %} disabled {% endif %}
             />
@@ -283,7 +321,7 @@ document.getElementById('{{id}}').focus();
 
 {# linkThickBox: ABRE UNA VENTANA THICKBOX RENDERIZANDO EL RESULTADO DEL CONTROLADOR Y ACTION INDICADO EN RUTA #}
 {% macro linkThickBox(path,textoLink,ruta,ventanaTitulo,ventanaAlto,ventanaAncho)%}
-<a class="thickbox" title= "{{ventanaTitulo|default("Informe")}}" href="{{path}}/{{ruta}}/?TB_iframe=true&height={{ ventanaAlto|default("500") }}&width={{ ventanaAncho|default("600") }}">
+<a class="thickbox" title= "{{ventanaTitulo|default("Informe")}}" href="{{path}}/{{ruta}}/?height={{ ventanaAlto|default("500") }}&width={{ ventanaAncho|default("600") }}">
     {{textoLink}}
 </a>
 {% endmacro %}
@@ -344,3 +382,9 @@ document.getElementById('{{id}}').focus();
 <script>documentos('{{entidad}}', '{{idEntidad}}', 'Documentos', '{{tipo}}');</script>
 <div style="clear:both;"></div>
 {% endmacro %}
+
+{# MUESTRA EL ICONO DE ALERTA PARA SALVAR EL REGISTRO #}
+{# ESTA MACRO ES LLAMADA POR EL EVENTO ONCHANGE DE TODOS LOS TAGS (input,select, chekbox, select, etc #}
+{% macro alertSave() %}
+$('.title_icon span').css('background','url({{appPath}}/images/alert.png)');
+{% endmacro%}

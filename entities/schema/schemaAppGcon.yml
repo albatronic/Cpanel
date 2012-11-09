@@ -16,9 +16,21 @@ GconSecciones:
     MostrarTitulo:                { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
     MostrarSubtitulo:             { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
     MostrarIntroduccion:          { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
-    MostrarEnMenuN:               { type: string(255), notnull: true, default: '{1,0,0,0,0}' }
-    EtiquetaWebN:                 { type: string(255), notnull: true, default: '{}' }
-    OrdenMenuN:                   { type: string(255), notnull: true, default: '{}' }
+    MostrarEnMenu1:               { type: tinyint(1), notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarEnMenu2:               { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarEnMenu3:               { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarEnMenu4:               { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    MostrarEnMenu5:               { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    EtiquetaWeb1:                 { type: string(255), notnull: false }
+    EtiquetaWeb2:                 { type: string(255), notnull: false }
+    EtiquetaWeb3:                 { type: string(255), notnull: false }
+    EtiquetaWeb4:                 { type: string(255), notnull: false }
+    EtiquetaWeb5:                 { type: string(255), notnull: false }
+    OrdenMenu1:                   { type: int(4), notnull: true, default: 0 }
+    OrdenMenu2:                   { type: int(4), notnull: true, default: 0 }
+    OrdenMenu3:                   { type: int(4), notnull: true, default: 0 }
+    OrdenMenu4:                   { type: int(4), notnull: true, default: 0 }
+    OrdenMenu5:                   { type: int(4), notnull: true, default: 0 }
     ModoMostrarContenidos:        { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ModosMostrarContenidos,IDTipo'}
     CriterioOrdenContenidosHijos: { type: string(255), notnull: true, default: 'SortOrder ASC', index: index, comment: 'abstract,CriteriosOrdenContenidosHijos,IDTipo'}
     MostrarSubsecciones:          { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
@@ -48,12 +60,9 @@ GconContenidos:
     NoticiaMostrarEnPortada:      { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
     NoticiaOrden:                 { type: integer(11), notnull: true, default: 0, index: index}
     EsEvento:                     { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
-    # Array de id's de etiquetas definidas en el módulo Etiquetas de Contenidos
-    Etiquetas: { type: string(500), notnull: true, default: '{}' }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdSeccion: { ForeignEntity: GconSecciones, ForeignId: Id }
-
 
 # RELACION 1 A N ENTRE CONTENIDOS.
 # UN CONTENIDO PUEDE ESTAR RELACIONADO CON N CONTENIDOS
@@ -64,3 +73,11 @@ GconContenidosRelacionados:
     IdRelacionado: {type: bigint(11), notnull: true, index: index }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
+
+# RELACION 1 A N ENTRE CONTENIDOS Y ETIQUETAS DE CONTENIDOS
+GconContenidosEtiquetas:
+  comment: Tabla auxiliar para la relacion 1 a n entre contenidos y etiquetas
+  columns:
+    IdContenido: { type: bigint(11), notnull: true, index: index }
+    IdEtiqueta:  { type: bigint(11), notnull: true, index: index }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>

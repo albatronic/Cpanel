@@ -4,7 +4,7 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 29.10.2012 20:11:57
+  date 30.10.2012 18:45:39
 #}
 
 {% extends layout %}
@@ -18,10 +18,15 @@
 	{% endif %}
 	{% endblock %}
 
-	<div id='div_listado'>
+        <div id='div_listado'>
 	{% block listado %}
 	{% endblock %}
-	</div>
+        </div>
+
+        {% if (values.datos.getPrimaryKeyValue) %}
+            {{ macro.linkThickBox(app.path,'Contenidos relacionados','GconContenidosRelacionados/list/'~values.datos.getPrimaryKeyValue,'Contenidos Relacionados con ' ~ values.datos,370,490) }}
+            {{ macro.linkThickBox(app.path,'Etiquetas relacionadas','GconContenidosEtiquetas/list/'~values.datos.getPrimaryKeyValue,'Etiquetas Relacionados con ' ~ values.datos,370,490) }}
+        {% endif %}
 
 	{% block mantenimiento %}
 	{% endblock %}

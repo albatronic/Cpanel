@@ -3,17 +3,17 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 29.10.2012 20:11:57
+# @date 30.10.2012 18:45:39
 #
 ---
 GconContenidos:
-  app: ''
-  isModuleRoot: 0
+  app: 'Gcon'
+  isModuleRoot: 1
   linkModule:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
-  showCommonFields: 'true'
+  showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'
   withGalery: '0'
@@ -31,9 +31,9 @@ GconContenidos:
     generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
-  urlFriendlyManagement: 'true'
+  urlFriendlyManagement: true
   fieldGeneratorUrlFriendly: IdSeccion
-  metatagTitleManagement: 'true'
+  metatagTitleManagement: true
   fieldGeneratorMetatagTitle: IdSeccion
   controller: CONTROLADOR
   action: ACTION
@@ -306,17 +306,6 @@ GconContenidos:
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 13, caption: EsEvento, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
-    Etiquetas:
-      title: Etiquetas
-      filter: YES
-      list: NO
-      visible: true
-      updatable: true
-      default: '{}'
-      help: null
-      permission: null
-      link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: NO, type: string, length: '500', min: null, max: null, message: 'Valor Requerido' }
     Observations:
       title: Observations
       filter: NO

@@ -12,7 +12,7 @@
 class CommIdiomas extends CommIdiomasEntity {
 
     public function __toString() {
-        return $this->getIdioma();
+        return $this->Idioma();
     }
 
     public function fetchAll($column = '', $default = TRUE) {

@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 29.10.2012 20:07:59
+ * @date 30.10.2012 18:44:57
  */
 
 /**
@@ -45,20 +45,75 @@ class GconSeccionesEntity extends EntityComunes {
 	 */
 	protected $MostrarIntroduccion = '1';
 	/**
-	 * @var string
+	 * @var entities\ValoresSN
 	 * @assert NotBlank(groups="GconSecciones")
 	 */
-	protected $MostrarEnMenuN = '{1,0,0,0,0}';
+	protected $MostrarEnMenu1 = '1';
+	/**
+	 * @var entities\ValoresSN
+	 * @assert NotBlank(groups="GconSecciones")
+	 */
+	protected $MostrarEnMenu2 = '0';
+	/**
+	 * @var entities\ValoresSN
+	 * @assert NotBlank(groups="GconSecciones")
+	 */
+	protected $MostrarEnMenu3 = '0';
+	/**
+	 * @var entities\ValoresSN
+	 * @assert NotBlank(groups="GconSecciones")
+	 */
+	protected $MostrarEnMenu4 = '0';
+	/**
+	 * @var entities\ValoresSN
+	 * @assert NotBlank(groups="GconSecciones")
+	 */
+	protected $MostrarEnMenu5 = '0';
 	/**
 	 * @var string
-	 * @assert NotBlank(groups="GconSecciones")
 	 */
-	protected $EtiquetaWebN = '{}';
+	protected $EtiquetaWeb1;
 	/**
 	 * @var string
+	 */
+	protected $EtiquetaWeb2;
+	/**
+	 * @var string
+	 */
+	protected $EtiquetaWeb3;
+	/**
+	 * @var string
+	 */
+	protected $EtiquetaWeb4;
+	/**
+	 * @var string
+	 */
+	protected $EtiquetaWeb5;
+	/**
+	 * @var integer
 	 * @assert NotBlank(groups="GconSecciones")
 	 */
-	protected $OrdenMenuN = '{}';
+	protected $OrdenMenu1 = '0';
+	/**
+	 * @var integer
+	 * @assert NotBlank(groups="GconSecciones")
+	 */
+	protected $OrdenMenu2 = '0';
+	/**
+	 * @var integer
+	 * @assert NotBlank(groups="GconSecciones")
+	 */
+	protected $OrdenMenu3 = '0';
+	/**
+	 * @var integer
+	 * @assert NotBlank(groups="GconSecciones")
+	 */
+	protected $OrdenMenu4 = '0';
+	/**
+	 * @var integer
+	 * @assert NotBlank(groups="GconSecciones")
+	 */
+	protected $OrdenMenu5 = '0';
 	/**
 	 * @var entities\ModosMostrarContenidos
 	 * @assert NotBlank(groups="GconSecciones")
@@ -169,25 +224,119 @@ class GconSeccionesEntity extends EntityComunes {
 		return $this->MostrarIntroduccion;
 	}
 
-	public function setMostrarEnMenuN($MostrarEnMenuN){
-		$this->MostrarEnMenuN = trim($MostrarEnMenuN);
+	public function setMostrarEnMenu1($MostrarEnMenu1){
+		$this->MostrarEnMenu1 = $MostrarEnMenu1;
 	}
-	public function getMostrarEnMenuN(){
-		return $this->MostrarEnMenuN;
-	}
-
-	public function setEtiquetaWebN($EtiquetaWebN){
-		$this->EtiquetaWebN = trim($EtiquetaWebN);
-	}
-	public function getEtiquetaWebN(){
-		return $this->EtiquetaWebN;
+	public function getMostrarEnMenu1(){
+		if (!($this->MostrarEnMenu1 instanceof ValoresSN))
+			$this->MostrarEnMenu1 = new ValoresSN($this->MostrarEnMenu1);
+		return $this->MostrarEnMenu1;
 	}
 
-	public function setOrdenMenuN($OrdenMenuN){
-		$this->OrdenMenuN = trim($OrdenMenuN);
+	public function setMostrarEnMenu2($MostrarEnMenu2){
+		$this->MostrarEnMenu2 = $MostrarEnMenu2;
 	}
-	public function getOrdenMenuN(){
-		return $this->OrdenMenuN;
+	public function getMostrarEnMenu2(){
+		if (!($this->MostrarEnMenu2 instanceof ValoresSN))
+			$this->MostrarEnMenu2 = new ValoresSN($this->MostrarEnMenu2);
+		return $this->MostrarEnMenu2;
+	}
+
+	public function setMostrarEnMenu3($MostrarEnMenu3){
+		$this->MostrarEnMenu3 = $MostrarEnMenu3;
+	}
+	public function getMostrarEnMenu3(){
+		if (!($this->MostrarEnMenu3 instanceof ValoresSN))
+			$this->MostrarEnMenu3 = new ValoresSN($this->MostrarEnMenu3);
+		return $this->MostrarEnMenu3;
+	}
+
+	public function setMostrarEnMenu4($MostrarEnMenu4){
+		$this->MostrarEnMenu4 = $MostrarEnMenu4;
+	}
+	public function getMostrarEnMenu4(){
+		if (!($this->MostrarEnMenu4 instanceof ValoresSN))
+			$this->MostrarEnMenu4 = new ValoresSN($this->MostrarEnMenu4);
+		return $this->MostrarEnMenu4;
+	}
+
+	public function setMostrarEnMenu5($MostrarEnMenu5){
+		$this->MostrarEnMenu5 = $MostrarEnMenu5;
+	}
+	public function getMostrarEnMenu5(){
+		if (!($this->MostrarEnMenu5 instanceof ValoresSN))
+			$this->MostrarEnMenu5 = new ValoresSN($this->MostrarEnMenu5);
+		return $this->MostrarEnMenu5;
+	}
+
+	public function setEtiquetaWeb1($EtiquetaWeb1){
+		$this->EtiquetaWeb1 = trim($EtiquetaWeb1);
+	}
+	public function getEtiquetaWeb1(){
+		return $this->EtiquetaWeb1;
+	}
+
+	public function setEtiquetaWeb2($EtiquetaWeb2){
+		$this->EtiquetaWeb2 = trim($EtiquetaWeb2);
+	}
+	public function getEtiquetaWeb2(){
+		return $this->EtiquetaWeb2;
+	}
+
+	public function setEtiquetaWeb3($EtiquetaWeb3){
+		$this->EtiquetaWeb3 = trim($EtiquetaWeb3);
+	}
+	public function getEtiquetaWeb3(){
+		return $this->EtiquetaWeb3;
+	}
+
+	public function setEtiquetaWeb4($EtiquetaWeb4){
+		$this->EtiquetaWeb4 = trim($EtiquetaWeb4);
+	}
+	public function getEtiquetaWeb4(){
+		return $this->EtiquetaWeb4;
+	}
+
+	public function setEtiquetaWeb5($EtiquetaWeb5){
+		$this->EtiquetaWeb5 = trim($EtiquetaWeb5);
+	}
+	public function getEtiquetaWeb5(){
+		return $this->EtiquetaWeb5;
+	}
+
+	public function setOrdenMenu1($OrdenMenu1){
+		$this->OrdenMenu1 = $OrdenMenu1;
+	}
+	public function getOrdenMenu1(){
+		return $this->OrdenMenu1;
+	}
+
+	public function setOrdenMenu2($OrdenMenu2){
+		$this->OrdenMenu2 = $OrdenMenu2;
+	}
+	public function getOrdenMenu2(){
+		return $this->OrdenMenu2;
+	}
+
+	public function setOrdenMenu3($OrdenMenu3){
+		$this->OrdenMenu3 = $OrdenMenu3;
+	}
+	public function getOrdenMenu3(){
+		return $this->OrdenMenu3;
+	}
+
+	public function setOrdenMenu4($OrdenMenu4){
+		$this->OrdenMenu4 = $OrdenMenu4;
+	}
+	public function getOrdenMenu4(){
+		return $this->OrdenMenu4;
+	}
+
+	public function setOrdenMenu5($OrdenMenu5){
+		$this->OrdenMenu5 = $OrdenMenu5;
+	}
+	public function getOrdenMenu5(){
+		return $this->OrdenMenu5;
 	}
 
 	public function setModoMostrarContenidos($ModoMostrarContenidos){

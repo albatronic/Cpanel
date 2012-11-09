@@ -25,7 +25,7 @@ class CommImpuestosEntity extends EntityComunes {
 	 * @var string
 	 * @assert NotBlank(groups="CommImpuestos")
 	 */
-	protected $Nombre;
+	protected $Nombre = '';
 	/**
 	 * @var integer
 	 * @assert NotBlank(groups="CommImpuestos")

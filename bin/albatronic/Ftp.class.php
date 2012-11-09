@@ -65,7 +65,6 @@ class Ftp {
             if (!$ok) {
                 $this->mkdir($targetFolder);
                 $ok = $this->chdir($targetFolder);
-                echo "Directorio actual ",ftp_pwd($this->connectId);
             }
 
             if ($ok) {
@@ -159,7 +158,7 @@ class Ftp {
     public function mkdir($directory) {
 
         $this->errores = array();
-echo "mkdir ",$this->connectId," ",$directory,"<br />";
+
         if ($this->connectId) {
             $ok = ftp_mkdir($this->connectId, $directory);
 

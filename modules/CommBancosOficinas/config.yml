@@ -1,0 +1,760 @@
+# Module: CommBancosOficinas
+# Document : modules/CommBancosOficinas/config.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 04.11.2012 20:25:21
+#
+---
+CommBancosOficinas:
+  app: ''
+  isModuleRoot: 0
+  linkModule:
+    fromColumn: ''
+    toEntity: ''
+    toColumn: ''
+  showCommonFields: true
+  numMaxRecords: ''
+  numberOfImages: '3'
+  withGalery: '0'
+  withDocuments: '0'
+  withVideos: 0
+  withAudios: '0'
+  maxSizes:
+    image: '400000'
+    document: ''
+    video: ''
+    audio: ''
+  galery:
+    maxWidthImage: '500'
+    maxHeightImage: '400'
+    generateThumbnail: '0'
+    widthThumbnail: '50'
+    heightThumbnail: '50'
+  urlFriendlyManagement: true
+  fieldGeneratorUrlFriendly: IdBanco
+  metatagTitleManagement: true
+  fieldGeneratorMetatagTitle: IdBanco
+  controller: CONTROLADOR
+  action: ACTION
+  template: TEMPLATE
+  parametros: PARAMETROS
+  includesHead:
+    twigCss: _global/css.html.twig
+    twigJs: _global/js.html.twig
+  login_required: YES
+  permission_control: YES
+  favourite_control: NO
+  help_file: help.html.twig
+  title: Oficinas Bancarias
+  id_video: commbancosoficinas
+  url_video: null
+  feature_list: YES
+  conection: pcae
+  entity: CommBancosOficinas
+  table: CommBancosOficinas
+  primarykey: Id
+  linkBy: 'IdBanco'
+  records_per_page: 15
+  order_by:
+    -
+      title: 'Id a-z'
+      criteria: 'Id ASC'
+    -
+      title: 'Id z-a'
+      criteria: 'Id DESC'
+  search_default: Id
+  referenced_entities:
+    - CommBancos
+    - CommPaises
+    - CommProvincias
+    - CommMunicipios
+    - ValoresSN
+    - ValoresPrivacy
+    - ValoresDchaIzq
+    - ValoresChangeFreq
+    - RequestMethods
+    - RequestOrigins
+    - CpanAplicaciones
+  columns:
+    Id:
+      title: Id
+      visible: false
+      updatable: false
+      filter: NO
+      list: NO
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+    IdBanco:
+      title: IdBanco
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    Codigo:
+      title: Código
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    Digito:
+      title: Digito
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    IdPais:
+      title: Pais
+      filter: NO
+      list: YES
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IdProvincia:
+      title: Provincia
+      filter: NO
+      list: YES
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IdMunicipio:
+      title: Municipio
+      filter: NO
+      list: YES
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    Direccion:
+      title: Direccion
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
+    CodigoPostal:
+      title: CodigoPostal
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '10', min: null, max: null, message: 'Valor Requerido' }
+    Telefono:
+      title: Telefono
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
+    Fax:
+      title: Fax
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
+    Web:
+      title: Web
+      filter: YES
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
+    EMail:
+      title: EMail
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
+    Observations:
+      title: Observations
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: false, min: null, max: null, message: 'Valor Requerido' }
+    PrimaryKeyMD5:
+      title: PrimaryKeyMD5
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
+    IsDefault:
+      title: IsDefault
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Checked:
+      title: Checked
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Publish:
+      title: Publish
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    BelongsTo:
+      title: BelongsTo
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    CreatedBy:
+      title: CreatedBy
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    CreatedAt:
+      title: CreatedAt
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    ModifiedBy:
+      title: ModifiedBy
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    ModifiedAt:
+      title: ModifiedAt
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    Deleted:
+      title: Deleted
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    DeletedBy:
+      title: DeletedBy
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    DeletedAt:
+      title: DeletedAt
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    Privacy:
+      title: Privacy
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    SortOrder:
+      title: SortOrder
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    PublishedAt:
+      title: PublishedAt
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    ActiveFrom:
+      title: ActiveFrom
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    ActiveTo:
+      title: ActiveTo
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0000-00-00 00:00:00'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
+    UrlPrefix:
+      title: UrlPrefix
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    LockUrlPrefix:
+      title: LockUrlPrefix
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '1'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    Slug:
+      title: Slug
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    LockSlug:
+      title: LockSlug
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '1'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    UrlFriendly:
+      title: UrlFriendly
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    UrlHeritable:
+      title: UrlHeritable
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '1'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    NumberVisits:
+      title: NumberVisits
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    MetatagTitle:
+      title: MetatagTitle
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    LockMetatagTitle:
+      title: LockMetatagTitle
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    MetatagKeywords:
+      title: MetatagKeywords
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    MetatagDescription:
+      title: MetatagDescription
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    MetatagTitleSimple:
+      title: MetatagTitleSimple
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    MetatagTitlePosition:
+      title: MetatagTitlePosition
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    ShowOnSitemap:
+      title: ShowOnSitemap
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    ImportanceSitemap:
+      title: ImportanceSitemap
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0.5'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '5', min: null, max: null, message: 'Valor Requerido' }
+    ChangeFreqSitemap:
+      title: ChangeFreqSitemap
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: monthly
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    ShowGalery:
+      title: ShowGalery
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    ShowDocuments:
+      title: ShowDocuments
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    ShowRelatedLinks:
+      title: ShowRelatedLinks
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    ShowRelatedContents:
+      title: ShowRelatedContents
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    ShowPublishedAt:
+      title: ShowPublishedAt
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    AccessProfileList:
+      title: AccessProfileList
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '1,2'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
+    UrlTarget:
+      title: UrlTarget
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    UrlParameters:
+      title: UrlParameters
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    UrlRequestMethod:
+      title: UrlRequestMethod
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    UrlOrigin:
+      title: UrlOrigin
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    UrlTargetBlank:
+      title: UrlTargetBlank
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    UrlIsHttps:
+      title: UrlIsHttps
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    CodigoAppAsociada:
+      title: CodigoAppAsociada
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
+    IdAlbumExterno:
+      title: IdAlbumExterno
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IdSliderAsociado:
+      title: IdSliderAsociado
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }

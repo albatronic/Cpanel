@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `cpanel`
+-- Base de datos: `Cpanel`
 --
 
 -- --------------------------------------------------------
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `aplicaciones` (
 
 CREATE TABLE IF NOT EXISTS `funcionalidades` (
   `IDFuncionalidad` bigint(11) NOT NULL AUTO_INCREMENT,
-  `IDOpcion` bigint(11) DEFAULT NULL COMMENT 'cpanel,Opciones,IDOpcion',
+  `IDOpcion` bigint(11) DEFAULT NULL COMMENT 'Cpanel,Opciones,IDOpcion',
   `Funcionalidades` varchar(255) DEFAULT NULL,
   `Observaciones` text,
   `PrimaryKeyMD5` varchar(100) DEFAULT NULL,
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `funcionalidades` (
 
 CREATE TABLE IF NOT EXISTS `opciones` (
   `IDOpcion` bigint(11) NOT NULL AUTO_INCREMENT,
-  `CodigoApp` bigint(11) DEFAULT NULL COMMENT 'cpanel,Aplicaciones,CodigoApp',
+  `CodigoApp` bigint(11) DEFAULT NULL COMMENT 'Cpanel,Aplicaciones,CodigoApp',
   `Nivel` int(4) DEFAULT NULL,
   `PerteneceA` int(4) DEFAULT NULL,
   `Titulo` varchar(100) DEFAULT NULL,
@@ -377,7 +377,7 @@ CREATE TABLE IF NOT EXISTS `tiposusuarios` (
 --
 
 INSERT INTO `tiposusuarios` (`IDTipoUsuario`, `TipoUsuario`, `Observaciones`, `PrimaryKeyMD5`, `EsPredeterminado`, `Revisado`, `Publicar`, `VigenteDesde`, `VigenteHasta`, `CreatedBy`, `CreatedAt`, `ModifiedBy`, `ModifiedAt`, `Deleted`, `DeletedBy`, `DeletedAt`, `Privacidad`, `Orden`, `Imagenes`, `FechaPublicacion`, `UrlAmigable`, `NumeroVisitas`, `MetatagTitle`, `MetatagKeywords`, `MetatagDescription`, `MetatagTitleSimple`, `MetatagTitlePosicion`, `MostrarEnMapaWeb`, `ImportanciaMapaWeb`, `ChangeFreqMapaWeb`) VALUES
-(1, 'Usuario CPANEL', NULL, '06735d4e246265dfaf01a565b763d7be', 1, NULL, 1, '2000-01-01 00:00:00', '2020-01-01 00:00:00', 1, '2012-08-02 20:19:35', 1, '2012-08-02 20:19:35', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1, 'Usuario Cpanel', NULL, '06735d4e246265dfaf01a565b763d7be', 1, NULL, 1, '2000-01-01 00:00:00', '2020-01-01 00:00:00', 1, '2012-08-02 20:19:35', 1, '2012-08-02 20:19:35', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2, 'Usuario WEB', NULL, '2f3fbd4745e6e5c4db1d9aaa08389b1d', 1, NULL, 1, '2000-01-01 00:00:00', '2020-01-01 00:00:00', 1, '2012-08-02 20:19:35', 1, '2012-08-02 20:19:35', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------

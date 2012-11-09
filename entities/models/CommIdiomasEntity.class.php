@@ -25,7 +25,7 @@ class CommIdiomasEntity extends EntityComunes {
 	 * @var string
 	 * @assert NotBlank(groups="CommIdiomas")
 	 */
-	protected $Idioma;
+	protected $Idioma = '';
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string

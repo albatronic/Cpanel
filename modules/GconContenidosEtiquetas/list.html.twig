@@ -1,0 +1,42 @@
+{#
+  Module: GconContenidosEtiquetas
+  Document : modules\GconContenidosEtiquetas\list.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 02.11.2012 10:58:56
+#}
+
+{% extends values.controller  ~ '/index.html.twig' %}
+
+{% block listado %}
+
+<div class=''>
+    <div id="accordion">
+    {% for idseccion,seccion in values.datos %}
+        <h3>{{seccion.titulo}}</h3>
+        <div>
+
+                {% for contenido in seccion.contenidos%}
+
+                    <div id="contenidoRelacionado{{contenido.Id}}" class="contenidoRelacionado{{contenido.Id}}" style="float: left;">
+                    <input
+                        id="check{{contenido.Id}}"
+                        type="checkbox"
+                        value="{{contenido.estaRelacionado}}"
+                        {% if (contenido.estaRelacionado == '1') %} checked {% endif %}
+                        onchange="
+                          if ($('#check{{contenido.Id}}').is(':checked')) {$('#check{{contenido.Id}}').val('1');} else {$('#check{{contenido.Id}}').val('0');}
+                          actualizaContenidoRelacionado('contenidoRelacionado{{contenido.Id}}','{{values.idContenidoOrigen}}','{{contenido.Id}}',$('#check{{contenido.Id}}').val());
+                        "
+                    />
+                    </div>
+                    <div style="float: left;">{{contenido.Value}}</div>
+                    <div style="clear: both;"></div>
+                {% endfor %}
+
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

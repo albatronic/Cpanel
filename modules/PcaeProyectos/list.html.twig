@@ -1,0 +1,53 @@
+{#
+  Module: PcaeProyectos
+  Document : modules\PcaeProyectos\list.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 04.11.2012 20:25:21
+#}
+
+{% extends values.controller  ~ '/index.html.twig' %}
+
+{% block listado %}
+<div class='Listado'>
+
+	{# include '_global/paginacion.html.twig' with {'filter':values.listado.filter,'controller':'BancosOficinas','position':'izq'}#}
+
+	<table width="100%">
+            <tr class='Titulos'>
+                <td class='Item'>Proyecto</td>
+                <td class='Item'>Inicio</td>
+                <td class='Item'>F. fin prevista</td>
+                <td class='Item'>Presupuesto</td>
+                <td class='Item'>Horas Previstas</td>
+                <td class='Item'>Project Manager</td>
+                <td class='Item'>Contacto Cliente</td>
+            </tr>
+
+            <tbody class='Cuerpo'>
+            {% for key,objeto in values.listado.data %}
+                {% if (key is even) %}
+                    {% set classFila = 'Impar' %}
+                {% else %}
+                    {% set classFila = 'Par' %}
+                {% endif %}
+            <tr onclick="location.href='{{app.path}}/{{values.controller}}/edit/{{objeto.primaryKeyMD5}}/{{objeto.IdEmpresa.Id}}'" class='{{classFila}}'>
+                <td class='Item'><a href="{{app.path}}/{{values.controller}}/edit/{{objeto.primaryKeyMD5}}/{{objeto.IdEmpresa.Id}}" title="Editar...">{{objeto.Proyecto}}</a></td>
+                <td class='Item' align="center">{{objeto.FechaInicio}}</td>
+                <td class='Item' align="center">{{objeto.FechaFinPrevista}}</td>
+                <td class='Item' align="right">{{objeto.Presupuesto}}</td>
+                <td class='Item' align="right">{{objeto.HorasPrevistas}}</td>
+                <td class='Item'>{{objeto.ResponsableAE}}</td>
+                <td class='Item'>{{objeto.ResponsableCliente}}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan='9'>No hay informaci&oacute;n que cumpla esos criterios</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+	{# include '_global/paginacion.html.twig' with {'filter':values.listado.filter,'controller':'BancosOficinas','position':'der'}#}
+
+</div>
+{% endblock %}

@@ -1,0 +1,6 @@
+{# Template para el comando List #}
+{% if values.permisos.permisosModulo['CO'] %}
+<a href='{{app.path}}/{{values.controller}}/list/{{linkValue}}'>
+    <img src="{{app.path}}/images/lupa.png" width="16px" height="16px" alt="Nuevo" title="Nuevo" />
+</a>
+{%endif%}

@@ -9,10 +9,66 @@
 
 {% extends values.controller  ~ '/index.html.twig' %}
 
+{% set listado = values.listado %}
+{% set controller = values.controller %}
+
 {% block listado %}
 
 <div class='Listado'>
 	{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'izq'}%}
-	{% include '_global/listGenerico.html.twig' with {'listado': values.listado, 'controller': values.controller} %}
+
+<div class="grid_12">
+    <div class="widget_wrap">
+        <div class="widget_top">
+            <span class="h_icon blocks_images"></span>
+            <h6>Listado</h6>
+        </div>
+        <div class="widget_content">
+            {#<h3>Task list with label badge</h3>#}
+            {#<p>subtitulo del listado</p>#}
+
+            <table class="display" id="action_tbl">
+                <thead>
+                    <tr>
+                        <th width='16px'>&nbsp;</th>
+                        {% for title in listado.titles %}
+                            <th >{{ title.title }}</th>
+                        {% endfor%}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for key,objeto in listado.data %}
+                        <tr>
+                            <td class="center tr_select">
+                                <a href='{{app.path}}/{{controller}}/Edit/{{objeto.PrimaryKeyMD5}}' title='Editar ...'>
+                                    <img src="{{app.path}}/images/botoneditar.png" width="16px" height="16px" />
+                                <a>
+                            </td>
+                            {% for field,value in listado.titles %}
+                                {% if (value.type == 'decimal') %}
+                                    {% set align = 'right' %}
+                                {% else %}
+                                    {% set aling = 'left' %}
+                                {% endif %}
+                            <td align='{{align}}'>
+                            {% if value.link.route %}
+                                <a class="thickbox" title="{{value.link.title}}" href="{{app.path}}/{{value.link.route}}/{{objeto.getPrimaryKeyValue()}}/?TB_iframe=true&height=430&width=1000">
+                                    {{objeto.getColumnValue(field,value.length)}}
+                                </a>
+                            {% else %}
+                                {{objeto.getColumnValue(field,value.length)}}
+                            {% endif%}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                    {% else %}
+                        <tr><td colspan='8'>No hay información que cumpla esos criterios</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </div>
 {% endblock %}

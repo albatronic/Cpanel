@@ -12,7 +12,7 @@
 class CommMonedas extends CommMonedasEntity {
 
     public function __toString() {
-        return $this->getMoneda();
+        return $this->Moneda;
     }
 
     public function fetchAll($column = '', $default = TRUE) {

@@ -1,0 +1,24 @@
+{#
+  Module: CommBancosOficinas
+  Document : modules\CommBancosOficinas\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 04.11.2012 20:25:21
+#}
+
+{{ macro.input(atributos.Codigo,'field_title','text',values.controller ~ '[Codigo]',values.controller ~ '_Codigo',datos.Codigo,'4','CampoTextoCorto','1') }}
+{{ macro.input(atributos.Digito,'field_title','text',values.controller ~ '[Digito]',values.controller ~ '_Digito',datos.Digito,'1','CampoTextoCorto','2') }}
+{{ macro.input(atributos.IdPais,'field_title','text',values.controller ~ '[IdPais]',values.controller ~ '_IdPais',datos.IdPais.Id,'255','CampoTextoLargo','3','','',['paises','Pais',datos.IdPais.Pais]) }}
+{{ macro.input(atributos.IdProvincia,'field_title','text',values.controller ~ '[IdProvincia]',values.controller ~ '_IdProvincia',datos.IdProvincia.Id,'255','CampoTextoLargo','4','','',['provincias','Provincia',datos.IdProvincia.Provincia,values.controller ~ '_IdPais']) }}
+{{ macro.input(atributos.IdMunicipio,'field_title','text',values.controller ~ '[IdMunicipio]',values.controller ~ '_IdMunicipio',datos.IdMunicipio.Id,'255','CampoTextoLargo','5','','',['municipios','Municipio',datos.IdMunicipio.Municipio,values.controller ~ '_IdProvincia']) }}
+{{ macro.input(atributos.Direccion,'field_title','text',values.controller ~ '[Direccion]',values.controller ~ '_Direccion',datos.Direccion,'100','CampoTextoLargo','6') }}
+{{ macro.input(atributos.CodigoPostal,'field_title','text',values.controller ~ '[CodigoPostal]',values.controller ~ '_CodigoPostal',datos.CodigoPostal,'10','CampoTextoCorto','7') }}
+{{ macro.input(atributos.Telefono,'field_title','text',values.controller ~ '[Telefono]',values.controller ~ '_Telefono',datos.Telefono,'50','CampoTextoLargo','8') }}
+{{ macro.input(atributos.Fax,'field_title','text',values.controller ~ '[Fax]',values.controller ~ '_Fax',datos.Fax,'50','CampoTextoLargo','9') }}
+{{ macro.input(atributos.Web,'field_title','text',values.controller ~ '[Web]',values.controller ~ '_Web',datos.Web,'50','CampoTextoLargo','10') }}
+{{ macro.input(atributos.EMail,'field_title','text',values.controller ~ '[EMail]',values.controller ~ '_EMail',datos.EMail,'50','CampoTextoLargo','11') }}
+
+{# include '_global/fieldsComunes.html.twig' #}
+
+{{ macro.foco(values.controller ~ '_Codigo') }}

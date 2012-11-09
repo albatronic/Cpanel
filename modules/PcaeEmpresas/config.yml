@@ -141,7 +141,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     CodigoPostal:
-      title: CodigoPostal
+      title: Código Postal
       filter: YES
       list: NO
       visible: true
@@ -220,7 +220,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
     IdBanco:
-      title: IdBanco
+      title: Banco
       filter: NO
       list: NO
       visible: true
@@ -231,7 +231,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdOficina:
-      title: IdOficina
+      title: Oficina Bancaria
       filter: NO
       list: NO
       visible: true
@@ -242,7 +242,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     DigitoControl:
-      title: DigitoControl
+      title: Dígito de Control
       filter: YES
       list: NO
       visible: true
@@ -275,7 +275,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '34', min: null, max: null, message: 'Valor Requerido' }
     SufijoRemesas:
-      title: SufijoRemesas
+      title: Sufijo Remesas
       filter: YES
       list: NO
       visible: true
@@ -286,7 +286,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '2', min: null, max: null, message: 'Valor Requerido' }
     DigitosCuentaContable:
-      title: DigitosCuentaContable
+      title: Dígitos cuenta contable
       filter: YES
       list: NO
       visible: true
@@ -297,7 +297,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '2', min: null, max: null, message: 'Valor Requerido' }
     IdCNAE:
-      title: IdCNAE
+      title: CNAE
       filter: NO
       list: NO
       visible: true
@@ -306,10 +306,10 @@ PcaeEmpresas:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 7, caption: IdCNAE, entity: CommCnae, method: fetchAll, params: Actividad, type: select, operator: '=', event: null }
+      aditional_filter: { order: 7, caption: CNAE (%), entity: CommCnae, method: null, params: Actividad, type: input }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     RegistroMercantil:
-      title: RegistroMercantil
+      title: Registro Mercantil
       filter: YES
       list: NO
       visible: true
@@ -320,7 +320,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
     LicenciaActividad:
-      title: LicenciaActividad
+      title: Licencia Actividad
       filter: YES
       list: NO
       visible: true

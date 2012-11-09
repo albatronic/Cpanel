@@ -10,7 +10,7 @@
  */
 class CpanPerfiles extends CpanPerfilesEntity {
 	public function __toString() {
-		return $this->getId();
+		return $this->getPerfil();
 	}
 }
 ?>

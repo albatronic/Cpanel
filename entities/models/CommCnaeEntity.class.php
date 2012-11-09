@@ -25,7 +25,7 @@ class CommCnaeEntity extends EntityComunes {
 	 * @var string
 	 * @assert NotBlank(groups="CommCnae")
 	 */
-	protected $Actividad;
+	protected $Actividad = '';
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string

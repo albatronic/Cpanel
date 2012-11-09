@@ -3,7 +3,7 @@
 * CONTROLLER FOR GconSecciones
 * @author: Sergio Perez <sergio.perez@albatronic.com>
 * @copyright: INFORMATICA ALBATRONIC SL 
-* @date 29.10.2012 20:07:59
+* @date 30.10.2012 18:44:56
 
 * Extiende a la clase controller
 */

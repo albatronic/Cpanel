@@ -4,29 +4,30 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 29.10.2012 20:11:57
+  date 30.10.2012 18:45:39
 #}
 
-{{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.IdSeccion,datos.IdSeccion.fetchAll('Titulo',0),'chzn-select','1')}}
+{{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.Id,datos.IdSeccion.fetchAll('Titulo',0),'chzn-select','1')}}
 {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
 {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
-{{ macro.input(atributos.Resumen,'field_title','text',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,'500','CampoTextoLargo','4') }}
-{{ macro.textarea(atributos.Desarrollo,'field_title',values.controller ~ '[Desarrollo]',values.controller ~ '_Desarrollo',datos.Desarrollo,none,none,'input_grow','5')}}
-{{ macro.select(atributos.MostrarTituloPortada,'field_title',values.controller ~ '[MostrarTituloPortada]',values.controller ~ '_MostrarTituloPortada',none,datos.MostrarTituloPortada.MostrarTituloPortada,datos.MostrarTituloPortada.fetchAll('',0),'chzn-select','6')}}
-{{ macro.select(atributos.MostrarTituloContenido,'field_title',values.controller ~ '[MostrarTituloContenido]',values.controller ~ '_MostrarTituloContenido',none,datos.MostrarTituloContenido.MostrarTituloContenido,datos.MostrarTituloContenido.fetchAll('',0),'chzn-select','7')}}
-{{ macro.select(atributos.MostrarSubtituloPortada,'field_title',values.controller ~ '[MostrarSubtituloPortada]',values.controller ~ '_MostrarSubtituloPortada',none,datos.MostrarSubtituloPortada.MostrarSubtituloPortada,datos.MostrarSubtituloPortada.fetchAll('',0),'chzn-select','8')}}
-{{ macro.select(atributos.MostrarSubtituloContenido,'field_title',values.controller ~ '[MostrarSubtituloContenido]',values.controller ~ '_MostrarSubtituloContenido',none,datos.MostrarSubtituloContenido.MostrarSubtituloContenido,datos.MostrarSubtituloContenido.fetchAll('',0),'chzn-select','9')}}
-{{ macro.select(atributos.MostrarResumenPortada,'field_title',values.controller ~ '[MostrarResumenPortada]',values.controller ~ '_MostrarResumenPortada',none,datos.MostrarResumenPortada.MostrarResumenPortada,datos.MostrarResumenPortada.fetchAll('',0),'chzn-select','10')}}
-{{ macro.select(atributos.MostrarResumenContenido,'field_title',values.controller ~ '[MostrarResumenContenido]',values.controller ~ '_MostrarResumenContenido',none,datos.MostrarResumenContenido.MostrarResumenContenido,datos.MostrarResumenContenido.fetchAll('',0),'chzn-select','11')}}
-{{ macro.select(atributos.BlogPublicar,'field_title',values.controller ~ '[BlogPublicar]',values.controller ~ '_BlogPublicar',none,datos.BlogPublicar.BlogPublicar,datos.BlogPublicar.fetchAll('',0),'chzn-select','12')}}
-{{ macro.select(atributos.BlogMostrarEnPortada,'field_title',values.controller ~ '[BlogMostrarEnPortada]',values.controller ~ '_BlogMostrarEnPortada',none,datos.BlogMostrarEnPortada.BlogMostrarEnPortada,datos.BlogMostrarEnPortada.fetchAll('',0),'chzn-select','13')}}
-{{ macro.select(atributos.BlogPermitirComentarios,'field_title',values.controller ~ '[BlogPermitirComentarios]',values.controller ~ '_BlogPermitirComentarios',none,datos.BlogPermitirComentarios.BlogPermitirComentarios,datos.BlogPermitirComentarios.fetchAll('',0),'chzn-select','14')}}
-{{ macro.input(atributos.BlogOrden,'field_title','text',values.controller ~ '[BlogOrden]',values.controller ~ '_BlogOrden',datos.BlogOrden,'11','CampoImporte','15') }}
-{{ macro.select(atributos.NoticiaPublicar,'field_title',values.controller ~ '[NoticiaPublicar]',values.controller ~ '_NoticiaPublicar',none,datos.NoticiaPublicar.NoticiaPublicar,datos.NoticiaPublicar.fetchAll('',0),'chzn-select','16')}}
-{{ macro.select(atributos.NoticiaMostrarEnPortada,'field_title',values.controller ~ '[NoticiaMostrarEnPortada]',values.controller ~ '_NoticiaMostrarEnPortada',none,datos.NoticiaMostrarEnPortada.NoticiaMostrarEnPortada,datos.NoticiaMostrarEnPortada.fetchAll('',0),'chzn-select','17')}}
-{{ macro.input(atributos.NoticiaOrden,'field_title','text',values.controller ~ '[NoticiaOrden]',values.controller ~ '_NoticiaOrden',datos.NoticiaOrden,'11','CampoImporte','18') }}
-{{ macro.select(atributos.EsEvento,'field_title',values.controller ~ '[EsEvento]',values.controller ~ '_EsEvento',none,datos.EsEvento.EsEvento,datos.EsEvento.fetchAll('',0),'chzn-select','19')}}
-{{ macro.input(atributos.Etiquetas,'field_title','text',values.controller ~ '[Etiquetas]',values.controller ~ '_Etiquetas',datos.Etiquetas,'500','CampoTextoLargo','20') }}
+{{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','4') }}
+{{ macro.textarea(atributos.Desarrollo,'field_title',values.controller ~ '[Desarrollo]',values.controller ~ '_Desarrollo',datos.Desarrollo,none,none,'textarea','5')}}
+
+{{ macro.input(atributos.MostrarTituloPortada,'field_title','checkbox',values.controller ~ '[MostrarTituloPortada]',values.controller ~ '_MostrarTituloPortada',datos.MostrarTituloPortada.IDTipo,'255','CampoTextoLargo','12') }}
+{{ macro.input(atributos.MostrarTituloContenido,'field_title','checkbox',values.controller ~ '[MostrarTituloContenido]',values.controller ~ '_MostrarTituloContenido',datos.MostrarTituloContenido.IDTipo,'255','CampoTextoLargo','12') }}
+{{ macro.input(atributos.MostrarSubtituloPortada,'field_title','checkbox',values.controller ~ '[MostrarSubtituloPortada]',values.controller ~ '_MostrarSubtituloPortada',datos.MostrarSubtituloPortada.IDTipo,'255','CampoTextoLargo','12') }}
+{{ macro.input(atributos.MostrarSubtituloContenido,'field_title','checkbox',values.controller ~ '[MostrarSubtituloContenido]',values.controller ~ '_MostrarSubtituloContenido',datos.MostrarSubtituloContenido.IDTipo,'255','CampoTextoLargo','12') }}
+{{ macro.input(atributos.MostrarResumenPortada,'field_title','checkbox',values.controller ~ '[MostrarResumenPortada]',values.controller ~ '_MostrarResumenPortada',datos.MostrarResumenPortada.IDTipo,'255','CampoTextoLargo','12') }}
+{{ macro.input(atributos.MostrarResumenContenido,'field_title','checkbox',values.controller ~ '[MostrarResumenContenido]',values.controller ~ '_MostrarResumenContenido',datos.MostrarResumenContenido.IDTipo,'255','CampoTextoLargo','12') }}
+{{ macro.input(atributos.BlogPublicar,'field_title','checkbox',values.controller ~ '[BlogPublicar]',values.controller ~ '_BlogPublicar',datos.BlogPublicar.IDTipo,'255','CampoTextoLargo','12') }}
+{{ macro.input(atributos.BlogMostrarEnPortada,'field_title','checkbox',values.controller ~ '[BlogMostrarEnPortada]',values.controller ~ '_BlogMostrarEnPortada',datos.BlogMostrarEnPortada.IDTipo,'255','CampoTextoLargo','12') }}
+{{ macro.input(atributos.BlogPermitirComentarios,'field_title','checkbox',values.controller ~ '[BlogPermitirComentarios]',values.controller ~ '_BlogPermitirComentarios',datos.BlogPermitirComentarios.IDTipo,'255','CampoTextoLargo','12') }}
+{# macro.input(atributos.BlogOrden,'field_title','text',values.controller ~ '[BlogOrden]',values.controller ~ '_BlogOrden',datos.BlogOrden,'11','CampoImporte','15') #}
+{{ macro.input(atributos.NoticiaPublicar,'field_title','checkbox',values.controller ~ '[NoticiaPublicar]',values.controller ~ '_NoticiaPublicar',datos.NoticiaPublicar.IDTipo,'255','CampoTextoLargo','12') }}
+{{ macro.input(atributos.NoticiaMostrarEnPortada,'field_title','checkbox',values.controller ~ '[NoticiaMostrarEnPortada]',values.controller ~ '_NoticiaMostrarEnPortada',datos.NoticiaMostrarEnPortada.IDTipo,'255','CampoTextoLargo','12') }}
+{# macro.input(atributos.NoticiaOrden,'field_title','text',values.controller ~ '[NoticiaOrden]',values.controller ~ '_NoticiaOrden',datos.NoticiaOrden,'11','CampoImporte','18') #}
+{{ macro.input(atributos.EsEvento,'field_title','checkbox',values.controller ~ '[EsEvento]',values.controller ~ '_EsEvento',datos.EsEvento.IDTipo,'255','CampoTextoLargo','12') }}
+
 
 {% include '_global/fieldsComunes.html.twig' %}
 

@@ -1,0 +1,243 @@
+{#
+  CAMPOS COMUNES A TODOS LOS FORMULARIOS
+
+  EL TABINDEX EMPIEZA EN 100
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 09.09.2012 01:51:37
+#}
+
+{{ macro.select(atributos.Publish,'field_title',values.controller ~ '[Publish]',values.controller ~ '_Publish',none,datos.Publish.IDTipo,datos.Publish.fetchAll(none,0),'chzn-select',103)}}
+
+{% if values.varEnvMod.showCommonFields == '1' %}
+
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'general' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-general" onclick="activaSolapa('general');">General</a></li>
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'fechas' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-fechas" onclick="activaSolapa('fechas');">Fechas</a></li>
+        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'meta' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-meta" onclick="activaSolapa('meta');">Meta</a></li>
+        {% if datos.getPrimaryKeyValue %}
+
+            {% if values.varEnvMod.numberOfImages > '0' %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'imagenes' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-imagenes" onclick="activaSolapa('imagenes');">Imágenes</a></li>
+            {% endif %}
+
+            {% if values.varEnvMod.withGalery == '1' %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'galery' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-galery" onclick="cargaSolapa('tabs-galery','galery');">Galería</a></li>
+            {% endif %}
+
+            {% if values.varEnvMod.withDocuments == '1' %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'documents' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-documents" onclick="cargaSolapa('tabs-documents','document');">Documentos</a></li>
+            {% endif %}
+
+            {% if values.varEnvMod.withVideos == '1' %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'videos' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-videos" onclick="cargaSolapa('tabs-videos','video');">Vídeos</a></li>
+            {% endif %}
+
+            {% if values.varEnvMod.withAudios == '1' %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'audios' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-audios" onclick="cargaSolapa('tabs-audios','audio');">Audios</a></li>
+            {% endif %}
+
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'urls' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-urls" onclick="activaSolapa('urls');">URL's</a></li>
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'urlDestino' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-urlDestino" onclick="activaSolapa('urlDestino');">URL destino</a></li>
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'sitemap' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-sitemap" onclick="activaSolapa('sitemap');">SiteMap</a></li>
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'auditoria' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-auditoria" onclick="activaSolapa('auditoria');">Auditoría</a></li>
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'mostrar' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-mostrar" onclick="activaSolapa('mostrar');">Mostrar...</a></li>
+        {% endif %}
+    </ul>
+
+    {# SOLAPA GENERAL #}
+    <div id="tabs-general" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input(atributos.Id,'field_title','text',values.controller ~ '[Id]',values.controller ~ '_Id',datos.primaryKeyValue,none,none,110,'disabled') }}
+        {% if user.idPerfil == 1 %}
+            {{ macro.input(atributos.PrimaryKeyMD5,'field_title','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo',none,'disabled') }}
+            {{ macro.select(atributos.IsDefault,'field_title',values.controller ~ '[IsDefault]',values.controller ~ '_IsDefault',none,datos.IsDefault.IDTipo,datos.IsDefault.fetchAll(none,0),'chzn-select',101)}}
+        {% endif %}
+        {{ macro.select(atributos.BelongsTo,'field_title',values.controller ~ '[BelongsTo]',values.controller ~ '_BelongsTo',none,datos.BelongsTo.getPrimaryKeyValue,datos.BelongsTo.fetchAll(none),'chzn-select',110) }}
+        {{ macro.input(atributos.SortOrder,'field_title','text',values.controller ~ '[SortOrder]',values.controller ~ '_SortOrder',datos.SortOrder,none,none,110) }}
+        {{ macro.select(atributos.CodigoAppAsociada,'field_title',values.controller ~ '[CodigoAppAsociada]',values.controller ~ '_CodigoAppAsociada',none,datos.CodigoAppAsociada.IDTipo,datos.CodigoAppAsociada.fetchAll('NombreApp'),'chzn-select',101)}}
+        {{ macro.input(atributos.IdAlbumExterno,'field_title','text',values.controller ~ '[IdAlbumExterno]',values.controller ~ '_IdAlbumExterno',datos.IdAlbumExterno,none,none,110) }}
+        {{ macro.input(atributos.IdSliderAsociado,'field_title','text',values.controller ~ '[IdSliderAsociado]',values.controller ~ '_IdSliderAsociado',datos.IdSliderAsociado,none,none,110) }}
+        {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea',100)}}
+    </div>
+
+    {# SOLAPA FECHAS #}
+    <div id="tabs-fechas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.fecha(atributos.PublishedAt,'field_title',values.controller ~ '[PublishedAt]',values.controller ~ '_PublishedAt',datos.PublishedAt,'19','datepicker',111) }}
+        {{ macro.fecha(atributos.ActiveFrom,'field_title',values.controller ~ '[ActiveFrom]',values.controller ~ '_ActiveFrom',datos.ActiveFrom,'19','datepicker',104) }}
+        {{ macro.fecha(atributos.ActiveTo,'field_title',values.controller ~ '[ActiveTo]',values.controller ~ '_ActiveTo',datos.ActiveTo,'19','datepicker',105) }}
+    </div>
+
+    {# SOLAPA META #}
+    <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.select(atributos.LockMetatagTitle,'field_title',values.controller ~ '[LockMetatagTitle]',values.controller ~ '_LockMetatagTitle',none,datos.LockMetatagTitle.IDTipo,datos.LockMetatagTitle.fetchAll(none,0),'chzn-select',117)}}
+        {% if datos.LockMetatagTitle.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
+        {{ macro.input(atributos.MetatagTitle,'field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,none,none,110, disabled) }}
+        {{ macro.textarea(atributos.MetatagDescription, 'field_title', values.controller ~ '[MetatagDescription]', values.controller ~ '_MetatagDescription', datos.MetatagDescription, none, none, 'textarea',115) }}
+        {{ macro.textarea(atributos.MetatagKeywords, 'field_title', values.controller ~ '[MetatagKeywords]', values.controller ~ '_MetatagKeywords', datos.MetatagKeywords, none, none, 'textarea',116) }}
+        {{ macro.select(atributos.MetatagTitleSimple,'field_title',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',none,datos.MetatagTitleSimple.IDTipo,datos.MetatagTitleSimple.fetchAll(none,0),'chzn-select',117)}}
+        {{ macro.select(atributos.MetatagTitlePosition,'field_title',values.controller ~ '[MetatagTitlePosition]',values.controller ~ '_MetatagTitlePosition',none,datos.MetatagTitlePosition.IDTipo,datos.MetatagTitlePosition.fetchAll(none,0),'chzn-select',118)}}
+    </div>
+
+    {% if datos.getPrimaryKeyValue %}
+    {# SOLAPA IMAGENES #}
+    <div id="tabs-imagenes" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        <table style="width: 100%;">
+            <tr style="height: 50px;"><td colspan="2">
+            <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
+            Imágen Master: <input name="imagenMaster" id="imagenMaster" type="file" />
+            <input type="button" value="Enviar"
+               onclick="
+                   $('#action_{{ values.controller }}').val('Imagen');
+                   $('#accion_{{ values.controller }}').val('EnviarMaster');
+                   submitForm('manto_{{ values.controller}}');" />
+            </td></tr>
+
+            <input name="idImagenEnviar" id="idImagenEnviar" value="" type="hidden" />
+
+            {% for key,imagen in values.datos.getDocuments('image%','IsThumbnail=0') %}
+            {% set puntero = key + 1%}
+            <tr>
+                <td align="center" style="width: 45%;">
+                    <div id="foto{{puntero}}">
+                        <img src="{{project.url}}/docs/{{values.controller}}/{{imagen.Name}}" width="150px" />
+                    </div>
+                    <br />{{imagen.getSize}} ({{imagen.Width}} x {{imagen.Height}})<br />
+                    <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
+                    <input name="image{{puntero}}" id="imagen_{{puntero}}_Doc" type="file" onclick="loading('foto{{puntero}}');"/>
+                </td>
+                <td style="vertical-align: top !important;">
+                    <input name="image[{{puntero}}][Tipo]" id="image_{{puntero}}_Tipo" value="{{imagen.Type}}" type="hidden" />
+                    <input name="image[{{puntero}}][Id]" id="image_{{puntero}}_Id" value="{{imagen.Id}}" type="hidden" />
+                    <input name="image[{{puntero}}][SortOrder]" id="image_{{puntero}}_SortOrder" value="{{imagen.SortOrder}}" type="hidden" />
+                    {{ macro.input({'caption':'Título','visible':'1','varEnv':'0'},'field_title','text','image['~puntero~'][Title]','image_'~puntero~'_Title',imagen.Title,255,none) }}
+                    {{ macro.input({'caption':'Nombre','visible':'1','varEnv':'0'},'field_title','text','image['~puntero~'][Name]','image_'~puntero~'_Name',imagen.Name,255,none) }}
+                    {{ macro.select({'caption':'Mostrar pie de foto','visible':'1','varEnv':'0'},'field_title','image['~puntero~'][ShowCaption]','image_'~puntero~'_ShowCaption',none,imagen.ShowCaption.IDTipo,imagen.ShowCaption.fetchAll(none,0),'chzn-select',103)}}
+                    {{ macro.select({'caption':'Publicar','visible':'1','varEnv':'0'},'field_title','image['~puntero~'][Publish]','image_'~puntero~'_Publish',none,imagen.Publish.IDTipo,imagen.Publish.fetchAll(none,0),'chzn-select',104)}}
+                    <div style="text-align: center;">
+                    <input type="button" value="Guardar cambios" class="comando"
+                        onclick="
+                            $('#action_{{ values.controller }}').val('Imagen');
+                            $('#accion_{{ values.controller }}').val('GuardarCambios');
+                            $('#idImagenEnviar').val('{{puntero}}');
+                            submitForm('manto_{{ values.controller}}');" />
+
+                    <input type="button" value="Borrar imagen" class="comando"
+                        onclick="
+                            if (!confirm('¿Desea borrar la imagen?')) {return false;}
+                            else {
+                            $('#action_{{ values.controller }}').val('Imagen');
+                            $('#accion_{{ values.controller }}').val('Quitar');
+                            $('#idImagenEnviar').val('{{puntero}}');
+                            submitForm('manto_{{ values.controller}}');
+                            }" />
+                    </div>
+                </td>
+            </tr>
+            <tr style="height: 20px;"></tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    {# SOLAPA GALERIA #}
+    {% if values.varEnvMod.withGalery == '1' %}
+    <div id="tabs-galery" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    </div>
+    {% endif %}
+
+    {# SOLAPA DOCUMENTOS #}
+    {% if values.varEnvMod.withDocuments == '1' %}
+    <div id="tabs-documents" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    </div>
+    {% endif %}
+
+    {# SOLAPA VIDEOS #}
+    {% if values.varEnvMod.withVideos == '1' %}
+    <div id="tabs-videos" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    </div>
+    {% endif %}
+
+    {# SOLAPA AUDIOS #}
+    {% if values.varEnvMod.withAudios == '1' %}
+    <div id="tabs-audios" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    </div>
+    {% endif %}
+
+    {# SOLAPA URLS #}
+    <div id="tabs-urls" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.select(atributos.LockUrlPrefix,'field_title',values.controller ~ '[LockUrlPrefix]',values.controller ~ '_LockUrlPrefix',none,datos.LockUrlPrefix.IDTipo,datos.LockUrlPrefix.fetchAll(none,0),'chzn-select',117)}}
+        {% if datos.LockUrlPrefix.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
+        {{ macro.input(atributos.UrlPrefix,'field_title','text',values.controller ~ '[UrlPrefix]',values.controller ~ '_UrlPrefix',datos.UrlPrefix,'255','CampoTextoLargo',112,disabled) }}
+        {{ macro.select(atributos.LockSlug,'field_title',values.controller ~ '[LockSlug]',values.controller ~ '_LockSlug',none,datos.LockSlug.IDTipo,datos.LockSlug.fetchAll(none,0),'chzn-select',117)}}
+        {% if datos.LockSlug.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
+        {{ macro.input(atributos.Slug,'field_title','text',values.controller ~ '[Slug]',values.controller ~ '_Slug',datos.Slug,'255','CampoTextoLargo',112, disabled) }}
+        {{ macro.input(atributos.UrlFriendly,'field_title','text',values.controller ~ '[UrlFriendly]',values.controller ~ '_UrlFriendly',datos.UrlFriendly,'255','CampoTextoLargo',112,'DISABLED') }}
+        {{ macro.select(atributos.UrlHeritable,'field_title',values.controller ~ '[UrlHeritable]',values.controller ~ '_UrlHeritable',none,datos.UrlHeritable.IDTipo,datos.UrlHeritable.fetchAll(none,0),'chzn-select',117)}}
+    </div>
+
+    {# SOLAPA URL DESTINO #}
+    <div id="tabs-urlDestino" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.input(atributos.UrlTarget,'field_title','text',values.controller ~ '[UrlTarget]',values.controller ~ '_UrlTarget',datos.UrlTarget,'255','CampoTextoLargo',112) }}
+        {{ macro.input(atributos.UrlParameters,'field_title','text',values.controller ~ '[UrlParameters]',values.controller ~ '_UrlParameters',datos.UrlParameters,'255','CampoTextoLargo',112) }}
+        {{ macro.select(atributos.UrlRequestMethod,'field_title',values.controller ~ '[UrlRequestMethod]',values.controller ~ '_UrlRequestMethod',none,datos.UrlRequestMethod.IDTipo,datos.UrlRequestMethod.fetchAll(none,0),'chzn-select',117)}}
+        {{ macro.select(atributos.UrlOrigin,'field_title',values.controller ~ '[UrlOrigin]',values.controller ~ '_UrlOrigin',none,datos.UrlOrigin.IDTipo,datos.UrlOrigin.fetchAll(none,0),'chzn-select',117)}}
+        {{ macro.select(atributos.UrlTargetBlank,'field_title',values.controller ~ '[UrlTargetBlank]',values.controller ~ '_UrlTargetBlank',none,datos.UrlTargetBlank.IDTipo,datos.UrlTargetBlank.fetchAll(none,0),'chzn-select',117)}}
+        {{ macro.select(atributos.UrlIsHttps,'field_title',values.controller ~ '[UrlIsHttps]',values.controller ~ '_UrlIsHttps',none,datos.UrlIsHttps.IDTipo,datos.UrlIsHttps.fetchAll(none,0),'chzn-select',117)}}
+    </div>
+
+    {# SOLAPA SITEMAP #}
+    <div id="tabs-sitemap" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.select(atributos.ShowOnSitemap,'field_title',values.controller ~ '[ShowOnSitemap]',values.controller ~ '_ShowOnSitemap',none,datos.ShowOnSitemap.IDTipo,datos.ShowOnSitemap.fetchAll(none,0),'chzn-select',119)}}
+        {{ macro.input(atributos.ImportanceSitemap,'field_title','text',values.controller ~ '[ImportanceSitemap]',values.controller ~ '_ImportanceSitemap',datos.ImportanceSitemap,'5','CampoTextoCorto',120) }}
+        {{ macro.select(atributos.ChangeFreqSitemap,'field_title',values.controller ~ '[ChangeFreqSitemap]',values.controller ~ '_ChangeFreqSitemap',none,datos.ChangeFreqSitemap.IDTipo,datos.ChangeFreqSitemap.fetchAll(none,0),'chzn-select',121) }}
+    </div>
+
+    {# SOLAPA AUDITORIA #}
+    <div id="tabs-auditoria" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.select(atributos.Checked,'field_title',values.controller ~ '[Checked]',values.controller ~ '_Checked',none,datos.Checked.IDTipo,datos.Checked.fetchAll(none,0),'chzn-select',102)}}
+        {{ macro.select(atributos.Privacy,'field_title',values.controller ~ '[Privacy]',values.controller ~ '_Privacy',none,datos.Privacy.IDTipo,datos.Privacy.fetchAll(none,0),'chzn-select',109)}}
+        {{ macro.input(atributos.AccessProfileList,'field_title','text',values.controller ~ '[AccessProfileList]',values.controller ~ '_AccessProfileList',datos.AccessProfileList,none,none,107) }}
+        {% if datos.getPrimaryKeyValue %}
+            {{ macro.input(atributos.NumberVisits,'field_title','text',values.controller ~ '[NumberVisits]',values.controller ~ '_NumberVisits',datos.NumberVisits,none,'CampoImporte',113, 'disabled') }}
+        {% endif %}
+        {{ macro.input(atributos.CreatedBy,'field_title','text',values.controller ~ '[CreatedBy]',values.controller ~ '_CreatedBy',datos.CreatedBy,none,none,107,'disabled') }}
+        {{ macro.fecha(atributos.CreatedAt,'field_title',values.controller ~ '[CreatedAt]',values.controller ~ '_CreatedAt',datos.CreatedAt,'19','datepicker',108,'disabled') }}
+        {{ macro.input(atributos.ModifiedBy,'field_title','text',values.controller ~ '[ModifiedBy]',values.controller ~ '_ModifiedBy',datos.ModifiedBy,none,none,107,'disabled') }}
+        {{ macro.fecha(atributos.ModifiedAt,'field_title',values.controller ~ '[ModifiedAt]',values.controller ~ '_ModifiedAt',datos.ModifiedAt,'19','datepicker',108,'disabled') }}
+
+        {{ macro.input(atributos.Deleted,'field_title','text',values.controller ~ '[Deleted]',values.controller ~ '_Deleted',datos.Deleted.Descripcion,none,none,106,'disabled') }}
+        {% if datos.Deleted.IDTipo %}
+            {{ macro.input(atributos.DeletedBy,'field_title','text',values.controller ~ '[DeletedBy]',values.controller ~ '_DeletedBy',datos.DeletedBy,none,none,107,'disabled') }}
+            {{ macro.fecha(atributos.DeletedAt,'field_title',values.controller ~ '[DeletedAt]',values.controller ~ '_DeletedAt',datos.DeletedAt,'19','datepicker',108,'disabled') }}
+        {% endif %}
+    </div>
+
+    {# SOLAPA MOSTRAR... #}
+    <div id="tabs-mostrar" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+        {{ macro.select(atributos.ShowGalery,'field_title',values.controller ~ '[ShowGalery]',values.controller ~ '_ShowGalery',none,datos.ShowGalery.IDTipo,datos.ShowGalery.fetchAll(none,0),'chzn-select',102)}}
+        {{ macro.select(atributos.ShowDocuments,'field_title',values.controller ~ '[ShowDocuments]',values.controller ~ '_ShowDocuments',none,datos.ShowDocuments.IDTipo,datos.ShowDocuments.fetchAll(none,0),'chzn-select',103)}}
+        {{ macro.select(atributos.ShowRelatedLinks,'field_title',values.controller ~ '[ShowRelatedLinks]',values.controller ~ '_ShowRelatedLinks',none,datos.ShowRelatedLinks.IDTipo,datos.ShowRelatedLinks.fetchAll(none,0),'chzn-select',109)}}
+        {{ macro.select(atributos.ShowRelatedContents,'field_title',values.controller ~ '[ShowRelatedContents]',values.controller ~ '_ShowRelatedContents',none,datos.ShowRelatedContents.IDTipo,datos.ShowRelatedContents.fetchAll(none,0),'chzn-select',103)}}
+        {{ macro.select(atributos.ShowPublishedAt,'field_title',values.controller ~ '[ShowPublishedAt]',values.controller ~ '_ShowPublishedAt',none,datos.ShowPublishedAt.IDTipo,datos.ShowPublishedAt.fetchAll(none,0),'chzn-select',109)}}
+    </div>
+    {% endif %}
+</div>
+
+
+<script type="text/javascript">
+
+function activaSolapa(solapa) {
+    $("#solapaActiva").val(solapa);
+}
+
+function cargaSolapa(solapa, tipo) {
+
+    activaSolapa(tipo);
+    $('#'+solapa).html("<iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' src='{{app.path}}/CpanDocs/list/{{values.controller}}/{{datos.Id}}/" + tipo + "'></iframe>");
+
+}
+
+</script>
+
+{% endif %}

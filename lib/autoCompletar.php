@@ -106,12 +106,30 @@ switch ($_GET['entidad']) {
         unset($moneda);
         break;
 
-    // BUSCA MONEDAS POR %Moneda%
+    // BUSCA ZONAS HORARIAS POR %zonaHoraria%
     case 'zonasHorarias':
         $filtro = "Zona LIKE '%{$_GET['term']}%'";
         $zona = new CommZonasHorarias();
         $rows = $zona->cargaCondicion("Id as Id, Zona as Value", $filtro, "Zona");
         unset($zona);
+        break;
+
+    // BUSCA CNAES POR %actividad%
+    case 'cnae':
+        $filtro = "Actividad LIKE '%{$_GET['term']}%'";
+        $cnae = new CommCnae();
+        $rows = $cnae->cargaCondicion("Id as Id, Actividad as Value", $filtro, "Actividad");
+        unset($cnae);
+        break;
+
+    // BUSCA OFICINAS BANCARIAS POR %codigo% y %direccion%
+    case 'oficinasBancarias':
+        $filtro = "(Codigo LIKE '%{$_GET['term']}%' OR Direccion LIKE '%{$_GET['term']}%')";
+        if ($_GET['filtroAdicional'])
+            $filtro .= " and IdBanco='{$_GET['filtroAdicional']}'";
+        $oficina = new CommBancosOficinas();
+        $rows = $oficina->cargaCondicion("Id as Id, CONCAT(Codigo,'-',Direccion) as Value", $filtro, "Codigo,Direccion");
+        unset($oficina);
         break;
 
     // BUSCA ARTICULOS POR %CODIGO%, %DESCRIPCION% Y %CODIGOEAN%

@@ -1,0 +1,21 @@
+{#
+  Module: PcaeProyectos
+  Document : modules\PcaeProyectos\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 05.11.2012 00:46:31
+#}
+
+{{ macro.input(atributos.Proyecto,'field_title','text',values.controller ~ '[Proyecto]',values.controller ~ '_Proyecto',datos.Proyecto,'100','CampoTextoLargo','2') }}
+{{ macro.input(atributos.Presupuesto,'field_title','text',values.controller ~ '[Presupuesto]',values.controller ~ '_Presupuesto',datos.Presupuesto,'10','CampoImporte','3') }}
+{{ macro.input(atributos.HorasPrevistas,'field_title','text',values.controller ~ '[HorasPrevistas]',values.controller ~ '_HorasPrevistas',datos.HorasPrevistas,'10','CampoImporte','4') }}
+{{ macro.input(atributos.HorasReales,'field_title','text',values.controller ~ '[HorasReales]',values.controller ~ '_HorasReales',datos.HorasReales,'10','CampoImporte','5') }}
+{{ macro.fecha(atributos.FechaInicio,'field_title',values.controller ~ '[FechaInicio]',values.controller ~ '_FechaInicio',datos.FechaInicio,'10','datepicker','6')}}
+{{ macro.fecha(atributos.FechaFinPrevista,'field_title',values.controller ~ '[FechaFinPrevista]',values.controller ~ '_FechaFinPrevista',datos.FechaFinPrevista,'10','datepicker','7')}}
+{{ macro.input(atributos.ResponsableAE,'field_title','text',values.controller ~ '[ResponsableAE]',values.controller ~ '_ResponsableAE',datos.ResponsableAE,'255','CampoTextoLargo','8') }}
+{{ macro.input(atributos.ResponsableCliente,'field_title','text',values.controller ~ '[ResponsableCliente]',values.controller ~ '_ResponsableCliente',datos.ResponsableCliente,'255','CampoTextoLargo','9') }}
+
+{# include '_global/fieldsComunes.html.twig' #}
+
+{{ macro.foco(values.controller ~ '_Proyecto') }}

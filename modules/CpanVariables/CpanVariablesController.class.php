@@ -309,7 +309,12 @@ class CpanVariablesController {
                     $this->values['nombre'] = $nombre;
                     $this->values['columna'] = $columna;
                     $this->values['errores'] = $variables->getErrores();
-                    $this->values['datos'] = $variables->getColumn($columna);
+
+                    $archivoConfig = new Form($nombre);
+                    $columnasConfig = $archivoConfig->getNode('columns');
+                    unset($archivoConfig);
+                    $datos = $this->ponAtributos($variables->getColumn($columna), $columnasConfig[$columna]);
+                    $this->values['datos'] = $datos;
                     unset($variables);
 
                     $template = $this->entity . '/formPlantillaVariables.html.twig';

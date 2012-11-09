@@ -73,7 +73,7 @@ class PcaeEmpresasEntity extends EntityComunes {
 	 */
 	protected $IdBanco = '0';
 	/**
-	 * @var entities\CommOficinas
+	 * @var entities\CommBancosOficinas
 	 */
 	protected $IdOficina = '0';
 	/**
@@ -144,7 +144,7 @@ class PcaeEmpresasEntity extends EntityComunes {
 			'CommProvincias',
 			'CommPaises',
 			'CommBancos',
-			'CommOficinas',
+			'CommBancosOficinas',
 			'CommCnae',
 			'ValoresSN',
 			'ValoresPrivacy',
@@ -266,8 +266,8 @@ class PcaeEmpresasEntity extends EntityComunes {
 		$this->IdOficina = $IdOficina;
 	}
 	public function getIdOficina(){
-		if (!($this->IdOficina instanceof CommOficinas))
-			$this->IdOficina = new CommOficinas($this->IdOficina);
+		if (!($this->IdOficina instanceof CommBancosOficinas))
+			$this->IdOficina = new CommBancosOficinas($this->IdOficina);
 		return $this->IdOficina;
 	}
 

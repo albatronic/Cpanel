@@ -428,20 +428,24 @@ class Entity {
     protected function validaBorrado() {
         unset($this->_errores);
 
-        // Validacion de integridad referencial respecto a entidades padre
-        if (is_array($this->_parentEntities)) {
-            foreach ($this->_parentEntities as $entity) {
-                $entidad = new $entity['ParentEntity']();
-                $condicion = $entity['ParentColumn'] . "='" . $this->$entity['SourceColumn'] . "'";
-                $rows = $entidad->cargaCondicion($entity['ParentColumn'], $condicion);
-                $n = count($rows);
-                if ($n > 0)
-                    $this->_errores[] = "Imposible eliminar. Hay {$n} relaciones con {$entity['ParentEntity']}";
+        if ($this->IsDefault)
+            $this->errores[] = "No se puede eliminar. Es un valor predeterminado";
+
+        if (count($this->errores) == 0) {
+            // Validacion de integridad referencial respecto a entidades padre
+            if (is_array($this->_parentEntities)) {
+                foreach ($this->_parentEntities as $entity) {
+                    $entidad = new $entity['ParentEntity']();
+                    $condicion = $entity['ParentColumn'] . "='" . $this->$entity['SourceColumn'] . "'";
+                    $rows = $entidad->cargaCondicion($entity['ParentColumn'], $condicion);
+                    $n = count($rows);
+                    if ($n > 0)
+                        $this->_errores[] = "Imposible eliminar. Hay {$n} relaciones con {$entity['ParentEntity']}";
+                }
             }
         }
 
         // Validacion de integridad referencial respecto a entidades hijas
-
 
         return (count($this->_errores) == 0);
     }
@@ -668,6 +672,44 @@ class Entity {
         unset($docs);
 
         return $nDocs;
+    }
+
+    /**
+     * Generar un árbol genealógico con las entidades hijas
+     * de la entidad cuyo id es $idPadre
+     *
+     * @param integer $idOrigen El id de la entidad origen
+     * @param integer $idPadre El id de la entidad padre
+     * @return array Array con los objetos hijos
+     */
+    public function getChildEntities($idOrigen, $idPadre) {
+
+        $padre = new $this($idPadre);
+
+
+        $arbol = array(
+            'id' => $idPadre,
+            'titulo' => $padre->__tostring(),
+            'hijos' => array(),
+        );
+        /**
+          $arbol = array(
+          'padre' => $padre,
+          );
+         *
+         */
+        $hijos = $padre->cargaCondicion('Id, Titulo', "BelongsTo='{$idPadre}'", "SortOrder ASC");
+
+        foreach ($hijos as $key => $hijo) {
+            if ($hijo['Id'] != $idOrigen) {
+                $nietos = $padre->getChildEntities($idOrigen, $hijo['Id']);
+                if (count($nietos))
+                    $arbol['hijos'][] = $nietos;
+            }
+        }
+        unset($padre);
+
+        return $arbol;
     }
 
     /**

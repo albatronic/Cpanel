@@ -10,7 +10,7 @@
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">General</a></li>
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Meta</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-firmas">Firmas</a></li>
     </ul>
 
@@ -20,7 +20,12 @@
         {{ macro.input({'caption':'[keyWords] Keywords','visible':'1','varEnv':'0'},'field_title','text','datos[keyWords]','datos_keyWords',values.datos.keyWords,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[description] Description','visible':'1','varEnv':'0'},'field_title','text','datos[description]','datos_description',values.datos.description,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[author] Author','visible':'1','varEnv':'0'},'field_title','text','datos[author]','datos_author',values.datos.author,'50','CampoTextoCorto','1') }}
-    </div>
+        {{ macro.input({'caption':'[revisitAfter] revisitAfter','visible':'1','varEnv':'0'},'field_title','text','datos[revisitAfter]','datos_revisitAfter',values.datos.revisitAfter,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[geoRegion] geoRegion','visible':'1','varEnv':'0'},'field_title','text','datos[geoRegion]','datos_geoRegion',values.datos.geoRegion,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[geoPlaceName] geoPlaceName','visible':'1','varEnv':'0'},'field_title','text','datos[geoPlaceName]','datos_geoPlaceName',values.datos.geoPlaceName,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[geoPositionLongitude] geoPositionLongitude','visible':'1','varEnv':'0'},'field_title','text','datos[geoPositionLongitude]','datos_geoPositionLongitude',values.datos.geoPositionLongitude,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[geoPositionLatitude] geoPositionLatitude','visible':'1','varEnv':'0'},'field_title','text','datos[geoPositionLatitude]','datos_geoPositionLatitude',values.datos.geoPositionLatitude,'50','CampoTextoCorto','1') }}
+        </div>
 
     <div id="tabs-firmas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.input({'caption':'[signatures][links] Links separados por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][links]','datos_signatures_links',values.datos.signatures.links,'255','CampoTextoCorto','1') }}

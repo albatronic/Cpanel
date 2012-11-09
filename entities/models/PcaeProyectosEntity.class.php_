@@ -1,0 +1,44 @@
+<?php
+/**
+ * @author Sergio Perez <sergio.perez@albatronic.com>
+ * @copyright INFORMATICA ALBATRONIC SL
+ * @date 05.11.2012 01:08:49
+ */
+
+/**
+ * @orm:Entity(PcaeProyectos)
+ */
+class PcaeProyectosEntity extends EntityComunes {
+	/**
+	 * Nombre de la conexion a la BD
+	 * @var string
+	 */
+	protected $_conectionName = 'pcae';
+	/**
+	 * Nombre de la tabla física
+	 * @var string
+	 */
+	protected $_tableName = 'PcaeProyectos';
+	/**
+	 * Nombre de la PrimaryKey
+	 * @var string
+	 */
+	protected $_primaryKeyName = '';
+	/**
+	 * Relacion de entidades que dependen de esta
+	 * @var string
+	 */
+	protected $_parentEntities = array(
+		);
+	/**
+	 * Relacion de entidades de las que esta depende
+	 * @var string
+	 */
+	protected $_childEntities = array(
+		);
+	/**
+	 * GETTERS Y SETTERS
+	 */
+} // END class PcaeProyectos
+
+?>

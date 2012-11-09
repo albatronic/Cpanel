@@ -25,7 +25,7 @@ class CommMonedasEntity extends EntityComunes {
 	 * @var string
 	 * @assert NotBlank(groups="CommMonedas")
 	 */
-	protected $Moneda;
+	protected $Moneda = '';
 	/**
 	 * @var string
 	 */

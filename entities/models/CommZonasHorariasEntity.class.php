@@ -19,7 +19,7 @@ class CommZonasHorariasEntity extends EntityComunes {
 	/**
 	 * @var string
 	 */
-	protected $Zona;
+	protected $Zona = '';
 	/**
 	 * Nombre de la conexion a la BD
 	 * @var string
