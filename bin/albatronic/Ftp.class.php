@@ -22,26 +22,31 @@
  */
 class Ftp {
 
-    var $server;
-    var $user;
-    var $password;
-    var $connectId;
-    var $errores = array();
-    var $alertas = array();
+    protected $server;
+    protected $port;
+    protected $user;
+    protected $password;
+    protected $timeout;
+    protected $connectId;
+    protected $errores = array();
+    protected $alertas = array();
 
     /**
      * Realiza la conexión al servidor ftp
      * @param string $server Servidor ftp
      * @param string $user Usuario ftp
      * @param string $password Password ftp
+     * @return boolean TRUE si la conexión ex exitosa
      */
-    public function __construct($server, $user, $password) {
+    public function __construct(array $parameters) {
 
-        $this->server = $server;
-        $this->user = $user;
-        $this->password = $password;
+        $this->server = $parameters['server'];
+        $this->port = $parameters['port'];
+        $this->user = $parameters['user'];
+        $this->password = $parameters['password'];
+        $this->timeout = $parameters['timeout'];
 
-        $this->connect();
+        return $this->connect();
 
     }
 
@@ -74,7 +79,6 @@ class Ftp {
                     $this->errores[] = "FTP: La carga ha fallado!";
             } else {
                 $this->errores[] = "FTP: No existe el directorio '{$targetFolder}'";
-                print_r($this->errores);
             }
         }
 
@@ -268,14 +272,18 @@ class Ftp {
 
     /**
      * Se conecta al servidor por FTP
+     * 
+     * @return boolean TRUE si la conexión es exitosa
      */
     public function connect() {
 
-        $this->connectId = ftp_connect($this->server);
+        $this->connectId = ftp_connect($this->server,$this->port, $this->timeout);
         $ok = ftp_login($this->connectId, $this->user, $this->password);
-
+print_r($this);
         if (!$ok)
             $this->errores[] = "FTP: La conexión ha fallado!";
+        
+        return $ok;
     }
 
     public function close() {

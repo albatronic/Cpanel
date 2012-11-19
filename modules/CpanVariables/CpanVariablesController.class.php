@@ -149,9 +149,9 @@ class CpanVariablesController {
                     break;
 
                 case 'Mod':
+                    $this->ponValoresDefecto($ambito, $tipo, $nombre, $datos);
+                    
                     if ($tipo == 'Env') {
-
-                        $this->ponValoresDefecto($ambito, $tipo, $nombre, $datos);
 
                         // Constuyo array con los nombres de las columnas del modulo(=entidad)
                         // para mostrar en el template las variables Web/Env de cada columna.
@@ -376,7 +376,7 @@ class CpanVariablesController {
                 break;
 
             case 'App':
-
+/**
                 if ($tipo == 'Env') {
                     if ($datos['globales']['urlPrefix'] == '') {
                         $archivoConfig = new Form($nombre);
@@ -384,12 +384,13 @@ class CpanVariablesController {
                         unset($archivoConfig);
                     }
                 }
-                break;
+*/                break;
 
             case 'Mod':
-
+             
+                $archivoConfig = new Form($nombre);
+                
                 if ($tipo == 'Env') {
-                    $archivoConfig = new Form($nombre);
 
                     if ($datos['isModuleRoot'] == '')
                         $datos['isModuleRoot'] = $archivoConfig->getNode('isModuleRoot');
@@ -449,7 +450,19 @@ class CpanVariablesController {
 
                     unset($archivoConfig);
                 }
+                
+                if ($tipo == 'Web') {
+                    $linkModule = $archivoConfig->getNode('linkModule');
+                    if ($datos['linkFromColumn'] == '')
+                        $datos['linkFromColumn'] = $linkModule['fromColumn'];
+                    if ($datos['linkToEntity'] == '')
+                        $datos['linkToEntity'] = $linkModule['toEntity'];
+                    if ($datos['linkToColumn'] == '')
+                        $datos['linkToColumn'] = $linkModule['toColumn'];
+
+                }
                 break;
+                
         }
     }
 

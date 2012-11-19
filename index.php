@@ -213,7 +213,7 @@ $twig->loadTemplate($result['template'])
             'layout' => '_global/layout.html.twig',
             //'user'    => new CpanUsuarios($_SESSION['USER']['user']['Id']),
             'menu' => $_SESSION['USER']['menu'],
-            'projects' => $_SESSION['projects'],
+            //'projects' => $_SESSION['projects'],
             'project' => $_SESSION['project'],
         ));
 

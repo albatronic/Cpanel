@@ -65,6 +65,12 @@ class PcaeProyectosAppsEntity extends EntityComunes {
     protected $FtpPassword;
 
     /**
+     * @var integer
+     * @assert NotBlank(groups="PcaeProyectosApps")
+     */
+    protected $FtpTimeout;
+    
+    /**
      * @var string
      * @assert NotBlank(groups="PcaeProyectosApps")
      */
@@ -219,6 +225,14 @@ class PcaeProyectosAppsEntity extends EntityComunes {
         return $this->FtpPassword;
     }
 
+    public function setFtpTimeout($FtpTimeout) {
+        $this->FtpTimeout = trim($FtpTimeout);
+    }
+
+    public function getFtpTimeout() {
+        return $this->FtpTimeout;
+    }
+    
     public function setUrl($Url) {
         $this->Url = trim($Url);
     }

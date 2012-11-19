@@ -13,6 +13,6 @@
 {{ macro.input(atributos.DigitoControl,'field_title','text',values.controller ~ '[DigitoControl]',values.controller ~ '_DigitoControl',datos.DigitoControl,'2','CampoTextoCorto','4') }}
 {{ macro.input(atributos.Municipio,'field_title','text',values.controller ~ '[Municipio]',values.controller ~ '_Municipio',datos.Municipio,'255','CampoTextoLargo','5') }}
 
-{# include '_global/fieldsComunes.html.twig' #}
+{% include '_global/fieldsComunes.html.twig' %}
 
 {{ macro.foco(values.controller ~ '_IdPais') }}

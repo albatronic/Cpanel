@@ -26,28 +26,7 @@
         {% endblock %}
 
         <div class="page_title_user">
-            <form name="layoutForm" id="layoutForm" method="POST">
-                <input name="controller" value ="index" type="hidden" />
-                <input name="action" id="actionLayout" value="ChangeProjectUser" type="hidden"/>
-
-                    <select class="projectsSelector" name="project" id="projectsSelector">
-                    {% for key,value in projects %}
-                        <option value="{{key}}" {% if key == project.name %} SELECTED{% endif %}>{{value.title}}</option>
-                    {% endfor %}
-                    </select>
-
-                {% if user.IdPerfil.Id == '1' %}
-                    <select class="usersSelector" name="user" id="usersSelector">
-                    {% for usuario in user.fetchAll('Nombre',0) %}
-                        <option value="{{usuario.Id}}" {% if usuario.Id == user.Id %} SELECTED{% endif %}>{{usuario.Value}}</option>
-                    {% endfor %}
-                    </select>
-                {% else %}
-                    <input name="user" value="{{user.Id}}" type="hidden" />
-                    {{user.NombreApellidos}}&nbsp;&nbsp;
-                {% endif %}
-
-            </form>
+            {{ project.title }}
 	</div>
 
         <div id="container">

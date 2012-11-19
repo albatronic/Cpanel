@@ -120,7 +120,7 @@ class CpanDocs extends CpanDocsEntity {
         unset($this->_em);
 
         $ok = (count($this->_errores) == 0);
-
+        print_r($this->_errores);
         return $ok;
     }
 
@@ -135,12 +135,11 @@ class CpanDocs extends CpanDocsEntity {
 
         $carpetaDestino = $this->_prePath . $pathInfo['dirname'];
 
-        $ftp = new Ftp($_SESSION['project']['ftp']['server'], $_SESSION['project']['ftp']['user'], $_SESSION['project']['ftp']['password']);
+        $ftp = new Ftp($_SESSION['project']['ftp']);
         $ok = $ftp->delete($carpetaDestino, $this->Name);
         $this->_errores = $ftp->getErrores();
         $ftp->close();
         unset($ftp);
-
 
         return $ok;
     }
@@ -415,10 +414,12 @@ class CpanDocs extends CpanDocsEntity {
                 unset($archivo);
             }
 
-            $ftp = new Ftp($_SESSION['project']['ftp']['server'], $_SESSION['project']['ftp']['user'], $_SESSION['project']['ftp']['password']);
-            $ok = $ftp->upLoad($carpetaDestino, $this->_ArrayDoc['tmp_name'], $this->Name);
-            $this->_errores = $ftp->getErrores();
-            $ftp->close();
+            $ftp = new Ftp($_SESSION['project']['ftp']);
+            if ($ftp) {
+                $ok = $ftp->upLoad($carpetaDestino, $this->_ArrayDoc['tmp_name'], $this->Name);
+                $this->_errores = $ftp->getErrores();
+                $ftp->close();
+            } else $this->_errores = "Fallo al conectar vía FTP";
             unset($ftp);
         }
 
@@ -458,7 +459,7 @@ class CpanDocs extends CpanDocsEntity {
 
         $carpetaDestino = $this->_prePath . $pathInfo['dirname'];
 
-        $ftp = new Ftp($_SESSION['project']['ftp']['server'], $_SESSION['project']['ftp']['user'], $_SESSION['project']['ftp']['password']);
+        $ftp = new Ftp($_SESSION['project']['ftp']);
         $ok = $ftp->rename($carpetaDestino, $nombreAnterior, $nombreNuevo);
         $this->_errores = $ftp->getErrores();
         $ftp->close();

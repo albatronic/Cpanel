@@ -11,6 +11,6 @@
 {{ macro.input(atributos.Moneda,'field_title','text',values.controller ~ '[Moneda]',values.controller ~ '_Moneda',datos.Moneda,'255','CampoTextoLargo','2') }}
 {{ macro.input(atributos.Simbolo,'field_title','text',values.controller ~ '[Simbolo]',values.controller ~ '_Simbolo',datos.Simbolo,'255','CampoTextoLargo','3') }}
 
-{# include '_global/fieldsComunes.html.twig' #}
+{% include '_global/fieldsComunes.html.twig' %}
 
 {{ macro.foco(values.controller ~ '_Codigo') }}

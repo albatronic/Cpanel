@@ -7,7 +7,7 @@
 #
 ---
 GconContenidosRelacionados:
-  app: ''
+  app: 'Gcon'
   isModuleRoot: 0
   linkModule:
     fromColumn: ''

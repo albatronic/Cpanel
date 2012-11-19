@@ -125,16 +125,17 @@ class Controller {
             'value' => '',
         );
 
+        // Cargar los includes del Head html
         $includesHead = $this->form->getIncludesHead();
-
         $this->values['twigCss'] = $includesHead['twigCss'];
         $this->values['twigJs'] = $includesHead['twigJs'];
 
-        // CARGAR LAS VARIABLES
+        // Cargas las variables
         $this->cargaVariables();
 
         $this->values['atributos'] = $this->form->getAtributos($this->values['permisos']['enCurso']['modulo']);
 
+        // Poner la solapa activa de los campos comunes
         ($this->request['solapaActiva'] == '') ? $this->values['solapaActiva'] = 'general' : $this->values['solapaActiva'] = $this->request['solapaActiva'];
     }
 
@@ -206,8 +207,25 @@ class Controller {
                             $rules = $this->form->getRules();
                             if ($datos->valida($rules)) {
                                 $this->values['alertas'] = $datos->getAlertas();
-                                if ($datos->save())
+                                if ($datos->save()) {
                                     $this->gestionUrlMeta($datos);
+
+                                    // Salvar los campos Controller, action, template y parameters
+                                    // del objeto CpanUrlAmigables asociado
+                                    if ($this->request['objetoUrlAmigable']) {
+                                        $arrayUrlAmigable = $this->request['objetoUrlAmigable'];
+                                        $objetoUrl = new CpanUrlAmigables($arrayUrlAmigable['Id']);
+                                        $objetoUrl->setController($arrayUrlAmigable['Controller']);
+                                        $objetoUrl->setAction($arrayUrlAmigable['Action']);
+                                        $objetoUrl->setTemplate($arrayUrlAmigable['Template']);
+                                        $objetoUrl->setParameters($arrayUrlAmigable['Parameters']);
+
+                                        if (!$objetoUrl->save())
+                                            $this->values['errores'] = $objetoUrl->getErrores();
+
+                                        unset($objetoUrl);
+                                    }
+                                }
 
                                 //Recargo el objeto para refrescar las propiedas que
                                 //hayan podido ser objeto de algun calculo durante el proceso
@@ -609,7 +627,8 @@ class Controller {
                     $idImagen = $this->request['idImagenEnviar'];
                     $tipo = $this->request['image'][$idImagen]['Tipo'];
                     $img = new CpanDocs();
-                    $img->borraDocs($this->entity, $idEntidad, $tipo);
+                    if (!$img->borraDocs($this->entity, $idEntidad, $tipo))
+                        $this->values['errores'] = $img->getErrores();
                     unset($img);
                     $template = $this->entity . '/form.html.twig';
                 } else {
@@ -620,68 +639,6 @@ class Controller {
 
         $this->values['datos'] = new $this->entity($idEntidad);
         return array('template' => $template, 'values' => $this->values);
-    }
-
-    /**
-     * Actualiza el registro de accesos favoritos.
-     * LLeva un contador de accesos para cada agente-url
-     *
-     * Si el acceso es al propio contralador de favoritos, no se tiene en cuenta
-     *
-     */
-    protected function actualizaFavoritos() {
-
-        switch ($this->request['METHOD']) {
-            case 'POST':
-                $url = $this->request['controller'];
-                break;
-            case 'GET':
-                $url = $this->request[0];
-                break;
-        }
-
-
-        if (($url != 'Favoritos') and ($url != 'Index')) {
-
-            $idAgente = $_SESSION['USER']['user']['Id'];
-            $favorito = new Favoritos();
-            $rows = $favorito->cargaCondicion("Id", "(IDAgente='{$idAgente}') and (Url='{$url}')");
-            $row = $rows[0];
-            if (!$row['Id']) {
-                $favorito->setIDAgente($idAgente);
-                $favorito->setTitulo($this->form->getTitle());
-                $favorito->setUrl($url);
-                $favorito->setAccesos(1);
-                $favorito->create();
-            } else {
-                $favorito = new Favoritos($row['Id']);
-                $favorito->setAccesos($favorito->getAccesos() + 1);
-                $favorito->save();
-            }
-            unset($favorito);
-        }
-    }
-
-    /**
-     * Devuelve un array con el número ($nFavoritos) de accesos favoritos
-     * del agente $idAgente
-     *
-     * @param integer $idAgente
-     * @param integer $nFavoritos
-     * @return array Los accesos favoritos
-     */
-    protected function getTopFavoritos($idAgente = '', $nFavoritos = 10) {
-
-        $favoritos = array();
-        $favorito = new Favoritos();
-
-        if ($idAgente == '')
-            $idAgente = $_SESSION['USER']['user']['Id'];
-
-        $favoritos = $favorito->cargaCondicion("*", "IDAgente='{$idAgente}'", "Accesos Desc limit {$nFavoritos}");
-        unset($favorito);
-
-        return $favoritos;
     }
 
     /**
@@ -899,11 +856,16 @@ class Controller {
             $this->varEnvPro = $_SESSION['VARIABLES']['EnvPro'];
         $this->values['varEnvPro'] = $this->varEnvPro;
 
+        if (count($this->values['varEnvPro']) == 0)
+            $this->values['errores'][] = "No se han definido las variables de entorno del proyecto";
+
         // Variables de entorno del modulo
         $variables = new CpanVariables('Mod', 'Env', $this->entity);
         $this->varEnvMod = $variables->getValores();
         $this->values['varEnvMod'] = $this->varEnvMod;
-
+        if (count($this->values['varEnvMod']) == 0)
+            $this->values['errores'][] = "No se han definido las variables de entorno del módulo";
+        
         // Variables web del modulo
         if (!isset($_SESSION['VARIABLES']['WebMod'])) {
             $variables = new CpanVariables('Mod', 'Web', $this->entity);
@@ -912,7 +874,9 @@ class Controller {
         } else
             $this->varWebMod = $_SESSION['VARIABLES']['WebMod'];
         $this->values['varWebMod'] = $this->varWebMod;
-
+        if (count($this->values['varWebMod']) == 0)
+            $this->values['errores'][] = "No se han definido las variables web del módulo";
+        
         // Variables de entorno de la app
         if (!isset($_SESSION['VARIABLES']['EnvApp'])) {
             $variables = new CpanVariables('App', 'Env', $this->app);
@@ -921,6 +885,8 @@ class Controller {
         } else
             $this->varEnvApp = $_SESSION['VARIABLES']['EnvApp'];
         $this->values['varEnvApp'] = $this->varEnvApp;
+        if (count($this->values['varEnvApp']) == 0)
+            $this->values['errores'][] = "No se han definido las variables de entorno de la App";        
 
         // Variables web de la app
         if (!isset($_SESSION['VARIABLES']['WebApp'])) {
@@ -930,6 +896,9 @@ class Controller {
         } else
             $this->varWebApp = $_SESSION['VARIABLES']['WebApp'];
         $this->values['varWebApp'] = $this->varWebApp;
+        if (count($this->values['varWebApp']) == 0)
+            $this->values['errores'][] = "No se han definido las variables web de la App";
+        
         unset($variables);
     }
 

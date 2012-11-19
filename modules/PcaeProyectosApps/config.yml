@@ -127,7 +127,7 @@ PcaeProyectosApps:
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     FtpPort:
       title: FtpPort
-      filter: YES
+      filter: NO
       list: NO
       visible: true
       updatable: true
@@ -135,14 +135,25 @@ PcaeProyectosApps:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: NO, type: integer, length: '6', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: NO, type: integer, length: '6', min: null, max: null, message: 'Valor Requerido' } 
     FtpFolder:
       title: FtpFolder
-      filter: YES
+      filter: NO
       list: NO
       visible: true
       updatable: true
-      default: null
+      default: ''
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    FtpTimeout:
+      title: FtpTimeout
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '60'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
@@ -186,7 +197,7 @@ PcaeProyectosApps:
       list: NO
       visible: true
       updatable: true
-      default: null
+      default: mysql
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }

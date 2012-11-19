@@ -60,7 +60,7 @@ class IndexController extends Controller {
             $proyectoApp = new PcaeProyectosApps();
             $proyectoApp = $proyectoApp->find('PrimaryKeyMD5', $this->request[1]);
             $_SESSION['project']['Id'] = $proyectoApp->getId();
-            $_SESSION['project']['title'] = $proyectoApp->getIdProyecto()->getProyecto();
+            $_SESSION['project']['title'] = $proyectoApp->getIdProyecto()->getProyecto() . " - " . $proyectoApp->getIdApp()->getAplicacion();
             $_SESSION['project']['url'] = $proyectoApp->getUrl();
             $_SESSION['project']['conection'] = array(
                 'dbEngine' => $proyectoApp->getDbEngine(),
@@ -73,6 +73,7 @@ class IndexController extends Controller {
             $_SESSION['project']['ftp'] = array(
                 'server' => $proyectoApp->getFtpServer(),
                 'port' => $proyectoApp->getFtpPort(),
+                'timeout' => $proyectoApp->getFtpTimeout(),
                 'folder' => $proyectoApp->getFtpFolder(),
                 'user' => $proyectoApp->getFtpUser(),
                 'password' => $proyectoApp->getFtpPassword(),
@@ -124,7 +125,7 @@ class IndexController extends Controller {
                     }
             }
         }
-
+        
         return array(
             'template' => $this->entity . '/index.html.twig',
             'values' => $this->values,

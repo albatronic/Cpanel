@@ -175,6 +175,18 @@
         {{ macro.input(atributos.Slug,'field_title','text',values.controller ~ '[Slug]',values.controller ~ '_Slug',datos.Slug,'255','CampoTextoLargo',112, disabled) }}
         {{ macro.input(atributos.UrlFriendly,'field_title','text',values.controller ~ '[UrlFriendly]',values.controller ~ '_UrlFriendly',datos.UrlFriendly,'255','CampoTextoLargo',112,'DISABLED') }}
         {{ macro.input(atributos.UrlHeritable,'field_title','checkbox',values.controller ~ '[UrlHeritable]',values.controller ~ '_UrlHeritable',datos.UrlHeritable.IDTipo,'255','CampoTextoLargo','12') }}
+            
+        {# SI EL USUARIO ES SUPER, SE MUESTRAN LOS CAMPOS CONTROLLER, ACTION, TEMPLATE y PARAMETERS
+           QUE ESTAN EN LA TABLA CpanUrlAmigables
+        #}
+        {% if user.idPerfil == 1 %}
+            {% set objetoUrlAmigable = datos.getObjetoUrlAmigable %}
+            <input name="objetoUrlAmigable[Id]" value="{{objetoUrlAmigable.Id}}" type="hidden" />
+            {{ macro.input({'caption':'Controller','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Controller]','CpanUrlAmigables_Controller',objetoUrlAmigable.Controller,'255','CampoTextoLargo','12') }}
+            {{ macro.input({'caption':'Action','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Action]','CpanUrlAmigables_Action',objetoUrlAmigable.Action,'255','CampoTextoLargo','12') }}
+            {{ macro.input({'caption':'Template','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Template]','CpanUrlAmigables_Template',objetoUrlAmigable.Template,'255','CampoTextoLargo','12') }}
+            {{ macro.input({'caption':'Parameters','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Parameters]','CpanUrlAmigables_Parameters',objetoUrlAmigable.Parameters,'255','CampoTextoLargo','12') }}
+        {% endif %}
     </div>
 
     {# SOLAPA URL DESTINO #}

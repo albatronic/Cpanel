@@ -33,11 +33,45 @@
             'CampoTextoCorto'
             )
         }}
+            
+        {{ macro.input(
+            {'caption': 'linkFromColumn','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[linkFromColumn]',
+            'datos_linkFromColumn',
+            values.datos.linkFromColumn,
+            '50',
+            'CampoTextoCorto'
+            )
+        }}
+        {{ macro.input(
+            {'caption': 'linktoEntity','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[linkToEntity]',
+            'datos_linkToEntity',
+            values.datos.linkToEntity,
+            '50',
+            'CampoTextoCorto'
+            )
+        }} 
+        {{ macro.input(
+            {'caption': 'linkToColumn','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[linkToColumn]',
+            'datos_linkToColumn',
+            values.datos.linkToColumn,
+            '50',
+            'CampoTextoCorto'
+            )
+        }}            
     </div>
 
-    {# VARIABLES WEB ESPECIFICAS AL MODULO EN CURSO nombreModulo/varWeb.yml #}
+    {# VARIABLES WEB ESPECIFICAS AL MODULO EN CURSO #}
     <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {% for nombre,atributos in values.datos.especificas %}
+        {% for nombre,atributos in values.datos.especificas %}{{nombre}}
             {% if user.IdPerfil == '1' %} {% set prefijo = '[especificas]['~nombre~']' %} {% else %} {% set prefijo = '' %} {% endif %}
             {{ macro.input(
                 {'caption':prefijo~' '~atributos.caption,'visible':'1','varEnv':'0'},

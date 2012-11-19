@@ -7,7 +7,7 @@
 #
 ---
 CommMunicipios:
-  app: ''
+  app: 'Comm'
   isModuleRoot: 0
   linkModule:
     fromColumn: ''

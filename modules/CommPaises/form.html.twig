@@ -22,9 +22,6 @@
 			<input name="solapaActiva" id="solapaActiva" value="{{ values.solapaActiva }}" type="hidden" />
 			<input name="{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]" value="{{values.datos.getPrimaryKeyValue}}" type="hidden" />
 
-			{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
-			{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
-
 			<ul>
 				{% include values.controller ~ "/fields.html.twig" with {'datos' : values.datos, 'atributos' : values.atributos } %}
 			</ul>

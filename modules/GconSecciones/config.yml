@@ -10,9 +10,9 @@ GconSecciones:
   app: 'Gcon'
   isModuleRoot: 1
   linkModule:
-    fromColumn: ''
-    toEntity: ''
-    toColumn: ''
+    fromColumn: '1'
+    toEntity: '2'
+    toColumn: '3'
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'
@@ -35,10 +35,10 @@ GconSecciones:
   fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Titulo
-  controller: CONTROLADOR
-  action: ACTION
-  template: TEMPLATE
-  parametros: PARAMETROS
+  controller: Secciones
+  action: Index
+  template: Index
+  parametros: 
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
