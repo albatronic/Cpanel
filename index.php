@@ -122,7 +122,6 @@ $_SESSION['EntornoDesarrollo'] = $rq->isDevelopment();
 setlocale(LC_MONETARY, $rq->getLanguage());
 
 if ($rq->isOldBrowser()) {
-
     $controller = 'OldBrowser';
     $action = 'Index';
 } else {

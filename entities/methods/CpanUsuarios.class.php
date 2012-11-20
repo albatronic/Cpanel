@@ -45,7 +45,7 @@ class CpanUsuarios extends CpanUsuariosEntity {
             $em->query($query);
             $rows = $em->fetchResult();
             $em->desConecta();
-        }
+        } else echo "NO HAY CONEXION CON LA BASE DE DATOS";
         unset($em);
 
         $appAnterior = '';

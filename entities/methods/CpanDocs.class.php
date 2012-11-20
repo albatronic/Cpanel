@@ -59,8 +59,6 @@ class CpanDocs extends CpanDocsEntity {
             $this->actualizaNombreAmigable();
             if ($this->subeDocumento())
                 $this->save();
-            else
-                $this->_errores[] = "Error al subir el documento";
         }
 
         return $id;
@@ -120,7 +118,7 @@ class CpanDocs extends CpanDocsEntity {
         unset($this->_em);
 
         $ok = (count($this->_errores) == 0);
-        print_r($this->_errores);
+        
         return $ok;
     }
 
@@ -419,8 +417,9 @@ class CpanDocs extends CpanDocsEntity {
                 $ok = $ftp->upLoad($carpetaDestino, $this->_ArrayDoc['tmp_name'], $this->Name);
                 $this->_errores = $ftp->getErrores();
                 $ftp->close();
-            } else $this->_errores = "Fallo al conectar vía FTP";
+            } else $this->_errores[] = "Fallo al conectar vía FTP";
             unset($ftp);
+            $ok = ( count($this->_errores) == 0);
         }
 
         return $ok;

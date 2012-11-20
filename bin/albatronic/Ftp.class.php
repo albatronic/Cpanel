@@ -61,8 +61,6 @@ class Ftp {
      */
     public function upLoad($targetFolder, $sourceFile, $targetFile, $transferMode = FTP_BINARY) {
 
-        $this->errores = array();
-
         if ($this->connectId) {
 
             $ok = $this->chdir($targetFolder);
@@ -96,8 +94,6 @@ class Ftp {
      */
     public function downLoad($serverFile, $localFile, $transferMode = FTP_BINARY) {
 
-        $this->errores = array();
-
         if ($this->connectId) {
             $ok = @ftp_get($this->connectId, $localFile, $serverFile, $transferMode);
 
@@ -116,8 +112,6 @@ class Ftp {
      * @return boolean TRUE si el archivo se subió con éxito
      */
     public function delete($folder, $file) {
-
-        $this->errores = array();
 
         if ($this->connectId) {
             ftp_chdir($this->connectId, $folder);
@@ -140,8 +134,6 @@ class Ftp {
      */
     public function rename($folder, $oldName, $newName) {
 
-        $this->errores = array();
-
         if ($this->connectId) {
             ftp_chdir($this->connectId, $folder);
             $ok = @ftp_rename($this->connectId, $oldName, $newName);
@@ -160,8 +152,6 @@ class Ftp {
      * @return boolean TRUE si se creó el directorio
      */
     public function mkdir($directory) {
-
-        $this->errores = array();
 
         if ($this->connectId) {
             $ok = ftp_mkdir($this->connectId, $directory);
@@ -182,8 +172,6 @@ class Ftp {
      * @return boolean TRUE si se borró el directorio
      */
     public function rmdir($directory) {
-
-        $this->errores = array();
 
         if ($this->connectId) {
             $ok = @ftp_rmdir($this->connectId, $directory);
@@ -225,7 +213,6 @@ class Ftp {
      * @return array Array con el listado del directorio
      */
     public function listDir($directory, $recursive = FALSE) {
-        $this->errores = array();
 
         if ($this->connectId) {
             $array = @ftp_rawlist($this->connectId, $directory, $recursive);
@@ -279,7 +266,7 @@ class Ftp {
 
         $this->connectId = ftp_connect($this->server,$this->port, $this->timeout);
         $ok = ftp_login($this->connectId, $this->user, $this->password);
-print_r($this);
+        
         if (!$ok)
             $this->errores[] = "FTP: La conexión ha fallado!";
         
