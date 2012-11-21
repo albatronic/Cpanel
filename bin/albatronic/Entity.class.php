@@ -308,18 +308,6 @@ class Entity {
             $this->{"set$key"}($values['default']);
         }
     }
-
-    /**
-     * Devuelve el objeto CpanUrlAmigables asociado
-     */
-    public function getObjetoUrlAmigable() {
-        
-        $url = new CpanUrlAmigables();
-        $rows = $url->cargaCondicion("Id","Entity='{$this->getClassName()}' and IdEntity='{$this->getPrimaryKeyValue()}'");
-        unset($url);
-        
-        return new CpanUrlAmigables($rows[0]['Id']);    
-    }
     
     /**
      * Valida la información cargada en las propiedades del objeto
