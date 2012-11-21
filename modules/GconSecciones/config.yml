@@ -99,7 +99,7 @@ GconSecciones:
     Subtitulo:
       title: Subtítulo
       filter: YES
-      list: YES
+      list: NO
       visible: true
       updatable: true
       default: null
@@ -121,7 +121,7 @@ GconSecciones:
     MostrarTitulo:
       title: Mostrar título
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '1'
@@ -133,7 +133,7 @@ GconSecciones:
     MostrarSubtitulo:
       title: Mostrar subtítulo
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '1'
@@ -157,7 +157,7 @@ GconSecciones:
     MostrarEnMenu1:
       title: MostrarEnMenu1
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '1'
@@ -169,7 +169,7 @@ GconSecciones:
     MostrarEnMenu2:
       title: MostrarEnMenu2
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -181,7 +181,7 @@ GconSecciones:
     MostrarEnMenu3:
       title: MostrarEnMenu3
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -612,7 +612,7 @@ GconSecciones:
     UrlFriendly:
       title: UrlFriendly
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null

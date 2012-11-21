@@ -10,9 +10,9 @@ GconContenidos:
   app: 'Gcon'
   isModuleRoot: 1
   linkModule:
-    fromColumn: ''
-    toEntity: ''
-    toColumn: ''
+    fromColumn: 'IdSeccion'
+    toEntity: 'GconSecciones'
+    toColumn: 'Id'
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'

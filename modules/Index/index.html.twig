@@ -10,16 +10,20 @@
 
 {% block content %}
 
+{% if values.errores %}
+    {{ values.errores}}
+{% endif %}
+
 {% if values.menu.tipo == 'apps' %}
 
-    {# MUESTROS LAS APLICACIONES #}
+    {# MUESTRO LAS APLICACIONES #}
     {% for key,value in values.menu.apps %}
         <a href="{{app.path}}/index/{{key}}"><img src="{{app.path}}/images/iconos/{{key}}.jpg" alt="{{value.titulo}}" title="{{value.titulo}}" /></a>
     {% endfor %}
 
 {% else %}
 
-    {# MUESTROS LOS MODULOS DE LA APLICACION EN CURSO #}
+    {# MUESTRO LOS MODULOS DE LA APLICACION EN CURSO #}
     {% for key,value in values.menu.modulos %}
         <a href="{{app.path}}/{{value.controller}}"><img src="{{app.path}}/images/iconos/{{key}}.jpg" alt="{{value.titulo}}" title="{{value.titulo}}" /></a>
     {% endfor %}
