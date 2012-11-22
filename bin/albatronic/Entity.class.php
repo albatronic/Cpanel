@@ -84,7 +84,7 @@ class Entity {
             $this->conecta();
 
             if (is_resource($this->_dbLink)) {
-                $query = "SELECT * FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE (`{$this->_primaryKeyName}`='{$this->getPrimaryKeyValue()}') AND (Deleted = '0')";
+                $query = "SELECT * FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE (`{$this->_primaryKeyName}`='{$this->getPrimaryKeyValue()}')";
 
                 if ($this->_em->query($query)) {
                     $this->setStatus($this->_em->numRows());
@@ -446,7 +446,11 @@ class Entity {
         }
 
         // Validacion de integridad referencial respecto a entidades hijas
-
+        $hijos = $this->cargaCondicion($this->getPrimaryKeyName(),"BelongsTo='{$this->getPrimaryKeyValue()}'");
+        $n = count($hijos);
+        if ($n != 0)
+            $this->_errores[] = "Imposible eliminar. Hay {$n} relaciones con elementos hijos";
+            
         return (count($this->_errores) == 0);
     }
 

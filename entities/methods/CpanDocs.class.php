@@ -118,7 +118,7 @@ class CpanDocs extends CpanDocsEntity {
         unset($this->_em);
 
         $ok = (count($this->_errores) == 0);
-        
+
         return $ok;
     }
 
@@ -401,25 +401,31 @@ class CpanDocs extends CpanDocsEntity {
                 $img = new Gd();
                 $img->loadImage($this->_ArrayDoc['tmp_name']);
                 $img->crop($ancho, $alto);
-                $ok = $img->save($this->_ArrayDoc['tmp_name']);
+                $imagenRecortada = "tmp/" . md5($this->_ArrayDoc['tmp_name']);
+                $ok = $img->save($imagenRecortada);
                 unset($img);
-
-                $archivo = new Archivo($this->_ArrayDoc['tmp_name']);
+                $archivo = new Archivo($imagenRecortada);
                 $this->setSize($archivo->getSize());
                 $this->setWidth($archivo->getImageWidth());
                 $this->setHeight($archivo->getImageHeight());
                 $this->setMimeType($archivo->getMimeType());
                 unset($archivo);
-            }
+                $archivoSubir = $imagenRecortada;
+            } else $archivoSubir = $this->_ArrayDoc['tmp_name'];
 
             $ftp = new Ftp($_SESSION['project']['ftp']);
             if ($ftp) {
-                $ok = $ftp->upLoad($carpetaDestino, $this->_ArrayDoc['tmp_name'], $this->Name);
+                $ok = $ftp->upLoad($carpetaDestino, $archivoSubir, $this->Name);
                 $this->_errores = $ftp->getErrores();
                 $ftp->close();
-            } else $this->_errores[] = "Fallo al conectar vía FTP";
+            } else
+                $this->_errores[] = "Fallo al conectar vía FTP";
+
             unset($ftp);
             $ok = ( count($this->_errores) == 0);
+            
+            if (file_exists($imagenRecortada))
+                @unlink ($imagenRecortada);
         }
 
         return $ok;
@@ -488,22 +494,6 @@ class CpanDocs extends CpanDocsEntity {
         unset($obj);
 
         return new CpanDocs($rows[0]['Id']);
-    }
-
-    /**
-     * Devuelve un string con el tamaño del documento
-     * expresado en la unidad de medida $unit
-     *
-     * @param string $unit La unidad de medida
-     * @return string Texto con ek tamaño y la unidad de medida
-     */
-    public function getSize($unit = 'kb') {
-
-        $archivo = new Archivo($this->_prePath . $this->PathName);
-        $size = $archivo->getSize($unit);
-        unset($archivo);
-
-        return number_format($size, 2, ',', '.') . "({$unit})";
     }
 
 }

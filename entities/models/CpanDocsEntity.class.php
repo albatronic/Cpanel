@@ -238,10 +238,32 @@ class CpanDocsEntity extends EntityComunes {
         $this->Size = $Size;
     }
 
-    public function getSize() {
-        return $this->Size;
-    }
+    /**
+     * Devuelve un string con el tamaño del documento
+     * expresado en la unidad de medida $unit
+     *
+     * @param string $unit La unidad de medida
+     * @return string Texto con ek tamaño y la unidad de medida
+     */
+    public function getSize($unit = 'kb') {
 
+        switch (strtolower(trim($unit))) {
+            case 'byte':
+                $factor = 1;
+                break;
+            case 'kb':
+                $factor = 1000;
+                break;
+            case 'mb':
+                $factor = 100000;
+                break;
+            default:
+                $factor = 1;
+        }
+
+        return number_format($this->Size / $factor, 2, ',', '.') . "({$unit})";
+    }
+    
     public function setHeight($Height) {
         $this->Height = $Height;
     }

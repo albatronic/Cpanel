@@ -256,7 +256,7 @@ class Ftp {
             'info' => $info,
         );
     }
-
+    
     /**
      * Se conecta al servidor por FTP
      * 

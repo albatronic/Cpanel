@@ -54,14 +54,14 @@ CpanUrlAmigables:
   table: CpanUrlAmigables
   primarykey: Id
   linkBy: ''
-  records_per_page: 15
+  records_per_page: 20
   order_by:
     -
-      title: 'Id a-z'
-      criteria: 'Id ASC'
+      title: 'Url amigable a-z'
+      criteria: 'UrlFriendly ASC'
     -
-      title: 'Id z-a'
-      criteria: 'Id DESC'
+      title: 'Entidad z-a'
+      criteria: 'Entity DESC'
   search_default: Id
   referenced_entities:
     - ValoresSN
@@ -80,7 +80,7 @@ CpanUrlAmigables:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
     UrlFriendly:
-      title: UrlFriendly
+      title: Url Amigable
       filter: YES
       list: YES
       visible: true
@@ -91,7 +91,7 @@ CpanUrlAmigables:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Controller:
-      title: Controller
+      title: Controlador
       filter: YES
       list: YES
       visible: true
@@ -102,7 +102,7 @@ CpanUrlAmigables:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Action:
-      title: Action
+      title: Accion
       filter: YES
       list: YES
       visible: true
@@ -124,7 +124,7 @@ CpanUrlAmigables:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Parameters:
-      title: Parameters
+      title: Parámetros
       filter: YES
       list: YES
       visible: true
@@ -135,7 +135,7 @@ CpanUrlAmigables:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Entity:
-      title: Entity
+      title: Entidad
       filter: YES
       list: YES
       visible: true
@@ -146,8 +146,8 @@ CpanUrlAmigables:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     IdEntity:
-      title: IdEntity
-      filter: YES
+      title: Id Entidad
+      filter: NO
       list: YES
       visible: true
       updatable: true
@@ -312,7 +312,7 @@ CpanUrlAmigables:
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     SortOrder:
       title: SortOrder
-      filter: YES
+      filter: NO
       list: NO
       visible: true
       updatable: true
