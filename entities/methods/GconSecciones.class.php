@@ -36,6 +36,16 @@ class GconSecciones extends GconSeccionesEntity {
                 $this->setEtiquetaWeb4($this->Titulo);
             if ($this->EtiquetaWeb5 == '')
                 $this->setEtiquetaWeb5($this->Titulo);
+
+            // Asignar el nivel Jerárquico
+            $nivelPadre = 0;
+            if ($this->BelongsTo != 0) {
+                $seccion = new GconSecciones($this->BelongsTo);
+                $nivelPadre = $seccion->getNivelJerarquico();
+                unset($seccion);
+            }
+
+            $this->setNivelJerarquico($nivelPadre + 1);
         }
     }
 
@@ -50,24 +60,25 @@ class GconSecciones extends GconSeccionesEntity {
      * @param integer $idContenido El id del contenido
      * @return array Array Id, Value de contenidos
      */
-    public function getContenidos($idSeccion='', $idContenido='') {
+    public function getContenidos($idSeccion = '', $idContenido = '') {
 
-        if ($idSeccion == '') $idSeccion = $this->Id;
+        if ($idSeccion == '')
+            $idSeccion = $this->Id;
 
         $contenido = new GconContenidos();
-        $contenidos = $contenido->cargaCondicion('Id as Id,Titulo as Value',"IdSeccion='{$idSeccion}'","SortOrder ASC");
+        $contenidos = $contenido->cargaCondicion('Id as Id,Titulo as Value', "IdSeccion='{$idSeccion}'", "SortOrder ASC");
         unset($contenido);
 
         if ($idContenido) {
             foreach ($contenidos as $key => $contenido) {
                 $relacion = new GconContenidosRelacionados();
-                $contenidos[$key]['estaRelacionado'] = $relacion->estanRelacionados($idContenido,$contenido['Id']);
+                $contenidos[$key]['estaRelacionado'] = $relacion->estanRelacionados($idContenido, $contenido['Id']);
             }
             unset($relacion);
         }
         return $contenidos;
-
     }
+
 }
 
 ?>

@@ -13,10 +13,22 @@
 
 {% block template %}
 
+{# DEFINICION DE CONSTANTE CUYOS VALORES PUEDEN SER ADQUIRIDOS POR LOS CAMPOS ------------------------ #}
+
+{% set CriteriosOrdenNoticias = { 
+        '0':{'Id':'SortOrder ASC','Value':'Orden a-z'}, 
+        '1':{'Id':'SortOrder DESC','Value':'Orden z-a'},
+        '2':{'Id':'PublishedAt ASC','Value':'Fecha Publicación a-z'}, 
+        '3':{'Id':'PublishedAt DESC','Value':'Fecha Publicación z-a'},
+    }  
+%}
+
+{# ----------------------------------------------------------------------------------------------------#}
+
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-global">Globales</a></li>
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-especificas">Específicas</a></li>
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Globales</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas</a></li>
     </ul>
 
     {# VARIABLES WEB GLOBALES A TODOS LOS MODULOS #}
@@ -33,7 +45,7 @@
             'CampoTextoCorto'
             )
         }}
-            
+
         {{ macro.input(
             {'caption': 'linkFromColumn','visible':'1','varEnv':'0'},
             'field_title',
@@ -66,7 +78,62 @@
             '50',
             'CampoTextoCorto'
             )
+        }}
+
+        {{ macro.select(
+            {'caption': 'CriterioOrdenNoticias','visible':'1','varEnv':'0','updatable':'1'},
+            'field_title',
+            'datos[CriterioOrdenNoticias]',
+            'datos_CriterioOrdenNoticias',
+            none,
+            values.datos.CriterioOrdenNoticias,
+            CriteriosOrdenNoticias,
+            'chzn-select','22')
         }}            
+        {{ macro.input(
+            {'caption': 'NumNoticasMostrarHome','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[NumNoticasMostrarHome]',
+            'datos_NumNoticasMostrarHome',
+            values.datos.NumNoticasMostrarHome,
+            '50',
+            'CampoTextoCorto'
+            )
+        }}
+        {{ macro.input(
+            {'caption': 'NumNoticasPorPagina','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[NumNoticasPorPagina]',
+            'datos_NumNoticasPorPagina',
+            values.datos.NumNoticasPorPagina,
+            '50',
+            'CampoTextoCorto'
+            )
+        }}
+        {{ macro.input(
+            {'caption': 'NumContenidosPorPaginaListado','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[NumContenidosPorPaginaListado]',
+            'datos_NumContenidosPorPaginaListado',
+            values.datos.NumContenidosPorPaginaListado,
+            '50',
+            'CampoTextoCorto'
+            )
+        }}
+        {{ macro.input(
+            {'caption': 'NumContenidosPorPaginaDesarrollado','visible':'1','varEnv':'0'},
+            'field_title',
+            'text',
+            'datos[NumContenidosPorPaginaDesarrollado]',
+            'datos_NumContenidosPorPaginaDesarrollado',
+            values.datos.NumContenidosPorPaginaDesarrollado,
+            '50',
+            'CampoTextoCorto'
+            )
+        }}
     </div>
 
     {# VARIABLES WEB ESPECIFICAS AL MODULO EN CURSO #}
