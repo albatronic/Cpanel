@@ -2,7 +2,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 20.10.2012 20:46:26
+ * @date 06.11.2012 23:55:15
  */
 
 /**
@@ -60,6 +60,9 @@ class CpanVariablesEntity extends EntityComunes {
 			'ValoresPrivacy',
 			'ValoresDchaIzq',
 			'ValoresChangeFreq',
+			'RequestMethods',
+			'RequestOrigins',
+			'CpanAplicaciones',
 		);
 	/**
 	 * GETTERS Y SETTERS

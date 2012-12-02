@@ -1,4 +1,4 @@
-# Fixtures app Even. GESTOR DE EVENTOS
+# MODULOS DE LA APP Even. GESTOR DE EVENTOS
 CpanAplicaciones:
   Even  : { CodigoApp: Even,   NombreApp: Gestor de Eventos }
 

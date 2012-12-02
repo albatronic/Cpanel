@@ -2,7 +2,7 @@
 
 /**
  * Clase para envíos de correos electrónicos
- *
+ * 
  * Está implementado para ser independiente del motor de envíos
  * Si el constructor recibe un objeto mailer, lo utiliza, en caso contrario
  * lo instancia en base a los parametros indicados en el nodo 'mailer'
@@ -13,7 +13,7 @@
  *
  *  send($para,$de,$deNombre,$asunto,$mensaje, array $adjuntos): envía el email
  *  compruebaEmail($email): comprueba la validez sintáctica del $email
- *
+ * 
  * @author Sergio Perez. <sergio.perez@albatronic.com>
  * @copyright Informática ALBATRONIC, SL
  * @since 29.05.2011

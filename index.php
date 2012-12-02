@@ -114,6 +114,9 @@ if (!$_SESSION['browser']) {
 // ----------------------------------------------------------------
 $rq = new Request();
 
+// ----------------------------------------------------------------
+// DETERMINAR ENTORNO DE DESARROLLO O DE PRODUCCION
+// ----------------------------------------------------------------
 $_SESSION['EntornoDesarrollo'] = $rq->isDevelopment();
 
 // ----------------------------------------------------------------
@@ -187,6 +190,18 @@ $result = $con->{$metodo}();
 
 $result['values']['controller'] = $controller;
 
+$result['values']['archivoCss'] = getArchivoCss($result['template']);
+$result['values']['archivoJs'] = getArchivoJs($result['template']);
+
+// Cargar las variables Web del Proyecto
+if (!isset($_SESSION['varPro_Web'])) {
+    $var = new CpanVariables();
+    $rows = $var->cargaCondicion('Yml', "Variable='varPro_Web'");
+    unset($var);
+    $_SESSION['varPro_Web'] = sfYaml::load($rows[0]['Yml']);
+}
+$result['values']['varPro_Web'] = $_SESSION['varPro_Web'];
+
 // Cargo los valores para el modo debuger
 if ($config['debug_mode']) {
     $result['values']['_debugMode'] = true;
@@ -199,6 +214,13 @@ if ($config['debug_mode']) {
 if (!file_exists($config['twig']['templates_folder'] . '/' . $result['template']) or ($result['template'] == '')) {
     $result['values']['error'] = 'No existe el template: "' . $result['template'] . '" devuelto por el método "' . $clase . ':' . $action . 'Action"';
     $result['template'] = '_global/error.html.twig';
+}
+
+// Establecer el layout segun el dispositivo de navegación
+if ($_SESSION['isMobile']) {
+    $layout = "_global/layoutMobile.html.twig";
+} else {
+    $layout = "_global/layoutLaptop.html.twig";
 }
 
 // Renderizo el template y los valores devueltos por el método
@@ -223,5 +245,37 @@ unset($con);
 unset($loader);
 unset($twig);
 unset($config);
-unset($browser);
+
+/**
+ * Devuelve el nombre del archivo css asociado al template
+ * @param string $template
+ * @return string
+ */
+function getArchivoCss($template) {
+
+    $archivoTemplate = str_replace('html', 'css', $template);
+
+    if (!file_exists($archivoTemplate)) {
+        $archivoTemplate = "_global/css.twig";
+    }
+
+    return $archivoTemplate;
+}
+
+/**
+ * Devuelve el nombre del archivo js asociado al template
+ * @param string $template
+ * @return string
+ */
+function getArchivoJs($template) {
+
+    $archivoTemplate = str_replace('html', 'js', $template);
+
+    if (!file_exists($archivoTemplate)) {
+        $archivoTemplate = "_global/js.twig";
+    }
+
+    return $archivoTemplate;
+}
+
 ?>

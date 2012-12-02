@@ -1,0 +1,52 @@
+# Module: VisitVisitas
+# Document : modules\VisitVisitas\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 02.12.2012 00:09:39
+#
+---
+listados:
+  -
+    title: VisitVisitas
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      Sesion: { title: Sesion, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      TiempoUnix: { title: TiempoUnix, length: '20', align: R, type: integer, total: NO, formula: null, format: null }
+      SegundosVisita: { title: SegundosVisita, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
+      NClicks: { title: NClicks, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
+      NUrlsUnicas: { title: NUrlsUnicas, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
+      Host: { title: Host, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      IpAddress: { title: IpAddress, length: '15', align: L, type: string, total: NO, formula: null, format: null }
+      CodigoPais: { title: CodigoPais, length: '10', align: L, type: string, total: NO, formula: null, format: null }
+      NombrePais: { title: NombrePais, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      CodigoRegion: { title: CodigoRegion, length: '10', align: L, type: string, total: NO, formula: null, format: null }
+      NombreRegion: { title: NombreRegion, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Ciudad: { title: Ciudad, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      CodigoPostal: { title: CodigoPostal, length: '10', align: L, type: string, total: NO, formula: null, format: null }
+      Latitud: { title: Latitud, length: false, align: R, type: integer, total: NO, formula: null, format: null }
+      Longitud: { title: Longitud, length: false, align: R, type: integer, total: NO, formula: null, format: null }
+      ISP: { title: ISP, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Organizacion: { title: Organizacion, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      UrlOrigen: { title: UrlOrigen, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      q: { title: q, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Browser: { title: Browser, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      BrowserVersion: { title: BrowserVersion, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Platform: { title: Platform, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      UserAgent: { title: UserAgent, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      IsMobile: { title: IsMobile, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      IsRobot: { title: IsRobot, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      IsAol: { title: IsAol, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      AolVersion: { title: AolVersion, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      IsChromeFrame: { title: IsChromeFrame, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      Resolution: { title: Resolution, length: '25', align: L, type: string, total: NO, formula: null, format: null }

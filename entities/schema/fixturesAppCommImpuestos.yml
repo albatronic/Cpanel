@@ -1,0 +1,7 @@
+# VALORES POR DEFECTO PARA LA TABLA IMPUESTOS DE LA APP Comm
+#
+CommImpuestos:
+  1: { IdPais: 68, Nombre: 'Exento', Valor: 0, Recargo: 0, Retencion: 0 }
+  2: { IdPais: 68, Nombre: 'Iva 4% Recargo 0,5%', Valor: 4, Recargo: 0.5, Retencion: 0 }
+  3: { IdPais: 68, Nombre: 'Iva 8% Recargo 1%', Valor: 8, Recargo: 1, Retencion: 0 }
+  4: { IdPais: 68, Nombre: 'Iva 18%', Valor: 18, Recargo: 0, Retencion: 0 }

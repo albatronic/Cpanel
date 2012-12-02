@@ -1,7 +1,8 @@
 <?php
 
 /**
- * DEFINICION DE LAS VARIABLES DE ENTORNO DE CADA COLUMNA
+ * DEFINICION DE LAS VARIABLES DE ENTORNO A NIVEL
+ * DE PROJECTO, APLICACION Y MODULO
  *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @copyright Informática ALBATRONIC, SL
@@ -22,7 +23,6 @@ class VariablesEnv {
         'help' => 'help',
         'permission' => 'permission',
         'editorTiny' => '',
-        'saveTinyAsFile' => true, // Guardar el texto del tiny en un fichero (no en la BD)
     );
 
 }

@@ -1,8 +1,7 @@
 nbproject/
-
 tmp/
-
 log/
-
 docs/
 phpdoc/
+!/docs/
+!/log/

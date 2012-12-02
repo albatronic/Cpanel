@@ -1,0 +1,8 @@
+# VALORES POR DEFECTO PARA BANCOS Y OFICINAS BANCARIAS DE LA APP Comm
+#
+CommBancos:
+  001: {Id: 1, Codigo: 2100, Nombre: 'La Caixa' }
+  002: {Id: 2, Codigo: 2031, Nombre: 'Caja Granada' }
+
+CommBancosOficinas:
+  001: { IdBanco: 1, Codigo: 2497, IdProvincia: 18, Direccion: 'Cmno. de Albolote, 1'}

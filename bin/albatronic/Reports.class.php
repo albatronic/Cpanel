@@ -101,7 +101,7 @@ class Reports extends Controller {
 
     public function makeReportAction() {
 
-        if ($this->values['permisos']['LI']) {
+        if ($this->values['permisos']['L']) {
 
             $this->idReport = $this->request['idReport'];
             $this->breakFields = explode(",", trim($this->reports[$this->idReport]['break_fields']));
@@ -140,7 +140,7 @@ class Reports extends Controller {
         $formatos = array();
 
         if (is_array($this->reports['reports'])) {
-            $perfilUsuario = $_SESSION['USER']['user']['IdPerfil'];
+            $perfilUsuario = $_SESSION['USER']['user']['IDPerfil'];
             foreach ($this->reports['reports'] as $value) {
                 $perfiles = (string) $value['idPerfil'];
                 $arrayPerfiles = explode(',', $perfiles);

@@ -95,7 +95,7 @@ PcaeEmpresas:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 1, caption: Grupo, entity: PcaeGruposEmpresas, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: NO, type: integer, length: '25', min: null, max: null, message: 'Valor Requerido' }
     RazonSocial:
       title: Razón Social
       filter: YES

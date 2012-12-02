@@ -1,0 +1,739 @@
+# VALORES POR DEFECTO PARA LA TABLA DE IDIOMAS DE LA APP Comm
+#
+CommIdiomas:
+  -
+    Id: 1
+    Codigo: "AA"
+    Idioma: "Afar"
+  -
+    Id: 2
+    Codigo: "AB"
+    Idioma: "Abkhaz"
+  -
+    Id: 3
+    Codigo: "AE"
+    Idioma: "Avestan"
+  -
+    Id: 4
+    Codigo: "AF"
+    Idioma: "Afrikaans"
+  -
+    Id: 5
+    Codigo: "AK"
+    Idioma: "Akan"
+  -
+    Id: 6
+    Codigo: "AM"
+    Idioma: "Amharic"
+  -
+    Id: 7
+    Codigo: "AN"
+    Idioma: "Aragonese"
+  -
+    Id: 8
+    Codigo: "AR"
+    Idioma: "Arabic"
+  -
+    Id: 9
+    Codigo: "AS"
+    Idioma: "Assamese"
+  -
+    Id: 10
+    Codigo: "AV"
+    Idioma: "Avaric"
+  -
+    Id: 11
+    Codigo: "AY"
+    Idioma: "Aymara"
+  -
+    Id: 12
+    Codigo: "AZ"
+    Idioma: "Azerbaijani"
+  -
+    Id: 13
+    Codigo: "BA"
+    Idioma: "Bashkir"
+  -
+    Id: 14
+    Codigo: "BE"
+    Idioma: "Belarusian"
+  -
+    Id: 15
+    Codigo: "BG"
+    Idioma: "Bulgarian"
+  -
+    Id: 16
+    Codigo: "BH"
+    Idioma: "Bihari"
+  -
+    Id: 17
+    Codigo: "BI"
+    Idioma: "Bislama"
+  -
+    Id: 18
+    Codigo: "BM"
+    Idioma: "Bambara"
+  -
+    Id: 19
+    Codigo: "BN"
+    Idioma: "Bengali"
+  -
+    Id: 20
+    Codigo: "BO"
+    Idioma: "Tibetan Standard"
+  -
+    Id: 21
+    Codigo: "BR"
+    Idioma: "Breton"
+  -
+    Id: 22
+    Codigo: "BS"
+    Idioma: "Bosnian"
+  -
+    Id: 23
+    Codigo: "CA"
+    Idioma: "Catalan"
+  -
+    Id: 24
+    Codigo: "CE"
+    Idioma: "Chechen"
+  -
+    Id: 25
+    Codigo: "CH"
+    Idioma: "Chamorro"
+  -
+    Id: 26
+    Codigo: "CO"
+    Idioma: "Corsican"
+  -
+    Id: 27
+    Codigo: "CR"
+    Idioma: "Cree"
+  -
+    Id: 28
+    Codigo: "CS"
+    Idioma: "Czech"
+  -
+    Id: 29
+    Codigo: "CU"
+    Idioma: "Old Church Slavonic"
+  -
+    Id: 30
+    Codigo: "CV"
+    Idioma: "Chuvash"
+  -
+    Id: 31
+    Codigo: "CY"
+    Idioma: "Welsh"
+  -
+    Id: 32
+    Codigo: "DA"
+    Idioma: "Danish"
+  -
+    Id: 33
+    Codigo: "DE"
+    Idioma: "German"
+  -
+    Id: 34
+    Codigo: "DV"
+    Idioma: "Divehi"
+  -
+    Id: 35
+    Codigo: "DZ"
+    Idioma: "Dzongkha"
+  -
+    Id: 36
+    Codigo: "EE"
+    Idioma: "Ewe"
+  -
+    Id: 37
+    Codigo: "EL"
+    Idioma: "Greek"
+  -
+    Id: 38
+    Codigo: "EN"
+    Idioma: "English"
+  -
+    Id: 39
+    Codigo: "EO"
+    Idioma: "Esperanto"
+  -
+    Id: 40
+    Codigo: "ES"
+    Idioma: "Spanish"
+  -
+    Id: 41
+    Codigo: "ET"
+    Idioma: "Estonian"
+  -
+    Id: 42
+    Codigo: "EU"
+    Idioma: "Basque"
+  -
+    Id: 43
+    Codigo: "FA"
+    Idioma: "Persian"
+  -
+    Id: 44
+    Codigo: "FF"
+    Idioma: "Fula"
+  -
+    Id: 45
+    Codigo: "FI"
+    Idioma: "Finnish"
+  -
+    Id: 46
+    Codigo: "FJ"
+    Idioma: "Fijian"
+  -
+    Id: 47
+    Codigo: "FO"
+    Idioma: "Faroese"
+  -
+    Id: 48
+    Codigo: "FR"
+    Idioma: "French"
+  -
+    Id: 49
+    Codigo: "FY"
+    Idioma: "Western Frisian"
+  -
+    Id: 50
+    Codigo: "GA"
+    Idioma: "Irish"
+  -
+    Id: 51
+    Codigo: "GD"
+    Idioma: "Scottish Gaelic"
+  -
+    Id: 52
+    Codigo: "GL"
+    Idioma: "Galician"
+  -
+    Id: 53
+    Codigo: "GN"
+    Idioma: "Guaraní"
+  -
+    Id: 54
+    Codigo: "GU"
+    Idioma: "Gujarati"
+  -
+    Id: 55
+    Codigo: "GV"
+    Idioma: "Manx"
+  -
+    Id: 56
+    Codigo: "HA"
+    Idioma: "Hausa"
+  -
+    Id: 57
+    Codigo: "HE"
+    Idioma: "Hebrew"
+  -
+    Id: 58
+    Codigo: "HI"
+    Idioma: "Hindi"
+  -
+    Id: 59
+    Codigo: "HO"
+    Idioma: "Hiri Motu"
+  -
+    Id: 60
+    Codigo: "HR"
+    Idioma: "Croatian"
+  -
+    Id: 61
+    Codigo: "HT"
+    Idioma: "Haitian"
+  -
+    Id: 62
+    Codigo: "HU"
+    Idioma: "Hungarian"
+  -
+    Id: 63
+    Codigo: "HY"
+    Idioma: "Armenian"
+  -
+    Id: 64
+    Codigo: "HZ"
+    Idioma: "Herero"
+  -
+    Id: 65
+    Codigo: "IA"
+    Idioma: "Interlingua"
+  -
+    Id: 66
+    Codigo: "ID"
+    Idioma: "Indonesian"
+  -
+    Id: 67
+    Codigo: "IE"
+    Idioma: "Interlingue"
+  -
+    Id: 68
+    Codigo: "IG"
+    Idioma: "Igbo"
+  -
+    Id: 69
+    Codigo: "II"
+    Idioma: "Nuosu"
+  -
+    Id: 70
+    Codigo: "IK"
+    Idioma: "Inupiaq"
+  -
+    Id: 71
+    Codigo: "IO"
+    Idioma: "Ido"
+  -
+    Id: 72
+    Codigo: "IS"
+    Idioma: "Icelandic"
+  -
+    Id: 73
+    Codigo: "IT"
+    Idioma: "Italian"
+  -
+    Id: 74
+    Codigo: "IU"
+    Idioma: "Inuktitut"
+  -
+    Id: 75
+    Codigo: "JA"
+    Idioma: "Japanese"
+  -
+    Id: 76
+    Codigo: "JV"
+    Idioma: "Javanese"
+  -
+    Id: 77
+    Codigo: "KA"
+    Idioma: "Georgian"
+  -
+    Id: 78
+    Codigo: "KG"
+    Idioma: "Kongo"
+  -
+    Id: 79
+    Codigo: "KI"
+    Idioma: "Kikuyu"
+  -
+    Id: 80
+    Codigo: "KJ"
+    Idioma: "Kwanyama"
+  -
+    Id: 81
+    Codigo: "KK"
+    Idioma: "Kazakh"
+  -
+    Id: 82
+    Codigo: "KL"
+    Idioma: "Kalaallisut"
+  -
+    Id: 83
+    Codigo: "KM"
+    Idioma: "Khmer"
+  -
+    Id: 84
+    Codigo: "KN"
+    Idioma: "Kannada"
+  -
+    Id: 85
+    Codigo: "KO"
+    Idioma: "Korean"
+  -
+    Id: 86
+    Codigo: "KR"
+    Idioma: "Kanuri"
+  -
+    Id: 87
+    Codigo: "KS"
+    Idioma: "Kashmiri"
+  -
+    Id: 88
+    Codigo: "KU"
+    Idioma: "Kurdish"
+  -
+    Id: 89
+    Codigo: "KV"
+    Idioma: "Komi"
+  -
+    Id: 90
+    Codigo: "KW"
+    Idioma: "Cornish"
+  -
+    Id: 91
+    Codigo: "KY"
+    Idioma: "Kirghiz"
+  -
+    Id: 92
+    Codigo: "LA"
+    Idioma: "Latin"
+  -
+    Id: 93
+    Codigo: "LB"
+    Idioma: "Luxembourgish"
+  -
+    Id: 94
+    Codigo: "LG"
+    Idioma: "Luganda"
+  -
+    Id: 95
+    Codigo: "LI"
+    Idioma: "Limburgish"
+  -
+    Id: 96
+    Codigo: "LN"
+    Idioma: "Lingala"
+  -
+    Id: 97
+    Codigo: "LO"
+    Idioma: "Lao"
+  -
+    Id: 98
+    Codigo: "LT"
+    Idioma: "Lithuanian"
+  -
+    Id: 99
+    Codigo: "LU"
+    Idioma: "Luba  -Katanga"
+  -
+    Id: 100
+    Codigo: "LV"
+    Idioma: "Latvian"
+  -
+    Id: 101
+    Codigo: "MG"
+    Idioma: "Malagasy"
+  -
+    Id: 102
+    Codigo: "MH"
+    Idioma: "Marshallese"
+  -
+    Id: 103
+    Codigo: "MI"
+    Idioma: "Māori"
+  -
+    Id: 104
+    Codigo: "MK"
+    Idioma: "Macedonian"
+  -
+    Id: 105
+    Codigo: "ML"
+    Idioma: "Malayalam"
+  -
+    Id: 106
+    Codigo: "MN"
+    Idioma: "Mongolian"
+  -
+    Id: 107
+    Codigo: "MR"
+    Idioma: "Marathi"
+  -
+    Id: 108
+    Codigo: "MS"
+    Idioma: "Malay"
+  -
+    Id: 109
+    Codigo: "MT"
+    Idioma: "Maltese"
+  -
+    Id: 110
+    Codigo: "MY"
+    Idioma: "Burmese"
+  -
+    Id: 111
+    Codigo: "NA"
+    Idioma: "Nauru"
+  -
+    Id: 112
+    Codigo: "NB"
+    Idioma: "Norwegian Bokmål"
+  -
+    Id: 113
+    Codigo: "ND"
+    Idioma: "North Ndebele"
+  -
+    Id: 114
+    Codigo: "NE"
+    Idioma: "Nepali"
+  -
+    Id: 115
+    Codigo: "NG"
+    Idioma: "Ndonga"
+  -
+    Id: 116
+    Codigo: "NL"
+    Idioma: "Dutch"
+  -
+    Id: 117
+    Codigo: "NN"
+    Idioma: "Norwegian Nynorsk"
+  -
+    Id: 118
+    Codigo: "NO"
+    Idioma: "Norwegian"
+  -
+    Id: 119
+    Codigo: "NR"
+    Idioma: "South Ndebele"
+  -
+    Id: 120
+    Codigo: "NV"
+    Idioma: "Navajo"
+  -
+    Id: 121
+    Codigo: "NY"
+    Idioma: "Chichewa"
+  -
+    Id: 122
+    Codigo: "OC"
+    Idioma: "Occitan"
+  -
+    Id: 123
+    Codigo: "OJ"
+    Idioma: "Ojibwe"
+  -
+    Id: 124
+    Codigo: "OM"
+    Idioma: "Oromo"
+  -
+    Id: 125
+    Codigo: "OR"
+    Idioma: "Oriya"
+  -
+    Id: 126
+    Codigo: "OS"
+    Idioma: "Ossetian"
+  -
+    Id: 127
+    Codigo: "PA"
+    Idioma: "Panjabi"
+  -
+    Id: 128
+    Codigo: "PI"
+    Idioma: "Pāli"
+  -
+    Id: 129
+    Codigo: "PL"
+    Idioma: "Polish"
+  -
+    Id: 130
+    Codigo: "PS"
+    Idioma: "Pashto"
+  -
+    Id: 131
+    Codigo: "PT"
+    Idioma: "Portuguese"
+  -
+    Id: 132
+    Codigo: "QU"
+    Idioma: "Quechua"
+  -
+    Id: 133
+    Codigo: "RM"
+    Idioma: "Romansh"
+  -
+    Id: 134
+    Codigo: "RN"
+    Idioma: "Kirundi"
+  -
+    Id: 135
+    Codigo: "RO"
+    Idioma: "Romanian"
+  -
+    Id: 136
+    Codigo: "RU"
+    Idioma: "Russian"
+  -
+    Id: 137
+    Codigo: "RW"
+    Idioma: "Kinyarwanda"
+  -
+    Id: 138
+    Codigo: "SA"
+    Idioma: "Sanskrit"
+  -
+    Id: 139
+    Codigo: "SC"
+    Idioma: "Sardinian"
+  -
+    Id: 140
+    Codigo: "SD"
+    Idioma: "Sindhi"
+  -
+    Id: 141
+    Codigo: "SE"
+    Idioma: "Northern Sami"
+  -
+    Id: 142
+    Codigo: "SG"
+    Idioma: "Sango"
+  -
+    Id: 143
+    Codigo: "SI"
+    Idioma: "Sinhala"
+  -
+    Id: 144
+    Codigo: "SK"
+    Idioma: "Slovak"
+  -
+    Id: 145
+    Codigo: "SL"
+    Idioma: "Slovene"
+  -
+    Id: 146
+    Codigo: "SM"
+    Idioma: "Samoan"
+  -
+    Id: 147
+    Codigo: "SN"
+    Idioma: "Shona"
+  -
+    Id: 148
+    Codigo: "SO"
+    Idioma: "Somali"
+  -
+    Id: 149
+    Codigo: "SQ"
+    Idioma: "Albanian"
+  -
+    Id: 150
+    Codigo: "SR"
+    Idioma: "Serbian"
+  -
+    Id: 151
+    Codigo: "SS"
+    Idioma: "Swati"
+  -
+    Id: 152
+    Codigo: "ST"
+    Idioma: "Southern Sotho"
+  -
+    Id: 153
+    Codigo: "SU"
+    Idioma: "Sundanese"
+  -
+    Id: 154
+    Codigo: "SV"
+    Idioma: "Swedish"
+  -
+    Id: 155
+    Codigo: "SW"
+    Idioma: "Swahili"
+  -
+    Id: 156
+    Codigo: "TA"
+    Idioma: "Tamil"
+  -
+    Id: 157
+    Codigo: "TE"
+    Idioma: "Telugu"
+  -
+    Id: 158
+    Codigo: "TG"
+    Idioma: "Tajik"
+  -
+    Id: 159
+    Codigo: "TH"
+    Idioma: "Thai"
+  -
+    Id: 160
+    Codigo: "TI"
+    Idioma: "Tigrinya"
+  -
+    Id: 161
+    Codigo: "TK"
+    Idioma: "Turkmen"
+  -
+    Id: 162
+    Codigo: "TL"
+    Idioma: "Tagalog"
+  -
+    Id: 163
+    Codigo: "TN"
+    Idioma: "Tswana"
+  -
+    Id: 164
+    Codigo: "TO"
+    Idioma: "Tonga"
+  -
+    Id: 165
+    Codigo: "TR"
+    Idioma: "Turkish"
+  -
+    Id: 166
+    Codigo: "TS"
+    Idioma: "Tsonga"
+  -
+    Id: 167
+    Codigo: "TT"
+    Idioma: "Tatar"
+  -
+    Id: 168
+    Codigo: "TW"
+    Idioma: "Twi"
+  -
+    Id: 169
+    Codigo: "TY"
+    Idioma: "Tahitian"
+  -
+    Id: 170
+    Codigo: "UG"
+    Idioma: "Uighur"
+  -
+    Id: 171
+    Codigo: "UK"
+    Idioma: "Ukrainian"
+  -
+    Id: 172
+    Codigo: "UR"
+    Idioma: "Urdu"
+  -
+    Id: 173
+    Codigo: "UZ"
+    Idioma: "Uzbek"
+  -
+    Id: 174
+    Codigo: "VE"
+    Idioma: "Venda"
+  -
+    Id: 175
+    Codigo: "VI"
+    Idioma: "VietIdiomase"
+  -
+    Id: 176
+    Codigo: "VO"
+    Idioma: "Volapük"
+  -
+    Id: 177
+    Codigo: "WA"
+    Idioma: "Walloon"
+  -
+    Id: 178
+    Codigo: "WO"
+    Idioma: "Wolof"
+  -
+    Id: 179
+    Codigo: "XH"
+    Idioma: "Xhosa"
+  -
+    Id: 180
+    Codigo: "YI"
+    Idioma: "Yiddish"
+  -
+    Id: 181
+    Codigo: "YO"
+    Idioma: "Yoruba"
+  -
+    Id: 182
+    Codigo: "ZA"
+    Idioma: "Zhuang"
+  -
+    Id: 183
+    Codigo: "ZH"
+    Idioma: "Chinese"
+  -
+    Id: 184
+    Codigo: "ZU"
+    Idioma: "Zulu"

@@ -30,7 +30,6 @@ class Documents {
     protected $tipos = array(
         'documents',
         'images',
-        'galeria',
     );
 
     public function __construct($entidad, $id, $tipo = 'documents') {

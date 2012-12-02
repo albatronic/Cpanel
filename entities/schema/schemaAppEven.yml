@@ -1,0 +1,12 @@
+# SCHEMA DE LA APP Even
+#
+EvenEventos:
+  comment: Programación de eventos
+  columns:
+    Entidad :   { type: string(50), notnull: true, index: index }
+    IdEntidad:  { type: integer(11), notnull: true, index: index }
+    Fecha:      { type: date, notnull: true, default: '0000-00-00' }
+    HoraInicio: { type: time, notnull: true, default: '00:00:00' }
+    HoraFin:    { type: time, notnull: true, default: '00:00:00' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:

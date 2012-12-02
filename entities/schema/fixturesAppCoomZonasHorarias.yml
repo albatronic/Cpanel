@@ -1,0 +1,988 @@
+# VALORES POR DEFECTO PARA LA TABLA ZONASHORARIAS DE LA APP Comm
+#
+# ESTAN INCLUIDAS TODAS LAS ZONAS HORARIAS MUNDIALES
+CommZonasHorarias:
+  -
+    Id: 1
+    Zona: "Europe/Andorra"
+  -
+    Id: 2
+    Zona: "Asia/Dubai"
+  -
+    Id: 3
+    Zona: "Asia/Kabul"
+  -
+    Id: 4
+    Zona: "America/Antigua"
+  -
+    Id: 5
+    Zona: "America/Anguilla"
+  -
+    Id: 6
+    Zona: "Europe/Tirane"
+  -
+    Id: 7
+    Zona: "Asia/Yerevan"
+  -
+    Id: 8
+    Zona: "Africa/Luanda"
+  -
+    Id: 9
+    Zona: "Pacific/Pago_Pago"
+  -
+    Id: 10
+    Zona: "Europe/Vienna"
+  -
+    Id: 11
+    Zona: "America/Aruba"
+  -
+    Id: 12
+    Zona: "Europe/Mariehamn"
+  -
+    Id: 13
+    Zona: "Asia/Baku"
+  -
+    Id: 14
+    Zona: "Europe/Sarajevo"
+  -
+    Id: 15
+    Zona: "America/Barbados"
+  -
+    Id: 16
+    Zona: "Asia/Dhaka"
+  -
+    Id: 17
+    Zona: "Europe/Brussels"
+  -
+    Id: 18
+    Zona: "Africa/Ouagadougou"
+  -
+    Id: 19
+    Zona: "Europe/Sofia"
+  -
+    Id: 20
+    Zona: "Asia/Bahrain"
+  -
+    Id: 21
+    Zona: "Africa/Bujumbura"
+  -
+    Id: 22
+    Zona: "Africa/Porto  -Novo"
+  -
+    Id: 23
+    Zona: "America/St_Barthelemy"
+  -
+    Id: 24
+    Zona: "Atlantic/Bermuda"
+  -
+    Id: 25
+    Zona: "Asia/Brunei"
+  -
+    Id: 26
+    Zona: "America/La_Paz"
+  -
+    Id: 27
+    Zona: "America/Kralendijk"
+  -
+    Id: 28
+    Zona: "America/Nassau"
+  -
+    Id: 29
+    Zona: "Asia/Thimphu"
+  -
+    Id: 30
+    Zona: "Africa/Gaborone"
+  -
+    Id: 31
+    Zona: "Europe/Minsk"
+  -
+    Id: 32
+    Zona: "America/Belize"
+  -
+    Id: 33
+    Zona: "Indian/Cocos"
+  -
+    Id: 34
+    Zona: "Africa/Bangui"
+  -
+    Id: 35
+    Zona: "Africa/Brazzaville"
+  -
+    Id: 36
+    Zona: "Europe/Zurich"
+  -
+    Id: 37
+    Zona: "Africa/Abidjan"
+  -
+    Id: 38
+    Zona: "Pacific/Rarotonga"
+  -
+    Id: 39
+    Zona: "Africa/Douala"
+  -
+    Id: 40
+    Zona: "America/Bogota"
+  -
+    Id: 41
+    Zona: "America/Costa_Rica"
+  -
+    Id: 42
+    Zona: "America/Havana"
+  -
+    Id: 43
+    Zona: "Atlantic/Cape_Verde"
+  -
+    Id: 44
+    Zona: "America/Curacao"
+  -
+    Id: 45
+    Zona: "Indian/Christmas"
+  -
+    Id: 46
+    Zona: "Asia/Nicosia"
+  -
+    Id: 47
+    Zona: "Europe/Prague"
+  -
+    Id: 48
+    Zona: "Europe/Berlin"
+  -
+    Id: 49
+    Zona: "Africa/Djibouti"
+  -
+    Id: 50
+    Zona: "Europe/Copenhagen"
+  -
+    Id: 51
+    Zona: "America/Dominica"
+  -
+    Id: 52
+    Zona: "America/Santo_Domingo"
+  -
+    Id: 53
+    Zona: "Africa/Algiers"
+  -
+    Id: 54
+    Zona: "Europe/Tallinn"
+  -
+    Id: 55
+    Zona: "Africa/Cairo"
+  -
+    Id: 56
+    Zona: "Africa/El_Aaiun"
+  -
+    Id: 57
+    Zona: "Africa/Asmara"
+  -
+    Id: 58
+    Zona: "Africa/Addis_Ababa"
+  -
+    Id: 59
+    Zona: "Europe/Helsinki"
+  -
+    Id: 60
+    Zona: "Pacific/Fiji"
+  -
+    Id: 61
+    Zona: "Atlantic/Stanley"
+  -
+    Id: 62
+    Zona: "Atlantic/Faroe"
+  -
+    Id: 63
+    Zona: "Europe/Paris"
+  -
+    Id: 64
+    Zona: "Africa/Libreville"
+  -
+    Id: 65
+    Zona: "Europe/London"
+  -
+    Id: 66
+    Zona: "America/Grenada"
+  -
+    Id: 67
+    Zona: "Asia/Tbilisi"
+  -
+    Id: 68
+    Zona: "America/Cayenne"
+  -
+    Id: 69
+    Zona: "Europe/Guernsey"
+  -
+    Id: 70
+    Zona: "Africa/Accra"
+  -
+    Id: 71
+    Zona: "Europe/Gibraltar"
+  -
+    Id: 72
+    Zona: "Africa/Banjul"
+  -
+    Id: 73
+    Zona: "Africa/Conakry"
+  -
+    Id: 74
+    Zona: "America/Guadeloupe"
+  -
+    Id: 75
+    Zona: "Africa/Malabo"
+  -
+    Id: 76
+    Zona: "Europe/Athens"
+  -
+    Id: 77
+    Zona: "Atlantic/South_Georgia"
+  -
+    Id: 78
+    Zona: "America/Guatemala"
+  -
+    Id: 79
+    Zona: "Pacific/Guam"
+  -
+    Id: 80
+    Zona: "Africa/Bissau"
+  -
+    Id: 81
+    Zona: "America/Guyana"
+  -
+    Id: 82
+    Zona: "Asia/Hong_Kong"
+  -
+    Id: 83
+    Zona: "America/Tegucigalpa"
+  -
+    Id: 84
+    Zona: "Europe/Zagreb"
+  -
+    Id: 85
+    Zona: "America/Port  -au  -Prince"
+  -
+    Id: 86
+    Zona: "Europe/Budapest"
+  -
+    Id: 87
+    Zona: "Europe/Dublin"
+  -
+    Id: 88
+    Zona: "Asia/Jerusalem"
+  -
+    Id: 89
+    Zona: "Europe/Isle_of_Man"
+  -
+    Id: 90
+    Zona: "Asia/Kolkata"
+  -
+    Id: 91
+    Zona: "Indian/Chagos"
+  -
+    Id: 92
+    Zona: "Asia/Baghdad"
+  -
+    Id: 93
+    Zona: "Asia/Tehran"
+  -
+    Id: 94
+    Zona: "Atlantic/Reykjavik"
+  -
+    Id: 95
+    Zona: "Europe/Rome"
+  -
+    Id: 96
+    Zona: "Europe/Jersey"
+  -
+    Id: 97
+    Zona: "America/Jamaica"
+  -
+    Id: 98
+    Zona: "Asia/Amman"
+  -
+    Id: 99
+    Zona: "Asia/Tokyo"
+  -
+    Id: 100
+    Zona: "Africa/Nairobi"
+  -
+    Id: 101
+    Zona: "Asia/Bishkek"
+  -
+    Id: 102
+    Zona: "Asia/Phnom_Penh"
+  -
+    Id: 103
+    Zona: "Indian/Comoro"
+  -
+    Id: 104
+    Zona: "America/St_Kitts"
+  -
+    Id: 105
+    Zona: "Asia/Pyongyang"
+  -
+    Id: 106
+    Zona: "Asia/Seoul"
+  -
+    Id: 107
+    Zona: "Asia/Kuwait"
+  -
+    Id: 108
+    Zona: "America/Cayman"
+  -
+    Id: 109
+    Zona: "Asia/Vientiane"
+  -
+    Id: 110
+    Zona: "Asia/Beirut"
+  -
+    Id: 111
+    Zona: "America/St_Lucia"
+  -
+    Id: 112
+    Zona: "Europe/Vaduz"
+  -
+    Id: 113
+    Zona: "Asia/Colombo"
+  -
+    Id: 114
+    Zona: "Africa/Monrovia"
+  -
+    Id: 115
+    Zona: "Africa/Maseru"
+  -
+    Id: 116
+    Zona: "Europe/Vilnius"
+  -
+    Id: 117
+    Zona: "Europe/Luxembourg"
+  -
+    Id: 118
+    Zona: "Europe/Riga"
+  -
+    Id: 119
+    Zona: "Africa/Tripoli"
+  -
+    Id: 120
+    Zona: "Africa/Casablanca"
+  -
+    Id: 121
+    Zona: "Europe/Monaco"
+  -
+    Id: 122
+    Zona: "Europe/Chisinau"
+  -
+    Id: 123
+    Zona: "Europe/Podgorica"
+  -
+    Id: 124
+    Zona: "America/Marigot"
+  -
+    Id: 125
+    Zona: "Indian/Antananarivo"
+  -
+    Id: 126
+    Zona: "Europe/Skopje"
+  -
+    Id: 127
+    Zona: "Africa/Bamako"
+  -
+    Id: 128
+    Zona: "Asia/Rangoon"
+  -
+    Id: 129
+    Zona: "Asia/Macau"
+  -
+    Id: 130
+    Zona: "Pacific/Saipan"
+  -
+    Id: 131
+    Zona: "America/Martinique"
+  -
+    Id: 132
+    Zona: "Africa/Nouakchott"
+  -
+    Id: 133
+    Zona: "America/Montserrat"
+  -
+    Id: 134
+    Zona: "Europe/Malta"
+  -
+    Id: 135
+    Zona: "Indian/Mauritius"
+  -
+    Id: 136
+    Zona: "Indian/Maldives"
+  -
+    Id: 137
+    Zona: "Africa/Blantyre"
+  -
+    Id: 138
+    Zona: "Africa/Maputo"
+  -
+    Id: 139
+    Zona: "Africa/Windhoek"
+  -
+    Id: 140
+    Zona: "Pacific/Noumea"
+  -
+    Id: 141
+    Zona: "Africa/Niamey"
+  -
+    Id: 142
+    Zona: "Pacific/Norfolk"
+  -
+    Id: 143
+    Zona: "Africa/Lagos"
+  -
+    Id: 144
+    Zona: "America/Managua"
+  -
+    Id: 145
+    Zona: "Europe/Amsterdam"
+  -
+    Id: 146
+    Zona: "Europe/Oslo"
+  -
+    Id: 147
+    Zona: "Asia/Kathmandu"
+  -
+    Id: 148
+    Zona: "Pacific/Nauru"
+  -
+    Id: 149
+    Zona: "Pacific/Niue"
+  -
+    Id: 150
+    Zona: "Asia/Muscat"
+  -
+    Id: 151
+    Zona: "America/Panama"
+  -
+    Id: 152
+    Zona: "America/Lima"
+  -
+    Id: 153
+    Zona: "Pacific/Port_Moresby"
+  -
+    Id: 154
+    Zona: "Asia/Manila"
+  -
+    Id: 155
+    Zona: "Asia/Karachi"
+  -
+    Id: 156
+    Zona: "Europe/Warsaw"
+  -
+    Id: 157
+    Zona: "America/Miquelon"
+  -
+    Id: 158
+    Zona: "Pacific/Pitcairn"
+  -
+    Id: 159
+    Zona: "America/Puerto_Rico"
+  -
+    Id: 160
+    Zona: "Pacific/Palau"
+  -
+    Id: 161
+    Zona: "America/Asuncion"
+  -
+    Id: 162
+    Zona: "Asia/Qatar"
+  -
+    Id: 163
+    Zona: "Indian/Reunion"
+  -
+    Id: 164
+    Zona: "Europe/Bucharest"
+  -
+    Id: 165
+    Zona: "Europe/Belgrade"
+  -
+    Id: 166
+    Zona: "Africa/Kigali"
+  -
+    Id: 167
+    Zona: "Asia/Riyadh"
+  -
+    Id: 168
+    Zona: "Pacific/Guadalcanal"
+  -
+    Id: 169
+    Zona: "Indian/Mahe"
+  -
+    Id: 170
+    Zona: "Africa/Khartoum"
+  -
+    Id: 171
+    Zona: "Europe/Stockholm"
+  -
+    Id: 172
+    Zona: "Asia/Singapore"
+  -
+    Id: 173
+    Zona: "Atlantic/St_Helena"
+  -
+    Id: 174
+    Zona: "Europe/Ljubljana"
+  -
+    Id: 175
+    Zona: "Arctic/Longyearbyen"
+  -
+    Id: 176
+    Zona: "Europe/Bratislava"
+  -
+    Id: 177
+    Zona: "Africa/Freetown"
+  -
+    Id: 178
+    Zona: "Europe/San_Marino"
+  -
+    Id: 179
+    Zona: "Africa/Dakar"
+  -
+    Id: 180
+    Zona: "Africa/Mogadishu"
+  -
+    Id: 181
+    Zona: "America/Paramaribo"
+  -
+    Id: 182
+    Zona: "Africa/Juba"
+  -
+    Id: 183
+    Zona: "Africa/Sao_Tome"
+  -
+    Id: 184
+    Zona: "America/El_Salvador"
+  -
+    Id: 185
+    Zona: "America/Lower_Princes"
+  -
+    Id: 186
+    Zona: "Asia/Damascus"
+  -
+    Id: 187
+    Zona: "Africa/Mbabane"
+  -
+    Id: 188
+    Zona: "America/Grand_Turk"
+  -
+    Id: 189
+    Zona: "Africa/Ndjamena"
+  -
+    Id: 190
+    Zona: "Indian/Kerguelen"
+  -
+    Id: 191
+    Zona: "Africa/Lome"
+  -
+    Id: 192
+    Zona: "Asia/Bangkok"
+  -
+    Id: 193
+    Zona: "Asia/Dushanbe"
+  -
+    Id: 194
+    Zona: "Pacific/Fakaofo"
+  -
+    Id: 195
+    Zona: "Asia/Dili"
+  -
+    Id: 196
+    Zona: "Asia/Ashgabat"
+  -
+    Id: 197
+    Zona: "Africa/Tunis"
+  -
+    Id: 198
+    Zona: "Pacific/Tongatapu"
+  -
+    Id: 199
+    Zona: "Europe/Istanbul"
+  -
+    Id: 200
+    Zona: "America/Port_of_Spain"
+  -
+    Id: 201
+    Zona: "Pacific/Funafuti"
+  -
+    Id: 202
+    Zona: "Asia/Taipei"
+  -
+    Id: 203
+    Zona: "Africa/Dar_es_Salaam"
+  -
+    Id: 204
+    Zona: "Africa/Kampala"
+  -
+    Id: 205
+    Zona: "America/Montevideo"
+  -
+    Id: 206
+    Zona: "Europe/Vatican"
+  -
+    Id: 207
+    Zona: "America/St_Vincent"
+  -
+    Id: 208
+    Zona: "America/Caracas"
+  -
+    Id: 209
+    Zona: "America/Tortola"
+  -
+    Id: 210
+    Zona: "America/St_Thomas"
+  -
+    Id: 211
+    Zona: "Asia/Ho_Chi_Minh"
+  -
+    Id: 212
+    Zona: "Pacific/Efate"
+  -
+    Id: 213
+    Zona: "Pacific/Wallis"
+  -
+    Id: 214
+    Zona: "Pacific/Apia"
+  -
+    Id: 215
+    Zona: "Asia/Aden"
+  -
+    Id: 216
+    Zona: "Indian/Mayotte"
+  -
+    Id: 217
+    Zona: "Africa/Johannesburg"
+  -
+    Id: 218
+    Zona: "Africa/Lusaka"
+  -
+    Id: 219
+    Zona: "Africa/Harare"
+  -
+    Id: 220
+    Zona: "Antarctica/South_Pole"
+  -
+    Id: 221
+    Zona: "Pacific/Chuuk"
+  -
+    Id: 222
+    Zona: "Pacific/Wake"
+  -
+    Id: 223
+    Zona: "America/Argentina/Buenos_Aires"
+  -
+    Id: 224
+    Zona: "Australia/Sydney"
+  -
+    Id: 225
+    Zona: "Australia/Darwin"
+  -
+    Id: 226
+    Zona: "Australia/Brisbane"
+  -
+    Id: 227
+    Zona: "Australia/Adelaide"
+  -
+    Id: 228
+    Zona: "Australia/Hobart"
+  -
+    Id: 229
+    Zona: "Australia/Melbourne"
+  -
+    Id: 230
+    Zona: "Australia/Perth"
+  -
+    Id: 231
+    Zona: "America/Rio_Branco"
+  -
+    Id: 232
+    Zona: "America/Maceio"
+  -
+    Id: 233
+    Zona: "America/Sao_Paulo"
+  -
+    Id: 234
+    Zona: "America/Manaus"
+  -
+    Id: 235
+    Zona: "America/Bahia"
+  -
+    Id: 236
+    Zona: "America/Fortaleza"
+  -
+    Id: 237
+    Zona: "America/Campo_Grande"
+  -
+    Id: 238
+    Zona: "America/Belem"
+  -
+    Id: 239
+    Zona: "America/Cuiaba"
+  -
+    Id: 240
+    Zona: "America/Recife"
+  -
+    Id: 241
+    Zona: "America/Porto_Velho"
+  -
+    Id: 242
+    Zona: "America/Boa_Vista"
+  -
+    Id: 243
+    Zona: "America/Araguaina"
+  -
+    Id: 244
+    Zona: "America/Edmonton"
+  -
+    Id: 245
+    Zona: "America/Vancouver"
+  -
+    Id: 246
+    Zona: "America/Winnipeg"
+  -
+    Id: 247
+    Zona: "America/Halifax"
+  -
+    Id: 248
+    Zona: "America/St_Johns"
+  -
+    Id: 249
+    Zona: "America/Yellowknife"
+  -
+    Id: 250
+    Zona: "America/Rankin_Inlet"
+  -
+    Id: 251
+    Zona: "America/Toronto"
+  -
+    Id: 252
+    Zona: "America/Montreal"
+  -
+    Id: 253
+    Zona: "America/Regina"
+  -
+    Id: 254
+    Zona: "America/Whitehorse"
+  -
+    Id: 255
+    Zona: "Africa/Kinshasa"
+  -
+    Id: 256
+    Zona: "Africa/Lubumbashi"
+  -
+    Id: 257
+    Zona: "America/Santiago"
+  -
+    Id: 258
+    Zona: "Asia/Shanghai"
+  -
+    Id: 259
+    Zona: "Asia/Harbin"
+  -
+    Id: 260
+    Zona: "Asia/Chongqing"
+  -
+    Id: 261
+    Zona: "Asia/Urumqi"
+  -
+    Id: 262
+    Zona: "America/Guayaquil"
+  -
+    Id: 263
+    Zona: "Europe/Madrid"
+  -
+    Id: 264
+    Zona: "America/Thule"
+  -
+    Id: 265
+    Zona: "America/Godthab"
+  -
+    Id: 266
+    Zona: "Asia/Pontianak"
+  -
+    Id: 267
+    Zona: "Asia/Makassar"
+  -
+    Id: 268
+    Zona: "Asia/Jakarta"
+  -
+    Id: 269
+    Zona: "Asia/Jayapura"
+  -
+    Id: 270
+    Zona: "Pacific/Tarawa"
+  -
+    Id: 271
+    Zona: "Asia/Almaty"
+  -
+    Id: 272
+    Zona: "Asia/Qyzylorda"
+  -
+    Id: 273
+    Zona: "Asia/Aqtobe"
+  -
+    Id: 274
+    Zona: "Asia/Aqtau"
+  -
+    Id: 275
+    Zona: "Asia/Oral"
+  -
+    Id: 276
+    Zona: "Pacific/Majuro"
+  -
+    Id: 277
+    Zona: "Asia/Choibalsan"
+  -
+    Id: 278
+    Zona: "America/Mexico_City"
+  -
+    Id: 279
+    Zona: "America/Tijuana"
+  -
+    Id: 280
+    Zona: "America/Mazatlan"
+  -
+    Id: 281
+    Zona: "America/Chihuahua"
+  -
+    Id: 282
+    Zona: "America/Merida"
+  -
+    Id: 283
+    Zona: "America/Monterrey"
+  -
+    Id: 284
+    Zona: "America/Cancun"
+  -
+    Id: 285
+    Zona: "America/Hermosillo"
+  -
+    Id: 286
+    Zona: "America/Matamoros"
+  -
+    Id: 287
+    Zona: "Asia/Kuala_Lumpur"
+  -
+    Id: 288
+    Zona: "Asia/Kuching"
+  -
+    Id: 289
+    Zona: "Pacific/Auckland"
+  -
+    Id: 290
+    Zona: "Pacific/Marquesas"
+  -
+    Id: 291
+    Zona: "Asia/Gaza"
+  -
+    Id: 292
+    Zona: "Europe/Lisbon"
+  -
+    Id: 293
+    Zona: "Europe/Volgograd"
+  -
+    Id: 294
+    Zona: "Asia/Irkutsk"
+  -
+    Id: 295
+    Zona: "Asia/Novokuznetsk"
+  -
+    Id: 296
+    Zona: "Asia/Novosibirsk"
+  -
+    Id: 297
+    Zona: "Asia/Vladivostok"
+  -
+    Id: 298
+    Zona: "Europe/Moscow"
+  -
+    Id: 299
+    Zona: "Europe/Samara"
+  -
+    Id: 300
+    Zona: "Asia/Yekaterinburg"
+  -
+    Id: 301
+    Zona: "Asia/Anadyr"
+  -
+    Id: 302
+    Zona: "Asia/Krasnoyarsk"
+  -
+    Id: 303
+    Zona: "Europe/Kaliningrad"
+  -
+    Id: 304
+    Zona: "Asia/Kamchatka"
+  -
+    Id: 305
+    Zona: "Asia/Omsk"
+  -
+    Id: 306
+    Zona: "Asia/Magadan"
+  -
+    Id: 307
+    Zona: "Asia/Yakutsk"
+  -
+    Id: 308
+    Zona: "Asia/Sakhalin"
+  -
+    Id: 309
+    Zona: "Europe/Kiev"
+  -
+    Id: 310
+    Zona: "Europe/Uzhgorod"
+  -
+    Id: 311
+    Zona: "Europe/Zaporozhye"
+  -
+    Id: 312
+    Zona: "Europe/Simferopol"
+  -
+    Id: 313
+    Zona: "America/Chicago"
+  -
+    Id: 314
+    Zona: "America/Anchorage"
+  -
+    Id: 315
+    Zona: "America/Phoenix"
+  -
+    Id: 316
+    Zona: "America/Los_Angeles"
+  -
+    Id: 317
+    Zona: "America/Denver"
+  -
+    Id: 318
+    Zona: "America/New_York"
+  -
+    Id: 319
+    Zona: "Pacific/Honolulu"
+  -
+    Id: 320
+    Zona: "America/Indiana/Indianapolis"
+  -
+    Id: 321
+    Zona: "Asia/Tashkent"
+  -
+    Id: 322
+    Zona: "Asia/Samarkand"
+  -
+    Id: 323
+    Zona: "Pacific/Galapagos"
+  -
+    Id: 324
+    Zona: "Africa/Ceuta"
+  -
+    Id: 325
+    Zona: "Atlantic/Canary"
+  -
+    Id: 326
+    Zona: "Pacific/Chatham"
+  -
+    Id: 327
+    Zona: "Atlantic/Madeira"
+  -
+    Id: 328
+    Zona: "Atlantic/Azores"

@@ -1,4 +1,0 @@
-<?php include '../Cpanel/entities/schema/fixturesAppEnl.yml'; echoln('');?>
-<?php include '../Cpanel/entities/schema/fixturesAppPcae.yml'; echoln('');?>
-<?php include '../Cpanel/entities/schema/fixturesAppComm.yml'; echoln('');?>
-<?php include '../Cpanel/entities/schema/fixturesAppGcon.yml'; echoln('');?>

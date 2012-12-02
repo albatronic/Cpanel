@@ -1,25 +1,59 @@
-CpanAplicaciones:
-  Index: { CodigoApp: Index, NombreApp: Index }
-  Pcae : { CodigoApp: Pcae,  NombreApp: Gestión PCAE}
+# VALORES POR DEFECTO PARA LAS TABLAS DE LA APP Pcae
+#
+# SE DEFINE UNA EMPRESA CON DOS PROYECTOS Y LA APP CPANEL PARA QUE A PARTIR
+# DE AHI, EL SUPER ADMINISTRADOR PUEDA IR CREANDO NUEVAS EMPRESAS Y PROYECTOS
+#
+PcaeGruposEmpresas:
+  1: { Id: 1, Descripcion: 'Grupo Ártico Estudio' }
+  2: { Id: 2, Descripcion: 'Grupo Regantes' }
+  3: { Id: 3, Descripcion: 'Grupo Brisa' }
+  4: { Id: 4, Descripcion: 'Grupo Galápago' }
+  
+PcaeEmpresas:
+  1: { Id: 1, IdGrupo: 1, RazonSocial: 'Ártico Estudio, SL', IdPais: 68, IdProvincia: 18}
+  2: { Id: 2, IdGrupo: 2, RazonSocial: 'Comunidad de Regantes Virgen de la Salud', IdPais: 68, IdProvincia: 18}
+  3: { Id: 3, IdGrupo: 3, RazonSocial: 'Brisa', IdPais: 68, IdProvincia: 18}
+  4: { Id: 4, IdGrupo: 4, RazonSocial: 'Galápago', IdPais: 68, IdProvincia: 18}
+  
+PcaeProyectos:
+  1: { Id: 1, IdEmpresa: 1, Proyecto: 'Ártico Web Empresa'}  
+  2: { Id: 2, IdEmpresa: 2, Proyecto: 'Web Regantes'}  
+  3: { Id: 3, IdEmpresa: 3, Proyecto: 'Tienda Online Brisa'}  
+  4: { Id: 4, IdEmpresa: 4, Proyecto: 'Tienda Online Galápago'}  
+  
+PcaeApps:
+  1: { Id: 1, Aplicacion: 'Panel de Control', Url: 'http://localhost/Cpanel' }
+  2: { Id: 2, Aplicacion: 'Erp', Url: 'http://localhost/Erp' }
 
-CpanModulos:
-  Pcae1: { CodigoApp: Pcae, NombreModulo: Pcae,         Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Pcae, Funcionalidades: 'AC' }
-  Pcae2: { CodigoApp: Pcae, NombreModulo: PcaeApps,     Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Aplicaciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
-  Pcae3: { CodigoApp: Pcae, NombreModulo: PcaeGruposEmpresas, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Grupos de Empresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
-  Pcae4: { CodigoApp: Pcae, NombreModulo: PcaeEmpresas, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Empresas y Proyectos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
-  Pcae5: { CodigoApp: Pcae, NombreModulo: PcaeUsuarios, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
-  Pcae6: { CodigoApp: Pcae, NombreModulo: PcaeProyectosApps, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Proyectos y Apps, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+PcaeProyectosApps:
+  1: { IdProyecto: 1, IdApp: 1, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: pcae, Password: pcae, Database: pcae }
+  2: { IdProyecto: 2, IdApp: 1, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: regantes, Password: regante, Database: regantes }
+  3: { IdProyecto: 3, IdApp: 1, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: brisa, Password: brisa, Database: brisa }
+  4: { IdProyecto: 3, IdApp: 2, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: brisa, Password: brisa, Database: brisa }
+  5: { IdProyecto: 4, IdApp: 1, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: galapago, Password: galapago, Database: galapago }
+  6: { IdProyecto: 4, IdApp: 2, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: galapago, Password: galapago, Database: galapago }
 
-  Index1: { CodigoApp: Index, NombreModulo: Index,           Nivel: 0, BelongsTo: 0,    Publish: 0, Titulo: Index, Funcionalidades: 'AC,VW' }
-  Index2: { CodigoApp: Index, NombreModulo: IndexContenidosFijos, Nivel: 1, BelongsTo: Index, Publish: 1, Titulo: Gestión de Contenidos Fijos, Funcionalidades: AC }
+PcaePerfiles:
+  1: { Id: 1, Perfil: Super }
+  2: { Id: 2, Perfil: Adm }
+  3: { Id: 3, Perfil: Acceso }
 
-CpanPermisos:
-  Pcae1: { IdPerfil: 1, NombreModulo: Pcae, Funcionalidades: 'AC,VW' }
-  Pcae2: { IdPerfil: 1, NombreModulo: PcaeApps, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Pcae3: { IdPerfil: 1, NombreModulo: PcaeGruposEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Pcae4: { IdPerfil: 1, NombreModulo: PcaeEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Pcae5: { IdPerfil: 1, NombreModulo: PcaeUsuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Pcae6: { IdPerfil: 1, NombreModulo: PcaeProyectosApps, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+PcaeUsuarios:
+  1: { Id: 1, Nombre: Super, Apellidos: Super, IdPais: 68, IdProvincia: 18, IdMunicipio: 2747, EMail: info@articoestudio.com, Password: '<?php echo(md5('1234verano'));?>'}
+  2: { Id: 2, Nombre: adm, Apellidos: Regantes, IdPais: 68, IdProvincia: 18, IdMunicipio: 2747, EMail: info@regante.com, Password: '<?php echo(md5('1234verano'));?>'}
+  3: { Id: 3, Nombre: adm, Apellidos: Brisa, IdPais: 68, IdProvincia: 18, IdMunicipio: 2747, EMail: info@brisa.com, Password: '<?php echo(md5('1234verano'));?>'}
+  4: { Id: 4, Nombre: adm, Apellidos: Galapago, IdPais: 68, IdProvincia: 18, IdMunicipio: 2747, EMail: info@galapago.com, Password: '<?php echo(md5('1234verano'));?>'}
 
-  Index1: { IdPerfil: 1, NombreModulo: Index, Funcionalidades: 'AC,VW' }
-  Index2: { IdPerfil: 1, NombreModulo: IndexContenidosFijos, Funcionalidades: 'AC,UP'}
+PcaeEmpresasUsuarios:
+  1: { IdEmpresa: 1, IdUsuario: 1, IdPerfil: 1 }
+  2: { IdEmpresa: 2, IdUsuario: 2, IdPerfil: 2 }
+  3: { IdEmpresa: 3, IdUsuario: 3, IdPerfil: 2 }
+  4: { IdEmpresa: 4, IdUsuario: 4, IdPerfil: 2 }
+  
+PcaePermisos:
+  1: { IdUsuario: 1, IdEmpresa: 1, IdProyecto: 1, IdApp: 1 }
+  2: { IdUsuario: 2, IdEmpresa: 2, IdProyecto: 2, IdApp: 1 }
+  3: { IdUsuario: 3, IdEmpresa: 3, IdProyecto: 3, IdApp: 1 }
+  4: { IdUsuario: 3, IdEmpresa: 3, IdProyecto: 3, IdApp: 2 } 
+  5: { IdUsuario: 4, IdEmpresa: 4, IdProyecto: 4, IdApp: 1 }
+  6: { IdUsuario: 4, IdEmpresa: 4, IdProyecto: 4, IdApp: 2 } 

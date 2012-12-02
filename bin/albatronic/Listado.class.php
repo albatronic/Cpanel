@@ -177,12 +177,8 @@ class Listado {
     public function makeQuery($aditionalFilter = '') {
         //Recorro las columnsSelected del filter para ver
         //qué columnas se han seleccionado y construir el filtro
-
-        // Las tablas involucradas las meto en un array para controlar
-        // que no se repitan en la clausa 'FROM'
         $filtro = '';
-        $tablas = array();
-        $tablas[$this->form->getDataBaseName() . "." . $this->form->getTable()] = $this->form->getDataBaseName() . "." . $this->form->getTable();
+        $tablas = $this->form->getDataBaseName() . "." . $this->form->getTable();
         foreach ($this->filter['columnsSelected'] as $key => $value) {
             if ($this->filter['valuesSelected'][$key] != '') {
                 if ($filtro)
@@ -200,7 +196,7 @@ class Listado {
                             //a la lista de tablas
                             $entidadReferenciada = new $this->filter['aditional'][$key]['entity'] ( );
                             $tablaReferenciada = $entidadReferenciada->getDataBaseName() . "." . $entidadReferenciada->getTableName();
-                            $tablas[$tablaReferenciada] = $tablaReferenciada;
+                            $tablas .= ", " . $tablaReferenciada;
                             //Construir la parte del where para el join
                             $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $this->filter['columnsSelected'][$key] . "=" . $tablaReferenciada . "." . $entidadReferenciada->getPrimaryKeyName() . ")";
                             //Construir el filtro de la columna
@@ -258,24 +254,16 @@ class Listado {
             }
         }
 
+
         if ($filtro == '')
             $filtro = '(1)';
 
         if ($aditionalFilter != '')
             $filtro .= " AND (" . $aditionalFilter . ")";
 
-        $filtro .= " AND ({$this->form->getDataBaseName()}.{$this->form->getTable()}.Deleted = '0')";
-
-        // Transformo el array de tablas en un string
-        $listaTablas = "";
-        foreach ($tablas as $key => $value) {
-            if ($listaTablas != '')
-                $listaTablas .= ", ";
-            $listaTablas .= $key;
-        }
         $arrayQuery = array(
             "SELECT" => $this->form->getDataBaseName() . "." . $this->form->getTable() . ".*", // . $this->form->getPrimaryKey(),
-            "FROM" => $listaTablas,
+            "FROM" => $tablas,
             "WHERE" => "({$filtro})",
             "ORDER BY" => $this->filter['orderBy'],
                 //"ORDER BY" => $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $this->filter['orderBy'],
@@ -353,7 +341,7 @@ class Listado {
     /**
      * Genera un archivo pdf con el listado
      * @param array $parametros Array con los parámetros de configuración del listado
-     * @param string $aditionalFilter Expresion/es booleana de filtro adicional
+     * @param string $aditionalFilter
      * @return string $archivo El nombre completo (con la ruta) del archivo pdf generado
      */
     public function getPdf($parametros, $aditionalFilter = '') {
@@ -482,8 +470,8 @@ class Listado {
 
             $parametrosMetodo = substr($parametrosMetodo, 0, -1);
 
-            $configLinea[$key] = array(
-                'field' => $key,
+            $configLinea[$value['field']] = array(
+                'field' => $value['field'],
                 'params' => $parametrosMetodo,
                 'caracteres' => $caracteres,
                 'ancho' => $anchoColumna,
@@ -609,9 +597,9 @@ class Listado {
         $pdf->Cell(0, 4, "Total Registros: " . $nRegistros);
 
         // Leyenda a pie de la última página
-        if ($parametros['legend_bottom']) {
+        if ($parametros['legend_text']) {
             $pdf->SetY(-25);
-            $pdf->Write(4, $parametros['legend_bottom']);
+            $pdf->Write(4, $parametros['legend_text']);
         }
 
         $archivo = Archivo::getTemporalFileName();
@@ -1039,10 +1027,9 @@ class listadoPDF extends FPDF {
         $this->Cell(0, 5, $empresa->getRazonSocial(), 0, 1, "R");
         $this->SetFont('Arial', '', 8);
         $this->Cell(0, 5, $sucursal->getNombre(), 0, 1, "R");
-        */
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(0, 5, $this->opciones['title'], 0, 1, "C");
-
+         */
 
         // Pintar la leyenda del filtro en la primera pagina
         if ($this->page == 1) {

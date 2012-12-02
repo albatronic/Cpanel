@@ -1,4 +1,4 @@
-# FIXTURES DE LA APP COMM. DATOS COMUNES
+# MODULOS DE LA APP COMM. DATOS COMUNES
 CpanAplicaciones:
   Comm : { CodigoApp: Comm,  NombreApp: Datos Comunes}
 

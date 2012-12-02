@@ -1,6 +1,23 @@
-## OldBrowser/config.yml
+## YAML Template.
 ---
 OldBrowser:
   includesHead:
-    twigCss: OldBrowser/css.html.twig
-    twigJs: OldBrowser/js.html.twig
+    lapTopPublic:
+      twigCss: OldBrowser/css.html.twig
+      twigJs: OldBrowser/js.html.twig
+      
+    lapTopPrivate:
+      twigCss: 
+      twigJs: 
+
+    mobilePublic:
+      twigCss: 
+      twigJs: 
+      
+    mobilePrivate:
+      twigCss: 
+      twigJs: 
+  
+  #Variables Web
+  includesVarWeb: 
+

@@ -1,0 +1,42 @@
+{#
+  Module: VisitVisitas
+  Document : modules\VisitVisitas\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 02.12.2012 00:09:39
+#}
+
+{{ macro.input(atributos.Sesion,'field_title','text',values.controller ~ '[Sesion]',values.controller ~ '_Sesion',datos.Sesion,'50','CampoTextoLargo','1') }}
+{{ macro.input(atributos.TiempoUnix,'field_title','text',values.controller ~ '[TiempoUnix]',values.controller ~ '_TiempoUnix',datos.TiempoUnix,'20','CampoImporte','2') }}
+{{ macro.input(atributos.SegundosVisita,'field_title','text',values.controller ~ '[SegundosVisita]',values.controller ~ '_SegundosVisita',datos.SegundosVisita,'4','CampoUnidades','3') }}
+{{ macro.input(atributos.NClicks,'field_title','text',values.controller ~ '[NClicks]',values.controller ~ '_NClicks',datos.NClicks,'4','CampoUnidades','4') }}
+{{ macro.input(atributos.NUrlsUnicas,'field_title','text',values.controller ~ '[NUrlsUnicas]',values.controller ~ '_NUrlsUnicas',datos.NUrlsUnicas,'4','CampoUnidades','5') }}
+{{ macro.input(atributos.Host,'field_title','text',values.controller ~ '[Host]',values.controller ~ '_Host',datos.Host,'255','CampoTextoLargo','6') }}
+{{ macro.input(atributos.IpAddress,'field_title','text',values.controller ~ '[IpAddress]',values.controller ~ '_IpAddress',datos.IpAddress,'15','CampoTextoCorto','7') }}
+{{ macro.input(atributos.CodigoPais,'field_title','text',values.controller ~ '[CodigoPais]',values.controller ~ '_CodigoPais',datos.CodigoPais,'10','CampoTextoCorto','8') }}
+{{ macro.input(atributos.NombrePais,'field_title','text',values.controller ~ '[NombrePais]',values.controller ~ '_NombrePais',datos.NombrePais,'50','CampoTextoLargo','9') }}
+{{ macro.input(atributos.CodigoRegion,'field_title','text',values.controller ~ '[CodigoRegion]',values.controller ~ '_CodigoRegion',datos.CodigoRegion,'10','CampoTextoCorto','10') }}
+{{ macro.input(atributos.NombreRegion,'field_title','text',values.controller ~ '[NombreRegion]',values.controller ~ '_NombreRegion',datos.NombreRegion,'50','CampoTextoLargo','11') }}
+{{ macro.input(atributos.Ciudad,'field_title','text',values.controller ~ '[Ciudad]',values.controller ~ '_Ciudad',datos.Ciudad,'50','CampoTextoLargo','12') }}
+{{ macro.input(atributos.CodigoPostal,'field_title','text',values.controller ~ '[CodigoPostal]',values.controller ~ '_CodigoPostal',datos.CodigoPostal,'10','CampoTextoCorto','13') }}
+{{ macro.input(atributos.Latitud,'field_title','text',values.controller ~ '[Latitud]',values.controller ~ '_Latitud',datos.Latitud,'10','','14') }}
+{{ macro.input(atributos.Longitud,'field_title','text',values.controller ~ '[Longitud]',values.controller ~ '_Longitud',datos.Longitud,'10','','15') }}
+{{ macro.input(atributos.ISP,'field_title','text',values.controller ~ '[ISP]',values.controller ~ '_ISP',datos.ISP,'255','CampoTextoLargo','16') }}
+{{ macro.input(atributos.Organizacion,'field_title','text',values.controller ~ '[Organizacion]',values.controller ~ '_Organizacion',datos.Organizacion,'255','CampoTextoLargo','17') }}
+{{ macro.input(atributos.UrlOrigen,'field_title','text',values.controller ~ '[UrlOrigen]',values.controller ~ '_UrlOrigen',datos.UrlOrigen,'255','CampoTextoLargo','18') }}
+{{ macro.input(atributos.q,'field_title','text',values.controller ~ '[q]',values.controller ~ '_q',datos.q,'255','CampoTextoLargo','19') }}
+{{ macro.input(atributos.Browser,'field_title','text',values.controller ~ '[Browser]',values.controller ~ '_Browser',datos.Browser,'255','CampoTextoLargo','20') }}
+{{ macro.input(atributos.BrowserVersion,'field_title','text',values.controller ~ '[BrowserVersion]',values.controller ~ '_BrowserVersion',datos.BrowserVersion,'255','CampoTextoLargo','21') }}
+{{ macro.input(atributos.Platform,'field_title','text',values.controller ~ '[Platform]',values.controller ~ '_Platform',datos.Platform,'255','CampoTextoLargo','22') }}
+{{ macro.input(atributos.UserAgent,'field_title','text',values.controller ~ '[UserAgent]',values.controller ~ '_UserAgent',datos.UserAgent,'255','CampoTextoLargo','23') }}
+{{ macro.select(atributos.IsMobile,'field_title',values.controller ~ '[IsMobile]',values.controller ~ '_IsMobile',none,datos.IsMobile.IsMobile,datos.IsMobile.fetchAll(),'chzn-select','24')}}
+{{ macro.select(atributos.IsRobot,'field_title',values.controller ~ '[IsRobot]',values.controller ~ '_IsRobot',none,datos.IsRobot.IsRobot,datos.IsRobot.fetchAll(),'chzn-select','25')}}
+{{ macro.select(atributos.IsAol,'field_title',values.controller ~ '[IsAol]',values.controller ~ '_IsAol',none,datos.IsAol.IsAol,datos.IsAol.fetchAll(),'chzn-select','26')}}
+{{ macro.input(atributos.AolVersion,'field_title','text',values.controller ~ '[AolVersion]',values.controller ~ '_AolVersion',datos.AolVersion,'255','CampoTextoLargo','27') }}
+{{ macro.select(atributos.IsChromeFrame,'field_title',values.controller ~ '[IsChromeFrame]',values.controller ~ '_IsChromeFrame',none,datos.IsChromeFrame.IsChromeFrame,datos.IsChromeFrame.fetchAll(),'chzn-select','28')}}
+{{ macro.input(atributos.Resolution,'field_title','text',values.controller ~ '[Resolution]',values.controller ~ '_Resolution',datos.Resolution,'25','CampoTextoCorto','29') }}
+
+{# include '_global/fieldsComunes.html.twig' #}
+
+{{ macro.foco(values.controller ~ '_Sesion') }}

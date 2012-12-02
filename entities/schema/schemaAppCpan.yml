@@ -1,4 +1,4 @@
-# Cpanel/entities/schema.yml
+# ESQUEMA DE LA APP Cpan.
 
 CpanAplicaciones:
   engine:
@@ -124,19 +124,3 @@ CpanEtiquetas:
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdModulo : { ForeignEntity: CpanModulos, ForeignId: Id }
-
-# VISITIAS
-#id
-
-
-# ITINERARIO VISITAS
-#id
-#idVisita
-#sesion
-#idUsuario null
-#entidad
-#idEntidad
-##fecha y hora en formato unix
-##diferencia formato unix
-#diferencia en formato text
-

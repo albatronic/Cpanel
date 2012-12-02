@@ -1,294 +1,225 @@
 <?php
-
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 02.10.2012 23:15:30
+ * @date 06.11.2012 23:55:15
  */
 
 /**
  * @orm:Entity(CpanDocs)
  */
 class CpanDocsEntity extends EntityComunes {
+	/**
+	 * @orm GeneratedValue
+	 * @orm Id
+	 * @var integer
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $Id;
+	/**
+	 * @var string
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $Entity;
+	/**
+	 * @var integer
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $IdEntity;
+	/**
+	 * @var entities\TiposDocs
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $Type;
+	/**
+	 * @var entities\ValoresSN
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $IsThumbnail = '0';
+	/**
+	 * @var string
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $PathName;
+	/**
+	 * @var string
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $Name;
+	/**
+	 * @var string
+	 */
+	protected $Extension;
+	/**
+	 * @var string
+	 */
+	protected $Title;
+	/**
+	 * @var entities\ValoresSN
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $ShowCaption = '0';
+	/**
+	 * @var string
+	 */
+	protected $MimeType;
+	/**
+	 * @var integer
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $Size = '0';
+	/**
+	 * @var integer
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $Height = '0';
+	/**
+	 * @var integer
+	 * @assert NotBlank(groups="CpanDocs")
+	 */
+	protected $Width = '0';
+	/**
+	 * Nombre de la conexion a la BD
+	 * @var string
+	 */
+	protected $_conectionName = '';
+	/**
+	 * Nombre de la tabla física
+	 * @var string
+	 */
+	protected $_tableName = 'CpanDocs';
+	/**
+	 * Nombre de la PrimaryKey
+	 * @var string
+	 */
+	protected $_primaryKeyName = 'Id';
+	/**
+	 * Relacion de entidades que dependen de esta
+	 * @var string
+	 */
+	protected $_parentEntities = array(
+		);
+	/**
+	 * Relacion de entidades de las que esta depende
+	 * @var string
+	 */
+	protected $_childEntities = array(
+			'TiposDocs',
+			'ValoresSN',
+			'ValoresPrivacy',
+			'ValoresDchaIzq',
+			'ValoresChangeFreq',
+			'RequestMethods',
+			'RequestOrigins',
+			'CpanAplicaciones',
+		);
+	/**
+	 * GETTERS Y SETTERS
+	 */
+	public function setId($Id){
+		$this->Id = $Id;
+	}
+	public function getId(){
+		return $this->Id;
+	}
 
-    /**
-     * @orm GeneratedValue
-     * @orm Id
-     * @var integer
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $Id;
+	public function setEntity($Entity){
+		$this->Entity = trim($Entity);
+	}
+	public function getEntity(){
+		return $this->Entity;
+	}
 
-    /**
-     * @var string
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $Entity;
+	public function setIdEntity($IdEntity){
+		$this->IdEntity = $IdEntity;
+	}
+	public function getIdEntity(){
+		return $this->IdEntity;
+	}
 
-    /**
-     * @var integer
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $IdEntity;
+	public function setType($Type){
+		$this->Type = trim($Type);
+	}
+	public function getType(){
+		if (!($this->Type instanceof TiposDocs))
+			$this->Type = new TiposDocs($this->Type);
+		return $this->Type;
+	}
 
-    /**
-     * @var entities\TiposDocs
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $Type;
+	public function setIsThumbnail($IsThumbnail){
+		$this->IsThumbnail = $IsThumbnail;
+	}
+	public function getIsThumbnail(){
+		if (!($this->IsThumbnail instanceof ValoresSN))
+			$this->IsThumbnail = new ValoresSN($this->IsThumbnail);
+		return $this->IsThumbnail;
+	}
 
-    /**
-     * @var entities\ValoresSN
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $IsThumbnail = '0';
+	public function setPathName($PathName){
+		$this->PathName = trim($PathName);
+	}
+	public function getPathName(){
+		return $this->PathName;
+	}
 
-    /**
-     * @var string
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $PathName = '';
+	public function setName($Name){
+		$this->Name = trim($Name);
+	}
+	public function getName(){
+		return $this->Name;
+	}
 
-    /**
-     * @var string
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $Name = '';
+	public function setExtension($Extension){
+		$this->Extension = trim($Extension);
+	}
+	public function getExtension(){
+		return $this->Extension;
+	}
 
-    /**
-     * @var string
-     */
-    protected $Extension = '';
+	public function setTitle($Title){
+		$this->Title = trim($Title);
+	}
+	public function getTitle(){
+		return $this->Title;
+	}
 
-    /**
-     * @var string
-     */
-    protected $Title;
+	public function setShowCaption($ShowCaption){
+		$this->ShowCaption = $ShowCaption;
+	}
+	public function getShowCaption(){
+		if (!($this->ShowCaption instanceof ValoresSN))
+			$this->ShowCaption = new ValoresSN($this->ShowCaption);
+		return $this->ShowCaption;
+	}
 
-    /**
-     * @var entities\ValoresSN
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $ShowCaption = '0';
+	public function setMimeType($MimeType){
+		$this->MimeType = trim($MimeType);
+	}
+	public function getMimeType(){
+		return $this->MimeType;
+	}
 
-    /**
-     * @var string
-     */
-    protected $MimeType;
+	public function setSize($Size){
+		$this->Size = $Size;
+	}
+	public function getSize(){
+		return $this->Size;
+	}
 
-    /**
-     * @var integer
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $Size = '0';
+	public function setHeight($Height){
+		$this->Height = $Height;
+	}
+	public function getHeight(){
+		return $this->Height;
+	}
 
-    /**
-     * @var integer
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $Height = '0';
+	public function setWidth($Width){
+		$this->Width = $Width;
+	}
+	public function getWidth(){
+		return $this->Width;
+	}
 
-    /**
-     * @var integer
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $Width = '0';
+} // END class CpanDocs
 
-    /**
-     * @var integer
-     * @assert NotBlank(groups="CpanDocs")
-     */
-    protected $SortOrder = '0';
-
-    /**
-     * Nombre de la conexion a la BD
-     * @var string
-     */
-    protected $_conectionName = '';
-
-    /**
-     * Nombre de la tabla física
-     * @var string
-     */
-    protected $_tableName = 'CpanDocs';
-
-    /**
-     * Nombre de la PrimaryKey
-     * @var string
-     */
-    protected $_primaryKeyName = 'Id';
-
-    /**
-     * Relacion de entidades que dependen de esta
-     * @var string
-     */
-    protected $_parentEntities = array(
-    );
-
-    /**
-     * Relacion de entidades de las que esta depende
-     * @var string
-     */
-    protected $_childEntities = array(
-        'TiposDocs',
-        'ValoresSN',
-        'ValoresPrivacy',
-        'ValoresDchaIzq',
-        'ValoresChangeFreq',
-    );
-
-    /**
-     * GETTERS Y SETTERS
-     */
-    public function setId($Id) {
-        $this->Id = $Id;
-    }
-
-    public function getId() {
-        return $this->Id;
-    }
-
-    public function setEntity($Entity) {
-        $this->Entity = trim($Entity);
-    }
-
-    public function getEntity() {
-        return $this->Entity;
-    }
-
-    public function setIdEntity($IdEntity) {
-        $this->IdEntity = $IdEntity;
-    }
-
-    public function getIdEntity() {
-        return $this->IdEntity;
-    }
-
-    public function setType($Type) {
-        $this->Type = trim($Type);
-    }
-
-    public function getType() {
-        if (!($this->Type instanceof TiposDocs))
-            $this->Type = new TiposDocs($this->Type);
-        return $this->Type;
-    }
-
-    public function setIsThumbnail($IsThumbnail) {
-        $this->IsThumbnail = $IsThumbnail;
-    }
-
-    public function getIsThumbnail() {
-        if (!($this->IsThumbnail instanceof ValoresSN))
-            $this->IsThumbnail = new ValoresSN($this->IsThumbnail);
-        return $this->IsThumbnail;
-    }
-
-    public function setPathName($PathName) {
-        $this->PathName = trim($PathName);
-    }
-
-    public function getPathName() {
-        return $this->PathName;
-    }
-
-    public function setName($Name) {
-        $this->Name = trim($Name);
-    }
-
-    public function getName() {
-        return $this->Name;
-    }
-
-    public function setExtension($Extension) {
-        $this->Extension = trim($Extension);
-    }
-
-    public function getExtension() {
-        return $this->Extension;
-    }
-
-    public function setTitle($Title) {
-        $this->Title = trim($Title);
-    }
-
-    public function getTitle() {
-        return $this->Title;
-    }
-
-    public function setShowCaption($ShowCaption) {
-        $this->ShowCaption = $ShowCaption;
-    }
-
-    public function getShowCaption() {
-        if (!($this->ShowCaption instanceof ValoresSN))
-            $this->ShowCaption = new ValoresSN($this->ShowCaption);
-        return $this->ShowCaption;
-    }
-
-    public function setMimeType($MimeType) {
-        $this->MimeType = trim($MimeType);
-    }
-
-    public function getMimeType() {
-        return $this->MimeType;
-    }
-
-    public function setSize($Size) {
-        $this->Size = $Size;
-    }
-
-    /**
-     * Devuelve un string con el tamaño del documento
-     * expresado en la unidad de medida $unit
-     *
-     * @param string $unit La unidad de medida
-     * @return string Texto con ek tamaño y la unidad de medida
-     */
-    public function getSize($unit = 'kb') {
-
-        switch (strtolower(trim($unit))) {
-            case 'byte':
-                $factor = 1;
-                break;
-            case 'kb':
-                $factor = 1000;
-                break;
-            case 'mb':
-                $factor = 100000;
-                break;
-            default:
-                $factor = 1;
-        }
-
-        return number_format($this->Size / $factor, 2, ',', '.') . "({$unit})";
-    }
-    
-    public function setHeight($Height) {
-        $this->Height = $Height;
-    }
-
-    public function getHeight() {
-        return $this->Height;
-    }
-
-    public function setWidth($Width) {
-        $this->Width = $Width;
-    }
-
-    public function getWidth() {
-        return $this->Width;
-    }
-
-    public function setSortOrder($SortOrder) {
-        $this->SortOrder = $SortOrder;
-    }
-
-    public function getSortOrder() {
-        return $this->SortOrder;
-    }
-
-}
-
-// END class CpanDocs
 ?>

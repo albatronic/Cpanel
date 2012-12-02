@@ -1,0 +1,59 @@
+# VSITAS A LA WEB
+# Esta tabla se alimenta con la información obtenida con el web service:
+# http://api.ip-adress.com/?u=1062c309c5c054edc08fe578ef8f0dd94720c0&h=<host or ip address>
+VisitVisitas:
+  comment: Registro de visitantes de la web
+  columns:
+    Sesion:         { type: string(50), notnull: true }
+    TiempoUnix:     { type: bigint(20), notnull: true, default: 0 }
+    SegundosVisita: { type: integer, notnull: true, default: 0 }
+    NClicks:        { type: integer, notnull: true, default: 0 }
+    NUrlsUnicas:    { type: integer, notnull: true, default: 0 }
+    Host:           { type: string(255), notnull: false }
+    IpAddress:      { type: string(15), notnull: true }
+    CodigoPais:     { type: string(10), notnull: false }
+    NombrePais:     { type: string(50), notnull: false }
+    CodigoRegion:   { type: string(10), notnull: false }
+    NombreRegion:   { type: string(50), notnul: false }
+    Ciudad:         { type: string(50), notnull: false }
+    CodigoPostal:   { type: string(10), notnull: false }
+    Latitud:        { type: float, notnull: false, default: 0 }
+    Longitud:       { type: float, notnull: false, default: 0 }
+    ISP:            { type: string(255), notnull: false }
+    Organizacion:   { type: string(255), notnull: false }
+    UrlOrigen:      { type: string(255), notnull: false }
+    q:              { type: string(255), notnull: false }
+    Browser:        { type: string(255), notnull: false }
+    BrowserVersion: { type: string(255), notnull: false }
+    Platform:       { type: string(255), notnull: false }
+    UserAgent:      { type: string(255), notnull: false }
+    IsMobile:       { type: tinyint(1), notnull: true, default: 0 }
+    IsRobot:        { type: tinyint(1), notnull: true, default: 0 }
+    IsAol:          { type: tinyint(1), notnull: true, default: 0 }
+    AolVersion:     { type: string(255), notnull: false }
+    IsChromeFrame:  { type: tinyint(1), notnull: true, default: 0 }
+    Resolution:     { type: string(25), notnull: false }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    
+# ITINERARIOS VISITAS
+VisitVisitasItinerarios:
+  comment: Itinerarios seguidos por los visitantes de la web
+  columns:
+    IdVisita:       { type: bigint(11), notnull: true, index: index, comment: 'db,VisitVisitas,Id' }
+    IdUsuario:      { type: bigint(11), notnull: true}
+    Entidad:        { type: string(255), notnull: true}
+    IdEntidad:      { type: bigint(11), notnull: true}
+    TiempoUnix:     { type: bigint(20), notnull: true, default: 0 }
+    SegundosVisita: { type: integer, notnull: true, default: 0 }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IdVisita : { ForeignEntity: CpanVisitas, ForeignId: Id }
+
+# TABLA TEMPORAL PARA CONTROLAR LAS VISITAS UNICAS POR URL AMIGABLE
+VisitVisitasTemporal:
+  comment: Tabla temporal para control de visitas unicas por url amigable
+  columns:
+    Sesion:        { type: string(50), notnull: true }
+    IdUrlAmigable: { type: bigint(11), notnull: true }
+    TiempoUnix:    { type: bigint(20), notnull: true, default: 0 }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>

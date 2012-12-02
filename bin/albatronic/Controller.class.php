@@ -208,22 +208,25 @@ class Controller {
                             if ($datos->valida($rules)) {
                                 $this->values['alertas'] = $datos->getAlertas();
                                 if ($datos->save()) {
-                                    $this->gestionUrlMeta($datos);
 
-                                    // Salvar los campos Controller, action, template y parameters
-                                    // del objeto CpanUrlAmigables asociado
-                                    if ($this->request['objetoUrlAmigable']) {
-                                        $arrayUrlAmigable = $this->request['objetoUrlAmigable'];
-                                        $objetoUrl = new CpanUrlAmigables($arrayUrlAmigable['Id']);
-                                        $objetoUrl->setController($arrayUrlAmigable['Controller']);
-                                        $objetoUrl->setAction($arrayUrlAmigable['Action']);
-                                        $objetoUrl->setTemplate($arrayUrlAmigable['Template']);
-                                        $objetoUrl->setParameters($arrayUrlAmigable['Parameters']);
+                                    if ($datos->getUrlTarget() == '') {
+                                        $this->gestionUrlMeta($datos);
 
-                                        if (!$objetoUrl->save())
-                                            $this->values['errores'] = $objetoUrl->getErrores();
+                                        // Salvar los campos Controller, action, template y parameters
+                                        // del objeto CpanUrlAmigables asociado
+                                        if ($this->request['objetoUrlAmigable']) {
+                                            $arrayUrlAmigable = $this->request['objetoUrlAmigable'];
+                                            $objetoUrl = new CpanUrlAmigables($arrayUrlAmigable['Id']);
+                                            $objetoUrl->setController($arrayUrlAmigable['Controller']);
+                                            $objetoUrl->setAction($arrayUrlAmigable['Action']);
+                                            $objetoUrl->setTemplate($arrayUrlAmigable['Template']);
+                                            $objetoUrl->setParameters($arrayUrlAmigable['Parameters']);
 
-                                        unset($objetoUrl);
+                                            if (!$objetoUrl->save())
+                                                $this->values['errores'] = $objetoUrl->getErrores();
+
+                                            unset($objetoUrl);
+                                        }
                                     }
                                 }
 
@@ -313,10 +316,10 @@ class Controller {
                         $this->values['errores'] = $datos->getErrores();
                         $this->values['alertas'] = $datos->getAlertas();
 
-                        //Recargo el objeto para refrescar las propiedas que
+                        //Recargo el objeto para refrescar las propiedades que
                         //hayan podido ser objeto de algun calculo durante el proceso
                         //de guardado y pongo valores por defecto (urlamigable, etc)
-                        if ($lastId) {
+                        if (($lastId) and ($datos->getUrlTarget() == '')) {
                             $datos = new $this->entity($lastId);
                             $this->gestionUrlMeta($datos);
                             $this->values['errores'] = $datos->getErrores();
@@ -865,7 +868,7 @@ class Controller {
         $this->values['varEnvMod'] = $this->varEnvMod;
         if (count($this->values['varEnvMod']) == 0)
             $this->values['errores'][] = "No se han definido las variables de entorno del módulo";
-        
+
         // Variables web del modulo
         if (!isset($_SESSION['VARIABLES']['WebMod'])) {
             $variables = new CpanVariables('Mod', 'Web', $this->entity);
@@ -876,7 +879,7 @@ class Controller {
         $this->values['varWebMod'] = $this->varWebMod;
         if (count($this->values['varWebMod']) == 0)
             $this->values['errores'][] = "No se han definido las variables web del módulo";
-        
+
         // Variables de entorno de la app
         if (!isset($_SESSION['VARIABLES']['EnvApp'])) {
             $variables = new CpanVariables('App', 'Env', $this->app);
@@ -886,7 +889,7 @@ class Controller {
             $this->varEnvApp = $_SESSION['VARIABLES']['EnvApp'];
         $this->values['varEnvApp'] = $this->varEnvApp;
         if (count($this->values['varEnvApp']) == 0)
-            $this->values['errores'][] = "No se han definido las variables de entorno de la App";        
+            $this->values['errores'][] = "No se han definido las variables de entorno de la App";
 
         // Variables web de la app
         if (!isset($_SESSION['VARIABLES']['WebApp'])) {
@@ -898,7 +901,7 @@ class Controller {
         $this->values['varWebApp'] = $this->varWebApp;
         if (count($this->values['varWebApp']) == 0)
             $this->values['errores'][] = "No se han definido las variables web de la App";
-        
+
         unset($variables);
     }
 

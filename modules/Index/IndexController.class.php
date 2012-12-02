@@ -68,7 +68,7 @@ class IndexController extends Controller {
                 'user' => $proyectoApp->getUser(),
                 'password' => $proyectoApp->getPassword(),
                 'database' => $proyectoApp->getDatabase(),
-                );
+            );
             // Carga la cadena de conexión al servidor ftp del proyecto
             $_SESSION['project']['ftp'] = array(
                 'server' => $proyectoApp->getFtpServer(),
@@ -85,14 +85,14 @@ class IndexController extends Controller {
             // el menú en base a su perfil
             $usuario = new CpanUsuarios($_SESSION['USER']['user']['Id']);
             if ($usuario->getStatus()) {
-            $_SESSION['USER']['user']['IdPerfil'] = $usuario->getIdPerfil()->getId();
-            $_SESSION['USER']['menu'] = $usuario->getArrayMenu();
-            } else $this->values['errores'] = 'EL USUARIO NO ESTA REGISTRADO EN ESTA APP';
+                $_SESSION['USER']['user']['IdPerfil'] = $usuario->getIdPerfil()->getId();
+                $_SESSION['USER']['menu'] = $usuario->getArrayMenu();
+            } else
+                $this->values['errores'] = 'EL USUARIO NO ESTA REGISTRADO EN ESTA APP';
             unset($usuario);
 
             // Carga las variables de entorno y web del proyecto
             $this->cargaVariables();
-
         } else {
 
             $aplicacion = $this->request[1];
@@ -127,7 +127,7 @@ class IndexController extends Controller {
                     }
             }
         }
-        
+
         return array(
             'template' => $this->entity . '/index.html.twig',
             'values' => $this->values,
@@ -174,7 +174,6 @@ class IndexController extends Controller {
         } else
             $this->varWebPro = $_SESSION['VARIABLES']['WebPro'];
         $this->values['varWebPro'] = $this->varWebPro;
-
     }
 
     /**

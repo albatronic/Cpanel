@@ -18,7 +18,7 @@ class EntityManager {
      * Fichero de configuracion de conexiones por defecto
      * Es el fichero que se utilizará si no se indica otro en la
      * llamada al constructor.
-     * @var
+     * @var string
      */
     private $file = "config/config.yml";
 
@@ -45,7 +45,7 @@ class EntityManager {
      * Estable la conexion a la base de datos.
      * Abre el fichero de configuracion '$fileConfig', o en su defecto config/config.yml
      * y lee el nodo $conection donde se definen los parametros de conexion.
-     *
+     * 
      * En entorno de poducción los parámetros de conexión se fuerzan a:
      *
      *      host    =   localhost
@@ -69,7 +69,6 @@ class EntityManager {
             $this->password = $conection['password'];
             $this->dataBase = $conection['database'];
             $this->conecta();
-
         } else {
 
             if ($fileConfig == '')

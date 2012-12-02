@@ -1,4 +1,4 @@
-# Fixtures app Gcon. GESTOR DE CONTENIDOS
+# MODULOS DE LA APP Gcon. GESTOR DE CONTENIDOS
 CpanAplicaciones:
   Gcon  : { CodigoApp: Gcon,   NombreApp: Gestor de Contenidos }
 

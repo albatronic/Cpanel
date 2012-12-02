@@ -1,20 +1,19 @@
-# Fixtures app Cpan. GESTOR DEL PANEL DE CONTROL
-CpanAplicaciones:
-  Cpan  : { CodigoApp: Cpan, NombreApp: Gestor del Panel de Control }
-
-CpanModulos:
-  Cpan0: { CodigoApp: Cpan, NombreModulo: Cpan,             Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Gestor del Panel de Control, Funcionalidades: AC }
-  Cpan1: { CodigoApp: Cpan, NombreModulo: CpanDocs,         Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Gestor de Documentos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan2: { CodigoApp: Cpan, NombreModulo: CpanUrlAmigables, Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Gestor de Urls Amigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan3: { CodigoApp: Cpan, NombreModulo: CpanEtiquetas,    Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Gestor de Etiquetas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-
-CpanPermisos:
-  Cpan1: { IdPerfil: 1, NombreModulo: Cpan, Funcionalidades: 'AC,VW' }
-  Cpan2: { IdPerfil: 1, NombreModulo: CpanDocs, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan3: { IdPerfil: 1, NombreModulo: CpanUrlAmigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan4: { IdPerfil: 1, NombreModulo: CpanEtiquetas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-
-  Cpan11: { IdPerfil: 2, NombreModulo: Cpan, Funcionalidades: 'AC,VW' }
-  Cpan12: { IdPerfil: 2, NombreModulo: CpanDocs, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan13: { IdPerfil: 2, NombreModulo: CpanUrlAmigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan14: { IdPerfil: 2, NombreModulo: CpanEtiquetas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+# SECCIONES DE CONTENIDOS Y URLS AMIGABLES POR DEFECTO
+#
+CpanUrlAmigables:
+  1: { UrlFriendly: '/',            Controller: Index,      Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 1 }
+  2: { UrlFriendly: '/error404',    Controller: Error404,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 2 }
+  3: { UrlFriendly: '/oldbrowser',  Controller: OldBrowser, Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 3 }
+  4: { UrlFriendly: '/return',      Controller: Index,      Action: Return, Template: Index, Entity: GconSecciones, IdEntity: 4 }  
+  5: { UrlFriendly: '/logout',      Controller: Index,      Action: Logout, Template: Index, Entity: GconSecciones, IdEntity: 5 }  
+  6: { UrlFriendly: '/aviso-legal', Controller: AvisoLegal, Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 6 }  
+  7: { UrlFriendly: '/olvido',      Controller: Olvido,     Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 7 }  
+  
+GconSecciones:
+  1: { Id: 1, Titulo: Inicio, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: '', LockSlug: 1, UrlFriendly: '/' }
+  2: { Id: 2, Titulo: Error404, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'error404', LockSlug: 1, UrlFriendly: '/error404' }
+  3: { Id: 3, Titulo: OldBrowser, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'oldbrowser', LockSlug: 1, UrlFriendly: '/oldbrowser' }  
+  4: { Id: 4, Titulo: Regresar al portal, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'return', LockSlug: 1, UrlFriendly: '/return' }
+  5: { Id: 5, Titulo: Salir del portal, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'logout', LockSlug: 1, UrlFriendly: '/logout' }
+  6: { Id: 6, Titulo: Aviso legal, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'aviso-legal', LockSlug: 1, UrlFriendly: '/aviso-legal' }
+  7: { Id: 7, Titulo: Olvido, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'olvido', LockSlug: 1, UrlFriendly: '/olvido' }

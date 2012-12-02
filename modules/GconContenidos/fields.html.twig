@@ -28,6 +28,11 @@
 {# macro.input(atributos.NoticiaOrden,'field_title','text',values.controller ~ '[NoticiaOrden]',values.controller ~ '_NoticiaOrden',datos.NoticiaOrden,'11','CampoImporte','18') #}
 {{ macro.input(atributos.EsEvento,'field_title','checkbox',values.controller ~ '[EsEvento]',values.controller ~ '_EsEvento',datos.EsEvento.IDTipo,'255','CampoTextoLargo','12') }}
 
+{% if datos.EsEvento.IDTipo %}
+    {{ macro.fecha(atributos.PublishedAt,'field_title','Evento[Fecha]','Evento_Fecha',datos.ObjetoEvento.Fecha,'19','datepicker',111) }}
+    {{ macro.input(atributos.PublishedAt,'field_title','text','Evento[HoraInicio]','Evento_HoraInicio',datos.ObjetoEvento.HoraInicio,'19','CampoTextoMedio',111) }}
+    {{ macro.input(atributos.PublishedAt,'field_title','text','Evento[HoraFin]','Evento_HoraFin',datos.ObjetoEvento.HoraFin,'19','CampoTextoMedio',111) }}
+{% endif %}
 
 {% include '_global/fieldsComunes.html.twig' %}
 
