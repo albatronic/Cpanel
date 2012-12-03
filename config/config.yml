@@ -22,7 +22,7 @@ config:
     url: http://localhost/Cpanel
     path: /Cpanel
     framework: bin/albatronic/
-    urlParent: http://localhost/articowebempresa
+    urlParent: http://localhost/Pcae
 
   # SEMILLA PARA CONSTRUIR CLAVES MD5
   semillaMD5: verano
