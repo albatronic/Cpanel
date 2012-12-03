@@ -43,7 +43,7 @@ PcaeEmpresas:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Empresas y Proyectos
+  title: Empresas, Proyectos y Apps
   id_video: pcaeempresas
   url_video: null
   feature_list: YES

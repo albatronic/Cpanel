@@ -7,16 +7,31 @@
   date 25.10.2012 19:10:00
 #}
 
-{% extends layout %}
+{% extends '_global/layoutPopup.html.twig' %}
 
 {% block title parent() ~ ' - '  ~ values.titulo %}
 
 {% block content %}
-	{% block filtro %}
-	{% if values.permisos.permisosModulo['CO'] and values.tieneListado %}
-		{% include '_global/filtroGenericoWrapper.html.twig' with {'filter': values.listado.filter} %}
-	{% endif %}
+	<div class='Titulo'>{{ values.titulo }}
+	{% block navegador %}
+
+            {% if action == '' %}
+                {% include '_global/linkNew.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
+            {% endif %}
+
+            {% if action == 'new' %}
+                {% include '_global/linkCreate.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
+                {% include '_global/linkList.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
+            {% endif %}
+
+            {% if action == 'edit' %}
+                {% include '_global/linkSaveDelete.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
+                {% include '_global/linkNew.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
+                {% include '_global/linkList.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
+            {% endif %}
+
 	{% endblock %}
+        </div>
 
 	<div id='div_listado'>
 	{% block listado %}

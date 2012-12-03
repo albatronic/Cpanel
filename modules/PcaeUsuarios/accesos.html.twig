@@ -1,0 +1,19 @@
+{# LISTADO DE EMPRESAS, PROYECTOS Y APPS A LOS QUE TIENE ACCESO EL USUARIO #}
+
+<ul>
+{% for empresa in accesos.empresas %}
+    <h2>{{empresa.empresa}}</h2>
+    ({{empresa.perfil}})
+    <ul>
+        {% for proyecto in empresa.proyectos %}
+            <h3>{{proyecto.proyecto}}</h3>
+            <ul>
+                {% for app in proyecto.apps %}
+                    <h4>{{app.aplicacion}}</h4>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+    <hr />
+{% endfor %}
+</ul>

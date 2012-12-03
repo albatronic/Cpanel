@@ -7,20 +7,39 @@
   date 23.10.2012 01:02:46
 #}
 
-{{ macro.input(atributos.Nombre,'field_title','text',values.controller ~ '[Nombre]',values.controller ~ '_Nombre',datos.Nombre,'50','CampoTextoLargo','1') }}
-{{ macro.input(atributos.Apellidos,'field_title','text',values.controller ~ '[Apellidos]',values.controller ~ '_Apellidos',datos.Apellidos,'50','CampoTextoLargo','2') }}
-{{ macro.input(atributos.DNI,'field_title','text',values.controller ~ '[DNI]',values.controller ~ '_DNI',datos.DNI,'15','CampoTextoCorto','3') }}
-{{ macro.input(atributos.Direccion,'field_title','text',values.controller ~ '[Direccion]',values.controller ~ '_Direccion',datos.Direccion,'100','CampoTextoLargo','4') }}
-{{ macro.input(atributos.IdPais,'field_title','text',values.controller ~ '[IdPais]',values.controller ~ '_IdPais',datos.IdPais.Id,'255','CampoTextoLargo','5','','',['paises','Pais',datos.IdPais.Pais]) }}
-{{ macro.input(atributos.IdProvincia,'field_title','text',values.controller ~ '[IdProvincia]',values.controller ~ '_IdProvincia',datos.IdProvincia.Id,'255','CampoTextoLargo','6','','',['provincias','Provincia',datos.IdProvincia.Provincia,values.controller ~ '_IdPais']) }}
-{{ macro.input(atributos.IdMunicipio,'field_title','text',values.controller ~ '[IdMunicipio]',values.controller ~ '_IdMunicipio',datos.IdMunicipio.Id,'255','CampoTextoLargo','7','','',['municipios','Municipio',datos.IdMunicipio.Municipio,values.controller ~ '_IdProvincia']) }}
-{{ macro.input(atributos.CodigoPostal,'field_title','text',values.controller ~ '[CodigoPostal]',values.controller ~ '_CodigoPostal',datos.CodigoPostal,'10','CampoTextoCorto','8') }}
-{{ macro.input(atributos.Telefono,'field_title','text',values.controller ~ '[Telefono]',values.controller ~ '_Telefono',datos.Telefono,'50','CampoTextoLargo','9') }}
-{{ macro.input(atributos.EMail,'field_title','text',values.controller ~ '[EMail]',values.controller ~ '_EMail',datos.EMail,'100','CampoTextoLargo','10') }}
-{{ macro.input(atributos.Password,'field_title','text',values.controller ~ '[Password]',values.controller ~ '_Password',datos.Password,'100','CampoTextoLargo','11') }}
-{{ macro.input(atributos.NLogin,'field_title','text',values.controller ~ '[NLogin]',values.controller ~ '_NLogin',datos.NLogin,'4','CampoUnidades','12') }}
-{{ macro.fecha(atributos.UltimoLogin,'field_title',values.controller ~ '[UltimoLogin]',values.controller ~ '_UltimoLogin',datos.UltimoLogin,'19','datepicker','13')}}
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-general">General</a></li>
+        {% if datos.Id %}
+            <li class="ui-state-default ui-corner-top"><a href="#tabs-permisos">Permisos de Acceso</a></li>   
+        {% endif %}
+    </ul>
 
-{% include '_global/fieldsComunes.html.twig' %}
+    {# SOLAPA GENERAL #}
+    <div id="tabs-general" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input(atributos.Nombre,'field_title','text',values.controller ~ '[Nombre]',values.controller ~ '_Nombre',datos.Nombre,'50','CampoTextoLargo','1') }}
+        {{ macro.input(atributos.Apellidos,'field_title','text',values.controller ~ '[Apellidos]',values.controller ~ '_Apellidos',datos.Apellidos,'50','CampoTextoLargo','2') }}
+        {{ macro.input(atributos.DNI,'field_title','text',values.controller ~ '[DNI]',values.controller ~ '_DNI',datos.DNI,'15','CampoTextoCorto','3') }}
+        {{ macro.input(atributos.Direccion,'field_title','text',values.controller ~ '[Direccion]',values.controller ~ '_Direccion',datos.Direccion,'100','CampoTextoLargo','4') }}
+        {{ macro.input(atributos.IdPais,'field_title','text',values.controller ~ '[IdPais]',values.controller ~ '_IdPais',datos.IdPais.Id,'255','CampoTextoLargo','5','','',['paises','Pais',datos.IdPais.Pais]) }}
+        {{ macro.input(atributos.IdProvincia,'field_title','text',values.controller ~ '[IdProvincia]',values.controller ~ '_IdProvincia',datos.IdProvincia.Id,'255','CampoTextoLargo','6','','',['provincias','Provincia',datos.IdProvincia.Provincia,values.controller ~ '_IdPais']) }}
+        {{ macro.input(atributos.IdMunicipio,'field_title','text',values.controller ~ '[IdMunicipio]',values.controller ~ '_IdMunicipio',datos.IdMunicipio.Id,'255','CampoTextoLargo','7','','',['municipios','Municipio',datos.IdMunicipio.Municipio,values.controller ~ '_IdProvincia']) }}
+        {{ macro.input(atributos.CodigoPostal,'field_title','text',values.controller ~ '[CodigoPostal]',values.controller ~ '_CodigoPostal',datos.CodigoPostal,'10','CampoTextoCorto','8') }}
+        {{ macro.input(atributos.Telefono,'field_title','text',values.controller ~ '[Telefono]',values.controller ~ '_Telefono',datos.Telefono,'50','CampoTextoLargo','9') }}
+        {{ macro.input(atributos.EMail,'field_title','text',values.controller ~ '[EMail]',values.controller ~ '_EMail',datos.EMail,'100','CampoTextoLargo','10') }}
+        {{ macro.input(atributos.Password,'field_title','text',values.controller ~ '[Password]',values.controller ~ '_Password',datos.Password,'100','CampoTextoLargo','11') }}
+        {{ macro.input(atributos.NLogin,'field_title','text',values.controller ~ '[NLogin]',values.controller ~ '_NLogin',datos.NLogin,'4','CampoUnidades','12') }}
+        {{ macro.fecha(atributos.UltimoLogin,'field_title',values.controller ~ '[UltimoLogin]',values.controller ~ '_UltimoLogin',datos.UltimoLogin,'19','datepicker','13')}}
+        
+        {# include '_global/fieldsComunes.html.twig' #}
+    </div>
+        
+
+    {% if datos.Id %}
+        {# SOLAPA PERMISOS #}
+        <div id="tabs-permisos" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+            {% include 'PcaeUsuarios/accesos.html.twig' with {'accesos' : datos.getArrayAccesos } %}
+        </div>
+    {% endif %}
 
 {{ macro.foco(values.controller ~ '_Nombre') }}

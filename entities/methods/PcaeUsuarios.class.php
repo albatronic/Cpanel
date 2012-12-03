@@ -20,7 +20,18 @@ class PcaeUsuarios extends PcaeUsuariosEntity {
      * @return string
      */
     public function getNombreApellidos() {
-        return $this->getNombre() . " " . $this->getApellidos();
+        return trim($this->getNombre() . " " . $this->getApellidos());
+    }
+
+    /**
+     * Devuelve los apellidos concatenado con el nombre
+     * @return string
+     */
+    public function getApellidosNombre() {
+        $texto = $this->getApellidos() . ", " . $this->getNombre();
+        if ($texto == ", ")
+            $texto = "";
+        return $texto;
     }
 
     /**
@@ -114,7 +125,7 @@ class PcaeUsuarios extends PcaeUsuariosEntity {
 
             $app = new PcaeApps($row['IdApp']);
             $proyectoApp = new PcaeProyectosApps();
-            $keyProyectoApp = $proyectoApp->cargaCondicion("PrimaryKeyMD5","IdProyecto='{$row['IdProyecto']}' AND IdApp='{$row['IdApp']}'");
+            $keyProyectoApp = $proyectoApp->cargaCondicion("PrimaryKeyMD5", "IdProyecto='{$row['IdProyecto']}' AND IdApp='{$row['IdApp']}'");
 
             $accesos['empresas'][$row['IdEmpresa']]['proyectos'][$row['IdProyecto']]['apps'][$row['IdApp']] = array(
                 'aplicacion' => $app->getAplicacion(),
@@ -127,7 +138,7 @@ class PcaeUsuarios extends PcaeUsuariosEntity {
             $proAnt = $row['IdProyecto'];
             $empAnt = $row['IdEmpresa'];
         }
-print_r($accesos);
+
         return $accesos;
     }
 

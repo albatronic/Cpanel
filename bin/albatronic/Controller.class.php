@@ -707,7 +707,7 @@ class Controller {
         }
     }
 
-    private function calculaUrlAmigable($datos) {
+    protected function calculaUrlAmigable($datos) {
 
         $urlPrefix = '';
         $urlAmigable = '';
@@ -831,7 +831,7 @@ class Controller {
         return $array;
     }
 
-    private function calculaMetatagTitle($datos) {
+    protected function calculaMetatagTitle($datos) {
 
         // Obtener el metatagtitle
 
@@ -848,7 +848,7 @@ class Controller {
         return $metatagTitle;
     }
 
-    private function cargaVariables() {
+    protected function cargaVariables() {
 
         // Variables de entorno del proyecto
         if (!isset($_SESSION['VARIABLES']['EnvPro'])) {

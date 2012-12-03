@@ -1,0 +1,55 @@
+{#
+  Module: PcaeEmpresasUsuarios
+  Document : modules\PcaeEmpresasUsuarios\form.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 02.12.2012 19:10:00
+#}
+
+{% extends values.controller ~ '/index.html.twig' %}
+
+{% block listado %}
+<div class='Listado' style="width: 80%; margin-left: 90px;">
+    <table width='100%'>
+        <tr class='Titulos'>
+            <td class='Item'>Usuario</td>
+            <td class='Item'>Perfil</td>
+            <td>&nbsp;</td>
+        </tr>
+
+        <tbody class="Cuerpo">
+            {% for key,objeto in values.listado.data %}
+            <form name="linea{{key}}" action="" method="POST">
+                <input name="controller" value="PcaeEmpresasUsuarios" type="hidden" />
+                <input name="action" id="action" value="edit" type="hidden" />
+                <input name="{{values.controller}}[IdEmpresa]" value="{{ values.linkBy.value }}" type="hidden" />
+                <input name="{{values.controller}}[Id]" value="{{ objeto.Id }}" type="hidden" />
+                <input name="accion" id="accion{{key}}" value="" type="hidden" />
+                <tr class="ItemListado">
+                    <td>
+                        <input name="{{values.controller}}[IdUsuario]" value="{{objeto.IdUsuario.Id}}" id="{{values.controller}}_IdUsuario{{key}}" type="hidden" />
+                        <input value="{{objeto.IdUsuario.ApellidosNombre}}{% if key %} <{{objeto.IdUsuario.EMail}}>{%endif%}" id="Codigo{{key}}" type="text" maxlength="25" style="width:360px;"
+                        onkeyup="autoCompletar('Codigo{{key}}','{{values.controller}}_IdUsuario{{key}}','{{values.controller}}_Descripcion{{key}}','usuarios','','');"/>
+                    </td>
+                    <td>
+                        {{ macro.select({'visible':'1','updatable':'1'},'field_title',values.controller ~ '[IdPerfil]',values.controller ~ '_IdPerfil',none,objeto.IdPerfil.Id,objeto.IdPerfil.fetchAll('Perfil',0),'select','2')}}
+                    </td>
+                    <td align="center">
+                        {% if objeto.Id > 0 %}
+                        <input type="image" src="{{app.path}}/images/botonsave.png" onclick="$('#accion{{key}}').val('G');" alt="Guardar" title="Guardar Linea" />
+                        <input type="image" src="{{app.path}}/images/papelera.gif" onclick="if (!confirm('Desea eliminar la línea?')) {return false;} else {$('#accion{{key}}').val('B');}" alt="Borrar" title="Borrar Linea" />
+                        {% else %}
+                        <input type="image" src="{{app.path}}/images/nuevo.png" onclick="$('#action').val('new');" alt="Nuevo" title="Crear Linea" />
+                        {% endif %}
+                    </td>
+                </tr>
+            </form>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+{{ macro.foco('Codigo0') }}
+{% endblock %}

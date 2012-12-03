@@ -7,7 +7,6 @@
   date 25.10.2012 19:10:00
 #}
 
-{{ macro.select(atributos.IdProyecto,'field_title',values.controller ~ '[IdProyecto]',values.controller ~ '_IdProyecto',none,datos.IdProyecto.Id,datos.IdProyecto.fetchAll('Proyecto',0),'chzn-select','1')}}
 {{ macro.select(atributos.IdApp,'field_title',values.controller ~ '[IdApp]',values.controller ~ '_IdApp',none,datos.IdApp.Id,datos.IdApp.fetchAll('Aplicacion',0),'chzn-select','2')}}
 {{ macro.input(atributos.NumeroLicencias,'field_title','text',values.controller ~ '[NumeroLicencias]',values.controller ~ '_NumeroLicencias',datos.NumeroLicencias,'4','CampoUnidades','3') }}
 {{ macro.input(atributos.FtpServer,'field_title','text',values.controller ~ '[FtpServer]',values.controller ~ '_FtpServer',datos.FtpServer,'255','CampoTextoLargo','4') }}
@@ -25,4 +24,4 @@
 
 {# include '_global/fieldsComunes.html.twig' #}
 
-{{ macro.foco(values.controller ~ '_IdProyecto') }}
+{{ macro.foco(values.controller ~ '_IdApp') }}

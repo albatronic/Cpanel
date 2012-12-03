@@ -155,7 +155,7 @@ class IndexController extends Controller {
     /**
      * Carga en la sesión las variables de entorno y web del proyecto
      */
-    private function cargaVariables() {
+    protected function cargaVariables() {
 
         // Variables de entorno del proyecto
         if (!isset($_SESSION['VARIABLES']['EnvPro'])) {

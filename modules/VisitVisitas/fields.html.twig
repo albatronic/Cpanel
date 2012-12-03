@@ -30,11 +30,11 @@
 {{ macro.input(atributos.BrowserVersion,'field_title','text',values.controller ~ '[BrowserVersion]',values.controller ~ '_BrowserVersion',datos.BrowserVersion,'255','CampoTextoLargo','21') }}
 {{ macro.input(atributos.Platform,'field_title','text',values.controller ~ '[Platform]',values.controller ~ '_Platform',datos.Platform,'255','CampoTextoLargo','22') }}
 {{ macro.input(atributos.UserAgent,'field_title','text',values.controller ~ '[UserAgent]',values.controller ~ '_UserAgent',datos.UserAgent,'255','CampoTextoLargo','23') }}
-{{ macro.select(atributos.IsMobile,'field_title',values.controller ~ '[IsMobile]',values.controller ~ '_IsMobile',none,datos.IsMobile.IsMobile,datos.IsMobile.fetchAll(),'chzn-select','24')}}
-{{ macro.select(atributos.IsRobot,'field_title',values.controller ~ '[IsRobot]',values.controller ~ '_IsRobot',none,datos.IsRobot.IsRobot,datos.IsRobot.fetchAll(),'chzn-select','25')}}
-{{ macro.select(atributos.IsAol,'field_title',values.controller ~ '[IsAol]',values.controller ~ '_IsAol',none,datos.IsAol.IsAol,datos.IsAol.fetchAll(),'chzn-select','26')}}
+{{ macro.input(atributos.IsMobile,'field_title','checkbox',values.controller ~ '[IsMobile]',values.controller ~ '_IsMobile',datos.IsMobile.IDTipo,'255','CampoTextoLargo','24') }}
+{{ macro.input(atributos.IsRobot,'field_title','checkbox',values.controller ~ '[IsRobot]',values.controller ~ '_IsRobot',datos.IsRobot.IDTipo,'255','CampoTextoLargo','25') }}
+{{ macro.input(atributos.IsAol,'field_title','checkbox',values.controller ~ '[IsAol]',values.controller ~ '_IsAol',datos.IsAol.IDTipo,'255','CampoTextoLargo','26') }}
 {{ macro.input(atributos.AolVersion,'field_title','text',values.controller ~ '[AolVersion]',values.controller ~ '_AolVersion',datos.AolVersion,'255','CampoTextoLargo','27') }}
-{{ macro.select(atributos.IsChromeFrame,'field_title',values.controller ~ '[IsChromeFrame]',values.controller ~ '_IsChromeFrame',none,datos.IsChromeFrame.IsChromeFrame,datos.IsChromeFrame.fetchAll(),'chzn-select','28')}}
+{{ macro.input(atributos.IsChromeFrame,'field_title','checkbox',values.controller ~ '[IsChromeFrame]',values.controller ~ '_IsChromeFrame',datos.IsChromeFrame.IDTipo,'255','CampoTextoLargo','28') }}
 {{ macro.input(atributos.Resolution,'field_title','text',values.controller ~ '[Resolution]',values.controller ~ '_Resolution',datos.Resolution,'25','CampoTextoCorto','29') }}
 
 {# include '_global/fieldsComunes.html.twig' #}

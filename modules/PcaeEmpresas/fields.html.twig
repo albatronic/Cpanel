@@ -7,35 +7,59 @@
   date 23.10.2012 02:05:11
 #}
 
-{{ macro.input(atributos.RazonSocial,'field_title','text',values.controller ~ '[RazonSocial]',values.controller ~ '_RazonSocial',datos.RazonSocial,'100','CampoTextoLargo','1') }}
 {{ macro.select(atributos.IdGrupo,'field_title',values.controller ~ '[IdGrupo]',values.controller ~ '_IdGrupo',none,datos.IdGrupo.Id,datos.IdGrupo.fetchAll('Descripcion',0),'chzn-select','2')}}
-{{ macro.input(atributos.Cif,'field_title','text',values.controller ~ '[Cif]',values.controller ~ '_Cif',datos.Cif,'15','CampoTextoCorto','3') }}
-{{ macro.input(atributos.Direccion,'field_title','text',values.controller ~ '[Direccion]',values.controller ~ '_Direccion',datos.Direccion,'100','CampoTextoLargo','4') }}
-{{ macro.input(atributos.IdPais,'field_title','text',values.controller ~ '[IdPais]',values.controller ~ '_IdPais',datos.IdPais.Id,'255','CampoTextoLargo','5','','',['paises','Pais',datos.IdPais.Pais]) }}
-{{ macro.input(atributos.IdProvincia,'field_title','text',values.controller ~ '[IdProvincia]',values.controller ~ '_IdProvincia',datos.IdProvincia.Id,'255','CampoTextoLargo','6','','',['provincias','Provincia',datos.IdProvincia.Provincia,values.controller ~ '_IdPais']) }}
-{{ macro.input(atributos.IdMunicipio,'field_title','text',values.controller ~ '[IdMunicipio]',values.controller ~ '_IdMunicipio',datos.IdMunicipio.Id,'255','CampoTextoLargo','7','','',['municipios','Municipio',datos.IdMunicipio.Municipio,values.controller ~ '_IdProvincia']) }}
-{{ macro.input(atributos.CodigoPostal,'field_title','text',values.controller ~ '[CodigoPostal]',values.controller ~ '_CodigoPostal',datos.CodigoPostal,'10','CampoTextoCorto','8') }}
-{{ macro.input(atributos.Telefono,'field_title','text',values.controller ~ '[Telefono]',values.controller ~ '_Telefono',datos.Telefono,'50','CampoTextoLargo','9') }}
-{{ macro.input(atributos.Fax,'field_title','text',values.controller ~ '[Fax]',values.controller ~ '_Fax',datos.Fax,'50','CampoTextoLargo','10') }}
-{{ macro.input(atributos.Web,'field_title','text',values.controller ~ '[Web]',values.controller ~ '_Web',datos.Web,'50','CampoTextoLargo','11') }}
-{{ macro.input(atributos.EMail,'field_title','text',values.controller ~ '[EMail]',values.controller ~ '_EMail',datos.EMail,'50','CampoTextoLargo','12') }}
-{{ macro.select(atributos.IdBanco,'field_title',values.controller ~ '[IdBanco]',values.controller ~ '_IdBanco',none,datos.IdBanco.Id,datos.IdBanco.fetchAll('Nombre'),'chzn-select','13')}}
-{{ macro.input(atributos.IdOficina,'field_title','text',values.controller ~ '[IdOficina]',values.controller ~ '_IdOficina',datos.IdOficina.Id,'255','CampoTextoLargo','14','','',['oficinasBancarias','Codigo',datos.IdOficina,values.controller ~ '_IdBanco']) }}
-{{ macro.input(atributos.DigitoControl,'field_title','text',values.controller ~ '[DigitoControl]',values.controller ~ '_DigitoControl',datos.DigitoControl,'2','CampoTextoCorto','15') }}
-{{ macro.input(atributos.Cuenta,'field_title','text',values.controller ~ '[Cuenta]',values.controller ~ '_Cuenta',datos.Cuenta,'10','CampoTextoCorto','16') }}
-{{ macro.input(atributos.IBAN,'field_title','text',values.controller ~ '[IBAN]',values.controller ~ '_IBAN',datos.IBAN,'34','CampoTextoLargo','17') }}
-{{ macro.input(atributos.SufijoRemesas,'field_title','text',values.controller ~ '[SufijoRemesas]',values.controller ~ '_SufijoRemesas',datos.SufijoRemesas,'2','CampoTextoCorto','18') }}
-{{ macro.input(atributos.DigitosCuentaContable,'field_title','text',values.controller ~ '[DigitosCuentaContable]',values.controller ~ '_DigitosCuentaContable',datos.DigitosCuentaContable,'2','CampoUnidades','19') }}
-{{ macro.input(atributos.IdCNAE,'field_title','text',values.controller ~ '[IdCNAE]',values.controller ~ '_IdCNAE',datos.IdCNAE.Id,'255','CampoTextoLargo','20','','',['cnae','Actividad',datos.IdCNAE.Actividad]) }}
-{{ macro.input(atributos.RegistroMercantil,'field_title','text',values.controller ~ '[RegistroMercantil]',values.controller ~ '_RegistroMercantil',datos.RegistroMercantil,'100','CampoTextoLargo','21') }}
-{{ macro.input(atributos.LicenciaActividad,'field_title','text',values.controller ~ '[LicenciaActividad]',values.controller ~ '_LicenciaActividad',datos.LicenciaActividad,'100','CampoTextoLargo','22') }}
+{{ macro.input(atributos.RazonSocial,'field_title','text',values.controller ~ '[RazonSocial]',values.controller ~ '_RazonSocial',datos.RazonSocial,'100','CampoTextoLargo','1') }}
 
-{# include '_global/fieldsComunes.html.twig' #}
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-general">General</a></li>
+        {% if datos.Id %}
+            <li class="ui-state-default ui-corner-top"><a href="#tabs-proyectos">Proyectos</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="#tabs-usuarios">Usuarios Adscritos</a></li>      
+        {% endif %}
+    </ul>
 
+    {# SOLAPA GENERAL #}
+    <div id="tabs-general" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input(atributos.Cif,'field_title','text',values.controller ~ '[Cif]',values.controller ~ '_Cif',datos.Cif,'15','CampoTextoCorto','3') }}
+        {{ macro.input(atributos.Direccion,'field_title','text',values.controller ~ '[Direccion]',values.controller ~ '_Direccion',datos.Direccion,'100','CampoTextoLargo','4') }}
+        {{ macro.input(atributos.IdPais,'field_title','text',values.controller ~ '[IdPais]',values.controller ~ '_IdPais',datos.IdPais.Id,'255','CampoTextoLargo','5','','',['paises','Pais',datos.IdPais.Pais]) }}
+        {{ macro.input(atributos.IdProvincia,'field_title','text',values.controller ~ '[IdProvincia]',values.controller ~ '_IdProvincia',datos.IdProvincia.Id,'255','CampoTextoLargo','6','','',['provincias','Provincia',datos.IdProvincia.Provincia,values.controller ~ '_IdPais']) }}
+        {{ macro.input(atributos.IdMunicipio,'field_title','text',values.controller ~ '[IdMunicipio]',values.controller ~ '_IdMunicipio',datos.IdMunicipio.Id,'255','CampoTextoLargo','7','','',['municipios','Municipio',datos.IdMunicipio.Municipio,values.controller ~ '_IdProvincia']) }}
+        {{ macro.input(atributos.CodigoPostal,'field_title','text',values.controller ~ '[CodigoPostal]',values.controller ~ '_CodigoPostal',datos.CodigoPostal,'10','CampoTextoCorto','8') }}
+        {{ macro.input(atributos.Telefono,'field_title','text',values.controller ~ '[Telefono]',values.controller ~ '_Telefono',datos.Telefono,'50','CampoTextoLargo','9') }}
+        {{ macro.input(atributos.Fax,'field_title','text',values.controller ~ '[Fax]',values.controller ~ '_Fax',datos.Fax,'50','CampoTextoLargo','10') }}
+        {{ macro.input(atributos.Web,'field_title','text',values.controller ~ '[Web]',values.controller ~ '_Web',datos.Web,'50','CampoTextoLargo','11') }}
+        {{ macro.input(atributos.EMail,'field_title','text',values.controller ~ '[EMail]',values.controller ~ '_EMail',datos.EMail,'50','CampoTextoLargo','12') }}
+        {{ macro.select(atributos.IdBanco,'field_title',values.controller ~ '[IdBanco]',values.controller ~ '_IdBanco',none,datos.IdBanco.Id,datos.IdBanco.fetchAll('Nombre'),'chzn-select','13')}}
+        {{ macro.input(atributos.IdOficina,'field_title','text',values.controller ~ '[IdOficina]',values.controller ~ '_IdOficina',datos.IdOficina.Id,'255','CampoTextoLargo','14','','',['oficinasBancarias','Codigo',datos.IdOficina,values.controller ~ '_IdBanco']) }}
+        {{ macro.input(atributos.DigitoControl,'field_title','text',values.controller ~ '[DigitoControl]',values.controller ~ '_DigitoControl',datos.DigitoControl,'2','CampoTextoCorto','15') }}
+        {{ macro.input(atributos.Cuenta,'field_title','text',values.controller ~ '[Cuenta]',values.controller ~ '_Cuenta',datos.Cuenta,'10','CampoTextoCorto','16') }}
+        {{ macro.input(atributos.IBAN,'field_title','text',values.controller ~ '[IBAN]',values.controller ~ '_IBAN',datos.IBAN,'34','CampoTextoLargo','17') }}
+        {{ macro.input(atributos.SufijoRemesas,'field_title','text',values.controller ~ '[SufijoRemesas]',values.controller ~ '_SufijoRemesas',datos.SufijoRemesas,'2','CampoTextoCorto','18') }}
+        {{ macro.input(atributos.DigitosCuentaContable,'field_title','text',values.controller ~ '[DigitosCuentaContable]',values.controller ~ '_DigitosCuentaContable',datos.DigitosCuentaContable,'2','CampoUnidades','19') }}
+        {{ macro.input(atributos.IdCNAE,'field_title','text',values.controller ~ '[IdCNAE]',values.controller ~ '_IdCNAE',datos.IdCNAE.Id,'255','CampoTextoLargo','20','','',['cnae','Actividad',datos.IdCNAE.Actividad]) }}
+        {{ macro.input(atributos.RegistroMercantil,'field_title','text',values.controller ~ '[RegistroMercantil]',values.controller ~ '_RegistroMercantil',datos.RegistroMercantil,'100','CampoTextoLargo','21') }}
+        {{ macro.input(atributos.LicenciaActividad,'field_title','text',values.controller ~ '[LicenciaActividad]',values.controller ~ '_LicenciaActividad',datos.LicenciaActividad,'100','CampoTextoLargo','22') }}
+
+        {# include '_global/fieldsComunes.html.twig' #}
+    </div>
+        
+
+    {% if datos.Id %}
+        {# SOLAPA PROYECTOS #}
+        <div id="tabs-proyectos" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+            <iframe width="100%" height="420" scrolling="yes" style="border:0px;margin-bottom:10px;margin-top:0px;"
+                    src="{{app.path}}/PcaeProyectos/list/{{datos.Id}}">
+            </iframe>        
+        </div>
+
+        {# SOLAPA USUARIOS #}
+        <div id="tabs-usuarios" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+            <iframe width="100%" height="420" scrolling="yes" style="border:0px;margin-bottom:10px;margin-top:0px;"
+                    src="{{app.path}}/PcaeEmpresasUsuarios/list/{{datos.Id}}">
+            </iframe>        
+        </div>
+    {% endif %}
+        
 {{ macro.foco(values.controller ~ '_IdGrupo') }}
-
-{% if datos.Id %}
-<iframe width="100%" height="420" scrolling="yes" style="border:0px;margin-bottom:10px;margin-top:25px;"
-        src="{{app.path}}/PcaeProyectos/list/{{datos.Id}}">
-</iframe>
-{% endif %}

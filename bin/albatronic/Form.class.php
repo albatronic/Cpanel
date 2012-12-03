@@ -169,7 +169,9 @@ class Form {
      * @return boolean
      */
     public function getLoginRequired() {
-        return $this->getNode('login_required');
+        $valor = strtoupper($this->getNode('login_required'));
+        
+        return ( ($valor == 'YES') or ($valor == 'TRUE') );        
     }
 
     /**
@@ -179,7 +181,9 @@ class Form {
      * @return boolean
      */
     public function getPermissionControl() {
-        return $this->getNode('permission_control');
+        $valor = strtoupper($this->getNode('permission_control'));
+        
+        return ( ($valor == 'YES') or ($valor == 'TRUE') );
     }
 
     /**
@@ -189,7 +193,9 @@ class Form {
      * @return boolean
      */
     public function getFavouriteControl() {
-        return $this->getNode('favourite_control');
+        $valor = strtoupper($this->getNode('favourite_control'));
+        
+        return ( ($valor == 'YES') or ($valor == 'TRUE') );        
     }
 
     /**
@@ -381,7 +387,9 @@ class Form {
      * @return boolean TRUE si el formulario tiene listado
      */
     public function getTieneListado() {
-        return ($this->getNode('feature_list') == 'YES');
+        $valor = strtoupper($this->getNode('feature_list'));
+                
+        return ( ($valor == 'YES') or ($valor == 'TRUE') );
     }
 
     /**

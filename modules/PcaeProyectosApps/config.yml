@@ -7,12 +7,13 @@
 #
 ---
 PcaeProyectosApps:
-  app: ''
+  app: 'Pcae'
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
+  showCommonFields: false    
   numMaxRecords: ''
   numberOfImages: '0'
   withGalery: '0'
@@ -40,10 +41,10 @@ PcaeProyectosApps:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
   login_required: YES
-  permission_control: YES
+  permission_control: NO
   favourite_control: NO
   help_file: help.html.twig
-  title: Proyectos y Apps
+  title: Apps asociadas al proyecto
   id_video: pcaeproyectosapps
   url_video: null
   feature_list: YES
@@ -51,7 +52,7 @@ PcaeProyectosApps:
   entity: PcaeProyectosApps
   table: PcaeProyectosApps
   primarykey: Id
-  linkBy: ''
+  linkBy: 'IdProyecto'
   records_per_page: 15
   order_by:
     -

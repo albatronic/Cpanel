@@ -21,7 +21,8 @@
 			<input name="accion" id="accion_{{ values.controller }}" value="" type="hidden" />
 			<input name="solapaActiva" id="solapaActiva" value="{{ values.solapaActiva }}" type="hidden" />
 			<input name="{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]" value="{{values.datos.getPrimaryKeyValue}}" type="hidden" />
-
+			<input name="{{ values.controller }}[IdProyecto]" value="{{values.linkBy.value}}" type="hidden" />
+                        
 			{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
 			{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 

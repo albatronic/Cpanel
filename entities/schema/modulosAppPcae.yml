@@ -6,9 +6,8 @@ CpanModulos:
   Pcae1: { CodigoApp: Pcae, NombreModulo: Pcae,         Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Pcae, Funcionalidades: 'AC' }
   Pcae2: { CodigoApp: Pcae, NombreModulo: PcaeApps,     Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Aplicaciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
   Pcae3: { CodigoApp: Pcae, NombreModulo: PcaeGruposEmpresas, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Grupos de Empresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
-  Pcae4: { CodigoApp: Pcae, NombreModulo: PcaeEmpresas, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Empresas y Proyectos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
+  Pcae4: { CodigoApp: Pcae, NombreModulo: PcaeEmpresas, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: 'Empresas, Proyectos Y Apps', Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
   Pcae5: { CodigoApp: Pcae, NombreModulo: PcaeUsuarios, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
-  Pcae6: { CodigoApp: Pcae, NombreModulo: PcaeProyectosApps, Nivel: 1, BelongsTo: Pcae, Publish: 1, Titulo: Proyectos y Apps, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?> }
 
 CpanPermisos:
   Pcae1: { IdPerfil: 1, NombreModulo: Pcae, Funcionalidades: 'AC,VW' }
@@ -16,11 +15,9 @@ CpanPermisos:
   Pcae3: { IdPerfil: 1, NombreModulo: PcaeGruposEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Pcae4: { IdPerfil: 1, NombreModulo: PcaeEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Pcae5: { IdPerfil: 1, NombreModulo: PcaeUsuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Pcae6: { IdPerfil: 1, NombreModulo: PcaeProyectosApps, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
 
   Pcae11: { IdPerfil: 2, NombreModulo: Pcae, Funcionalidades: 'AC,VW' }
   Pcae12: { IdPerfil: 2, NombreModulo: PcaeApps, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Pcae13: { IdPerfil: 2, NombreModulo: PcaeGruposEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Pcae14: { IdPerfil: 2, NombreModulo: PcaeEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Pcae15: { IdPerfil: 2, NombreModulo: PcaeUsuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Pcae16: { IdPerfil: 2, NombreModulo: PcaeProyectosApps, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}

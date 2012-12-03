@@ -132,6 +132,14 @@ switch ($_GET['entidad']) {
         unset($oficina);
         break;
 
+    // BUSCA USUARIOS POR %Nombre% y %Apellidos%
+    case 'usuarios':
+        $filtro = "Nombre LIKE '%{$_GET['term']}%' OR Apellidos LIKE '%{$_GET['term']}%' OR EMail LIKE '%{$_GET['term']}%'";
+        $usuario = new PcaeUsuarios();
+        $rows = $usuario->cargaCondicion("Id as Id, CONCAT(Apellidos,', ',Nombre,' <',EMail,'>') as Value", $filtro, "Apellidos");
+        unset($usuario);
+        break;
+    
     // BUSCA ARTICULOS POR %CODIGO%, %DESCRIPCION% Y %CODIGOEAN%
     case 'articulos':
         $articulo = new Articulos();

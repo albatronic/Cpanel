@@ -1,0 +1,22 @@
+{#
+  Module: PcaeEmpresasUsuarios
+  Document : modules\PcaeEmpresasUsuarios\index.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 25.10.2012 19:10:00
+#}
+
+{% extends '_global/layoutPopup.html.twig' %}
+
+{% block title parent() ~ ' - '  ~ values.titulo %}
+
+{% block content %}
+    {% include "_global/formErrores.html.twig" with {'errores': values.errores} %}
+    {% include "_global/alertas.html.twig" with {'alertas': values.alertas} %}
+
+    {% block listado %}
+    {% endblock %}
+
+    <div id="notificacion"></div>
+{% endblock %}
