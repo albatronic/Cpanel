@@ -55,11 +55,11 @@ PcaeEmpresas:
   records_per_page: 15
   order_by:
     -
-      title: 'Id a-z'
-      criteria: 'Id ASC'
+      title: 'Razón Social a-z'
+      criteria: 'RazonSocial ASC'
     -
-      title: 'Id z-a'
-      criteria: 'Id DESC'
+      title: 'Razón Social z-a'
+      criteria: 'RazonSocial DESC'
   search_default: Id
   referenced_entities:
     - PcaeGruposEmpresas

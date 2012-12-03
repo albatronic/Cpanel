@@ -55,11 +55,11 @@ PcaeUsuarios:
   records_per_page: 15
   order_by:
     -
-      title: 'Id a-z'
-      criteria: 'Id ASC'
+      title: 'Apellidos a-z'
+      criteria: 'Apellidos ASC'
     -
-      title: 'Id z-a'
-      criteria: 'Id DESC'
+      title: 'Apellidos z-a'
+      criteria: 'Apellidos DESC'
   search_default: Id
   referenced_entities:
     - CommMunicipios

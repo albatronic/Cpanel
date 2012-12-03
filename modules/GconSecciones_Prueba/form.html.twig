@@ -11,6 +11,8 @@
 
 {% if values.datos.getPrimaryKeyValue == '' %} {% set action = 'new' %} {% else %} {% set action = 'edit' %} {% endif %}
 {% block mantenimiento %}
+        {% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
+	{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 <div class="grid_container">
 	<div class="grid_12 full_block">
 		<div class="widget_wrap">
