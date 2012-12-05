@@ -7,7 +7,11 @@
   date 25.10.2012 19:10:00
 #}
 
-{{ macro.select(atributos.IdApp,'field_title',values.controller ~ '[IdApp]',values.controller ~ '_IdApp',none,datos.IdApp.Id,datos.IdApp.fetchAll('Aplicacion',0),'chzn-select','2')}}
+{% if datos.Id %}
+    <h3>{{ datos.IdApp.Aplicacion }}</h3>
+{% else %}
+    {{ macro.select(atributos.IdApp,'field_title',values.controller ~ '[IdApp]',values.controller ~ '_IdApp',none,datos.IdApp.Id,datos.IdApp.fetchAll('Aplicacion',0),'chzn-select','2')}}
+{% endif %}
 {{ macro.input(atributos.NumeroLicencias,'field_title','text',values.controller ~ '[NumeroLicencias]',values.controller ~ '_NumeroLicencias',datos.NumeroLicencias,'4','CampoUnidades','3') }}
 {{ macro.input(atributos.FtpServer,'field_title','text',values.controller ~ '[FtpServer]',values.controller ~ '_FtpServer',datos.FtpServer,'255','CampoTextoLargo','4') }}
 {{ macro.input(atributos.FtpPort,'field_title','text',values.controller ~ '[FtpPort]',values.controller ~ '_FtpPort',datos.FtpPort,'6','CampoUnidades','5') }}

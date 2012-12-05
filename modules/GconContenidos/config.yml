@@ -8,7 +8,7 @@
 ---
 GconContenidos:
   app: 'Gcon'
-  isModuleRoot: 1
+  isModuleRoot: 0
   linkModule:
     fromColumn: 'IdSeccion'
     toEntity: 'GconSecciones'

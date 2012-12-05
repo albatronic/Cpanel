@@ -23,7 +23,7 @@ class PcaeProyectosApps extends PcaeProyectosAppsEntity {
      */
     public function create() {
         $id = parent::create();
-        
+
         if ($id) {
             // Asignar permiso de acceso al usuario en curso
             $permiso = new PcaePermisos();
@@ -33,10 +33,10 @@ class PcaeProyectosApps extends PcaeProyectosAppsEntity {
             $permiso->setIdApp($this->IdApp);
             $permiso->create();
         }
-        
+
         return $id;
     }
-    
+
     /**
      * Borra físicamente el registro que vincula la app al proyecto
      * y elimina todos los permisos relativos a ese proyecto y app
@@ -44,12 +44,12 @@ class PcaeProyectosApps extends PcaeProyectosAppsEntity {
      */
     public function delete() {
 
-        $idProyecto = $this->IdProyecto;        
+        $idProyecto = $this->IdProyecto;
         $idEmpresa = $this->getIdProyecto()->getIdEmpresa()->getId();
         $idApp = $this->IdApp;
-        
+
         $ok = parent::erase();
-        
+
         if ($ok) {
             // Borrar todos los permisos de acceso a la app borrada
             $em = new EntityManager($this->getConectionName());
@@ -61,9 +61,25 @@ class PcaeProyectosApps extends PcaeProyectosAppsEntity {
             }
             unset($em);
         }
-        
+
         return $ok;
     }
+
+    /**
+     * Comprueba la unicidad de IdProyecto-IdApp
+     */
+    public function validaLogico() {
+        parent::validaLogico();
+
+        if (!$this->Id) {
+            $proApp = new PcaeProyectosApps();
+            $rows = $proApp->cargaCondicion("Id", "IdProyecto='$this->IdProyecto' AND IdApp='{$this->IdApp}'");
+            unset($proApp);
+            if (count($rows))
+                $this->_errores[] = "Ya existe esa App en el proyecto";
+        }
+    }
+
 }
 
 ?>

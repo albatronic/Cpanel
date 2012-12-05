@@ -1,6 +1,6 @@
 # MODULOS DE LA APP Enl. ENLACES DE INTERÉS
 CpanAplicaciones:
-  Enl  : { CodigoApp: Enl,   NombreApp: Enlaces de Interes }
+  Enl  : { CodigoApp: Enl,   NombreApp: Enlaces de Interés }
 
 CpanModulos:
   Enl1: { CodigoApp: Enl,  NombreModulo: Enl,           Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Enl, Funcionalidades: AC }

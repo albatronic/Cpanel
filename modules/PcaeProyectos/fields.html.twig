@@ -13,7 +13,7 @@
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
         <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-general">General</a></li>
         {% if datos.Id %}
-            <li class="ui-state-default ui-corner-top"><a href="#tabs-apps">Apps</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="#tabs-aplicaciones">Aplicaciones</a></li>
         {% endif %}
     </ul>
 
@@ -30,9 +30,9 @@
         {# include '_global/fieldsComunes.html.twig' #}
     </div>
         
-    {# SOLAPA APPS #}
+    {# SOLAPA APLICACIONES #}
     {% if datos.Id %}        
-        <div id="tabs-apps" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        <div id="tabs-aplicaciones" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
             <iframe width="100%" height="420" scrolling="yes" style="border:0px;margin-bottom:10px;margin-top:0px;"
                     src="{{app.path}}/PcaeProyectosApps/list/{{datos.Id}}">
             </iframe>        

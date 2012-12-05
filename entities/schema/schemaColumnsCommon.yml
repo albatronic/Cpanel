@@ -2,6 +2,7 @@
     Observations:         {type: text, default: NULL}
     PrimaryKeyMD5:        {type: string(100), default: NULL, index: unique}
     IsDefault:            {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    IsSuper:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     Checked:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     Publish:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     BelongsTo:            {type: integer(11), notnull: true, default: 0, index: index}
@@ -61,3 +62,4 @@
     CodigoAppAsociada:    { type: string(15), notnull: false, default: NULL, index: index, comment: 'db,CpanAplicaciones,CodigoApp'}
     IdAlbumExterno:       { type: bigint(11), notnull: false, default: NULL }
     IdSliderAsociado:     { type: bigint(11), notnull: false, default: NULL }
+    DateTimeLastVisit:    { type: bigint(11), notnull: true, default: 0 }

@@ -33,6 +33,12 @@ class EntityComunes extends Entity {
      * @orm Column(type="tinyint")
      * @var entities\ValoresSN
      */
+    protected $IsSuper = '0';
+    
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
     protected $Checked = '0';
 
     /**
@@ -296,6 +302,12 @@ class EntityComunes extends Entity {
     protected $CodigoAppAsociada = NULL;
     protected $IdAlbumExterno = NULL;
     protected $IdSliderAsociado = NULL;
+    
+    /**
+     * Fecha y hora última visita en formato UNIX
+     * @var integer
+     */
+    protected $DateTimeLastVisit = '0';
 
     /**
      * METODOS ELABORADOS
@@ -376,6 +388,16 @@ class EntityComunes extends Entity {
         return $this->IsDefault;
     }
 
+    public function setIsSuper($IsSuper) {
+        $this->IsSuper = $IsSuper;
+    }
+
+    public function getIsSuper() {
+        if (!($this->IsSuper instanceof ValoresSN))
+            $this->IsSuper = new ValoresSN($this->IsSuper);
+        return $this->IsSuper;
+    }
+    
     public function setChecked($Checked) {
         $this->Checked = $Checked;
     }
@@ -815,6 +837,18 @@ class EntityComunes extends Entity {
 
     public function getIdSliderAsociado() {
         return $this->IdSliderAsociado;
+    }
+
+    public function setDateTimeLastVisit($TimeUnix = 0) {
+
+        if ($TimeUnix == 0)
+            $TimeUnix = time();
+
+        $this->DateTimeLastVisit = $TimeUnix;
+    }
+
+    public function getDateTimeLastVisit() {
+        return date('d-m-Y H:i:s', $this->DateTimeLastVisit);
     }
 
 }

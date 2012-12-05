@@ -1,0 +1,14 @@
+# MODULOS DE LA APP Vid. VÍDEOS
+CpanAplicaciones:
+  Vid  : { CodigoApp: Vid,   NombreApp: Vídeos }
+
+CpanModulos:
+  Vid1: { CodigoApp: Vid,  NombreModulo: Vid,     Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Vid, Funcionalidades: AC }
+  Vid2: { CodigoApp: Vid,  NombreModulo: Videos,  Nivel: 1, BelongsTo: Vid,  Publish: 1, Titulo: Vídeos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+CpanPermisos:
+  Vid1:  { IdPerfil: 1, NombreModulo: Vid, Funcionalidades: 'AC,VW' }
+  Vid2:  { IdPerfil: 1, NombreModulo: Videos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+  Vid11: { IdPerfil: 2, NombreModulo: Vid, Funcionalidades: 'AC,VW' }
+  Vid21: { IdPerfil: 2, NombreModulo: Videos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}

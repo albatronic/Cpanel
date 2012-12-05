@@ -4,7 +4,7 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 10.09.2012 12:31:10
+  date 05.12.2012 00:19:44
 #}
 
 {% extends layout %}
@@ -12,6 +12,8 @@
 {% block title parent() ~ ' - '  ~ values.titulo %}
 
 {% block content %}
+	{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
+	{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 	{% block filtro %}
 	{% if values.permisos.permisosModulo['CO'] and values.tieneListado %}
 		{% include '_global/filtroGenericoWrapper.html.twig' with {'filter': values.listado.filter} %}

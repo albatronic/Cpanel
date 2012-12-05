@@ -2,11 +2,10 @@
 #
 # Module: EnlSecciones
 # author Sergio Pérez <sergio.perez@albatronic.com>
-# copyright Informática ALBATRONIC, SL
-# date 17-09-2012 19:56:27
+# copyright ARTICO ESTUDIO, SL
+# date 05-12-2012 00:19:44
 #
 # ejemplo:
 #
 # nombreVariable: el texto del caption
 ---
-varWebEspeModSecciones: hola
