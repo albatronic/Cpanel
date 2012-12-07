@@ -32,3 +32,6 @@ PcaeEmpresasUsuarios:
   
 PcaePermisos:
   1: { IdUsuario: 1, IdEmpresa: 1, IdProyecto: 1, IdApp: 1 }
+  
+CpanUrlAmigables:
+  1: { UrlFriendly: '/artico-estudio-sl',Controller: Proyectos, Action: Index, Template: Index, Entity: PcaEmpresas, IdEntity: 1}
