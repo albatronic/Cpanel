@@ -8,7 +8,7 @@
 ---
 VisitVisitas:
   app: 'Visit'
-  isModuleRoot: 0
+  isModuleRoot: 1
   linkModule:
     fromColumn: ''
     toEntity: ''
@@ -55,14 +55,14 @@ VisitVisitas:
   table: VisitVisitas
   primarykey: Id
   linkBy: ''
-  records_per_page: 15
+  records_per_page: 20
   order_by:
     -
-      title: 'Id a-z'
-      criteria: 'Id ASC'
+      title: 'Fecha a-z'
+      criteria: 'TiempoUnix ASC'
     -
-      title: 'Id z-a'
-      criteria: 'Id DESC'
+      title: 'Fecha z-a'
+      criteria: 'TiempoUnix DESC'
   search_default: Id
   referenced_entities:
     - ValoresSN
@@ -97,7 +97,7 @@ VisitVisitas:
     TiempoUnix:
       title: TiempoUnix
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -108,7 +108,7 @@ VisitVisitas:
     SegundosVisita:
       title: SegundosVisita
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -119,7 +119,7 @@ VisitVisitas:
     NClicks:
       title: NClicks
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -141,7 +141,7 @@ VisitVisitas:
     Host:
       title: Host
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -152,7 +152,7 @@ VisitVisitas:
     IpAddress:
       title: IpAddress
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -174,7 +174,7 @@ VisitVisitas:
     NombrePais:
       title: NombrePais
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -196,7 +196,7 @@ VisitVisitas:
     NombreRegion:
       title: NombreRegion
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -207,7 +207,7 @@ VisitVisitas:
     Ciudad:
       title: Ciudad
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -262,7 +262,7 @@ VisitVisitas:
     Organizacion:
       title: Organizacion
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -273,7 +273,7 @@ VisitVisitas:
     UrlOrigen:
       title: UrlOrigen
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -284,7 +284,7 @@ VisitVisitas:
     q:
       title: q
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -295,7 +295,7 @@ VisitVisitas:
     Browser:
       title: Browser
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -317,7 +317,7 @@ VisitVisitas:
     Platform:
       title: Platform
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null

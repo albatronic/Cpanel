@@ -39,6 +39,9 @@ EnlEnlaces:
   action: Index
   template: index.html.twig
   parametros: ''
+  includesHead:
+    twigCss: _global/css.html.twig
+    twigJs: _global/js.html.twig  
   login_required: YES
   permission_control: YES
   favourite_control: NO

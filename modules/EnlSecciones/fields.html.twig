@@ -4,12 +4,13 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 05.12.2012 00:19:44
+  date 05.12.2012 10:14:17
 #}
 
 {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
 {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
 {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'input_grow','3')}}
+{{ macro.select(atributos.IdTipo,'field_title',values.controller ~ '[IdTipo]',values.controller ~ '_IdTipo',none,datos.IdTipo.IdTipo,datos.IdTipo.fetchAll('IDTipo'),'chzn-select','4')}}
 
 {% include '_global/fieldsComunes.html.twig' %}
 

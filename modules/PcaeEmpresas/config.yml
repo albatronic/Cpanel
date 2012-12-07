@@ -7,7 +7,7 @@
 #
 ---
 PcaeEmpresas:
-  app: ''
+  app: 'Pcae'
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -32,10 +32,10 @@ PcaeEmpresas:
     heightThumbnail: '50'
   fieldGeneratorUrlFriendly: IdGrupo
   fieldGeneratorMetatagTitle: IdGrupo
-  controller: CONTROLADOR
-  action: ACTION
-  template: TEMPLATE
-  parametros: PARAMETROS
+  controller: Proyectos
+  action: Index
+  template: 
+  parametros: 
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
@@ -306,7 +306,7 @@ PcaeEmpresas:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 7, caption: CNAE (%), entity: CommCnae, method: null, params: Actividad, type: input }
+      aditional_filter: { order: 7, caption: CNAE (%), entity: CommCnae, method: fetchAll, params: Actividad, type: input }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     RegistroMercantil:
       title: Registro Mercantil

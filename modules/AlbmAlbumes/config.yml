@@ -39,6 +39,9 @@ AlbmAlbumes:
   action: Index
   template: index.html.twig
   parametros: ''
+  includesHead:
+    twigCss: _global/css.html.twig
+    twigJs: _global/js.html.twig    
   login_required: YES
   permission_control: YES
   favourite_control: NO
@@ -83,7 +86,7 @@ AlbmAlbumes:
     Titulo:
       title: Título
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -130,11 +133,11 @@ AlbmAlbumes:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: <?php echo date('d-m-Y');?>
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnPortada:
       title: Mostrar en Portada
       filter: NO

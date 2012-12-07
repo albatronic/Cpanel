@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Description of TiposSeccionEnlacesInteres
+ * Description of TiposSeccionEnlaces
  *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @copyright Informática ALBATRONIC, SL
  * @date 03-sep-2012 18:51:22
  */
-class TiposSeccionEnlacesInteres extends Tipos {
+class TiposSeccionEnlaces extends Tipos {
 
     protected $tipos = array(
         array('Id' => "1", 'Value' => "Tipo Seccion 1"),

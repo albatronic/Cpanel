@@ -5,21 +5,12 @@
 #
 PcaeGruposEmpresas:
   1: { Id: 1, Descripcion: 'Grupo Ártico Estudio' }
-  2: { Id: 2, Descripcion: 'Grupo Regantes' }
-  3: { Id: 3, Descripcion: 'Grupo Brisa' }
-  4: { Id: 4, Descripcion: 'Grupo Galápago' }
   
 PcaeEmpresas:
-  1: { Id: 1, IdGrupo: 1, RazonSocial: 'Ártico Estudio, SL', IdPais: 68, IdProvincia: 18}
-  2: { Id: 2, IdGrupo: 2, RazonSocial: 'Comunidad de Regantes Virgen de la Salud', IdPais: 68, IdProvincia: 18}
-  3: { Id: 3, IdGrupo: 3, RazonSocial: 'Brisa', IdPais: 68, IdProvincia: 18}
-  4: { Id: 4, IdGrupo: 4, RazonSocial: 'Galápago', IdPais: 68, IdProvincia: 18}
+  1: { Id: 1, IdGrupo: 1, RazonSocial: 'Ártico Estudio, SL', IdPais: 68, IdProvincia: 18, UrlPrefix: /, LockUrlPrefix: 1, Slug: artico-estudio-sl, LockSlug: 1, UrlFriendly: /artico-estudio-sl }
   
 PcaeProyectos:
   1: { Id: 1, IdEmpresa: 1, Proyecto: 'Ártico Web Empresa'}  
-  2: { Id: 2, IdEmpresa: 2, Proyecto: 'Web Regantes'}  
-  3: { Id: 3, IdEmpresa: 3, Proyecto: 'Tienda Online Brisa'}  
-  4: { Id: 4, IdEmpresa: 4, Proyecto: 'Tienda Online Galápago'}  
   
 PcaeApps:
   1: { Id: 1, Aplicacion: 'Panel de Control', Url: 'http://localhost/Cpanel' }
@@ -27,11 +18,6 @@ PcaeApps:
 
 PcaeProyectosApps:
   1: { IdProyecto: 1, IdApp: 1, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: pcae, Password: pcae, Database: pcae }
-  2: { IdProyecto: 2, IdApp: 1, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: regantes, Password: regante, Database: regantes }
-  3: { IdProyecto: 3, IdApp: 1, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: brisa, Password: brisa, Database: brisa }
-  4: { IdProyecto: 3, IdApp: 2, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: brisa, Password: brisa, Database: brisa }
-  5: { IdProyecto: 4, IdApp: 1, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: galapago, Password: galapago, Database: galapago }
-  6: { IdProyecto: 4, IdApp: 2, NumeroLicencias: 99, FtpServer: '', FtpFolder: '', FtpUser: '', FtpPassword: '', Url: '', DbEngine: mysql, Host: localhost, User: galapago, Password: galapago, Database: galapago }
 
 PcaePerfiles:
   1: { Id: 1, Perfil: Super }
@@ -40,20 +26,9 @@ PcaePerfiles:
 
 PcaeUsuarios:
   1: { Id: 1, Nombre: Super, Apellidos: Super, IdPais: 68, IdProvincia: 18, IdMunicipio: 2747, EMail: info@articoestudio.com, Password: '<?php echo(md5('1234verano'));?>'}
-  2: { Id: 2, Nombre: adm, Apellidos: Regantes, IdPais: 68, IdProvincia: 18, IdMunicipio: 2747, EMail: info@regante.com, Password: '<?php echo(md5('1234verano'));?>'}
-  3: { Id: 3, Nombre: adm, Apellidos: Brisa, IdPais: 68, IdProvincia: 18, IdMunicipio: 2747, EMail: info@brisa.com, Password: '<?php echo(md5('1234verano'));?>'}
-  4: { Id: 4, Nombre: adm, Apellidos: Galapago, IdPais: 68, IdProvincia: 18, IdMunicipio: 2747, EMail: info@galapago.com, Password: '<?php echo(md5('1234verano'));?>'}
 
 PcaeEmpresasUsuarios:
   1: { IdEmpresa: 1, IdUsuario: 1, IdPerfil: 1 }
-  2: { IdEmpresa: 2, IdUsuario: 2, IdPerfil: 2 }
-  3: { IdEmpresa: 3, IdUsuario: 3, IdPerfil: 2 }
-  4: { IdEmpresa: 4, IdUsuario: 4, IdPerfil: 2 }
   
 PcaePermisos:
   1: { IdUsuario: 1, IdEmpresa: 1, IdProyecto: 1, IdApp: 1 }
-  2: { IdUsuario: 2, IdEmpresa: 2, IdProyecto: 2, IdApp: 1 }
-  3: { IdUsuario: 3, IdEmpresa: 3, IdProyecto: 3, IdApp: 1 }
-  4: { IdUsuario: 3, IdEmpresa: 3, IdProyecto: 3, IdApp: 2 } 
-  5: { IdUsuario: 4, IdEmpresa: 4, IdProyecto: 4, IdApp: 1 }
-  6: { IdUsuario: 4, IdEmpresa: 4, IdProyecto: 4, IdApp: 2 } 

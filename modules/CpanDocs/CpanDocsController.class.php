@@ -106,7 +106,7 @@ class CpanDocsController extends Controller {
                     $datos = new CpanDocs();
                     $datos->bind($this->request['CpanDocs']);
                     $datos->setArrayDoc($this->request['FILES']['documento']);
-
+print_r($this->request);
                     $rules = $this->getRules($this->request[$this->entity]['Type']);
 
                     switch ($this->request[$this->entity]['Type']) {

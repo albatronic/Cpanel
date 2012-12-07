@@ -37,7 +37,7 @@ GconSecciones:
   fieldGeneratorMetatagTitle: Titulo
   controller: Secciones
   action: Index
-  template: Index
+  template: index.html.twig
   parametros: 
   includesHead:
     twigCss: _global/css.html.twig

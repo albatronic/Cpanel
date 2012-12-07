@@ -133,7 +133,7 @@ class Controller {
         // Cargas las variables
         $this->cargaVariables();
 
-        $this->values['atributos'] = $this->form->getAtributos($this->values['permisos']['enCurso']['modulo']);
+        $this->values['atributos'] = $this->form->getAtributos($this->entity);//$this->values['permisos']['enCurso']['modulo']);
 
         // Poner la solapa activa de los campos comunes
         ($this->request['solapaActiva'] == '') ? $this->values['solapaActiva'] = 'general' : $this->values['solapaActiva'] = $this->request['solapaActiva'];
