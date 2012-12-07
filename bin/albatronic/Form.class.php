@@ -170,8 +170,8 @@ class Form {
      */
     public function getLoginRequired() {
         $valor = strtoupper($this->getNode('login_required'));
-        
-        return ( ($valor == 'YES') or ($valor == 'TRUE') );        
+
+        return ( ($valor == 'YES') or ($valor == 'TRUE') );
     }
 
     /**
@@ -182,7 +182,7 @@ class Form {
      */
     public function getPermissionControl() {
         $valor = strtoupper($this->getNode('permission_control'));
-        
+
         return ( ($valor == 'YES') or ($valor == 'TRUE') );
     }
 
@@ -194,8 +194,8 @@ class Form {
      */
     public function getFavouriteControl() {
         $valor = strtoupper($this->getNode('favourite_control'));
-        
-        return ( ($valor == 'YES') or ($valor == 'TRUE') );        
+
+        return ( ($valor == 'YES') or ($valor == 'TRUE') );
     }
 
     /**
@@ -388,7 +388,7 @@ class Form {
      */
     public function getTieneListado() {
         $valor = strtoupper($this->getNode('feature_list'));
-                
+
         return ( ($valor == 'YES') or ($valor == 'TRUE') );
     }
 
@@ -546,9 +546,11 @@ class Form {
             foreach ($arrayColumnas as $key => $value) {
                 $atributos[$key] = $value;
 
-                foreach ($columnasConfig[$key] as $keyConfig => $valueConfig) {
-                    if (!isset($atributos[$key][$keyConfig]))
-                        $atributos[$key][$keyConfig] = $valueConfig;
+                if (is_array($columnasConfig[$key])) {
+                    foreach ($columnasConfig[$key] as $keyConfig => $valueConfig) {
+                        if (!isset($atributos[$key][$keyConfig]))
+                            $atributos[$key][$keyConfig] = $valueConfig;
+                    }
                 }
             }
         } else {
