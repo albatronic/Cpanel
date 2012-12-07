@@ -195,7 +195,7 @@ $result['values']['archivoJs'] = getArchivoJs($result['template']);
 
 // Cargar las variables Web del Proyecto
 if (!isset($_SESSION['varPro_Web'])) {
-    $var = new CpanVariables();
+    $var = new CpanVariables('Pro','Web');
     $rows = $var->cargaCondicion('Yml', "Variable='varPro_Web'");
     unset($var);
     $_SESSION['varPro_Web'] = sfYaml::load($rows[0]['Yml']);
