@@ -52,7 +52,7 @@ CommBancos:
   table: CommBancos
   primarykey: Id
   linkBy: ''
-  records_per_page: 15
+  records_per_page: 20
   order_by:
     -
       title: 'Código a-z'

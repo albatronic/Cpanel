@@ -7,7 +7,7 @@
 #
 ---
 CpanUrlAmigables:
-  app: ''
+  app: 'Cpan'
   isModuleRoot: 0
   linkModule:
     fromColumn: ''

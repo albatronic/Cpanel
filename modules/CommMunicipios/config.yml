@@ -52,14 +52,20 @@ CommMunicipios:
   table: CommMunicipios
   primarykey: Id
   linkBy: ''
-  records_per_page: 15
+  records_per_page: 20
   order_by:
     -
-      title: 'Id a-z'
-      criteria: 'Id ASC'
+      title: 'Municipio a-z'
+      criteria: 'Municipio ASC'
     -
-      title: 'Id z-a'
-      criteria: 'Id DESC'
+      title: 'Municipio z-a'
+      criteria: 'Municipio DESC'
+    -
+      title: 'Provincia a-z'
+      criteria: 'IdProvincia,Municipio ASC'
+    -
+      title: 'Provincia z-a'
+      criteria: 'IdProvincia,Municipio DESC'      
   search_default: Id
   referenced_entities:
     - CommPaises

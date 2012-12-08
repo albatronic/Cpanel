@@ -376,6 +376,9 @@ class Controller {
     public function listAction($aditionalFilter = '') {
 
         if ($this->values['permisos']['permisosModulo']['CO']) {
+            if ($aditionalFilter != '')
+                $aditionalFilter .= " AND ";
+            $aditionalFilter .= "(Deleted='0')";
             $this->values['listado'] = $this->listado->getAll($aditionalFilter);
             $template = $this->entity . '/list.html.twig';
         } else {

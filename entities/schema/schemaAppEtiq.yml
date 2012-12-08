@@ -1,0 +1,9 @@
+# ESQUEMA DE LA APP Etiq. ETIQUETAS DE TODOS LOS MODULOS
+EtiqEtiquetas:
+  comment: Etiquetas de los modulos
+  columns:
+    IdModulo: { type: bigint(11), notnull: true, index: index, comment: 'db,CpanModulos,Id'}
+    Etiqueta: { type: string(255), notnull: true, index: unique }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IdModulo : { ForeignEntity: CpanModulos, ForeignId: Id }

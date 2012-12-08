@@ -13,6 +13,10 @@ class CpanUrlAmigablesController extends Controller {
     protected $entity = "CpanUrlAmigables";
     protected $parentEntity = "";
 
+    public function IndexAction() {
+        return parent::listAction();
+    }
+
 }
 
 ?>

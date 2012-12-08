@@ -86,6 +86,8 @@ class CpanUsuariosEntity extends EntityComunes {
     }
 
     public function getId() {
+        if (!($this->Id instanceof PcaeUsuarios))
+            $this->Id = new PcaeUsuarios($this->Id);
         return $this->Id;
     }
 

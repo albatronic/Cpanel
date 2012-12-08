@@ -52,6 +52,8 @@ class IndexController extends Controller {
      */
     public function IndexAction() {
 
+        $template = $this->entity . "/index.html.twig";
+        
         if (!isset($_SESSION['USER']['menu'])) {
             // Está logeado (viene del portal), pero es la primera vez que entra
             unset($_SESSION['USER']['accesosPortal']);
@@ -60,7 +62,9 @@ class IndexController extends Controller {
             $proyectoApp = new PcaeProyectosApps();
             $proyectoApp = $proyectoApp->find('PrimaryKeyMD5', $this->request[1]);
             $_SESSION['project']['Id'] = $proyectoApp->getId();
-            $_SESSION['project']['title'] = $proyectoApp->getIdProyecto()->getProyecto() . " - " . $proyectoApp->getIdApp()->getAplicacion();
+            $_SESSION['project']['IdEmpresa'] = $proyectoApp->getIdProyecto()->getIdEmpresa()->getId();            
+            $_SESSION['project']['empresa'] = $proyectoApp->getIdProyecto()->getIdEmpresa()->getRazonSocial();
+            $_SESSION['project']['title'] = $proyectoApp->getIdProyecto()->getProyecto();
             $_SESSION['project']['url'] = $proyectoApp->getUrl();
             $_SESSION['project']['conection'] = array(
                 'dbEngine' => $proyectoApp->getDbEngine(),
@@ -88,7 +92,7 @@ class IndexController extends Controller {
                 $_SESSION['USER']['user']['IdPerfil'] = $usuario->getIdPerfil()->getId();
                 $_SESSION['USER']['menu'] = $usuario->getArrayMenu();
             } else
-                $this->values['errores'] = 'EL USUARIO NO ESTA REGISTRADO EN ESTA APP';
+                $template = $this->entity . "/noLoged.html.twig";
             unset($usuario);
 
             // Carga las variables de entorno y web del proyecto
@@ -129,7 +133,7 @@ class IndexController extends Controller {
         }
 
         return array(
-            'template' => $this->entity . '/index.html.twig',
+            'template' => $template,
             'values' => $this->values,
         );
     }

@@ -1,16 +1,22 @@
 <?php
+
 /**
-* CONTROLLER FOR CpanRoles
-* @author: Sergio Perez <sergio.perez@albatronic.com>
-* @copyright: INFORMATICA ALBATRONIC SL 
-* @date 10.09.2012 12:31:09
+ * CONTROLLER FOR CpanRoles
+ * @author: Sergio Perez <sergio.perez@albatronic.com>
+ * @copyright: INFORMATICA ALBATRONIC SL 
+ * @date 08.12.2012 01:31:49
 
-* Extiende a la clase controller
-*/
-
+ * Extiende a la clase controller
+ */
 class CpanRolesController extends Controller {
 
-	protected $entity = "CpanRoles";
-	protected $parentEntity = "";
+    protected $entity = "CpanRoles";
+    protected $parentEntity = "";
+
+    public function IndexAction() {
+        return parent::listAction();
+    }
+
 }
+
 ?>

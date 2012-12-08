@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 10.09.2012 12:31:10
+# @date 07.12.2012 23:55:49
 #
 ---
 listados:
@@ -24,13 +24,3 @@ listados:
       IdPerfil: { title: IdPerfil, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
       IdRol: { title: IdRol, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
       IdTipoUsuario: { title: IdTipoUsuario, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
-      Login: { title: Login, length: '50', align: L, type: string, total: NO, formula: null, format: null }
-      Password: { title: Password, length: '100', align: L, type: string, total: NO, formula: null, format: null }
-      Apellidos: { title: Apellidos, length: '100', align: L, type: string, total: NO, formula: null, format: null }
-      Nombre: { title: Nombre, length: '100', align: L, type: string, total: NO, formula: null, format: null }
-      Email: { title: Email, length: '100', align: L, type: string, total: NO, formula: null, format: null }
-      TelefonoMovil: { title: TelefonoMovil, length: '25', align: L, type: string, total: NO, formula: null, format: null }
-      CambioPassword: { title: CambioPassword, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
-      Ips: { title: Ips, length: '255', align: L, type: string, total: NO, formula: null, format: null }
-      NLogin: { title: NLogin, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
-      UltimoLogin: { title: UltimoLogin, length: 10, align: R, type: datetime, total: NO, formula: null, format: null }

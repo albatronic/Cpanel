@@ -1,0 +1,15 @@
+{#
+  Module: EtiqEtiquetas
+  Document : modules\EtiqEtiquetas\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 30.10.2012 18:46:08
+#}
+
+{{ macro.select(atributos.IdModulo,'field_title',values.controller ~ '[IdModulo]',values.controller ~ '_IdModulo',none,datos.IdModulo.Id,datos.IdModulo.cargaCondicion('Id as Id, Titulo as Value','Nivel>0','Titulo ASC'),'chzn-select','1')}}
+{{ macro.input(atributos.Etiqueta,'field_title','text',values.controller ~ '[Etiqueta]',values.controller ~ '_Etiqueta',datos.Etiqueta,'255','CampoTextoLargo','1') }}
+
+{% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_Etiqueta') }}

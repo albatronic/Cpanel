@@ -46,7 +46,7 @@ VisitVisitas:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: VisitVisitas
+  title: Visitas
   id_video: visitvisitas
   url_video: null
   feature_list: YES
