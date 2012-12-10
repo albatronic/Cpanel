@@ -146,7 +146,6 @@ if ($rq->isOldBrowser()) {
 
         case 'POST':
             $request = $rq->getRequest();
-            $request['FILES'] = $rq->getFiles();
             $request['METHOD'] = "POST";
             $controller = ucfirst($request['controller']);
             $action = $request['action'];

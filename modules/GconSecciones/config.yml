@@ -58,11 +58,11 @@ GconSecciones:
   records_per_page: 20
   order_by:
     -
-      title: 'Id a-z'
-      criteria: 'Id ASC'
+      title: 'Título a-z'
+      criteria: 'Titulo ASC'
     -
-      title: 'Id z-a'
-      criteria: 'Id DESC'
+      title: 'Título z-a'
+      criteria: 'Titulo DESC'
   search_default: Id
   referenced_entities:
     - ValoresSN

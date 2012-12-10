@@ -40,16 +40,16 @@ class CpanDocsEntity extends EntityComunes {
 	 * @var string
 	 * @assert NotBlank(groups="CpanDocs")
 	 */
-	protected $PathName;
+	protected $PathName='';
 	/**
 	 * @var string
 	 * @assert NotBlank(groups="CpanDocs")
 	 */
-	protected $Name;
+	protected $Name='';
 	/**
 	 * @var string
 	 */
-	protected $Extension;
+	protected $Extension='';
 	/**
 	 * @var string
 	 */

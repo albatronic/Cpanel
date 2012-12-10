@@ -79,9 +79,9 @@
 }
 
 .comando{
-	width: 120px;
-	padding: 5px 10px 5px 10px;
-        margin-right: 5px;
+    width: 120px;
+    padding: 5px 10px 5px 10px;
+    margin-right: 5px;
 }
 
 .Titulo{
@@ -200,3 +200,39 @@
 .Listado tbody tr:hover td,tbody tr:hover th, tbody tr:hover a{ color: black; background-color: #D9D9D9;}
 .Listado .sin_registros{ font-size: 12px; text-align: center;}
 /*FIN ACTION LIST*/
+
+.docsCaja {
+    padding: 20px;
+}
+
+.docsItem {
+    float: left;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.docsFoto {
+
+    float: left;
+    margin-left: 50px; 
+}
+
+.docsLabel {
+    float:left;
+    overflow: hidden;
+    color: black;
+    border-bottom: 1px dotted #525252;
+    text-align:left;
+    width: 120px;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+
+.docsItem {
+    margin-left: 40px;
+    float: left;
+}
+
+.docsSaltoLinea {
+    clear: both;
+}

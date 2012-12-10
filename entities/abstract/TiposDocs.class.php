@@ -15,6 +15,7 @@ class TiposDocs extends Tipos {
         array('Id' => 'image3',   'Value' => 'image3',  'limit' => '1'),
         array('Id' => 'image4',   'Value' => 'image4',  'limit' => '1'),
         array('Id' => 'image5',   'Value' => 'image5',  'limit' => '1'),
+        array('Id' => 'tiny',     'Value' => 'tiny',    'limit' => ''),        
         array('Id' => 'galery',   'Value' => 'galery',  'limit' => ''),
         array('Id' => 'document', 'Value' => 'document','limit' => ''),
         array('Id' => 'video',    'Value' => 'video',   'limit' => ''),

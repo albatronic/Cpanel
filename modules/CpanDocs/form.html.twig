@@ -10,64 +10,85 @@
 {% extends values.controller ~ '/index.html.twig' %}
 
 {% block listado %}
-    <table width='100%'>
-        <tr class='Titulos'>
-            <td class='Item'>Orden</td>
-            <td class='Item'>Documento</td>
-            <td class='Item'>Título</td>
-            <td class='Item'>Nombre</td>
-            <td class='Item'>Pie Foto</td>
-            <td>&nbsp;</td>
-        </tr>
 
-        <tbody class="">
-            {% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
-            {% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
+{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
+{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 
-            {% for key,objeto in values.listado.data %}
 
-            <form name="linea{{key}}" id="linea{{key}}" action="" method="POST" enctype="multipart/form-data" class="form_container left_label">
-                <input name="controller" value="{{values.controller}}" type="hidden" />
-                <input name="action" id="action{{key}}" value="edit" type="hidden" />
-                <input name="CpanDocs[Id]" value="{{ objeto.Id }}" type="hidden" />
-                <input name="CpanDocs[Entity]" value="{{ objeto.Entity }}" type="hidden" />
-                <input name="CpanDocs[IdEntity]" value="{{ objeto.IdEntity }}" type="hidden" />
-                <input name="CpanDocs[Type]" value="{{ objeto.Type }}" type="hidden" />
-                <input name="accion" id="accion{{key}}" value="" type="hidden" />
-                <tr style="vertical-align: middle;">
-                    <td><input name="CpanDocs[SortOrder]" id="CpanDocs_SortOrder{{key}}" value="{{objeto.SortOrder}}" type="text" maxlength="3" style="width:25px;"  /></td>
-                    <td style="text-align: center; width: 100px; overflow: hidden;">
-                        {% if objeto.PathName != '' %}
-                            <div id="foto{{key}}">
-                                <img src="{{project.url}}/{{objeto.PathName}}" width="70px;" />
-                            </div>
-                        {% endif %}
-                        <input name="MAX_FILE_SIZE" value="{{values.maxFileSize}}" type="hidden"  />
-                        <input name="documento" id="documento{{key}}" type="file" onclick="loading('foto{{key}}');" />
-                    </td>
-                    <td><input name="CpanDocs[Title]" id="CpanDocs_Title{{key}}" value="{{objeto.Title}}" type="text" maxlength="255" style="width:200px;" /></td>
-                    <td><input name="CpanDocs[Name]" id="CpanDocs_Name{{key}}" value="{{objeto.Name}}" type="text" maxlength="255" style="width:180px;" /></td>
-                    <td>
-                        <select name="CpanDocs[ShowCaption]">
-                            {% for value in objeto.ShowCaption.fetchAll('Descripcion',0)%}
-                                <option value="{{value.Id}}" {%if value.Id == objeto.ShowCaption.IDTipo%} SELECTED{%endif%}>{{value.Value}}</option>
-                            {% endfor %}
-                        </select>
-                    </td>
-                    <td align="center">
-                        {% if objeto.Id > 0 %}
-                        <input type="image" src="{{app.path}}/images/botonsave.png" onclick="$('#accion{{key}}').val('G');" alt="Guardar" title="Guardar Documento" />
-                        <input type="image" src="{{app.path}}/images/papelera.gif" onclick="if (!confirm('Desea eliminar el documento?')) {return false;} else {$('#accion{{key}}').val('B');}" alt="Borrar" title="Borrar Documento" />
-                        {% else %}
-                        <input type="image" src="{{app.path}}/images/nuevo.png" onclick="$('#action{{key}}').val('new'); submitForm('linea{{key}}');" alt="Nuevo" title="Crear Documento" />
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr style="height: 20px;"></tr>
-            </form>
-            {% endfor %}
-        </tbody>
-    </table>
+{% for key,objeto in values.listado.data %}
+
+<div class="docsCaja">
+    <form name="linea{{key}}" id="linea{{key}}" action="" method="POST" enctype="multipart/form-data" class="form_container left_label">
+    <input name="controller" value="{{values.controller}}" type="hidden" />
+    <input name="action" id="action{{key}}" value="edit" type="hidden" />
+    <input name="CpanDocs[Id]" value="{{ objeto.Id }}" type="hidden" />
+    <input name="CpanDocs[Entity]" value="{{ objeto.Entity }}" type="hidden" />
+    <input name="CpanDocs[IdEntity]" value="{{ objeto.IdEntity }}" type="hidden" />
+    <input name="CpanDocs[Type]" value="{{ objeto.Type }}" type="hidden" />
+    <input name="accion" id="accion{{key}}" value="" type="hidden" /> 
+
+    <div class="docsFoto">
+        {% if objeto.PathName != '' %}
+            <div id="foto{{key}}" style="text-align: center;">
+                <img src="{{project.url}}/{{objeto.PathName}}" width="150px;" />
+            </div>
+            <div style="text-align: center;">{{objeto.getSize}} ({{objeto.Width}} x {{objeto.Height}})</div>
+        {% else %}
+            &nbsp;
+        {% endif %}
+        <div>
+        <input name="MAX_FILE_SIZE" value="{{values.maxFileSize}}" type="hidden"  />
+        <input name="documento" id="documento{{key}}" type="file" onclick="loading('foto{{key}}');" />
+        </div>
+    </div>
+
+    <div class="docsItem">
+        <div class="Item">
+            <div class="docsLabel">Orden</div>
+            <input style="width: 30px;" name="CpanDocs[SortOrder]" id="CpanDocs_SortOrder{{key}}" value="{{objeto.SortOrder}}" type="text" />
+        </div>
+        <div class="Item">
+            <div class="docsLabel">Título</div>
+            <input style="width: 300px;" name="CpanDocs[Title]" id="CpanDocs_Title{{key}}" value="{{objeto.Title}}" type="text" />
+        </div>            
+        <div>
+            <div class="docsLabel">Nombre</div>
+            <input style="width: 300px; "name="CpanDocs[Name]" id="CpanDocs_Name{{key}}" value="{{objeto.Name}}" type="text" />
+        </div>  
+        <div class="Item">
+            <div class="docsLabel">Mostrar título</div>
+            <input name="CpanDocs[ShowCaption]" 
+                   id="CpanDocs_ShowCaption{{key}}" 
+                   value="{{objeto.ShowCaption.IDTipo}}" 
+                   type="checkbox" 
+                   {% if objeto.ShowCaption.IDTipo %} checked{% endif %}
+                   onchange="if ($(this).is(':checked')) {$(this).val('1');} else {$(this).val('0');}"
+            />
+        </div>
+            
+        {% if objeto.Type == 'tiny' and objeto.Id > 0%}
+        <div class="Item" style="margin-top: 10px;">
+            <p>{{project.url}}/{{objeto.PathName}}</p>
+        </div>
+        {% endif %}
+            
+        <div class="Item">
+            {% if objeto.Id > 0 %}
+            <input type="image" src="{{app.path}}/images/botonsave.png" onclick="$('#accion{{key}}').val('G');" alt="Guardar" title="Guardar Documento" />
+            <input type="image" src="{{app.path}}/images/papelera.gif" onclick="if (!confirm('Desea eliminar el documento?')) {return false;} else {$('#accion{{key}}').val('B');}" alt="Borrar" title="Borrar Documento" />
+            {% else %}
+            <input type="image" src="{{app.path}}/images/nuevo.png" onclick="$('#action{{key}}').val('new'); submitForm('linea{{key}}');" alt="Nuevo" title="Crear Documento" />
+            {% endif %}
+        </div>
+    </div>
+
+    </form>
+
+</div>
+
+<div class="docsSaltoLinea"></div>
+{% endfor %}
 
 {{ macro.foco('documento0') }}
+
 {% endblock %}

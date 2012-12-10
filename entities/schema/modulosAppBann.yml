@@ -1,0 +1,17 @@
+# MODULOS DE LA APP Bann. BANNERS
+CpanAplicaciones:
+  1  : { CodigoApp: Bann,   NombreApp: Banners }
+
+CpanModulos:
+  1: { CodigoApp: Bann,  NombreModulo: Bann,         Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Banners, Funcionalidades: AC }
+  2: { CodigoApp: Bann,  NombreModulo: BannZonas,    Nivel: 1, BelongsTo: Bann,  Publish: 1, Titulo: Zonas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  3: { CodigoApp: Bann,  NombreModulo: BannBanners,  Nivel: 1, BelongsTo: Bann,  Publish: 1, Titulo: Banners, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+CpanPermisos:
+  1:  { IdPerfil: 1, NombreModulo: Bann, Funcionalidades: 'AC,VW' }
+  2:  { IdPerfil: 1, NombreModulo: BannZonas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  3:  { IdPerfil: 1, NombreModulo: BannBanners, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  
+  11: { IdPerfil: 2, NombreModulo: Bann, Funcionalidades: 'AC,VW' }
+  12: { IdPerfil: 2, NombreModulo: BannZonas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  13: { IdPerfil: 2, NombreModulo: BannBanners, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  

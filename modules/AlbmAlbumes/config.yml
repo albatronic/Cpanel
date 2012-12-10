@@ -127,17 +127,6 @@ AlbmAlbumes:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
-    FechaPublicacion:
-      title: Fecha Publicación
-      filter: YES
-      list: NO
-      visible: true
-      updatable: true
-      default: <?php echo date('d-m-Y');?>
-      help: null
-      permission: null
-      link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnPortada:
       title: Mostrar en Portada
       filter: NO

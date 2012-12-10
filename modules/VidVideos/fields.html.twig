@@ -11,10 +11,8 @@
 {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
 {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','3')}}
 {{ macro.input(atributos.Autor,'field_title','text',values.controller ~ '[Autor]',values.controller ~ '_Autor',datos.Autor,'50','CampoTextoLargo','4') }}
-{{ macro.input(atributos.FechaPublicacion,'field_title','text',values.controller ~ '[FechaPublicacion]',values.controller ~ '_FechaPublicacion',datos.FechaPublicacion,'11','CampoImporte','5') }}
 {{ macro.input(atributos.MostrarEnPortada,'field_title','checkbox',values.controller ~ '[MostrarEnPortada]',values.controller ~ '_MostrarEnPortada',datos.MostrarEnPortada.IDTipo,'255','CampoTextoLargo','12') }}
-
-{{ macro.input(atributos.OrdenPortada,'field_title','text',values.controller ~ '[OrdenPortada]',values.controller ~ '_OrdenPortada',datos.OrdenPortada,'4','CampoUnidades','7') }}
+{# macro.input(atributos.OrdenPortada,'field_title','text',values.controller ~ '[OrdenPortada]',values.controller ~ '_OrdenPortada',datos.OrdenPortada,'4','CampoUnidades','7') #}
 
 {% include '_global/fieldsComunes.html.twig' %}
 

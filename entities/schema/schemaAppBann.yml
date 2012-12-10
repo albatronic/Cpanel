@@ -1,0 +1,25 @@
+# ----------------------
+# APP ENLACES DE BANNERS
+# ----------------------
+
+BannZonas:
+  columns:
+    Titulo:              { type: string(255), notnull: true}
+    NumeroMaximoBanners: { type: integer(4), notnull: true, default: 0 }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+
+BannBanners:
+  columns:
+    IdZona:                { type: int(11), notnull: true, index: index, comment: 'db,BannZonas,Id' }
+    Titulo:                { type: string(255), notnull: true }
+    Subtitulo:             { type: string(255), notnull: false, default: NULL }
+    Resumen:               { type: text, default: NULL }
+    IdTipo:                { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,TiposBanners,IDTipo'}
+    MostrarEnListado:      { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
+    OrdenMostrarEnListado: { type: integer(4), notnull: true, default: 0 }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IdZona:    { ForeignEntity: BannZonas, ForeignId: Id}
+    IdTipo:    { ForeignEntity: TiposBanners, ForeignId: Id}
+    MostrarEnListado:    { ForeignEntity: ValoresSN, ForeignId: IDTipo}

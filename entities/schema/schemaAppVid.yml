@@ -8,7 +8,6 @@ VidVideos:
     Subtitulo:        { type: string(255), notnull: false, default: NULL }
     Resumen:          { type: text, default: NULL }
     Autor:            { type: string(50), notnull: false, default: NULL }
-    FechaPublicacion: { type: bigint(11), notnull: true, default: '0', index: index }
     MostrarEnPortada: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
     OrdenPortada:     { type: integer(4), notnull: true, default: 0 }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>

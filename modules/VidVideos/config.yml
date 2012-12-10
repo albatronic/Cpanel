@@ -58,11 +58,11 @@ VidVideos:
   records_per_page: 20
   order_by:
     -
-      title: 'Titulo a-z'
-      criteria: 'Título ASC'
+      title: 'Título a-z'
+      criteria: 'Titulo ASC'
     -
-      title: 'Titulo z-a'
-      criteria: 'Título DESC'
+      title: 'Título z-a'
+      criteria: 'Titulo DESC'
   search_default: Id
   referenced_entities:
     - ValoresSN
@@ -86,7 +86,7 @@ VidVideos:
     Titulo:
       title: Título
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -119,7 +119,7 @@ VidVideos:
     Autor:
       title: Autor
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -127,21 +127,10 @@ VidVideos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
-    FechaPublicacion:
-      title: Fecha de Publicación
-      filter: YES
-      list: NO
-      visible: true
-      updatable: true
-      default: '0'
-      help: null
-      permission: null
-      link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnPortada:
       title: Mostrar en Portada
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -149,7 +138,7 @@ VidVideos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 1, caption: MostrarEnPortada, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: NO, type: tinyint, length: 2, min: null, max: null, message: 'Valor Requerido' }
     OrdenPortada:
       title: Orden Portada
       filter: YES

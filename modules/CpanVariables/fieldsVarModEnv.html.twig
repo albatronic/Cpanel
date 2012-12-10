@@ -48,11 +48,12 @@
         {{ macro.input({'caption':'[numMaxRecords] Número máximo registros','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[numMaxRecords]','datos_numMaxRecords',values.datos.numMaxRecords,'15','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[showNumberVisits] Mostrar número visitas','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showNumberVisits]','datos_showNumberVisits',values.datos.showNumberVisits)}}
         {{ macro.input({'caption':'[numberOfImages] Número de imágenes de diseño (0=sin imágenes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[numberOfImages]','datos_numberOfImages',values.datos.numberOfImages,'3','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[withTiny] Hay imágenes Tiny','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[withTiny]','datos_withTiny',values.datos.withTiny)}}
         {{ macro.input({'caption':'[withGalery] Hay Galeria','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[withGalery]','datos_withGalery',values.datos.withGalery)}}
         {{ macro.input({'caption':'[withDocuments] Hay Documentos','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[withDocuments]','datos_withDocuments',values.datos.withDocuments)}}
         {{ macro.input({'caption':'[withVideos] Hay Videos','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[withVideos]','datos_withVideos',values.datos.withVideos)}}
         {{ macro.input({'caption':'[withAudios] Hay Audios','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[withAudios]','datos_withAudios',values.datos.withAudios)}}
-        {{ macro.input({'caption':'[maxSizes][image] Tamaño máximo imagen (bytes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[maxSizes][image]','datos_maxSizes_image',values.datos.maxSizes.image,'10','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[maxSizes][image] Tamaño máximo de las imágenes (bytes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[maxSizes][image]','datos_maxSizes_image',values.datos.maxSizes.image,'10','CampoTextoCorto','1') }}          
         {{ macro.input({'caption':'[maxSizes][document] Tamaño máximo documento (bytes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[maxSizes][document]','datos_maxSizes_document',values.datos.maxSizes.document,'10','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[maxSizes][video] Tamaño máximo video (bytes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[maxSizes][video]','datos_maxSizes_video',values.datos.maxSizes.video,'10','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[maxSizes][audio] Tamaño máximo Audio (bytes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[maxSizes][audio]','datos_maxSizes_audio',values.datos.maxSizes.audio,'10','CampoTextoCorto','1') }}
@@ -204,7 +205,7 @@
      </div>
 
     {# EDITOR TINY #}
-    <div id="tabs-editorTiny" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    <div id="tabs-editorTiny" class="ui-tabs-panel ui-widget-content ui-corner-bottom"> 
         {{ macro.input({'caption':'[editorTiny][biu] Bold,Italic,Underline','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[editorTiny][bui]','datos_editorTiny_bui',values.datos.editorTiny.bui)}}
         {{ macro.input({'caption':'[editorTiny][alignment] Alineación','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[editorTiny][alignment]','datos_editorTiny_alignment',values.datos.editorTiny.alignment)}}
         {{ macro.input({'caption':'[editorTiny][lists] Listas','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[editorTiny][lists]','datos_editorTiny_lists',values.datos.editorTiny.lists)}}

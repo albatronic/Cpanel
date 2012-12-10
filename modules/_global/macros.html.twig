@@ -120,6 +120,39 @@
 {% endif %}
 {% endmacro %}
 
+{# ------------------------
+   INPUT RADIO 
+---------------------------#}
+{% macro radio(atributos, classLabel, name, id, valueSelected, arrayOptions, class, tabIndex, extra, onchange) %}
+{% if atributos.visible == '1' %}
+<li>
+<div class="form_grid_12" id="div_{{id|default(name)}}">
+
+    {% if atributos.caption %}
+        {{ _self.label(atributos, classLabel, name, id) }}
+    {% endif %}
+
+    <div class="form_input">
+        {% for value in arrayOptions %}
+        <input  
+           type="radio"
+           name="{{ name }}"
+           id="{{ id|default(name)}}"
+           value="{{value.Id}}"
+           class="{{ class |default('input_grow') }}"
+           tabindex="{{ tabindex }}"
+           onchange="{{ onchange}} {{ _self.alertSave }}"
+           {% if atributos.updatable == '0' %} disabled {% endif %}
+           {{extra}}
+           {% if valueSelected == value.Id %} checked{% endif %}
+        />&nbsp;{{value.Value}}&nbsp;
+        {% endfor %}
+    </div>
+</div>
+</li>
+{% endif %}   
+{% endmacro %}
+    
 {# cc: CUENTA CORRIENTE #}
 {# -------------------- #}
 {% macro cc(label,classLabel,entidad,banco,oficina,digitoControl,cuentaCorriente) %}

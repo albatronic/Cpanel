@@ -266,7 +266,7 @@ class Ftp {
 
         $this->connectId = ftp_connect($this->server,$this->port, $this->timeout);
         $ok = ftp_login($this->connectId, $this->user, $this->password);
-        
+
         if (!$ok)
             $this->errores[] = "FTP: La conexión ha fallado!";
         

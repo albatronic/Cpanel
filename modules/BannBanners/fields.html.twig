@@ -1,0 +1,43 @@
+{#
+  Module: BannBanners
+  Document : modules\BannBanners\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 09.12.2012 08:36:04
+#}
+
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top"><a href="#tabs1-arbol">Árbol de Banners</a></li>
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs1-seccion">Banner</a></li>     
+    </ul>
+
+    <div id="tabs1-arbol" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        <ul>
+            {% for key,zona in values.arbol %}
+                <li style="font-weight: bold;">{{zona.titulo}}</li>
+                <ul>
+                    {% for keyBanner,titulo in zona.banners %}
+                        <li style="margin-left: 30px;">
+                            <a href="{{app.path}}/{{values.controller}}/edit/{{keyBanner}}">{{titulo}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ul>
+    </div>
+        
+    <div id="tabs1-seccion" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.select(atributos.IdZona,'field_title',values.controller ~ '[IdZona]',values.controller ~ '_IdZona',none,datos.IdZona.Id,datos.IdZona.fetchAll('Titulo',0),'chzn-select','1')}}
+        {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
+        {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
+        {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','4')}}
+        {{ macro.radio(atributos.IdTipo,'field_title',values.controller ~ '[IdTipo]',values.controller ~ '_IdTipo',datos.IdTipo.IDTipo,datos.IdTipo.fetchAll('Descripcion',0),'chzn-radio','5') }}
+        {{ macro.input(atributos.MostrarEnListado,'field_title','checkbox',values.controller ~ '[MostrarEnListado]',values.controller ~ '_MostrarEnListado',datos.MostrarEnListado.IDTipo,'255','CampoTextoLargo','5') }}
+        {# macro.input(atributos.OrdenMostrarEnListado,'field_title','text',values.controller ~ '[OrdenMostrarEnListado]',values.controller ~ '_OrdenMostrarEnListado',datos.OrdenMostrarEnListado,'4','CampoUnidades','6') #}
+
+        {% include '_global/fieldsComunes.html.twig' %}
+    </div>
+</div>
+{{ macro.foco(values.controller ~ '_IdZona') }}

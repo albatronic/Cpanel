@@ -27,9 +27,9 @@ class GconContenidos extends GconContenidosEntity {
 
         if (count($this->_errores) == 0) {
             if ($this->BlogOrden == 0)
-                $this->setBlogOrden($this->getSortOrder());
+                $this->BlogOrden = $this->SortOrder;
             if ($this->NoticiaOrden == 0)
-                $this->setNoticiaOrden($this->getSortOrder());
+                $this->NoticiaOrden = $this->SortOrder;
         }
     }
 
@@ -42,7 +42,7 @@ class GconContenidos extends GconContenidosEntity {
      * @param integer $idContenido El id del contenido, opcional
      * @return array Array
      */
-    public function getEtiquetas($idContenido='') {
+    public function getEtiquetas($idContenido = '') {
 
         if ($idContenido == '')
             $idContenido = $this->Id;
@@ -52,11 +52,12 @@ class GconContenidos extends GconContenidosEntity {
         unset($etiqueta);
 
         $relacion = new GconContenidosEtiquetas();
-        $etiquetasRelacionadas = $relacion->cargaCondicion('IdEtiqueta',"IdContenido='{$idContenido}'");
+        $etiquetasRelacionadas = $relacion->cargaCondicion('IdEtiqueta', "IdContenido='{$idContenido}'");
         unset($relacion);
 
         foreach ($etiquetas as $key => $etiqueta) {
-            if ($etiqueta['Id'] == '1');
+            if ($etiqueta['Id'] == '1')
+                ;
         }
 
         return $rows;

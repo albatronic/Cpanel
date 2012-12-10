@@ -58,11 +58,11 @@ GconContenidos:
   records_per_page: 15
   order_by:
     -
-      title: 'Id a-z'
-      criteria: 'Id ASC'
+      title: 'Título a-z'
+      criteria: 'Titulo ASC'
     -
-      title: 'Id z-a'
-      criteria: 'Id DESC'
+      title: 'Título z-a'
+      criteria: 'Titulo DESC'
   search_default: Id
   referenced_entities:
     - GconSecciones
@@ -97,7 +97,7 @@ GconContenidos:
       aditional_filter: { order: 1, caption: Seccion, entity: GconSecciones, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Titulo:
-      title: Titulo
+      title: Título
       filter: YES
       list: YES
       visible: true

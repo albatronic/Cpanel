@@ -429,10 +429,10 @@ class Entity {
 
         if ($this->getPrimaryKeyValue() != '') {
             // Estoy validando antes de actualizar
-            if ( ($this->IsSuper) and ($_SESSION['USER']['user']['IdPerfil'] != '1') )
+            if (($this->IsSuper) and ($_SESSION['USER']['user']['IdPerfil'] != '1'))
                 $this->_errores[] = "No se puede modificar, es un datos reservado (super)";
         }
-        
+
         if (trim($this->UrlTarget) != '') {
             // Desactivar la gestion de url amigable
             $this->LockUrlPrefix = 1;
@@ -715,6 +715,26 @@ class Entity {
         return $nDocs;
     }
 
+    public function getArbolHijos() {
+        
+        $arbol = array();
+        
+        $objeto = new $this();
+        $rows = $objeto->cargaCondicion("Id,PrimaryKeyMD5", "BelongsTo='0'", "SortOrder ASC");
+        unset($objeto);
+
+        foreach ($rows as $row) {
+            $objeto = new $this($row['Id']);
+            $arbol[$row['PrimaryKeyMD5']] = array(
+                'titulo' => $objeto->getTitulo(),
+                'hijos' => $objeto->getHijos(),
+            );
+        }
+
+        unset($objeto);
+        return $arbol;
+    }
+
     /**
      * Genera el árbol genealógico con las entidades hijas de la
      * entidad $idPadre.
@@ -766,10 +786,15 @@ class Entity {
     private function getChildrens($idPadre) {
 
         // Obtener todos los hijos del padre actual
-        $hijos = $this->cargaCondicion('Id', "BelongsTo='{$idPadre}'", "SortOrder ASC");
+        $hijos = $this->cargaCondicion('Id,PrimaryKeyMD5', "BelongsTo='{$idPadre}'", "SortOrder ASC");
 
         foreach ($hijos as $hijo) {
-            $this->_hijos[$idPadre][$hijo['Id']] = $this->getChildrens($hijo['Id']);
+            $aux = new $this($hijo['Id']);
+            $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']] = array(
+                'titulo' => $aux->getTitulo(),
+                'hijos' => $this->getChildrens($hijo['Id']),
+            );
+            unset($hijo);
         }
 
         return $this->_hijos[$idPadre];

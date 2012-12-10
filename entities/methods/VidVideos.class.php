@@ -15,6 +15,15 @@ class VidVideos extends VidVideosEntity {
         return $this->getId();
     }
 
+    public function validaLogico() {
+        parent::validaLogico();
+
+        if (count($this->_errores) == 0) {
+            if ($this->OrdenPortada == 0)
+                $this->OrdenPortada = $this->SortOrder;
+        }
+    }
+
 }
 
 ?>

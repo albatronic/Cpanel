@@ -14,6 +14,7 @@ class CpanDocsController extends Controller {
     protected $parentEntity = "";
 
     public function __construct($request) {
+
         parent::__construct($request);
 
         $variables = new CpanVariables('Mod', 'Env', $this->entity);
@@ -61,6 +62,7 @@ class CpanDocsController extends Controller {
             // Tamaño máximo del archivo
             switch ($tipo) {
                 case 'galery':
+                case 'tiny':
                     $maxFileSize = $this->varEnvMod['maxSizes']['image'];
                     break;
                 case 'document':
@@ -106,7 +108,7 @@ class CpanDocsController extends Controller {
                     $datos = new CpanDocs();
                     $datos->bind($this->request['CpanDocs']);
                     $datos->setArrayDoc($this->request['FILES']['documento']);
-print_r($this->request);
+
                     $rules = $this->getRules($this->request[$this->entity]['Type']);
 
                     switch ($this->request[$this->entity]['Type']) {
@@ -138,6 +140,21 @@ print_r($this->request);
                                 $this->values['errores'] = $datos->getErrores();
                             }
                             break;
+
+                        case 'tiny':
+                            if ($datos->valida($rules)) {
+                                $documento = $datos->getArrayDoc();
+                                $documento['maxWidth'] = $this->varEnvMod['galery']['maxWidthImage'];
+                                $documento['maxHeight'] = $this->varEnvMod['galery']['maxHeightImage'];
+                                $datos->setArrayDoc($documento);
+                                $lastId = $datos->create();
+                                if (!$lastId)
+                                    $this->values['errores'] = $datos->getErrores();
+                            } else {
+                                $this->values['errores'] = $datos->getErrores();
+                            }
+                            break;
+                            
                         case 'document':
                         case 'video':
                         case 'audio':
@@ -283,6 +300,10 @@ print_r($this->request);
         $rules['type'] = $tipoDocumento;
 
         switch ($tipoDocumento) {
+            case 'tiny':
+                $rules['maxFileSize'] = $this->varEnvMod['maxSizes']['image'];
+                $rules['numMaxDocs'] = 9999;
+                break;
             case 'galery':
                 $rules['maxFileSize'] = $this->varEnvMod['maxSizes']['image'];
                 $rules['numMaxDocs'] = $this->varEnvPro['numMaxGalery'];

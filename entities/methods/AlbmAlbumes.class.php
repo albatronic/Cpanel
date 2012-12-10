@@ -15,6 +15,16 @@ class AlbmAlbumes extends AlbmAlbumesEntity {
         return $this->getId();
     }
 
+    /**
+     * Pone el orden 'OrdenPortada'
+     */
+    public function validaLogico() {
+
+        parent::validaLogico();
+
+        if (count($this->_errores) == 0) 
+            $this->OrdenPortada = $this->SortOrder;
+    }    
 }
 
 ?>

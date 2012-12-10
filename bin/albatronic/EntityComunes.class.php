@@ -818,7 +818,7 @@ class EntityComunes extends Entity {
     public function getCodigoAppAsociada() {
         if (!($this->CodigoAppAsociada instanceof CpanAplicaciones)) {
             $app = new CpanAplicaciones();
-            $this->CodigoAppAsociada = $app->find('CodigoApp', $this->CodigoAppAsociada);
+            $this->CodigoAppAsociada = $app->find('Id', $this->CodigoAppAsociada);
         }
         return $this->CodigoAppAsociada;
     }

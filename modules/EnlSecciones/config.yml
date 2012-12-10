@@ -87,7 +87,7 @@ EnlSecciones:
     Titulo:
       title: Título
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null

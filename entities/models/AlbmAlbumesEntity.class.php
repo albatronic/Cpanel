@@ -3,7 +3,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 05.12.2012 00:51:11
+ * @date 09.12.2012 18:17:00
  */
 
 /**
@@ -39,12 +39,6 @@ class AlbmAlbumesEntity extends EntityComunes {
      * @var string
      */
     protected $Autor;
-
-    /**
-     * @var integer
-     * @assert NotBlank(groups="AlbmAlbumes")
-     */
-    protected $FechaPublicacion = '0';
 
     /**
      * @var entities\ValoresSN
@@ -138,18 +132,6 @@ class AlbmAlbumesEntity extends EntityComunes {
 
     public function getAutor() {
         return $this->Autor;
-    }
-
-    public function setFechaPublicacion($TimeUnix) {
-
-        if ($TimeUnix == 0)
-            $TimeUnix = time();
-
-        $this->FechaPublicacion = $TimeUnix;
-    }
-
-    public function getFechaPublicacion() {
-        return date('d-m-Y H:i:s', $this->FechaPublicacion);
     }
 
     public function setMostrarEnPortada($MostrarEnPortada) {

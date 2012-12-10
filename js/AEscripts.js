@@ -12,7 +12,7 @@ $(function(){
      * Para las solapas
      */
     $( "#tabs" ).tabs();
-
+    $( "#tabs1" ).tabs();
     /**
      * Para el efecto acordeón
      */

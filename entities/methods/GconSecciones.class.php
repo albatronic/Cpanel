@@ -26,6 +26,7 @@ class GconSecciones extends GconSeccionesEntity {
         parent::validaLogico();
 
         if (count($this->_errores) == 0) {
+            // Poner las etiquetas web
             if ($this->EtiquetaWeb1 == '')
                 $this->setEtiquetaWeb1($this->Titulo);
             if ($this->EtiquetaWeb2 == '')
@@ -37,6 +38,18 @@ class GconSecciones extends GconSeccionesEntity {
             if ($this->EtiquetaWeb5 == '')
                 $this->setEtiquetaWeb5($this->Titulo);
 
+            // Poner el orden de los menus
+            if ($this->OrdenMenu1 == 0)
+                $this->setOrdenMenu1($this->SortOrder);
+            if ($this->OrdenMenu2 == 0)
+                $this->setOrdenMenu2($this->SortOrder);
+            if ($this->OrdenMenu3 == 0)
+                $this->setOrdenMenu3($this->SortOrder);
+            if ($this->OrdenMenu4 == 0)
+                $this->setOrdenMenu4($this->SortOrder);
+            if ($this->OrdenMenu5 == 0)
+                $this->setOrdenMenu5($this->SortOrder);
+            
             // Asignar el nivel Jerárquico
             $nivelPadre = 0;
             if ($this->BelongsTo != 0) {

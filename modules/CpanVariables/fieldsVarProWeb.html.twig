@@ -6,12 +6,15 @@
 
 {% extends 'CpanVariables/form.html.twig' %}
 
+{% set numeroContenidosFijos = 4 %}
+
 {% block template %}
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
         <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Meta</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-firmas">Firmas</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-contenidosFijos">Contenidos fijos</a></li>        
     </ul>
 
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
@@ -36,5 +39,10 @@
         {% endfor %}
     </div>
 
+    <div id="tabs-contenidosFijos" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {% for i in 0..numeroContenidosFijos %}
+        {{ macro.input({'caption':'[staticContents]['~i~'] Contenido fijo '~i,'visible':'1','varEnv':'0'},'field_title','text','datos[staticContents]['~i~']','datos_staticContents_sc'~i,values.datos.staticContents[i],'255','CampoTextoCorto','1') }}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
