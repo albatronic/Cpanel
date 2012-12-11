@@ -19,8 +19,19 @@ class _EmergenteController {
         // Cargar lo que viene en el request
         $this->request = $request;
         $this->values['request'] = $this->request;
+        $this->values['twigCss'] = '_global/css.html.twig';
+        $this->values['twigJs'] = '_global/js.html.twig';        
     }
 
+    public function BannBannersAction($keyMD5) {
+        
+        return array('template' => '_Emergente/entradasPedidos.html.twig', 'values' => $this->values);        
+    }
+    
+    public function SldSlidersAction($keyMD5) {
+        
+        return array('template' => '_Emergente/entradasPedidos.html.twig', 'values' => $this->values);        
+    }    
     /**
      * Muestra las líneas de albarán que están reservadas para el almacén y artículo indicado
      * @return array Con el template y values

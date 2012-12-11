@@ -50,8 +50,8 @@
 
             {% if values.varEnvMod.urlFriendlyManagement == '1' %}            
             <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'urls' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-urls" onclick="activaSolapa('urls');">URL's</a></li>
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'urlDestino' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-urlDestino" onclick="activaSolapa('urlDestino');">URL destino</a></li>
             {% endif %}
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'urlDestino' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-urlDestino" onclick="activaSolapa('urlDestino');">URL destino</a></li>
 
             {% if values.varEnvMod.showSiteMapManagement.show == '1' %}             
             <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'sitemap' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-sitemap" onclick="activaSolapa('sitemap');">SiteMap</a></li>
@@ -214,8 +214,8 @@
     <div id="tabs-urlDestino" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
         {{ macro.input(atributos.UrlTarget,'field_title','text',values.controller ~ '[UrlTarget]',values.controller ~ '_UrlTarget',datos.UrlTarget,'255','CampoTextoLargo',112) }}
         {{ macro.input(atributos.UrlParameters,'field_title','text',values.controller ~ '[UrlParameters]',values.controller ~ '_UrlParameters',datos.UrlParameters,'255','CampoTextoLargo',112) }}
-        {{ macro.select(atributos.UrlRequestMethod,'field_title',values.controller ~ '[UrlRequestMethod]',values.controller ~ '_UrlRequestMethod',none,datos.UrlRequestMethod.IDTipo,datos.UrlRequestMethod.fetchAll(none,0),'chzn-select',117)}}
-        {{ macro.select(atributos.UrlOrigin,'field_title',values.controller ~ '[UrlOrigin]',values.controller ~ '_UrlOrigin',none,datos.UrlOrigin.IDTipo,datos.UrlOrigin.fetchAll(none,0),'chzn-select',117)}}
+        {{ macro.radio(atributos.UrlRequestMethod,'field_title',values.controller ~ '[UrlRequestMethod]',values.controller ~ '_UrlRequestMethod',datos.UrlRequestMethod.IDTipo,datos.UrlRequestMethod.fetchAll(none,0),'chzn-radio',117)}}
+        {{ macro.radio(atributos.UrlOrigin,'field_title',values.controller ~ '[UrlOrigin]',values.controller ~ '_UrlOrigin',datos.UrlOrigin.IDTipo,datos.UrlOrigin.fetchAll(none,0),'chzn-radio',117)}}
         {{ macro.input(atributos.UrlTargetBlank,'field_title','checkbox',values.controller ~ '[UrlTargetBlank]',values.controller ~ '_UrlTargetBlank',datos.UrlTargetBlank.IDTipo,'255','CampoTextoLargo','12') }}
         {{ macro.input(atributos.UrlIsHttps,'field_title','checkbox',values.controller ~ '[UrlIsHttps]',values.controller ~ '_UrlIsHttps',datos.UrlIsHttps.IDTipo,'255','CampoTextoLargo','12') }}
     </div>
@@ -233,7 +233,9 @@
         {{ macro.radio(atributos.Privacy,'field_title',values.controller ~ '[Privacy]',values.controller ~ '_Privacy',datos.Privacy.IDTipo,datos.Privacy.fetchAll(none,0),'chzn-radio',109)}}
         {{ macro.input(atributos.AccessProfileList,'field_title','text',values.controller ~ '[AccessProfileList]',values.controller ~ '_AccessProfileList',datos.AccessProfileList,none,none,107) }}
         {% if datos.getPrimaryKeyValue %}
+            {% if values.varEnvMod.showNumberVisits %}
             {{ macro.input(atributos.NumberVisits,'field_title','text',values.controller ~ '[NumberVisits]',values.controller ~ '_NumberVisits',datos.NumberVisits,none,'CampoImporte',113, 'disabled') }}
+            {% endif %}
             {{ macro.input(atributos.DateTimeLastVisit,'field_title','text',values.controller ~ '[DateTimeLastVisit]',values.controller ~ '_DateTimeLastVisit',datos.DateTimeLastVisit,none,'CampoImporte',114, 'disabled') }}
 
             {{ macro.input(atributos.CreatedBy,'field_title','text',values.controller ~ '[CreatedBy]',values.controller ~ '_CreatedBy',datos.CreatedBy,none,none,107,'disabled') }}

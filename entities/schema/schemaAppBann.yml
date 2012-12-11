@@ -18,6 +18,8 @@ BannBanners:
     IdTipo:                { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,TiposBanners,IDTipo'}
     MostrarEnListado:      { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     OrdenMostrarEnListado: { type: integer(4), notnull: true, default: 0 }
+    Entidad:               { type: string(255), notnull: true, default: '' }
+    IdEntidad:             { type: bigint(11), notnull: true, default: 0 }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdZona:    { ForeignEntity: BannZonas, ForeignId: Id}

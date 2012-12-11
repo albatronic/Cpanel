@@ -31,9 +31,9 @@ CpanRoles:
     generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
-  urlFriendlyManagement: true
+  urlFriendlyManagement: false
   fieldGeneratorUrlFriendly: Rol
-  metatagTitleManagement: true
+  metatagTitleManagement: false
   fieldGeneratorMetatagTitle: Rol
   controller: CpanRoles
   action: Index

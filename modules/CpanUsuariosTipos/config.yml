@@ -31,9 +31,9 @@ CpanUsuariosTipos:
     generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
-  urlFriendlyManagement: true
+  urlFriendlyManagement: false
   fieldGeneratorUrlFriendly: Descripcion
-  metatagTitleManagement: true
+  metatagTitleManagement: false
   fieldGeneratorMetatagTitle: Descripcion
   controller: CpanUsuariosTipos
   action: Index

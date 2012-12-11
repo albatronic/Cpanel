@@ -33,7 +33,7 @@ class BannBanners extends BannBannersEntity {
             $zona = new BannZonas($this->IdZona);
             $banner = new BannBanners();
             $rows = $banner->cargaCondicion("count(Id) as nMax", "IdZona='{$this->IdZona}'");
-            if ($zona->getNumeroMaximoBanners() < ($rows['nMax'] + 1))
+            if ($zona->getNumeroMaximoBanners() < ($rows[0]['nMax'] + 1))
                 $this->_errores[] = "Se ha superado el número de banners para la zona {$zona->getTitulo()}. Consulte con el administrador de la web";
             unset($banner);
             unset($zona);

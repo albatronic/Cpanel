@@ -3,31 +3,31 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 09.12.2012 09:27:33
+ * @date 10.12.2012 17:38:34
  */
 
 /**
- * @orm:Entity(BannBanners)
+ * @orm:Entity(SldSliders)
  */
-class BannBannersEntity extends EntityComunes {
+class SldSlidersEntity extends EntityComunes {
 
     /**
      * @orm GeneratedValue
      * @orm Id
      * @var integer
-     * @assert NotBlank(groups="BannBanners")
+     * @assert NotBlank(groups="SldSliders")
      */
     protected $Id;
 
     /**
-     * @var entities\BannZonas
-     * @assert NotBlank(groups="BannBanners")
+     * @var entities\SldZonas
+     * @assert NotBlank(groups="SldSliders")
      */
     protected $IdZona;
 
     /**
      * @var string
-     * @assert NotBlank(groups="BannBanners")
+     * @assert NotBlank(groups="SldSliders")
      */
     protected $Titulo;
 
@@ -42,22 +42,16 @@ class BannBannersEntity extends EntityComunes {
     protected $Resumen;
 
     /**
-     * @var tinyint
-     * @assert NotBlank(groups="BannBanners")
+     * @var entities\TiposSliders
+     * @assert NotBlank(groups="SldSliders")
      */
     protected $IdTipo = '0';
 
     /**
-     * @var tinyint
-     * @assert NotBlank(groups="BannBanners")
+     * @var entities\ValoresSN
+     * @assert NotBlank(groups="SldSliders")
      */
-    protected $MostrarEnListado = '0';
-
-    /**
-     * @var integer
-     * @assert NotBlank(groups="BannBanners")
-     */
-    protected $OrdenMostrarEnListado = '0';
+    protected $MostrarTextos = '0';
 
     /**
      * @var string
@@ -81,7 +75,7 @@ class BannBannersEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'BannBanners';
+    protected $_tableName = 'SldSliders';
 
     /**
      * Nombre de la PrimaryKey
@@ -101,7 +95,8 @@ class BannBannersEntity extends EntityComunes {
      * @var string
      */
     protected $_childEntities = array(
-        'BannZonas',
+        'SldZonas',
+        'TiposSliders',
         'ValoresSN',
         'ValoresPrivacy',
         'ValoresDchaIzq',
@@ -127,8 +122,8 @@ class BannBannersEntity extends EntityComunes {
     }
 
     public function getIdZona() {
-        if (!($this->IdZona instanceof BannZonas))
-            $this->IdZona = new BannZonas($this->IdZona);
+        if (!($this->IdZona instanceof SldZonas))
+            $this->IdZona = new SldZonas($this->IdZona);
         return $this->IdZona;
     }
 
@@ -161,27 +156,19 @@ class BannBannersEntity extends EntityComunes {
     }
 
     public function getIdTipo() {
-        if (!($this->IdTipo instanceof TiposBanners))
-            $this->IdTipo = new TiposBanners($this->IdTipo);
+        if (!($this->IdTipo instanceof TiposSliders))
+            $this->IdTipo = new TiposSliders($this->IdTipo);
         return $this->IdTipo;
     }
 
-    public function setMostrarEnListado($MostrarEnListado) {
-        $this->MostrarEnListado = $MostrarEnListado;
+    public function setMostrarTextos($MostrarTextos) {
+        $this->MostrarTextos = $MostrarTextos;
     }
 
-    public function getMostrarEnListado() {
-        if (!($this->MostrarEnListado instanceof ValoresSN))
-            $this->MostrarEnListado = new ValoresSN($this->MostrarEnListado);
-        return $this->MostrarEnListado;
-    }
-
-    public function setOrdenMostrarEnListado($OrdenMostrarEnListado) {
-        $this->OrdenMostrarEnListado = $OrdenMostrarEnListado;
-    }
-
-    public function getOrdenMostrarEnListado() {
-        return $this->OrdenMostrarEnListado;
+    public function getMostrarTextos() {
+        if (!($this->MostrarTextos instanceof ValoresSN))
+            $this->MostrarTextos = new ValoresSN($this->MostrarTextos);
+        return $this->MostrarTextos;
     }
 
     public function setEntidad($Entidad) {
@@ -202,5 +189,5 @@ class BannBannersEntity extends EntityComunes {
 
 }
 
-// END class BannBanners
+// END class SldSliders
 ?>

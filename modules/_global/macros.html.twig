@@ -41,6 +41,15 @@
 </label>
 {% endmacro %}
 
+{% macro labelPopup(caption, url, ancho, alto, class) %}
+<label class="{{ class|default('field_title') }}"
+     style="cursor: pointer;"
+     onclick="window.open('{{url}}','{{caption}}','width={{ancho|default(400)}},height={{alto|default(580)}}');"
+     title='{{caption}}'
+    >
+    {{ caption }}
+</label>
+{% endmacro %}
 {#
   input: MUESTRA UN <INPUT> o <TEXTAREA> dependiendo del atributo 'editorTiny'
 

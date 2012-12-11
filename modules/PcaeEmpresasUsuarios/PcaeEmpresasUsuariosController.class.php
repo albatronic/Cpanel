@@ -67,8 +67,11 @@ class PcaeEmpresasUsuariosController extends Controller {
     }
 
     /**
-     * Devuelve todas los proyectos de una empresa
+     * Devuelve todas los usuarios de una empresa
      * indicada en la posicion 2 del request.
+     * 
+     * No muestra al usuario super
+     * 
      * @return array
      */
     public function listAction($idEmpresa = '') {
@@ -83,7 +86,7 @@ class PcaeEmpresasUsuariosController extends Controller {
             unset($objetoNuevo);
 
             $lis = new $this->entity();
-            $rows = $lis->cargaCondicion('Id', "IdEmpresa = '" . $idEmpresa . "'", 'Id ASC');
+            $rows = $lis->cargaCondicion('Id', "IdEmpresa='{$idEmpresa}' AND IdUsuario<>'1'", 'Id ASC');
             unset($lis);
             foreach ($rows as $row) {
                 $lineas[] = new $this->entity($row['Id']);

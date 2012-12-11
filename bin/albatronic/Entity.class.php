@@ -462,14 +462,26 @@ class Entity {
     protected function validaBorrado() {
         unset($this->_errores);
 
+        // No se puede borrar si el objeto es un valor predeterminado y el usuario
+        // no es el super
         if (($this->IsDefault) AND ($_SESSION['USER']['user']['IdPerfil'] != 1))
-            $this->errores[] = "No se puede eliminar. Es un valor predeterminado";
+            $this->_errores[] = "No se puede eliminar. Es un valor predeterminado";
 
+        // No se puede borrar si el objeto es un valor SUPER y el usuario
+        // no es el super
         if (($this->IsSuper) AND ($_SESSION['USER']['user']['IdPerfil'] != 1))
-            $this->errores[] = "No se puede eliminar. Es un valor reservado (super)";
+            $this->_errores[] = "No se puede eliminar. Es un valor reservado (super)";
 
-        if (count($this->errores) == 0) {
-            // Validacion de integridad referencial respecto a entidades padre
+        // Validacion de integridad referencial respecto a entidades hijas
+        if (count($this->_errores) == 0) {
+            $hijos = $this->cargaCondicion($this->getPrimaryKeyName(), "BelongsTo='{$this->getPrimaryKeyValue()}'");
+            $n = count($hijos);
+            if ($n != 0)
+                $this->_errores[] = "Imposible eliminar. Hay {$n} relaciones con elementos hijos";
+        }
+
+        // Validacion de integridad referencial respecto a entidades padre        
+        if (count($this->_errores) == 0) {
             if (is_array($this->_parentEntities)) {
                 foreach ($this->_parentEntities as $entity) {
                     $entidad = new $entity['ParentEntity']();
@@ -481,12 +493,6 @@ class Entity {
                 }
             }
         }
-
-        // Validacion de integridad referencial respecto a entidades hijas
-        $hijos = $this->cargaCondicion($this->getPrimaryKeyName(), "BelongsTo='{$this->getPrimaryKeyValue()}'");
-        $n = count($hijos);
-        if ($n != 0)
-            $this->_errores[] = "Imposible eliminar. Hay {$n} relaciones con elementos hijos";
 
         return (count($this->_errores) == 0);
     }
@@ -716,9 +722,9 @@ class Entity {
     }
 
     public function getArbolHijos() {
-        
+
         $arbol = array();
-        
+
         $objeto = new $this();
         $rows = $objeto->cargaCondicion("Id,PrimaryKeyMD5", "BelongsTo='0'", "SortOrder ASC");
         unset($objeto);

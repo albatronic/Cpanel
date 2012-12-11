@@ -55,6 +55,23 @@ class PcaeEmpresas extends PcaeEmpresasEntity {
         return $proyectos;
     }
 
+    /**
+     * Al crear una empresa, le asigno el usuario SUPER
+     */
+    public function create() {
+        $IdEmpresa = parent::create();
+        
+        if ($IdEmpresa) {
+            $empUsu = new PcaeEmpresasUsuarios();
+            $empUsu->setIdEmpresa($IdEmpresa);
+            $empUsu->setIdUsuario(1);
+            $empUsu->setIdPerfil(1);
+            $empUsu->create();
+            unset($empUsu);
+        }
+        
+        return $IdEmpresa;
+    }
 }
 
 ?>

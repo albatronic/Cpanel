@@ -1,16 +1,16 @@
 <?php
 
 /**
- * CONTROLLER FOR BannBanners
+ * CONTROLLER FOR SldSliders
  * @author: Sergio Perez <sergio.perez@albatronic.com>
  * @copyright: INFORMATICA ALBATRONIC SL 
- * @date 09.12.2012 08:36:04
+ * @date 10.12.2012 17:38:33
 
  * Extiende a la clase controller
  */
-class BannBannersController extends Controller {
+class SldSlidersController extends Controller {
 
-    protected $entity = "BannBanners";
+    protected $entity = "SldSliders";
     protected $parentEntity = "";
 
     public function __construct($request) {
@@ -24,26 +24,26 @@ class BannBannersController extends Controller {
     }
 
     /**
-     * Devuelve un array anidados de zonas de banners con sus banners
+     * Devuelve un array anidados de zonas de sliders con sus sliders
      * 
-     * @return array Array de zonas y banners
+     * @return array Array de zonas y sliders
      */
     public function getArbol() {
 
-        $zonas = new BannZonas();
+        $zonas = new SldZonas();
         $rows = $zonas->cargaCondicion("Id,Titulo", "1", "SortOrder ASC");
         unset($zonas);
 
         $arbol = array();
 
         foreach ($rows as $row) {
-            $banner = new BannBanners();
-            $banners = $banner->cargaCondicion('Id', "IdZona='{$row['Id']}'", "SortOrder ASC");
-            unset($banner);
+            $slider = new SldSliders();
+            $sliders = $slider->cargaCondicion('Id', "IdZona='{$row['Id']}'", "SortOrder ASC");
+            unset($slider);
 
             $arbol[$row['Id']]['titulo'] = $row['Titulo'];
-            foreach ($banners as $banner)
-                $arbol[$row['Id']]['banners'][] = new BannBanners($banner['Id']);
+            foreach ($sliders as $slider)
+                $arbol[$row['Id']]['sliders'][] = new SldSliders($slider['Id']);
         }
 
         return $arbol;
