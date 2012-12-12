@@ -1,0 +1,19 @@
+{# empty Twig template #}
+{% extends '_Emergente/index.html.twig' %}
+
+{% block listado %}
+
+<div id="dialog" title="Enlazar a ...">
+    <select id="selectExportType" class="Select" style="width: 100px; margin-top: 20px;">
+    {% for value in export_types %}
+        <option value="{{value}}">{{value}}</option>
+    {% endfor %}
+    </select>
+    
+    <input type="button" value="Exportar" class="Comando"
+            onClick="$('#action{{position}}').val('exportar');
+                    $('#exportType{{position}}').val($('#selectExportType').val());
+                    document.getElementById('paginacion{{position}}').submit();"
+    />
+</div>
+{% endblock %}

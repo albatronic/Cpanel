@@ -29,7 +29,13 @@ class SldZonasEntity extends EntityComunes {
      * @var integer
      * @assert NotBlank(groups="SldZonas")
      */
-    protected $NumeroMaximoSliders = '0';
+    protected $NumeroMaximoSliders = '1';
+
+    /**
+     * @var integer
+     * @assert NotBlank(groups="SldZonas")
+     */
+    protected $NumeroPosicionesSliders = '1';
 
     /**
      * Nombre de la conexion a la BD
@@ -96,6 +102,14 @@ class SldZonasEntity extends EntityComunes {
 
     public function getNumeroMaximoSliders() {
         return $this->NumeroMaximoSliders;
+    }
+
+    public function setNumeroPosicionesSliders($NumeroPosicionesSliders) {
+        $this->NumeroPosicionesSliders = $NumeroPosicionesSliders;
+    }
+
+    public function getNumeroPosicionesSliders() {
+        return $this->NumeroPosicionesSliders;
     }
 
 }

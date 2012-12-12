@@ -4,8 +4,9 @@
 
 SldZonas:
   columns:
-    Titulo:              { type: string(255), notnull: true}
-    NumeroMaximoSliders: { type: integer(4), notnull: true, default: 0 }
+    Titulo:                  { type: string(255), notnull: true}
+    NumeroMaximoSliders:     { type: integer(4), notnull: true, default: 1 }
+    NumeroPosicionesSliders: { type: integer(4), notnull: true, default: 1 }  
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
@@ -17,7 +18,7 @@ SldSliders:
     Resumen:               { type: text, default: NULL }
     IdTipo:                { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,TiposSliders,IDTipo'}
     MostrarTextos:         { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
-    Entidad:               { type: string(255), notnull: true, default='' }
+    Entidad:               { type: string(255), notnull: true, default: '' }
     IdEntidad:             { type: bigint(11), notnull: true, default: 0 }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:

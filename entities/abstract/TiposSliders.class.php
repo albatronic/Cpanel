@@ -11,9 +11,9 @@ class TiposSliders extends Tipos {
 
     protected $tipos = array(
         array('Id' => '0', 'Value' => 'Variable',),
-        array('Id' => '1', 'Value' => 'Fijo para la WEB',),
-        array('Id' => '2', 'Value' => 'Fijo para el HOME',),
-        array('Id' => '3', 'Value' => 'Fijo para la WEB excepto HOME',),
+        array('Id' => '1', 'Value' => 'Fijo en toda la WEB',),
+        array('Id' => '2', 'Value' => 'Fijo en el HOME',),
+        array('Id' => '3', 'Value' => 'Fijo en la WEB excepto HOME',),
     );
 }
 

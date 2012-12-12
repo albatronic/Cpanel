@@ -39,7 +39,7 @@
         {# macro.input(atributos.Entidad,'field_title','text',values.controller ~ '[Entidad]',values.controller ~ '_Entidad',datos.Entidad,'255','CampoTextoLargo','7') #}
         {# macro.input(atributos.IdEntidad,'field_title','text',values.controller ~ '[IdEntidad]',values.controller ~ '_IdEntidad',datos.IdEntidad,'11','CampoImporte','8') #}
         {% if datos.primaryKeyMD5 %}
-            {{ macro.labelPopup('Enlazar con...', app.path ~ '/_Emergente/' ~ values.controller ~'/' ~ datos.primaryKeyMD5) }}
+            {{ macro.labelPopup('Enlazar con...', app.path ~ '/'  ~ values.controller ~ '/enlazar/' ~ datos.primaryKeyMD5) }}
         {% endif %}
             
         {% include '_global/fieldsComunes.html.twig' %}

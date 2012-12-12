@@ -5,7 +5,8 @@
 BannZonas:
   columns:
     Titulo:              { type: string(255), notnull: true}
-    NumeroMaximoBanners: { type: integer(4), notnull: true, default: 0 }
+    NumeroMaximoBanners: { type: integer(4), notnull: true, default: 1 }
+    NumeroPosicionesBanners: { type: integer(4), notnull: true, default: 1 }    
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 

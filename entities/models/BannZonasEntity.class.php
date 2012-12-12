@@ -29,7 +29,13 @@ class BannZonasEntity extends EntityComunes {
      * @var integer
      * @assert NotBlank(groups="BannZonas")
      */
-    protected $NumeroMaximoBanners = '0';
+    protected $NumeroMaximoBanners = '1';
+
+    /**
+     * @var integer
+     * @assert NotBlank(groups="BannZonas")
+     */
+    protected $NumeroPosicionesBanners = '1';
 
     /**
      * Nombre de la conexion a la BD
@@ -96,6 +102,14 @@ class BannZonasEntity extends EntityComunes {
 
     public function getNumeroMaximoBanners() {
         return $this->NumeroMaximoBanners;
+    }
+
+    public function setNumeroPosicionesBanners($NumeroPosicionesBanners) {
+        $this->NumeroPosicionesBanners = $NumeroPosicionesBanners;
+    }
+
+    public function getNumeroPosicionesBanners() {
+        return $this->NumeroPosicionesBanners;
     }
 
 }
