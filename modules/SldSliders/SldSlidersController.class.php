@@ -16,11 +16,30 @@ class SldSlidersController extends Controller {
     public function __construct($request) {
         parent::__construct($request);
 
-        $this->values['arbol'] = $this->getArbol();
+        $this->values['objetoController'] = $this;
     }
 
     public function IndexAction() {
         return parent::newAction();
+    }
+
+    /**
+     * Muestra la vista mediante la que se pueden enlazar
+     * entidades a la actual
+     * 
+     * @param string $primaryKeyMD5 El valor de la primaryKey en formato MD5 de la entidad
+     * a la que se va a realizar el enlace
+     * @return array Array template, value
+     */
+    public function EnlazarAction($primaryKeyMD5 = '') {
+
+        // Obtener las entidades con las que se pueden enlazar
+        // los sliders
+        $enlaces = new SldSlidersEnlaces();
+        $this->enlazarCon = $enlaces->fetchAll('Descripcion', 0);
+        unset($enlaces);
+
+        return parent::EnlazarAction($primaryKeyMD5);
     }
 
     /**

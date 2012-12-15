@@ -230,7 +230,7 @@ $twig->loadTemplate($result['template'])
         ->display(array(
             'values' => $result['values'],
             'app' => $app,
-            'layout' => '_global/layout.html.twig',
+            'layout' => $layout,
             //'user'    => new CpanUsuarios($_SESSION['USER']['user']['Id']),
             'menu' => $_SESSION['USER']['menu'],
             //'projects' => $_SESSION['projects'],

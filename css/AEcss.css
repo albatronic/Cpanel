@@ -236,3 +236,15 @@
 .docsSaltoLinea {
     clear: both;
 }
+
+.arbol ul {
+    margin-left: 10px;
+}
+.arbol li {
+    padding-top: 5px;
+    margin-left: 15px;
+}
+
+.arbol a img {
+    cursor: pointer;
+}

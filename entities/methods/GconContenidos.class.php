@@ -63,6 +63,15 @@ class GconContenidos extends GconContenidosEntity {
         return $rows;
     }
 
+    /**
+     * Devuelve un array anidado de secciones de contenidos
+     * 
+     * @return array Array de zonas y banners
+     */
+    public function getArbol() {
+        
+        return $this->getArbolHijos();
+    }      
 }
 
 ?>

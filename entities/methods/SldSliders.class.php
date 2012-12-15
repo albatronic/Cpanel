@@ -81,6 +81,19 @@ class SldSliders extends SldSlidersEntity {
         }
     }
 
+    /**
+     * Devuelve el objeto enlazado o nulo si no existe enlace
+     * 
+     * @return \Entidad|null Objeto enlazado
+     */
+    public function getObjetoEnlazado() {
+
+        if (class_exists($this->Entidad))
+            return new $this->Entidad($this->IdEntidad);
+        else
+            return null;
+    }
+
 }
 
 ?>

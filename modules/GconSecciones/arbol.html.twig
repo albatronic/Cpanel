@@ -1,0 +1,45 @@
+{# empty Twig template #}
+{% extends '_global/layoutPopup.html.twig' %}
+
+{% block content %}
+<form name="formEnlace" id="formEnlace" action="" method="POST" class="form_container left_label">
+    <input name="controller" value="{{values.controller}}" type="hidden" />
+    <input name="action" id="action" value="enlazar" type="hidden" />
+    <input name="accion" id="accion" value="" type="hidden" />
+    <input name="idEntidadOrigen" value="{{values.idEntidadOrigen}}" type="hidden" />
+    <input name="entidadDestino" id="entidadDestino" value="{{values.entidadDestino.getClassName}}" type="hidden" />
+    <input name="idEntidadDestino" id="idEntidadDestino" value="{{values.idEntidadDestino}}" type="hidden" />
+    <ul class="arbol">
+    {% for padre in values.entidadDestino.getArbolHijos %}
+        <li class="arbol">
+            <div>
+                <a class="arbol" title="Enlazar" href="javascript:;" onclick="$('#idEntidadDestino').val('{{padre.id}}'); window.parent.window.opener.$('#enlace').html('{{padre.titulo}}'); submitForm('formEnlace');">{{padre.titulo}}</a>
+                {% if (padre.id == values.idEntidadDestino) %}
+                    <img class="arbol" src="{{app.path}}/images/candado.png" title="Quitar enlace" onclick="$('#accion').val('quitar'); window.parent.window.opener.$('#enlace').html(''); submitForm('formEnlace');"/>
+                {% endif %}                
+            </div>
+        </li>
+        <ul class="arbol">
+            {% for hijo in padre.hijos %}
+                <li class="arbol">
+                    <a class="arbol" title="Enlazar" href="javascript:;" onclick="$('#idEntidadDestino').val('{{hijo.id}}'); window.parent.window.opener.$('#enlace').html('{{hijo.titulo}}'); submitForm('formEnlace');">{{hijo.titulo}}</a>
+                    {% if (hijo.id == values.idEntidadDestino) %}
+                        <img class="arbol" src="{{app.path}}/images/candado.png" title="Quitar enlace" onclick="$('#accion').val('quitar'); window.parent.window.opener.$('#enlace').html(''); submitForm('formEnlace');" />
+                    {% endif %}                    
+                </li>
+                <ul class="arbol">
+                    {% for nieto in hijo.hijos %}
+                        <li class="arbol">                           
+                            <a class="arbol" title="Enlazar" href="javascript:;" onclick="$('#idEntidadDestino').val('{{nieto.id}}'); window.parent.window.opener.$('#enlace').html('{{nieto.titulo}}'); submitForm('formEnlace');">{{nieto.titulo}}</a>
+                            {% if (nieto.id == values.idEntidadDestino) %}
+                                <img class="arbol" src="{{app.path}}/images/candado.png" title="Quitar enlace" onclick="$('#accion').val('quitar'); window.parent.window.opener.$('#enlace').html(''); submitForm('formEnlace');" />
+                            {% endif %}            
+                        </li>
+                    {% endfor %}
+                </ul>                        
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    </ul>
+</form>
+{% endblock %}

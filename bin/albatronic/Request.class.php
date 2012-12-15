@@ -44,6 +44,12 @@ class Request {
     private $remoteAddr;
 
     /**
+     * Url desde donde viene el visitante
+     * @var string
+     */
+    private $httpReferer;
+
+    /**
      * Navegador
      * @var string
      */
@@ -67,11 +73,11 @@ class Request {
     public function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->request = $_REQUEST;
-        $this->request['FILES'] = $_FILES;
         $this->acceptLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
         $this->remoteAddr = $_SERVER['REMOTE_ADDR'];
         $this->userAgent = $_SERVER['HTTP_USER_AGENT'];
         $this->contentType = $_SERVER['CONTENT_TYPE'];
+        $this->httpReferer = $_SERVER['HTTP_REFERER'];
     }
 
     /**
@@ -95,7 +101,7 @@ class Request {
      * @param string $appPath El path de la web
      * @return string La url amigable sin el dominio, sin el path de la web
      */
-    public function getUrlAmigable($appPath) {
+    public function getUrlFriendly($appPath) {
         // Cojo la url, incluido el path a la aplicacion
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         // A la url le quito la parte del path a la aplicacion
@@ -153,14 +159,6 @@ class Request {
     }
 
     /**
-     * Devuelve un array con los ficheros enviados por POST
-     * @return array
-     */
-    public function getFiles() {
-        return $this->request['FILES'];
-    }
-    
-    /**
      * Devuelve un string con el idioma aceptado por el cliente (ej: es-ES)
      * @return string
      */
@@ -182,6 +180,14 @@ class Request {
      */
     public function getRemoteAddr() {
         return $this->remoteAddr;
+    }
+
+    /**
+     * Devuelve un string con la url desde la que procede el visitante
+     * @return string
+     */
+    public function getHttpReferer() {
+        return $this->httpReferer;
     }
 
     /**
@@ -224,7 +230,6 @@ class Request {
         return $isOld;
     }
 
-
     /**
      * Devuelve TRUE / FALSE dependiendo si estás en entorno
      * de desarrollo o de producción respectivamente.
@@ -232,8 +237,9 @@ class Request {
      * @return boolean TRUE si estás en entorno desarrollo
      */
     public function isDevelopment() {
-        return ( ($_SERVER['SERVER_NAME'] == 'localhost') or (substr($_SERVER['SERVER_NAME'],0,3) != 'www') );
+        return ( ($_SERVER['SERVER_NAME'] == 'localhost') or (substr($_SERVER['SERVER_NAME'], 0, 3) != 'www') );
     }
+
 }
 
 ?>

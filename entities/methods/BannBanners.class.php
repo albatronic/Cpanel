@@ -43,6 +43,19 @@ class BannBanners extends BannBannersEntity {
             $this->OrdenMostrarEnListado = $this->SortOrder;
     }
 
+    /**
+     * Devuelve el objeto enlazado o nulo si no existe enlace
+     * 
+     * @return \Entidad|null Objeto enlazado
+     */
+    public function getObjetoEnlazado() {
+
+        if (class_exists($this->Entidad))
+            return new $this->Entidad($this->IdEntidad);
+        else
+            return null;
+    }
+
 }
 
 ?>

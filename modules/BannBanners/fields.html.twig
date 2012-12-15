@@ -15,7 +15,7 @@
 
     <div id="tabs1-arbol" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         <ul>
-            {% for key,zona in values.arbol %}
+            {% for key,zona in values.objetoController.arbol %}
                 <li style="font-weight: bold;">{{zona.titulo}}</li>
                 <ul>
                     {% for banner in zona.banners %}
@@ -39,7 +39,7 @@
         {# macro.input(atributos.Entidad,'field_title','text',values.controller ~ '[Entidad]',values.controller ~ '_Entidad',datos.Entidad,'255','CampoTextoLargo','7') #}
         {# macro.input(atributos.IdEntidad,'field_title','text',values.controller ~ '[IdEntidad]',values.controller ~ '_IdEntidad',datos.IdEntidad,'11','CampoImporte','8') #}
         {% if datos.primaryKeyMD5 %}
-            {{ macro.labelPopup('Enlazar con...', app.path ~ '/'  ~ values.controller ~ '/enlazar/' ~ datos.primaryKeyMD5) }}
+            {{ macro.labelPopup('Enlazar con...', app.path ~ '/'  ~ values.controller ~ '/enlazar/' ~ datos.primaryKeyMD5,datos.ObjetoEnlazado,datos.getUrlEnlace,600) }}
         {% endif %}
             
         {% include '_global/fieldsComunes.html.twig' %}

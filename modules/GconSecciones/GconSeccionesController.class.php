@@ -16,7 +16,7 @@ class GconSeccionesController extends Controller {
     public function IndexAction() {
         return parent::newAction();
     }
-
+  
 }
 
 ?>

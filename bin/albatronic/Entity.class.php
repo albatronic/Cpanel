@@ -732,6 +732,7 @@ class Entity {
         foreach ($rows as $row) {
             $objeto = new $this($row['Id']);
             $arbol[$row['PrimaryKeyMD5']] = array(
+                'id' => $row['Id'],
                 'titulo' => $objeto->getTitulo(),
                 'hijos' => $objeto->getHijos(),
             );
@@ -797,6 +798,7 @@ class Entity {
         foreach ($hijos as $hijo) {
             $aux = new $this($hijo['Id']);
             $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']] = array(
+                'id' => $hijo['Id'],
                 'titulo' => $aux->getTitulo(),
                 'hijos' => $this->getChildrens($hijo['Id']),
             );

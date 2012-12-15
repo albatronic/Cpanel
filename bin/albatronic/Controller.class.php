@@ -51,6 +51,12 @@ class Controller {
     protected $isModuleRoot;
 
     /**
+     * Array de entidades enlazables a la actual
+     * @var array
+     */
+    protected $enlazarCon = array();
+
+    /**
      * Array con las variables Web del modulo
      * @var array
      */
@@ -133,8 +139,7 @@ class Controller {
         // Cargas las variables
         $this->cargaVariables();
 
-        $this->values['atributos'] = $this->form->getAtributos($this->entity);//$this->values['permisos']['enCurso']['modulo']);
-
+        $this->values['atributos'] = $this->form->getAtributos($this->entity); //$this->values['permisos']['enCurso']['modulo']);
         // Poner la solapa activa de los campos comunes
         ($this->request['solapaActiva'] == '') ? $this->values['solapaActiva'] = 'general' : $this->values['solapaActiva'] = $this->request['solapaActiva'];
     }
@@ -364,6 +369,86 @@ class Controller {
         $values['urlVideo'] = $this->form->getUrlVideo();
 
         return array('template' => $template, 'values' => $values);
+    }
+
+    /**
+     * Muestra la vista mediante la que se pueden enlazar
+     * entidades a la actual
+     * 
+     * @param string $primaryKeyMD5 El valor de la primaryKey en formato MD5 de la entidad
+     * a la que se va a realizar el enlace
+     * @return array Array template, value
+     */
+    public function EnlazarAction($primaryKeyMD5) {
+
+        switch ($this->request['METHOD']) {
+            case 'GET':
+                if ($primaryKeyMD5 == '')
+                    $primaryKeyMD5 = $this->request['2'];
+
+                $entidad = new $this->entity();
+                $objeto = $entidad->find("PrimaryKeyMD5", $primaryKeyMD5);
+
+                $this->values['objetoOrigen'] = $objeto;
+                $this->values['enlazarCon'] = $this->enlazarCon;
+                unset($objeto);
+                unset($entidad);
+
+                return array(
+                    'template' => '_emergente/enlazar.html.twig',
+                    'values' => $this->values,
+                );
+                break;
+
+            case 'POST':
+                $entidadDestino = $this->request['entidadDestino'];
+                $idEntidadDestino = $this->request['idEntidadDestino'];
+                $idEntidadOrigen = $this->request['idEntidadOrigen'];
+
+                $objeto = new $this->entity($idEntidadOrigen);
+                if ($this->request['accion'] == 'quitar') {
+                    $objeto->setEntidad('');
+                    $objeto->setIdEntidad('');
+                    $idEntidadDestino = '';
+                } else {
+                    $objeto->setEntidad($entidadDestino);
+                    $objeto->setIdEntidad($idEntidadDestino);
+                }
+                $objeto->setUrlTarget('');
+                $objeto->setUrlParameters('');
+                $objeto->save();
+
+                $this->values['entidadOrigen'] = $this->entity;
+                $this->values['idEntidadOrigen'] = $idEntidadOrigen;
+                $this->values['entidadDestino'] = new $entidadDestino();
+                $this->values['idEntidadDestino'] = $idEntidadDestino;
+
+                return array(
+                    'template' => $entidadDestino . '/arbol.html.twig',
+                    'values' => $this->values,
+                );
+                break;
+        }
+    }
+
+    public function CargaEnlacesAction() {
+
+        $primaryKeyMD5 = $this->request[2];
+        $controllerDestino = $this->request[3];
+
+        $entidadOrigen = new $this->entity();
+        $rows = $entidadOrigen->cargaCondicion('Id,IdEntidad', "PrimaryKeyMd5='{$primaryKeyMD5}'");
+        unset($entidadOrigen);
+
+        $this->values['entidadOrigen'] = $this->entity;
+        $this->values['idEntidadOrigen'] = $rows[0]['Id'];
+        $this->values['entidadDestino'] = new $controllerDestino();
+        $this->values['idEntidadDestino'] = $rows[0]['IdEntidad'];
+
+        return array(
+            'template' => $controllerDestino . '/arbol.html.twig',
+            'values' => $this->values,
+        );
     }
 
     /**
