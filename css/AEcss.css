@@ -248,3 +248,8 @@
 .arbol a img {
     cursor: pointer;
 }
+
+.arbol span {
+    cursor: pointer;
+    font-weight: bold;
+}

@@ -1,0 +1,35 @@
+{#
+    MUESTRA LAS SOLAPAS DE LAS ENTIDADES DESTINO CON LAS QUE ENLAZAR
+#}
+
+{% extends '_global/layoutPopup.html.twig' %}
+
+{% block content %}
+
+<h6>Seleccione la solapa con la quiere enlazar</h6>
+<h5 style="margin-bottom:7px;">{{values.objetoOrigen}}</h5>
+
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        {% for enlace in values.enlazarCon %}        
+            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == enlace.Value %} ui-tabs-selected ui-state-active{% endif %}">
+                <a href="#tabs-{{enlace.Id}}" onclick="cargaEnlaces('tabs-{{enlace.Id}}','{{enlace.Id}}','{{values.objetoOrigen.PrimaryKeyMD5}}');">
+                    {{enlace.Value}}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% for enlace in values.enlazarCon %}   
+        <div id="tabs-{{enlace.Id}}" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
+    {% endfor %}
+</div>
+
+<script>
+function cargaEnlaces(idDiv,controller,primaryKeyMD5) {
+
+    var url = "<iframe  src='" + appPath+ "/{{values.controller}}/CargaEnlaces/" + primaryKeyMD5 + "/" + controller + "' width='100%' height='520'><p>Tu navegador no soporta iframes</p></iframe>";
+
+    $('#'+idDiv).html(url);
+}
+</script>
+{% endblock %}

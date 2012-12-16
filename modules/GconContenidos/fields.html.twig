@@ -7,33 +7,94 @@
   date 30.10.2012 18:45:39
 #}
 
-{{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.Id,datos.IdSeccion.fetchAll('Titulo',0),'chzn-select','1')}}
-{{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
-{{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
-{{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','4') }}
-{{ macro.textarea(atributos.Desarrollo,'field_title',values.controller ~ '[Desarrollo]',values.controller ~ '_Desarrollo',datos.Desarrollo,none,none,'textarea','5')}}
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top"><a href="#tabs1-arbol">Árbol de Contenidos</a></li>
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+            <a href="#tabs1-contenido">{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Contenido{%endif%}</a>
+        </li>
+        {% if (values.datos.getPrimaryKeyValue) %}
+            <li class="ui-state-default ui-corner-top"><a href="#tabs1-contenidosRelacionados" onclick="cargaTab('tabs1-contenidosRelacionados','GconContenidosRelacionados');">Contenidos Relacionados</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="#tabs1-etiquetas" onclick="cargaTab('tabs1-etiquetas','GconContenidosEtiquetas');">Etiquetas</a></li>
+            {% if values.datos.EsEvento.IDTipo %}
+                <li class="ui-state-default ui-corner-top"><a href="#tabs1-eventos" onclick="cargaEventos('tabs1-eventos');">Eventos</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
 
-{{ macro.input(atributos.MostrarTituloPortada,'field_title','checkbox',values.controller ~ '[MostrarTituloPortada]',values.controller ~ '_MostrarTituloPortada',datos.MostrarTituloPortada.IDTipo,'255','CampoTextoLargo','12') }}
-{{ macro.input(atributos.MostrarTituloContenido,'field_title','checkbox',values.controller ~ '[MostrarTituloContenido]',values.controller ~ '_MostrarTituloContenido',datos.MostrarTituloContenido.IDTipo,'255','CampoTextoLargo','12') }}
-{{ macro.input(atributos.MostrarSubtituloPortada,'field_title','checkbox',values.controller ~ '[MostrarSubtituloPortada]',values.controller ~ '_MostrarSubtituloPortada',datos.MostrarSubtituloPortada.IDTipo,'255','CampoTextoLargo','12') }}
-{{ macro.input(atributos.MostrarSubtituloContenido,'field_title','checkbox',values.controller ~ '[MostrarSubtituloContenido]',values.controller ~ '_MostrarSubtituloContenido',datos.MostrarSubtituloContenido.IDTipo,'255','CampoTextoLargo','12') }}
-{{ macro.input(atributos.MostrarResumenPortada,'field_title','checkbox',values.controller ~ '[MostrarResumenPortada]',values.controller ~ '_MostrarResumenPortada',datos.MostrarResumenPortada.IDTipo,'255','CampoTextoLargo','12') }}
-{{ macro.input(atributos.MostrarResumenContenido,'field_title','checkbox',values.controller ~ '[MostrarResumenContenido]',values.controller ~ '_MostrarResumenContenido',datos.MostrarResumenContenido.IDTipo,'255','CampoTextoLargo','12') }}
-{{ macro.input(atributos.BlogPublicar,'field_title','checkbox',values.controller ~ '[BlogPublicar]',values.controller ~ '_BlogPublicar',datos.BlogPublicar.IDTipo,'255','CampoTextoLargo','12') }}
-{{ macro.input(atributos.BlogMostrarEnPortada,'field_title','checkbox',values.controller ~ '[BlogMostrarEnPortada]',values.controller ~ '_BlogMostrarEnPortada',datos.BlogMostrarEnPortada.IDTipo,'255','CampoTextoLargo','12') }}
-{{ macro.input(atributos.BlogPermitirComentarios,'field_title','checkbox',values.controller ~ '[BlogPermitirComentarios]',values.controller ~ '_BlogPermitirComentarios',datos.BlogPermitirComentarios.IDTipo,'255','CampoTextoLargo','12') }}
-{# macro.input(atributos.BlogOrden,'field_title','text',values.controller ~ '[BlogOrden]',values.controller ~ '_BlogOrden',datos.BlogOrden,'11','CampoImporte','15') #}
-{{ macro.input(atributos.NoticiaPublicar,'field_title','checkbox',values.controller ~ '[NoticiaPublicar]',values.controller ~ '_NoticiaPublicar',datos.NoticiaPublicar.IDTipo,'255','CampoTextoLargo','12') }}
-{{ macro.input(atributos.NoticiaMostrarEnPortada,'field_title','checkbox',values.controller ~ '[NoticiaMostrarEnPortada]',values.controller ~ '_NoticiaMostrarEnPortada',datos.NoticiaMostrarEnPortada.IDTipo,'255','CampoTextoLargo','12') }}
-{# macro.input(atributos.NoticiaOrden,'field_title','text',values.controller ~ '[NoticiaOrden]',values.controller ~ '_NoticiaOrden',datos.NoticiaOrden,'11','CampoImporte','18') #}
-{{ macro.input(atributos.EsEvento,'field_title','checkbox',values.controller ~ '[EsEvento]',values.controller ~ '_EsEvento',datos.EsEvento.IDTipo,'255','CampoTextoLargo','12') }}
+    <div id="tabs1-arbol" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        <ul class="arbol">
+        {% for padre in values.datos.getArbolHijos %}
+            {% include values.controller ~ '/secciones.html.twig' with {'seccion': padre, 'templateContenidos':'contenidosEditar.html.twig'} %}
+            <ul class="arbol">
+                {% for hijo in padre.hijos %}
+                    {% include values.controller ~ '/secciones.html.twig' with {'seccion': hijo, 'templateContenidos':'contenidosEditar.html.twig'} %}
+                    <ul class="arbol">
+                        {% for nieto in hijo.hijos %}
+                            {% include values.controller ~ '/secciones.html.twig' with {'seccion': nieto, 'templateContenidos':'contenidosEditar.html.twig'} %}
+                        {% endfor %}
+                    </ul>                        
+                {% endfor %}
+            </ul>
+        {% endfor %}
+        </ul>
+    </div>
+        
+    <div id="tabs1-contenido" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        
+        {{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.Id,datos.IdSeccion.fetchAll('Titulo',0),'chzn-select','1')}}
+        {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
+        {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
+        {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','4') }}
+        {{ macro.textarea(atributos.Desarrollo,'field_title',values.controller ~ '[Desarrollo]',values.controller ~ '_Desarrollo',datos.Desarrollo,none,none,'textarea','5')}}
 
-{% if datos.EsEvento.IDTipo %}
-    {{ macro.fecha(atributos.PublishedAt,'field_title','Evento[Fecha]','Evento_Fecha',datos.ObjetoEvento.Fecha,'19','datepicker',111) }}
-    {{ macro.input(atributos.PublishedAt,'field_title','text','Evento[HoraInicio]','Evento_HoraInicio',datos.ObjetoEvento.HoraInicio,'19','CampoTextoMedio',111) }}
-    {{ macro.input(atributos.PublishedAt,'field_title','text','Evento[HoraFin]','Evento_HoraFin',datos.ObjetoEvento.HoraFin,'19','CampoTextoMedio',111) }}
-{% endif %}
+        {{ macro.input(atributos.MostrarTituloPortada,'field_title','checkbox',values.controller ~ '[MostrarTituloPortada]',values.controller ~ '_MostrarTituloPortada',datos.MostrarTituloPortada.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.MostrarTituloContenido,'field_title','checkbox',values.controller ~ '[MostrarTituloContenido]',values.controller ~ '_MostrarTituloContenido',datos.MostrarTituloContenido.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.MostrarSubtituloPortada,'field_title','checkbox',values.controller ~ '[MostrarSubtituloPortada]',values.controller ~ '_MostrarSubtituloPortada',datos.MostrarSubtituloPortada.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.MostrarSubtituloContenido,'field_title','checkbox',values.controller ~ '[MostrarSubtituloContenido]',values.controller ~ '_MostrarSubtituloContenido',datos.MostrarSubtituloContenido.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.MostrarResumenPortada,'field_title','checkbox',values.controller ~ '[MostrarResumenPortada]',values.controller ~ '_MostrarResumenPortada',datos.MostrarResumenPortada.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.MostrarResumenContenido,'field_title','checkbox',values.controller ~ '[MostrarResumenContenido]',values.controller ~ '_MostrarResumenContenido',datos.MostrarResumenContenido.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.BlogPublicar,'field_title','checkbox',values.controller ~ '[BlogPublicar]',values.controller ~ '_BlogPublicar',datos.BlogPublicar.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.BlogMostrarEnPortada,'field_title','checkbox',values.controller ~ '[BlogMostrarEnPortada]',values.controller ~ '_BlogMostrarEnPortada',datos.BlogMostrarEnPortada.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.BlogPermitirComentarios,'field_title','checkbox',values.controller ~ '[BlogPermitirComentarios]',values.controller ~ '_BlogPermitirComentarios',datos.BlogPermitirComentarios.IDTipo,'255','CampoTextoLargo','12') }}
+        {# macro.input(atributos.BlogOrden,'field_title','text',values.controller ~ '[BlogOrden]',values.controller ~ '_BlogOrden',datos.BlogOrden,'11','CampoImporte','15') #}
+        {{ macro.input(atributos.NoticiaPublicar,'field_title','checkbox',values.controller ~ '[NoticiaPublicar]',values.controller ~ '_NoticiaPublicar',datos.NoticiaPublicar.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.NoticiaMostrarEnPortada,'field_title','checkbox',values.controller ~ '[NoticiaMostrarEnPortada]',values.controller ~ '_NoticiaMostrarEnPortada',datos.NoticiaMostrarEnPortada.IDTipo,'255','CampoTextoLargo','12') }}
+        {# macro.input(atributos.NoticiaOrden,'field_title','text',values.controller ~ '[NoticiaOrden]',values.controller ~ '_NoticiaOrden',datos.NoticiaOrden,'11','CampoImporte','18') #}
+        {{ macro.input(atributos.EsEvento,'field_title','checkbox',values.controller ~ '[EsEvento]',values.controller ~ '_EsEvento',datos.EsEvento.IDTipo,'255','CampoTextoLargo','12') }}
 
-{% include '_global/fieldsComunes.html.twig' %}
+        {% if datos.EsEvento.IDTipo %}
+            {{ macro.fecha(atributos.PublishedAt,'field_title','Evento[Fecha]','Evento_Fecha',datos.ObjetoEvento.Fecha,'19','datepicker',111) }}
+            {{ macro.input(atributos.PublishedAt,'field_title','text','Evento[HoraInicio]','Evento_HoraInicio',datos.ObjetoEvento.HoraInicio,'19','CampoTextoMedio',111) }}
+            {{ macro.input(atributos.PublishedAt,'field_title','text','Evento[HoraFin]','Evento_HoraFin',datos.ObjetoEvento.HoraFin,'19','CampoTextoMedio',111) }}
+        {% endif %}
 
+        {% include '_global/fieldsComunes.html.twig' %}
+    </div>
+    
+    {% if (values.datos.getPrimaryKeyValue) %}
+        <div id="tabs1-contenidosRelacionados" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
+        <div id="tabs1-etiquetas" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
+        {% if values.datos.EsEvento.IDTipo %}
+            <div id="tabs1-eventos" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
+        {% endif%}
+    {% endif %}
+    
+</div>
 {{ macro.foco(values.controller ~ '_IdSeccion') }}
+
+<script>
+function cargaTab(idDiv,controller) {
+
+    var url = "<iframe src='{{appPath}}/" + controller + "/list/{{datos.getPrimaryKeyValue}}' width='100%' height='520'><p>Tu navegador no soporta iframes</p></iframe>";
+
+    $('#'+idDiv).html(url);
+}
+
+function cargaEventos(idDiv) {
+
+    var url = "<iframe src='{{appPath}}/EvenEventos/listPopup/{{values.controller}}/{{datos.Id}}' width='100%' height='520'><p>Tu navegador no soporta iframes</p></iframe>";
+
+    $('#'+idDiv).html(url);
+}
+</script>

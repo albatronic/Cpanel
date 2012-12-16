@@ -60,6 +60,16 @@ function mostrarElemento(id) {
 }
 
 /**
+ * Muestra/oculta el elemento id
+ */
+function switchDisplay(id) {
+    if ($('#'+id).css('display') == 'block') {
+        $('#'+id).css('display','none');
+    } else {
+        $('#'+id).css('display','block')        
+    }
+}
+/**
  * Muestra un popUp con las variables de entorno
  * un formulario de mantenimiento de las variables de entorno
  * del modulo y columna indicado en 'modulo_columna'

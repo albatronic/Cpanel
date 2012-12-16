@@ -68,10 +68,14 @@ class GconContenidos extends GconContenidosEntity {
      * 
      * @return array Array de zonas y banners
      */
-    public function getArbol() {
+    public function getArbolHijos() {
         
-        return $this->getArbolHijos();
-    }      
+        $secciones = new GconSecciones();
+        $arbolSecciones = $secciones->getArbolHijos();
+        unset($secciones);
+        
+        return $arbolSecciones;
+    } 
 }
 
 ?>

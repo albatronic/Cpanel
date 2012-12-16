@@ -49,7 +49,7 @@ class GconSecciones extends GconSeccionesEntity {
                 $this->setOrdenMenu4($this->SortOrder);
             if ($this->OrdenMenu5 == 0)
                 $this->setOrdenMenu5($this->SortOrder);
-            
+
             // Asignar el nivel Jerárquico
             $nivelPadre = 0;
             if ($this->BelongsTo != 0) {
@@ -79,7 +79,7 @@ class GconSecciones extends GconSeccionesEntity {
             $idSeccion = $this->Id;
 
         $contenido = new GconContenidos();
-        $contenidos = $contenido->cargaCondicion('Id as Id,Titulo as Value', "IdSeccion='{$idSeccion}'", "SortOrder ASC");
+        $contenidos = $contenido->cargaCondicion('Id as Id,Titulo as Value,PrimaryKeyMD5', "IdSeccion='{$idSeccion}'", "SortOrder ASC");
         unset($contenido);
 
         if ($idContenido) {
@@ -92,16 +92,85 @@ class GconSecciones extends GconSeccionesEntity {
         return $contenidos;
     }
 
+    /**
+     * Devuelve un array con el arbol de secciones, incluyendo
+     * los eventuales contenidos de cada seccion
+     * 
+     * @return array Array de secciones
+     */
+    public function getArbolHijos() {
+
+        $arbol = array();
+
+        $objeto = new $this();
+        $rows = $objeto->cargaCondicion("Id,PrimaryKeyMD5", "BelongsTo='0'", "SortOrder ASC");
+        unset($objeto);
+
+        foreach ($rows as $row) {
+            $objeto = new $this($row['Id']);
+            $arrayContenidos = $this->getContenidos($row['Id']);
+            $arbol[$row['PrimaryKeyMD5']] = array(
+                'id' => $row['Id'],
+                'titulo' => $objeto->getTitulo(),
+                'hijos' => $objeto->getHijos(),
+                'nContenidos' => count($arrayContenidos),
+                'contenidos' => $arrayContenidos,
+            );
+        }
+
+        unset($objeto);
+        return $arbol;
+    }
 
     /**
-     * Devuelve un array anidado de secciones de contenidos
+     * Genera el árbol genealógico con las entidades hijas de la
+     * entidad $idPadre.
      * 
-     * @return array Array de zonas y banners
+     * El árbol se genera de forma recursiva sin límite de profundidad.
+     * 
+     * El array lleva valor únicamente en el índice, y dicho valor es el
+     * id de las entidades.
+     * 
+     * @param integer $idPadre El id de la entidad padre
+     * @return array
      */
-    public function getArbol() {
-        
-        return $this->getArbolHijos();
-    }    
+    public function getHijos($idPadre = '') {
+
+        if ($idPadre == '')
+            $idPadre = $this->getPrimaryKeyValue();
+
+        $this->getChildrens($idPadre);
+        return $this->_hijos[$idPadre];
+    }
+
+    /**
+     * Generar un árbol genealógico con las entidades hijas
+     * de la entidad cuyo id es $idPadre
+     *
+     * @param integer $idPadre El id de la entidad padre
+     * @return array Array con los objetos hijos
+     */
+    private function getChildrens($idPadre) {
+
+        // Obtener todos los hijos del padre actual
+        $hijos = $this->cargaCondicion('Id,PrimaryKeyMD5', "BelongsTo='{$idPadre}'", "SortOrder ASC");
+
+        foreach ($hijos as $hijo) {
+            $aux = new $this($hijo['Id']);
+            $arrayContenidos = $this->getContenidos($hijo['Id']);
+            $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']] = array(
+                'id' => $hijo['Id'],
+                'titulo' => $aux->getTitulo(),
+                'hijos' => $this->getChildrens($hijo['Id']),
+                'nContenidos' => count($arrayContenidos),
+                'contenidos' => $arrayContenidos,
+            );
+            unset($hijo);
+        }
+
+        return $this->_hijos[$idPadre];
+    }
+
 }
 
 ?>

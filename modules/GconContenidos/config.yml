@@ -59,10 +59,10 @@ GconContenidos:
   order_by:
     -
       title: 'Título a-z'
-      criteria: 'Titulo ASC'
+      criteria: 'IdSeccion ASC,Titulo ASC'
     -
       title: 'Título z-a'
-      criteria: 'Titulo DESC'
+      criteria: 'IdSeccion DESC,Titulo DESC'
   search_default: Id
   referenced_entities:
     - GconSecciones

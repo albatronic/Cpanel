@@ -22,32 +22,13 @@ class BannBannersController extends Controller {
     public function IndexAction() {
         return parent::newAction();
     }
-
-    /**
-     * Muestra la vista mediante la que se pueden enlazar
-     * entidades a la actual
-     * 
-     * @param string $primaryKeyMD5 El valor de la primaryKey en formato MD5 de la entidad
-     * a la que se va a realizar el enlace
-     * @return array Array template, value
-     */
-    public function EnlazarAction($primaryKeyMD5 = '') {
-
-        // Obtener las entidades con la que se pueden enlazar
-        // los banners
-        $enlaces = new BannBannersEnlaces();
-        $this->enlazarCon = $enlaces->fetchAll('Descripcion', 0);
-        unset($enlaces);
-
-        return parent::EnlazarAction($primaryKeyMD5);
-    }
     
     /**
      * Devuelve un array anidado de zonas de banners con sus banners
      * 
      * @return array Array de zonas y banners
      */
-    public function getArbol() {
+    public function getArbolZonasBanners() {
 
         $zonas = new BannZonas();
         $rows = $zonas->cargaCondicion("Id,Titulo", "1", "SortOrder ASC");

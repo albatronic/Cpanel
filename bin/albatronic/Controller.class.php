@@ -373,14 +373,23 @@ class Controller {
 
     /**
      * Muestra la vista mediante la que se pueden enlazar
-     * entidades a la actual
+     * entidades a la entidad actual ($this->entity)
+     * 
+     * Las entitdades destino del enlace se definen para cada
+     * controlador en la clase entities/abstract/<NOMBRECONTROLADOR>Enlaces.class.php
      * 
      * @param string $primaryKeyMD5 El valor de la primaryKey en formato MD5 de la entidad
      * a la que se va a realizar el enlace
      * @return array Array template, value
      */
     public function EnlazarAction($primaryKeyMD5) {
-
+        
+        // Obtener las entidades con las que se pueden enlazar la entidad actual
+        $entidadActual = $this->entity . "Enlaces";
+        $enlaces = new $entidadActual();
+        $this->enlazarCon = $enlaces->fetchAll('Descripcion', 0);
+        unset($enlaces);
+        
         switch ($this->request['METHOD']) {
             case 'GET':
                 if ($primaryKeyMD5 == '')
@@ -395,7 +404,7 @@ class Controller {
                 unset($entidad);
 
                 return array(
-                    'template' => '_emergente/enlazar.html.twig',
+                    'template' => '_global/popupEnlazar.html.twig',
                     'values' => $this->values,
                 );
                 break;
@@ -408,11 +417,12 @@ class Controller {
                 $objeto = new $this->entity($idEntidadOrigen);
                 if ($this->request['accion'] == 'quitar') {
                     $objeto->setEntidad('');
-                    $objeto->setIdEntidad('');
-                    $idEntidadDestino = '';
+                    $objeto->setIdEntidad(0);
+                    $entidadEnlazada = '';
                 } else {
                     $objeto->setEntidad($entidadDestino);
                     $objeto->setIdEntidad($idEntidadDestino);
+                    $entidadEnlazada = $entidadDestino;
                 }
                 $objeto->setUrlTarget('');
                 $objeto->setUrlParameters('');
@@ -422,6 +432,7 @@ class Controller {
                 $this->values['idEntidadOrigen'] = $idEntidadOrigen;
                 $this->values['entidadDestino'] = new $entidadDestino();
                 $this->values['idEntidadDestino'] = $idEntidadDestino;
+                $this->values['entidadEnlazada'] = $entidadEnlazada;
 
                 return array(
                     'template' => $entidadDestino . '/arbol.html.twig',
@@ -434,19 +445,20 @@ class Controller {
     public function CargaEnlacesAction() {
 
         $primaryKeyMD5 = $this->request[2];
-        $controllerDestino = $this->request[3];
+        $entidadDestino = $this->request[3];
 
         $entidadOrigen = new $this->entity();
-        $rows = $entidadOrigen->cargaCondicion('Id,IdEntidad', "PrimaryKeyMd5='{$primaryKeyMD5}'");
+        $rows = $entidadOrigen->cargaCondicion('Id,Entidad,IdEntidad', "PrimaryKeyMd5='{$primaryKeyMD5}'");
         unset($entidadOrigen);
 
         $this->values['entidadOrigen'] = $this->entity;
         $this->values['idEntidadOrigen'] = $rows[0]['Id'];
-        $this->values['entidadDestino'] = new $controllerDestino();
+        $this->values['entidadDestino'] = new $entidadDestino();
         $this->values['idEntidadDestino'] = $rows[0]['IdEntidad'];
+        $this->values['entidadEnlazada'] = $rows[0]['Entidad'];
 
         return array(
-            'template' => $controllerDestino . '/arbol.html.twig',
+            'template' => $entidadDestino . '/arbol.html.twig',
             'values' => $this->values,
         );
     }

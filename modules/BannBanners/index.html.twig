@@ -14,6 +14,7 @@
 {% block content %}
 	{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
 	{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
+
 	{% block filtro %}
 	{% if values.permisos.permisosModulo['CO'] and values.tieneListado %}
 		{% include '_global/filtroGenericoWrapper.html.twig' with {'filter': values.listado.filter} %}
