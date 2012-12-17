@@ -382,7 +382,7 @@ class Controller {
      * a la que se va a realizar el enlace
      * @return array Array template, value
      */
-    public function EnlazarAction($primaryKeyMD5) {
+    public function EnlazarAction($primaryKeyMD5 = '') {
         
         // Obtener las entidades con las que se pueden enlazar la entidad actual
         $entidadActual = $this->entity . "Enlaces";

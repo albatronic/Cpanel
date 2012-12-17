@@ -94,7 +94,7 @@ class EvenEventosController extends Controller {
         }
     }
 
-    public function listPopupAction($entidad, $idEntidad) {
+    public function listPopupAction($entidad='', $idEntidad='') {
 
         if ($entidad == '')
             $entidad = $this->request[2];
