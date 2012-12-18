@@ -57,14 +57,14 @@ class PcaeProyectosAppsController extends Controller {
         $this->values['twigJs'] = $includesHead['twigJs'];
 
         // Cargas las variables
-        $this->cargaVariables();
+        //$this->cargaVariables();
 
         $this->values['atributos'] = $this->form->getAtributos($this->entity);
 
         // Poner la solapa activa de los campos comunes
         ($this->request['solapaActiva'] == '') ? $this->values['solapaActiva'] = 'general' : $this->values['solapaActiva'] = $this->request['solapaActiva'];
     }
-    
+
     /**
      * Devuelve todas los proyectos de una empresa
      * indicada en la posicion 2 del request.
@@ -98,6 +98,48 @@ class PcaeProyectosAppsController extends Controller {
         $this->values['linkBy']['value'] = $idProyecto;
 
         return parent::listadoAction();
+    }
+
+    public function ProbarConexionAction() {
+
+        $app = new PcaeProyectosApps($this->request[$this->entity]['Id']);
+
+        // Probrar la conexión ftp
+        $parametrosFtp = array(
+            'server' => $app->getFtpServer(),
+            'user' => $app->getFtpUser(),
+            'password' => $app->getFtpPassword(),
+            'port' => $app->getFtpPort(),
+            'timeout' => $app->getFtpTimeout(),
+        );
+        $ftp = new Ftp($parametrosFtp);
+        if (count($ftp->getErrores()) == 0) {
+            $this->values['alertas'][] = "Conexión ftp con EXITO. Directorio de conexión '{$ftp->pwd()}'";
+            if ($ftp->chdir($app->getFtpFolder()))
+                $this->values['alertas'][] = "Carpeta ftp '{$app->getFtpFolder()}' OK";
+            else
+                $this->values['alertas'][] = "La carpeta ftp NO existe o NO está accesible";
+
+            $ftp->close();
+        } else
+            $this->values['errores'] = $ftp->getErrores();
+        unset($ftp);
+        
+        // Probar la conexión de la base de datos
+        $dbLink = mysql_connect($app->getHost(), $app->getUser(), $app->getPassword());
+        if ($dbLink) {
+            $this->values['alertas'][] = "Conexión a la base de datos con EXITO.";
+            mysql_close($dbLink);
+        } else
+            $this->values['errores'][] = "No se ha establecido la conexión con el servidor de datos";
+
+
+        $template = $this->entity . '/form.html.twig';
+        $this->values['datos'] = $app;
+        $this->values['linkBy']['value'] = $this->request[$this->entity]['IdProyecto'];
+        unset($app);
+
+        return array('template' => $template, 'values' => $this->values);
     }
 
 }

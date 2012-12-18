@@ -3,11 +3,12 @@
 {# PASA A LA FUNCION JS SEPARADOS POR EL CARACTER '#'       #}
 
 {% if alertas %}
-    {% set mensaje = none %}
-
+<div class="MensajeAlerta">
+    <p class="TituloAlerta">Avisos:</p>
+    <ul>
     {% for alerta in alertas %}
-        {% set mensaje = mensaje ~ alerta ~ '#' %}
+        <li>{{ alerta }}</li>
     {% endfor %}
-
-    <script> setTimeout ("notificacion('{{mensaje}}','alerta')", 0000);</script>
+    </ul>
+</div>
 {% endif %}

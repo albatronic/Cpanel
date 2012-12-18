@@ -45,12 +45,29 @@
     padding: 10px 10px 10px 55px;
     margin: 5px;
     background-color: #ff9900;
-    background-image: url('../images/iconos/error.png');
+    background-image: url('../images/notificaciones/error.png');
     background-position: 10px 50%;
     background-repeat: no-repeat;
 }
 
 .TituloError{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.MensajeAlerta{
+    font-size: 12px;
+    font-family: Arial, Helvetica, serif;
+    color: black;
+    padding: 10px 10px 10px 55px;
+    margin: 5px;
+    background-color: #ff9900;
+    background-image: url('../images/notificaciones/info.png');
+    background-position: 10px 50%;
+    background-repeat: no-repeat;
+}
+
+.TituloAlerta{
     margin-bottom: 5px;
     font-weight: bold;
 }

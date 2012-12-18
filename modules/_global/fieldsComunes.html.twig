@@ -99,19 +99,26 @@
     {% if datos.getPrimaryKeyValue %}
     {# SOLAPA IMAGENES #}
     <div id="tabs-imagenes" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        <table style="width: 100%;">
-            <tr style="height: 50px;"><td colspan="2">
-            <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
-            Imágen Master: <input name="imagenMaster" id="imagenMaster" type="file" />
-            <input type="button" value="Enviar"
-               onclick="
-                   $('#action_{{ values.controller }}').val('Imagen');
-                   $('#accion_{{ values.controller }}').val('EnviarMaster');
-                   submitForm('manto_{{ values.controller}}');" />
-            </td></tr>
 
-            <input name="idImagenEnviar" id="idImagenEnviar" value="" type="hidden" />
+        <input name="idImagenEnviar" id="idImagenEnviar" value="" type="hidden" />
+        
+        <div style="margin-bottom: 20px;">
+            <div style="float: left;">
+                <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
+                Imágen Master: <input name="imagenMaster" id="imagenMaster" type="file" />
+            </div>
+            <div id="foto" style="float: left;">
+                <input type="button" value="Enviar"
+                   onclick="
+                       $('#action_{{ values.controller }}').val('Imagen');
+                       $('#accion_{{ values.controller }}').val('EnviarMaster');
+                       loading('foto');
+                       submitForm('manto_{{ values.controller}}');" 
+                />
+            </div>
+        </div>
 
+        <table style="margin-top: 10px; width: 100%;">            
             {% for key,imagen in values.datos.getDocuments('image%','IsThumbnail=0') %}
             {% set puntero = key + 1%}
             <tr>
@@ -121,7 +128,7 @@
                     </div>
                     <br />{{imagen.getSize}} ({{imagen.Width}} x {{imagen.Height}})<br />
                     <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
-                    <input name="image{{puntero}}" id="imagen_{{puntero}}_Doc" type="file" onclick="loading('foto{{puntero}}');"/>
+                    <input name="image{{puntero}}" id="imagen_{{puntero}}_Doc" type="file"/>
                 </td>
                 <td style="vertical-align: top !important;">
                     <input name="image[{{puntero}}][Tipo]" id="image_{{puntero}}_Tipo" value="{{imagen.Type}}" type="hidden" />
@@ -131,12 +138,13 @@
                     {{ macro.input({'caption':'Nombre','visible':'1','varEnv':'0'},'field_title','text','image['~puntero~'][Name]','image_'~puntero~'_Name',imagen.Name,255,none) }}
                     {{ macro.input({'caption':'Mostrar pie de foto','visible':'1','varEnv':'0'},'field_title','checkbox','image['~puntero~'][ShowCaption]','image_'~puntero~'_ShowCaption',imagen.ShowCaption.IDTipo,'255','CampoTextoLargo','12') }}
                     {{ macro.input({'caption':'Publicar','visible':'1','varEnv':'0'},'field_title','checkbox','image['~puntero~'][Publish]','image_'~puntero~'_Publish',imagen.Publish.IDTipo,'255','CampoTextoLargo','12') }}
-                    <div style="text-align: center;">
+                    <div id="botonera{{puntero}}" style="text-align: center;">
                     <input type="button" value="Guardar cambios" class="comando"
                         onclick="
                             $('#action_{{ values.controller }}').val('Imagen');
                             $('#accion_{{ values.controller }}').val('GuardarCambios');
                             $('#idImagenEnviar').val('{{puntero}}');
+                            loading('botonera{{puntero}}');
                             submitForm('manto_{{ values.controller}}');" />
 
                     <input type="button" value="Borrar imagen" class="comando"
@@ -158,32 +166,27 @@
 
     {# SOLAPA TINY #}
     {% if values.varEnvMod.withTiny == '1' %}
-    <div id="tabs-tiny" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-    </div>
+    <div id="tabs-tiny" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"></div>
     {% endif %}
         
     {# SOLAPA GALERIA #}
     {% if values.varEnvMod.withGalery == '1' %}
-    <div id="tabs-galery" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-    </div>
+    <div id="tabs-galery" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"></div>
     {% endif %}
 
     {# SOLAPA DOCUMENTOS #}
     {% if values.varEnvMod.withDocuments == '1' %}
-    <div id="tabs-documents" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-    </div>
+    <div id="tabs-documents" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"></div>
     {% endif %}
 
     {# SOLAPA VIDEOS #}
     {% if values.varEnvMod.withVideos == '1' %}
-    <div id="tabs-videos" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-    </div>
+    <div id="tabs-videos" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"></div>
     {% endif %}
 
     {# SOLAPA AUDIOS #}
     {% if values.varEnvMod.withAudios == '1' %}
-    <div id="tabs-audios" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-    </div>
+    <div id="tabs-audios" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"></div>
     {% endif %}
 
     {# SOLAPA URLS #}

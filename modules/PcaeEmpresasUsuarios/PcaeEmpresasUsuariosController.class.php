@@ -58,7 +58,7 @@ class PcaeEmpresasUsuariosController extends Controller {
         $this->values['twigJs'] = $includesHead['twigJs'];
 
         // Cargas las variables
-        $this->cargaVariables();
+        //$this->cargaVariables();
 
         $this->values['atributos'] = $this->form->getAtributos($this->values['permisos']['enCurso']['modulo']);
 

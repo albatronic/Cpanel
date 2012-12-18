@@ -33,9 +33,18 @@ class Ftp {
 
     /**
      * Realiza la conexión al servidor ftp
-     * @param string $server Servidor ftp
-     * @param string $user Usuario ftp
-     * @param string $password Password ftp
+     * @param array $parameters Array con los parametros de conexion:
+     * 
+     *      * server => servidor de ftp
+     * 
+     *      * user => usuario
+     * 
+     *      * password => contraseña
+     * 
+     *      * port => puerto (defecto 21)
+     * 
+     *      * timeout => tiempo de espera
+     * 
      * @return boolean TRUE si la conexión ex exitosa
      */
     public function __construct(array $parameters) {
@@ -183,6 +192,14 @@ class Ftp {
         return (count($this->errores) == 0);
     }
 
+    /**
+     * Devuelve el nombre del directorio actual
+     * @return string
+     */
+    public function pwd() {
+        return ftp_pwd($this->connectId);
+    }
+    
     /**
      * Cambia de directorio en el servidor vía FTP.
      *

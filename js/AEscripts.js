@@ -230,7 +230,9 @@ function submitForm(formulario) {
  */
 function loading(idDiv) {
     // Coloco un gif "Cargando..." en la capa
-    $('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
+    var url = "<img src='"+appPath+"/images/loading.gif'>";
+
+    $('#'+idDiv).html(url);
 }
 
 /*

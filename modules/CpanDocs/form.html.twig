@@ -38,7 +38,7 @@
         {% endif %}
         <div>
         <input name="MAX_FILE_SIZE" value="{{values.maxFileSize}}" type="hidden"  />
-        <input name="documento" id="documento{{key}}" type="file" onclick="loading('foto{{key}}');" />
+        <input name="documento" id="documento{{key}}" type="file" />
         </div>
     </div>
 
@@ -72,12 +72,12 @@
         </div>
         {% endif %}
             
-        <div class="Item">
+        <div class="Item" id="botonera{{key}}">
             {% if objeto.Id > 0 %}
-            <input type="image" src="{{app.path}}/images/botonsave.png" onclick="$('#accion{{key}}').val('G');" alt="Guardar" title="Guardar Documento" />
-            <input type="image" src="{{app.path}}/images/papelera.gif" onclick="if (!confirm('Desea eliminar el documento?')) {return false;} else {$('#accion{{key}}').val('B');}" alt="Borrar" title="Borrar Documento" />
+            <input type="image" src="{{app.path}}/images/botonsave.png" onclick="loading('botonera{{key}}');$('#accion{{key}}').val('G');submitForm('linea{{key}}');" alt="Guardar" title="Guardar Documento" />
+            <input type="image" src="{{app.path}}/images/papelera.gif" onclick="if (!confirm('Desea eliminar el documento?')) {return false;} else {loading('botonera{{key}}');$('#accion{{key}}').val('B');submitForm('linea{{key}}');}" alt="Borrar" title="Borrar Documento" />
             {% else %}
-            <input type="image" src="{{app.path}}/images/nuevo.png" onclick="$('#action{{key}}').val('new'); submitForm('linea{{key}}');" alt="Nuevo" title="Crear Documento" />
+            <input type="image" src="{{app.path}}/images/nuevo.png" onclick="loading('botonera{{key}}');$('#action{{key}}').val('new'); submitForm('linea{{key}}');" alt="Nuevo" title="Crear Documento" />
             {% endif %}
         </div>
     </div>

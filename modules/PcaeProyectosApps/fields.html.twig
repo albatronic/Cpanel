@@ -9,6 +9,14 @@
 
 {% if datos.Id %}
     <h3>{{ datos.IdApp.Aplicacion }}</h3>
+    <div id="testConexion">
+        <a href="javascript:;" onclick="
+            $('#action_{{ values.controller }}').val('ProbarConexion');
+            loading('testConexion');
+            submitForm('manto_{{ values.controller }}');" 
+        >Probar Conexión</a>
+    </div>             
+    
 {% else %}
     {{ macro.select(atributos.IdApp,'field_title',values.controller ~ '[IdApp]',values.controller ~ '_IdApp',none,datos.IdApp.Id,datos.IdApp.fetchAll('Aplicacion',0),'chzn-select','2')}}
 {% endif %}
@@ -28,4 +36,4 @@
 
 {# include '_global/fieldsComunes.html.twig' #}
 
-{{ macro.foco(values.controller ~ '_IdApp') }}
+{# macro.foco(values.controller ~ '_IdApp') #}

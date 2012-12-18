@@ -1,14 +1,14 @@
 # MODULOS DE LA APP Albm. ÁLBUMES FOTOGRÁFICOS
 CpanAplicaciones:
-  Albm  : { CodigoApp: Albm,   NombreApp: Álbumes Fotográficos }
+  1: { CodigoApp: Albm, NombreApp: Álbumes Fotográficos }
 
 CpanModulos:
-  Albm1: { CodigoApp: Albm,  NombreModulo: Albm,         Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Albm, Funcionalidades: AC }
-  Albm2: { CodigoApp: Albm,  NombreModulo: AlbmAlbumes,  Nivel: 1, BelongsTo: Albm,  Publish: 1, Titulo: Álbumes, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  1: { CodigoApp: Albm, NombreModulo: Albm,        Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Albm, Funcionalidades: AC }
+  2: { CodigoApp: Albm, NombreModulo: AlbmAlbumes, Nivel: 1, BelongsTo: Albm,  Publish: 1, Titulo: Álbumes, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
-  Albm1:  { IdPerfil: 1, NombreModulo: Albm, Funcionalidades: 'AC,VW' }
-  Albm2:  { IdPerfil: 1, NombreModulo: AlbmAlbumes, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  1: { IdPerfil: 1, NombreModulo: Albm, Funcionalidades: 'AC,VW' }
+  2: { IdPerfil: 1, NombreModulo: AlbmAlbumes, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
 
-  Albm11: { IdPerfil: 2, NombreModulo: Albm, Funcionalidades: 'AC,VW' }
-  Albm21: { IdPerfil: 2, NombreModulo: AlbmAlbumes, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  11: { IdPerfil: 2, NombreModulo: Albm, Funcionalidades: 'AC,VW' }
+  21: { IdPerfil: 2, NombreModulo: AlbmAlbumes, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
