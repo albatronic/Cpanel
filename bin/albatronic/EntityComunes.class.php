@@ -345,10 +345,7 @@ class EntityComunes extends Entity {
             $url = $this->getUrlFriendly();
             $prefijo = $_SESSION['appPath'];
         } else {
-            if ($this->UrlIsHttps)
-                $prefijo = "https://";
-            else
-                $prefijo = "http://";
+            $prefijo = ($this->UrlIsHttps) ? "https://" : "http://";
         }
 
         $url = $prefijo . $url . $this->getUrlParameters();
