@@ -20,6 +20,8 @@ class IndexController extends Controller {
         // Cargar la configuracion del modulo (modules/moduloName/config.yml)
         $this->form = new Form($this->entity);
 
+        $this->cargaValores();
+
         // Cargar los permisos.
         // Si la entidad no está sujeta a control de permisos, se habilitan todos
         if ($this->form->getPermissionControl()) {
@@ -53,7 +55,14 @@ class IndexController extends Controller {
     public function IndexAction() {
 
         $template = $this->entity . "/index.html.twig";
-        
+
+        return array(
+            'template' => $template,
+            'values' => $this->values,
+        );
+    }
+
+    protected function cargaValores() {
         if (!isset($_SESSION['USER']['menu'])) {
             // Está logeado (viene del portal), pero es la primera vez que entra
             unset($_SESSION['USER']['accesosPortal']);
@@ -62,7 +71,7 @@ class IndexController extends Controller {
             $proyectoApp = new PcaeProyectosApps();
             $proyectoApp = $proyectoApp->find('PrimaryKeyMD5', $this->request[1]);
             $_SESSION['project']['Id'] = $proyectoApp->getId();
-            $_SESSION['project']['IdEmpresa'] = $proyectoApp->getIdProyecto()->getIdEmpresa()->getId();            
+            $_SESSION['project']['IdEmpresa'] = $proyectoApp->getIdProyecto()->getIdEmpresa()->getId();
             $_SESSION['project']['empresa'] = $proyectoApp->getIdProyecto()->getIdEmpresa()->getRazonSocial();
             $_SESSION['project']['title'] = $proyectoApp->getIdProyecto()->getProyecto();
             $_SESSION['project']['url'] = $proyectoApp->getUrl();
@@ -131,11 +140,6 @@ class IndexController extends Controller {
                     }
             }
         }
-
-        return array(
-            'template' => $template,
-            'values' => $this->values,
-        );
     }
 
     /**
