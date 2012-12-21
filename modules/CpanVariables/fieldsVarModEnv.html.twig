@@ -88,7 +88,7 @@
     {% for i in 1..values.datos.numberOfImages %}
     <div id="tabs-imagen{{i}}" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.input({'caption':'[images]['~i~'][visible] Visible','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][visible]','datos_images_' ~ i ~ '_visible',values.datos.images[i].visible)}}
-        {{ macro.input({'caption':'[images]['~i~'][caption] Caption','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][caption]','datos_images_'~i~'_caption',values.datos.images[i].caption,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[images]['~i~'][caption] Caption','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][caption]','datos_images_'~i~'_caption',values.datos.images[i].caption,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[images]['~i~'][width] Width','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][width]','datos_images_'~i~'_width',values.datos.images[i].width,'15','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[images]['~i~'][height] Height','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][height]','datos_images_'~i~'_height',values.datos.images[i].height,'15','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[images]['~i~'][generateThumbnail] Generar Thumbnail','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][generateThumbnail]','datos_images_' ~ i ~ 'generateThumbnail',values.datos.images[i].generateThumbnail)}}

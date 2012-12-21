@@ -1,4 +1,8 @@
 # MODULOS DE LA APP Sld. SLIDERS
+
+SldZonas:
+  1 : { Titulo: 'Zona Predeterminada', IsDefault: true, IsSuper: true}
+  
 CpanAplicaciones:
   1  : { CodigoApp: Sld,   NombreApp: Sliders }
 
