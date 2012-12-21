@@ -13,7 +13,11 @@
 
 {% if values.varEnvMod.showCommonFields == '1' %}
 
-<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+<div style="clear: both; margin-top: 10px; margin-left: 20px;">
+    <a href="javascript:;" onclick="switchDisplay('tabs')">Más detalles ...</a>    
+</div>
+
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="display: none;">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
         <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'general' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-general" onclick="activaSolapa('general');">General</a></li>
         <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'fechas' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-fechas" onclick="activaSolapa('fechas');">Fechas</a></li>

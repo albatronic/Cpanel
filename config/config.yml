@@ -99,7 +99,7 @@ config:
       description:
       folder: /Pcae
       dbEngine: mysql
-      host: localhost
+      host: 192.168.1.41
       user: pcae
       password: pcae
       database: pcae

@@ -26,7 +26,7 @@
         {% endblock %}
 
         <div class="page_title_user">
-            {{ project.empresa}} - {{ project.title }}
+            {{ project.empresa}} - {{ project.title }} {% if user.IdPerfil.Id == '1' %}(Id:{{project.Id}}){% endif %}
 	</div>
 
         <div id="container">

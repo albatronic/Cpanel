@@ -30,6 +30,17 @@ class GconContenidos extends GconContenidosEntity {
                 $this->BlogOrden = $this->SortOrder;
             if ($this->NoticiaOrden == 0)
                 $this->NoticiaOrden = $this->SortOrder;
+            
+            // Si no es evento, borrar los posibles eventos asociados
+            if ( ($this->Id) and (!$this->EsEvento) ) {
+                $em = new EntityManager($this->getConectionName());
+                if ($em->getDbLink()) {
+                    $query = "delete from EvenEventos where Entidad='GconContenidos' and IdEntidad='{$this->Id}'";
+                    $em->query($query);
+                    $em->desConecta();
+                }
+                unset($em);
+            }
         }
     }
 

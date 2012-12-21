@@ -44,7 +44,9 @@ class EvenEventosController extends Controller {
                     break;
             }
         } else {
-            return array('template' => '_global/forbiden.html.twig');
+            return array(
+                'template' => '_global/forbiden.html.twig',
+                'values' => $this->values);
         }
     }
 
@@ -94,7 +96,7 @@ class EvenEventosController extends Controller {
         }
     }
 
-    public function listPopupAction($entidad='', $idEntidad='') {
+    public function listPopupAction($entidad = '', $idEntidad = '') {
 
         if ($entidad == '')
             $entidad = $this->request[2];
@@ -107,7 +109,7 @@ class EvenEventosController extends Controller {
         $evento->setFecha(date('d-m-Y'));
         $lineas[] = $evento;
 
-        $eventos = $evento->cargaCondicion("Id", "Entidad='{$entidad}' AND IdEntidad='{$idEntidad}'","Fecha DESC,HoraInicio DESC");
+        $eventos = $evento->cargaCondicion("Id", "Entidad='{$entidad}' AND IdEntidad='{$idEntidad}'", "Fecha DESC,HoraInicio DESC");
         unset($evento);
 
         foreach ($eventos as $evento) {
