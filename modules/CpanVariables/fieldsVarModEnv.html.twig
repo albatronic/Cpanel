@@ -94,6 +94,10 @@
         {{ macro.input({'caption':'[images]['~i~'][generateThumbnail] Generar Thumbnail','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][generateThumbnail]','datos_images_' ~ i ~ 'generateThumbnail',values.datos.images[i].generateThumbnail)}}
         {{ macro.input({'caption':'[images]['~i~'][widthThumbnail] Anchura Thumbnail','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][widthThumbnail]','datos_images_' ~ i ~ '_widthThumbnail',values.datos.images[i].widthThumbnail,'15','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[images]['~i~'][heightThumbnail] Altura Thumbnail','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[images]['~i~'][heightThumbnail]','datos_images_' ~ i ~ '_heightThumbnail',values.datos.images[i].heightThumbnail,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[images]['~i~'][mostrarTitulo] Mostrar Título','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][mostrarTitulo]','datos_images_' ~ i ~ 'mostrarTitulo',values.datos.images[i].mostrarTitulo)}}            
+        {{ macro.input({'caption':'[images]['~i~'][mostrarNombre] Mostrar Nombre','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][mostrarNombre]','datos_images_' ~ i ~ 'mostrarNombre',values.datos.images[i].mostrarNombre)}}
+        {{ macro.input({'caption':'[images]['~i~'][mostrarPieDeFoto] Mostrar Pie de Foto','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][mostrarPieDeFoto]','datos_images_' ~ i ~ 'mostrarPieDeFoto',values.datos.images[i].mostrarPieDeFoto)}}
+        {{ macro.input({'caption':'[images]['~i~'][mostrarPublicar] Mostrar Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][mostrarPublicar]','datos_images_' ~ i ~ 'mostrarPublicar',values.datos.images[i].mostrarPublicar)}}        
     </div>
     {% endfor %}
 
@@ -109,7 +113,7 @@
     {# VARIABLES DE ENTORNO DE CADA COLUMNA DE LA ENTIDAD DE DATOS #}
     <div id="tabs-columnas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
 
-        <div id="accordion" style="margin-top:10px;">
+        <div id="accordionColumnas" style="margin-top:10px;">
             {% for columna,variables in values.datos.columns %}
                 <h3 style="{% if (variables.visible) %} color: blue; font-weight: bold; {% endif %}">
                     [columns][{{columna}}] :: [{{variables.caption}} = {{variables.default }}] [permission: {{variables.permission }}]

@@ -7,7 +7,7 @@ var segundoslap=false;
 
 
 $(function(){
-
+ 
     /**
      * Para las solapas
      */
@@ -16,14 +16,23 @@ $(function(){
     /**
      * Para el efecto acordeón
      */
-    $( "#accordion" ).accordion({
+
+    $( "#accordionColumnas" ).accordion({
         autoHeight: false,
         navigation: true,
         collapsible: true,
         active: false,
-        animated: 'bounceslide'
+        animated: ''
     });
-
+    
+    $( "#accordionMenu" ).accordion({
+        autoHeight: false,
+        navigation: true,
+        collapsible: true,
+        active: false,
+        animated: ''
+    });
+    
     $("#usersSelector").change(function () {
         submitForm('layoutForm');
     });
@@ -34,6 +43,38 @@ $(function(){
 
 });
 
+function solapaActiva(solapa) {
+    alert(solapa);
+    //$("#solapaActiva").val(solapa);
+}
+
+function AcordeonActivo(acordeon) {
+    $("#acordeonActivo").val(acordeon);
+}
+
+function Confirma(mensaje) {
+    var dialogo = $('<div title="Confirmación"><p>' + mensaje + '</p></div>');
+
+    $( "#dialog:ui-dialog" ).dialog( "destroy" );
+
+    dialogo.dialog({
+        autoOpen: true,
+        dialogClass: "alert",
+        resizable: false,
+        height: 150,
+        modal: true,
+        buttons: {
+            Aceptar: function() {
+                $( this ).dialog( "close" );
+                return true;
+            },          
+            Cancelar: function() {
+                $( this ).dialog( "close" );
+                return false;
+            }
+        }
+    });
+}
 
 /**
  * Oculta (si existe) el elemento html id
@@ -222,6 +263,13 @@ function documentos(entidad, idEntidad, idDiv, tipo) {
  * @return void
  */
 function submitForm(formulario) {
+    
+    // Coger el número de acordeon que está activo
+    var acordeonActivo = $( "#accordion" ).accordion( "option", "active" );
+    
+    // Poner el número acordeon activo para que se submitee
+    $('#acordeonActivo').val(acordeonActivo);
+    
     $('#'+formulario).submit();
 }
 
@@ -254,7 +302,7 @@ function DesplegableAjax(iddiv,idselect,nameselect,tipo,filtro) {
     // Coloco un gif "Cargando..." en la capa
     $('#'+iddiv).html("<img src='"+appPath+"/images/loading.gif'>");
 
-    jQuery('#'+iddiv).load(url, parametros);
+    $('#'+iddiv).load(url, parametros);
 }
 
 /*
@@ -289,6 +337,18 @@ function devuelve( campoId, id, campoTexto, value, desplegableAjax) {
     $( "#"+campoTexto ).focus();
 }
 
+function actualizaPublish(entidad,idEntidad,onOff) {
+
+    var parametros = 'entidad='+entidad+'&idEntidad='+idEntidad+'&onOff='+onOff;
+
+    $.ajax({
+        url: appPath + "/lib/actualizaPublish.php",
+        type: 'GET',
+        async: true,
+        data: parametros
+    });
+}
+
 function actualizaContenidoRelacionado(idDiv,idContenidoOrigen,idContenidoRelacionado,onOff) {
 
     //var url        = appPath + '/lib/contenidosRelacionados.php';
@@ -297,12 +357,12 @@ function actualizaContenidoRelacionado(idDiv,idContenidoOrigen,idContenidoRelaci
     // Coloco un gif "Cargando..." en la capa
     //$('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
 
-$.ajax({
-    url: appPath + '/lib/contenidosRelacionados.php',
-    type: 'GET',
-    async: true,
-    data: parametros
-});
+    $.ajax({
+        url: appPath + '/lib/contenidosRelacionados.php',
+        type: 'GET',
+        async: true,
+        data: parametros
+    });
 
 }
 

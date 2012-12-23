@@ -79,7 +79,7 @@ class GconSecciones extends GconSeccionesEntity {
             $idSeccion = $this->Id;
 
         $contenido = new GconContenidos();
-        $contenidos = $contenido->cargaCondicion('Id as Id,Titulo as Value,PrimaryKeyMD5', "IdSeccion='{$idSeccion}'", "SortOrder ASC");
+        $contenidos = $contenido->cargaCondicion('Id as Id,Titulo as Value,PrimaryKeyMD5,Publish', "IdSeccion='{$idSeccion}'", "SortOrder ASC");
         unset($contenido);
 
         if ($idContenido) {

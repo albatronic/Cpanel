@@ -517,7 +517,7 @@ class Entity {
             if ($showDeleted == FALSE)
                 $condicion .= " AND (Deleted = '0')";
 
-            $query = "SELECT {$columnas} FROM `{$this->_tableName}` WHERE ({$condicion}) {$orderBy}";
+            $query = "SELECT {$columnas} FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE ({$condicion}) {$orderBy}";
             $this->_em->query($query);
             $this->setStatus($this->_em->numRows());
 

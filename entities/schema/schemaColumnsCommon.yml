@@ -6,6 +6,7 @@
     Checked:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     Publish:              {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     BelongsTo:            {type: integer(11), notnull: true, default: 0, index: index}
+    AllowsChildren:       {type: tinyint, notnull: true, default: 1, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
 
     # Auditoria
     CreatedBy:            {type: integer, notnull: true, default: 0}

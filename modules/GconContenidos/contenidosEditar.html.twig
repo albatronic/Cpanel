@@ -9,11 +9,24 @@
     <ul>
     {% for contenido in contenidos.contenidos %}
         <li>
+ 
+            <input
+                title="Publicar / Despublicar"
+                id="check{{contenido.Id}}"
+                type="checkbox"
+                value="{{contenido.Publish}}"
+                {% if (contenido.Publish == '1') %} checked {% endif %}
+                onchange="
+                  if ($('#check{{contenido.Id}}').is(':checked')) {$('#check{{contenido.Id}}').val('1');} else {$('#check{{contenido.Id}}').val('0');}
+                  actualizaPublish('GconContenidos','{{contenido.Id}}',$('#check{{contenido.Id}}').val());
+                "
+            />
+                
+            <a href="{{app.path}}/{{values.controller}}/edit/{{contenido.PrimaryKeyMD5}}" title="Editar..." class="arbol">{{contenido.Value}}</a>            
             {% if (contenido.Id == values.datos.Id) %}
                 <img class="arbol" src="{{app.path}}/images/botoneditar.png"/>
                 <script>switchDisplay('contenidosDe_{{contenidos.id}}');</script>
-            {% endif %} 
-            <a href="{{app.path}}/{{values.controller}}/edit/{{contenido.PrimaryKeyMD5}}" title="Editar..." class="arbol">{{contenido.Value}}</a>            
+            {% endif %}             
         </li>
     {% endfor%}
     </ul>

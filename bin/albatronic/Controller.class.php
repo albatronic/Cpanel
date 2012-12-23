@@ -140,8 +140,10 @@ class Controller {
         $this->cargaVariables();
 
         $this->values['atributos'] = $this->form->getAtributos($this->entity); //$this->values['permisos']['enCurso']['modulo']);
-        // Poner la solapa activa de los campos comunes
+        // Poner la solapa activa del formulario
         ($this->request['solapaActiva'] == '') ? $this->values['solapaActiva'] = 'general' : $this->values['solapaActiva'] = $this->request['solapaActiva'];
+        // Poner el acordeon activo de los campos comunes
+        ($this->request['acordeonActivo'] == '') ? $this->values['acordeonActivo'] = '' : $this->values['acordeonActivo'] = $this->request['acordeonActivo'];        
     }
 
     public function IndexAction() {
@@ -233,7 +235,7 @@ class Controller {
                                             unset($objetoUrl);
                                         }
                                     }
-                                }
+                                } else $this->values['errores'] = $datos->getErrores ();
 
                                 //Recargo el objeto para refrescar las propiedas que
                                 //hayan podido ser objeto de algun calculo durante el proceso

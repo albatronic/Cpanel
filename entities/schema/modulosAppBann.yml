@@ -1,4 +1,9 @@
 # MODULOS DE LA APP Bann. BANNERS
+
+# Crear la zona de banners predeterminada
+BannZonas:
+  1 : { Titulo: 'Zona Predeterminada', IsDefault: true, IsSuper: true}
+  
 CpanAplicaciones:
   1  : { CodigoApp: Bann,   NombreApp: Banners }
 

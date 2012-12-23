@@ -8,281 +8,297 @@
   date 09.09.2012 01:51:37
 #}
 
+{% if values.varEnvMod.showCommonFields == '1' or user.IdPerfil.Id == '1' %}
 
-{{ macro.input(atributos.Publish,'field_title','checkbox',values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo,'255','CampoTextoLargo','12') }}
-
-{% if values.varEnvMod.showCommonFields == '1' %}
-
-<div style="clear: both; margin-top: 10px; margin-left: 20px;">
-    <a href="javascript:;" onclick="switchDisplay('tabs')">Más detalles ...</a>    
-</div>
-
-<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="display: none;">
-    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'general' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-general" onclick="activaSolapa('general');">General</a></li>
-        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'fechas' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-fechas" onclick="activaSolapa('fechas');">Fechas</a></li>
+<div id="fieldsComunes" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    
+    <div id="accordion">
         
-        {% if values.varEnvMod.metatagTitleManagement > '0' %}
-        <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'meta' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-meta" onclick="activaSolapa('meta');">Meta</a></li>
-        {% endif %}
-        
-        {% if datos.getPrimaryKeyValue %}
-
-            {% if values.varEnvMod.numberOfImages > '0' %}
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'imagenes' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-imagenes" onclick="activaSolapa('imagenes');">Imágenes</a></li>
+        {# GENERAL #}
+        <h3>General</h3>
+        <div>
+            <p>
+            {{ macro.input(atributos.Id,'field_title','text',values.controller ~ '[Id]',values.controller ~ '_Id',datos.primaryKeyValue,none,none,110,'disabled') }}
+            {% if user.idPerfil == 1 %}
+                {{ macro.input(atributos.PrimaryKeyMD5,'field_title','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo',none,'disabled') }}
+                {{ macro.input(atributos.IsDefault,'field_title','checkbox',values.controller ~ '[IsDefault]',values.controller ~ '_IsDefault',datos.IsDefault.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.input(atributos.IsSuper,'field_title','checkbox',values.controller ~ '[IsSuper]',values.controller ~ '_IsSuper',datos.IsSuper.IDTipo,'255','CampoTextoLargo','12') }}
             {% endif %}
-            
-            {% if values.varEnvMod.withTiny == '1' %}
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'tiny' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-tiny" onclick="cargaSolapa('tabs-tiny','tiny');">Imágenes Tiny</a></li>
-            {% endif %}
-            
-            {% if values.varEnvMod.withGalery == '1' %}
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'galery' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-galery" onclick="cargaSolapa('tabs-galery','galery');">Galería</a></li>
-            {% endif %}
-
-            {% if values.varEnvMod.withDocuments == '1' %}
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'documents' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-documents" onclick="cargaSolapa('tabs-documents','document');">Documentos</a></li>
-            {% endif %}
-
-            {% if values.varEnvMod.withVideos == '1' %}
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'videos' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-videos" onclick="cargaSolapa('tabs-videos','video');">Vídeos</a></li>
-            {% endif %}
-
-            {% if values.varEnvMod.withAudios == '1' %}
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'audios' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-audios" onclick="cargaSolapa('tabs-audios','audio');">Audios</a></li>
-            {% endif %}
-
-            {% if values.varEnvMod.urlFriendlyManagement == '1' %}            
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'urls' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-urls" onclick="activaSolapa('urls');">URL Amigable</a></li>
-            {% endif %}
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'urlDestino' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-urlDestino" onclick="activaSolapa('urlDestino');">URL destino</a></li>
-
-            {% if values.varEnvMod.showSiteMapManagement.show == '1' %}             
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'sitemap' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-sitemap" onclick="activaSolapa('sitemap');">SiteMap</a></li>
-            {% endif %}
-            
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'auditoria' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-auditoria" onclick="activaSolapa('auditoria');">Auditoría</a></li>
-            <li class="ui-state-default ui-corner-top {% if values.solapaActiva == 'mostrar' %} ui-tabs-selected ui-state-active{% endif %}"><a href="#tabs-mostrar" onclick="activaSolapa('mostrar');">Mostrar...</a></li>
-        {% endif %}
-    </ul>
-
-    {# SOLAPA GENERAL #}
-    <div id="tabs-general" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input(atributos.Id,'field_title','text',values.controller ~ '[Id]',values.controller ~ '_Id',datos.primaryKeyValue,none,none,110,'disabled') }}
-        {% if user.idPerfil == 1 %}
-            {{ macro.input(atributos.PrimaryKeyMD5,'field_title','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo',none,'disabled') }}
-            {{ macro.input(atributos.IsDefault,'field_title','checkbox',values.controller ~ '[IsDefault]',values.controller ~ '_IsDefault',datos.IsDefault.IDTipo,'255','CampoTextoLargo','12') }}
-            {{ macro.input(atributos.IsSuper,'field_title','checkbox',values.controller ~ '[IsSuper]',values.controller ~ '_IsSuper',datos.IsSuper.IDTipo,'255','CampoTextoLargo','12') }}
-        {% endif %}
-        {{ macro.select(atributos.BelongsTo,'field_title',values.controller ~ '[BelongsTo]',values.controller ~ '_BelongsTo',none,datos.BelongsTo.getPrimaryKeyValue,datos.BelongsTo.fetchAll(none),'chzn-select',110) }}
-        {# macro.input(atributos.SortOrder,'field_title','text',values.controller ~ '[SortOrder]',values.controller ~ '_SortOrder',datos.SortOrder,none,none,110) #}
-        {{ macro.select(atributos.CodigoAppAsociada,'field_title',values.controller ~ '[CodigoAppAsociada]',values.controller ~ '_CodigoAppAsociada',none,datos.CodigoAppAsociada.Id,datos.CodigoAppAsociada.fetchAll('NombreApp'),'chzn-select',101)}}
-        {{ macro.input(atributos.IdAlbumExterno,'field_title','text',values.controller ~ '[IdAlbumExterno]',values.controller ~ '_IdAlbumExterno',datos.IdAlbumExterno,none,none,110) }}
-        {{ macro.input(atributos.IdSliderAsociado,'field_title','text',values.controller ~ '[IdSliderAsociado]',values.controller ~ '_IdSliderAsociado',datos.IdSliderAsociado,none,none,110) }}
-        {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea',100)}}
-    </div>
-
-    {# SOLAPA FECHAS #}
-    <div id="tabs-fechas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.fecha(atributos.PublishedAt,'field_title',values.controller ~ '[PublishedAt]',values.controller ~ '_PublishedAt',datos.PublishedAt,'19','datepicker',111) }}
-        {{ macro.fecha(atributos.ActiveFrom,'field_title',values.controller ~ '[ActiveFrom]',values.controller ~ '_ActiveFrom',datos.ActiveFrom,'19','datepicker',104) }}
-        {{ macro.fecha(atributos.ActiveTo,'field_title',values.controller ~ '[ActiveTo]',values.controller ~ '_ActiveTo',datos.ActiveTo,'19','datepicker',105) }}
-    </div>
-
-    {# SOLAPA META #}
-    <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.input(atributos.LockMetatagTitle,'field_title','checkbox',values.controller ~ '[LockMetatagTitle]',values.controller ~ '_LockMetatagTitle',datos.LockMetatagTitle.IDTipo,'255','CampoTextoLargo','12') }}
-        {% if datos.LockMetatagTitle.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
-        {{ macro.input(atributos.MetatagTitle,'field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,none,none,110, disabled) }}
-        {{ macro.textarea(atributos.MetatagDescription, 'field_title', values.controller ~ '[MetatagDescription]', values.controller ~ '_MetatagDescription', datos.MetatagDescription, none, none, 'textarea',115) }}
-        {{ macro.textarea(atributos.MetatagKeywords, 'field_title', values.controller ~ '[MetatagKeywords]', values.controller ~ '_MetatagKeywords', datos.MetatagKeywords, none, none, 'textarea',116) }}
-        {{ macro.input(atributos.MetatagTitleSimple,'field_title','checkbox',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',datos.MetatagTitleSimple.IDTipo,'255','CampoTextoLargo','12') }}
-        {{ macro.select(atributos.MetatagTitlePosition,'field_title',values.controller ~ '[MetatagTitlePosition]',values.controller ~ '_MetatagTitlePosition',none,datos.MetatagTitlePosition.IDTipo,datos.MetatagTitlePosition.fetchAll(none,0),'chzn-select',118)}}
-    </div>
-
-    {% if datos.getPrimaryKeyValue %}
-    {# SOLAPA IMAGENES #}
-    <div id="tabs-imagenes" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-
-        <input name="idImagenEnviar" id="idImagenEnviar" value="" type="hidden" />
-        
-        <div style="margin-bottom: 20px;">
-            <div style="float: left;">
-                <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
-                Imágen Master: <input name="imagenMaster" id="imagenMaster" type="file" />
-            </div>
-            <div id="foto" style="float: left;">
-                <input type="button" value="Enviar"
-                   onclick="
-                       $('#action_{{ values.controller }}').val('Imagen');
-                       $('#accion_{{ values.controller }}').val('EnviarMaster');
-                       loading('foto');
-                       submitForm('manto_{{ values.controller}}');" 
-                />
-            </div>
+            {{ macro.input(atributos.AllowsChildren,'field_title','checkbox',values.controller ~ '[AllowsChildren]',values.controller ~ '_AllowsChildren',datos.AllowsChildren.IDTipo,'255','CampoTextoLargo','12') }}    
+            {{ macro.select(atributos.BelongsTo,'field_title',values.controller ~ '[BelongsTo]',values.controller ~ '_BelongsTo',none,datos.BelongsTo.getPrimaryKeyValue,datos.BelongsTo.fetchAll(none),'chzn-select',110) }}
+            {# macro.input(atributos.SortOrder,'field_title','text',values.controller ~ '[SortOrder]',values.controller ~ '_SortOrder',datos.SortOrder,none,none,110) #}
+            {{ macro.select(atributos.CodigoAppAsociada,'field_title',values.controller ~ '[CodigoAppAsociada]',values.controller ~ '_CodigoAppAsociada',none,datos.CodigoAppAsociada.Id,datos.CodigoAppAsociada.fetchAll('NombreApp'),'chzn-select',101)}}
+            {{ macro.input(atributos.IdAlbumExterno,'field_title','text',values.controller ~ '[IdAlbumExterno]',values.controller ~ '_IdAlbumExterno',datos.IdAlbumExterno,none,none,110) }}
+            {{ macro.input(atributos.IdSliderAsociado,'field_title','text',values.controller ~ '[IdSliderAsociado]',values.controller ~ '_IdSliderAsociado',datos.IdSliderAsociado,none,none,110) }}
+            {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea',100)}}                
+            </p>
         </div>
-
-        <table style="margin-top: 10px; width: 100%;">            
-            {% for key,imagen in values.datos.getDocuments('image%','IsThumbnail=0') %}
-            {% set puntero = key + 1%}
-            <tr>
-                <td align="center" style="width: 45%;">
-                    <div id="foto{{puntero}}">
-                        <img src="{{project.url}}/docs/{{values.controller}}/{{imagen.Name}}" width="150px" />
-                    </div>
-                    <br />{{imagen.getSize}} ({{imagen.Width}} x {{imagen.Height}})<br />
-                    <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
-                    <input name="image{{puntero}}" id="imagen_{{puntero}}_Doc" type="file"/>
-                </td>
-                <td style="vertical-align: top !important;">
-                    <input name="image[{{puntero}}][Tipo]" id="image_{{puntero}}_Tipo" value="{{imagen.Type}}" type="hidden" />
-                    <input name="image[{{puntero}}][Id]" id="image_{{puntero}}_Id" value="{{imagen.Id}}" type="hidden" />
-                    <input name="image[{{puntero}}][SortOrder]" id="image_{{puntero}}_SortOrder" value="{{imagen.SortOrder}}" type="hidden" />
-                    {{ macro.input({'caption':'Título','visible':'1','varEnv':'0'},'field_title','text','image['~puntero~'][Title]','image_'~puntero~'_Title',imagen.Title,255,none) }}
-                    {{ macro.input({'caption':'Nombre','visible':'1','varEnv':'0'},'field_title','text','image['~puntero~'][Name]','image_'~puntero~'_Name',imagen.Name,255,none) }}
-                    {{ macro.input({'caption':'Mostrar pie de foto','visible':'1','varEnv':'0'},'field_title','checkbox','image['~puntero~'][ShowCaption]','image_'~puntero~'_ShowCaption',imagen.ShowCaption.IDTipo,'255','CampoTextoLargo','12') }}
-                    {{ macro.input({'caption':'Publicar','visible':'1','varEnv':'0'},'field_title','checkbox','image['~puntero~'][Publish]','image_'~puntero~'_Publish',imagen.Publish.IDTipo,'255','CampoTextoLargo','12') }}
-                    <div id="botonera{{puntero}}" style="text-align: center;">
-                    <input type="button" value="Guardar cambios" class="comando"
-                        onclick="
-                            $('#action_{{ values.controller }}').val('Imagen');
-                            $('#accion_{{ values.controller }}').val('GuardarCambios');
-                            $('#idImagenEnviar').val('{{puntero}}');
-                            loading('botonera{{puntero}}');
-                            submitForm('manto_{{ values.controller}}');" />
-
-                    <input type="button" value="Borrar imagen" class="comando"
-                        onclick="
-                            if (!confirm('¿Desea borrar la imagen?')) {return false;}
-                            else {
-                            $('#action_{{ values.controller }}').val('Imagen');
-                            $('#accion_{{ values.controller }}').val('Quitar');
-                            $('#idImagenEnviar').val('{{puntero}}');
-                            submitForm('manto_{{ values.controller}}');
-                            }" />
-                    </div>
-                </td>
-            </tr>
-            <tr style="height: 20px;"></tr>
-            {% endfor %}
-        </table>
-    </div>
-
-    {# SOLAPA TINY #}
-    {% if values.varEnvMod.withTiny == '1' %}
-    <div id="tabs-tiny" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"></div>
-    {% endif %}
         
-    {# SOLAPA GALERIA #}
-    {% if values.varEnvMod.withGalery == '1' %}
-    <div id="tabs-galery" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"></div>
-    {% endif %}
-
-    {# SOLAPA DOCUMENTOS #}
-    {% if values.varEnvMod.withDocuments == '1' %}
-    <div id="tabs-documents" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"></div>
-    {% endif %}
-
-    {# SOLAPA VIDEOS #}
-    {% if values.varEnvMod.withVideos == '1' %}
-    <div id="tabs-videos" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"></div>
-    {% endif %}
-
-    {# SOLAPA AUDIOS #}
-    {% if values.varEnvMod.withAudios == '1' %}
-    <div id="tabs-audios" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"></div>
-    {% endif %}
-
-    {# SOLAPA URLS #}
-    <div id="tabs-urls" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.input(atributos.LockUrlPrefix,'field_title','checkbox',values.controller ~ '[LockUrlPrefix]',values.controller ~ '_LockUrlPrefix',datos.LockUrlPrefix.IDTipo,'255','CampoTextoLargo','12') }}
-        {% if datos.LockUrlPrefix.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
-        {{ macro.input(atributos.UrlPrefix,'field_title','text',values.controller ~ '[UrlPrefix]',values.controller ~ '_UrlPrefix',datos.UrlPrefix,'255','CampoTextoLargo',112,disabled) }}
-        {{ macro.input(atributos.LockSlug,'field_title','checkbox',values.controller ~ '[LockSlug]',values.controller ~ '_LockSlug',datos.LockSlug.IDTipo,'255','CampoTextoLargo','12') }}
-        {% if datos.LockSlug.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
-        {{ macro.input(atributos.Slug,'field_title','text',values.controller ~ '[Slug]',values.controller ~ '_Slug',datos.Slug,'255','CampoTextoLargo',112, disabled) }}
-        {{ macro.input(atributos.UrlFriendly,'field_title','text',values.controller ~ '[UrlFriendly]',values.controller ~ '_UrlFriendly',datos.UrlFriendly,'255','CampoTextoLargo',112,'DISABLED') }}
-        {{ macro.input(atributos.UrlHeritable,'field_title','checkbox',values.controller ~ '[UrlHeritable]',values.controller ~ '_UrlHeritable',datos.UrlHeritable.IDTipo,'255','CampoTextoLargo','12') }}
-            
-        {# SI EL USUARIO ES SUPER, SE MUESTRAN LOS CAMPOS CONTROLLER, ACTION, TEMPLATE y PARAMETERS
-           QUE ESTAN EN LA TABLA CpanUrlAmigables
-        #}
-        {% if user.idPerfil == 1 %}
-            {% set objetoUrlAmigable = datos.getObjetoUrlAmigable %}
-            <input name="objetoUrlAmigable[Id]" value="{{objetoUrlAmigable.Id}}" type="hidden" />
-            {{ macro.input({'caption':'Controller','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Controller]','CpanUrlAmigables_Controller',objetoUrlAmigable.Controller,'255','CampoTextoLargo','12') }}
-            {{ macro.input({'caption':'Action','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Action]','CpanUrlAmigables_Action',objetoUrlAmigable.Action,'255','CampoTextoLargo','12') }}
-            {{ macro.input({'caption':'Template','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Template]','CpanUrlAmigables_Template',objetoUrlAmigable.Template,'255','CampoTextoLargo','12') }}
-            {{ macro.input({'caption':'Parameters','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Parameters]','CpanUrlAmigables_Parameters',objetoUrlAmigable.Parameters,'255','CampoTextoLargo','12') }}
+        {# FECHAS #}
+        <h3>Fecha</h3>
+        <div>
+            <p>
+            {{ macro.fecha(atributos.PublishedAt,'field_title',values.controller ~ '[PublishedAt]',values.controller ~ '_PublishedAt',datos.PublishedAt,'19','datepicker',111) }}
+            {{ macro.fecha(atributos.ActiveFrom,'field_title',values.controller ~ '[ActiveFrom]',values.controller ~ '_ActiveFrom',datos.ActiveFrom,'19','datepicker',104) }}
+            {{ macro.fecha(atributos.ActiveTo,'field_title',values.controller ~ '[ActiveTo]',values.controller ~ '_ActiveTo',datos.ActiveTo,'19','datepicker',105) }}                
+            </p>
+        </div>
+        
+        {# META #}
+        {% if values.varEnvMod.metatagTitleManagement > '0' %}
+        <h3>Meta</h3>
+        <div>
+            <p>
+            {{ macro.input(atributos.LockMetatagTitle,'field_title','checkbox',values.controller ~ '[LockMetatagTitle]',values.controller ~ '_LockMetatagTitle',datos.LockMetatagTitle.IDTipo,'255','CampoTextoLargo','12') }}
+            {% if datos.LockMetatagTitle.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
+            {{ macro.input(atributos.MetatagTitle,'field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,none,none,110, disabled) }}
+            {{ macro.textarea(atributos.MetatagDescription, 'field_title', values.controller ~ '[MetatagDescription]', values.controller ~ '_MetatagDescription', datos.MetatagDescription, none, none, 'textarea',115) }}
+            {{ macro.textarea(atributos.MetatagKeywords, 'field_title', values.controller ~ '[MetatagKeywords]', values.controller ~ '_MetatagKeywords', datos.MetatagKeywords, none, none, 'textarea',116) }}
+            {{ macro.input(atributos.MetatagTitleSimple,'field_title','checkbox',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',datos.MetatagTitleSimple.IDTipo,'255','CampoTextoLargo','12') }}
+            {{ macro.select(atributos.MetatagTitlePosition,'field_title',values.controller ~ '[MetatagTitlePosition]',values.controller ~ '_MetatagTitlePosition',none,datos.MetatagTitlePosition.IDTipo,datos.MetatagTitlePosition.fetchAll(none,0),'chzn-select',118)}}                
+            </p>
+        </div>        
         {% endif %}
-    </div>
-
-    {# SOLAPA URL DESTINO #}
-    <div id="tabs-urlDestino" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.input(atributos.UrlTarget,'field_title','text',values.controller ~ '[UrlTarget]',values.controller ~ '_UrlTarget',datos.UrlTarget,'255','CampoTextoLargo',112) }}
-        {{ macro.input(atributos.UrlParameters,'field_title','text',values.controller ~ '[UrlParameters]',values.controller ~ '_UrlParameters',datos.UrlParameters,'255','CampoTextoLargo',112) }}
-        {{ macro.radio(atributos.UrlRequestMethod,'field_title',values.controller ~ '[UrlRequestMethod]',values.controller ~ '_UrlRequestMethod',datos.UrlRequestMethod.IDTipo,datos.UrlRequestMethod.fetchAll(none,0),'chzn-radio',117)}}
-        {{ macro.radio(atributos.UrlOrigin,'field_title',values.controller ~ '[UrlOrigin]',values.controller ~ '_UrlOrigin',datos.UrlOrigin.IDTipo,datos.UrlOrigin.fetchAll(none,0),'chzn-radio',117)}}
-        {{ macro.input(atributos.UrlTargetBlank,'field_title','checkbox',values.controller ~ '[UrlTargetBlank]',values.controller ~ '_UrlTargetBlank',datos.UrlTargetBlank.IDTipo,'255','CampoTextoLargo','12') }}
-        {{ macro.input(atributos.UrlIsHttps,'field_title','checkbox',values.controller ~ '[UrlIsHttps]',values.controller ~ '_UrlIsHttps',datos.UrlIsHttps.IDTipo,'255','CampoTextoLargo','12') }}
-    </div>
-
-    {# SOLAPA SITEMAP #}
-    <div id="tabs-sitemap" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.input(atributos.ShowOnSitemap,'field_title','checkbox',values.controller ~ '[ShowOnSitemap]',values.controller ~ '_ShowOnSitemap',datos.ShowOnSitemap.IDTipo,'255','CampoTextoLargo','12') }}
-        {{ macro.input(atributos.ImportanceSitemap,'field_title','text',values.controller ~ '[ImportanceSitemap]',values.controller ~ '_ImportanceSitemap',datos.ImportanceSitemap,'5','CampoTextoCorto',120) }}
-        {{ macro.select(atributos.ChangeFreqSitemap,'field_title',values.controller ~ '[ChangeFreqSitemap]',values.controller ~ '_ChangeFreqSitemap',none,datos.ChangeFreqSitemap.IDTipo,datos.ChangeFreqSitemap.fetchAll(none,0),'chzn-select',121) }}
-    </div>
-
-    {# SOLAPA AUDITORIA #}
-    <div id="tabs-auditoria" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.input(atributos.Checked,'field_title','checkbox',values.controller ~ '[Checked]',values.controller ~ '_Checked',datos.Checked.IDTipo,'255','CampoTextoLargo','12') }}
-        {{ macro.radio(atributos.Privacy,'field_title',values.controller ~ '[Privacy]',values.controller ~ '_Privacy',datos.Privacy.IDTipo,datos.Privacy.fetchAll(none,0),'chzn-radio',109)}}
-        {{ macro.input(atributos.AccessProfileList,'field_title','text',values.controller ~ '[AccessProfileList]',values.controller ~ '_AccessProfileList',datos.AccessProfileList,none,none,107) }}
+        
         {% if datos.getPrimaryKeyValue %}
-            {% if values.varEnvMod.showNumberVisits %}
-            {{ macro.input(atributos.NumberVisits,'field_title','text',values.controller ~ '[NumberVisits]',values.controller ~ '_NumberVisits',datos.NumberVisits,none,'CampoImporte',113, 'disabled') }}
-            {% endif %}
-            {{ macro.input(atributos.DateTimeLastVisit,'field_title','text',values.controller ~ '[DateTimeLastVisit]',values.controller ~ '_DateTimeLastVisit',datos.DateTimeLastVisit,none,'CampoImporte',114, 'disabled') }}
+            {# IMÁGENES #}
+            {% if values.varEnvMod.numberOfImages > '0' %}
+            <h3>Imágenes</h3>
+            <div>
+                <p>
+                <input name="idImagenEnviar" id="idImagenEnviar" value="" type="hidden" />
 
-            {{ macro.input(atributos.CreatedBy,'field_title','text',values.controller ~ '[CreatedBy]',values.controller ~ '_CreatedBy',datos.CreatedBy,none,none,107,'disabled') }}
-            {{ macro.fecha(atributos.CreatedAt,'field_title',values.controller ~ '[CreatedAt]',values.controller ~ '_CreatedAt',datos.CreatedAt,'19','datepicker',108,'disabled') }}
-            {{ macro.input(atributos.ModifiedBy,'field_title','text',values.controller ~ '[ModifiedBy]',values.controller ~ '_ModifiedBy',datos.ModifiedBy,none,none,107,'disabled') }}
-            {{ macro.fecha(atributos.ModifiedAt,'field_title',values.controller ~ '[ModifiedAt]',values.controller ~ '_ModifiedAt',datos.ModifiedAt,'19','datepicker',108,'disabled') }}
+                <div style="margin-bottom: 20px;">
+                    <div style="float: left;">
+                        <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
+                        Imágen Master:
+                        <input name="imagenMaster" id="imagenMaster" type="file" />
+                    </div>
+                    <div id="foto" style="float: left;">
+                        <input type="button" value="Enviar"
+                           onclick="
+                               $('#action_{{ values.controller }}').val('Imagen');
+                               $('#accion_{{ values.controller }}').val('EnviarMaster');
+                               loading('foto');
+                               submitForm('manto_{{ values.controller}}');" 
+                        />
+                    </div>
+                </div>
 
-            {{ macro.input(atributos.Deleted,'field_title','text',values.controller ~ '[Deleted]',values.controller ~ '_Deleted',datos.Deleted.Descripcion,none,none,106,'disabled') }}
-            {% if datos.Deleted.IDTipo %}
-                {{ macro.input(atributos.DeletedBy,'field_title','text',values.controller ~ '[DeletedBy]',values.controller ~ '_DeletedBy',datos.DeletedBy,none,none,107,'disabled') }}
-                {{ macro.fecha(atributos.DeletedAt,'field_title',values.controller ~ '[DeletedAt]',values.controller ~ '_DeletedAt',datos.DeletedAt,'19','datepicker',108,'disabled') }}
+                <table style="margin-top: 10px; width: 100%;">            
+                    {% for key,imagen in values.datos.getDocuments('image%','IsThumbnail=0') %}
+                    {% set puntero = key + 1%}
+                    <tr>
+                        <td align="center" style="width: 45%;">
+                            <div id="foto{{puntero}}">
+                                <img src="{{project.url}}/docs/{{values.controller}}/{{imagen.Name}}" width="150px" />
+                            </div>
+                            <br />{{imagen.getSize}} 
+                            (
+                            {{imagen.Width}}
+                            {% if (imagen.Width != values.varEnvMod.images[puntero].width) %}
+                            <img src="{{app.path}}/images/icono_exclamacion.gif" title="La anchura correcta debería ser {{values.varEnvMod.images[puntero].width}}" />
+                            {% endif %}
+                            x 
+                            {{imagen.Height}}
+                            {% if (imagen.Height != values.varEnvMod.images[puntero].height) %}
+                            <img src="{{app.path}}/images/icono_exclamacion.gif" title="La altura correcta debería ser {{values.varEnvMod.images[puntero].height}}" />                            
+                            {% endif %}                            
+                            )
+                            <br />
+                            <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
+                            <input name="image{{puntero}}" id="imagen_{{puntero}}_Doc" type="file"/>
+                        </td>
+                        <td style="vertical-align: top !important;">
+                            <h1>{{values.varEnvMod.images[puntero].caption}}</h1>
+                            <input name="image[{{puntero}}][Tipo]" id="image_{{puntero}}_Tipo" value="{{imagen.Type}}" type="hidden" />
+                            <input name="image[{{puntero}}][Id]" id="image_{{puntero}}_Id" value="{{imagen.Id}}" type="hidden" />
+                            <input name="image[{{puntero}}][SortOrder]" id="image_{{puntero}}_SortOrder" value="{{imagen.SortOrder}}" type="hidden" />
+                            {{ macro.input({'caption':'Título','visible':values.varEnvMod.images[puntero].mostrarTitulo,'varEnv':'0'},'field_title','text','image['~puntero~'][Title]','image_'~puntero~'_Title',imagen.Title,255,none) }}
+                            {{ macro.input({'caption':'Nombre','visible':values.varEnvMod.images[puntero].mostrarNombre,'varEnv':'0'},'field_title','text','image['~puntero~'][Name]','image_'~puntero~'_Name',imagen.Name,255,none) }}
+                            {{ macro.input({'caption':'Mostrar pie de foto','visible':values.varEnvMod.images[puntero].mostrarPieDeFoto,'varEnv':'0'},'field_title','checkbox','image['~puntero~'][ShowCaption]','image_'~puntero~'_ShowCaption',imagen.ShowCaption.IDTipo,'255','CampoTextoLargo','12') }}
+                            {{ macro.input({'caption':'Publicar','visible':values.varEnvMod.images[puntero].mostrarPublicar,'varEnv':'0'},'field_title','checkbox','image['~puntero~'][Publish]','image_'~puntero~'_Publish',imagen.Publish.IDTipo,'255','CampoTextoLargo','12') }}
+                            <div id="botonera{{puntero}}" style="text-align: center;">
+                            <input type="button" value="Guardar cambios" class="comando"
+                                onclick="
+                                    $('#action_{{ values.controller }}').val('Imagen');
+                                    $('#accion_{{ values.controller }}').val('GuardarCambios');
+                                    $('#idImagenEnviar').val('{{puntero}}');
+                                    loading('botonera{{puntero}}');
+                                    submitForm('manto_{{ values.controller}}');" />
+
+                            <input type="button" value="Borrar imagen" class="comando"
+                                onclick="
+                                    if (!confirm('¿Desea borrar la imagen?')) {return false;}
+                                    else {
+                                    $('#action_{{ values.controller }}').val('Imagen');
+                                    $('#accion_{{ values.controller }}').val('Quitar');
+                                    $('#idImagenEnviar').val('{{puntero}}');
+                                    submitForm('manto_{{ values.controller}}');
+                                    }" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 20px;"></tr>
+                    {% endfor %}
+                </table>                    
+                </p>
+            </div>
             {% endif %}
+            
+            {# SOLAPA TINY #}
+            {% if values.varEnvMod.withTiny == '1' %}
+            <h3>Imágenes para Tiny</h3>
+            <div id="solapaTiny">
+                <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
+                        src='{{app.path}}/CpanDocs/list/{{values.controller}}/{{datos.Id}}/tiny'>
+                </iframe>            
+            </div>
+            {% endif %}
+
+            {# SOLAPA GALERIA #}
+            {% if values.varEnvMod.withGalery == '1' %}
+            <h3>Galería de imágenes</h3>
+            <div id="solapaGalery">
+                <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
+                        src='{{app.path}}/CpanDocs/list/{{values.controller}}/{{datos.Id}}/galery'>
+                </iframe>
+            </div>
+            {% endif %}
+
+            {# SOLAPA DOCUMENTOS #}
+            {% if values.varEnvMod.withDocuments == '1' %}
+            <h3>Documentos</h3>
+            <div id="solapaDocuments">
+                <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
+                        src='{{app.path}}/CpanDocs/list/{{values.controller}}/{{datos.Id}}/documents'>
+                </iframe>            
+            </div>
+            {% endif %}
+
+            {# SOLAPA VIDEOS #}
+            {% if values.varEnvMod.withVideos == '1' %}
+            <h3>Vídeos</h3>
+            <div id="solapaVideos">
+                <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
+                        src='{{app.path}}/CpanDocs/list/{{values.controller}}/{{datos.Id}}/video'>
+                </iframe>            
+            </div>
+            {% endif %}
+
+            {# SOLAPA AUDIOS #}
+            {% if values.varEnvMod.withAudios == '1' %}
+            <h3>Audios</h3>
+            <div id="solapaAudios">
+                <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
+                        src='{{app.path}}/CpanDocs/list/{{values.controller}}/{{datos.Id}}/audio'>
+                </iframe>            
+            </div>
+            {% endif %}
+
+            {# SOLAPA URLS #}
+            <h3>Url Amigable</h3>
+            <div>
+                {{ macro.input(atributos.LockUrlPrefix,'field_title','checkbox',values.controller ~ '[LockUrlPrefix]',values.controller ~ '_LockUrlPrefix',datos.LockUrlPrefix.IDTipo,'255','CampoTextoLargo','12') }}
+                {% if datos.LockUrlPrefix.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
+                {{ macro.input(atributos.UrlPrefix,'field_title','text',values.controller ~ '[UrlPrefix]',values.controller ~ '_UrlPrefix',datos.UrlPrefix,'255','CampoTextoLargo',112,disabled) }}
+                {{ macro.input(atributos.LockSlug,'field_title','checkbox',values.controller ~ '[LockSlug]',values.controller ~ '_LockSlug',datos.LockSlug.IDTipo,'255','CampoTextoLargo','12') }}
+                {% if datos.LockSlug.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
+                {{ macro.input(atributos.Slug,'field_title','text',values.controller ~ '[Slug]',values.controller ~ '_Slug',datos.Slug,'255','CampoTextoLargo',112, disabled) }}
+                {{ macro.input(atributos.UrlFriendly,'field_title','text',values.controller ~ '[UrlFriendly]',values.controller ~ '_UrlFriendly',datos.UrlFriendly,'255','CampoTextoLargo',112,'DISABLED') }}
+                {{ macro.input(atributos.UrlHeritable,'field_title','checkbox',values.controller ~ '[UrlHeritable]',values.controller ~ '_UrlHeritable',datos.UrlHeritable.IDTipo,'255','CampoTextoLargo','12') }}
+
+                {# SI EL USUARIO ES SUPER, SE MUESTRAN LOS CAMPOS CONTROLLER, ACTION, TEMPLATE y PARAMETERS
+                   QUE ESTAN EN LA TABLA CpanUrlAmigables
+                #}
+                {% if user.idPerfil == 1 %}
+                    {% set objetoUrlAmigable = datos.getObjetoUrlAmigable %}
+                    <input name="objetoUrlAmigable[Id]" value="{{objetoUrlAmigable.Id}}" type="hidden" />
+                    {{ macro.input({'caption':'Controller','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Controller]','CpanUrlAmigables_Controller',objetoUrlAmigable.Controller,'255','CampoTextoLargo','12') }}
+                    {{ macro.input({'caption':'Action','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Action]','CpanUrlAmigables_Action',objetoUrlAmigable.Action,'255','CampoTextoLargo','12') }}
+                    {{ macro.input({'caption':'Template','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Template]','CpanUrlAmigables_Template',objetoUrlAmigable.Template,'255','CampoTextoLargo','12') }}
+                    {{ macro.input({'caption':'Parameters','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Parameters]','CpanUrlAmigables_Parameters',objetoUrlAmigable.Parameters,'255','CampoTextoLargo','12') }}
+                {% endif %}
+            </div>
+
+            {# SOLAPA URL DESTINO #}
+            <h3>Url Destino</h3>
+            <div>
+                {{ macro.input(atributos.UrlTarget,'field_title','text',values.controller ~ '[UrlTarget]',values.controller ~ '_UrlTarget',datos.UrlTarget,'255','CampoTextoLargo',112) }}
+                {{ macro.input(atributos.UrlParameters,'field_title','text',values.controller ~ '[UrlParameters]',values.controller ~ '_UrlParameters',datos.UrlParameters,'255','CampoTextoLargo',112) }}
+                {{ macro.radio(atributos.UrlRequestMethod,'field_title',values.controller ~ '[UrlRequestMethod]',values.controller ~ '_UrlRequestMethod',datos.UrlRequestMethod.IDTipo,datos.UrlRequestMethod.fetchAll(none,0),'chzn-radio',117)}}
+                {{ macro.radio(atributos.UrlOrigin,'field_title',values.controller ~ '[UrlOrigin]',values.controller ~ '_UrlOrigin',datos.UrlOrigin.IDTipo,datos.UrlOrigin.fetchAll(none,0),'chzn-radio',117)}}
+                {{ macro.input(atributos.UrlTargetBlank,'field_title','checkbox',values.controller ~ '[UrlTargetBlank]',values.controller ~ '_UrlTargetBlank',datos.UrlTargetBlank.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.input(atributos.UrlIsHttps,'field_title','checkbox',values.controller ~ '[UrlIsHttps]',values.controller ~ '_UrlIsHttps',datos.UrlIsHttps.IDTipo,'255','CampoTextoLargo','12') }}
+            </div>
+
+            {# SOLAPA SITEMAP #}
+            <h3>Site Map</h3>
+            <div>
+                {{ macro.input(atributos.ShowOnSitemap,'field_title','checkbox',values.controller ~ '[ShowOnSitemap]',values.controller ~ '_ShowOnSitemap',datos.ShowOnSitemap.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.input(atributos.ImportanceSitemap,'field_title','text',values.controller ~ '[ImportanceSitemap]',values.controller ~ '_ImportanceSitemap',datos.ImportanceSitemap,'5','CampoTextoCorto',120) }}
+                {{ macro.select(atributos.ChangeFreqSitemap,'field_title',values.controller ~ '[ChangeFreqSitemap]',values.controller ~ '_ChangeFreqSitemap',none,datos.ChangeFreqSitemap.IDTipo,datos.ChangeFreqSitemap.fetchAll(none,0),'chzn-select',121) }}
+            </div>
+
+            {# SOLAPA AUDITORIA #}
+            <h3>Auditoría</h3>
+            <div>
+                {{ macro.input(atributos.Checked,'field_title','checkbox',values.controller ~ '[Checked]',values.controller ~ '_Checked',datos.Checked.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.radio(atributos.Privacy,'field_title',values.controller ~ '[Privacy]',values.controller ~ '_Privacy',datos.Privacy.IDTipo,datos.Privacy.fetchAll(none,0),'chzn-radio',109)}}
+                {{ macro.input(atributos.AccessProfileList,'field_title','text',values.controller ~ '[AccessProfileList]',values.controller ~ '_AccessProfileList',datos.AccessProfileList,none,none,107) }}
+                {% if datos.getPrimaryKeyValue %}
+                    {% if values.varEnvMod.showNumberVisits %}
+                    {{ macro.input(atributos.NumberVisits,'field_title','text',values.controller ~ '[NumberVisits]',values.controller ~ '_NumberVisits',datos.NumberVisits,none,'CampoImporte',113, 'disabled') }}
+                    {% endif %}
+                    {{ macro.input(atributos.DateTimeLastVisit,'field_title','text',values.controller ~ '[DateTimeLastVisit]',values.controller ~ '_DateTimeLastVisit',datos.DateTimeLastVisit,none,'CampoImporte',114, 'disabled') }}
+
+                    {{ macro.input(atributos.CreatedBy,'field_title','text',values.controller ~ '[CreatedBy]',values.controller ~ '_CreatedBy',datos.CreatedBy,none,none,107,'disabled') }}
+                    {{ macro.fecha(atributos.CreatedAt,'field_title',values.controller ~ '[CreatedAt]',values.controller ~ '_CreatedAt',datos.CreatedAt,'19','datepicker',108,'disabled') }}
+                    {{ macro.input(atributos.ModifiedBy,'field_title','text',values.controller ~ '[ModifiedBy]',values.controller ~ '_ModifiedBy',datos.ModifiedBy,none,none,107,'disabled') }}
+                    {{ macro.fecha(atributos.ModifiedAt,'field_title',values.controller ~ '[ModifiedAt]',values.controller ~ '_ModifiedAt',datos.ModifiedAt,'19','datepicker',108,'disabled') }}
+
+                    {{ macro.input(atributos.Deleted,'field_title','text',values.controller ~ '[Deleted]',values.controller ~ '_Deleted',datos.Deleted.Descripcion,none,none,106,'disabled') }}
+                    {% if datos.Deleted.IDTipo %}
+                        {{ macro.input(atributos.DeletedBy,'field_title','text',values.controller ~ '[DeletedBy]',values.controller ~ '_DeletedBy',datos.DeletedBy,none,none,107,'disabled') }}
+                        {{ macro.fecha(atributos.DeletedAt,'field_title',values.controller ~ '[DeletedAt]',values.controller ~ '_DeletedAt',datos.DeletedAt,'19','datepicker',108,'disabled') }}
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            {# SOLAPA MOSTRAR... #}
+            <h3>Mostrar ...</h3>
+            <div>
+                {{ macro.input(atributos.ShowGalery,'field_title','checkbox',values.controller ~ '[ShowGalery]',values.controller ~ '_ShowGalery',datos.ShowGalery.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.input(atributos.ShowDocuments,'field_title','checkbox',values.controller ~ '[ShowDocuments]',values.controller ~ '_ShowDocuments',datos.ShowDocuments.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.input(atributos.ShowRelatedLinks,'field_title','checkbox',values.controller ~ '[ShowRelatedLinks]',values.controller ~ '_ShowRelatedLinks',datos.ShowRelatedLinks.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.input(atributos.ShowRelatedContents,'field_title','checkbox',values.controller ~ '[ShowRelatedContents]',values.controller ~ '_ShowRelatedContents',datos.ShowRelatedContents.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.input(atributos.ShowPublishedAt,'field_title','checkbox',values.controller ~ '[ShowPublishedAt]',values.controller ~ '_ShowPublishedAt',datos.ShowPublishedAt.IDTipo,'255','CampoTextoLargo','12') }}
+            </div>            
         {% endif %}
     </div>
-
-    {# SOLAPA MOSTRAR... #}
-    <div id="tabs-mostrar" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-        {{ macro.input(atributos.ShowGalery,'field_title','checkbox',values.controller ~ '[ShowGalery]',values.controller ~ '_ShowGalery',datos.ShowGalery.IDTipo,'255','CampoTextoLargo','12') }}
-        {{ macro.input(atributos.ShowDocuments,'field_title','checkbox',values.controller ~ '[ShowDocuments]',values.controller ~ '_ShowDocuments',datos.ShowDocuments.IDTipo,'255','CampoTextoLargo','12') }}
-        {{ macro.input(atributos.ShowRelatedLinks,'field_title','checkbox',values.controller ~ '[ShowRelatedLinks]',values.controller ~ '_ShowRelatedLinks',datos.ShowRelatedLinks.IDTipo,'255','CampoTextoLargo','12') }}
-        {{ macro.input(atributos.ShowRelatedContents,'field_title','checkbox',values.controller ~ '[ShowRelatedContents]',values.controller ~ '_ShowRelatedContents',datos.ShowRelatedContents.IDTipo,'255','CampoTextoLargo','12') }}
-        {{ macro.input(atributos.ShowPublishedAt,'field_title','checkbox',values.controller ~ '[ShowPublishedAt]',values.controller ~ '_ShowPublishedAt',datos.ShowPublishedAt.IDTipo,'255','CampoTextoLargo','12') }}
-    </div>
-    {% endif %}
+    
 </div>
 
 
-<script type="text/javascript">
-
-function activaSolapa(solapa) {
-    $("#solapaActiva").val(solapa);
-}
-
-function cargaSolapa(solapa, tipo) {
-
-    activaSolapa(tipo);
-    $('#'+solapa).html("<iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' src='{{app.path}}/CpanDocs/list/{{values.controller}}/{{datos.Id}}/" + tipo + "'></iframe>");
-
-}
-
+<script type="text/javascript"> 
+    
+    $(function(){
+        
+        $( "#accordion" ).accordion({
+            autoHeight: false,
+            navigation: true,
+            collapsible: true,
+            {% if values.acordeonActivo %} 
+            active: {{ values.acordeonActivo }},
+            {% else %}
+            active: false,
+            {% endif %}
+            animated: ''
+        });              
+        
+    });
+    
+  
 </script>
 
 {% endif %}

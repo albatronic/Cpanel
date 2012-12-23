@@ -7,10 +7,26 @@
   date 09.12.2012 08:35:28
 #}
 
-{{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
-{{ macro.input(atributos.NumeroMaximoBanners,'field_title','text',values.controller ~ '[NumeroMaximoBanners]',values.controller ~ '_NumeroMaximoBanners',datos.NumeroMaximoBanners,'4','CampoUnidades','2') }}
-{{ macro.input(atributos.NumeroPosicionesBanners,'field_title','text',values.controller ~ '[NumeroPosicionesBanners]',values.controller ~ '_NumeroPosicionesBanners',datos.NumeroPosicionesBanners,'4','CampoUnidades','2') }}
-
-{% include '_global/fieldsComunes.html.twig' %}
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general">{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Zona{%endif%}</a>
+        </li>
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}
+    </ul>
+                
+    <div id="general">
+        {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
+        {{ macro.input(atributos.NumeroMaximoBanners,'field_title','text',values.controller ~ '[NumeroMaximoBanners]',values.controller ~ '_NumeroMaximoBanners',datos.NumeroMaximoBanners,'4','CampoUnidades','2') }}
+        {{ macro.input(atributos.NumeroPosicionesBanners,'field_title','text',values.controller ~ '[NumeroPosicionesBanners]',values.controller ~ '_NumeroPosicionesBanners',datos.NumeroPosicionesBanners,'4','CampoUnidades','2') }}
+    </div>
+        
+    {% include '_global/fieldsComunes.html.twig' %}        
+</div>
 
 {{ macro.foco(values.controller ~ '_Titulo') }}
+

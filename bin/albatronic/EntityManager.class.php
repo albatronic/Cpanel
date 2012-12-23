@@ -79,14 +79,13 @@ class EntityManager {
 
                 $params = $yaml['config']['conections'][$conection];
                 $this->dbEngine = $params['dbEngine'];
-
+                $this->host = $params['host'];
+                
                 if ($_SESSION['EntornoDesarrollo']) {
-                    $this->host = 'localhost';
                     $this->user = $conection;
                     $this->password = $conection;
                     $this->dataBase = $conection;
                 } else {
-                    $this->host = $params['host'];
                     $this->user = $params['user'];
                     $this->password = $params['password'];
                     $this->dataBase = $params['database'];
@@ -96,6 +95,7 @@ class EntityManager {
                 $this->error[] = "EntityManager []: ERROR AL LEER EL ARCHIVO DE CONFIGURACION. " . $fileConfig . " NO EXISTE\n";
             }
         }
+
     }
 
     /**

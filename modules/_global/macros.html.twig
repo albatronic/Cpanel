@@ -57,6 +57,24 @@
     </div>
 </li>        
 {% endmacro %}
+
+{% macro publicar(atributos,name,id,value) %}
+<input name="{{name}}" id="{{ id|default(name)}}" type="hidden" value="{{value}}" />
+<input type="checkbox"
+       name="checkbox_{{ name }}"
+       id="checkbox_{{ id|default(name)}}"
+       value="{{ value }}"
+        {% if (value == '1') %} CHECKED {% endif %}
+       class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
+       onchange="
+            {{ onchange }} {{ _self.alertSave }}
+            if ($('#checkbox_{{ id|default(name)}}').is(':checked')) {$('#{{ id|default(name)}}').val('1');} else {$('#{{ id|default(name)}}').val('0');}
+       "
+       {{extra}}
+       {% if atributos.updatable == '0' %} disabled {% endif %}
+/>
+{% endmacro %}
+
 {#
   input: MUESTRA UN <INPUT> o <TEXTAREA> dependiendo del atributo 'editorTiny'
 

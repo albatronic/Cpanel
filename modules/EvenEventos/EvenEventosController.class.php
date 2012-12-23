@@ -30,6 +30,7 @@ class EvenEventosController extends Controller {
         if ($this->values['permisos']['permisosModulo']['IN']) {
             switch ($this->request["METHOD"]) {
 
+                case 'GET': ECHO "ASDFASDF ASDFASDFASDF";
                 case 'POST': //CREAR NUEVO REGISTRO
                     $datos = new $this->entity();
                     $datos->bind($this->request[$this->entity]);

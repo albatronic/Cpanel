@@ -1,5 +1,6 @@
 # MODULOS DE LA APP Sld. SLIDERS
 
+# Crear la zona de slider predeterminada
 SldZonas:
   1 : { Titulo: 'Zona Predeterminada', IsDefault: true, IsSuper: true}
   

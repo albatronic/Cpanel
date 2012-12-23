@@ -9,14 +9,22 @@
 
 <div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top"><a href="#tabs1-arbol">Árbol de Secciones</a></li>
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs1-seccion">Sección</a></li>     
+        <li class="ui-state-default ui-corner-top"><a href="#arbol">Árbol de Secciones</a></li>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Sección{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
+        </li>     
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}                      
     </ul>
 
-    <div id="tabs1-arbol" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    <div id="arbol">
         {% include '_global/arbol.html.twig' %}
     </div>        
-    <div id="tabs1-seccion" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    <div id="general">
         {% if datos.NivelJerarquico %}Nivel Jerárquico {{datos.NivelJerarquico}}{% endif %}
         {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
         {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
@@ -27,8 +35,8 @@
         {{ macro.input(atributos.MostrarSubsecciones,'field_title','checkbox',values.controller ~ '[MostrarSubsecciones]',values.controller ~ '_MostrarSubsecciones',datos.MostrarSubsecciones.IDTipo,'255','CampoTextoLargo','12') }}
         {{ macro.radio(atributos.ModoMostrarContenidos,'field_title',values.controller ~ '[ModoMostrarContenidos]',values.controller ~ '_ModoMostrarContenidos',datos.ModoMostrarContenidos.IDTipo,datos.ModoMostrarContenidos.fetchAll(Descripcion,0),'chzn-radio','22')}}
         {{ macro.select(atributos.CriterioOrdenContenidosHijos,'field_title',values.controller ~ '[CriterioOrdenContenidosHijos]',values.controller ~ '_CriterioOrdenContenidosHijos',none,datos.CriterioOrdenContenidosHijos.CriterioOrdenContenidosHijos,datos.CriterioOrdenContenidosHijos.fetchAll(none,0),'chzn-select','23')}}
-
-        <div id="accordion" style="margin-left:60px; width: 70%;">
+        
+        <div id="accordionMenu" style="margin-left:60px; width: 70%;">
             <h3{% if (datos.MostrarEnMenu1.IDTipo == '1') %} style="font-weight: bold;"{% endif %}>{{atributos.MostrarEnMenu1.caption}}</h3>
             <div>
                 <p>
@@ -74,6 +82,7 @@
         {{ macro.input(atributos.OrdenMenu5,'field_title','text',values.controller ~ '[OrdenMenu5]',values.controller ~ '_OrdenMenu5',datos.OrdenMenu5,'4','CampoUnidades','21') }}
         #}
 
-        {% include '_global/fieldsComunes.html.twig' %}
     </div>
+
+    {% include '_global/fieldsComunes.html.twig' %}
 </div>

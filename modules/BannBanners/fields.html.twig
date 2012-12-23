@@ -8,18 +8,39 @@
 #}
 
 <div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
-    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top"><a href="#tabs1-arbol">Árbol de Banners</a></li>
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs1-seccion">Banner</a></li>     
+    <ul>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'arbol'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#arbol" onclick='$( "#solapaActiva" ).val("arbol");'>Árbol de Banners</a>
+        </li>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Banner{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}            
+        </li>
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}
     </ul>
 
-    <div id="tabs1-arbol" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    <div id="arbol">
         <ul>
             {% for key,zona in values.objetoController.arbolZonasBanners %}
                 <li style="font-weight: bold;">{{zona.titulo}}</li>
                 <ul>
                     {% for banner in zona.banners %}
                         <li style="margin-left: 30px;">
+                            <input
+                                title="Publicar / Despublicar"
+                                id="check{{banner.Id}}"
+                                type="checkbox"
+                                value="{{banner.Publish.IDTipo}}"
+                                {% if (banner.Publish.IDTipo == '1') %} checked {% endif %}
+                                onchange="
+                                  if ($('#check{{banner.Id}}').is(':checked')) {$('#check{{banner.Id}}').val('1');} else {$('#check{{banner.Id}}').val('0');}
+                                  actualizaPublish('{{values.controller}}','{{banner.Id}}',$('#check{{banner.Id}}').val());
+                                "
+                            />                            
                             <a href="{{app.path}}/{{values.controller}}/edit/{{banner.primaryKeyMD5}}">{{banner.Titulo}} ({{banner.IdTipo.Descripcion}})</a>
                         </li>
                     {% endfor %}
@@ -28,7 +49,7 @@
         </ul>
     </div>
         
-    <div id="tabs1-seccion" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    <div id="general" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.select(atributos.IdZona,'field_title',values.controller ~ '[IdZona]',values.controller ~ '_IdZona',none,datos.IdZona.Id,datos.IdZona.fetchAll('Titulo',0),'chzn-select','1')}}
         {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
         {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
@@ -41,8 +62,8 @@
         {% if datos.primaryKeyMD5 %}
             {{ macro.labelPopup('Enlazar con...', app.path ~ '/'  ~ values.controller ~ '/enlazar/' ~ datos.primaryKeyMD5,datos.ObjetoEnlazado,datos.getUrlEnlace,600) }}
         {% endif %}
+    </div>      
             
-        {% include '_global/fieldsComunes.html.twig' %}
-    </div>
+    {% include '_global/fieldsComunes.html.twig' %}        
 </div>
 {{ macro.foco(values.controller ~ '_IdZona') }}
