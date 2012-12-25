@@ -52,30 +52,6 @@ function AcordeonActivo(acordeon) {
     $("#acordeonActivo").val(acordeon);
 }
 
-function Confirma(mensaje) {
-    var dialogo = $('<div title="Confirmación"><p>' + mensaje + '</p></div>');
-
-    $( "#dialog:ui-dialog" ).dialog( "destroy" );
-
-    dialogo.dialog({
-        autoOpen: true,
-        dialogClass: "alert",
-        resizable: false,
-        height: 150,
-        modal: true,
-        buttons: {
-            Aceptar: function() {
-                $( this ).dialog( "close" );
-                return true;
-            },          
-            Cancelar: function() {
-                $( this ).dialog( "close" );
-                return false;
-            }
-        }
-    });
-}
-
 /**
  * Oculta (si existe) el elemento html id
  * @param id

@@ -17,16 +17,22 @@ class CpanDocsController extends Controller {
 
         parent::__construct($request);
 
-        $variables = new CpanVariables('Mod', 'Env', $this->entity);
-        $this->varEnvMod = $variables->getValores();
+        $variablesEnv = new CpanVariables('Mod', 'Env', $this->entity);
+        $this->varEnvMod = $variablesEnv->getValores();
         $this->values['varEnvMod'] = $this->varEnvMod;
+        unset($variablesEnv);
 
-        $variables = new CpanVariables('Mod', 'Web', $this->entity);
-        $this->varWebMod = $variables->getValores();
+        $variablesWeb = new CpanVariables('Mod', 'Web', $this->entity);
+        $this->varWebMod = $variablesWeb->getValores();
         $this->values['varWebMod'] = $this->varWebMod;
+        unset($variablesWeb);
     }
 
-    public function listAction($entidad = '', $idEntidad = '', $tipo = '') {
+    public function IndexAction() {
+        return parent::listAction();
+    }
+
+    public function listPopupAction($entidad = '', $idEntidad = '', $tipo = '') {
 
         if ($this->values['permisos']['permisosModulo']['CO']) {
 
@@ -154,7 +160,7 @@ class CpanDocsController extends Controller {
                                 $this->values['errores'] = $datos->getErrores();
                             }
                             break;
-                            
+
                         case 'document':
                         case 'video':
                         case 'audio':
@@ -178,7 +184,7 @@ class CpanDocsController extends Controller {
                             break;
                     }
 
-                    return $this->listAction($entidad, $idEntidad, $tipo);
+                    return $this->listPopupAction($entidad, $idEntidad, $tipo);
                     break;
             }
         } else {
@@ -256,7 +262,7 @@ class CpanDocsController extends Controller {
                     $this->values['alertas'] = $doc->getAlertas();
                     unset($doc);
 
-                    return $this->listAction($entidad, $idEntidad, $tipo);
+                    return $this->listPopupAction($entidad, $idEntidad, $tipo);
                 } else
                     return array('template' => '_global/forbiden.html.twig');
 
@@ -286,7 +292,7 @@ class CpanDocsController extends Controller {
                         $this->values['errores'] = $datos->getErrores();
                     }
                     unset($datos);
-                    return $this->listAction($entidad, $idEntidad, $tipo);
+                    return $this->listPopupAction($entidad, $idEntidad, $tipo);
                 } else {
                     return array('template' => '_global/forbiden.html.twig');
                 }

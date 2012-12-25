@@ -493,10 +493,10 @@ class CpanVariablesController {
             $datos = array();
         }
 
-        foreach (VariablesEnv::$varEnvMod as $keyVar => $keyColumnaConfig)
+        foreach (VariablesEnv::$varEnvMod as $keyVar => $keyColumnaConfig) {
             if (!isset($datos[$keyVar]))
                 $datos[$keyVar] = $atributosConfig[$keyColumnaConfig];
-
+        }
         // SI LA COLUMNA ESTA VINCULADA A UNA ENTIDAD, CREA LA LISTA DE VALORES
         if ($atributosConfig['aditional_filter']['entity']) {
             $entidad = $atributosConfig['aditional_filter']['entity'];

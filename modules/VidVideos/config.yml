@@ -83,6 +83,18 @@ VidVideos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
+    IdSeccion:
+      title: Sección
+      filter: NO
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 1, caption: IdSeccion, entity: VidSecciones, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: '30', min: null, max: null, message: 'Valor Requerido' }      
     Titulo:
       title: Título
       filter: YES
@@ -214,7 +226,7 @@ VidVideos:
       list: NO
       visible: true
       updatable: true
-      default: '0'
+      default: '1'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }

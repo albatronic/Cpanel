@@ -4,17 +4,25 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 02.10.2012 18:58:03
+  date 25.12.2012 16:42:34
 #}
 
-{% extends '_global/popup.html.twig' %}
+{% extends layout %}
+
+{% block title parent() ~ ' - '  ~ values.titulo %}
 
 {% block content %}
-    {% include "_global/errores.html.twig" with {'errores': values.errores} %}
-    {% include "_global/alertas.html.twig" with {'alertas': values.alertas} %}
+	{% block filtro %}
+	{% if values.permisos.permisosModulo['CO'] and values.tieneListado %}
+		{% include '_global/filtroGenericoWrapper.html.twig' with {'filter': values.listado.filter} %}
+	{% endif %}
+	{% endblock %}
 
-    {% block listado %}
-    {% endblock %}
+	<div id='div_listado'>
+	{% block listado %}
+	{% endblock %}
+	</div>
 
-    <div id="notificacion"></div>
+	{% block mantenimiento %}
+	{% endblock %}
 {% endblock %}

@@ -6,7 +6,29 @@
 {% endif %}
 
 {% if values.permisos.permisosModulo['DE'] %}
-<a href="#" onclick="if (!Confirma('¿Desea borrar el registro?')) {return false;} else {$('#accion_{{values.controller}}').val('Borrar');} submitForm('manto_{{ values.controller}}');" title="Borrar">
+<script>
+$(function() {    
+    $("#confirmacionBorrado").dialog({
+        autoOpen: false,
+        dialogClass: "",
+        resizable: false,
+        height: 150,
+        modal: true,
+        buttons: {
+            Aceptar: function() {
+                $('#accion_{{values.controller}}').val('Borrar');
+                submitForm('manto_{{ values.controller}}');                
+                $( this ).dialog( "close" );
+            },          
+            Cancelar: function() {
+                $( this ).dialog( "close" );
+            }
+        }
+    });
+});
+</script>
+<div id="confirmacionBorrado" title="Borrar registro"><p>¿Realmente desea borrar el registro?</p></div>
+<a href="#" title="Borrar" onclick="$('#confirmacionBorrado').dialog('open');">
     <img src="{{app.path}}/images/barraherramientas/trash_cmd.png" alt="Borrar" title="Borrar" />
 </a>
 {% endif %}

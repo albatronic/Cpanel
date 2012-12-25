@@ -3,7 +3,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 09.12.2012 18:17:00
+ * @date 25.12.2012 20:39:54
  */
 
 /**
@@ -18,6 +18,12 @@ class AlbmAlbumesEntity extends EntityComunes {
      * @assert NotBlank(groups="AlbmAlbumes")
      */
     protected $Id;
+
+    /**
+     * @var entities\AlbmSecciones
+     * @assert NotBlank(groups="AlbmAlbumes")
+     */
+    protected $IdSeccion;
 
     /**
      * @var string
@@ -82,6 +88,7 @@ class AlbmAlbumesEntity extends EntityComunes {
      * @var string
      */
     protected $_childEntities = array(
+        'AlbmSecciones',
         'ValoresSN',
         'ValoresPrivacy',
         'ValoresDchaIzq',
@@ -100,6 +107,16 @@ class AlbmAlbumesEntity extends EntityComunes {
 
     public function getId() {
         return $this->Id;
+    }
+
+    public function setIdSeccion($IdSeccion) {
+        $this->IdSeccion = $IdSeccion;
+    }
+
+    public function getIdSeccion() {
+        if (!($this->IdSeccion instanceof AlbmSecciones))
+            $this->IdSeccion = new AlbmSecciones($this->IdSeccion);
+        return $this->IdSeccion;
     }
 
     public function setTitulo($Titulo) {

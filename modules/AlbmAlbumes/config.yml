@@ -15,8 +15,8 @@ AlbmAlbumes:
     toColumn: ''
   showCommonFields: true
   numMaxRecords: ''
-  numberOfImages: '3'
-  withGalery: '0'
+  numberOfImages: '1'
+  withGalery: '1'
   withDocuments: '0'
   withVideos: 0
   withAudios: '0'
@@ -31,7 +31,7 @@ AlbmAlbumes:
     generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
-  urlFriendlyManagement: true
+  urlFriendlyManagement: false
   fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Titulo
@@ -83,6 +83,18 @@ AlbmAlbumes:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
+    IdSeccion:
+      title: Seccion
+      filter: NO
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 1, caption: Seccion, entity: AlbmSecciones, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: 40, min: null, max: null, message: 'Valor Requerido' }      
     Titulo:
       title: Título
       filter: YES

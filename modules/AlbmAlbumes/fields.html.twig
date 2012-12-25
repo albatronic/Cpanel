@@ -8,19 +8,51 @@
 #}
 
 <div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
-    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+    <ul>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'arbol'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#arbol" onclick='$( "#solapaActiva" ).val("arbol");'>Árbol de Secciones</a>
+        </li>
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
-            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>General</a>
-            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
-        </li>     
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Álbum{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}            
+        </li>
         {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
             <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
         </li>        
-        {% endif %}                      
+        {% endif %}
     </ul>
+
+    <div id="arbol">
+        <ul>
+            {% for key,seccion in values.objetoController.arbolSeccionesAlbumes %}
+                <li style="font-weight: bold;">{{seccion.titulo}}</li>
+                <ul>
+                    {% for album in seccion.albumes %}
+                        <li style="margin-left: 30px;">
+                            {% if values.varEnvMod.columns.Publish.visible == '1' %}
+                            <input
+                                title="Publicar / Despublicar"
+                                id="check{{album.Id}}"
+                                type="checkbox"
+                                value="{{album.Publish.IDTipo}}"
+                                {% if (album.Publish.IDTipo == '1') %} checked {% endif %}
+                                onchange="
+                                  if ($('#check{{album.Id}}').is(':checked')) {$('#check{{album.Id}}').val('1');} else {$('#check{{album.Id}}').val('0');}
+                                  actualizaPublish('{{values.controller}}','{{album.Id}}',$('#check{{album.Id}}').val());
+                                "
+                            /> 
+                            {% endif %}
+                            <a href="{{app.path}}/{{values.controller}}/edit/{{album.primaryKeyMD5}}">{{album.Titulo}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ul>
+    </div>
        
     <div id="general">
+        {{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.Id,datos.IdSeccion.fetchAll('Titulo',0),'chzn-select','1')}}        
         {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
         {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
         {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','4') }}

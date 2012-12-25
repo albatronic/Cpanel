@@ -3,7 +3,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 09.12.2012 17:13:26
+ * @date 25.12.2012 13:35:08
  */
 
 /**
@@ -18,6 +18,12 @@ class VidVideosEntity extends EntityComunes {
      * @assert NotBlank(groups="VidVideos")
      */
     protected $Id;
+
+    /**
+     * @var entities\VidSecciones
+     * @assert NotBlank(groups="VidVideos")
+     */
+    protected $IdSeccion;
 
     /**
      * @var string
@@ -82,6 +88,7 @@ class VidVideosEntity extends EntityComunes {
      * @var string
      */
     protected $_childEntities = array(
+        'VidSecciones',
         'ValoresSN',
         'ValoresPrivacy',
         'ValoresDchaIzq',
@@ -100,6 +107,16 @@ class VidVideosEntity extends EntityComunes {
 
     public function getId() {
         return $this->Id;
+    }
+
+    public function setIdSeccion($IdSeccion) {
+        $this->IdSeccion = $IdSeccion;
+    }
+
+    public function getIdSeccion() {
+        if (!($this->IdSeccion instanceof VidSecciones))
+            $this->IdSeccion = new VidSecciones($this->IdSeccion);
+        return $this->IdSeccion;
     }
 
     public function setTitulo($Titulo) {

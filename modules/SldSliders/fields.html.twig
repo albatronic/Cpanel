@@ -14,7 +14,7 @@
         </li>
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
             <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Slider{%endif%}</a>
-            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
+            {{ macro.publicar(values.varEnvMod.columns.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
         </li>
         {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
@@ -30,6 +30,7 @@
                 <ul>
                     {% for slider in zona.sliders %}
                         <li style="margin-left: 30px;">
+                            {% if values.varEnvMod.columns.Publish.visible == '1' %}
                             <input
                                 title="Publicar / Despublicar"
                                 id="check{{slider.Id}}"
@@ -40,7 +41,8 @@
                                   if ($('#check{{slider.Id}}').is(':checked')) {$('#check{{slider.Id}}').val('1');} else {$('#check{{slider.Id}}').val('0');}
                                   actualizaPublish('{{values.controller}}','{{slider.Id}}',$('#check{{slider.Id}}').val());
                                 "
-                            />                               
+                            />
+                            {% endif %}
                             <a href="{{app.path}}/{{values.controller}}/edit/{{slider.primaryKeyMD5}}" onclick="$('#solapaActiva').val('1');">{{slider.titulo}} ({{slider.IdTipo.Descripcion}})</a>
                         </li>
                     {% endfor %}
@@ -61,6 +63,7 @@
         {% if datos.primaryKeyMD5 %}
             {{ macro.labelPopup('Enlazar con...', app.path ~ '/'  ~ values.controller ~ '/enlazar/' ~ datos.primaryKeyMD5,datos.objetoEnlazado,600) }}
         {% endif %}
+            
     </div>
         
     {% include '_global/fieldsComunes.html.twig' %}        

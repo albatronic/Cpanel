@@ -59,6 +59,7 @@
 {% endmacro %}
 
 {% macro publicar(atributos,name,id,value) %}
+{% if atributos.visible == '1' %}
 <input name="{{name}}" id="{{ id|default(name)}}" type="hidden" value="{{value}}" />
 <input type="checkbox"
        name="checkbox_{{ name }}"
@@ -73,6 +74,7 @@
        {{extra}}
        {% if atributos.updatable == '0' %} disabled {% endif %}
 />
+{% endif %}
 {% endmacro %}
 
 {#
@@ -455,3 +457,18 @@ document.getElementById('{{id}}').focus();
 {% macro alertSave() %}
 $('.title_icon span').css('background','url({{appPath}}/images/alert.png)');
 {% endmacro%}
+
+{# MUESTRA UN VIDEO/AUDIO INCRUSTADO #}
+{% macro embedMedia(media,width,height) %}
+{% if media %}
+<embed bgcolor='#505050'
+       width='{{ width|default('250')}}'
+       height='{{ height|default('250')}}'
+       {#type='application/x-shockwave-flash'#}
+       allowScriptAccess='always'
+       src='{{media}}'
+       {#pluginspage='http://www.adobe.com/go/getflashplayer'#}
+       allowFullScreen='true'
+/>
+{% endif %}
+{% endmacro %}

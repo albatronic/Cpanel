@@ -30,6 +30,7 @@
                 <ul>
                     {% for banner in zona.banners %}
                         <li style="margin-left: 30px;">
+                            {% if values.varEnvMod.columns.Publish.visible == '1' %}
                             <input
                                 title="Publicar / Despublicar"
                                 id="check{{banner.Id}}"
@@ -40,7 +41,8 @@
                                   if ($('#check{{banner.Id}}').is(':checked')) {$('#check{{banner.Id}}').val('1');} else {$('#check{{banner.Id}}').val('0');}
                                   actualizaPublish('{{values.controller}}','{{banner.Id}}',$('#check{{banner.Id}}').val());
                                 "
-                            />                            
+                            /> 
+                            {% endif %}
                             <a href="{{app.path}}/{{values.controller}}/edit/{{banner.primaryKeyMD5}}">{{banner.Titulo}} ({{banner.IdTipo.Descripcion}})</a>
                         </li>
                     {% endfor %}

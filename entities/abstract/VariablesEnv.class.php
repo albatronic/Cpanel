@@ -18,7 +18,7 @@ class VariablesEnv {
     static $varEnvMod = array(
         'caption' => 'title',
         'default' => 'default',
-        'visible' => 'form',
+        'visible' => 'visible',
         'updatable' => 'updatable',
         'help' => 'help',
         'permission' => 'permission',

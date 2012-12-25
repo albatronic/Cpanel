@@ -12,7 +12,13 @@
 class VidVideos extends VidVideosEntity {
 
     public function __toString() {
-        return $this->getId();
+        return $this->Titulo;
+    }
+
+    public function fetchAll($column = '', $default = TRUE) {
+        if ($column == '')
+            $column = 'Titulo';
+        return parent::fetchAll($column, $default);
     }
 
     public function validaLogico() {

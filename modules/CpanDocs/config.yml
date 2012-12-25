@@ -47,19 +47,31 @@ CpanDocs:
   id_video: cpandocs
   url_video: null
   feature_list: YES
-  conection: Cpanel
+  conection: ''
   entity: CpanDocs
   table: CpanDocs
   primarykey: Id
   linkBy: ''
-  records_per_page: 15
+  records_per_page: 20
   order_by:
     -
-      title: 'Id a-z'
-      criteria: 'Id ASC'
+      title: 'Entidad a-z'
+      criteria: 'Entity ASC'
     -
-      title: 'Id z-a'
-      criteria: 'Id DESC'
+      title: 'Entidad z-a'
+      criteria: 'Entity DESC'
+    -
+      title: 'Tipo a-z'
+      criteria: 'Type ASC'
+    -
+      title: 'Tipo z-a'
+      criteria: 'Type DESC' 
+    -
+      title: 'PathName a-z'
+      criteria: 'PathName ASC'
+    -
+      title: 'PathName z-a'
+      criteria: 'PathName DESC'      
   search_default: Id
   referenced_entities:
     - TiposDocs
@@ -79,9 +91,9 @@ CpanDocs:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
     Entity:
-      title: Entity
+      title: Entidad
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -90,9 +102,9 @@ CpanDocs:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     IdEntity:
-      title: IdEntity
+      title: Id de Entidad
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -101,9 +113,9 @@ CpanDocs:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Type:
-      title: Type
+      title: Tipo
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -113,9 +125,9 @@ CpanDocs:
       aditional_filter: { order: 1, caption: Type, entity: TiposDocs, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '10', min: null, max: null, message: 'Valor Requerido' }
     IsThumbnail:
-      title: IsThumbnail
+      title: Es Thumbnail
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -123,11 +135,11 @@ CpanDocs:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 2, caption: IsThumbnail, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: NO, type: tinyint, length: '2', min: null, max: null, message: 'Valor Requerido' }
     PathName:
       title: PathName
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -183,7 +195,7 @@ CpanDocs:
     MimeType:
       title: MimeType
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null
@@ -194,7 +206,7 @@ CpanDocs:
     Size:
       title: Size
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -205,7 +217,7 @@ CpanDocs:
     Height:
       title: Height
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
@@ -216,7 +228,7 @@ CpanDocs:
     Width:
       title: Width
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'

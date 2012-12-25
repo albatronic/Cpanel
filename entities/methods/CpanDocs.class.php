@@ -219,7 +219,7 @@ class CpanDocs extends CpanDocsEntity {
      * Calcula el nombre amigable y actualiza las
      * propiedades $this->Name, $this->PathName y $this->Extension
      *
-     * En base al tipo de documento (imageN, galery, document, etc) se permiten
+     * En base al tipo de documento (imageN, galery, document, video, audio) se permiten
      * varios documentos para la misma entidad e idEntidad, o sólo uno.
      *
      * Esto viene determinado por el valor 'limit' del array TiposDocs.
@@ -338,8 +338,10 @@ class CpanDocs extends CpanDocsEntity {
     /**
      * Valida el objeto
      *
-     * También compruebo que el titulo y el nombre no están vacios, si fuera el caso
-     * los lleno con el valor de la columna indicado en la variable de entorno 'fieldGeneratorUrlFriendly'
+     * También compruebo que el titulo y el nombre no están vacios.
+     * 
+     * Si el título está vacío, pongo el valor de la columna indicado en la variable de entorno 'fieldGeneratorUrlFriendly'
+     * Si el nombre está vacío, pongo el valor del título
      *
      * @param array $rules
      * @return boolean TRUE si el objeto completo pasa la validación
@@ -362,7 +364,7 @@ class CpanDocs extends CpanDocsEntity {
                 if ($this->Title == '')
                     $this->Title = $slug;
                 if ($this->Name == '')
-                    $this->Name = $slug;
+                    $this->Name = $this->Title;
             } $slug = $this->Name;
 
             if ($slug == '')
@@ -411,7 +413,13 @@ class CpanDocs extends CpanDocsEntity {
                 $this->setMimeType($archivo->getMimeType());
                 unset($archivo);
                 $archivoSubir = $imagenRecortada;
-            } else $archivoSubir = $this->_ArrayDoc['tmp_name'];
+            } else {
+                $archivo = new Archivo($this->_ArrayDoc['tmp_name']);
+                $this->setSize($archivo->getSize());
+                $this->setMimeType($archivo->getMimeType());
+                unset($archivo);
+                $archivoSubir = $this->_ArrayDoc['tmp_name'];
+            }
 
             $ftp = new Ftp($_SESSION['project']['ftp']);
             if ($ftp) {
@@ -423,9 +431,9 @@ class CpanDocs extends CpanDocsEntity {
 
             unset($ftp);
             $ok = ( count($this->_errores) == 0);
-            
+
             if (file_exists($imagenRecortada))
-                @unlink ($imagenRecortada);
+                @unlink($imagenRecortada);
         }
 
         return $ok;
@@ -494,6 +502,20 @@ class CpanDocs extends CpanDocsEntity {
         unset($obj);
 
         return new CpanDocs($rows[0]['Id']);
+    }
+
+    /**
+     * Devuelve el valor de la primaryKeyMD5 del objeto
+     * al que está asociado el documento
+     * 
+     * @return string La primaryKeyMD5
+     */
+    public function getPrimaryKeyMD5Document() {
+        $doc = new $this->Entity($this->IdEntity);
+        $key = $doc->getPrimaryKeyMD5();
+        unset($doc);
+
+        return $key;
     }
 
 }

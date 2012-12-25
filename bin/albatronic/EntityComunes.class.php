@@ -460,7 +460,7 @@ class EntityComunes extends Entity {
     }
 
     public function getCreatedAt() {
-        return $this->CreatedAt;
+        return date_format(date_create($this->CreatedAt),'d-m-Y H:i:s');
     }
 
     public function setModifiedBy($ModifiedBy) {
@@ -478,7 +478,7 @@ class EntityComunes extends Entity {
     }
 
     public function getModifiedAt() {
-        return $this->ModifiedAt;
+        return date_format(date_create($this->ModifiedAt),'d-m-Y H:i:s');
     }
 
     public function setDeleted($Deleted) {
@@ -506,7 +506,7 @@ class EntityComunes extends Entity {
     }
 
     public function getDeletedAt() {
-        return $this->DeletedAt;
+        return date_format(date_create($this->DeletedAt),'d-m-Y H:i:s');
     }
 
     public function setPrivacy($Privacy) {
@@ -541,6 +541,9 @@ class EntityComunes extends Entity {
     }
 
     public function setActiveFrom($ActiveFrom) {
+        if ($ActiveFrom == '0000-00-00 00:00:00')
+            $ActiveFrom = $_SESSION['VARIABLES']['EnvPro']['activeFrom'];    
+        
         $date = new Fecha($ActiveFrom);
         $this->ActiveFrom = $date->getFechaTime();
         unset($date);
@@ -554,6 +557,9 @@ class EntityComunes extends Entity {
     }
 
     public function setActiveTo($ActiveTo) {
+        if ($ActiveTo == '0000-00-00 00:00:00')
+            $ActiveTo = $_SESSION['VARIABLES']['EnvPro']['activeTo'];  
+        
         $date = new Fecha($ActiveTo);
         $this->ActiveTo = $date->getFechaTime();
         unset($date);

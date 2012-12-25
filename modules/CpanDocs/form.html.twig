@@ -7,7 +7,7 @@
   date 30.09.2012 21:04:21
 #}
 
-{% extends values.controller ~ '/index.html.twig' %}
+{% extends values.controller ~ '/indexPopup.html.twig' %}
 
 {% block listado %}
 
@@ -29,10 +29,21 @@
 
     <div class="docsFoto">
         {% if objeto.PathName != '' %}
-            <div id="foto{{key}}" style="text-align: center;">
-                <img src="{{project.url}}/{{objeto.PathName}}" width="150px;" />
-            </div>
-            <div style="text-align: center;">{{objeto.getSize}} ({{objeto.Width}} x {{objeto.Height}})</div>
+            {% if objeto.Type == 'video' or objeto.Type == 'audio'%}
+                <div>
+                    {% if objeto.Type == 'video'%}
+                        {{ macro.embedMedia(project.url~"/"~objeto.PathName,190,120)}}
+                    {% else %}
+                        {{ macro.embedMedia(project.url~"/"~objeto.PathName,190,50)}}
+                    {% endif %}
+                </div>            
+                <div style="text-align: center;">{{objeto.getSize}}</div>
+            {% else %}
+                <div id="foto{{key}}" style="text-align: center;">
+                    <img src="{{project.url}}/{{objeto.PathName}}" width="150px;" />  
+                </div>
+                <div style="text-align: center;">{{objeto.getSize}} ({{objeto.Width}} x {{objeto.Height}})</div>
+            {% endif %}
         {% else %}
             &nbsp;
         {% endif %}
