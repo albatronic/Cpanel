@@ -25,7 +25,7 @@
 
     <div id="arbol">
         <ul>
-            {% for key,zona in values.objetoController.arbolZonasSliders %}
+            {% for keyZona,zona in values.objetoController.arbolZonasSliders %}
                 <li style="font-weight: bold;">{{zona.titulo}}</li>
                 <ul>
                     {% for slider in zona.sliders %}
@@ -46,6 +46,11 @@
                             <a href="{{app.path}}/{{values.controller}}/edit/{{slider.primaryKeyMD5}}" onclick="$('#solapaActiva').val('1');">{{slider.titulo}} ({{slider.IdTipo.Descripcion}})</a>
                         </li>
                     {% endfor %}
+                    {% if zona.nSliders > 1%}
+                        <li style="margin-left: 30px;">
+                            {{ macro.ordenarPopup(values.controller,'IdZona',keyZona) }}                              
+                        </li>                          
+                    {% endif %}                         
                 </ul>
             {% endfor %}
         </ul>

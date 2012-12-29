@@ -25,9 +25,9 @@
 
     <div id="arbol">
         <ul>
-            {% for key,zona in values.objetoController.arbolZonasBanners %}
+            {% for keyZona,zona in values.objetoController.arbolZonasBanners %}
                 <li style="font-weight: bold;">{{zona.titulo}}</li>
-                <ul>
+                <ul>                  
                     {% for banner in zona.banners %}
                         <li style="margin-left: 30px;">
                             {% if values.varEnvMod.columns.Publish.visible == '1' %}
@@ -46,6 +46,12 @@
                             <a href="{{app.path}}/{{values.controller}}/edit/{{banner.primaryKeyMD5}}">{{banner.Titulo}} ({{banner.IdTipo.Descripcion}})</a>
                         </li>
                     {% endfor %}
+                        
+                    {% if zona.nBanners > 1%}
+                        <li style="margin-left: 30px;">
+                            {{ macro.ordenarPopup(values.controller,'IdZona',keyZona) }}                            
+                        </li>                        
+                    {% endif %}                          
                 </ul>
             {% endfor %}
         </ul>

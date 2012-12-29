@@ -64,6 +64,13 @@ BannBanners:
       title: 'Título z-a'
       criteria: 'Titulo DESC'
   search_default: Id
+  orden_web:
+    orden1:
+      caption: 'Mostrar en listado'
+      columnaMostrar: Titulo
+      filtro: MostrarEnListado='1'
+      columnaOrden: OrdenMostrarEnListado
+        
   referenced_entities:
     - BannZonas
     - ValoresSN
@@ -142,7 +149,7 @@ BannBanners:
       aditional_filter: { order: 2, caption: Tipo, entity: TiposBanners, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: 10, min: null, max: null, message: 'Valor Requerido' }
     MostrarEnListado:
-      title: Mostrar en Listado
+      title: Mostrar en Listado 
       filter: NO
       list: NO
       visible: true
@@ -736,7 +743,7 @@ BannBanners:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 26, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      aditional_filter: { order: 26, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: NombreApp, type: select, operator: '=', event: null }
       validator: { nullable: YES, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
       title: IdAlbumExterno

@@ -15,9 +15,33 @@
 {% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 
 
+<div id="acordeonOrden">
+    
 {% for key,objeto in values.listado.data %}
-
-<div class="docsCaja">
+<div>
+    <h3>      
+        {% if objeto.PathName != '' %}
+            {% if objeto.Type == 'video' or objeto.Type == 'audio'%}
+                <div>
+                    {% if objeto.Type == 'video'%}
+                        {{ macro.embedMedia(project.url~"/"~objeto.PathName,190,120)}}
+                    {% else %}
+                        {{ macro.embedMedia(project.url~"/"~objeto.PathName,190,50)}}
+                    {% endif %}
+                </div>            
+            {% else %}
+                <div style="margin-left: 25px;">
+                    <div style="margin-top:5px; width: 60px; overflow: hidden;">
+                    <img src="{{project.url}}/{{objeto.PathName}}" width="50px;" />
+                    </div>
+                    <div id="texto{{key}}">{{objeto.Title}}</div>
+                </div>
+            {% endif %}
+        {% else %}
+            <span style="margin-left: 25px; font-weight: bold;">Nuevo Documento</span>
+        {% endif %}        
+    </h3>
+    <div>
     <form name="linea{{key}}" id="linea{{key}}" action="" method="POST" enctype="multipart/form-data" class="form_container left_label">
     <input name="controller" value="{{values.controller}}" type="hidden" />
     <input name="action" id="action{{key}}" value="edit" type="hidden" />
@@ -60,7 +84,7 @@
         </div>
         <div class="Item">
             <div class="docsLabel">Título</div>
-            <input style="width: 300px;" name="CpanDocs[Title]" id="CpanDocs_Title{{key}}" value="{{objeto.Title}}" type="text" />
+            <input onkeyup="$('#texto{{key}}').html($(this).val());"style="width: 300px;" name="CpanDocs[Title]" id="CpanDocs_Title{{key}}" value="{{objeto.Title}}" type="text" />
         </div>            
         <div>
             <div class="docsLabel">Nombre</div>
@@ -94,12 +118,9 @@
     </div>
 
     </form>
-
+    </div>
 </div>
-
-<div class="docsSaltoLinea"></div>
 {% endfor %}
-
-{{ macro.foco('documento0') }}
+</div>
 
 {% endblock %}

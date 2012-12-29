@@ -1,0 +1,11 @@
+{# empty Twig template #}
+<li class="arbol">
+    {% if seccion.nContenidos > 0 %}
+        {% include 'GconContenidosRelacionados/' ~ templateContenidos with {'contenidos': seccion} %}
+    {% else %}
+        <span class="arbol" title="Ver/Ocultar contenidos de esta sección" onclick="switchDisplay('contenidosDe_{{contenidos.id}}');">
+            <img src="{{app.path}}/images/pixel.png" width="16px"/>
+            {{seccion.titulo}}
+        </span>        
+    {% endif %}
+</li>

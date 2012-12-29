@@ -14,7 +14,7 @@
     {% if filter.aditional %}
         <div style="float: left; margin-left: 5px;">
             <img src="{{app.path}}/images/more.png" width="14px" height="14px" style="cursor: pointer;"
-                 onclick="getElementById('FiltrosAdicionales').style.display='';"
+                 onclick="$('#filtroAvanzado').dialog('open');"
                  alt="Filtro Avanzado" title="Filtro Avanzado ...">
         {% include "_global/filtroAvanzado.html.twig" with {'titulo': values.titulo} %}
         </div>
@@ -32,8 +32,7 @@
         <input name="filter[recordsPerPage]" type="text" size="3" value="{{ filter.recordsPerPage }}" style="width:25px;"/>
 
         <input name="filter[page]" value="1" type="hidden"/>
-        <input style="margin-left: 5px;" type="image" src="{{app.path}}/images/lupa.png" width="16px" height="16px" alt="Consulta" title="Consultar"
-               onclick=""/>
+        <input style="margin-left: 5px;" type="image" src="{{app.path}}/images/lupa.png" width="16px" height="16px" alt="Consulta" title="Consultar" />
     </div>
     <div style="clear:both;"></div>
 </div>

@@ -1,0 +1,32 @@
+{# Muestra los contenidos #}
+
+<span class="arbol" title="Ver/Ocultar contenidos de esta sección" onclick="switchDisplay('contenidosDe_{{contenidos.id}}');">
+    <img src="{{app.path}}/images/js-tree/folder-closed.gif"/>
+    {{contenidos.titulo}} ({{ contenidos.nContenidos}})
+</span>
+
+<div id='contenidosDe_{{contenidos.id}}' style="display: none;">
+    <ul>
+    {% for contenido in contenidos.contenidos %}
+            {% if (contenido.Id != values.idContenidoOrigen) %}            
+        <li>
+ 
+            <input
+                title="Enlazar / Quitar"
+                id="check{{contenido.Id}}"
+                type="checkbox"
+                value="{{contenido.estaRelacionado}}"
+                {% if (contenido.estaRelacionado == '1') %} checked {% endif %}
+                onchange="
+                  if ($('#check{{contenido.Id}}').is(':checked')) {$('#check{{contenido.Id}}').val('1');} else {$('#check{{contenido.Id}}').val('0');}
+                  actualizaPublish('GconContenidos','{{contenido.Id}}',$('#check{{contenido.Id}}').val());
+                "
+            />
+                
+            {{contenido.Value}}
+         
+        </li>
+            {% endif %}         
+    {% endfor%}
+    </ul>
+</div>

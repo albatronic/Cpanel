@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
@@ -14,6 +15,12 @@ class AlbmAlbumes extends AlbmAlbumesEntity {
         return $this->Titulo;
     }
 
+    public function fetchAll($column = '', $default = TRUE) {
+        if ($column == '')
+            $column = 'Titulo';
+        return parent::fetchAll($column, $default);
+    }
+
     /**
      * Pone el orden 'OrdenPortada'
      */
@@ -21,8 +28,10 @@ class AlbmAlbumes extends AlbmAlbumesEntity {
 
         parent::validaLogico();
 
-        if (count($this->_errores) == 0) 
+        if (count($this->_errores) == 0)
             $this->OrdenPortada = $this->SortOrder;
-    }  
+    }
+
 }
+
 ?>

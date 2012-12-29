@@ -1,9 +1,9 @@
 {# Template filtro.html.twig for CpanAplicaciones #}
 {# -------------------------------------------------------#}
 <div class='widget_top_listado'>
-	<form name='filtro' id='filtro' action='' method='POST'>
-		<input name='controller' value='{{ values.controller }}' type='hidden' />
-		<input name='action' id='actionFiltro' value='list' type='hidden' />
-		{% include '_global/filtroGenerico.html.twig' with {'filter': filter} %}
-	</form>
+    <form name='filtro' id='filtro' action='' method='POST'>
+        <input name='controller' value='{{ values.controller }}' type='hidden' />
+        <input name='action' id='actionFiltro' value='list' type='hidden' />
+        {% include '_global/filtroGenerico.html.twig' with {'filter': filter} %}
+    </form>
 </div>

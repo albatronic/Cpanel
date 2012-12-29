@@ -960,7 +960,6 @@ class Controller {
         } else
             $this->varEnvPro = $_SESSION['VARIABLES']['EnvPro'];
         $this->values['varEnvPro'] = $this->varEnvPro;
-
         if (count($this->values['varEnvPro']) == 0)
             $this->values['errores'][] = "No se han definido las variables de entorno del proyecto";
 
@@ -969,7 +968,7 @@ class Controller {
         $this->varEnvMod = $variables->getValores();
         $this->values['varEnvMod'] = $this->varEnvMod;
         if (count($this->values['varEnvMod']) == 0)
-            $this->values['errores'][] = "No se han definido las variables de entorno del módulo";
+            $this->values['errores'][] = "No se han definido las variables de entorno del módulo '{$this->entity}'";
 
         // Variables web del modulo
         if (!isset($_SESSION['VARIABLES']['WebMod'])) {
@@ -980,7 +979,7 @@ class Controller {
             $this->varWebMod = $_SESSION['VARIABLES']['WebMod'];
         $this->values['varWebMod'] = $this->varWebMod;
         if (count($this->values['varWebMod']) == 0)
-            $this->values['errores'][] = "No se han definido las variables web del módulo";
+            $this->values['errores'][] = "No se han definido las variables web del módulo '{$this->entity}'";
 
         // Variables de entorno de la app
         if (!isset($_SESSION['VARIABLES']['EnvApp'])) {
@@ -991,7 +990,7 @@ class Controller {
             $this->varEnvApp = $_SESSION['VARIABLES']['EnvApp'];
         $this->values['varEnvApp'] = $this->varEnvApp;
         if (count($this->values['varEnvApp']) == 0)
-            $this->values['errores'][] = "No se han definido las variables de entorno de la App";
+            $this->values['errores'][] = "No se han definido las variables de entorno de la App '{$this->app}'";
 
         // Variables web de la app
         if (!isset($_SESSION['VARIABLES']['WebApp'])) {
@@ -1002,7 +1001,7 @@ class Controller {
             $this->varWebApp = $_SESSION['VARIABLES']['WebApp'];
         $this->values['varWebApp'] = $this->varWebApp;
         if (count($this->values['varWebApp']) == 0)
-            $this->values['errores'][] = "No se han definido las variables web de la App";
+            $this->values['errores'][] = "No se han definido las variables web de la App '{$this->app}'";
 
         unset($variables);
     }

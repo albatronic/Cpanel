@@ -31,19 +31,20 @@ class AlbmAlbumesController extends Controller {
     public function getArbolSeccionesAlbumes() {
 
         $seccion = new AlbmSecciones();
-        $rows = $seccion->cargaCondicion("Id,Titulo", "1", "SortOrder ASC");
+        $secciones = $seccion->cargaCondicion("Id,Titulo", "1", "SortOrder ASC");
         unset($seccion);
 
         $arbol = array();
 
-        foreach ($rows as $row) {
+        foreach ($secciones as $seccion) {
             $album = new AlbmAlbumes();
-            $albumes = $album->cargaCondicion('Id', "IdSeccion='{$row['Id']}'", "SortOrder ASC");
+            $albumes = $album->cargaCondicion('Id', "IdSeccion='{$seccion['Id']}'", "SortOrder ASC");
             unset($album);
 
-            $arbol[$row['Id']]['titulo'] = $row['Titulo'];
+            $arbol[$seccion['Id']]['titulo'] = $seccion['Titulo'];
+            $arbol[$seccion['Id']]['nAlbumes'] = count($albumes);
             foreach ($albumes as $album)
-                $arbol[$row['Id']]['albumes'][] = new AlbmAlbumes($album['Id']);
+                $arbol[$seccion['Id']]['albumes'][] = new AlbmAlbumes($album['Id']);
         }
 
         return $arbol;

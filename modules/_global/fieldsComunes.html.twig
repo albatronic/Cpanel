@@ -158,7 +158,7 @@
 
             {# SOLAPA GALERIA #}
             {% if values.varEnvMod.withGalery == '1' %}
-            <h3>Galería de imágenes ({{datos.getNumberOfDocuments('galery')}})</h3>
+            <h3>Galería de imágenes ({{datos.getNumberOfDocuments('galery','IsThumbnail=0')}})</h3>
             <div id="solapaGalery">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
                         src='{{app.path}}/CpanDocs/listPopup/{{values.controller}}/{{datos.Id}}/galery'>

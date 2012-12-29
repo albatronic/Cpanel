@@ -25,7 +25,7 @@
 
     <div id="arbol">
         <ul>
-            {% for key,seccion in values.objetoController.arbolSeccionesAlbumes %}
+            {% for keySeccion,seccion in values.objetoController.arbolSeccionesAlbumes %}
                 <li style="font-weight: bold;">{{seccion.titulo}}</li>
                 <ul>
                     {% for album in seccion.albumes %}
@@ -46,6 +46,11 @@
                             <a href="{{app.path}}/{{values.controller}}/edit/{{album.primaryKeyMD5}}">{{album.Titulo}}</a>
                         </li>
                     {% endfor %}
+                    {% if seccion.nAlbumes > 1%}
+                        <li style="margin-left: 30px;">
+                            {{ macro.ordenarPopup(values.controller,'IdSeccion',keySeccion) }}
+                        </li>
+                    {% endif %}                         
                 </ul>
             {% endfor %}
         </ul>

@@ -1,0 +1,48 @@
+{#
+    ACORDEON CON LOS ELEMENTOS A ORDENAR. PUEDEN SER:
+
+    Contenidos, álbumes, vídeos, banners, sliders, etc
+
+#}
+{% extends '_global/layoutPopup.html.twig' %}
+
+{% block content %}
+    
+<form name="form{{values.controller}}" id="form{{values.controller}}" action="" method="POST">
+    <input name="controller" value="{{values.controller}}" type="hidden" />
+    <input name="action" id="action" value="" type="hidden" />
+    <input name="entidad" id="entidad" value="{{values.entidad}}" type="hidden" />
+    <input name="filtro" id="filtro" value="{{values.filtro}}" type="hidden" />  
+
+    <div style="margin-bottom: 10px; text-align: center;">
+        Ordenar por:
+        <select name="criterioOrden" id="criterioOrden">
+            {% for key,criterio in values.criteriosOrden %}
+                <option value="{{key}}" {% if key == values.criterioOrden %} SELECTED{% endif %}>{{criterio.caption}}</option>
+            {% endfor %}
+        </select>
+        <img src="{{app.path}}/images/lupa.png" onclick="$('#action').val('Index'); submitForm('form{{values.controller}}');"/>
+    </div>
+    
+    <p style="padding: 5px;">Pincha y desplaza los elementos a la ubicación deseada</p>
+    
+    <div id="acordeonOrden">
+        {% for valor in values.datos %}
+        <div style="">
+            <h3><span style="margin-left: 20px;">{{valor.Value}}</span></h3>
+            <div>
+                <input name="acordeon[{{valor.Id}}]" value="{{valor.Id}}" type="hidden"/>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="botonSubmit" style="margin-top: 10px; text-align: center;">
+        <input value="Guardar nuevo orden" type="submit" 
+               onclick="
+                   loading('botonSubmit');
+                   $('#action').val('Reordenar'); 
+                   submitForm('form{{values.controller}}');" />    
+    </div>
+</form>
+{% endblock %}

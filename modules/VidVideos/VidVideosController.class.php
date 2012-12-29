@@ -30,20 +30,21 @@ class VidVideosController extends Controller {
      */
     public function getArbolSeccionesVideos() {
 
-        $secciones = new VidSecciones();
-        $rows = $secciones->cargaCondicion("Id,Titulo", "1", "SortOrder ASC");
-        unset($secciones);
+        $seccion = new VidSecciones();
+        $secciones = $seccion->cargaCondicion("Id,Titulo", "1", "SortOrder ASC");
+        unset($seccion);
 
         $arbol = array();
 
-        foreach ($rows as $row) {
+        foreach ($secciones as $seccion) {
             $video = new VidVideos();
-            $videos = $video->cargaCondicion('Id', "IdSeccion='{$row['Id']}'", "SortOrder ASC");
+            $videos = $video->cargaCondicion('Id', "IdSeccion='{$seccion['Id']}'", "SortOrder ASC");
             unset($video);
 
-            $arbol[$row['Id']]['titulo'] = $row['Titulo'];
+            $arbol[$seccion['Id']]['titulo'] = $seccion['Titulo'];
+            $arbol[$seccion['Id']]['nVideos'] = count($videos);               
             foreach ($videos as $video)
-                $arbol[$row['Id']]['videos'][] = new VidVideos($video['Id']);
+                $arbol[$seccion['Id']]['videos'][] = new VidVideos($video['Id']);
         }
 
         return $arbol;

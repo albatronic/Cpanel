@@ -37,6 +37,28 @@ class GconContenidosRelacionadosController extends Controller {
         if ($idContenidoOrigen == '')
             $idContenidoOrigen = $this->request[2];
 
+        // Contruir el arbol de secciones y contenidos
+        // -------------------------------------------
+
+        $objetoSeccion = new GconSecciones();
+        $arbolContenidos = $objetoSeccion->getArbolHijos($idContenidoOrigen);
+        unset($objetoSeccion);
+
+        $template = $this->entity . '/list.html.twig';
+print_r($arbolContenidos);
+        $this->values['datos'] = $arbolContenidos;
+        $this->values['idContenidoOrigen'] = $idContenidoOrigen;
+
+        return array('template' => $template, 'values' => $this->values);
+    }
+    
+    
+    
+    public function listAction1($idContenidoOrigen = '') {
+
+        if ($idContenidoOrigen == '')
+            $idContenidoOrigen = $this->request[2];
+
         $arbolContenidos = array();
 
         // Contruir el arbol de secciones y contenidos

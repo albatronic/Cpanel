@@ -35,10 +35,10 @@ GconContenidos:
   fieldGeneratorUrlFriendly: IdSeccion
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: IdSeccion
-  controller: CONTROLADOR
-  action: ACTION
-  template: TEMPLATE
-  parametros: PARAMETROS
+  controller: GconContenidos
+  action: Index
+  template: 
+  parametros: 
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
@@ -64,6 +64,17 @@ GconContenidos:
       title: 'Título z-a'
       criteria: 'IdSeccion DESC,Titulo DESC'
   search_default: Id
+  orden_web:
+    orden1:
+      caption: 'Orden en portada del Blog'
+      columnaMostrar: concat(Titulo," ",Subtitulo)
+      filtro: BlogMostrarEnPortada='1' and Publish='1'
+      columnaOrden: BlogOrden
+    orden2:
+      caption: 'Orden de noticias de portada'
+      columnaMostrar: Titulo
+      filtro: NoticiaMostrarEnPortada='1' and Publish='1'
+      columnaOrden: NoticiaOrden        
   referenced_entities:
     - GconSecciones
     - ValoresSN
@@ -855,7 +866,7 @@ GconContenidos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 36, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      aditional_filter: { order: 36, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: NombreApp, type: select, operator: '=', event: null }
       validator: { nullable: YES, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
       title: IdAlbumExterno

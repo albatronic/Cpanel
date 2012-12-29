@@ -19,13 +19,19 @@
     <input name="idEntidadDestino" id="idEntidadDestino" value="{{values.idEntidadDestino}}" type="hidden" />
     <ul class="arbol">
     {% for padre in values.entidadDestino.getArbolHijos %}
-        {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': padre, 'templateContenidos':'contenidosEnlazar.html.twig'} %}
+        <li class="arbol">
+            {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': padre, 'templateContenidos':'contenidosEnlazar.html.twig'} %}
+        </li>
         <ul class="arbol">
             {% for hijo in padre.hijos %}
-                {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': hijo, 'templateContenidos':'contenidosEnlazar.html.twig'} %}
+                <li class="arbol">
+                    {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': hijo, 'templateContenidos':'contenidosEnlazar.html.twig'} %}
+                </li>
                 <ul class="arbol">
                     {% for nieto in hijo.hijos %}
-                        {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': nieto, 'templateContenidos':'contenidosEnlazar.html.twig'} %}
+                        <li class="arbol">
+                            {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': nieto, 'templateContenidos':'contenidosEnlazar.html.twig'} %}
+                        </li>
                     {% endfor %}
                 </ul>                        
             {% endfor %}

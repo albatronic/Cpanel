@@ -26,24 +26,31 @@ class BannBannersController extends Controller {
     /**
      * Devuelve un array anidado de zonas de banners con sus banners
      * 
+     * El array tiene los siguientes elementos:
+     * 
+     * - titulo => el título de la zona
+     * - nBanners => el número de banners que hay en la zona
+     * - banners => array de objetos BannBanners, que son los banners que hay en la zona
+     * 
      * @return array Array de zonas y banners
      */
     public function getArbolZonasBanners() {
 
-        $zonas = new BannZonas();
-        $rows = $zonas->cargaCondicion("Id,Titulo", "1", "SortOrder ASC");
-        unset($zonas);
+        $zona = new BannZonas();
+        $zonas = $zona->cargaCondicion("Id,Titulo", "1", "SortOrder ASC");
+        unset($zona);
 
         $arbol = array();
 
-        foreach ($rows as $row) {
+        foreach ($zonas as $zona) {
             $banner = new BannBanners();
-            $banners = $banner->cargaCondicion('Id', "IdZona='{$row['Id']}'", "SortOrder ASC");
+            $banners = $banner->cargaCondicion('Id', "IdZona='{$zona['Id']}'", "SortOrder ASC");
             unset($banner);
 
-            $arbol[$row['Id']]['titulo'] = $row['Titulo'];
+            $arbol[$zona['Id']]['titulo'] = $zona['Titulo'];
+            $arbol[$zona['Id']]['nBanners'] = count($banners);
             foreach ($banners as $banner)
-                $arbol[$row['Id']]['banners'][] = new BannBanners($banner['Id']);
+                $arbol[$zona['Id']]['banners'][] = new BannBanners($banner['Id']);
         }
 
         return $arbol;

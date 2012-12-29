@@ -231,7 +231,7 @@
 .docsFoto {
 
     float: left;
-    margin-left: 50px; 
+    margin-left: 20px; 
 }
 
 .docsLabel {
@@ -255,8 +255,9 @@
 }
 
 .arbol ul {
-    margin-left: 10px;
+    margin-left: 20px;
 }
+
 .arbol li {
     padding-top: 5px;
     margin-left: 15px;
@@ -266,7 +267,7 @@
     cursor: pointer;
 }
 
-.arbol span {
+.arbol .conContenido {
     cursor: pointer;
     font-weight: bold;
 }

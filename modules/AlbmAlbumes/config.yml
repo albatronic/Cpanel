@@ -64,6 +64,12 @@ AlbmAlbumes:
       title: 'Título z-a'
       criteria: 'Titulo DESC'
   search_default: Titulo
+  orden_web:
+    orden1:
+      caption: 'Mostrar en portada'
+      columnaMostrar: Titulo
+      filtro: MostrarEnPortada='1'
+      columnaOrden: OrdenPortada     
   referenced_entities:
     - ValoresSN
     - ValoresPrivacy
@@ -712,7 +718,7 @@ AlbmAlbumes:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 25, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      aditional_filter: { order: 25, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: NombreApp, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
       title: IdAlbumExterno

@@ -226,6 +226,9 @@ class CpanVariablesController {
                         $variables->setDatosYml($this->request['datos']);
                         $variables->save();
                         $this->values['errores'] = $variables->getErrores();
+                        if(count($this->values['errores']) == 0)
+                            $_SESSION['VARIABLES'][$tipo.$ambito] = $this->request['datos'];
+              
                         unset($variables);
 
                         return $this->indexAction($ambito, $tipo, $nombre);
@@ -238,7 +241,7 @@ class CpanVariablesController {
                 case 'Borrar':
                     if ($this->values['permisos']['permisosModulo']['DE']) {
                         $variables = new CpanVariables($ambito, $tipo, $nombre);
-                        $variables->delete();
+                        $variables->erase();
                         $this->values['errores'] = $variables->getErrores();
                         unset($variables);
 

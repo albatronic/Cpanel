@@ -30,20 +30,21 @@ class SldSlidersController extends Controller {
      */
     public function getArbolZonasSliders() {
 
-        $zonas = new SldZonas();
-        $rows = $zonas->cargaCondicion("Id,Titulo", "1", "SortOrder ASC");
-        unset($zonas);
+        $zona = new SldZonas();
+        $zonas = $zona->cargaCondicion("Id,Titulo", "1", "SortOrder ASC");
+        unset($zona);
 
         $arbol = array();
 
-        foreach ($rows as $row) {
+        foreach ($zonas as $zona) {
             $slider = new SldSliders();
-            $sliders = $slider->cargaCondicion('Id', "IdZona='{$row['Id']}'", "SortOrder ASC");
+            $sliders = $slider->cargaCondicion('Id', "IdZona='{$zona['Id']}'", "SortOrder ASC");
             unset($slider);
 
-            $arbol[$row['Id']]['titulo'] = $row['Titulo'];
+            $arbol[$zona['Id']]['titulo'] = $zona['Titulo'];
+            $arbol[$zona['Id']]['nSliders'] = count($sliders);            
             foreach ($sliders as $slider)
-                $arbol[$row['Id']]['sliders'][] = new SldSliders($slider['Id']);
+                $arbol[$zona['Id']]['sliders'][] = new SldSliders($slider['Id']);
         }
 
         return $arbol;

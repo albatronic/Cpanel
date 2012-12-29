@@ -36,43 +36,38 @@
         {{ macro.radio(atributos.ModoMostrarContenidos,'field_title',values.controller ~ '[ModoMostrarContenidos]',values.controller ~ '_ModoMostrarContenidos',datos.ModoMostrarContenidos.IDTipo,datos.ModoMostrarContenidos.fetchAll(Descripcion,0),'chzn-radio','22')}}
         {{ macro.select(atributos.CriterioOrdenContenidosHijos,'field_title',values.controller ~ '[CriterioOrdenContenidosHijos]',values.controller ~ '_CriterioOrdenContenidosHijos',none,datos.CriterioOrdenContenidosHijos.CriterioOrdenContenidosHijos,datos.CriterioOrdenContenidosHijos.fetchAll(none,0),'chzn-select','23')}}
         
-        <div id="accordionMenu" style="margin-left:60px; width: 70%;">
-            <h3{% if (datos.MostrarEnMenu1.IDTipo == '1') %} style="font-weight: bold;"{% endif %}>{{atributos.MostrarEnMenu1.caption}}</h3>
-            <div>
-                <p>
-                {{ macro.input(atributos.MostrarEnMenu1,'field_title','checkbox',values.controller ~ '[MostrarEnMenu1]',values.controller ~ '_MostrarEnMenu1',datos.MostrarEnMenu1.IDTipo,'255','CampoTextoLargo','12') }}
-                {{ macro.input(atributos.EtiquetaWeb1,'field_title','text',values.controller ~ '[EtiquetaWeb1]',values.controller ~ '_EtiquetaWeb1',datos.EtiquetaWeb1,'255','CampoTextoLargo','13') }}
-                </p>
+        {% if values.varEnvMod.especificas.numMenus > 0  or user.IdPerfil == 1 %}
+            {# 
+                Solapas de MOSTRAR EN MENU N 
+
+                Se muestran tantas solapas como las indicadas en la
+                la variable de entorno especifica de este módulo 'numMenus'
+
+                Como máximo se deberán mostrar 5 solapas, ya que la tabla GconSecciones
+                solo permite gestionar hasta 5 'MostrarEnMenuN'
+            #}
+            <div id="tabsMostrarEnMenu" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+
+                <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                    {% for nMenu in 1 .. values.varEnvMod.especificas.numMenus %}
+                    <li class="ui-state-default ui-corner-top">
+                        <a href="#mostrarEnMenu{{nMenu}}" {% if (datos.getMostrarEnMenuN(nMenu) == '1') %} style="font-weight: bold;"{% endif %}>{{atributos['MostrarEnMenu'~nMenu].caption}}</a>
+                    </li>
+                    {% endfor %}            
+                </ul>
+
+                {% for nMenu in 1 .. values.varEnvMod.especificas.numMenus %}
+                <div id="mostrarEnMenu{{nMenu}}">
+                    <p>
+                    {{ macro.input(atributos['MostrarEnMenu'~nMenu],'field_title','checkbox',values.controller ~ '[MostrarEnMenu'~nMenu~']',values.controller ~ '_MostrarEnMenu'~nMenu,datos.getMostrarEnMenuN(nMenu),'255','CampoTextoLargo','12') }}
+                    {{ macro.input(atributos['EtiquetaWeb'~nMenu],'field_title','text',values.controller ~ '[EtiquetaWeb'~nMenu~']',values.controller ~ '_EtiquetaWeb'~nMenu,datos.getEtiquetaWebN(nMenu),'255','CampoTextoLargo','13') }}
+                    </p>
+                </div>
+                {% endfor %}   
+
             </div>
-            <h3{% if (datos.MostrarEnMenu2.IDTipo == '1') %} style="font-weight: bold;"{% endif %}>{{atributos.MostrarEnMenu2.caption}}</h3>
-            <div>
-                <p>
-                {{ macro.input(atributos.MostrarEnMenu2,'field_title','checkbox',values.controller ~ '[MostrarEnMenu2]',values.controller ~ '_MostrarEnMenu2',datos.MostrarEnMenu2.IDTipo,'255','CampoTextoLargo','12') }}
-                {{ macro.input(atributos.EtiquetaWeb2,'field_title','text',values.controller ~ '[EtiquetaWeb2]',values.controller ~ '_EtiquetaWeb2',datos.EtiquetaWeb2,'255','CampoTextoLargo','13') }}
-                </p>
-            </div>
-            <h3{% if (datos.MostrarEnMenu3.IDTipo == '1') %} style="font-weight: bold;"{% endif %}>{{atributos.MostrarEnMenu3.caption}}</h3>
-            <div>
-                <p>
-                {{ macro.input(atributos.MostrarEnMenu3,'field_title','checkbox',values.controller ~ '[MostrarEnMenu3]',values.controller ~ '_MostrarEnMenu3',datos.MostrarEnMenu3.IDTipo,'255','CampoTextoLargo','12') }}
-                {{ macro.input(atributos.EtiquetaWeb3,'field_title','text',values.controller ~ '[EtiquetaWeb3]',values.controller ~ '_EtiquetaWeb3',datos.EtiquetaWeb3,'255','CampoTextoLargo','14') }}
-                </p>
-            </div>
-            <h3{% if (datos.MostrarEnMenu4.IDTipo == '1') %} style="font-weight: bold;"{% endif %}>{{atributos.MostrarEnMenu4.caption}}</h3>
-            <div>
-                <p>
-                {{ macro.input(atributos.MostrarEnMenu4,'field_title','checkbox',values.controller ~ '[MostrarEnMenu4]',values.controller ~ '_MostrarEnMenu4',datos.MostrarEnMenu4.IDTipo,'255','CampoTextoLargo','12') }}
-                {{ macro.input(atributos.EtiquetaWeb4,'field_title','text',values.controller ~ '[EtiquetaWeb4]',values.controller ~ '_EtiquetaWeb4',datos.EtiquetaWeb4,'255','CampoTextoLargo','14') }}
-                </p>
-            </div>
-            <h3{% if (datos.MostrarEnMenu5.IDTipo == '1') %} style="font-weight: bold;"{% endif %}>{{atributos.MostrarEnMenu5.caption}}</h3>
-            <div>
-                <p>
-                {{ macro.input(atributos.MostrarEnMenu5,'field_title','checkbox',values.controller ~ '[MostrarEnMenu5]',values.controller ~ '_MostrarEnMenu5',datos.MostrarEnMenu5.IDTipo,'255','CampoTextoLargo','12') }}
-                {{ macro.input(atributos.EtiquetaWeb5,'field_title','text',values.controller ~ '[EtiquetaWeb5]',values.controller ~ '_EtiquetaWeb5',datos.EtiquetaWeb5,'255','CampoTextoLargo','14') }}
-                </p>
-            </div>
-        </div>
+
+        {% endif %}
 
         {#
         {{ macro.input(atributos.OrdenMenu1,'field_title','text',values.controller ~ '[OrdenMenu1]',values.controller ~ '_OrdenMenu1',datos.OrdenMenu1,'4','CampoUnidades','17') }}

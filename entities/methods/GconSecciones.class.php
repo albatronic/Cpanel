@@ -93,25 +93,39 @@ class GconSecciones extends GconSeccionesEntity {
     }
 
     /**
-     * Devuelve un array con el arbol de secciones, incluyendo
-     * los eventuales contenidos de cada seccion
+     * Devuelve un array con el árbol de secciones y contenidos
      * 
+     * Si se indica valor para el parámetro $idContenidoRelacionado, en el array
+     * de contenidos se incluirá un elemento booleano que indica si cada contenido
+     * está relacionado con el contenido cuyo valor es el parámetro.
+     * 
+     * El índice del array contiene el valor de la primaryKeyMD5 de cada sección y la estructura es:
+     * 
+     * - id => el id de la seccion
+     * - titulo => el titulo de la seccion
+     * - nivelJerarquico => el nivel jerárquico dentro del árbol de secciones
+     * - hijos => array de secciones hijas (belongsTo) con la misma estructura
+     * - nContenidos => el número de contenidos que posee la sección
+     * - contenidos => array de contenidos de la seccion
+     * 
+     * @param integer $idContenidoRelacionado 
      * @return array Array de secciones
      */
-    public function getArbolHijos() {
+    public function getArbolHijos($idContenidoRelacionado = '') {
 
         $arbol = array();
 
         $objeto = new $this();
-        $rows = $objeto->cargaCondicion("Id,PrimaryKeyMD5", "BelongsTo='0'", "SortOrder ASC");
+        $rows = $objeto->cargaCondicion("Id,PrimaryKeyMD5,NivelJerarquico", "BelongsTo='0'", "SortOrder ASC");
         unset($objeto);
 
         foreach ($rows as $row) {
             $objeto = new $this($row['Id']);
-            $arrayContenidos = $this->getContenidos($row['Id']);
+            $arrayContenidos = $this->getContenidos($row['Id'],$idContenidoRelacionado);
             $arbol[$row['PrimaryKeyMD5']] = array(
                 'id' => $row['Id'],
                 'titulo' => $objeto->getTitulo(),
+                'nivelJerarquico' => $row['NivelJerarquico'],
                 'hijos' => $objeto->getHijos(),
                 'nContenidos' => count($arrayContenidos),
                 'contenidos' => $arrayContenidos,
@@ -153,7 +167,7 @@ class GconSecciones extends GconSeccionesEntity {
     private function getChildrens($idPadre) {
 
         // Obtener todos los hijos del padre actual
-        $hijos = $this->cargaCondicion('Id,PrimaryKeyMD5', "BelongsTo='{$idPadre}'", "SortOrder ASC");
+        $hijos = $this->cargaCondicion('Id,PrimaryKeyMD5,NivelJerarquico', "BelongsTo='{$idPadre}'", "SortOrder ASC");
 
         foreach ($hijos as $hijo) {
             $aux = new $this($hijo['Id']);
@@ -161,6 +175,7 @@ class GconSecciones extends GconSeccionesEntity {
             $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']] = array(
                 'id' => $hijo['Id'],
                 'titulo' => $aux->getTitulo(),
+                'nivelJerarquico' => $hijo['NivelJerarquico'],
                 'hijos' => $this->getChildrens($hijo['Id']),
                 'nContenidos' => count($arrayContenidos),
                 'contenidos' => $arrayContenidos,
@@ -171,6 +186,16 @@ class GconSecciones extends GconSeccionesEntity {
         return $this->_hijos[$idPadre];
     }
 
+    /**
+     * ESTOS MÉTODOS SON PARA TWIG
+     */
+    public function getMostrarEnMenuN($n) {
+        return $this->{"MostrarEnMenu$n"};
+    }
+
+    public function getEtiquetaWebN($n) {
+        return $this->{"EtiquetaWeb$n"};
+    }
 }
 
 ?>

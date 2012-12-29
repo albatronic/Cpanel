@@ -24,7 +24,7 @@
 
     <div id="arbol">
         <ul>
-            {% for key,seccion in values.objetoController.arbolSeccionesVideos %}
+            {% for keySeccion,seccion in values.objetoController.arbolSeccionesVideos %}
                 <li style="font-weight: bold;">{{seccion.titulo}}</li>
                 <ul>
                     {% for video in seccion.videos %}
@@ -45,6 +45,11 @@
                             <a href="{{app.path}}/{{values.controller}}/edit/{{video.primaryKeyMD5}}" onclick="$('#solapaActiva').val('1');">{{video.titulo}} ({{video.IdTipo.Descripcion}})</a>
                         </li>
                     {% endfor %}
+                    {% if seccion.nVideos > 1%}
+                        <li style="margin-left: 30px;">
+                            {{ macro.ordenarPopup(values.controller,'IdSeccion',keySeccion) }}
+                        </li>                           
+                    {% endif %}                         
                 </ul>
             {% endfor %}
         </ul>

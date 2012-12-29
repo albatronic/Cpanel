@@ -200,12 +200,11 @@ class CpanVariables extends CpanVariablesEntity {
     }
 
     /**
-     * Borrar el archivo yml de las variables
+     * Borrar físicamente el resgistro
      * @return boolean TRUE se se ha borrado correctamente
      */
-    public function delete() {
-
-        $ok = parent::delete();
+    public function erase() {
+        $ok = parent::erase();echo "borrado ",$ok," ";
         if ($ok and ($this->_objeto['ambito'] == 'Mod') and ($this->_objeto['tipo'] == 'Web'))
             $this->quitaVisibilidad();
 
@@ -257,7 +256,8 @@ class CpanVariables extends CpanVariablesEntity {
             }
 
             $variable .= "_{$tipo}";
-            $rows = $this->cargaCondicion('*', "IdProyectosApps='{$_SESSION['project']['Id']}' AND Variable='{$variable}'");
+            $filtro = "IdProyectosApps='{$_SESSION['project']['Id']}' AND Variable='{$variable}'";
+            $rows = $this->cargaCondicion('*', $filtro);
 
             if ($rows[0])
                 $this->bind($rows[0]);

@@ -38,17 +38,28 @@
         {% endif %}              
     </ul>
         
-    {# ARBOL DE SECCIONES Y CONTENIDOS #}
+    {# ARBOL DE SECCIONES Y CONTENIDOS, TRES NIVELES #}
     <div id="arbol">
         <ul class="arbol">
+        {% set nivel = '' %}
         {% for padre in values.datos.getArbolHijos %}
-            {% include values.controller ~ '/secciones.html.twig' with {'seccion': padre, 'templateContenidos':'contenidosEditar.html.twig'} %}
+                
+            <li class="arbol">
+                {% include values.controller ~ '/secciones.html.twig' with {'seccion': padre, 'templateContenidos':'contenidosEditar.html.twig'} %}
+            </li>
+            
             <ul class="arbol">
                 {% for hijo in padre.hijos %}
-                    {% include values.controller ~ '/secciones.html.twig' with {'seccion': hijo, 'templateContenidos':'contenidosEditar.html.twig'} %}
+                    
+                    <li class="arbol">
+                        {% include values.controller ~ '/secciones.html.twig' with {'seccion': hijo, 'templateContenidos':'contenidosEditar.html.twig'} %}
+                    </li>
+                    
                     <ul class="arbol">
                         {% for nieto in hijo.hijos %}
-                            {% include values.controller ~ '/secciones.html.twig' with {'seccion': nieto, 'templateContenidos':'contenidosEditar.html.twig'} %}
+                            <li class="arbol">
+                                {% include values.controller ~ '/secciones.html.twig' with {'seccion': nieto, 'templateContenidos':'contenidosEditar.html.twig'} %}
+                            </li>
                         {% endfor %}
                     </ul>                        
                 {% endfor %}

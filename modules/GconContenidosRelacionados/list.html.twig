@@ -10,6 +10,21 @@
 {% extends values.controller  ~ '/index.html.twig' %}
 
 {% block listado %}
+        <ul class="arbol">
+        {% for padre in values.datos %}
+            {% include values.controller ~ '/secciones.html.twig' with {'seccion': padre, 'templateContenidos':'contenidosEditar.html.twig'} %}
+            <ul class="arbol">
+                {% for hijo in padre.hijos %}
+                    {% include values.controller ~ '/secciones.html.twig' with {'seccion': hijo, 'templateContenidos':'contenidosEditar.html.twig'} %}
+                    <ul class="arbol">
+                        {% for nieto in hijo.hijos %}
+                            {% include values.controller ~ '/secciones.html.twig' with {'seccion': nieto, 'templateContenidos':'contenidosEditar.html.twig'} %}
+                        {% endfor %}
+                    </ul>                        
+                {% endfor %}
+            </ul>
+        {% endfor %}
+        </ul>
 
 <div class=''>
     <div id="accordion">

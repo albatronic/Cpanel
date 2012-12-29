@@ -1,8 +1,7 @@
 {# empty Twig template #}
-<li class="arbol">
-    {% if seccion.nContenidos > 0 %}
-        {% include 'GconContenidos/' ~ templateContenidos with {'contenidos': seccion} %}
-    {% else %}
-        {{seccion.titulo}}
-    {% endif %}
-</li>
+
+{% if seccion.nContenidos > 0 %}
+    {% include 'GconContenidos/' ~ templateContenidos with {'contenidos': seccion} %}
+{% else %}
+    <span>{{seccion.titulo}}</span>  
+{% endif %}

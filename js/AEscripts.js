@@ -12,27 +12,95 @@ $(function(){
      * Para las solapas
      */
     $( "#tabs" ).tabs();
-    $( "#tabs1" ).tabs();
+    $( "#tabs1" ).tabs(); 
+    $( "#tabsMostrarEnMenu" ).tabs();
+    
+    /**
+     * Diálogo popup variables de entorno
+     */
+    $( "#filtroAvanzado" ).dialog({
+        autoOpen: false,
+        modal: false,
+        width: 350,
+        height: 540,
+        position: ['right','center'],
+        closeOnEscape: true,
+        buttons: {
+            "Consultar" : function() {
+                // Enviar el formulario por ajax
+                var $formulario = $('#filtro');
+                $(formulario).submit(function(e){
+                    var valores = $formulario.serialize();alert(valores);
+                    var $envio = $.ajax({
+                        url: appPath + '/GconContenidos/list',
+                        data: valores,
+                        type: 'POST'
+                    });
+                    
+                    $envio.done(function(){
+                        $(this).dialog('close');
+                    });
+                });
+            },
+            
+            "Cancelar" : function(){
+                $(this).dialog('close');
+            }
+
+        }
+    });
+    
+    /**
+     * Diálogo popup variables de entorno
+     */
+    $( "#dialogoVarEnv" ).dialog({
+        autoOpen: false,
+        modal: false,
+        width: 350,
+        height: 540,
+        position: ['right','center'],
+        closeOnEscape: true
+    });
+
+    /**
+     * Diálogo popup para ordenaciones
+     */
+    $( "#dialogOrdenar" ).dialog({
+        autoOpen: false,
+        width: 400,
+        height: 500,
+        position: ['right','center'],
+        closeOnEscape: true
+    });
+   
     /**
      * Para el efecto acordeón
      */
-
     $( "#accordionColumnas" ).accordion({
         autoHeight: false,
         navigation: true,
         collapsible: true,
         active: false,
-        animated: ''
+        heightStyle: "content"
     });
-    
-    $( "#accordionMenu" ).accordion({
-        autoHeight: false,
-        navigation: true,
-        collapsible: true,
-        active: false,
-        animated: ''
-    });
-    
+        
+    $( "#acordeonOrden" )
+        .accordion({
+            header: "> div > h3",
+            active: false          
+        })
+        .sortable({
+            axis: "y",
+            handle: "h3",
+            cursor: "move",
+            opacity: 0.5,
+            stop: function( event, ui ) {
+                // IE doesn't register the blur when sorting
+                // so trigger focusout handlers to remove .ui-state-focus
+                ui.item.children( "h3" ).triggerHandler( "focusout" );
+            }
+        });
+        
     $("#usersSelector").change(function () {
         submitForm('layoutForm');
     });
@@ -95,7 +163,8 @@ function switchDisplay(id) {
  * de la columna concatenados con guión bajo
  *
  *
- * @param idDiv Id del elemento html a rellenar
+ * @param tipo El tipo de variable
+ * @param ambito El ámbito: Pro,App,Mod
  * @param modulo_columna El nombre del modulo y de la columna concatenados con guión bajo
  * @return void
  */
@@ -105,9 +174,21 @@ function popUpVariablesEnv(tipo, ambito, modulo_columna) {
 
     var modulo = elementos[0];
     var columna = elementos[1];
-    var url = appPath + '/CpanVariables/EditNode/'+ambito+'/'+tipo+'/'+modulo+'/'+columna;
+    var url = '<iframe src="' + appPath + '/CpanVariables/EditNode/' + ambito + '/' + tipo + '/' + modulo + '/' + columna + '" width="100%" height="98%"></iframe>';
 
-    window.open(url,'Variables','width=400,height=580,resizable=yes,scrollbars=yes');
+    $('#dialogoVarEnv').html(url);
+    $('#dialogoVarEnv').dialog('open');  
+}
+
+/**
+ * Muestra el popUp de ordenacion
+ */
+function popUpOrdenar(controller,columna,key) {
+    
+    var url = '<iframe src="' + appPath + '/Ordenar/Index/' + controller + '/' + columna + '/' + key + '" width="100%" height="98%"></iframe>';
+    
+    $('#dialogOrdenar').html(url);
+    $('#dialogOrdenar').dialog('open')    
 }
 
 /**
@@ -253,10 +334,8 @@ function submitForm(formulario) {
  * Pone un gif 'loading' en en div 'idDiv'
  */
 function loading(idDiv) {
-    // Coloco un gif "Cargando..." en la capa
-    var url = "<img src='"+appPath+"/images/loading.gif'>";
 
-    $('#'+idDiv).html(url);
+    $('#'+idDiv).html("<img src='" + appPath + "/images/loading.gif'>");
 }
 
 /*

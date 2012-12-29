@@ -58,7 +58,7 @@ class Gd {
      * @param integer $quality Calidad de la imagen destino (0 a 100)
      * @return boolean TRUE si éxito al guardar
      */
-    public function save($name, $quality = 100) {
+    public function save($name, $quality = 75) {
 
         $ok = FALSE;
 

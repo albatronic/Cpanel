@@ -64,6 +64,7 @@ SldSliders:
       title: 'Título z-a'
       criteria: 'IdZona,Titulo DESC'
   search_default: Id
+  orden_web:
   referenced_entities:
     - SldZonas
     - TiposSliders
@@ -726,7 +727,7 @@ SldSliders:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 27, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      aditional_filter: { order: 27, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: NombreApp, type: select, operator: '=', event: null }
       validator: { nullable: yes, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
       title: IdAlbumExterno

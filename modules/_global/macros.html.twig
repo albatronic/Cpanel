@@ -58,6 +58,13 @@
 </li>        
 {% endmacro %}
 
+{# MUESTRA EL DIALOGO DE ORDENAR #}
+{% macro ordenarPopup(controller,columna,key) %}
+<a href="javascript:;" onclick="popUpOrdenar('{{controller}}','{{columna}}','{{key}}');">
+    <img src="{{appPath}}/images/boton-ordenar.png" alt="Ordenar" title="Ordenar"/>
+</a>
+{% endmacro%}
+
 {% macro publicar(atributos,name,id,value) %}
 {% if atributos.visible == '1' %}
 <input name="{{name}}" id="{{ id|default(name)}}" type="hidden" value="{{value}}" />

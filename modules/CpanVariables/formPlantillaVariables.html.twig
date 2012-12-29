@@ -8,26 +8,26 @@
 {% extends '_global/layoutPopup.html.twig' %}
 
 {% block content %}
-        <div style="text-align: center;"><h4>{{values.titulo}}</h4></div>
-        <div id="resultado"></div>
-        <div class="grid_container">
-            <div class="grid_12 full_block">
-                <div class="widget_wrap">
-                    <div class="widget_content">
-                        <div class="form_container left_label">
-                            <form name="plantillaVariables" id="plantillaVariables" action="" method="POST">
-                            <input name="controller" value="CpanVariables" type="hidden" />
-                            <input name="action" id="action_CpanVariables" value="EditNode" type="hidden" />
-                            <input name="tipo" id="tipo" value="{{values.tipo}}" type="hidden" />
-                            <input name="ambito" id="ambito" value="{{values.ambito}}" type="hidden" />
-                            <input name="nombre" id="nombre" value="{{values.nombre}}" type="hidden" />
-                            <input name="columna" id="columna" value="{{values.columna}}" type="hidden" />
-                            <input name="archivoDatos" value="{{values.archivoDatos}}" type="hidden" readonly/>
+<div style="text-align: center;"><h4>{{values.titulo}}</h4></div>
+<div id="resultado"></div>
+<div class="grid_container">
+    <div class="grid_12 full_block">
+        <div class="widget_wrap">
+            <div class="widget_content">
+                <div class="form_container left_label">
+                    <form name="plantillaVariables" id="plantillaVariables" action="" method="POST">
+                    <input name="controller" value="CpanVariables" type="hidden" />
+                    <input name="action" id="action_CpanVariables" value="EditNode" type="hidden" />
+                    <input name="tipo" id="tipo" value="{{values.tipo}}" type="hidden" />
+                    <input name="ambito" id="ambito" value="{{values.ambito}}" type="hidden" />
+                    <input name="nombre" id="nombre" value="{{values.nombre}}" type="hidden" />
+                    <input name="columna" id="columna" value="{{values.columna}}" type="hidden" />
+                    <input name="archivoDatos" value="{{values.archivoDatos}}" type="hidden" readonly/>
 
-                            {% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
-                            {% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
+                    {% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
+                    {% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
 
-                            <ul>
+                    <ul>
                     {% set hayListaValores = (values.datos.listaValores is iterable) %}
 
                     {% for variable,valor in values.datos %}
@@ -85,17 +85,16 @@
                         </p>
                         {% endif %}
                     {% endfor %}
-                            </ul>
+                    </ul>
 
-                            <div style="margin-top: 10px; margin-bottom: 5px; text-align: center;">
-                                <input name="accion" value="Guardar" type ="submit" />
-                                <button onclick="window.close();">Cerrar</button>
-                            </div>
-
-                            </form>
-                        </div>
+                    <div style="margin-top: 10px; margin-bottom: 5px; text-align: center;">
+                        <input name="accion" value="Guardar" type ="submit" />
                     </div>
+
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 {% endblock %}
