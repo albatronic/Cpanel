@@ -76,14 +76,22 @@ $(function(){
     /**
      * Para el efecto acordeón
      */
-    $( "#accordionColumnas" ).accordion({
+    $( "#acordeonColumnas" ).accordion({
         autoHeight: false,
         navigation: true,
         collapsible: true,
         active: false,
         heightStyle: "content"
     });
-        
+    
+    $( "#acordeonOrdenesWeb" ).accordion({
+        autoHeight: false,
+        navigation: true,
+        collapsible: true,
+        active: false,
+        heightStyle: "content"
+    });
+    
     $( "#acordeonOrden" )
         .accordion({
             header: "> div > h3",
@@ -100,7 +108,7 @@ $(function(){
                 ui.item.children( "h3" ).triggerHandler( "focusout" );
             }
         });
-        
+    
     $("#usersSelector").change(function () {
         submitForm('layoutForm');
     });
@@ -392,12 +400,19 @@ function devuelve( campoId, id, campoTexto, value, desplegableAjax) {
     $( "#"+campoTexto ).focus();
 }
 
-function actualizaPublish(entidad,idEntidad,onOff) {
+/**
+ * Actualiza vía ajax la 'columna' de la 'entidad' e 'idEntidad' con el 'valor'
+ * 
+ * Esta función sirve para actualizar cualquier columna de cualquier entidad
+ * con un valor dado vía ajax
+ * 
+ */
+function actualizaColumna(entidad,idEntidad,columna,valor) {
 
-    var parametros = 'entidad='+entidad+'&idEntidad='+idEntidad+'&onOff='+onOff;
+    var parametros = 'entidad='+entidad+'&idEntidad='+idEntidad+'&columna='+columna+'&valor='+valor;
 
     $.ajax({
-        url: appPath + "/lib/actualizaPublish.php",
+        url: appPath + "/lib/actualizaColumna.php",
         type: 'GET',
         async: true,
         data: parametros

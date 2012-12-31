@@ -731,10 +731,12 @@ class Entity {
 
         foreach ($rows as $row) {
             $objeto = new $this($row['Id']);
+            $hijos = $objeto->getHijos();
             $arbol[$row['PrimaryKeyMD5']] = array(
                 'id' => $row['Id'],
                 'titulo' => $objeto->getTitulo(),
-                'hijos' => $objeto->getHijos(),
+                'nHijos' => count($hijos),
+                'hijos' => $hijos,                
             );
         }
 

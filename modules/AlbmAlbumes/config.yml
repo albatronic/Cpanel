@@ -64,9 +64,8 @@ AlbmAlbumes:
       title: 'Título z-a'
       criteria: 'Titulo DESC'
   search_default: Titulo
-  orden_web:
-    orden1:
-      caption: 'Mostrar en portada'
+  ordenes_web:
+    OrdenPortada:
       columnaMostrar: Titulo
       filtro: MostrarEnPortada='1'
       columnaOrden: OrdenPortada     

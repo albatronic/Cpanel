@@ -36,6 +36,7 @@
         <li class="ui-state-default ui-corner-top"><a href="#tabs-galeria">Galería</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-columnas">Columnas</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-ordenesWeb">Órdenes Web</a></li>        
         <li class="ui-state-default ui-corner-top"><a href="#tabs-controller">Controller</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-editorTiny">Editor Tiny</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-varWeb">VW</a></li>
@@ -113,7 +114,7 @@
     {# VARIABLES DE ENTORNO DE CADA COLUMNA DE LA ENTIDAD DE DATOS #}
     <div id="tabs-columnas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
 
-        <div id="accordionColumnas" style="margin-top:10px;">
+        <div id="acordeonColumnas" style="margin-top:10px;">
             {% for columna,variables in values.datos.columns %}
                 <h3 style="{% if (variables.visible) %} color: blue; font-weight: bold; {% endif %}">
                     [columns][{{columna}}] :: [{{variables.caption}} = {{variables.default }}] [permission: {{variables.permission }}]
@@ -200,6 +201,30 @@
         {% endfor %}
     </div>
 
+    {# ÓRDENES WEB #}
+    <div id="tabs-ordenesWeb" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        <div id="acordeonOrdenesWeb" style="margin-top:10px;">
+        {% for nombre,orden in values.datos.ordenesWeb %}
+            <h3>{{nombre}}</h3>
+            <div>
+                {% for key,value in orden %}
+                {{ macro.input(
+                    {'caption':'[ordenesWeb]['~nombre~']['~key~']','visible':'1','updatable':'1','varEnv':'0'},
+                    'field_title',
+                    'text',
+                    'datos[ordenesWeb]['~nombre~']['~key~']',
+                    'datos_ordenesWeb_'~nombre~'_'~key,
+                    value,
+                    '50',
+                    'CampoTextoCorto'
+                    )
+                }}
+                {% endfor %}
+            </div>
+        {% endfor %}
+        </div>            
+    </div>
+        
     {# CONTROLLER #}
     <div id="tabs-controller" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.input({'caption':'[controller] Controller','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[controller]','datos_controller',values.datos.controller,'50','CampoTextoCorto','1') }}

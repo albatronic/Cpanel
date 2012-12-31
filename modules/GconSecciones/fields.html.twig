@@ -22,8 +22,37 @@
     </ul>
 
     <div id="arbol">
-        {% include '_global/arbol.html.twig' %}
-    </div>        
+        <ul>
+        {% for key,padre in datos.getArbolHijos %}
+            <li>
+                {{ macro.ordenarPopup(values.controller,'BelongsTo',0)}}
+                {{ macro.actualizaColumna(values.controller,padre.id,'Publish',padre.publish,'Publicar/Despublicar')}}                      
+                <a href="{{app.path}}/{{values.controller}}/edit/{{key}}">{{padre.titulo}}</a>
+                {% if padre.nHijos %}
+                <ul>
+                {% for keyHijo,hijo in padre.hijos %}
+                    <li style="margin-left: 30px;">
+                        {{ macro.ordenarPopup(values.controller,'BelongsTo',padre.id)}}                     
+                        <a href="{{app.path}}/{{values.controller}}/edit/{{keyHijo}}">{{hijo.titulo}}</a>
+                        {% if hijo.nHijos %}
+                        <ul>
+                        {% for keyNieto,nieto in hijo.hijos %}
+                            <li style="margin-left: 60px;">
+                                {{ macro.ordenarPopup(values.controller,'BelongsTo',hijo.id)}}                              
+                                <a href="{{app.path}}/{{values.controller}}/edit/{{keyNieto}}">{{nieto.titulo}}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+        
     <div id="general">
         {% if datos.NivelJerarquico %}Nivel Jerárquico {{datos.NivelJerarquico}}{% endif %}
         {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}

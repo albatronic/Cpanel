@@ -41,17 +41,22 @@ class OrdenarController extends Controller {
         }
 
         // Obtener las posibles columnas por las que ordenar.
-        // Estas están indicadas en el config.yml de cada módulo, dentro
-        // del nodo <columns_order_web>
-        $form = new Form($entidad);
-        $this->values['criteriosOrden'] = $form->getNode('orden_web');
+        // Están en la variable de entorno del módulo
+        $variables = new CpanVariables('Mod', 'Env', $entidad);
+        $this->values['criteriosOrden'] = $variables->getNode('ordenesWeb');
+        $columnas = $variables->getNode('columns');
+        unset($variables);
+        // Pongo el caption del campo
+        foreach ($this->values['criteriosOrden'] as $key=>$criterio) {
+            $this->values['criteriosOrden'][$key]['caption'] = $columnas[$key]['caption'];
+        }
+        
         $this->values['criteriosOrden']['orden0'] = array(
             'caption' => 'Orden',
             'columnaMostrar' => "Titulo",
             'filtro' => $filtro,
             'columnaOrden' => 'SortOrder',
         );
-        unset($form);
 
         $columnaMostrarOrdenacion = $this->values['criteriosOrden'][$criterioOrden]['columnaMostrar'];
         $filtrar = $this->values['criteriosOrden'][$criterioOrden]['filtro'];
@@ -77,7 +82,7 @@ class OrdenarController extends Controller {
      * @return type
      */
     public function ReordenarAction() {
-        
+
         $entidad = $this->request['entidad'];
         $filtro = $this->request['filtro'];
         $criterioOrden = $this->request['criterioOrden'];
@@ -101,7 +106,7 @@ class OrdenarController extends Controller {
         $dbName = $objeto->getDataBaseName();
         $tableName = $objeto->getTableName();
         $primaryKeyName = $objeto->getPrimaryKeyName();
-        
+
         $em = new EntityManager($objeto->getConectionName());
         if ($em->getDbLink()) {
             // Recorro los elementos que vienen en el acordeon, y los reordeno

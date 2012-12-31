@@ -45,7 +45,7 @@
         </div>
         
         {# META #}
-        {% if values.varEnvMod.metatagTitleManagement > '0' %}
+        {% if values.varEnvMod.metatagTitleManagement > '0' or user.IdPerfil == '1' %}
         <h3>Meta</h3>
         <div>
             <p>
@@ -62,7 +62,7 @@
         
         {% if datos.getPrimaryKeyValue %}
             {# IMÁGENES #}
-            {% if values.varEnvMod.numberOfImages > '0' %}
+            {% if values.varEnvMod.numberOfImages > '0' or user.IdPerfil == '1' %}
             <h3>Imágenes ({{datos.getNumberOfDocuments('image%')}})</h3>
             <div>
                 <p>
@@ -147,7 +147,7 @@
             {% endif %}
             
             {# SOLAPA TINY #}
-            {% if values.varEnvMod.withTiny == '1' %}
+            {% if values.varEnvMod.withTiny == '1' or user.IdPerfil == '1' %}
             <h3>Imágenes para Tiny ({{datos.getNumberOfDocuments('tiny')}})</h3>
             <div id="solapaTiny">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
@@ -157,7 +157,7 @@
             {% endif %}
 
             {# SOLAPA GALERIA #}
-            {% if values.varEnvMod.withGalery == '1' %}
+            {% if values.varEnvMod.withGalery == '1' or user.IdPerfil == '1' %}
             <h3>Galería de imágenes ({{datos.getNumberOfDocuments('galery','IsThumbnail=0')}})</h3>
             <div id="solapaGalery">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
@@ -167,7 +167,7 @@
             {% endif %}
 
             {# SOLAPA DOCUMENTOS #}
-            {% if values.varEnvMod.withDocuments == '1' %}
+            {% if values.varEnvMod.withDocuments == '1' or user.IdPerfil == '1' %}
             <h3>Documentos ({{datos.getNumberOfDocuments('documents')}})</h3>
             <div id="solapaDocuments">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
@@ -177,7 +177,7 @@
             {% endif %}
 
             {# SOLAPA VIDEOS #}
-            {% if values.varEnvMod.withVideos == '1' %}
+            {% if values.varEnvMod.withVideos == '1' or user.IdPerfil == '1' %}
             <h3>Vídeos ({{datos.getNumberOfDocuments('video')}})</h3>
             <div id="solapaVideos">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
@@ -187,7 +187,7 @@
             {% endif %}
 
             {# SOLAPA AUDIOS #}
-            {% if values.varEnvMod.withAudios == '1' %}
+            {% if values.varEnvMod.withAudios == '1' or user.IdPerfil == '1' %}
             <h3>Audios ({{datos.getNumberOfDocuments('audio')}})</h3>
             <div id="solapaAudios">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
@@ -197,7 +197,8 @@
             {% endif %}
 
             {# SOLAPA URLS #}
-            <h3>Url Amigable</h3>
+            {% if values.varEnvMod.urlFriendlyManagement == '1' or user.IdPerfil == '1' %}            
+            <h3>Url Amigable (http:/{{app.path}}{{datos.UrlFriendly}})</h3>
             <div>
                 {{ macro.input(atributos.LockUrlPrefix,'field_title','checkbox',values.controller ~ '[LockUrlPrefix]',values.controller ~ '_LockUrlPrefix',datos.LockUrlPrefix.IDTipo,'255','CampoTextoLargo','12') }}
                 {% if datos.LockUrlPrefix.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
@@ -231,15 +232,18 @@
                 {{ macro.input(atributos.UrlTargetBlank,'field_title','checkbox',values.controller ~ '[UrlTargetBlank]',values.controller ~ '_UrlTargetBlank',datos.UrlTargetBlank.IDTipo,'255','CampoTextoLargo','12') }}
                 {{ macro.input(atributos.UrlIsHttps,'field_title','checkbox',values.controller ~ '[UrlIsHttps]',values.controller ~ '_UrlIsHttps',datos.UrlIsHttps.IDTipo,'255','CampoTextoLargo','12') }}
             </div>
-
+            {% endif %}
+            
             {# SOLAPA SITEMAP #}
+            {% if values.varEnvMod.showSiteMapManagement == '1' or user.IdPerfil == '1' %}              
             <h3>Site Map</h3>
             <div>
                 {{ macro.input(atributos.ShowOnSitemap,'field_title','checkbox',values.controller ~ '[ShowOnSitemap]',values.controller ~ '_ShowOnSitemap',datos.ShowOnSitemap.IDTipo,'255','CampoTextoLargo','12') }}
                 {{ macro.input(atributos.ImportanceSitemap,'field_title','text',values.controller ~ '[ImportanceSitemap]',values.controller ~ '_ImportanceSitemap',datos.ImportanceSitemap,'5','CampoTextoCorto',120) }}
                 {{ macro.select(atributos.ChangeFreqSitemap,'field_title',values.controller ~ '[ChangeFreqSitemap]',values.controller ~ '_ChangeFreqSitemap',none,datos.ChangeFreqSitemap.IDTipo,datos.ChangeFreqSitemap.fetchAll(none,0),'chzn-select',121) }}
             </div>
-
+            {% endif %}
+            
             {# SOLAPA AUDITORIA #}
             <h3>Auditoría</h3>
             <div>

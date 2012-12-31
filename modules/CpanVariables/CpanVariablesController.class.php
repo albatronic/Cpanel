@@ -451,6 +451,12 @@ class CpanVariablesController {
                     if ($datos['fieldGeneratorMetatagTitle'] == '')
                         $datos['fieldGeneratorMetatagTitle'] = $archivoConfig->getNode('fieldGeneratorMetatagTitle');
 
+                    //if ($datos['ordenesWeb'] == '')
+                    //    $datos['ordenesWeb'] = $archivoConfig->getNode('ordenes_web');
+                    foreach ($archivoConfig->getNode('ordenes_web') as $key => $value)
+                        if (!is_array($datos['ordenesWeb'][$key]))
+                            $datos['ordenesWeb'][$key] = $value;
+                    
                     unset($archivoConfig);
                 }
                 

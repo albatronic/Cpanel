@@ -64,9 +64,8 @@ VidVideos:
       title: 'Título z-a'
       criteria: 'Titulo DESC'
   search_default: Id
-  orden_web:
-    orden1:
-      caption: 'Mostrar en portada'
+  ordenes_web:
+    MostrarEnPortada:
       columnaMostrar: Titulo
       filtro: MostrarEnPortada='1'
       columnaOrden: OrdenPortada

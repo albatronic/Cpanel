@@ -64,9 +64,8 @@ BannBanners:
       title: 'Título z-a'
       criteria: 'Titulo DESC'
   search_default: Id
-  orden_web:
-    orden1:
-      caption: 'Mostrar en listado'
+  ordenes_web:
+    MostrarEnListado:
       columnaMostrar: Titulo
       filtro: MostrarEnListado='1'
       columnaOrden: OrdenMostrarEnListado

@@ -116,17 +116,20 @@ class GconSecciones extends GconSeccionesEntity {
         $arbol = array();
 
         $objeto = new $this();
-        $rows = $objeto->cargaCondicion("Id,PrimaryKeyMD5,NivelJerarquico", "BelongsTo='0'", "SortOrder ASC");
+        $rows = $objeto->cargaCondicion("Id,PrimaryKeyMD5,NivelJerarquico,Publish", "BelongsTo='0'", "SortOrder ASC");
         unset($objeto);
 
         foreach ($rows as $row) {
             $objeto = new $this($row['Id']);
             $arrayContenidos = $this->getContenidos($row['Id'],$idContenidoRelacionado);
+            $arrayHijos = $objeto->getHijos();
             $arbol[$row['PrimaryKeyMD5']] = array(
                 'id' => $row['Id'],
                 'titulo' => $objeto->getTitulo(),
                 'nivelJerarquico' => $row['NivelJerarquico'],
-                'hijos' => $objeto->getHijos(),
+                'publish' => $row['Publish'],
+                'nHijos' => count($arrayHijos),
+                'hijos' => $arrayHijos,
                 'nContenidos' => count($arrayContenidos),
                 'contenidos' => $arrayContenidos,
             );
@@ -167,16 +170,19 @@ class GconSecciones extends GconSeccionesEntity {
     private function getChildrens($idPadre) {
 
         // Obtener todos los hijos del padre actual
-        $hijos = $this->cargaCondicion('Id,PrimaryKeyMD5,NivelJerarquico', "BelongsTo='{$idPadre}'", "SortOrder ASC");
+        $hijos = $this->cargaCondicion('Id,PrimaryKeyMD5,NivelJerarquico,Publish', "BelongsTo='{$idPadre}'", "SortOrder ASC");
 
         foreach ($hijos as $hijo) {
             $aux = new $this($hijo['Id']);
             $arrayContenidos = $this->getContenidos($hijo['Id']);
+            $arrayHijos = $this->getChildrens($hijo['Id']);
             $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']] = array(
                 'id' => $hijo['Id'],
                 'titulo' => $aux->getTitulo(),
                 'nivelJerarquico' => $hijo['NivelJerarquico'],
-                'hijos' => $this->getChildrens($hijo['Id']),
+                'publish' => $hijo['Publish'],                
+                'nHijos' => count($arrayHijos),
+                'hijos' => $arrayHijos,
                 'nContenidos' => count($arrayContenidos),
                 'contenidos' => $arrayContenidos,
             );

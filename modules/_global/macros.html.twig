@@ -65,6 +65,21 @@
 </a>
 {% endmacro%}
 
+{# ACTUALIZA VIA AJAX LA columna DE LA entidad E idEntidad PONIENDO EL VALOR valor #}
+{% macro actualizaColumna(entidad,idEntidad,columna,valor,titulo) %}
+<input
+    title="{{titulo}}"
+    id="check{{entidad}}{{idEntidad}}"
+    type="checkbox"
+    value="{{valor}}"
+    {% if (valor == '1') %} checked {% endif %}
+    onchange="
+      if ($('#check{{entidad}}{{idEntidad}}').is(':checked')) {$('#check{{entidad}}{{idEntidad}}').val('1');} else {$('#check{{entidad}}{{idEntidad}}').val('0');}
+      actualizaColumna('{{entidad}}','{{idEntidad}}','{{columna}}',$('#check{{entidad}}{{idEntidad}}').val());
+    "
+/> 
+{% endmacro%}
+
 {% macro publicar(atributos,name,id,value) %}
 {% if atributos.visible == '1' %}
 <input name="{{name}}" id="{{ id|default(name)}}" type="hidden" value="{{value}}" />

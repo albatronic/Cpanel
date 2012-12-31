@@ -64,14 +64,12 @@ GconContenidos:
       title: 'Título z-a'
       criteria: 'IdSeccion DESC,Titulo DESC'
   search_default: Id
-  orden_web:
-    orden1:
-      caption: 'Orden en portada del Blog'
-      columnaMostrar: concat(Titulo," ",Subtitulo)
+  ordenes_web:
+    BlogMostrarEnPortada:
+      columnaMostrar: Titulo
       filtro: BlogMostrarEnPortada='1' and Publish='1'
       columnaOrden: BlogOrden
-    orden2:
-      caption: 'Orden de noticias de portada'
+    NoticiaMostrarEnPortada:
       columnaMostrar: Titulo
       filtro: NoticiaMostrarEnPortada='1' and Publish='1'
       columnaOrden: NoticiaOrden        

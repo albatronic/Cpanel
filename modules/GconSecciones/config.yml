@@ -63,6 +63,29 @@ GconSecciones:
     -
       title: 'Título z-a'
       criteria: 'Titulo DESC'
+      
+  ordenes_web:
+    MostrarEnMenu1:
+      columnaMostrar: Titulo
+      filtro: MostrarEnMenu1='1' and Publish='1'
+      columnaOrden: OrdenMenu1   
+    MostrarEnMenu2:
+      columnaMostrar: Titulo
+      filtro: MostrarEnMenu2='1' and Publish='1'
+      columnaOrden: OrdenMenu2
+    MostrarEnMenu3:
+      columnaMostrar: Titulo
+      filtro: MostrarEnMenu3='1' and Publish='1'
+      columnaOrden: OrdenMenu3        
+    MostrarEnMenu4:
+      columnaMostrar: Titulo
+      filtro: MostrarEnMenu4='1' and Publish='1'
+      columnaOrden: OrdenMenu4
+    MostrarEnMenu5:
+      columnaMostrar: Titulo
+      filtro: MostrarEnMenu5='1' and Publish='1'
+      columnaOrden: OrdenMenu5        
+
   search_default: Id
   referenced_entities:
     - ValoresSN

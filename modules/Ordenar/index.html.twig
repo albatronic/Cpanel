@@ -24,25 +24,30 @@
         <img src="{{app.path}}/images/lupa.png" onclick="$('#action').val('Index'); submitForm('form{{values.controller}}');"/>
     </div>
     
-    <p style="padding: 5px;">Pincha y desplaza los elementos a la ubicación deseada</p>
-    
-    <div id="acordeonOrden">
-        {% for valor in values.datos %}
-        <div style="">
-            <h3><span style="margin-left: 20px;">{{valor.Value}}</span></h3>
-            <div>
-                <input name="acordeon[{{valor.Id}}]" value="{{valor.Id}}" type="hidden"/>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+    {% if values.datos is not empty %}
+        <p style="padding: 5px;">Pincha y desplaza los elementos a la ubicación deseada</p>
 
-    <div id="botonSubmit" style="margin-top: 10px; text-align: center;">
-        <input value="Guardar nuevo orden" type="submit" 
-               onclick="
-                   loading('botonSubmit');
-                   $('#action').val('Reordenar'); 
-                   submitForm('form{{values.controller}}');" />    
-    </div>
+        <div id="acordeonOrden">
+            {% for valor in values.datos %}
+            <div style="">
+                <h3><span style="margin-left: 20px;">{{valor.Value}}</span></h3>
+                <div>
+                    <input name="acordeon[{{valor.Id}}]" value="{{valor.Id}}" type="hidden"/>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div id="botonSubmit" style="margin-top: 10px; text-align: center;">
+            <input value="Guardar nuevo orden" type="submit" 
+                   onclick="
+                       loading('botonSubmit');
+                       $('#action').val('Reordenar'); 
+                       submitForm('form{{values.controller}}');" />    
+        </div>
+    {% else %}
+        <p>No hay elementos para ordenar</p>
+    {% endif %}
+        
 </form>
 {% endblock %}
