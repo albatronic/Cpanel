@@ -45,7 +45,7 @@
     <form name="linea{{key}}" id="linea{{key}}" action="" method="POST" enctype="multipart/form-data" class="form_container left_label">
     <input name="controller" value="{{values.controller}}" type="hidden" />
     <input name="action" id="action{{key}}" value="edit" type="hidden" />
-    <input name="CpanDocs[Id]" value="{{ objeto.Id }}" type="hidden" />
+    <input name="CpanDocs[Id]" class="{% if objeto.Id %}orden{% endif %}" value="{{ objeto.Id }}" type="hidden" />
     <input name="CpanDocs[Entity]" value="{{ objeto.Entity }}" type="hidden" />
     <input name="CpanDocs[IdEntity]" value="{{ objeto.IdEntity }}" type="hidden" />
     <input name="CpanDocs[Type]" value="{{ objeto.Type }}" type="hidden" />
@@ -78,10 +78,6 @@
     </div>
 
     <div class="docsItem">
-        <div class="Item">
-            <div class="docsLabel">Orden</div>
-            <input style="width: 30px;" name="CpanDocs[SortOrder]" id="CpanDocs_SortOrder{{key}}" value="{{objeto.SortOrder}}" type="text" />
-        </div>
         <div class="Item">
             <div class="docsLabel">Título</div>
             <input onkeyup="$('#texto{{key}}').html($(this).val());"style="width: 300px;" name="CpanDocs[Title]" id="CpanDocs_Title{{key}}" value="{{objeto.Title}}" type="text" />
@@ -123,4 +119,30 @@
 {% endfor %}
 </div>
 
+<div>
+    <form name="reordenar" id="reordenar" action="" method="POST" class="form_container left_label">
+    <input name="controller" value="{{values.controller}}" type="hidden" />
+    <input name="action" id="action" value="cambiarOrden" type="hidden" />
+    <input name="CpanDocs[Entity]" value="{{ values.listado.data[0].Entity }}" type="hidden" />
+    <input name="CpanDocs[IdEntity]" value="{{ values.listado.data[0].IdEntity }}" type="hidden" />
+    <input name="CpanDocs[Type]" value="{{ values.listado.data[0].Type }}" type="hidden" />  
+    <input name="nuevoOrden" id="nuevoOrden" value="" type="hidden" />
+    <div style="margin-top: 10px; text-align: center;">
+        <input value="Cambiar Orden" type="submit" 
+           onclick="
+                var campos;
+                
+                $('.orden').each(function(){
+                    if (campos)
+                        campos = campos + ',' + $(this).val();
+                    else
+                        campos = $(this).val();
+                });
+                $('#nuevoOrden').val(campos);
+                submitForm('reordenar');
+           "
+        />
+    </div>
+    </form>
+</div>
 {% endblock %}

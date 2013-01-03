@@ -3,31 +3,37 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 06.11.2012 23:55:15
+ * @date 02.01.2013 17:48:05
  */
 
 /**
- * @orm:Entity(GconContenidosEtiquetas)
+ * @orm:Entity(EtiqRelaciones)
  */
-class GconContenidosEtiquetasEntity extends EntityComunes {
+class EtiqRelacionesEntity extends EntityComunes {
 
     /**
      * @orm GeneratedValue
      * @orm Id
      * @var integer
-     * @assert NotBlank(groups="GconContenidosEtiquetas")
+     * @assert NotBlank(groups="EtiqRelaciones")
      */
     protected $Id;
 
     /**
-     * @var integer
-     * @assert NotBlank(groups="GconContenidosEtiquetas")
+     * @var entities\CpanModulos
+     * @assert NotBlank(groups="EtiqRelaciones")
      */
-    protected $IdContenido;
+    protected $IdModulo;
 
     /**
      * @var integer
-     * @assert NotBlank(groups="GconContenidosEtiquetas")
+     * @assert NotBlank(groups="EtiqRelaciones")
+     */
+    protected $IdEntidad = '0';
+
+    /**
+     * @var entities\EtiqEtiquetas
+     * @assert NotBlank(groups="EtiqRelaciones")
      */
     protected $IdEtiqueta;
 
@@ -41,7 +47,7 @@ class GconContenidosEtiquetasEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'GconContenidosEtiquetas';
+    protected $_tableName = 'EtiqRelaciones';
 
     /**
      * Nombre de la PrimaryKey
@@ -61,6 +67,8 @@ class GconContenidosEtiquetasEntity extends EntityComunes {
      * @var string
      */
     protected $_childEntities = array(
+        'CpanModulos',
+        'EtiqEtiquetas',
         'ValoresSN',
         'ValoresPrivacy',
         'ValoresDchaIzq',
@@ -81,12 +89,22 @@ class GconContenidosEtiquetasEntity extends EntityComunes {
         return $this->Id;
     }
 
-    public function setIdContenido($IdContenido) {
-        $this->IdContenido = $IdContenido;
+    public function setIdModulo($IdModulo) {
+        $this->IdModulo = $IdModulo;
     }
 
-    public function getIdContenido() {
-        return $this->IdContenido;
+    public function getIdModulo() {
+        if (!($this->IdModulo instanceof CpanModulos))
+            $this->IdModulo = new CpanModulos($this->IdModulo);
+        return $this->IdModulo;
+    }
+
+    public function setIdEntidad($IdEntidad) {
+        $this->IdEntidad = $IdEntidad;
+    }
+
+    public function getIdEntidad() {
+        return $this->IdEntidad;
     }
 
     public function setIdEtiqueta($IdEtiqueta) {
@@ -94,10 +112,12 @@ class GconContenidosEtiquetasEntity extends EntityComunes {
     }
 
     public function getIdEtiqueta() {
+        if (!($this->IdEtiqueta instanceof EtiqEtiquetas))
+            $this->IdEtiqueta = new EtiqEtiquetas($this->IdEtiqueta);
         return $this->IdEtiqueta;
     }
 
 }
 
-// END class GconContenidosEtiquetas
+// END class EtiqRelaciones
 ?>

@@ -46,21 +46,21 @@ spl_autoload_register(array('Autoloader', 'loadClass'));
 
 $v = $_GET;
 
-$relacion = new GconContenidosEtiquetas();
-$idRelacion = $relacion->getIdRelacion($v['idContenido'], $v['idEtiqueta']);
+$relacion = new EtiqRelaciones();
+$existe = $relacion->cargaCondicion("Id", "IdModulo='{$v['idModulo']}' and IdEntidad='{$v['idEntidad']}' and IdEtiqueta='{$v['idEtiqueta']}'");
 
 if ($v['onOff']) {
-    // Hacer relacion
-    if (!$idRelacion) {
-        $relacion = new GconContenidosEtiquetas();
-        $relacion->setIContenido($v['idContenido']);
+    // Hacer relacion si no existe aun
+    if (!$existe[0]['Id']) {
+        $relacion->setIdModulo($v['idModulo']);
+        $relacion->setIdEntidad($v['idEntidad']);
         $relacion->setIdEtiqueta($v['idEtiqueta']);
         $relacion->create();
     }
 } else {
-    // Quitar la relación
-    if ($idRelacion) {
-        $relacion = new GconContenidosEtiquetas($idRelacion);
+    // Quitar la relación si existe
+    if ($existe[0]['Id']) {
+        $relacion = new EtiqRelaciones($existe[0]['Id']);
         $relacion->erase();
     }
 }

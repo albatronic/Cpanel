@@ -362,6 +362,8 @@ class CpanVariablesController {
                             $datos['numMaxVideos'] = $valores['numMaxVideos'];
                         if ($datos['numMaxAudios'] == '')
                             $datos['numMaxAudios'] = $valores['numMaxAudios'];
+                        if ($datos['modulosConEtiquetas'] == '')
+                            $datos['modulosConEtiquetas'] = $valores['modulosConEtiquetas'];                        
                         break;
                     case 'Web' :
                         // Leo el config global del Cpanel

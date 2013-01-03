@@ -7,3 +7,14 @@ EtiqEtiquetas:
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdModulo : { ForeignEntity: CpanModulos, ForeignId: Id }
+
+# RELACION 1 A N ENTRE MODULOS Y ETIQUETAS
+EtiqRelaciones:
+  comment: Tabla auxiliar para la relacion 1 a n entre modulos (entidades) y etiquetas
+  columns:
+    IdModulo:   { type: bigint(11), notnull: true, index: index, comment: 'db,CpanModulos,Id'}
+    IdEntidad:  { type: bigint(11), notnull: true, default: 0 }
+    IdEtiqueta: { type: bigint(11), notnull: true, index: index, comment: 'db,EtiqEtiquetas,Id'}
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IdEtiqueta : { ForeignEntity: EtiqEtiquetas, ForeignId: Id }    

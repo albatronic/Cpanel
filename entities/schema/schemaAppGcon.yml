@@ -75,10 +75,3 @@ GconContenidosRelacionados:
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
-# RELACION 1 A N ENTRE CONTENIDOS Y ETIQUETAS DE CONTENIDOS
-GconContenidosEtiquetas:
-  comment: Tabla auxiliar para la relacion 1 a n entre contenidos y etiquetas
-  columns:
-    IdContenido: { type: bigint(11), notnull: true, index: index }
-    IdEtiqueta:  { type: bigint(11), notnull: true, index: index }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>

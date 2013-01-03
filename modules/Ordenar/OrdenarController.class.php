@@ -31,11 +31,13 @@ class OrdenarController extends Controller {
             case 'GET':
                 $entidad = $this->request['2'];
                 $filtro = "({$this->request['3']} = '{$this->request['4']}') and (Publish='1')";
+                $columnaMostrar = ($this->request['5'] == '') ? "Titulo" : $this->request['5'];
                 $criterioOrden = "orden0";
                 break;
             case 'POST':
                 $entidad = $this->request['entidad'];
                 $filtro = $this->request['filtro'];
+                $columnaMostrar = $this->request['columnaMostrar'];
                 $criterioOrden = $this->request['criterioOrden'];
                 break;
         }
@@ -53,7 +55,7 @@ class OrdenarController extends Controller {
         
         $this->values['criteriosOrden']['orden0'] = array(
             'caption' => 'Orden',
-            'columnaMostrar' => "Titulo",
+            'columnaMostrar' => $columnaMostrar,
             'filtro' => $filtro,
             'columnaOrden' => 'SortOrder',
         );
@@ -69,6 +71,7 @@ class OrdenarController extends Controller {
         $this->values['entidad'] = $entidad;
         $this->values['criterioOrden'] = $criterioOrden;
         $this->values['filtro'] = $filtro;
+        $this->values['columnaMostrar'] = $columnaMostrar;
         $this->values['datos'] = $valores;
 
         return array(

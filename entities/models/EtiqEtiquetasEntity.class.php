@@ -54,6 +54,7 @@ class EtiqEtiquetasEntity extends EntityComunes {
      * @var string
      */
     protected $_parentEntities = array(
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'EtiqRelaciones', 'ParentColumn' => 'IdEtiqueta'),        
     );
 
     /**

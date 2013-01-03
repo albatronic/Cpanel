@@ -7,9 +7,47 @@
   date 30.10.2012 18:46:08
 #}
 
-{{ macro.select(atributos.IdModulo,'field_title',values.controller ~ '[IdModulo]',values.controller ~ '_IdModulo',none,datos.IdModulo.Id,datos.IdModulo.cargaCondicion('Id as Id, Titulo as Value','Nivel>0','Titulo ASC'),'chzn-select','1')}}
-{{ macro.input(atributos.Etiqueta,'field_title','text',values.controller ~ '[Etiqueta]',values.controller ~ '_Etiqueta',datos.Etiqueta,'255','CampoTextoLargo','1') }}
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'arbol'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#arbol" onclick='$( "#solapaActiva" ).val("arbol");'>Árbol de Módulos</a>
+        </li>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Etiqueta%}<b>{{datos.Etiqueta|slice(0,40)}}</b> ...{%else%}Etiqueta{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}            
+        </li>
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}
+    </ul>
 
-{% include '_global/fieldsComunes.html.twig' %}
+    <div id="arbol">
+        <ul>
+            {% for keyModulo,modulo in values.objetoController.arbolEtiquetas %}
+                <li style="font-weight: bold;">{{modulo.titulo}}</li>
+                <ul>
+                    {% for etiqueta in modulo.etiquetas %}
+                        <li style="margin-left: 30px;">
+                            {% if modulo.nEtiquetas > 1%}
+                                {{ macro.ordenarPopup(values.controller,'IdModulo',keyModulo,'Etiqueta') }}
+                            {% endif %}                             
+                            {% if values.varEnvMod.columns.Publish.visible == '1' %}
+                                {{ macro.actualizaColumna(values.controller,etiqueta.Id,'Publish',etiqueta.Publish.IDTipo,'Publicar/Despublicar')}}
+                            {% endif %}
+                            <a href="{{app.path}}/{{values.controller}}/edit/{{etiqueta.primaryKeyMD5}}">{{etiqueta.Etiqueta}}</a>
+                        </li>
+                    {% endfor %}                        
+                </ul>
+            {% endfor %}
+        </ul>
+    </div>
+       
+    <div id="general">
+        {{ macro.select(atributos.IdModulo,'field_title',values.controller ~ '[IdModulo]',values.controller ~ '_IdModulo',none,datos.IdModulo.Id,datos.IdModulo.getModulosConEtiquetas(),'chzn-select','1')}}
+        {{ macro.input(atributos.Etiqueta,'field_title','text',values.controller ~ '[Etiqueta]',values.controller ~ '_Etiqueta',datos.Etiqueta,'255','CampoTextoLargo','1') }}
+    </div>
 
-{{ macro.foco(values.controller ~ '_Etiqueta') }}
+    {% include '_global/fieldsComunes.html.twig' %}
+</div>

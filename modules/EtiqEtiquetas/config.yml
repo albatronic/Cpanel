@@ -93,7 +93,7 @@ EtiqEtiquetas:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: Modulo, entity: CpanModulos, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
+      aditional_filter: { order: 1, caption: Modulo, entity: CpanModulos, method: getModulosConEtiquetas, params: Titulo, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Etiqueta:
       title: Etiqueta

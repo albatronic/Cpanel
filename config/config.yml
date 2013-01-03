@@ -50,6 +50,8 @@ config:
   numMaxAudios: 0
   # TIPOS DE ARCHIVOS PERMITIDOS PARA UPLOAD
   allowTypes: 'jpg,png,gif,pdf,docx,mp3,avi,pps'
+  # MODULOS QUE TIENEN GESTION DE ETIQUETAS (lista separada por comas)
+  modulosConEtiquetas: 'GconContenidos'
 
   # MOTOR DE ENVIO DE CORREOS
   mailer:

@@ -823,6 +823,26 @@ class Entity {
     }
 
     /**
+     * Devuelve verdadero si la entidad en curso tiene etiquetas asociadas
+     * 
+     * @return boolean TRUE si tiene etiquetas asociadas
+     */
+    public function getTieneEtiquetas() {
+        
+        $modulos = new CpanModulos();
+        $modulo = $modulos->find("NombreModulo", $this->getClassName());
+        
+        $etiquetas = new EtiqEtiquetas();
+        $rows = $etiquetas->cargaCondicion("Id","IdModulo='{$modulo->getId()}' and Publish='1'");
+        unset($modulo);
+        unset($etiquetas);
+        
+        $tiene = count($rows);
+        
+        return $tiene;
+    }
+
+    /**
      * Devuelve un array cuyo índice es el nombre de la propiedad
      * y el valor es el valor de dicha propiedad
      * No devuelve las propiedades que empiezan por guión bajo "_"

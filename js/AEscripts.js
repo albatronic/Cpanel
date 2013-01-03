@@ -69,7 +69,7 @@ $(function(){
         autoOpen: false,
         width: 400,
         height: 500,
-        position: ['right','center'],
+        position: ['right','center'],     
         closeOnEscape: true
     });
    
@@ -95,7 +95,8 @@ $(function(){
     $( "#acordeonOrden" )
         .accordion({
             header: "> div > h3",
-            active: false          
+            active: false,
+            collapsible: true            
         })
         .sortable({
             axis: "y",
@@ -191,12 +192,19 @@ function popUpVariablesEnv(tipo, ambito, modulo_columna) {
 /**
  * Muestra el popUp de ordenacion
  */
-function popUpOrdenar(controller,columna,key) {
+function popUpOrdenar(controller,columna,key,columnaMostrar) {
     
-    var url = '<iframe src="' + appPath + '/Ordenar/Index/' + controller + '/' + columna + '/' + key + '" width="100%" height="98%"></iframe>';
+    var url = '<iframe src="' + appPath + '/Ordenar/Index/' + controller + '/' + columna + '/' + key + '/' + columnaMostrar + '" width="100%" height="98%"></iframe>';
     
     $('#dialogOrdenar').html(url);
     $('#dialogOrdenar').dialog('open')    
+}
+
+function cargaEtiquetasRelacionadas(idDiv,idModulo,primaryKey) {
+
+    var url = '<iframe src="' + appPath + '/EtiqRelaciones/list/' + idModulo + '/' + primaryKey + '" width="100%" height="520"><p>Tu navegador no soporta iframes</p></iframe>';
+
+    $('#'+idDiv).html(url);
 }
 
 /**
@@ -421,11 +429,7 @@ function actualizaColumna(entidad,idEntidad,columna,valor) {
 
 function actualizaContenidoRelacionado(idDiv,idContenidoOrigen,idContenidoRelacionado,onOff) {
 
-    //var url        = appPath + '/lib/contenidosRelacionados.php';
     var parametros = 'idContenidoOrigen='+idContenidoOrigen+'&idContenidoRelacionado='+idContenidoRelacionado+'&onOff='+onOff;
-
-    // Coloco un gif "Cargando..." en la capa
-    //$('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
 
     $.ajax({
         url: appPath + '/lib/contenidosRelacionados.php',
@@ -436,23 +440,17 @@ function actualizaContenidoRelacionado(idDiv,idContenidoOrigen,idContenidoRelaci
 
 }
 
-function actualizaEtiquetasRelacionadas(idDiv,idContenido,idEtiqueta,onOff) {
+function actualizaEtiquetasRelacionadas(idModulo,idEntidad,idEtiqueta,onOff) {
 
 
-    var url        = appPath + '/lib/etiquetasRelacionadas.php';
-    var parametros = 'idContenido='+idContenido+'&idEtiqueta='+idEtiqueta+'&onOff='+onOff;
+    var parametros = 'idModulo='+idModulo+'&idEntidad='+idEntidad+'&idEtiqueta='+idEtiqueta+'&onOff='+onOff;
 
-    // Cojo el html que hay en el div
-    var htmlSrc = $('div.'+idDiv).html();
-
-    // Coloco un gif "Cargando..." en la capa
-    $('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
-
-    $('#'+idDiv).load(
-                        url,
-                        parametros,
-                        function() { $('#'+idDiv).html(htmlSrc);}
-                    );
+    $.ajax({
+        url: appPath + '/lib/etiquetasRelacionadas.php',
+        type: 'GET',
+        async: true,
+        data: parametros
+    });
 }
 /*
  * ----------------------------------------------------------------

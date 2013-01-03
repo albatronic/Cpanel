@@ -300,6 +300,30 @@ class CpanDocsController extends Controller {
         }
     }
 
+    public function cambiarOrdenAction() {
+
+        $nuevoOrden = explode(",", $this->request['nuevoOrden']);
+
+        $objeto = $this->request['CpanDocs'];
+
+        // Recorro los elementos que vienen en el acordeon, y los reordeno
+        $orden = 0;
+        $doc = new CpanDocs();
+        $em = new EntityManager($doc->getConectionName());
+        if ($em->getDbLink()) {
+            foreach ($nuevoOrden as $idDoc) {
+                $query = "update {$doc->getDataBaseName()}.{$doc->getTableName()} set SortOrder='{$orden}' where Id='{$idDoc}'";
+                $em->query($query);
+                $orden += 1;
+            }
+            $em->desConecta();
+        }
+        unset($em);
+        unset($doc);
+
+        return $this->listPopupAction($objeto['Entity'], $objeto['IdEntity'], $objeto['Type']);
+    }
+
     private function getRules($tipoDocumento) {
 
         $rules['allowTypes'] = split(",", $this->varEnvPro['allowTypes']);

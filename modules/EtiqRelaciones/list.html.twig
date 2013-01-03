@@ -1,0 +1,38 @@
+{#
+  Module: EtiqRelaciones
+  Document : modules\EtiqRelaciones\list.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 02.01.2013 17:48:05
+#}
+
+{% extends values.controller  ~ '/index.html.twig' %}
+
+{% block listado %}
+
+<div style="padding: 10px;">
+    <ul><p>Marque las etiquetas con las que desea establecer una relación:</p>
+        {% for relacion in values.etiquetasRelacionadas %}
+            <li style="padding: 5px;">
+                <input
+                    title="Relacionar / Quitar relación"
+                    id="check{{relacion.IdEtiqueta}}"
+                    type="checkbox"
+                    value="{{relacion.IdRelacion}}"
+                    {% if (relacion.IdRelacion > 0) %} checked {% endif %}
+                    onchange="
+                      if ($('#check{{relacion.IdEtiqueta}}').is(':checked')) {
+                          $('#check{{relacion.IdEtiqueta}}').val('1');
+                      } else {
+                          $('#check{{relacion.IdEtiqueta}}').val('0');
+                      }
+                      actualizaEtiquetasRelacionadas('{{relacion.IdModulo}}','{{relacion.IdEntidad}}','{{relacion.IdEtiqueta}}',$('#check{{relacion.IdEtiqueta}}').val());
+                    "
+                /> 
+                {{ relacion.Etiqueta}}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

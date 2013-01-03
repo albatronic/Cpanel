@@ -21,9 +21,11 @@
             <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'contenidosRelacionados'%}  ui-tabs-selected ui-state-active{%endif%}">
                 <a href="#contenidosRelacionados" onclick="cargaTab('contenidosRelacionados','GconContenidosRelacionados');">Contenidos Relacionados</a>
             </li>
+            {% if datos.getTieneEtiquetas() %}
             <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'etiquetas'%}  ui-tabs-selected ui-state-active{%endif%}">
-                <a href="#etiquetas" onclick="cargaTab('etiquetas','GconContenidosEtiquetas');">Etiquetas</a>
+                <a href="#etiquetas" onclick="cargaEtiquetasRelacionadas('etiquetas','{{values.controller}}','{{datos.primaryKeyValue}}');">Etiquetas</a>
             </li>
+            {% endif %}
             {% if values.datos.EsEvento.IDTipo %}
                 <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'eventos'%}  ui-tabs-selected ui-state-active{%endif%}">
                     <a href="#eventos" onclick="cargaEventos('eventos');">Eventos</a>

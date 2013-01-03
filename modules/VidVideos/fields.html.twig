@@ -15,6 +15,15 @@
             <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Video{%endif%}</a>
             {{ macro.publicar(values.varEnvMod.columns.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
         </li>
+        
+        {% if (values.datos.getPrimaryKeyValue) %}
+            {% if datos.getTieneEtiquetas() %}
+            <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'etiquetas'%}  ui-tabs-selected ui-state-active{%endif%}">
+                <a href="#etiquetas" onclick="cargaEtiquetasRelacionadas('etiquetas','{{values.controller}}','{{datos.primaryKeyValue}}');">Etiquetas</a>
+            </li>
+            {% endif %}
+        {% endif %} 
+            
         {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
             <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
@@ -29,27 +38,15 @@
                 <ul>
                     {% for video in seccion.videos %}
                         <li style="margin-left: 30px;">
+                            {% if seccion.nVideos > 1%}
+                                {{ macro.ordenarPopup(values.controller,'IdSeccion',keySeccion) }}                          
+                            {% endif %}                             
                             {% if values.varEnvMod.columns.Publish.visible == '1' %}
-                            <input
-                                title="Publicar / Despublicar"
-                                id="check{{video.Id}}"
-                                type="checkbox"
-                                value="{{video.Publish.IDTipo}}"
-                                {% if (video.Publish.IDTipo == '1') %} checked {% endif %}
-                                onchange="
-                                  if ($('#check{{video.Id}}').is(':checked')) {$('#check{{video.Id}}').val('1');} else {$('#check{{video.Id}}').val('0');}
-                                  actualizaPublish('{{values.controller}}','{{video.Id}}',$('#check{{video.Id}}').val());
-                                "
-                            />
+                                {{ macro.actualizaColumna(values.controller,video.Id,'Publish',video.Publish.IDTipo,'Publicar/Despublicar')}}
                             {% endif %}
-                            <a href="{{app.path}}/{{values.controller}}/edit/{{video.primaryKeyMD5}}" onclick="$('#solapaActiva').val('1');">{{video.titulo}} ({{video.IdTipo.Descripcion}})</a>
+                            <a href="{{app.path}}/{{values.controller}}/edit/{{video.primaryKeyMD5}}" onclick="$('#solapaActiva').val('1');">{{video.titulo}}</a>
                         </li>
-                    {% endfor %}
-                    {% if seccion.nVideos > 1%}
-                        <li style="margin-left: 30px;">
-                            {{ macro.ordenarPopup(values.controller,'IdSeccion',keySeccion) }}
-                        </li>                           
-                    {% endif %}                         
+                    {% endfor %}                        
                 </ul>
             {% endfor %}
         </ul>
@@ -64,7 +61,11 @@
         {{ macro.input(atributos.MostrarEnPortada,'field_title','checkbox',values.controller ~ '[MostrarEnPortada]',values.controller ~ '_MostrarEnPortada',datos.MostrarEnPortada.IDTipo,'255','CampoTextoLargo','12') }}
         {# macro.input(atributos.OrdenPortada,'field_title','text',values.controller ~ '[OrdenPortada]',values.controller ~ '_OrdenPortada',datos.OrdenPortada,'4','CampoUnidades','7') #}
     </div>
-        
+ 
+    {% if (values.datos.getPrimaryKeyValue) %}
+        <div id="etiquetas" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
+    {% endif %}
+            
     {% include '_global/fieldsComunes.html.twig' %}        
 </div>
 {{ macro.foco(values.controller ~ '_IdSeccion') }}  

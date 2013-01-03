@@ -16,6 +16,15 @@
             <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Slider{%endif%}</a>
             {{ macro.publicar(values.varEnvMod.columns.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
         </li>
+        
+        {% if (values.datos.getPrimaryKeyValue) %}
+            {% if datos.getTieneEtiquetas() %}
+            <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'etiquetas'%}  ui-tabs-selected ui-state-active{%endif%}">
+                <a href="#etiquetas" onclick="cargaEtiquetasRelacionadas('etiquetas','{{values.controller}}','{{datos.primaryKeyValue}}');">Etiquetas</a>
+            </li>
+            {% endif %}
+        {% endif %} 
+            
         {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
             <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
@@ -30,27 +39,15 @@
                 <ul>
                     {% for slider in zona.sliders %}
                         <li style="margin-left: 30px;">
+                            {% if zona.nSliders > 1%}
+                                {{ macro.ordenarPopup(values.controller,'IdZona',keyZona) }}                                                      
+                            {% endif %}                              
                             {% if values.varEnvMod.columns.Publish.visible == '1' %}
-                            <input
-                                title="Publicar / Despublicar"
-                                id="check{{slider.Id}}"
-                                type="checkbox"
-                                value="{{slider.Publish.IDTipo}}"
-                                {% if (slider.Publish.IDTipo == '1') %} checked {% endif %}
-                                onchange="
-                                  if ($('#check{{slider.Id}}').is(':checked')) {$('#check{{slider.Id}}').val('1');} else {$('#check{{slider.Id}}').val('0');}
-                                  actualizaPublish('{{values.controller}}','{{slider.Id}}',$('#check{{slider.Id}}').val());
-                                "
-                            />
+                                {{ macro.actualizaColumna(values.controller,slider.Id,'Publish',slider.Publish.IDTipo,'Publicar/Despublicar')}}
                             {% endif %}
                             <a href="{{app.path}}/{{values.controller}}/edit/{{slider.primaryKeyMD5}}" onclick="$('#solapaActiva').val('1');">{{slider.titulo}} ({{slider.IdTipo.Descripcion}})</a>
                         </li>
-                    {% endfor %}
-                    {% if zona.nSliders > 1%}
-                        <li style="margin-left: 30px;">
-                            {{ macro.ordenarPopup(values.controller,'IdZona',keyZona) }}                              
-                        </li>                          
-                    {% endif %}                         
+                    {% endfor %}                       
                 </ul>
             {% endfor %}
         </ul>
@@ -70,6 +67,10 @@
         {% endif %}
             
     </div>
+
+    {% if (values.datos.getPrimaryKeyValue) %}
+        <div id="etiquetas" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
+    {% endif %}
         
     {% include '_global/fieldsComunes.html.twig' %}        
 </div>

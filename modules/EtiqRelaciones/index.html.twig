@@ -1,0 +1,21 @@
+{#
+  Module: EtiqRelaciones
+  Document : modules\EtiqRelaciones\index.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 02.01.2013 17:48:05
+#}
+
+{% extends '_global/popup.html.twig' %}
+
+{% block title parent() ~ ' - '  ~ values.titulo %}
+
+{% block content %}
+
+    <div id='div_listado'>
+    {% block listado %}
+    {% endblock %}
+    </div>
+
+{% endblock %}

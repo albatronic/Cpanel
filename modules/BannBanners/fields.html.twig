@@ -31,17 +31,7 @@
                     {% for banner in zona.banners %}
                         <li style="margin-left: 30px;">
                             {% if values.varEnvMod.columns.Publish.visible == '1' %}
-                            <input
-                                title="Publicar / Despublicar"
-                                id="check{{banner.Id}}"
-                                type="checkbox"
-                                value="{{banner.Publish.IDTipo}}"
-                                {% if (banner.Publish.IDTipo == '1') %} checked {% endif %}
-                                onchange="
-                                  if ($('#check{{banner.Id}}').is(':checked')) {$('#check{{banner.Id}}').val('1');} else {$('#check{{banner.Id}}').val('0');}
-                                  actualizaPublish('{{values.controller}}','{{banner.Id}}',$('#check{{banner.Id}}').val());
-                                "
-                            /> 
+                                {{ macro.actualizaColumna(values.controller,banner.Id,'Publish',banner.Publish.IDTipo,'Publicar/Despublicar')}}
                             {% endif %}
                             <a href="{{app.path}}/{{values.controller}}/edit/{{banner.primaryKeyMD5}}">{{banner.Titulo}} ({{banner.IdTipo.Descripcion}})</a>
                         </li>
