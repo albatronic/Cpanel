@@ -15,10 +15,29 @@ class SldSliders extends SldSlidersEntity {
         return $this->Titulo;
     }
 
-    public function fetchAll($column = '', $default = TRUE) {
-        if ($column == '')
-            $column = 'Titulo';
-        return parent::fetchAll($column, $default);
+    public function fetchAll($idZona='') {
+
+        $array = array();
+        
+        $filtro = ($idZona == '') ? "(1)" : "(IdZona='{$idZona}')";
+        
+        $zona = new SldZonas();
+        $zonas = $zona->cargaCondicion("Id,Titulo",$filtro,"SortOrder ASC");
+        unset($zona);
+        
+        foreach ($zonas as $zona) {
+            $array[$zona['Id']]['Titulo']=$zona['Titulo'];
+            $array[$zona['Id']]['items'][] = array('Id' => 0,'Value'=> ':: Indique un valor');            
+            $slider = new SldSliders();
+            $sliders = $slider->cargaCondicion("Id,Titulo","IdZona='{$zona['Id']}'","SortOrder ASC");
+            unset($slider);
+            foreach ($sliders as $slider) {
+                $array[$zona['Id']]['items'][] = array('Id' => $slider['Id'],'Value'=> $slider['Titulo']);
+                
+            }
+        }
+
+        return $array;
     }
 
     /**

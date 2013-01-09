@@ -15,10 +15,28 @@ class AlbmAlbumes extends AlbmAlbumesEntity {
         return $this->Titulo;
     }
 
-    public function fetchAll($column = '', $default = TRUE) {
-        if ($column == '')
-            $column = 'Titulo';
-        return parent::fetchAll($column, $default);
+    public function fetchAll($idSeccion='') {
+
+        $array = array();
+        
+        $filtro = ($idSeccion == '') ? "(1)" : "(IdSeccion='{$idSeccion}')";
+        
+        $seccion = new AlbmSecciones();
+        $secciones = $seccion->cargaCondicion("Id,Titulo",$filtro,"SortOrder ASC");
+        unset($seccion);
+        
+        foreach ($secciones as $seccion) {
+            $array[$seccion['Id']]['Titulo']=$seccion['Titulo'];
+            $array[$seccion['Id']]['items'][] = array('Id' => 0,'Value'=> ':: Indique un valor');
+            $album = new AlbmAlbumes();
+            $albumes = $album->cargaCondicion("Id,Titulo","IdSeccion='{$seccion['Id']}'","SortOrder ASC");
+            unset($album);
+            foreach ($albumes as $album) {
+                $array[$seccion['Id']]['items'][] = array('Id' => $album['Id'],'Value'=> $album['Titulo']);
+            }
+        }
+
+        return $array;
     }
 
     /**

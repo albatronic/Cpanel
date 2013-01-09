@@ -346,6 +346,54 @@
 {% endif %}
 {% endmacro %}
 
+{# selectGroup: MUESTRA UN <SELECT> AGRUPADO #}
+{# --------------------------- #}
+{% macro selectGroup(atributos, classLabel, name, id, width, defecto, opciones, class, tabindex, popup, onchange, onblur) %}
+{% if atributos.visible == '1' %}
+<li>
+    <div class="form_grid_12" id="div_{{id|default(name)}}">
+
+    {% if atributos.caption %}
+        {{ _self.label(atributos, classLabel, name, id) }}
+    {% endif %}
+
+    <div class="form_input">
+        {% if (atributos.updatable == '0') %}
+            <input type="hidden" name="{{ name }}" value="{{ defecto }}" />
+        {% endif %}
+        <select data-placeholder="Indique un valor"
+                {% if (atributos.updatable == '1') %}
+                name="{{ name }}" id="{{ id|default(name)}}"
+                {% endif %}
+                {% if (atributos.updatable == '0') %}
+                disabled
+                {% endif %}
+                style="width:{{width|default(200)}}px;"
+                class="{{ class|default('chzn-select') }}"
+                onchange="{{onchange}}"
+                onblur="{{onblur}} {{ _self.alertSave }}"
+                tabindex="{{tabindex}}"
+        >
+            {% for value in opciones %}
+                <optgroup label="{{value.Titulo}}">
+                    {% for opcion in value.items %}
+                        <option value="{{ opcion.Id }}" {% if (opcion.Id==defecto) %} SELECTED {% endif %}>
+                        {{opcion.Value}}
+                        </option>
+                    {% endfor%}
+                </optgroup>
+            {% endfor %}
+        </select>
+
+        {% if popup %}
+            {{ _self.linkimg(popup) }}
+        {% endif %}
+    </div>
+    </div>
+</li>
+{% endif %}
+{% endmacro %}
+
 {# img: MUESTRA UNA IMAGEN #}
 {% macro img(url,width,height,alt) %}
     <img src="{{ url }}" width="{{ width|default('') }}" alt="{{alt|default('Image')}}"/>

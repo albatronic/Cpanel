@@ -35,8 +35,8 @@ VidVideos:
   fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Titulo
-  controller: VidVideos
-  action: Index
+  controller: Videos
+  action: ShowItem
   template: index.html.twig
   parametros: ''
   includesHead:

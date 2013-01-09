@@ -12,36 +12,61 @@
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Meta</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-firmas">Firmas</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-contenidosFijos">Contenidos fijos</a></li>        
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Global [global]</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-mail">Mail [mail]</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-meta">Meta [meta]</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-firmas">Firmas [signatures]</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-contenidosFijos">Contenidos fijos [staticContents]</a></li>        
     </ul>
 
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input({'caption':'[webName] Nombre de la Web','visible':'1','varEnv':'0'},'field_title','text','datos[webName]','datos_webName',values.datos.webName,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[title] Título','visible':'1','varEnv':'0'},'field_title','text','datos[title]','datos_title',values.datos.title,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[keyWords] Keywords','visible':'1','varEnv':'0'},'field_title','text','datos[keyWords]','datos_keyWords',values.datos.keyWords,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[description] Description','visible':'1','varEnv':'0'},'field_title','text','datos[description]','datos_description',values.datos.description,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[author] Author','visible':'1','varEnv':'0'},'field_title','text','datos[author]','datos_author',values.datos.author,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[revisitAfter] revisitAfter','visible':'1','varEnv':'0'},'field_title','text','datos[revisitAfter]','datos_revisitAfter',values.datos.revisitAfter,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[geoRegion] geoRegion','visible':'1','varEnv':'0'},'field_title','text','datos[geoRegion]','datos_geoRegion',values.datos.geoRegion,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[geoPlaceName] geoPlaceName','visible':'1','varEnv':'0'},'field_title','text','datos[geoPlaceName]','datos_geoPlaceName',values.datos.geoPlaceName,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[geoPositionLongitude] geoPositionLongitude','visible':'1','varEnv':'0'},'field_title','text','datos[geoPositionLongitude]','datos_geoPositionLongitude',values.datos.geoPositionLongitude,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[geoPositionLatitude] geoPositionLatitude','visible':'1','varEnv':'0'},'field_title','text','datos[geoPositionLatitude]','datos_geoPositionLatitude',values.datos.geoPositionLatitude,'50','CampoTextoCorto','1') }}
-        </div>
+        {{ macro.input({'caption':'[dominio] Dominio','visible':'1','varEnv':'0'},'field_title','text','datos[global][dominio]','datos_global_dominio',values.datos.global.dominio,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[empresa] Empresa / Titular','visible':'1','varEnv':'0'},'field_title','text','datos[global][empresa]','datos_global_empresa',values.datos.global.empresa,'50','CampoTextoCorto','1') }}            
+        {{ macro.input({'caption':'[direccion] Dirección','visible':'1','varEnv':'0'},'field_title','text','datos[global][direccion]','datos_global_direccion',values.datos.global.direccion,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[poblacion] Población','visible':'1','varEnv':'0'},'field_title','text','datos[global][poblacion]','datos_global_poblacion',values.datos.global.poblacion,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[provincia] Provincia','visible':'1','varEnv':'0'},'field_title','text','datos[global][provincia]','datos_global_provincia',values.datos.global.provincia,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[codigoPostal] Código Postal','visible':'1','varEnv':'0'},'field_title','text','datos[global][codigoPostal]','datos_global_codigoPostal',values.datos.global.codigoPostal,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[telefono] Teléfono','visible':'1','varEnv':'0'},'field_title','text','datos[global][telefono]','datos_global_telefono',values.datos.global.telefono,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[emailInfo] Email Info','visible':'1','varEnv':'0'},'field_title','text','datos[global][emailInfo]','datos_global_emailInfo',values.datos.global.emailInfo,'50','CampoTextoCorto','1') }}
+    </div>
+
+    <div id="tabs-mail" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input({'caption':'[socket] Tipo de servidor (smtp)','visible':'1','varEnv':'0'},'field_title','text','datos[mail][socket]','datos_mail_socket',values.datos.mail.socket,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[host] Servidor mail','visible':'1','varEnv':'0'},'field_title','text','datos[mail][host]','datos_mail_host',values.datos.mail.host,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[smtp_auth] Requiere autenticación (true)','visible':'1','varEnv':'0'},'field_title','text','datos[mail][smtp_auth]','datos_mail_smtp_auth',values.datos.mail.smtp_auth,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[port] Puerto (25)','visible':'1','varEnv':'0'},'field_title','text','datos[mail][port]','datos_mail_port',values.datos.mail.port,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[user_name] Usuario','visible':'1','varEnv':'0'},'field_title','text','datos[mail][user_name]','datos_mail_user_name',values.datos.mail.user_name,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[password] Password','visible':'1','varEnv':'0'},'field_title','text','datos[mail][password]','datos_mail_password',values.datos.mail.password,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[from] Email envío','visible':'1','varEnv':'0'},'field_title','text','datos[mail][from]','datos_mail_from',values.datos.mail.from,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[from_name] Nombre','visible':'1','varEnv':'0'},'field_title','text','datos[mail][from_name]','datos_mail_from_name',values.datos.mail.from_name,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[timeout] Tiempo espera (30seg)','visible':'1','varEnv':'0'},'field_title','text','datos[mail][timeout]','datos_mail_timeout',values.datos.mail.timeout,'50','CampoTextoCorto','1') }}
+    </div>
+        
+    <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input({'caption':'[webName] Nombre de la Web','visible':'1','varEnv':'0'},'field_title','text','datos[meta][webName]','datos_meta_webName',values.datos.meta.webName,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[title] Título','visible':'1','varEnv':'0'},'field_title','text','datos[meta][title]','datos_meta_title',values.datos.meta.title,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[keyWords] Keywords','visible':'1','varEnv':'0'},'field_title','text','datos[meta][keyWords]','datos_meta_keyWords',values.datos.meta.keyWords,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[description] Description','visible':'1','varEnv':'0'},'field_title','text','datos[meta][description]','datos_meta_description',values.datos.meta.description,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[author] Author','visible':'1','varEnv':'0'},'field_title','text','datos[meta][author]','datos_meta_author',values.datos.meta.author,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[revisitAfter] revisitAfter','visible':'1','varEnv':'0'},'field_title','text','datos[meta][revisitAfter]','datos_meta_revisitAfter',values.datos.meta.revisitAfter,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[geoRegion] geoRegion','visible':'1','varEnv':'0'},'field_title','text','datos[meta][geoRegion]','datos_meta_geoRegion',values.datos.meta.geoRegion,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[geoPlaceName] geoPlaceName','visible':'1','varEnv':'0'},'field_title','text','datos[meta][geoPlaceName]','datos_meta_geoPlaceName',values.datos.meta.geoPlaceName,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[geoPositionLongitude] geoPositionLongitude','visible':'1','varEnv':'0'},'field_title','text','datos[meta][geoPositionLongitude]','datos_meta_geoPositionLongitude',values.datos.meta.geoPositionLongitude,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[geoPositionLatitude] geoPositionLatitude','visible':'1','varEnv':'0'},'field_title','text','datos[meta][geoPositionLatitude]','datos_meta_geoPositionLatitude',values.datos.meta.geoPositionLatitude,'50','CampoTextoCorto','1') }}
+    </div>
 
     <div id="tabs-firmas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input({'caption':'[signatures][links] Links separados por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][links]','datos_signatures_links',values.datos.signatures.links,'255','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[signatures][locations] Localizaciones geográficas separadas por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][locations]','datos_signatures_links',values.datos.signatures.locations,'255','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[links] Links separados por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][links]','datos_signatures_links',values.datos.signatures.links,'255','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[locations] Localizaciones geográficas separadas por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][locations]','datos_signatures_links',values.datos.signatures.locations,'255','CampoTextoCorto','1') }}
 
         {% for language,services in values.datos.signatures.services %}
-            {{ macro.input({'caption':'[signatures][services]['~language~'] Servicios separados por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][services]['~language~']','datos_signatures_services_'~language,services,'70','CampoTextoCorto','1') }}
+            {{ macro.input({'caption':'[services]['~language~'] Servicios separados por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][services]['~language~']','datos_signatures_services_'~language,services,'70','CampoTextoCorto','1') }}
         {% endfor %}
     </div>
 
     <div id="tabs-contenidosFijos" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {% for i in 0..numeroContenidosFijos %}
-        {{ macro.input({'caption':'[staticContents]['~i~'] Contenido fijo '~i,'visible':'1','varEnv':'0'},'field_title','text','datos[staticContents]['~i~']','datos_staticContents_sc'~i,values.datos.staticContents[i],'255','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'['~i~'] Contenido fijo '~i,'visible':'1','varEnv':'0'},'field_title','text','datos[staticContents]['~i~']','datos_staticContents_sc'~i,values.datos.staticContents[i],'255','CampoTextoCorto','1') }}
         {% endfor %}
     </div>
 </div>

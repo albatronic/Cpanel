@@ -47,7 +47,7 @@ class CpanDocsController extends Controller {
             $variables = new CpanVariables('Mod', 'Env', $entidad);
             $this->varEnvMod = $variables->getValores();
             unset($variables);
-            //$this->values['varEnvMod'] = $this->varEnvMod;
+            $this->values['varEnvMod'] = $this->varEnvMod;
             // Añadir un documento nuevo vacio
             $objetoNuevo = new CpanDocs();
             $objetoNuevo->setEntity($entidad);
@@ -163,7 +163,7 @@ class CpanDocsController extends Controller {
 
                         case 'document':
                         case 'video':
-                        case 'audio':
+                        case 'audio': 
                             if ($datos->valida($rules)) {
 
                                 $lastId = $datos->create();
@@ -218,7 +218,7 @@ class CpanDocsController extends Controller {
                     $title = $this->request[$this->entity]['Title'];
                     $slug = $this->request[$this->entity]['Name'];
                     $showCaption = $this->request[$this->entity]['ShowCaption'];
-                    $orden = $this->request[$this->entity]['SortOrder'];
+                    $publicar = $this->request[$this->entity]['Publish'];
                     $documento = $this->request['FILES']['documento'];
                     $documento['maxWidth'] = $this->varEnvMod['galery']['maxWidthImage'];
                     $documento['maxHeight'] = $this->varEnvMod['galery']['maxHeightImage'];
@@ -232,7 +232,7 @@ class CpanDocsController extends Controller {
                     $doc->setTitle($title);
                     $doc->setName($slug);
                     $doc->setShowCaption($showCaption);
-                    $doc->setSortOrder($orden);
+                    $doc->setPublish($publicar);
                     if ($documento['name'] != '')
                         $doc->setArrayDoc($documento);
                     $doc->setIsThumbnail(0);
@@ -244,7 +244,7 @@ class CpanDocsController extends Controller {
                             $thumbNail->setTitle($title);
                             $thumbNail->setName($slug);
                             $thumbNail->setShowCaption($showCaption);
-                            $thumbNail->setSortOrder($orden);
+                            $thumbNail->setPublish($publicar);
                             $thumbNail->setIsThumbnail(1);
                             if ($documento['name'] != '') {
                                 $documento['maxWidth'] = $this->varEnvMod['galery']['widthThumbnail'];

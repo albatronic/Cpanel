@@ -13,7 +13,7 @@ class GconSeccionesController extends Controller {
     protected $entity = "GconSecciones";
     protected $parentEntity = "";
 
-    public function IndexAction() {       
+    public function IndexAction() { 
         return parent::newAction();
     }
   

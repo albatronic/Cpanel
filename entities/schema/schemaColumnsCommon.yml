@@ -63,4 +63,5 @@
     CodigoAppAsociada:    { type: string(15), notnull: false, default: NULL, index: index, comment: 'db,CpanAplicaciones,CodigoApp'}
     IdAlbumExterno:       { type: bigint(11), notnull: false, default: NULL }
     IdSliderAsociado:     { type: bigint(11), notnull: false, default: NULL }
+    IdSeccionEnlaces:     { type: bigint(11), notnull: false, default: NULL }    
     DateTimeLastVisit:    { type: bigint(11), notnull: true, default: 0 }

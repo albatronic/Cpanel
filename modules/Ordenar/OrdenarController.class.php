@@ -49,10 +49,10 @@ class OrdenarController extends Controller {
         $columnas = $variables->getNode('columns');
         unset($variables);
         // Pongo el caption del campo
-        foreach ($this->values['criteriosOrden'] as $key=>$criterio) {
+        foreach ($this->values['criteriosOrden'] as $key => $criterio) {
             $this->values['criteriosOrden'][$key]['caption'] = $columnas[$key]['caption'];
         }
-        
+
         $this->values['criteriosOrden']['orden0'] = array(
             'caption' => 'Orden',
             'columnaMostrar' => $columnaMostrar,
@@ -95,11 +95,9 @@ class OrdenarController extends Controller {
             $columnaOrden = "SortOrder";
         } else {
             // Obtener las posibles columnas por las que ordenar.
-            // Estas están indicadas en el config.yml de cada módulo, dentro
-            // del nodo <columns_order_web>
-            $form = new Form($entidad);
-            $ordenesWeb = $form->getNode('orden_web');
-            unset($form);
+            $variables = new CpanVariables('Mod', 'Env', $entidad);
+            $ordenesWeb = $variables->getNode('ordenesWeb');
+            unset($variables);
 
             $filtro = $ordenesWeb[$criterioOrden]['filtro'];
             $columnaOrden = $ordenesWeb[$criterioOrden]['columnaOrden'];

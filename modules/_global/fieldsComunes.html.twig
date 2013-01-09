@@ -28,8 +28,9 @@
             {{ macro.select(atributos.BelongsTo,'field_title',values.controller ~ '[BelongsTo]',values.controller ~ '_BelongsTo',none,datos.BelongsTo.getPrimaryKeyValue,datos.BelongsTo.fetchAll(none),'chzn-select',110) }}
             {# macro.input(atributos.SortOrder,'field_title','text',values.controller ~ '[SortOrder]',values.controller ~ '_SortOrder',datos.SortOrder,none,none,110) #}
             {{ macro.select(atributos.CodigoAppAsociada,'field_title',values.controller ~ '[CodigoAppAsociada]',values.controller ~ '_CodigoAppAsociada',none,datos.CodigoAppAsociada.Id,datos.CodigoAppAsociada.fetchAll('NombreApp'),'chzn-select',101)}}
-            {{ macro.input(atributos.IdAlbumExterno,'field_title','text',values.controller ~ '[IdAlbumExterno]',values.controller ~ '_IdAlbumExterno',datos.IdAlbumExterno,none,none,110) }}
-            {{ macro.input(atributos.IdSliderAsociado,'field_title','text',values.controller ~ '[IdSliderAsociado]',values.controller ~ '_IdSliderAsociado',datos.IdSliderAsociado,none,none,110) }}
+            {{ macro.selectGroup(atributos.IdAlbumExterno,'field_title',values.controller ~ '[IdAlbumExterno]',values.controller ~ '_IdAlbumExterno',none,datos.IdAlbumExterno.Id,datos.IdAlbumExterno.fetchAll(),'chzn-select',110) }}
+            {{ macro.selectGroup(atributos.IdSliderAsociado,'field_title',values.controller ~ '[IdSliderAsociado]',values.controller ~ '_IdSliderAsociado',none,datos.IdSliderAsociado.Id,datos.IdSliderAsociado.fetchAll(),'chzn-select',110) }}
+            {{ macro.select(atributos.IdSeccionEnlaces,'field_title',values.controller ~ '[IdSeccionEnlaces]',values.controller ~ '_IdSeccionEnlaces',none,datos.IdSeccionEnlaces.Id,datos.IdSeccionEnlaces.fetchAll('Titulo'),'chzn-select',110) }}
             {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea',100)}}                
             </p>
         </div>
@@ -168,10 +169,10 @@
 
             {# SOLAPA DOCUMENTOS #}
             {% if values.varEnvMod.withDocuments == '1' or user.IdPerfil == '1' %}
-            <h3>Documentos ({{datos.getNumberOfDocuments('documents')}})</h3>
+            <h3>Documentos ({{datos.getNumberOfDocuments('document')}})</h3>
             <div id="solapaDocuments">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
-                        src='{{app.path}}/CpanDocs/listPopup/{{values.controller}}/{{datos.Id}}/documents'>
+                        src='{{app.path}}/CpanDocs/listPopup/{{values.controller}}/{{datos.Id}}/document'>
                 </iframe>            
             </div>
             {% endif %}

@@ -65,7 +65,6 @@ AlbmSecciones:
       criteria: 'Id DESC'
   search_default: Id
   referenced_entities:
-    - TiposSeccionAlbumes
     - ValoresSN
     - ValoresPrivacy
     - ValoresDchaIzq
@@ -117,18 +116,6 @@ AlbmSecciones:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: false, min: null, max: null, message: 'Valor Requerido' }
-    IdTipo:
-      title: Tipo
-      filter: NO
-      list: NO
-      visible: true
-      updatable: true
-      default: '1'
-      help: null
-      permission: null
-      link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: Tipo, entity: TiposSeccionAlbumes, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Observations:
       title: Observations
       filter: NO

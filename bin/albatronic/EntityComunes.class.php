@@ -308,6 +308,7 @@ class EntityComunes extends Entity {
     protected $CodigoAppAsociada = NULL;
     protected $IdAlbumExterno = NULL;
     protected $IdSliderAsociado = NULL;
+    protected $IdSeccionEnlaces = NULL;
 
     /**
      * Fecha y hora última visita en formato UNIX
@@ -460,7 +461,7 @@ class EntityComunes extends Entity {
     }
 
     public function getCreatedAt() {
-        return date_format(date_create($this->CreatedAt),'d-m-Y H:i:s');
+        return date_format(date_create($this->CreatedAt), 'd-m-Y H:i:s');
     }
 
     public function setModifiedBy($ModifiedBy) {
@@ -478,7 +479,7 @@ class EntityComunes extends Entity {
     }
 
     public function getModifiedAt() {
-        return date_format(date_create($this->ModifiedAt),'d-m-Y H:i:s');
+        return date_format(date_create($this->ModifiedAt), 'd-m-Y H:i:s');
     }
 
     public function setDeleted($Deleted) {
@@ -506,7 +507,7 @@ class EntityComunes extends Entity {
     }
 
     public function getDeletedAt() {
-        return date_format(date_create($this->DeletedAt),'d-m-Y H:i:s');
+        return date_format(date_create($this->DeletedAt), 'd-m-Y H:i:s');
     }
 
     public function setPrivacy($Privacy) {
@@ -542,8 +543,8 @@ class EntityComunes extends Entity {
 
     public function setActiveFrom($ActiveFrom) {
         if ($ActiveFrom == '0000-00-00 00:00:00')
-            $ActiveFrom = $_SESSION['VARIABLES']['EnvPro']['activeFrom'];    
-        
+            $ActiveFrom = $_SESSION['VARIABLES']['EnvPro']['activeFrom'];
+
         $date = new Fecha($ActiveFrom);
         $this->ActiveFrom = $date->getFechaTime();
         unset($date);
@@ -558,8 +559,8 @@ class EntityComunes extends Entity {
 
     public function setActiveTo($ActiveTo) {
         if ($ActiveTo == '0000-00-00 00:00:00')
-            $ActiveTo = $_SESSION['VARIABLES']['EnvPro']['activeTo'];  
-        
+            $ActiveTo = $_SESSION['VARIABLES']['EnvPro']['activeTo'];
+
         $date = new Fecha($ActiveTo);
         $this->ActiveTo = $date->getFechaTime();
         unset($date);
@@ -847,6 +848,10 @@ class EntityComunes extends Entity {
     }
 
     public function getIdAlbumExterno() {
+        if (!($this->IdAlbumExterno instanceof AlbmAlbumes)) {
+            $this->IdAlbumExterno = new AlbmAlbumes($this->IdAlbumExterno);
+        }
+
         return $this->IdAlbumExterno;
     }
 
@@ -855,9 +860,25 @@ class EntityComunes extends Entity {
     }
 
     public function getIdSliderAsociado() {
+        if (!($this->IdSliderAsociado instanceof SldSliders)) {
+            $this->IdSliderAsociado = new SldSliders($this->IdSliderAsociado);
+        }
+
         return $this->IdSliderAsociado;
     }
 
+    public function setIDSeccionEnlaces($IDSeccionEnlaces) {
+        $this->IdSeccionEnlaces = $IDSeccionEnlaces;
+    }
+
+    public function getIDSeccionEnlaces() {
+        if (!($this->IdSeccionEnlaces instanceof EnlSecciones)) {
+            $this->IdSeccionEnlaces = new EnlSecciones($this->IdSeccionEnlaces);
+        }
+
+        return $this->IdSeccionEnlaces;
+    }
+    
     public function setDateTimeLastVisit($TimeUnix = 0) {
 
         if ($TimeUnix == 0)

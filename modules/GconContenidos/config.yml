@@ -32,10 +32,10 @@ GconContenidos:
     widthThumbnail: '50'
     heightThumbnail: '50'
   urlFriendlyManagement: true
-  fieldGeneratorUrlFriendly: IdSeccion
+  fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
-  fieldGeneratorMetatagTitle: IdSeccion
-  controller: GconContenidos
+  fieldGeneratorMetatagTitle: Titulo
+  controller: Contenidos
   action: Index
   template: 
   parametros: 
@@ -855,7 +855,7 @@ GconContenidos:
       aditional_filter: { order: 35, caption: UrlIsHttps, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     CodigoAppAsociada:
-      title: CodigoAppAsociada
+      title: App asociada
       filter: NO
       list: NO
       visible: true
@@ -867,7 +867,7 @@ GconContenidos:
       aditional_filter: { order: 36, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: NombreApp, type: select, operator: '=', event: null }
       validator: { nullable: YES, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
-      title: IdAlbumExterno
+      title: Álbum externo
       filter: NO
       list: NO
       visible: true
@@ -878,7 +878,7 @@ GconContenidos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdSliderAsociado:
-      title: IdSliderAsociado
+      title: Slider asociado
       filter: NO
       list: NO
       visible: true
@@ -888,3 +888,14 @@ GconContenidos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IdSeccionEnlaces:
+      title: Sección de enlaces asociada
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }      

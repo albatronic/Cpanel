@@ -59,12 +59,13 @@ config:
     plugin_file: class.phpmailer.php
     motor: PHPMailer
     socket: smtp
-    host: mail.albatronic.com
+    port: 25
+    host: smtp.articoestudio.com
     smtp_auth: true
-    user_name: info@albatronic.com
-    password: i1234o
-    from: info@albatronic.com
-    from_name: INFO
+    user_name: info@articoestudio.com
+    password: Goanita2012
+    from: info@articoestudio.com
+    from_name: Web Master
     timeout: 30
 
   # MOTOR PARA DOCUMENTOS EXCEL

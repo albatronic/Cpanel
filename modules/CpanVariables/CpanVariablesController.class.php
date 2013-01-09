@@ -376,6 +376,11 @@ class CpanVariablesController {
                             $datos['signatures']['services'] = $signatures['services'];
                         if ($datos['signatures']['locations'] == '')
                             $datos['signatures']['locations'] = $signatures['locations'];
+                        
+                        $mail = $archivoConfig['config']['mailer'];
+                        foreach ($mail as $key => $value)
+                            if ($datos['mail'][$key] == '')
+                                $datos['mail'][$key] = $value;
                         break;
                 }
                 break;

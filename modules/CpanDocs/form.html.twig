@@ -66,7 +66,7 @@
                 <div id="foto{{key}}" style="text-align: center;">
                     <img src="{{project.url}}/{{objeto.PathName}}" width="150px;" />  
                 </div>
-                <div style="text-align: center;">{{objeto.getSize}} ({{objeto.Width}} x {{objeto.Height}})</div>
+                <div style="text-align: center;">{{objeto.getSize}} bytes {% if objeto.Type != 'document' %}({{objeto.Width}} x {{objeto.Height}}){% endif %}</div>
             {% endif %}
         {% else %}
             &nbsp;
@@ -78,24 +78,10 @@
     </div>
 
     <div class="docsItem">
-        <div class="Item">
-            <div class="docsLabel">Título</div>
-            <input onkeyup="$('#texto{{key}}').html($(this).val());"style="width: 300px;" name="CpanDocs[Title]" id="CpanDocs_Title{{key}}" value="{{objeto.Title}}" type="text" />
-        </div>            
-        <div>
-            <div class="docsLabel">Nombre</div>
-            <input style="width: 300px; "name="CpanDocs[Name]" id="CpanDocs_Name{{key}}" value="{{objeto.Name}}" type="text" />
-        </div>  
-        <div class="Item">
-            <div class="docsLabel">Mostrar título</div>
-            <input name="CpanDocs[ShowCaption]" 
-                   id="CpanDocs_ShowCaption{{key}}" 
-                   value="{{objeto.ShowCaption.IDTipo}}" 
-                   type="checkbox" 
-                   {% if objeto.ShowCaption.IDTipo %} checked{% endif %}
-                   onchange="if ($(this).is(':checked')) {$(this).val('1');} else {$(this).val('0');}"
-            />
-        </div>
+        {{ macro.input({'caption':'Título','visible':values.varEnvMod.galery.mostrarTitulo,'varEnv':'0'},'field_title','text','CpanDocs[Title]','CpanDocs_Title',objeto.Title,255,none) }}                   
+        {{ macro.input({'caption':'Nombre','visible':values.varEnvMod.galery.mostrarNombre,'varEnv':'0'},'field_title','text','CpanDocs[Name]','CpanDocs_Name',objeto.Name,255,none) }}        
+        {{ macro.input({'caption':'Mostrar pie de foto','visible':values.varEnvMod.galery.mostrarPieDeFoto,'varEnv':'0'},'field_title','checkbox','CpanDocs[ShowCaption]','CpanDocs_ShowCaption'~key,objeto.ShowCaption.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input({'caption':'Publicar','visible':values.varEnvMod.galery.mostrarPublicar,'varEnv':'0'},'field_title','checkbox','CpanDocs[Publish]','CpanDocs_Publish'~key,objeto.Publish.IDTipo,'255','CampoTextoLargo','12') }}            
             
         {% if objeto.Type == 'tiny' and objeto.Id > 0%}
         <div class="Item" style="margin-top: 10px;">
@@ -119,6 +105,7 @@
 {% endfor %}
 </div>
 
+{% if not values.listado.data is iterable %}
 <div>
     <form name="reordenar" id="reordenar" action="" method="POST" class="form_container left_label">
     <input name="controller" value="{{values.controller}}" type="hidden" />
@@ -145,4 +132,5 @@
     </div>
     </form>
 </div>
+{% endif %}
 {% endblock %}

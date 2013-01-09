@@ -7,7 +7,6 @@ AlbmSecciones:
     Titulo:      { type: string(255), notnull: true}
     Subtitulo:   { type: string(255), notnull: false, default: NULL }
     Resumen:     { type: text, default: NULL }
-    IdTipo:      { type: tinyint(1), notnull: true, default: 1, index: index, comment: 'Abstract,TiposSeccionAlbumes,IDTipo' }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     
@@ -22,3 +21,5 @@ AlbmAlbumes:
     OrdenPortada:     { type: integer(4), notnull: true, default: 0 }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
+    IdSeccion:        { ForeignEntity: AlbmSecciones, ForeignId: Id}
+    MostrarEnPortada: { ForeignEntity: ValoresSN, ForeignId: IDTipo}    

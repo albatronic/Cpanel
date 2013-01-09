@@ -6,12 +6,64 @@
   copyright: INFORMATICA ALBATRONIC SL
   date 05.12.2012 00:20:32
 #}
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'arbol'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#arbol" onclick='$( "#solapaActiva" ).val("arbol");'>Árbol de Enlaces</a>
+        </li>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Enlace{%endif%}</a>
+            {{ macro.publicar(values.varEnvMod.columns.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
+        </li>
+        
+        {% if (values.datos.getPrimaryKeyValue) %}
+            {% if datos.getTieneEtiquetas() %}
+            <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'etiquetas'%}  ui-tabs-selected ui-state-active{%endif%}">
+                <a href="#etiquetas" onclick="cargaEtiquetasRelacionadas('etiquetas','{{values.controller}}','{{datos.primaryKeyValue}}');">Etiquetas</a>
+            </li>
+            {% endif %}
+        {% endif %} 
+            
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}
+    </ul>
 
-{{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.IdSeccion,datos.IdSeccion.fetchAll('Id'),'chzn-select','1')}}
-{{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
-{{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
-{{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'input_grow','4')}}
+    <div id="arbol">
+        <ul>
+            {% for keySeccion,seccion in values.objetoController.arbolSeccionesEnlaces %}
+                <li style="font-weight: bold;">{{seccion.titulo}}</li>
+                <ul>
+                    {% for enlace in seccion.enlaces %}
+                        <li style="margin-left: 30px;">
+                            {% if seccion.nEnlaces > 1%}
+                                {{ macro.ordenarPopup(values.controller,'IdSeccion',keySeccion) }}                          
+                            {% endif %}                             
+                            {% if values.varEnvMod.columns.Publish.visible == '1' %}
+                                {{ macro.actualizaColumna(values.controller,enlace.Id,'Publish',enlace.Publish.IDTipo,'Publicar/Despublicar')}}
+                            {% endif %}
+                            <a href="{{app.path}}/{{values.controller}}/edit/{{enlace.primaryKeyMD5}}" onclick="$('#solapaActiva').val('1');">{{enlace.titulo}}</a>
+                        </li>
+                    {% endfor %}                        
+                </ul>
+            {% endfor %}
+        </ul>
+    </div>
+        
+    <div id="general">
+        {{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.IdSeccion,datos.IdSeccion.fetchAll('Titulo',0),'chzn-select','1')}}
+        {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
+        {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
+        {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','4')}}
+    </div>
+ 
+    {% if (values.datos.getPrimaryKeyValue) %}
+        <div id="etiquetas" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
+    {% endif %}
+            
+    {% include '_global/fieldsComunes.html.twig' %}        
+</div>
+{{ macro.foco(values.controller ~ '_IdSeccion') }}  
 
-{% include '_global/fieldsComunes.html.twig' %}
-
-{{ macro.foco(values.controller ~ '_IdSeccion') }}

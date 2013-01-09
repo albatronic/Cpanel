@@ -35,7 +35,7 @@ EnlEnlaces:
   fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Titulo
-  controller: EnlEnlaces
+  controller: Enlaces
   action: Index
   template: index.html.twig
   parametros: ''
