@@ -22,10 +22,9 @@
             </div>
 
 
+        {# PARA HACER DEBUGER EN ENTORNO DE DESARROLLO #}        
         {% if values._debugMode %}
-        <div style="clear: both;">
-            <pre>{{values._debugValues}}</pre>
-        </div>
+            {% include '_global/debuger.html.twig' %}
         {% endif %}
 
     </body>

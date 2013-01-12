@@ -69,7 +69,6 @@
     </div>
         
     <div id="general">
-        {% if datos.NivelJerarquico %}Nivel Jerárquico {{datos.NivelJerarquico}}{% endif %}
         {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
         {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
         {{ macro.textarea(atributos.Introduccion,'field_title',values.controller ~ '[Introduccion]',values.controller ~ '_Introduccion',datos.Introduccion,none,none,'textarea','3')}}
@@ -105,6 +104,7 @@
                     <p>
                     {{ macro.input(atributos['MostrarEnMenu'~nMenu],'field_title','checkbox',values.controller ~ '[MostrarEnMenu'~nMenu~']',values.controller ~ '_MostrarEnMenu'~nMenu,datos.getMostrarEnMenuN(nMenu),'255','CampoTextoLargo','12') }}
                     {{ macro.input(atributos['EtiquetaWeb'~nMenu],'field_title','text',values.controller ~ '[EtiquetaWeb'~nMenu~']',values.controller ~ '_EtiquetaWeb'~nMenu,datos.getEtiquetaWebN(nMenu),'255','CampoTextoLargo','13') }}
+                    {{ macro.input(atributos['SubetiquetaWeb'~nMenu],'field_title','text',values.controller ~ '[SubetiquetaWeb'~nMenu~']',values.controller ~ '_SubetiquetaWeb'~nMenu,datos.getSubetiquetaWebN(nMenu),'255','CampoTextoLargo','13') }}                            
                     </p>
                 </div>
                 {% endfor %}   

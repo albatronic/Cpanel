@@ -15,25 +15,24 @@ class SldSliders extends SldSlidersEntity {
         return $this->Titulo;
     }
 
-    public function fetchAll($idZona='') {
+    public function fetchAll($idZona = '') {
 
         $array = array();
-        
+
         $filtro = ($idZona == '') ? "(1)" : "(IdZona='{$idZona}')";
-        
+
         $zona = new SldZonas();
-        $zonas = $zona->cargaCondicion("Id,Titulo",$filtro,"SortOrder ASC");
+        $zonas = $zona->cargaCondicion("Id,Titulo", $filtro, "SortOrder ASC");
         unset($zona);
-        
+
         foreach ($zonas as $zona) {
-            $array[$zona['Id']]['Titulo']=$zona['Titulo'];
-            $array[$zona['Id']]['items'][] = array('Id' => 0,'Value'=> ':: Indique un valor');            
+            $array[$zona['Id']]['Titulo'] = $zona['Titulo'];
+            $array[$zona['Id']]['items'][] = array('Id' => 0, 'Value' => ':: Indique un valor');
             $slider = new SldSliders();
-            $sliders = $slider->cargaCondicion("Id,Titulo","IdZona='{$zona['Id']}'","SortOrder ASC");
+            $sliders = $slider->cargaCondicion("Id,Titulo", "IdZona='{$zona['Id']}'", "SortOrder ASC");
             unset($slider);
             foreach ($sliders as $slider) {
-                $array[$zona['Id']]['items'][] = array('Id' => $slider['Id'],'Value'=> $slider['Titulo']);
-                
+                $array[$zona['Id']]['items'][] = array('Id' => $slider['Id'], 'Value' => $slider['Titulo']);
             }
         }
 
@@ -111,6 +110,43 @@ class SldSliders extends SldSlidersEntity {
             return new $this->Entidad($this->IdEntidad);
         else
             return null;
+    }
+
+    /**
+     * Devuelve un array con los elemementos necesarios para
+     * construir un <a href=''> 
+     * 
+     * Si el slider está enlazado con contra entidad, se tomará la url de dicha entidad
+     * En caso contrario se tomará (si existe) la UrlTarget del slider
+     * 
+     * Tiene dos elmentos:
+     * 
+     * - url => Es la url en si con el prefijo, que puede ser: nada, http, o https)
+     * - targetBlank => Es un flag booleano para saber si el enlace se abrirá en popup o no
+     * 
+     * @return array Array
+     */
+    public function getHref() {
+
+        $array = array();
+
+        // Comprobar si el slider está enlazado con otra entidad
+        if ($this->Entidad) {
+            $objetoEnlazado = $this->getObjetoEnlazado();
+            $array = $objetoEnlazado->getHref();
+            unset($objetoEnlazado);
+        } else {
+
+            $url = $this->getUrlTarget();
+
+            if ($url) {
+                $prefijo = ($this->UrlIsHttps) ? "https://" : "http://";
+                $url = $prefijo . $url . $this->getUrlParameters();
+                $array = array('url' => $url, 'targetBlank' => $this->UrlTargetBlank);
+            }
+        }
+
+        return $array;
     }
 
 }

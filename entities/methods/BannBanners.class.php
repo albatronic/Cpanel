@@ -56,6 +56,43 @@ class BannBanners extends BannBannersEntity {
             return null;
     }
 
+    /**
+     * Devuelve un array con los elemementos necesarios para
+     * construir un <a href=''> 
+     * 
+     * Si el banner está enlazado con contra entidad, se tomará la url de dicha entidad
+     * En caso contrario se tomará (si existe) la UrlTarget del slider
+     * 
+     * Tiene dos elmentos:
+     * 
+     * - url => Es la url en si con el prefijo, que puede ser: nada, http, o https)
+     * - targetBlank => Es un flag booleano para saber si el enlace se abrirá en popup o no
+     * 
+     * @return array Array
+     */
+    public function getHref() {
+
+        $array = array();
+
+        // Comprobar si el banner está enlazado con otra entidad
+        if ($this->Entidad) {
+            $objetoEnlazado = $this->getObjetoEnlazado();
+            $array = $objetoEnlazado->getHref();
+            unset($objetoEnlazado);
+        } else {
+
+            $url = $this->getUrlTarget();
+
+            if ($url) {
+                $prefijo = ($this->UrlIsHttps) ? "https://" : "http://";
+                $url = $prefijo . $url . $this->getUrlParameters();
+                $array = array('url' => $url, 'targetBlank' => $this->UrlTargetBlank);
+            }
+        }
+
+        return $array;
+    }
+
 }
 
 ?>

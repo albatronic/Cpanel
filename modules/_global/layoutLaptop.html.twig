@@ -63,10 +63,9 @@
         <div id="dialogoVarEnv" title="Propiedades del elemento"></div>
         <div id="dialogOrdenar" title="Cambiar orden"></div>
         
+        {# PARA HACER DEBUGER EN ENTORNO DE DESARROLLO #}        
         {% if values._debugMode %}
-        <div style="clear: both;">
-            <pre>{{values._debugValues}}</pre>
-        </div>
+            {% include '_global/debuger.html.twig' %}
         {% endif %}
 
     </body>

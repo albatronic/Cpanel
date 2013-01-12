@@ -35,9 +35,9 @@ EnlSecciones:
   fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Titulo
-  controller: EnlSecciones
-  action: Index
-  template: index.html.twig
+  controller: Enlaces
+  action: Listado
+  template: listado.html.twig
   parametros: ''
   includesHead:
     twigCss: _global/css.html.twig
@@ -667,7 +667,7 @@ EnlSecciones:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 25, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: NombreApp, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: YES, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
       title: IdAlbumExterno
       filter: NO

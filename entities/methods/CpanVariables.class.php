@@ -204,7 +204,7 @@ class CpanVariables extends CpanVariablesEntity {
      * @return boolean TRUE se se ha borrado correctamente
      */
     public function erase() {
-        $ok = parent::erase();echo "borrado ",$ok," ";
+        $ok = parent::erase();
         if ($ok and ($this->_objeto['ambito'] == 'Mod') and ($this->_objeto['tipo'] == 'Web'))
             $this->quitaVisibilidad();
 

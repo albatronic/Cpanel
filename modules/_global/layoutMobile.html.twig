@@ -7,6 +7,10 @@
     </head>
 
     <body>
-
+        
+        {# PARA HACER DEBUGER EN ENTORNO DE DESARROLLO #}        
+        {% if values._debugMode %}
+            {% include '_global/debuger.html.twig' %}
+        {% endif %}
     </body>
 </html>

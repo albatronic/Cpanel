@@ -205,8 +205,8 @@ $result['values']['varPro_Web'] = $_SESSION['varPro_Web'];
 if ($config['debug_mode']) {
     $result['values']['_debugMode'] = true;
     $result['values']['_auditMode'] = (string) $config['audit_mode'];
-    $result['values']['_user'] = print_r($_SESSION['USER'], true);
-    $result['values']['_debugValues'] = print_r($result['values'], true);
+    $result['values']['_user'] = sfYaml::dump($_SESSION['USER'], 5);
+    $result['values']['_debugValues'] = sfYaml::Dump($result['values'],100);
 }
 
 // Si el método no devuelve template o no exite, muestro un template de error.

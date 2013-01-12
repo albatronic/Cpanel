@@ -121,7 +121,7 @@ class GconSecciones extends GconSeccionesEntity {
 
         foreach ($rows as $row) {
             $objeto = new $this($row['Id']);
-            $arrayContenidos = $this->getContenidos($row['Id'],$idContenidoRelacionado);
+            $arrayContenidos = $this->getContenidos($row['Id'], $idContenidoRelacionado);
             $arrayHijos = $objeto->getHijos();
             $arbol[$row['PrimaryKeyMD5']] = array(
                 'id' => $row['Id'],
@@ -180,7 +180,7 @@ class GconSecciones extends GconSeccionesEntity {
                 'id' => $hijo['Id'],
                 'titulo' => $aux->getTitulo(),
                 'nivelJerarquico' => $hijo['NivelJerarquico'],
-                'publish' => $hijo['Publish'],                
+                'publish' => $hijo['Publish'],
                 'nHijos' => count($arrayHijos),
                 'hijos' => $arrayHijos,
                 'nContenidos' => count($arrayContenidos),
@@ -202,6 +202,11 @@ class GconSecciones extends GconSeccionesEntity {
     public function getEtiquetaWebN($n) {
         return $this->{"EtiquetaWeb$n"};
     }
+
+    public function getSubetiquetaWebN($n) {
+        return $this->{"SubetiquetaWeb$n"};
+    }
+
 }
 
 ?>

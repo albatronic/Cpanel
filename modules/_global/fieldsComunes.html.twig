@@ -27,10 +27,10 @@
             {{ macro.input(atributos.AllowsChildren,'field_title','checkbox',values.controller ~ '[AllowsChildren]',values.controller ~ '_AllowsChildren',datos.AllowsChildren.IDTipo,'255','CampoTextoLargo','12') }}    
             {{ macro.select(atributos.BelongsTo,'field_title',values.controller ~ '[BelongsTo]',values.controller ~ '_BelongsTo',none,datos.BelongsTo.getPrimaryKeyValue,datos.BelongsTo.fetchAll(none),'chzn-select',110) }}
             {# macro.input(atributos.SortOrder,'field_title','text',values.controller ~ '[SortOrder]',values.controller ~ '_SortOrder',datos.SortOrder,none,none,110) #}
-            {{ macro.select(atributos.CodigoAppAsociada,'field_title',values.controller ~ '[CodigoAppAsociada]',values.controller ~ '_CodigoAppAsociada',none,datos.CodigoAppAsociada.Id,datos.CodigoAppAsociada.fetchAll('NombreApp'),'chzn-select',101)}}
+            {{ macro.select(atributos.CodigoAppAsociada,'field_title',values.controller ~ '[CodigoAppAsociada]',values.controller ~ '_CodigoAppAsociada',none,datos.CodigoAppAsociada.Id,datos.CodigoAppAsociada.fetchAll('NombreApp',1),'chzn-select',101)}}
             {{ macro.selectGroup(atributos.IdAlbumExterno,'field_title',values.controller ~ '[IdAlbumExterno]',values.controller ~ '_IdAlbumExterno',none,datos.IdAlbumExterno.Id,datos.IdAlbumExterno.fetchAll(),'chzn-select',110) }}
             {{ macro.selectGroup(atributos.IdSliderAsociado,'field_title',values.controller ~ '[IdSliderAsociado]',values.controller ~ '_IdSliderAsociado',none,datos.IdSliderAsociado.Id,datos.IdSliderAsociado.fetchAll(),'chzn-select',110) }}
-            {{ macro.select(atributos.IdSeccionEnlaces,'field_title',values.controller ~ '[IdSeccionEnlaces]',values.controller ~ '_IdSeccionEnlaces',none,datos.IdSeccionEnlaces.Id,datos.IdSeccionEnlaces.fetchAll('Titulo'),'chzn-select',110) }}
+            {{ macro.select(atributos.IdSeccionEnlaces,'field_title',values.controller ~ '[IdSeccionEnlaces]',values.controller ~ '_IdSeccionEnlaces',none,datos.IdSeccionEnlaces.Id,datos.IdSeccionEnlaces.fetchAll('Titulo',1),'chzn-select',110) }}
             {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea',100)}}                
             </p>
         </div>

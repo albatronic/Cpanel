@@ -150,14 +150,13 @@ class CpanVariablesController {
 
                 case 'Mod':
                     $this->ponValoresDefecto($ambito, $tipo, $nombre, $datos);
-                    
+
                     if ($tipo == 'Env') {
 
                         // Constuyo array con los nombres de las columnas del modulo(=entidad)
                         // para mostrar en el template las variables Web/Env de cada columna.
                         $archivoConfig = new Form($nombre);
                         $columnasConfig = $archivoConfig->getNode('columns');
-
                         unset($archivoConfig);
                         // Creo el nodo 'columns' creando si no existen o asignado valores por defecto si no tienen
                         // provinientes del 'config.yml' de cada módulo
@@ -226,9 +225,9 @@ class CpanVariablesController {
                         $variables->setDatosYml($this->request['datos']);
                         $variables->save();
                         $this->values['errores'] = $variables->getErrores();
-                        if(count($this->values['errores']) == 0)
-                            $_SESSION['VARIABLES'][$tipo.$ambito] = $this->request['datos'];
-              
+                        if (count($this->values['errores']) == 0)
+                            $_SESSION['VARIABLES'][$tipo . $ambito] = $this->request['datos'];
+
                         unset($variables);
 
                         return $this->indexAction($ambito, $tipo, $nombre);
@@ -363,7 +362,7 @@ class CpanVariablesController {
                         if ($datos['numMaxAudios'] == '')
                             $datos['numMaxAudios'] = $valores['numMaxAudios'];
                         if ($datos['modulosConEtiquetas'] == '')
-                            $datos['modulosConEtiquetas'] = $valores['modulosConEtiquetas'];                        
+                            $datos['modulosConEtiquetas'] = $valores['modulosConEtiquetas'];
                         break;
                     case 'Web' :
                         // Leo el config global del Cpanel
@@ -376,7 +375,7 @@ class CpanVariablesController {
                             $datos['signatures']['services'] = $signatures['services'];
                         if ($datos['signatures']['locations'] == '')
                             $datos['signatures']['locations'] = $signatures['locations'];
-                        
+
                         $mail = $archivoConfig['config']['mailer'];
                         foreach ($mail as $key => $value)
                             if ($datos['mail'][$key] == '')
@@ -386,20 +385,20 @@ class CpanVariablesController {
                 break;
 
             case 'App':
-/**
-                if ($tipo == 'Env') {
-                    if ($datos['globales']['urlPrefix'] == '') {
-                        $archivoConfig = new Form($nombre);
-                        $datos['globales']['urlPrefix'] = $archivoConfig->getNode('urlPrefix');
-                        unset($archivoConfig);
-                    }
-                }
-*/                break;
+                /**
+                  if ($tipo == 'Env') {
+                  if ($datos['globales']['urlPrefix'] == '') {
+                  $archivoConfig = new Form($nombre);
+                  $datos['globales']['urlPrefix'] = $archivoConfig->getNode('urlPrefix');
+                  unset($archivoConfig);
+                  }
+                  }
+                 */ break;
 
             case 'Mod':
-             
+
                 $archivoConfig = new Form($nombre);
-                
+
                 if ($tipo == 'Env') {
 
                     if ($datos['isModuleRoot'] == '')
@@ -460,13 +459,15 @@ class CpanVariablesController {
 
                     //if ($datos['ordenesWeb'] == '')
                     //    $datos['ordenesWeb'] = $archivoConfig->getNode('ordenes_web');
-                    foreach ($archivoConfig->getNode('ordenes_web') as $key => $value)
-                        if (!is_array($datos['ordenesWeb'][$key]))
-                            $datos['ordenesWeb'][$key] = $value;
-                    
+                    $ordenesWeb = $archivoConfig->getNode('ordenes_web');
+                    if (is_array($ordenesWeb)) {
+                        foreach ($ordenesWeb as $key => $value)
+                            if (!is_array($datos['ordenesWeb'][$key]))
+                                $datos['ordenesWeb'][$key] = $value;
+                    }
                     unset($archivoConfig);
                 }
-                
+
                 if ($tipo == 'Web') {
                     $linkModule = $archivoConfig->getNode('linkModule');
                     if ($datos['linkFromColumn'] == '')
@@ -475,10 +476,8 @@ class CpanVariablesController {
                         $datos['linkToEntity'] = $linkModule['toEntity'];
                     if ($datos['linkToColumn'] == '')
                         $datos['linkToColumn'] = $linkModule['toColumn'];
-
                 }
                 break;
-                
         }
     }
 

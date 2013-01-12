@@ -26,6 +26,11 @@ GconSecciones:
     EtiquetaWeb3:                 { type: string(255), notnull: false }
     EtiquetaWeb4:                 { type: string(255), notnull: false }
     EtiquetaWeb5:                 { type: string(255), notnull: false }
+    SubetiquetaWeb1:              { type: string(255), notnull: false }
+    SubetiquetaWeb2:              { type: string(255), notnull: false }
+    SubetiquetaWeb3:              { type: string(255), notnull: false }
+    SubetiquetaWeb4:              { type: string(255), notnull: false }
+    SubetiquetaWeb5:              { type: string(255), notnull: false }
     OrdenMenu1:                   { type: int(4), notnull: true, default: 0 }
     OrdenMenu2:                   { type: int(4), notnull: true, default: 0 }
     OrdenMenu3:                   { type: int(4), notnull: true, default: 0 }
