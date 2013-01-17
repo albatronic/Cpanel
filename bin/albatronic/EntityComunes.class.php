@@ -309,6 +309,7 @@ class EntityComunes extends Entity {
     protected $IdAlbumExterno = NULL;
     protected $IdSliderAsociado = NULL;
     protected $IdSeccionEnlaces = NULL;
+    protected $IdSeccionVideos = NULL;
 
     /**
      * Fecha y hora última visita en formato UNIX
@@ -878,7 +879,19 @@ class EntityComunes extends Entity {
 
         return $this->IdSeccionEnlaces;
     }
-    
+
+    public function setIDSeccionVideos($IDSeccionVideos) {
+        $this->IdSeccionVideos = $IDSeccionVideos;
+    }
+
+    public function getIDSeccionVideos() {
+        if (!($this->IdSeccionVideos instanceof VidSecciones)) {
+            $this->IdSeccionVideos = new VidSecciones($this->IdSeccionVideos);
+        }
+
+        return $this->IdSeccionVideos;
+    }
+
     public function setDateTimeLastVisit($TimeUnix = 0) {
 
         if ($TimeUnix == 0)

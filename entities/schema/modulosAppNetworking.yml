@@ -1,0 +1,14 @@
+# MODULOS DE LA APP Networking. GESTOR DE REDES SOCIALES
+CpanAplicaciones:
+  Ntwg : { CodigoApp: Ntwg, NombreApp: Gestor Redes Sociales }
+
+CpanModulos:
+  Ntwg0: { CodigoApp: Ntwg, NombreModulo: Ntwg, Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Gestor Redes Sociales, Funcionalidades: AC }
+  Ntwg1: { CodigoApp: Ntwg, NombreModulo: Networking, Nivel: 1, BelongsTo: Visit,  Publish: 1, Titulo: Redes Sociales, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+CpanPermisos:
+  Ntwg0: { IdPerfil: 1, NombreModulo: Ntwg, Funcionalidades: 'AC,VW' }
+  Ntwg1: { IdPerfil: 1, NombreModulo: Networking, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+  Ntwg10: { IdPerfil: 2, NombreModulo: Ntwg, Funcionalidades: 'AC,VW' }
+  Ntwg11: { IdPerfil: 2, NombreModulo: Networking, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}

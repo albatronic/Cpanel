@@ -13,46 +13,25 @@
 
 {% block template %}
 
-{# DEFINICION DE CONSTANTE CUYOS VALORES PUEDEN SER ADQUIRIDOS POR LOS CAMPOS ------------------------ #}
-
-{% set CriteriosOrdenNoticias = { 
-        '0':{'Id':'SortOrder ASC','Value':'Orden a-z'}, 
-        '1':{'Id':'SortOrder DESC','Value':'Orden z-a'},
-        '2':{'Id':'PublishedAt ASC','Value':'Fecha Publicación a-z'}, 
-        '3':{'Id':'PublishedAt DESC','Value':'Fecha Publicación z-a'},
-    }  
-%}
-
 {# ----------------------------------------------------------------------------------------------------#}
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Globales</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas</a></li>
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Globales [global]</a></li>
+        {% if values.datos.especificas %}
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas [especificas]</a></li>
+        {% endif %}
     </ul>
 
     {# VARIABLES WEB GLOBALES A TODOS LOS MODULOS #}
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {% if user.IdPerfil == '1' %} {% set prefijo = '[globales][vwglobal1]' %} {% else %} {% set prefijo = '' %} {% endif %}
-        {{ macro.input(
-            {'caption': prefijo~' Var Web Global1','visible':'1','varEnv':'0'},
-            'field_title',
-            'text',
-            'datos[globales][vwglobal1]',
-            'datos_globales_vwglobal1',
-            values.datos.globales.vwglobal1,
-            '50',
-            'CampoTextoCorto'
-            )
-        }}
-
         {{ macro.input(
             {'caption': 'linkFromColumn','visible':'1','varEnv':'0'},
             'field_title',
             'text',
-            'datos[linkFromColumn]',
-            'datos_linkFromColumn',
-            values.datos.linkFromColumn,
+            'datos[global][linkFromColumn]',
+            'datos_global_linkFromColumn',
+            values.datos.global.linkFromColumn,
             '50',
             'CampoTextoCorto'
             )
@@ -61,9 +40,9 @@
             {'caption': 'linktoEntity','visible':'1','varEnv':'0'},
             'field_title',
             'text',
-            'datos[linkToEntity]',
-            'datos_linkToEntity',
-            values.datos.linkToEntity,
+            'datos[global][linkToEntity]',
+            'datos_global_linkToEntity',
+            values.datos.global.linkToEntity,
             '50',
             'CampoTextoCorto'
             )
@@ -72,87 +51,48 @@
             {'caption': 'linkToColumn','visible':'1','varEnv':'0'},
             'field_title',
             'text',
-            'datos[linkToColumn]',
-            'datos_linkToColumn',
-            values.datos.linkToColumn,
+            'datos[global][linkToColumn]',
+            'datos_global_linkToColumn',
+            values.datos.global.linkToColumn,
             '50',
             'CampoTextoCorto'
             )
         }}
-
-        {{ macro.select(
-            {'caption': 'CriterioOrdenNoticias','visible':'1','varEnv':'0','updatable':'1'},
-            'field_title',
-            'datos[CriterioOrdenNoticias]',
-            'datos_CriterioOrdenNoticias',
-            none,
-            values.datos.CriterioOrdenNoticias,
-            CriteriosOrdenNoticias,
-            'chzn-select','22')
-        }}            
-        {{ macro.input(
-            {'caption': 'NumNoticiasMostrarHome','visible':'1','varEnv':'0'},
-            'field_title',
-            'text',
-            'datos[NumNoticiasMostrarHome]',
-            'datos_NumNoticiasMostrarHome',
-            values.datos.NumNoticiasMostrarHome,
-            '50',
-            'CampoTextoCorto'
-            )
-        }}
-        {{ macro.input(
-            {'caption': 'NumNoticiasPorPagina','visible':'1','varEnv':'0'},
-            'field_title',
-            'text',
-            'datos[NumNoticiasPorPagina]',
-            'datos_NumNoticiasPorPagina',
-            values.datos.NumNoticiasPorPagina,
-            '50',
-            'CampoTextoCorto'
-            )
-        }}
-        {{ macro.input(
-            {'caption': 'NumContenidosPorPaginaListado','visible':'1','varEnv':'0'},
-            'field_title',
-            'text',
-            'datos[NumContenidosPorPaginaListado]',
-            'datos_NumContenidosPorPaginaListado',
-            values.datos.NumContenidosPorPaginaListado,
-            '50',
-            'CampoTextoCorto'
-            )
-        }}
-        {{ macro.input(
-            {'caption': 'NumContenidosPorPaginaDesarrollado','visible':'1','varEnv':'0'},
-            'field_title',
-            'text',
-            'datos[NumContenidosPorPaginaDesarrollado]',
-            'datos_NumContenidosPorPaginaDesarrollado',
-            values.datos.NumContenidosPorPaginaDesarrollado,
-            '50',
-            'CampoTextoCorto'
-            )
-        }}
+            
     </div>
 
     {# VARIABLES WEB ESPECIFICAS AL MODULO EN CURSO #}
+    {% if values.datos.especificas %}
     <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {% for nombre,atributos in values.datos.especificas %}{{nombre}}
-            {% if user.IdPerfil == '1' %} {% set prefijo = '[especificas]['~nombre~']' %} {% else %} {% set prefijo = '' %} {% endif %}
-            {{ macro.input(
-                {'caption':prefijo~' '~atributos.caption,'visible':'1','varEnv':'0'},
-                'field_title',
-                'text',
-                'datos[especificas]['~nombre~']',
-                'datos_especificas_'~nombre,
-                atributos.value,
-                '50',
-                'CampoTextoCorto'
-                )
-            }}
+        {% for nombre,atributos in values.datos.especificas %}
+            {% if user.IdPerfil.Id == '1' %} {% set prefijo = '['~nombre~']' %} {% else %} {% set prefijo = '' %} {% endif %}
+            {% if atributos.values is iterable %}
+                {{ macro.select(
+                    {'caption': prefijo~' '~atributos.caption,'visible':'1','varEnv':'0','updatable':'1'},
+                    'field_title',
+                    'datos[especificas]['~nombre~']',
+                    'datos_especificas_'~nombre,
+                    none,
+                    atributos.value,
+                    atributos.values,
+                    'chzn-select','22')
+                }}            
+            {% else %}
+                {{ macro.input(
+                    {'caption': prefijo~' '~atributos.caption,'visible':'1','varEnv':'0'},
+                    'field_title',
+                    'text',
+                    'datos[especificas]['~nombre~']',
+                    'datos_especificas_'~nombre,
+                    atributos.value,
+                    '50',
+                    'CampoTextoCorto'
+                    )
+                }}
+            {% endif %}
         {% endfor %}
     </div>
+    {% endif %}
 
 </div>
 

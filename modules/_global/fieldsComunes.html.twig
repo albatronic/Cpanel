@@ -31,6 +31,7 @@
             {{ macro.selectGroup(atributos.IdAlbumExterno,'field_title',values.controller ~ '[IdAlbumExterno]',values.controller ~ '_IdAlbumExterno',none,datos.IdAlbumExterno.Id,datos.IdAlbumExterno.fetchAll(),'chzn-select',110) }}
             {{ macro.selectGroup(atributos.IdSliderAsociado,'field_title',values.controller ~ '[IdSliderAsociado]',values.controller ~ '_IdSliderAsociado',none,datos.IdSliderAsociado.Id,datos.IdSliderAsociado.fetchAll(),'chzn-select',110) }}
             {{ macro.select(atributos.IdSeccionEnlaces,'field_title',values.controller ~ '[IdSeccionEnlaces]',values.controller ~ '_IdSeccionEnlaces',none,datos.IdSeccionEnlaces.Id,datos.IdSeccionEnlaces.fetchAll('Titulo',1),'chzn-select',110) }}
+            {{ macro.select(atributos.IdSeccionVideos,'field_title',values.controller ~ '[IdSeccionVideos]',values.controller ~ '_IdSeccionVideos',none,datos.IdSeccionVideos.Id,datos.IdSeccionVideos.fetchAll('Titulo',1),'chzn-select',110) }}
             {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea',100)}}                
             </p>
         </div>

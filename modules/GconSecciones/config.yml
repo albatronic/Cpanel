@@ -1022,3 +1022,14 @@ GconSecciones:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IdSeccionVideos:
+      title: Sección de vídeos asociada
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }

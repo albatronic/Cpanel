@@ -60,6 +60,9 @@
         {{ macro.input(atributos.Autor,'field_title','text',values.controller ~ '[Autor]',values.controller ~ '_Autor',datos.Autor,'50','CampoTextoLargo','4') }}
         {{ macro.input(atributos.MostrarEnPortada,'field_title','checkbox',values.controller ~ '[MostrarEnPortada]',values.controller ~ '_MostrarEnPortada',datos.MostrarEnPortada.IDTipo,'255','CampoTextoLargo','12') }}
         {# macro.input(atributos.OrdenPortada,'field_title','text',values.controller ~ '[OrdenPortada]',values.controller ~ '_OrdenPortada',datos.OrdenPortada,'4','CampoUnidades','7') #}
+        {{ macro.input(atributos.UrlVideo,'field_title','text',values.controller ~ '[UrlVideo]',values.controller ~ '_UrlVideo',datos.UrlVideo,'50','CampoTextoLargo','4') }}
+        {{ macro.select(atributos.IdTipo,'field_title',values.controller ~ '[IdTipo]',values.controller ~ '_IdTipo',none,datos.IdTipo.Id,datos.IdTipo.fetchAll('Descripcion',0),'chzn-select','1')}} 
+            
     </div>
  
     {% if (values.datos.getPrimaryKeyValue) %}

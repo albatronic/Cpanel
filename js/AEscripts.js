@@ -83,6 +83,13 @@ $(function(){
         active: false,
         heightStyle: "content"
     });
+    $( "#acordeonVW" ).accordion({
+        autoHeight: false,
+        navigation: true,
+        collapsible: true,
+        active: false,
+        heightStyle: "content"
+    });    
     
     $( "#acordeonOrdenesWeb" ).accordion({
         autoHeight: false,

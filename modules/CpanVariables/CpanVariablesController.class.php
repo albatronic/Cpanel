@@ -469,13 +469,28 @@ class CpanVariablesController {
                 }
 
                 if ($tipo == 'Web') {
+                    // Variables web globales
                     $linkModule = $archivoConfig->getNode('linkModule');
-                    if ($datos['linkFromColumn'] == '')
-                        $datos['linkFromColumn'] = $linkModule['fromColumn'];
-                    if ($datos['linkToEntity'] == '')
-                        $datos['linkToEntity'] = $linkModule['toEntity'];
-                    if ($datos['linkToColumn'] == '')
-                        $datos['linkToColumn'] = $linkModule['toColumn'];
+                    if ($datos['global']['linkFromColumn'] == '')
+                        $datos['global']['linkFromColumn'] = $linkModule['fromColumn'];
+                    if ($datos['global']['linkToEntity'] == '')
+                        $datos['global']['linkToEntity'] = $linkModule['toEntity'];
+                    if ($datos['global']['linkToColumn'] == '')
+                        $datos['global']['linkToColumn'] = $linkModule['toColumn'];
+
+                    // Variables web específicas
+                    $varWebEspecificas = sfYaml::load("modules/{$nombre}/varWeb.yml");
+                    if (is_array($varWebEspecificas)) {
+                        foreach ($varWebEspecificas as $variable => $valores) {
+                            $valorActual = $datos['especificas'][$variable]['value'];
+                            $datos['especificas'][$variable]['caption'] = $valores['caption'];
+                            $datos['especificas'][$variable]['values'] = $valores['values'];
+                            $datos['especificas'][$variable]['value'] = ($valorActual == '') ?
+                                    $valores['default'] :
+                                    $valorActual;
+                        }
+                    }
+                    unset($archivoConfig);
                 }
                 break;
         }
@@ -534,12 +549,13 @@ class CpanVariablesController {
      */
     private function getEspecificas($datosEspecificas) {
 
-        foreach ($this->variables->getArrayEspecificas() as $key => $caption) {
+        foreach ($this->variables->getArrayEspecificas() as $key => $especifica) {
             $valorActual = $datosEspecificas[$key];
 
             $especificas[$key] = array(
+                'caption' => $especifica['caption'],
                 'value' => $valorActual,
-                'caption' => $caption,
+                'values' => $especifica['values'],
             );
         }
         return $especificas;

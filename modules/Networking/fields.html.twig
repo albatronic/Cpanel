@@ -1,0 +1,35 @@
+{#
+  Module: Networking
+  Document : modules\Networking\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 16.01.2013 19:04:53
+#}
+
+{{ macro.foco(values.controller ~ '_Titulo') }}
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Red Social{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}            
+        </li>
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}
+    </ul>
+        
+    <div id="general" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'50','CampoTextoLargo','1') }}
+        {{ macro.input(atributos.IdUsuario,'field_title','text',values.controller ~ '[IdUsuario]',values.controller ~ '_IdUsuario',datos.IdUsuario,'50','CampoTextoLargo','2') }}
+        {{ macro.input(atributos.Url,'field_title','text',values.controller ~ '[Url]',values.controller ~ '_Url',datos.Url,'255','CampoTextoLargo','3') }}
+        {{ macro.input(atributos.NumeroTweets,'field_title','text',values.controller ~ '[NumeroTweets]',values.controller ~ '_NumeroTweets',datos.NumeroTweets,'4','CampoUnidades','4') }}
+        {{ macro.select(atributos.ConAvatar,'field_title',values.controller ~ '[ConAvatar]',values.controller ~ '_ConAvatar',none,datos.ConAvatar.ConAvatar,datos.ConAvatar.fetchAll('Descripcion',0),'chzn-select','5')}}
+        {{ macro.input(atributos.Mensaje,'field_title','text',values.controller ~ '[Mensaje]',values.controller ~ '_Mensaje',datos.Mensaje,'255','CampoTextoLargo','6') }}
+    </div>      
+            
+    {% include '_global/fieldsComunes.html.twig' %}        
+</div>
+{{ macro.foco(values.controller ~ '_Titulo') }}

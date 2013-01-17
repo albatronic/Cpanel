@@ -39,7 +39,7 @@
         <li class="ui-state-default ui-corner-top"><a href="#tabs-ordenesWeb">Órdenes Web</a></li>        
         <li class="ui-state-default ui-corner-top"><a href="#tabs-controller">Controller</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-editorTiny">Editor Tiny</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-varWeb">VW</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-varWeb">Visibilidad Var Web</a></li>
     </ul>
 
     {# GLOBAL #}
@@ -255,15 +255,22 @@
 
     {# CONTROL VISIBILIDAD VARIABLES WEB #}
     <div id="tabs-varWeb" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        <h5>Globales</h5>
-        {% for nombre,valor in values.datos.showVarWeb.globales %}
-            {{ macro.select({'caption':'Es visible [showVarWeb][globales]['~nombre~']','visible':'1','updatable':'1','varEnv':'0'},'field_title','datos[showVarWeb][globales]['~nombre~']','datos_showVarWeb_globales_'~nombre,none,valor,ValoresSN,'chzn-select')}}
-        {% endfor %}
+        <h5>Control de visibilidad de variables web</h5>
+        <div id="acordeonVW" style="margin-top:10px;">
+            <h3>Globales [showVarWeb][globales]</h3>
+            <div>
+                {% for nombre,valor in values.datos.showVarWeb.globales %}
+                    {{ macro.input({'caption':'['~nombre~']','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showVarWeb][globales]['~nombre~']','datos_showVarWeb_globales_'~nombre,valor)}}
+                {% endfor %}            
+            </div>
 
-        <h5>Específicas</h5>
-        {% for nombre,valor in values.datos.showVarWeb.especificas %}
-            {{ macro.select({'caption':'Es visible [showVarWeb][especificas]['~nombre~']','visible':'1','updatable':'1','varEnv':'0'},'field_title','datos[showVarWeb][especificas]['~nombre~']','datos_showVarWeb_especificas_'~nombre,none,valor,ValoresSN,'chzn-select')}}
-        {% endfor %}
+            <h3>Específicas [showVarWeb][especificas]</h3>
+            <div>
+            {% for nombre,valor in values.datos.showVarWeb.especificas %}
+                {{ macro.input({'caption':'['~nombre~']','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showVarWeb][especificas]['~nombre~']','datos_showVarWeb_especificas_'~nombre,valor)}}
+            {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 

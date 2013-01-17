@@ -6,15 +6,12 @@ CpanModulos:
   Gcon0: { CodigoApp: Gcon, NombreModulo: Gcon,               Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Gestor de Contenidos, Funcionalidades: AC }
   Gcon1: { CodigoApp: Gcon, NombreModulo: GconSecciones,      Nivel: 1, BelongsTo: Gcon,  Publish: 1, Titulo: Secciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Gcon2: { CodigoApp: Gcon, NombreModulo: GconContenidos,     Nivel: 1, BelongsTo: Gcon,  Publish: 1, Titulo: Contenidos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Gcon3: { CodigoApp: Gcon, NombreModulo: GconRespuestasBlog, Nivel: 1, BelongsTo: Gcon,  Publish: 1, Titulo: Respuestas del Blog, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Gcon1: { IdPerfil: 1, NombreModulo: Gcon, Funcionalidades: 'AC,VW' }
   Gcon2: { IdPerfil: 1, NombreModulo: GconSecciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Gcon3: { IdPerfil: 1, NombreModulo: GconContenidos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Gcon4: { IdPerfil: 1, NombreModulo: GconRespuestasBlog, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
 
   Gcon11: { IdPerfil: 2, NombreModulo: Gcon, Funcionalidades: 'AC,VW' }
   Gcon12: { IdPerfil: 2, NombreModulo: GconSecciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Gcon13: { IdPerfil: 2, NombreModulo: GconContenidos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Gcon14: { IdPerfil: 2, NombreModulo: GconRespuestasBlog, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}

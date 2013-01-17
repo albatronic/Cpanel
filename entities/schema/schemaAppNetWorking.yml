@@ -1,0 +1,14 @@
+# ------------------------
+# APP MEDIA NETWORKING
+# ------------------------
+
+NetWorking:
+  columns:
+    Titulo:       { type: string(50), notnull: true}
+    IdUsuario:    { type: string(50), notnull: true}
+    Url:          { type: string(255), notnull: true }
+    NumeroTweets: { type: int(4), notnull: true, default: 0 }
+    ConAvatar:    { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' } 
+    Mensaje:      { type: string(255), notnull: false, default: NULL }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:

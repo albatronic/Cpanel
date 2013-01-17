@@ -1,0 +1,14 @@
+# VARIABLES WEB ESPECIFICAS DEL MODULO Networking
+#
+# Module: Networking
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright ARTICO ESTUDIO, SL
+# date 16-01-2013 19:04:53
+#
+# ejemplo:
+#
+# nombreVariable:
+#   caption: el texto del caption
+#   values: array Id, Value con los valores posibles de la variable (opcional)
+#   default: valor por defecto
+---

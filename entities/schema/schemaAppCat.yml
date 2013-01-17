@@ -1,0 +1,22 @@
+# ------------------------
+# APP CATALOGO DE PRODUCTOS
+#
+# DATE: 17-01-2013
+# AUTHOR: SERGIO PEREZ
+# COMPANY: ARTICO ESTUDIO
+# ------------------------
+Categorias:
+  engine:
+  charSet:
+  comment: Agrupaciones de empresas
+  columns:
+    Descripcion: {type: string(100), notnull: true}
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+
+Familias:
+Subfamilias:
+Fabricantes:
+  columns:
+    
+Articulos:

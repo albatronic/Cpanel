@@ -154,7 +154,7 @@ VidVideos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: MostrarEnPortada, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      aditional_filter: { order: 0, caption: MostrarEnPortada, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: 2, min: null, max: null, message: 'Valor Requerido' }
     OrdenPortada:
       title: Orden Portada
@@ -167,6 +167,29 @@ VidVideos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
+    UrlVideo:
+      title: Url del vídeo
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
+    IdTipo:
+      title: Tipo de vídeo
+      filter: NO
+      list: YES
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 1, caption: Tipo, entity: TiposVideos, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: 2, min: null, max: null, message: 'Valor Requerido' }      
     Observations:
       title: Observations
       filter: NO
