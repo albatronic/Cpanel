@@ -44,3 +44,10 @@ NumArticulosBlogHome:
 NumArticulosBlogPorPagina:
   caption: Número de artículos blog por página
   default: 8
+  
+AnchoVideos:
+  caption: Anchura del vídeo
+  default: 400
+AltoVideos:
+  caption: Altura del vídeo
+  default: 450

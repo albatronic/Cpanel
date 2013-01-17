@@ -17,9 +17,9 @@
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Globales [global]</a></li>
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Globales{% if user.IdPerfil.Id == '1' %} [global]{% endif %}</a></li>
         {% if values.datos.especificas %}
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas [especificas]</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas{% if user.IdPerfil.Id == '1' %}  [especificas]{% endif %}</a></li>
         {% endif %}
     </ul>
 
@@ -68,7 +68,7 @@
             {% if user.IdPerfil.Id == '1' %} {% set prefijo = '['~nombre~']' %} {% else %} {% set prefijo = '' %} {% endif %}
             {% if atributos.values is iterable %}
                 {{ macro.select(
-                    {'caption': prefijo~' '~atributos.caption,'visible':'1','varEnv':'0','updatable':'1'},
+                    {'caption': prefijo~' '~atributos.caption,'visible':'0','varEnv':'0','updatable':'1'},
                     'field_title',
                     'datos[especificas]['~nombre~']',
                     'datos_especificas_'~nombre,
@@ -79,7 +79,7 @@
                 }}            
             {% else %}
                 {{ macro.input(
-                    {'caption': prefijo~' '~atributos.caption,'visible':'1','varEnv':'0'},
+                    {'caption': prefijo~' '~atributos.caption,'visible':'1','varEnv':'0','updatable':'1'},
                     'field_title',
                     'text',
                     'datos[especificas]['~nombre~']',

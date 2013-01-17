@@ -10,7 +10,7 @@
 <div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul>
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'arbol'%}  ui-tabs-selected ui-state-active{%endif%}">
-            <a href="#arbol" onclick='$( "#solapaActiva" ).val("arbol");'>Árbol de Secciones</a>
+            <a href="#arbol" onclick='$( "#solapaActiva" ).val("arbol");'>Mapa Web</a>
         </li>
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
             <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Álbum{%endif%}</a>

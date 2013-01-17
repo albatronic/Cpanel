@@ -189,7 +189,6 @@ class Entity {
             $values = substr($values, 0, -1);
 
             $query = "INSERT INTO `{$this->_dataBaseName}`.`{$this->_tableName}` ({$columns}) VALUES ({$values})";
-
             if (!$this->_em->query($query)) {
                 $this->_errores = $this->_em->getError();
             } else {

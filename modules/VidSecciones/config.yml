@@ -31,9 +31,9 @@ VidSecciones:
     generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
-  urlFriendlyManagement: true
+  urlFriendlyManagement: false
   fieldGeneratorUrlFriendly: Titulo
-  metatagTitleManagement: true
+  metatagTitleManagement: false
   fieldGeneratorMetatagTitle: Titulo
   controller: VidSecciones
   action: Index

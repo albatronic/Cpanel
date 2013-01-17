@@ -41,7 +41,6 @@ class CpanVariables extends CpanVariablesEntity {
                 'titulo' => $this->_titulo,
                 'datos' => $this->getDatosYml(),
             );
-
         }
     }
 
@@ -300,18 +299,24 @@ class CpanVariables extends CpanVariablesEntity {
         $variables = new CpanVariables('Mod', 'Env', $this->_objeto['nombre']);
         $valoresActuales = $variables->getNode('showVarWeb');
 
-        foreach ($this->_objeto['datos']['globales'] as $key => $value)
-            if (!isset($valoresActuales['globales'][$key]))
-                $valores['globales'][$key] = 0;
-            else
-                $valores['globales'][$key] = $valoresActuales['globales'][$key];
+        $valores['globales'] = array();
+        $valores['especificas'] = array();
 
-        foreach ($this->_objeto['datos']['especificas'] as $key => $value)
-            if (!isset($valoresActuales['especificas'][$key]))
-                $valores['especificas'][$key] = 0;
-            else
-                $valores['especificas'][$key] = $valoresActuales['especificas'][$key];
+        if (is_array($this->_objeto['datos']['globales'])) {
+            foreach ($this->_objeto['datos']['globales'] as $key => $value)
+                if (!isset($valoresActuales['globales'][$key]))
+                    $valores['globales'][$key] = 0;
+                else
+                    $valores['globales'][$key] = $valoresActuales['globales'][$key];
+        }
 
+        if (is_array($this->_objeto['datos']['especificas'])) {
+            foreach ($this->_objeto['datos']['especificas'] as $key => $value)
+                if (!isset($valoresActuales['especificas'][$key]))
+                    $valores['especificas'][$key] = 0;
+                else
+                    $valores['especificas'][$key] = $valoresActuales['especificas'][$key];
+        }
 
         $variables->setNode('showVarWeb', $valores);
         $variables->save();
