@@ -1,0 +1,78 @@
+{#
+  Module: ErpFamilias
+  Document : modules\ErpFamilias\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 26.01.2013 19:57:09
+#}
+
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top"><a href="#arbol">Árbol de Familias</a></li>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Familia{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
+        </li>     
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}                      
+    </ul>
+
+    <div id="arbol">
+        <ul>
+        {% for key,padre in datos.getArbolHijos %}
+            <li>
+                {{ macro.ordenarPopup(values.controller,'BelongsTo',0)}}
+                {{ macro.actualizaColumna(values.controller,padre.id,'Publish',padre.publish,'Publicar/Despublicar')}}                      
+                <a href="{{app.path}}/{{values.controller}}/edit/{{key}}">{{padre.titulo}}</a>
+                <a href="{{app.path}}/{{values.controller}}/new/{{key}}" alt="Añadir Subfamilia" title="Añadir Subfamilia"><img src="{{app.path}}/images/detalle.png"/></a>
+                {% if padre.nHijos %}
+                    <ul>
+                    {% for keyHijo,hijo in padre.hijos %}
+                        <li style="margin-left: 30px;">
+                            {% if padre.nHijos > 1 %}
+                                {{ macro.ordenarPopup(values.controller,'BelongsTo',padre.id)}}
+                            {% endif %}
+                            {{ macro.actualizaColumna(values.controller,hijo.id,'Publish',hijo.publish,'Publicar/Despublicar')}}        
+                            <a href="{{app.path}}/{{values.controller}}/edit/{{keyHijo}}">{{hijo.titulo}}</a>
+                            <a href="{{app.path}}/{{values.controller}}/new/{{keyHijo}}" alt="Añadir Subfamilia" title="Añadir Subfamilia"><img src="{{app.path}}/images/detalle.png"/></a>
+                            {% if hijo.nHijos %}
+                                <ul>
+                                {% for keyNieto,nieto in hijo.hijos %}
+                                    <li style="margin-left: 60px;">
+                                        {% if hijo.nHijos > 1 %}
+                                            {{ macro.ordenarPopup(values.controller,'BelongsTo',hijo.id)}}
+                                        {% endif %}
+                                        {{ macro.actualizaColumna(values.controller,nieto.id,'Publish',nieto.publish,'Publicar/Despublicar')}}                                     
+                                        <a href="{{app.path}}/{{values.controller}}/edit/{{keyNieto}}">{{nieto.titulo}}</a>                           
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+        
+    <div id="general">
+        {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
+        {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
+        {{ macro.input(atributos.Descripcion1,'field_title','text',values.controller ~ '[Descripcion1]',values.controller ~ '_Descripcion1',datos.Descripcion1,'255','CampoTextoLargo','3') }}
+        {{ macro.input(atributos.Descripcion2,'field_title','text',values.controller ~ '[Descripcion2]',values.controller ~ '_Descripcion2',datos.Descripcion2,'255','CampoTextoLargo','4') }}
+        {# macro.input(atributos.NivelJerarquico,'field_title','text',values.controller ~ '[NivelJerarquico]',values.controller ~ '_NivelJerarquico',datos.NivelJerarquico,'4','CampoUnidades','5') #}
+        {{ macro.input(atributos.Inventario,'field_title','checkbox',values.controller ~ '[Inventario]',values.controller ~ '_Inventario',datos.Inventario.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.Trazabilidad,'field_title','checkbox',values.controller ~ '[Trazabilidad]',values.controller ~ '_Trazabilidad',datos.Trazabilidad.IDTipo,'255','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.MargenMinimo,'field_title','text',values.controller ~ '[MargenMinimo]',values.controller ~ '_MargenMinimo',datos.MargenMinimo,'10','CampoImporte','8') }}
+        {{ macro.input(atributos.MargenWeb,'field_title','text',values.controller ~ '[MargenWeb]',values.controller ~ '_MargenWeb',datos.MargenWeb,'10','CampoImporte','9') }}
+        {{ macro.input(atributos.Caducidad,'field_title','text',values.controller ~ '[Caducidad]',values.controller ~ '_Caducidad',datos.Caducidad,'4','CampoUnidades','10') }}
+    </div>
+
+    {% include '_global/fieldsComunes.html.twig' %}
+</div>

@@ -15,7 +15,6 @@
     RewriteCond %{REQUEST_FILENAME} !-f
 
     # EXCEPCIONES
-    #RewriteCond %{REQUEST_URI} !/Cpanel
     #-----------------------------------
 
     RewriteRule ^(.*)$ index.php [QSA,L]

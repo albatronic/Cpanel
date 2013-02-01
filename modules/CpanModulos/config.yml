@@ -1,13 +1,5 @@
-# Module: CpanModulos
-# Document : modules/CpanModulos/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 08.12.2012 00:07:48
-#
----
 CpanModulos:
-  app: 'Cpan'
+  app: Cpan
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -41,7 +33,7 @@ CpanModulos:
   parametros: ''
   includesHead:
     twigCss: _global/css.html.twig
-    twigJs: _global/js.html.twig  
+    twigJs: _global/js.html.twig
   login_required: YES
   permission_control: YES
   favourite_control: NO
@@ -96,7 +88,7 @@ CpanModulos:
       aditional_filter: { order: 1, caption: CodigoApp, entity: CpanAplicaciones, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     NombreModulo:
-      title: Nombre módulo
+      title: 'Nombre módulo'
       filter: YES
       list: YES
       visible: true
@@ -735,3 +727,10 @@ CpanModulos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

@@ -1,0 +1,43 @@
+{# GESTION DE PERMISOS DE ACCESO AL CPANEL 
+
+   LA ACTULIAZACION DE DATOS SE HACE VIA AJAX
+#}
+
+{% extends '_global/layoutPopup.html.twig' %}
+
+{% block content %}
+<h2>Permisos de acceso a '{{values.tituloApp}}'</h2>
+
+<div id="Listado">
+<table width='100%'>
+    <tr class='Titulos'>
+        <td class="Item">Usuario</td>
+        <td class='Item'>Permiso</td>
+    </tr>
+    <tbody class='Cuerpo'>
+        {% for key,usuario in values.usuarios %}
+        {% if (key is even) %}
+            {% set classFila = 'Impar' %}
+        {% else %}
+            {% set classFila = 'Par' %}
+        {% endif %}
+        <tr class="{{classFila}}">
+            <td>{{usuario.idUsuario}} {{usuario.nombre}} ({{usuario.email}})</td>
+            <td style="text-align: center;">
+                <input
+                    id="check{{usuario.idUsuario}}"
+                    type="checkbox"
+                    value="{{usuario.tienePermiso}}"
+                    {% if (usuario.tienePermiso == '1') %} checked {% endif %}
+                    onchange="
+                      if ($('#check{{usuario.idUsuario}}').is(':checked')) {$('#check{{usuario.idUsuario}}').val('1');} else {$('#check{{usuario.idUsuario}}').val('0');}
+                      actualizaPermiso('{{usuario.idUsuario}}','{{values.idEmpresa}}','{{values.idProyecto}}','{{values.idApp}}',$('#check{{usuario.idUsuario}}').val());
+                    "
+                /> 
+            </td>
+        </tr>    
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

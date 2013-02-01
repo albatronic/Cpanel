@@ -140,6 +140,31 @@ switch ($_GET['entidad']) {
         unset($usuario);
         break;
     
+    case 'categorias':
+        $familia = new ErpFamilias();
+        $filtro = "(Titulo LIKE '%{$_GET['term']}%') AND (NivelJerarquico='1')";
+        $rows = $familia->cargaCondicion("Id as Id, Titulo as Value", $filtro, "SortOrder ASC");
+        unset($familia);       
+        break;
+
+    case 'familias':
+        $familia = new ErpFamilias();
+        $filtro = "(Titulo LIKE '%{$_GET['term']}%') AND (NivelJerarquico='2')";
+        if ($_GET['filtroAdicional'])
+            $filtro .= " and BelongsTo='{$_GET['filtroAdicional']}'";        
+        $rows = $familia->cargaCondicion("Id as Id, Titulo as Value", $filtro, "SortOrder ASC");
+        unset($familia);       
+        break;
+
+    case 'subfamilias':
+        $familia = new ErpFamilias();
+        $filtro = "(Titulo LIKE '%{$_GET['term']}%') AND (NivelJerarquico='3')";
+        if ($_GET['filtroAdicional'])
+            $filtro .= " and BelongsTo='{$_GET['filtroAdicional']}'";           
+        $rows = $familia->cargaCondicion("Id as Id, Titulo as Value", $filtro, "SortOrder ASC");
+        unset($familia);       
+        break;
+    
     // BUSCA ARTICULOS POR %CODIGO%, %DESCRIPCION% Y %CODIGOEAN%
     case 'articulos':
         $articulo = new Articulos();

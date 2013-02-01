@@ -19,7 +19,7 @@
                 {% if (contenido.estaRelacionado == '1') %} checked {% endif %}
                 onchange="
                   if ($('#check{{contenido.Id}}').is(':checked')) {$('#check{{contenido.Id}}').val('1');} else {$('#check{{contenido.Id}}').val('0');}
-                  actualizaPublish('GconContenidos','{{contenido.Id}}',$('#check{{contenido.Id}}').val());
+                  actualizaContenidoRelacionado('{{values.idContenidoOrigen}}','{{contenido.Id}}',$('#check{{contenido.Id}}').val());
                 "
             />
                 

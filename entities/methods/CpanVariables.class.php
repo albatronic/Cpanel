@@ -192,7 +192,7 @@ class CpanVariables extends CpanVariablesEntity {
             $ok = parent::create();
         }
 
-        if ($ok and ($this->_objeto['ambito'] == 'Mod') and ($this->_objeto['tipo'] == 'Web'))
+        if ($ok and ($this->_objeto['tipo'] == 'Web'))
             $this->ponVisibilidad();
 
         return $ok;
@@ -272,21 +272,21 @@ class CpanVariables extends CpanVariablesEntity {
     }
 
     /**
-     * Quita las variables de entorno del modulo en curso
+     * Quita las variables de entorno del proyecto/app/modulo en curso
      * relativas al control de visibilidad de sus variables web
      *
      * @return void
      */
     private function quitaVisibilidad() {
 
-        $variables = new CpanVariables('Mod', 'Env', $this->_objeto['nombre']);
+        $variables = new CpanVariables($this->_objeto['ambito'], 'Env', $this->_objeto['nombre']);
         $variables->setNode('showVarWeb', array());
         $variables->save();
         unset($variables);
     }
 
     /**
-     * Pone las variables de entorno del modulo en curso
+     * Pone las variables de entorno del proyecto/app/modulo en curso
      * relativas al control de visibilidad de sus variables web
      *
      * Respeta los valores que hubiera en el yml del proyecto respecto
@@ -296,7 +296,7 @@ class CpanVariables extends CpanVariablesEntity {
      */
     private function ponVisibilidad() {
 
-        $variables = new CpanVariables('Mod', 'Env', $this->_objeto['nombre']);
+        $variables = new CpanVariables($this->_objeto['ambito'], 'Env', $this->_objeto['nombre']);
         $valoresActuales = $variables->getNode('showVarWeb');
 
         $valores['globales'] = array();

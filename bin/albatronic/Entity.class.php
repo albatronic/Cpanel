@@ -67,9 +67,9 @@ class Entity {
     /**
      * CONSTRUCTOR
      */
-    public function __construct($primaryKeyValue = '') {
+    public function __construct($primaryKeyValue = '', $showDeleted = FALSE) {
         $this->setPrimaryKeyValue($primaryKeyValue);
-        $this->load();
+        $this->load($showDeleted);
     }
 
     /**
@@ -91,13 +91,17 @@ class Entity {
      * Carga las propiedades del objeto con los valores de la base de datos.
      * SIEMPRE Y CUANDO SE HAYA ESTABLECIDO EL VALOR DE LA PRIMARYKEY
      */
-    protected function load() {
+    protected function load($showDeleted = FALSE) {
         if ($this->getPrimaryKeyValue() != '') {
 
             $this->conecta();
 
+            $filtro = "(`{$this->_primaryKeyName}`='{$this->getPrimaryKeyValue()}')";
+            if ($showDeleted == FALSE)
+                $filtro .= " AND (Deleted = '0')";
+
             if (is_resource($this->_dbLink)) {
-                $query = "SELECT * FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE (`{$this->_primaryKeyName}`='{$this->getPrimaryKeyValue()}') AND (Deleted = '0')";
+                $query = "SELECT * FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE {$filtro}";
 
                 if ($this->_em->query($query)) {
                     $this->setStatus($this->_em->numRows());
@@ -160,7 +164,7 @@ class Entity {
     /**
      * Inserta un objeto en la entidad.
      *
-     * @return variant El valor del último ID insertado
+     * @return int El valor del último ID insertado
      */
     public function create() {
         $this->conecta();
@@ -429,7 +433,7 @@ class Entity {
         if ($this->getPrimaryKeyValue() != '') {
             // Estoy validando antes de actualizar
             if (($this->IsSuper) and ($_SESSION['USER']['user']['IdPerfil'] != '1'))
-                $this->_errores[] = "No se puede modificar, es un datos reservado (super)";
+                $this->_errores[] = "No se puede modificar, es un valor reservado";
         }
 
         if (trim($this->UrlTarget) != '') {
@@ -469,7 +473,7 @@ class Entity {
         // No se puede borrar si el objeto es un valor SUPER y el usuario
         // no es el super
         if (($this->IsSuper) AND ($_SESSION['USER']['user']['IdPerfil'] != 1))
-            $this->_errores[] = "No se puede eliminar. Es un valor reservado (super)";
+            $this->_errores[] = "No se puede eliminar. Es un valor reservado";
 
         // Validacion de integridad referencial respecto a entidades hijas
         if (count($this->_errores) == 0) {
@@ -555,7 +559,7 @@ class Entity {
         }
 
         unset($this->_em);
-        return new $this($rows[0][$this->_primaryKeyName]);
+        return new $this($rows[0][$this->_primaryKeyName], $showDeleted);
     }
 
     /**
@@ -725,7 +729,7 @@ class Entity {
         $arbol = array();
 
         $objeto = new $this();
-        $rows = $objeto->cargaCondicion("Id,PrimaryKeyMD5", "BelongsTo='0'", "SortOrder ASC");
+        $rows = $objeto->cargaCondicion("Id,Titulo,Publish,PrimaryKeyMD5", "BelongsTo='0'", "SortOrder ASC");
         unset($objeto);
 
         foreach ($rows as $row) {
@@ -733,9 +737,10 @@ class Entity {
             $hijos = $objeto->getHijos();
             $arbol[$row['PrimaryKeyMD5']] = array(
                 'id' => $row['Id'],
-                'titulo' => $objeto->getTitulo(),
+                'titulo' => $row['Titulo'],
+                'publish' => $row['Publish'],
                 'nHijos' => count($hijos),
-                'hijos' => $hijos,                
+                'hijos' => $hijos,
             );
         }
 
@@ -794,14 +799,16 @@ class Entity {
     private function getChildrens($idPadre) {
 
         // Obtener todos los hijos del padre actual
-        $hijos = $this->cargaCondicion('Id,PrimaryKeyMD5', "BelongsTo='{$idPadre}'", "SortOrder ASC");
+        $hijos = $this->cargaCondicion('Id,Titulo,Publish,PrimaryKeyMD5', "BelongsTo='{$idPadre}'", "SortOrder ASC");
 
         foreach ($hijos as $hijo) {
-            $aux = new $this($hijo['Id']);
+            $descencientes = $this->getChildrens($hijo['Id']);
             $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']] = array(
                 'id' => $hijo['Id'],
-                'titulo' => $aux->getTitulo(),
-                'hijos' => $this->getChildrens($hijo['Id']),
+                'titulo' => $hijo['Titulo'],
+                'publish' => $hijo['Publish'],
+                'nHijos' => count($descencientes),
+                'hijos' => $descencientes,
             );
             unset($hijo);
         }
@@ -827,17 +834,17 @@ class Entity {
      * @return boolean TRUE si tiene etiquetas asociadas
      */
     public function getTieneEtiquetas() {
-        
+
         $modulos = new CpanModulos();
         $modulo = $modulos->find("NombreModulo", $this->getClassName());
-        
+
         $etiquetas = new EtiqEtiquetas();
-        $rows = $etiquetas->cargaCondicion("Id","IdModulo='{$modulo->getId()}' and Publish='1'");
+        $rows = $etiquetas->cargaCondicion("Id", "IdModulo='{$modulo->getId()}' and Publish='1'");
         unset($modulo);
         unset($etiquetas);
-        
+
         $tiene = count($rows);
-        
+
         return $tiene;
     }
 

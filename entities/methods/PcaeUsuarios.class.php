@@ -16,6 +16,17 @@ class PcaeUsuarios extends PcaeUsuariosEntity {
     }
 
     /**
+     * Recalcula el passw y guarda
+     * @return boolean
+     */
+    public function save() {
+        $config = sfYaml::load('config/config.yml');
+        $this->Password = md5($this->Password . $config['config']['semillaMD5']);
+        
+        return parent::save();
+    }
+    
+    /**
      * Devuelve el nombre concatenado con los apellidos
      * @return string
      */

@@ -1,13 +1,5 @@
-# Module: CpanRoles
-# Document : modules/CpanRoles/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 08.12.2012 01:31:49
-#
----
 CpanRoles:
-  app: 'Cpan'
+  app: Cpan
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -46,7 +38,7 @@ CpanRoles:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Roles de Usuarios
+  title: 'Roles de Usuarios'
   id_video: cpanroles
   url_video: null
   feature_list: YES
@@ -679,3 +671,10 @@ CpanRoles:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

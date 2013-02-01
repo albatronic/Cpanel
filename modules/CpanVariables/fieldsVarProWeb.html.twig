@@ -7,12 +7,12 @@
 {% extends 'CpanVariables/form.html.twig' %}
 
 {% set numeroContenidosFijos = 4 %}
+{% set esSuper = (user.IdPerfil.Id == '1')%}
 
 {% block template %}
-
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Global [global]</a></li>
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Global [globales]</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-mail">Mail [mail]</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-meta">Meta [meta]</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-firmas">Firmas [signatures]</a></li>
@@ -20,14 +20,17 @@
     </ul>
 
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input({'caption':'[dominio] Dominio','visible':'1','varEnv':'0'},'field_title','text','datos[global][dominio]','datos_global_dominio',values.datos.global.dominio,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[empresa] Empresa / Titular','visible':'1','varEnv':'0'},'field_title','text','datos[global][empresa]','datos_global_empresa',values.datos.global.empresa,'50','CampoTextoCorto','1') }}            
-        {{ macro.input({'caption':'[direccion] Dirección','visible':'1','varEnv':'0'},'field_title','text','datos[global][direccion]','datos_global_direccion',values.datos.global.direccion,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[poblacion] Población','visible':'1','varEnv':'0'},'field_title','text','datos[global][poblacion]','datos_global_poblacion',values.datos.global.poblacion,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[provincia] Provincia','visible':'1','varEnv':'0'},'field_title','text','datos[global][provincia]','datos_global_provincia',values.datos.global.provincia,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[codigoPostal] Código Postal','visible':'1','varEnv':'0'},'field_title','text','datos[global][codigoPostal]','datos_global_codigoPostal',values.datos.global.codigoPostal,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[telefono] Teléfono','visible':'1','varEnv':'0'},'field_title','text','datos[global][telefono]','datos_global_telefono',values.datos.global.telefono,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[emailInfo] Email Info','visible':'1','varEnv':'0'},'field_title','text','datos[global][emailInfo]','datos_global_emailInfo',values.datos.global.emailInfo,'50','CampoTextoCorto','1') }}
+        
+        {{ macro.input({'caption':'[dominio] Dominio','visible':(values.visibilidad.globales['dominio'] or esSuper),'varEnv':'0'},'field_title','text','datos[globales][dominio]','datos_global_dominio',values.datos.globales.dominio,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[empresa] Empresa / Titular','visible':(values.visibilidad.globales['empresa'] or esSuper),'varEnv':'0'},'field_title','text','datos[globales][empresa]','datos_global_empresa',values.datos.globales.empresa,'50','CampoTextoCorto','1') }}            
+        {{ macro.input({'caption':'[direccion] Dirección','visible':(values.visibilidad.globales['direccion'] or esSuper),'varEnv':'0'},'field_title','text','datos[globales][direccion]','datos_global_direccion',values.datos.globales.direccion,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[poblacion] Población','visible':(values.visibilidad.globales['poblacion'] or esSuper),'varEnv':'0'},'field_title','text','datos[globales][poblacion]','datos_global_poblacion',values.datos.globales.poblacion,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[provincia] Provincia','visible':(values.visibilidad.globales['provincia'] or esSuper),'varEnv':'0'},'field_title','text','datos[globales][provincia]','datos_global_provincia',values.datos.globales.provincia,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[codigoPostal] Código Postal','visible':(values.visibilidad.globales['codigoPostal'] or esSuper),'varEnv':'0'},'field_title','text','datos[globales][codigoPostal]','datos_global_codigoPostal',values.datos.globales.codigoPostal,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[telefono1] Teléfono1','visible':(values.visibilidad.globales['telefono1'] or esSuper),'varEnv':'0'},'field_title','text','datos[globales][telefono1]','datos_global_telefono1',values.datos.globales.telefono1,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[telefono2] Teléfono2','visible':(values.visibilidad.globales['telefono2'] or esSuper),'varEnv':'0'},'field_title','text','datos[globales][telefono2]','datos_global_telefono2',values.datos.globales.telefono2,'50','CampoTextoCorto','1') }}            
+        {{ macro.input({'caption':'[emailInfo] Email Info','visible':(values.visibilidad.globales['emailInfo'] or esSuper),'varEnv':'0'},'field_title','text','datos[globales][emailInfo]','datos_global_emailInfo',values.datos.globales.emailInfo,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[logoOldBrowser] Archivo imagen logo navegador antiguo','visible':(values.visibilidad.globales['logoOldBrowser'] or esSuper),'varEnv':'0'},'field_title','text','datos[globales][logoOldBrowser]','datos_global_logoOldBrowser',values.datos.globales.logoOldBrowser,'50','CampoTextoCorto','1') }}
     </div>
 
     <div id="tabs-mail" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
@@ -40,6 +43,9 @@
         {{ macro.input({'caption':'[from] Email envío','visible':'1','varEnv':'0'},'field_title','text','datos[mail][from]','datos_mail_from',values.datos.mail.from,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[from_name] Nombre','visible':'1','varEnv':'0'},'field_title','text','datos[mail][from_name]','datos_mail_from_name',values.datos.mail.from_name,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[timeout] Tiempo espera (30seg)','visible':'1','varEnv':'0'},'field_title','text','datos[mail][timeout]','datos_mail_timeout',values.datos.mail.timeout,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[mensajeExito] Mensaje de éxito','visible':'1','varEnv':'0'},'field_title','text','datos[mail][mensajeExito]','datos_mail_mensajeExito',values.datos.mail.mensajeExito,'255','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[mensajeError] Mensaje de error','visible':'1','varEnv':'0'},'field_title','text','datos[mail][mensajeError]','datos_mail_mensajeError',values.datos.mail.mensajeError,'255','CampoTextoCorto','1') }}
+        {{ macro.textarea({'caption':'[textoLOPD] Texto LOPD','visible':'1','varEnv':'0'},'field_title','datos[mail][textoLOPD]','datos_mail_textoLOPD',values.datos.mail.textoLOPD,none,none,'textarea',100)}}           
     </div>
         
     <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
@@ -53,7 +59,7 @@
         {{ macro.input({'caption':'[geoPlaceName] geoPlaceName','visible':'1','varEnv':'0'},'field_title','text','datos[meta][geoPlaceName]','datos_meta_geoPlaceName',values.datos.meta.geoPlaceName,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[geoPositionLongitude] geoPositionLongitude','visible':'1','varEnv':'0'},'field_title','text','datos[meta][geoPositionLongitude]','datos_meta_geoPositionLongitude',values.datos.meta.geoPositionLongitude,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[geoPositionLatitude] geoPositionLatitude','visible':'1','varEnv':'0'},'field_title','text','datos[meta][geoPositionLatitude]','datos_meta_geoPositionLatitude',values.datos.meta.geoPositionLatitude,'50','CampoTextoCorto','1') }}
-    </div>
+        </div>
 
     <div id="tabs-firmas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.input({'caption':'[links] Links separados por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][links]','datos_signatures_links',values.datos.signatures.links,'255','CampoTextoCorto','1') }}

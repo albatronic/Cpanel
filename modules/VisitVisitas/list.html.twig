@@ -12,7 +12,52 @@
 {% block listado %}
 
 <div class='Listado'>
-	{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'izq'}%}
-	{% include '_global/listGenerico.html.twig' with {'listado': values.listado, 'controller': values.controller} %}
+    {% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'izq'}%}
+
+    <div id="Listado">
+    <table width='100%'>
+        <tr class='Titulos'>
+            <td width='16px'>&nbsp;</td>
+            <td class='Item'>Fecha</td>
+            <td class='Item'>Segundos</td> 
+            <td class='Item'>N. Clicks</td>             
+            <td class='Item'>Pais</td>  
+            <td class='Item'>Region</td>
+            <td class='Item'>Ciudad</td>
+            <td class='Item'>Browser</td>            
+            <td class='Item'>Url Origen</td> 
+            <td class='Item'>q</td> 
+            <td class='Item'>Móvil</td> 
+            <td class='Item'>Robot</td> 
+            <td class='Item'>Resolución</td> 
+        </tr>
+
+        <tbody class='Cuerpo'>
+        {% for key,objeto in values.listado.data %}
+            <tr>
+                <td>
+                    <a href='{{app.path}}/{{values.controller}}/Edit/{{objeto.PrimaryKeyMD5}}' title='Editar ...'>
+                        <img src="{{app.path}}/images/botoneditar.png" width="16px" height="16px" />
+                    <a>
+                </td>
+                <td class="item">{{objeto.TiempoUnix|date('d-m-Y H:i:s')}}</td>
+                <td class="item" style="text-align: right;">{{objeto.SegundosVisita}}</td>                
+                <td class="item" style="text-align: right;">{{objeto.NClicks}}</td>
+                <td class="item">{{objeto.NombrePais}} ({{objeto.CodigoPais}})</td>  
+                <td class="item">{{objeto.NombreRegion}} ({{objeto.CodigoRegion}})</td>  
+                <td class="item">{{objeto.Ciudad}}</td>                 
+                <td class="item">{{objeto.Browser}} ({{objeto.BrowserVersion}})</td>                  
+                <td class="item">{{macro.recortaTexto(objeto.UrlOrigen,30)}}</td>                
+                <td class="item">{{macro.recortaTexto(objeto.q,10)}}</td>
+                <td class="item" style="text-align: center;">{{objeto.IsMobile}}</td>
+                <td class="item" style="text-align: center;">{{objeto.IsRobot}}</td>
+                <td class="item" style="text-align: center;">{{objeto.Resolution}}</td>                             
+            </tr>
+            {% else %}
+            <tr><td colspan='8'>No hay información que cumpla esos criterios</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>        
 </div>
 {% endblock %}

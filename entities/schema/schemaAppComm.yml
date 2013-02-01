@@ -1,5 +1,5 @@
 # ESQUEMA DE LA APP Comm. Tablas de terceros
----
+
 CommZonasHorarias:
   comment: Zonas Horarias mundiales
   columns:

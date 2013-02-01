@@ -1,11 +1,11 @@
 # MODULOS DE LA APP Gcon. GESTOR DE CONTENIDOS
 CpanAplicaciones:
-  Gcon  : { CodigoApp: Gcon,   NombreApp: Gestor de Contenidos }
+  Gcon  : { CodigoApp: Gcon, NombreApp: Gestor de Contenidos }
 
 CpanModulos:
-  Gcon0: { CodigoApp: Gcon, NombreModulo: Gcon,               Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Gestor de Contenidos, Funcionalidades: AC }
-  Gcon1: { CodigoApp: Gcon, NombreModulo: GconSecciones,      Nivel: 1, BelongsTo: Gcon,  Publish: 1, Titulo: Secciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Gcon2: { CodigoApp: Gcon, NombreModulo: GconContenidos,     Nivel: 1, BelongsTo: Gcon,  Publish: 1, Titulo: Contenidos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Gcon0: { CodigoApp: Gcon, NombreModulo: Gcon,           Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Gestor de Contenidos, Funcionalidades: AC }
+  Gcon1: { CodigoApp: Gcon, NombreModulo: GconSecciones,  Nivel: 1, BelongsTo: Gcon,  Publish: 1, Titulo: Secciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Gcon2: { CodigoApp: Gcon, NombreModulo: GconContenidos, Nivel: 1, BelongsTo: Gcon,  Publish: 1, Titulo: Contenidos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Gcon1: { IdPerfil: 1, NombreModulo: Gcon, Funcionalidades: 'AC,VW' }

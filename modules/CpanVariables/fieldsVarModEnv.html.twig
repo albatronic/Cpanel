@@ -30,7 +30,15 @@
         <li class="ui-state-default ui-corner-top"><a href="#tabs-meta">Meta</a></li>
 
         {% for i in 1..values.datos.numberOfImages %}
-        <li class="ui-state-default ui-corner-tope"><a href="#tabs-imagen{{i}}">Imagen {{i}}</a></li>
+        <li class="ui-state-default ui-corner-tope">
+            <a href="#tabs-imagen{{i}}">
+            {% if values.datos.images[i].caption %}
+                {{values.datos.images[i].caption}}
+            {% else %}
+                Imagen {{i}}
+            {% endif %}
+            </a>
+        </li>
         {% endfor %}
 
         <li class="ui-state-default ui-corner-top"><a href="#tabs-galeria">Galería</a></li>
@@ -70,19 +78,19 @@
 
     {# MOSTAR GESTION SITEMAP #}
     <div id="tabs-siteMap" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input({'caption':'[showSiteMapManagement][show] Mostrar gestión Sitemap','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSiteMapManagement][show]','datos_showSiteMapManagement_show',none,values.datos.showSiteMapManagement.show)}}
-        {{ macro.input({'caption':'[showSiteMapManagement][showAtSiteMap] Mostrar en Sitemap','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSiteMapManagement][showAtSiteMap]','datos_showSiteMapManagement_showAtSiteMap',none,values.datos.showSiteMapManagement.showAtSiteMap)}}
-        {{ macro.input({'caption':'[showSiteMapManagement][showImportanceSiteMap] Mostrar importancia Sitemap','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSiteMapManagement][showImportanceSiteMap]','datos_showSiteMapManagement_showImportanceSiteMap',none,values.datos.showSiteMapManagement.showImportanceSiteMap)}}
+        {{ macro.input({'caption':'[showSiteMapManagement][show] Mostrar gestión Sitemap','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSiteMapManagement][show]','datos_showSiteMapManagement_show',values.datos.showSiteMapManagement.show)}}
+        {{ macro.input({'caption':'[showSiteMapManagement][showAtSiteMap] Mostrar en Sitemap','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSiteMapManagement][showAtSiteMap]','datos_showSiteMapManagement_showAtSiteMap',values.datos.showSiteMapManagement.showAtSiteMap)}}
+        {{ macro.input({'caption':'[showSiteMapManagement][showImportanceSiteMap] Mostrar importancia Sitemap','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSiteMapManagement][showImportanceSiteMap]','datos_showSiteMapManagement_showImportanceSiteMap',values.datos.showSiteMapManagement.showImportanceSiteMap)}}
         {{ macro.input({'caption':'[showSiteMapManagement][frecuencyChange] Frecuencia de cambio','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[showSiteMapManagement][frecuencyChange]','datos_showSiteMapManagement_frecuencyChange',values.datos.showSiteMapManagement.frecuencyChange,'15','CampoTextoCorto','1') }}
     </div>
 
     {# MOSTAR GESTION META #}
-    <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input({'caption':'[metatagTitleManagement] Gestionar MetatagTitles','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[metatagTitleManagement]','datos_metatagTitleManagement',none,values.datos.metatagTitleManagement)}}
+    <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom">     
+        {{ macro.input({'caption':'[metatagTitleManagement] Gestionar MetatagTitles','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[metatagTitleManagement]','datos_metatagTitleManagement',values.datos.metatagTitleManagement)}}
         {{ macro.select({'caption':'[fieldGeneratorMetatagTitle] Campo generador Metatag Title','visible':'1','updatable':'1','varEnv':'0'},'field_title','datos[fieldGeneratorMetatagTitle]','datos_fieldGeneratorMetatagTitle',none,values.datos.fieldGeneratorMetatagTitle,values.columnas,'chzn-select')}}
-        {{ macro.input({'caption':'[showMetaManagement][show] Mostrar gestión Meta','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showMetaManagement][show]','datos_showMetaManagement_show',none,values.datos.showMetaManagement.show)}}
+        {{ macro.input({'caption':'[showMetaManagement][show] Mostrar gestión Meta','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showMetaManagement][show]','datos_showMetaManagement_show',values.datos.showMetaManagement.show)}}
         {{ macro.select({'caption':'[showMetaManagement][titlePosition] Posición del title','visible':'1','updatable':'1','varEnv':'0'},'field_title','datos[showMetaManagement][titlePosition]','datos_showMetaManagement_titlePosition',none,values.datos.showMetaManagement.titlePosition,ValoresIzqDcha,'chzn-select')}}
-        {{ macro.input({'caption':'[showMetaManagement][titleSimple] Title Simple','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showMetaManagement][titleSimple]','datos_showMetaManagement_titleSimple',none,values.datos.showMetaManagement.titleSimple)}}
+        {{ macro.input({'caption':'[showMetaManagement][titleSimple] Title Simple','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showMetaManagement][titleSimple]','datos_showMetaManagement_titleSimple',values.datos.showMetaManagement.titleSimple)}}
     </div>
 
     {# IMAGENES #}

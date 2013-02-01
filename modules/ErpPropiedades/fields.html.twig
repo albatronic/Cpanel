@@ -1,0 +1,38 @@
+{#
+  Module: ErpPropiedades
+  Document : modules\ErpPropiedades\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 26.01.2013 19:57:09
+#}
+
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Propiedad{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
+        </li>     
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}                      
+    </ul>
+        
+    <div id="general">
+        {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'30','CampoTextoLargo','1') }}
+
+        {% if datos.Id %}
+        <div style="text-align: center;">
+            <iframe width="100%" height="330" scrolling="yes" style="margin-top:5px; border:0;"
+                src="{{app.path}}/ErpPropiedadesValores/listPopup/{{datos.Id}}">
+            </iframe>
+        </div>
+        {% endif %}
+    </div>
+
+    {% include '_global/fieldsComunes.html.twig' %}
+</div>
+
+{{ macro.foco(values.controller ~ '_Titulo') }}

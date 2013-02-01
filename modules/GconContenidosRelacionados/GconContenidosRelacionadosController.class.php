@@ -45,7 +45,7 @@ class GconContenidosRelacionadosController extends Controller {
         unset($objetoSeccion);
 
         $template = $this->entity . '/list.html.twig';
-print_r($arbolContenidos);
+
         $this->values['datos'] = $arbolContenidos;
         $this->values['idContenidoOrigen'] = $idContenidoOrigen;
 

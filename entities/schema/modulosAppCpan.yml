@@ -4,14 +4,14 @@ CpanAplicaciones:
   Cpan  : { CodigoApp: Cpan, NombreApp: Gestor del Panel de Control }
 
 CpanModulos:
-  Cpan0: { CodigoApp: Cpan, NombreModulo: Cpan,                Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Gestor del Panel de Control, Funcionalidades: AC }
-  Cpan1: { CodigoApp: Cpan, NombreModulo: CpanPerfiles,        Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Perfiles de Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan2: { CodigoApp: Cpan, NombreModulo: CpanUsuariosTipos,   Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Tipos de Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan3: { CodigoApp: Cpan, NombreModulo: CpanRoles,           Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Roles de Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan4: { CodigoApp: Cpan, NombreModulo: CpanUsuarios,        Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan5: { CodigoApp: Cpan, NombreModulo: CpanFuncionalidades, Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Funcionalidades, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan6: { CodigoApp: Cpan, NombreModulo: CpanDocs,            Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Gestor de Documentos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan7: { CodigoApp: Cpan, NombreModulo: CpanUrlAmigables,    Nivel: 1, BelongsTo: Cpan,  Publish: 1, Titulo: Gestor de Urls Amigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan0: { CodigoApp: Cpan, NombreModulo: Cpan,                Nivel: 0, Publish: 1, Titulo: Gestor del Panel de Control, Funcionalidades: AC }
+  Cpan1: { CodigoApp: Cpan, NombreModulo: CpanPerfiles,        Nivel: 1, Publish: 1, Titulo: Perfiles de Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan2: { CodigoApp: Cpan, NombreModulo: CpanUsuariosTipos,   Nivel: 1, Publish: 1, Titulo: Tipos de Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan3: { CodigoApp: Cpan, NombreModulo: CpanRoles,           Nivel: 1, Publish: 1, Titulo: Roles de Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan4: { CodigoApp: Cpan, NombreModulo: CpanUsuarios,        Nivel: 1, Publish: 1, Titulo: Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan5: { CodigoApp: Cpan, NombreModulo: CpanFuncionalidades, Nivel: 1, Publish: 1, Titulo: Funcionalidades, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan6: { CodigoApp: Cpan, NombreModulo: CpanDocs,            Nivel: 1, Publish: 1, Titulo: Gestor de Documentos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan7: { CodigoApp: Cpan, NombreModulo: CpanUrlAmigables,    Nivel: 1, Publish: 1, Titulo: Gestor de Urls Amigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Cpan1: { IdPerfil: 1, NombreModulo: Cpan, Funcionalidades: 'AC,VW' }

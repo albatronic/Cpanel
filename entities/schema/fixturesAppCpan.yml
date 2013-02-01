@@ -34,12 +34,16 @@ CpanUrlAmigables:
   5: { UrlFriendly: '/logout',      Controller: Index,      Action: Logout, Template: Index, Entity: GconSecciones, IdEntity: 5 }  
   6: { UrlFriendly: '/aviso-legal', Controller: AvisoLegal, Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 6 }  
   7: { UrlFriendly: '/olvido',      Controller: Olvido,     Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 7 }  
+  8: { UrlFriendly: '/contacto',    Controller: Contacto,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 8 }
+  9: { UrlFriendly: '/politica-de-privacidad',    Controller: PoliticaPrivacidad,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 9 }      
   
 GconSecciones:
-  1: { Id: 1, Titulo: Inicio, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: '', LockSlug: 1, UrlFriendly: '/' }
+  1: { Id: 1, Titulo: Inicio, Publish: 1, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: '', LockSlug: 1, UrlFriendly: '/' }
   2: { Id: 2, Titulo: Error404, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'error404', LockSlug: 1, UrlFriendly: '/error404' }
   3: { Id: 3, Titulo: OldBrowser, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'oldbrowser', LockSlug: 1, UrlFriendly: '/oldbrowser' }  
   4: { Id: 4, Titulo: Regresar al portal, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'return', LockSlug: 1, UrlFriendly: '/return' }
   5: { Id: 5, Titulo: Salir del portal, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'logout', LockSlug: 1, UrlFriendly: '/logout' }
-  6: { Id: 6, Titulo: Aviso legal, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'aviso-legal', LockSlug: 1, UrlFriendly: '/aviso-legal' }
+  6: { Id: 6, Titulo: Aviso legal, Publish: 1, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'aviso-legal', LockSlug: 1, UrlFriendly: '/aviso-legal' }
   7: { Id: 7, Titulo: Olvido, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'olvido', LockSlug: 1, UrlFriendly: '/olvido' }
+  8: { Id: 8, Titulo: Contacto, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'contacto', LockSlug: 1, UrlFriendly: '/contacto' }
+  9: { Id: 9, Titulo: Politica de privacidad, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'politica-de-privacidad', LockSlug: 1, UrlFriendly: '/politica-de-privacidad' }  

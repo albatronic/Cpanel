@@ -1,13 +1,5 @@
-# Module: EnlEnlaces
-# Document : modules/EnlEnlaces/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 05.12.2012 00:20:32
-#
----
 EnlEnlaces:
-  app: 'Enl'
+  app: Enl
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -35,18 +27,18 @@ EnlEnlaces:
   fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Titulo
-  controller: 
-  action: 
-  template: 
+  controller: null
+  action: null
+  template: null
   parametros: ''
   includesHead:
     twigCss: _global/css.html.twig
-    twigJs: _global/js.html.twig  
+    twigJs: _global/js.html.twig
   login_required: YES
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Enlaces de Interés
+  title: 'Enlaces de Interés'
   id_video: enlenlaces
   url_video: null
   feature_list: YES
@@ -714,3 +706,10 @@ EnlEnlaces:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

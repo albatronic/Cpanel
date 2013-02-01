@@ -8,7 +8,7 @@
 #}
 
 {{ macro.input(atributos.Sesion,'field_title','text',values.controller ~ '[Sesion]',values.controller ~ '_Sesion',datos.Sesion,'50','CampoTextoLargo','1') }}
-{{ macro.input(atributos.TiempoUnix,'field_title','text',values.controller ~ '[TiempoUnix]',values.controller ~ '_TiempoUnix',datos.TiempoUnix,'20','CampoImporte','2') }}
+{{ macro.input(atributos.TiempoUnix,'field_title','text',values.controller ~ '[TiempoUnix]',values.controller ~ '_TiempoUnix',datos.TiempoUnix|date('d-m-Y H:i:s'),'20','CampoImporte','2') }}
 {{ macro.input(atributos.SegundosVisita,'field_title','text',values.controller ~ '[SegundosVisita]',values.controller ~ '_SegundosVisita',datos.SegundosVisita,'4','CampoUnidades','3') }}
 {{ macro.input(atributos.NClicks,'field_title','text',values.controller ~ '[NClicks]',values.controller ~ '_NClicks',datos.NClicks,'4','CampoUnidades','4') }}
 {{ macro.input(atributos.NUrlsUnicas,'field_title','text',values.controller ~ '[NUrlsUnicas]',values.controller ~ '_NUrlsUnicas',datos.NUrlsUnicas,'4','CampoUnidades','5') }}

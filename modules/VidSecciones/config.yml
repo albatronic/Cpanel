@@ -1,13 +1,5 @@
-# Module: VidSecciones
-# Document : modules/VidSecciones/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 24.12.2012 12:52:25
-#
----
 VidSecciones:
-  app: 'Vid'
+  app: Vid
   isModuleRoot: 1
   linkModule:
     fromColumn: ''
@@ -15,7 +7,7 @@ VidSecciones:
     toColumn: ''
   showCommonFields: true
   numMaxRecords: ''
-  numberOfImages: '3'
+  numberOfImages: '1'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0
@@ -46,7 +38,7 @@ VidSecciones:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Secciones de Vídeos
+  title: 'Secciones de Vídeos'
   id_video: vidsecciones
   url_video: null
   feature_list: YES
@@ -713,3 +705,10 @@ VidSecciones:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

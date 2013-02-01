@@ -1,13 +1,5 @@
-# Module: CpanFuncionalidades
-# Document : modules/CpanFuncionalidades/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 08.12.2012 02:03:38
-#
----
 CpanFuncionalidades:
-  app: 'Cpan'
+  app: Cpan
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -117,7 +109,7 @@ CpanFuncionalidades:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
     EsEstandar:
-      title: Es Estándar
+      title: 'Es Estándar'
       filter: NO
       list: YES
       visible: true
@@ -713,3 +705,10 @@ CpanFuncionalidades:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

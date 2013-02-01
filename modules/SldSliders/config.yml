@@ -1,13 +1,5 @@
-# Module: SldSliders
-# Document : modules/SldSliders/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 10.12.2012 17:38:34
-#
----
 SldSliders:
-  app: 'Sld'
+  app: Sld
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -64,7 +56,7 @@ SldSliders:
       title: 'Título z-a'
       criteria: 'IdZona,Titulo DESC'
   search_default: Id
-  orden_web:
+  orden_web: null
   referenced_entities:
     - SldZonas
     - TiposSliders
@@ -144,7 +136,7 @@ SldSliders:
       aditional_filter: { order: 2, caption: IdTipo, entity: TiposSliders, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '30', min: null, max: null, message: 'Valor Requerido' }
     MostrarTextos:
-      title: Mostrar Textos
+      title: 'Mostrar Textos'
       filter: NO
       list: YES
       visible: true
@@ -762,3 +754,10 @@ SldSliders:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

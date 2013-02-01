@@ -310,6 +310,7 @@ class EntityComunes extends Entity {
     protected $IdSliderAsociado = NULL;
     protected $IdSeccionEnlaces = NULL;
     protected $IdSeccionVideos = NULL;
+    protected $RevisitAfter = '';
 
     /**
      * Fecha y hora última visita en formato UNIX
@@ -902,6 +903,14 @@ class EntityComunes extends Entity {
 
     public function getDateTimeLastVisit() {
         return date('d-m-Y H:i:s', $this->DateTimeLastVisit);
+    }
+
+    public function setRevisitAfter($RevisitAfter) {
+        $this->RevisitAfter = trim($RevisitAfter);
+    }
+
+    public function getRevisitAfter() {
+        return $this->RevisitAfter;
     }
 
 }

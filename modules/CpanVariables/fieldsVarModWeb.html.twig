@@ -17,7 +17,7 @@
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Globales{% if user.IdPerfil.Id == '1' %} [global]{% endif %}</a></li>
+        <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Globales{% if user.IdPerfil.Id == '1' %} [globales]{% endif %}</a></li>
         {% if values.datos.especificas %}
         <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas{% if user.IdPerfil.Id == '1' %}  [especificas]{% endif %}</a></li>
         {% endif %}
@@ -29,9 +29,9 @@
             {'caption': 'linkFromColumn','visible':'1','varEnv':'0'},
             'field_title',
             'text',
-            'datos[global][linkFromColumn]',
-            'datos_global_linkFromColumn',
-            values.datos.global.linkFromColumn,
+            'datos[globales][linkFromColumn]',
+            'datos_globales_linkFromColumn',
+            values.datos.globales.linkFromColumn,
             '50',
             'CampoTextoCorto'
             )
@@ -40,9 +40,9 @@
             {'caption': 'linktoEntity','visible':'1','varEnv':'0'},
             'field_title',
             'text',
-            'datos[global][linkToEntity]',
-            'datos_global_linkToEntity',
-            values.datos.global.linkToEntity,
+            'datos[globales][linkToEntity]',
+            'datos_globales_linkToEntity',
+            values.datos.globales.linkToEntity,
             '50',
             'CampoTextoCorto'
             )
@@ -51,9 +51,9 @@
             {'caption': 'linkToColumn','visible':'1','varEnv':'0'},
             'field_title',
             'text',
-            'datos[global][linkToColumn]',
-            'datos_global_linkToColumn',
-            values.datos.global.linkToColumn,
+            'datos[globales][linkToColumn]',
+            'datos_globales_linkToColumn',
+            values.datos.globales.linkToColumn,
             '50',
             'CampoTextoCorto'
             )
@@ -65,10 +65,16 @@
     {% if values.datos.especificas %}
     <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {% for nombre,atributos in values.datos.especificas %}
-            {% if user.IdPerfil.Id == '1' %} {% set prefijo = '['~nombre~']' %} {% else %} {% set prefijo = '' %} {% endif %}
+            {% if user.IdPerfil.Id == '1' %} 
+                {% set prefijo = '['~nombre~']' %}
+                {% set visibilidad = '1' %}
+            {% else %} 
+                {% set prefijo = '' %} 
+                {% set visibilidad = values.visibilidad.especificas[nombre] %}
+            {% endif %}
             {% if atributos.values is iterable %}
                 {{ macro.select(
-                    {'caption': prefijo~' '~atributos.caption,'visible':'0','varEnv':'0','updatable':'1'},
+                    {'caption': prefijo~' '~atributos.caption,'visible':visibilidad,'varEnv':'0','updatable':'1'},
                     'field_title',
                     'datos[especificas]['~nombre~']',
                     'datos_especificas_'~nombre,
@@ -79,7 +85,7 @@
                 }}            
             {% else %}
                 {{ macro.input(
-                    {'caption': prefijo~' '~atributos.caption,'visible':'1','varEnv':'0','updatable':'1'},
+                    {'caption': prefijo~' '~atributos.caption,'visible':visibilidad,'varEnv':'0','updatable':'1'},
                     'field_title',
                     'text',
                     'datos[especificas]['~nombre~']',

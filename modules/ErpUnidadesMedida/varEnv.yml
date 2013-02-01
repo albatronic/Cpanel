@@ -1,0 +1,11 @@
+# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO ErpUnidadesMedida
+#
+# Module: ErpUnidadesMedida
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright ARTICO ESTUDIO, SL
+# date 26-01-2013 23:24:50
+#
+# ejemplo:
+#
+# nombreVariable: el texto del caption
+---

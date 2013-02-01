@@ -142,6 +142,62 @@ class PcaeProyectosAppsController extends Controller {
         return array('template' => $template, 'values' => $this->values);
     }
 
+    /**
+     * Devuelve un template mostrando los usuarios de la empresa e indicando si tienen
+     * o no permiso de accesso al proyecto-app
+     * 
+     * La actuliazación de datos se hace via ajax
+     * 
+     * @return array Array(template, values)
+     */
+    public function PermisosAction() {
+        
+        $proApps = new PcaeProyectosApps();
+        $proApp = $proApps->find('PrimaryKeyMD5',$this->request[2]);
+        unset($proApps);
+
+        $idEmpresa = $proApp->getIdProyecto()->getIdEmpresa()->getId();
+        $idProyecto = $proApp->getIdProyecto()->getId();
+        $idApp = $proApp->getIdApp()->getId();
+        $tituloApp = $proApp->getIdApp()->getAplicacion();
+        unset($proApp);
+        
+        $empresa = new PcaeEmpresas($idEmpresa);
+        $usuarios = $empresa->getUsuarios();
+        unset($empresa);
+        
+        $permiso = new PcaePermisos();
+        $rows = $permiso->cargaCondicion("IdUsuario","IdEmpresa='{$idEmpresa}' AND IdProyecto='{$idProyecto}' AND IdApp='$idApp'");
+        unset($permiso);
+        foreach ($rows as $row) {
+            $permiso[$row['IdUsuario']] = true;
+        }
+        
+        $permisos = array();
+        
+        // Para cada usuario de la empresa, miro si tiene permiso de acceso al proyecto-app
+        foreach ($usuarios as $usuario) {
+            
+            $permisos[] = array(
+                'idUsuario' => $usuario->getId(),
+                'nombre' => $usuario->getNombre(),
+                'email' => $usuario->getEMail(),
+                'tienePermiso' => isset($permiso[$usuario->getId()]),
+            );
+        }
+
+        $this->values['tituloApp'] = $tituloApp;
+        $this->values['idEmpresa'] = $idEmpresa;
+        $this->values['idProyecto'] = $idProyecto;
+        $this->values['idApp'] = $idApp;
+        $this->values['usuarios'] = $permisos;
+  
+        return array(
+            'template' => $this->entity . '/permisos.html.twig',
+            'values' => $this->values,
+        );
+        
+    }
 }
 
 ?>

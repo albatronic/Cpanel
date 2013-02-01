@@ -1,13 +1,5 @@
-# Module: CommZonasHorarias
-# Document : modules/CommZonasHorarias/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 23.10.2012 03:10:51
-#
----
 CommZonasHorarias:
-  app: 'Comm'
+  app: Comm
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -43,7 +35,7 @@ CommZonasHorarias:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Zonas Horarias
+  title: 'Zonas Horarias'
   id_video: commzonashorarias
   url_video: null
   feature_list: YES
@@ -473,3 +465,10 @@ CommZonasHorarias:
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 13, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

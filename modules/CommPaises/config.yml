@@ -1,13 +1,5 @@
-# Module: CommPaises
-# Document : modules/CommPaises/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 23.10.2012 02:30:16
-#
----
 CommPaises:
-  app: 'Comm'
+  app: Comm
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -35,7 +27,7 @@ CommPaises:
   controller: Paises
   action: Index
   template: Index
-  parametros: 
+  parametros: null
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
@@ -114,7 +106,7 @@ CommPaises:
       aditional_filter: { order: 1, caption: Moneda, entity: CommMonedas, method: fetchAll, params: Moneda, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdZonaHoraria:
-      title: Zona Horaria
+      title: 'Zona Horaria'
       filter: NO
       list: YES
       visible: true
@@ -123,7 +115,7 @@ CommPaises:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 2, caption: Zona Horaria, entity: CommZonasHorarias, method: fetchAll, params: Zona, type: select, operator: '=', event: null }
+      aditional_filter: { order: 2, caption: 'Zona Horaria', entity: CommZonasHorarias, method: fetchAll, params: Zona, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Latitud:
       title: Latitud
@@ -521,3 +513,10 @@ CommPaises:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

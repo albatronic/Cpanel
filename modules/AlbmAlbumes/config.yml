@@ -1,13 +1,5 @@
-# Module: AlbmAlbumes
-# Document : modules/AlbmAlbumes/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 05.12.2012 00:51:11
-#
----
 AlbmAlbumes:
-  app: 'Albm'
+  app: Albm
   isModuleRoot: 1
   linkModule:
     fromColumn: ''
@@ -41,12 +33,12 @@ AlbmAlbumes:
   parametros: ''
   includesHead:
     twigCss: _global/css.html.twig
-    twigJs: _global/js.html.twig    
+    twigJs: _global/js.html.twig
   login_required: YES
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Álbumes Fotográficos
+  title: 'Álbumes Fotográficos'
   id_video: albmalbumes
   url_video: null
   feature_list: YES
@@ -67,8 +59,8 @@ AlbmAlbumes:
   ordenes_web:
     OrdenPortada:
       columnaMostrar: Titulo
-      filtro: MostrarEnPortada='1'
-      columnaOrden: OrdenPortada     
+      filtro: 'MostrarEnPortada=''1'''
+      columnaOrden: OrdenPortada
   referenced_entities:
     - ValoresSN
     - ValoresPrivacy
@@ -99,7 +91,7 @@ AlbmAlbumes:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 1, caption: Seccion, entity: AlbmSecciones, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: integer, length: 40, min: null, max: null, message: 'Valor Requerido' }      
+      validator: { nullable: NO, type: integer, length: 40, min: null, max: null, message: 'Valor Requerido' }
     Titulo:
       title: Título
       filter: YES
@@ -145,7 +137,7 @@ AlbmAlbumes:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnPortada:
-      title: Mostrar en Portada
+      title: 'Mostrar en Portada'
       filter: NO
       list: NO
       visible: true
@@ -157,7 +149,7 @@ AlbmAlbumes:
       aditional_filter: { order: 1, caption: MostrarEnPortada, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     OrdenPortada:
-      title: Orden Portada
+      title: 'Orden Portada'
       filter: YES
       list: NO
       visible: true
@@ -718,7 +710,7 @@ AlbmAlbumes:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 25, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: NombreApp, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: YES, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
       title: IdAlbumExterno
       filter: NO
@@ -752,3 +744,10 @@ AlbmAlbumes:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

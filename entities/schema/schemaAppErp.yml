@@ -1,0 +1,198 @@
+# -------------------------
+# APP CATALOGO DE PRODUCTOS
+#
+# DATE: 26-01-2013
+# AUTHOR: SERGIO PEREZ
+# COMPANY: ARTICO ESTUDIO
+# -------------------------
+
+# Jerarquia de Categorías, Familias, Subfamilias, etc
+ErpFamilias:
+  engine: mysql
+  charSet:
+  comment: Familias de productos
+  columns:
+    Titulo:           { type: string(255), notnull: true, index: index}
+    Subtitulo:        { type: string(255), notnull: false, default: NULL }
+    Descripcion1:     { type: string(255), notnull: false, default: NULL }
+    Descripcion2:     { type: string(255), notnull: false, default: NULL }     
+    NivelJerarquico:  { type: integer(4), notnull: true, default: 1, index: index }
+    Inventario:       { type: tinyint(1), notnull: true, default: 1, comment: 'Abstract,ValoresSN,IDTipo' }
+    Trazabilidad:     { type: tinyint(1), notnull: true, default: 1, comment: 'Abstract,ValoresSN,IDTipo' }
+    MargenMinimo:     { type: decimal(), notnull: true, default: 0 }
+    MargenWeb:        { type: decimal(), notnull: true, default: 0 }    
+    Caducidad:        { type: integer(4), notnull: true, default: 0 }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+
+# Marcas comerciales / fabricantes
+ErpMarcas:
+  comment: Marcar comerciales/fabricantes
+  columns:
+    Titulo:       { type: string(50), notnull: true, index: index }
+    Descripcion1: { type: string(255), notnull: false, default: NULL }
+    Descripcion2: { type: string(255), notnull: false, default: NULL }     
+    Telefono:     { type: string(30), notnull: true }
+    Web:          { type: string(100), notnull: true }
+    Email:        { type: string(100), notnull: true }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>      
+  relations:
+    
+# Propiedades de los productos (tallas, colores, formatos, etc)
+ErpPropiedades:
+  comment: Propiedades de los productos
+  columns:
+    Titulo: { type: string(30), notnull: true, index: index }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+
+# Valores estandar de las propiedades
+ErpPropiedadesValores:
+  comment: Valores estandar de las propiedades
+  columns:
+    IdPropiedad:  { type: bigint(11), notnull: true, index: index, comment: 'db,ErpPropiedades,Id'}
+    Valor:        { type: string(20), notnull: true }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+  relations:
+    
+# Valores posibles de la tupla: familia-marca-propiedad
+ErpPropiedadesFamiliasMarcas:
+  comment: Valores posibles de la tupla familia-marca-propiedad
+  columns:
+    IdFamilia:    { type: bigint(11), notnull: true, index: index, comment: 'db,ErpFamilias,Id'}
+    IdMarca:      { type: bigint(11), notnull: true, index: index, comment: 'db,ErpMarcas,Id'}
+    IdPropiedad:  { type: bigint(11), notnull: true, index: index, comment: 'db,ErpPropiedades,Id'}
+    Valor:        { type: string(20), notnull: true }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+  relations:
+    
+# Articulos
+ErpArticulos:
+  comment: Artículos
+  columns:
+    Codigo:            { type: string(25), notnull: true, index: unique}
+    Descripcion:       { type: string(255), notnull: true, index: index }
+    IDCategoria:       { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpFamilias,Id' }
+    IDFamilia:         { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpFamilias,Id' }
+    IDSubfamilia:      { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpFamilias,Id' }
+    IDMarca:           { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpMarcas,Id' }
+    Pvd:               { type: decimal(), notnull: true, default: 0}
+    Pvp:               { type: decimal(), notnull: true, default: 0}
+    Margen:            { type: decimal(), notnull: true, default: 0}
+    Pmc:               { type: decimal(), notnull: true, default: 0}
+    IDIva:             { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,CommImpuestos,Id'}    
+    Etiqueta:          { type: string(30), notnull: false, default: NULL, index: index }
+    CodigoEAN:         { type: string(13), notnull: true }
+    Caducidad:         { type: integer(4), notnull: true, default: 0 }
+    Garantia:          { type: string(10), notnull: true, default: NULL }
+    Peso:              { type: decimal(), notnull: true, default: 0 }
+    Volumen:           { type: decimal(), notnull: true, default: 0 }
+    Caracteristicas:   { type: text, notnull: false }
+    FechaUltimoPrecio: { type: datetime, notnull: false, default: NULL }
+    Vigente:           { type: tinyint(1), notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    Inventario:        { type: tinyint(1), notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    Trazabilidad:      { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }    
+    BajoPedido:        { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    PackingCompras:    { type: decimal(), notnull: true, default: 1 }
+    PackingVentas:     { type: decimal(), notnull: true, default: 1 } 
+    Merma:             { type: decimal(), notnull: true, default: 0 } 
+    BloqueoStock:      { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' } 
+    IDEstado:          { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulosEstados,Id' }
+    StockMinimo:       { type: decimal(), notnull: true, default: 0 } 
+    StockMaximo:       { type: decimal(), notnull: true, default: 0 }
+    MinimoVentaAlto:   { type: decimal(), notnull: true, default: 0 }
+    MinimoVentaAncho:  { type: decimal(), notnull: true, default: 0 }    
+    MinimoVenta:       { type: decimal(), notnull: true, default: 0 } 
+    MultiploAlto:      { type: decimal(), notnull: true, default: 0 }  
+    MultiploAncho:     { type: decimal(), notnull: true, default: 0 } 
+    RecargoEnergetico: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }     
+    UMB:               { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpUnidadesMedida,Id' }
+    UMC:               { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpUnidadesMedida,Id' }
+    CUMC:              { type: decimal(), notnull: true, default: 1 }
+    UMA:               { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpUnidadesMedida,Id' }    
+    CUMA:              { type: decimal(), notnull: true, default: 1 }  
+    UMV:               { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpUnidadesMedida,Id' }    
+    CUMV:              { type: decimal(), notnull: true, default: 1 }     
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+  relations:
+    
+# Estados de los artículos
+ErpArticulosEstados:
+  comment: Estados de los artículos
+  columns:
+    Estado: { type: string(50), notnull: true }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    
+# Unidades de medida de los articulos
+ErpUnidadesMedida:
+  comment: Unidades de medida de los articulos
+  columns:
+    UnidadMedida: { type: string(10), notnull: true }
+    CreatedBy:  { type: int(4), notnull: true, default: 0 }
+    CreatedAt:  { type: datetime, notnull: true, }
+    ModifiedBy: { type: int(4), notnull: true, default: 0 }    
+    ModifiedAt: { type: datetime, notnull: true }    
+  relations:    
+    
+# Almacenes
+ErpAlmacenes:
+  comment: Almacenes
+  columns:
+    Nombre:             { type: string(50), notnull: true, index: index }
+    Direccion:          { type: string(50), notnull: true }
+    Poblacion:          { type: string(50), notnull: true }
+    IDProvincia:        { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,CommProvincias,Id' }
+    CodigoPostal:       { type: string(10), notnull: true, default: 0 }
+    Telefono:           { type: string(30), notnull: true, default: '' }
+    Fax:                { type: string(30), notnull: true, default: '' }    
+    EMail:              { type: string(50), notnull: true, default: '' }
+    Tipo:               { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ErpAlmacenesTipos,IDTipo' }
+    ControlUbicaciones: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }    
+    CreatedBy:  { type: int(4), notnull: true, default: 0 }
+    CreatedAt:  { type: datetime, notnull: true }
+    ModifiedBy: { type: int(4), notnull: true, default: 0 }    
+    ModifiedAt: { type: datetime, notnull: true, }    
+  relations:
+    
+# Mapas de almacenes
+ErpAlmacenesMapas:
+  comment: Ubicaciones de almacenes
+  columns:
+    IDAlmacen: { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpAlmacenes,Id' }
+    Ubicacion: { type: string(15), notnull: true, index: index }
+    X:         { type: int(11), notnull: true, default: 0 }
+    Y:         { type: int(11), notnull: true, default: 0 }
+    Z:         { type: int(11), notnull: true, default: 0 }    
+    Alto:      { type: decimal(), notnull: true, default: 0 }
+    Ancho:     { type: decimal(), notnull: true, default: 0 }
+    Fondo:     { type: decimal(), notnull: true, default: 0 }   
+    CreatedBy:  { type: int(4), notnull: true, default: 0 }
+    CreatedAt:  { type: datetime, notnull: true }
+    ModifiedBy: { type: int(4), notnull: true, default: 0 }    
+    ModifiedAt: { type: datetime, notnull: true }        
+  relations:
+    
+# Lotes
+
+# Existencias
+ErpExistencias:
+  comment: Existencias
+  columns:
+    IDAlmacen:   { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpAlmacenes,Id' }
+    IDUbicacion: { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpAlmacenesUbicaciones,Id' }    
+    IDArticulo:  { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulos,Id' }
+    IDLote:      { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpLotes,Id' }
+    Reales:      { type: decimal(), notnull: true, defautl: 0 }
+    Pales:       { type: decimal(), notnull: true, defautl: 0 }  
+    Cajas:       { type: decimal(), notnull: true, defautl: 0 } 
+    Reservadas:  { type: decimal(), notnull: true, defautl: 0 }
+    Entrando:    { type: decimal(), notnull: true, defautl: 0 }    
+    Maximo:      { type: decimal(), notnull: true, defautl: 0 }  
+    Minimo:      { type: decimal(), notnull: true, defautl: 0 }    
+    EnDeposito:  { type: tinyint(1), notnull: true, defautl: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }    
+    CreatedBy:  { type: int(4), notnull: true, default: 0 }
+    CreatedAt:  { type: datetime, notnull: true }
+    ModifiedBy: { type: int(4), notnull: true, default: 0 }    
+    ModifiedAt: { type: datetime, notnull: true}        
+  relations:

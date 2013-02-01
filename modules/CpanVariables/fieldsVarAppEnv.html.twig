@@ -12,6 +12,7 @@
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
         <li class="ui-state-default ui-corner-top"><a href="#tabs-global">Globales</a></li>
         <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-especificas">Específicas</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-varWeb">Visibilidad Var Web</a></li>        
     </ul>
 
     {# VARIABLES WEB GLOBALES A TODOS LOS MODULOS #}
@@ -68,5 +69,24 @@
         {% endfor %}
     </div>
 
+    {# CONTROL VISIBILIDAD VARIABLES WEB #}
+    <div id="tabs-varWeb" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        <h5>Control de visibilidad de variables web</h5>
+        <div id="acordeonVW" style="margin-top:10px;">
+            <h3>Globales [showVarWeb][globales]</h3>
+            <div>
+                {% for nombre,valor in values.datos.showVarWeb.globales %}
+                    {{ macro.input({'caption':'['~nombre~']','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showVarWeb][globales]['~nombre~']','datos_showVarWeb_globales_'~nombre,valor)}}
+                {% endfor %}            
+            </div>
+
+            <h3>Específicas [showVarWeb][especificas]</h3>
+            <div>
+            {% for nombre,valor in values.datos.showVarWeb.especificas %}
+                {{ macro.input({'caption':'['~nombre~']','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showVarWeb][especificas]['~nombre~']','datos_showVarWeb_especificas_'~nombre,valor)}}
+            {% endfor %}
+            </div>
+        </div>
+    </div>        
 </div>
 {% endblock %}

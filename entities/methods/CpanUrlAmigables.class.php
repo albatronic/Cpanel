@@ -36,6 +36,9 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
         // Quito de la entidad asociada los valores de la url amigable
         if (class_exists($this->Entity)) {
             $entidadAsociada = new $this->Entity($this->IdEntity);
+            if (!$entidadAsociada->getStatus())
+                $entidadAsociada = $entidadAsociada->find($entidadAsociada->getPrimaryKeyName(), $this->IdEntity, true);
+
             $entidadAsociada->setUrlPrefix('');
             $entidadAsociada->setSlug('');
             $entidadAsociada->setUrlFriendly('');
@@ -75,7 +78,7 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
         unset($url);
 
         if (count($this->_errores) == 0)
-            $this->actualizaEntidadReferenciada ();
+            $this->actualizaEntidadReferenciada();
     }
 
     public function actualizaEntidadReferenciada() {
@@ -90,7 +93,6 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
 
         if (!$ok)
             $this->_errores[] = "No se ha podido actualizar la url en la entidad referenciada '{$this->Entity}({$this->IdEntity})'. Es posible que esa Entidad/IdEntidad no exista.";
-
     }
 
     /**

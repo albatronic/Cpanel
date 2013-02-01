@@ -139,6 +139,12 @@ class CpanVariablesController {
 
                 case 'Pro':
                     $this->ponValoresDefecto($ambito, $tipo, '', $datos);
+                    if ($tipo == 'Web') {
+                        // Coger la visibilidad de las variables web
+                        $var = new CpanVariables($ambito, 'Env');
+                        $this->values['visibilidad'] = $var->getNode('showVarWeb');
+                        unset($var);
+                    }
                     break;
 
                 case 'App':
@@ -151,22 +157,31 @@ class CpanVariablesController {
                 case 'Mod':
                     $this->ponValoresDefecto($ambito, $tipo, $nombre, $datos);
 
-                    if ($tipo == 'Env') {
+                    switch ($tipo) {
+                        case 'Env':
 
-                        // Constuyo array con los nombres de las columnas del modulo(=entidad)
-                        // para mostrar en el template las variables Web/Env de cada columna.
-                        $archivoConfig = new Form($nombre);
-                        $columnasConfig = $archivoConfig->getNode('columns');
-                        unset($archivoConfig);
-                        // Creo el nodo 'columns' creando si no existen o asignado valores por defecto si no tienen
-                        // provinientes del 'config.yml' de cada módulo
-                        // SI SE AÑADE UNA COLUMNA NUEVA EN config.yml TAMBIEN SERÁ AÑADIDA EN EL FORMULARIO DE VARIABLES
-                        if (is_array($columnasConfig)) {
-                            foreach ($columnasConfig as $columnaConfig => $atributosConfig) {
-                                $valoresActuales = $datos['columns'][$columnaConfig];
-                                $datos['columns'][$columnaConfig] = $this->ponAtributos((array) $valoresActuales, $atributosConfig);
+                            // Constuyo array con los nombres de las columnas del modulo(=entidad)
+                            // para mostrar en el template las variables Web/Env de cada columna.
+                            $archivoConfig = new Form($nombre);
+                            $columnasConfig = $archivoConfig->getNode('columns');
+                            unset($archivoConfig);
+                            // Creo el nodo 'columns' creando si no existen o asignado valores por defecto si no tienen
+                            // provinientes del 'config.yml' de cada módulo
+                            // SI SE AÑADE UNA COLUMNA NUEVA EN config.yml TAMBIEN SERÁ AÑADIDA EN EL FORMULARIO DE VARIABLES
+                            if (is_array($columnasConfig)) {
+                                foreach ($columnasConfig as $columnaConfig => $atributosConfig) {
+                                    $valoresActuales = $datos['columns'][$columnaConfig];
+                                    $datos['columns'][$columnaConfig] = $this->ponAtributos((array) $valoresActuales, $atributosConfig);
+                                }
                             }
-                        }
+                            break;
+
+                        case 'Web':
+                            // Coger la visibilidad de las variables web
+                            $var = new CpanVariables($ambito, 'Env', $nombre);
+                            $this->values['visibilidad'] = $var->getNode('showVarWeb');
+                            unset($var);
+                            break;
                     }
 
                     // Variables especificas
@@ -363,6 +378,14 @@ class CpanVariablesController {
                             $datos['numMaxAudios'] = $valores['numMaxAudios'];
                         if ($datos['modulosConEtiquetas'] == '')
                             $datos['modulosConEtiquetas'] = $valores['modulosConEtiquetas'];
+                        if ($datos['blockRobots'] == '')
+                            $datos['blockRobots'] = $valores['blockRobots'];
+                        if ($datos['visitas']['activo'] == '')
+                            $datos['visitas']['activo'] = $valores['visitas']['activo'];
+                        if ($datos['visitas']['ws'] == '')
+                            $datos['visitas']['ws'] = $valores['visitas']['ws'];
+                        if ($datos['visitas']['frecuenciaHorasBorrado'] == '')
+                            $datos['visitas']['frecuenciaHorasBorrado'] = $valores['visitas']['frecuenciaHorasBorrado'];
                         break;
                     case 'Web' :
                         // Leo el config global del Cpanel
@@ -550,7 +573,7 @@ class CpanVariablesController {
     private function getEspecificas($datosEspecificas) {
 
         foreach ($this->variables->getArrayEspecificas() as $key => $especifica) {
-            $valorActual = $datosEspecificas[$key];
+            $valorActual = $datosEspecificas[$key]['value'];
 
             $especificas[$key] = array(
                 'caption' => $especifica['caption'],

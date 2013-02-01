@@ -15,11 +15,12 @@
     <div id="accordion">
         
         {# GENERAL #}
+        {% if user.IdPerfil.Id == '1' or atributos.AllowsChildren.visible or atributos.BelongsTo.visible or atributos.CodigoAppAsociada.visible or atributos.IdAlbumExterno.visible or atributos.IdSliderAsociado.visible or atributos.IdSeccionEnlaces.visible or atributos.IdSeccionVideos.visible or atributos.Observations.visible %}        
         <h3>General</h3>
         <div>
             <p>
-            {{ macro.input(atributos.Id,'field_title','text',values.controller ~ '[Id]',values.controller ~ '_Id',datos.primaryKeyValue,none,none,110,'disabled') }}
-            {% if user.idPerfil == 1 %}
+            {% if user.IdPerfil.Id == 1 %}
+                {{ macro.input(atributos.Id,'field_title','text',values.controller ~ '[Id]',values.controller ~ '_Id',datos.primaryKeyValue,none,none,110,'disabled') }}                    
                 {{ macro.input(atributos.PrimaryKeyMD5,'field_title','text',values.controller ~ '[PrimaryKeyMD5]',values.controller ~ '_PrimaryKeyMD5',datos.PrimaryKeyMD5,'100','CampoTextoLargo',none,'disabled') }}
                 {{ macro.input(atributos.IsDefault,'field_title','checkbox',values.controller ~ '[IsDefault]',values.controller ~ '_IsDefault',datos.IsDefault.IDTipo,'255','CampoTextoLargo','12') }}
                 {{ macro.input(atributos.IsSuper,'field_title','checkbox',values.controller ~ '[IsSuper]',values.controller ~ '_IsSuper',datos.IsSuper.IDTipo,'255','CampoTextoLargo','12') }}
@@ -35,8 +36,10 @@
             {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea',100)}}                
             </p>
         </div>
+        {% endif %}
         
         {# FECHAS #}
+        {% if user.IdPerfil.Id == '1' or atributos.PublishedAt.visible or atributos.ActiveFrom.visible or atributos.ActiveTo.visible %}
         <h3>Fechas</h3>
         <div>
             <p>
@@ -45,10 +48,11 @@
             {{ macro.fecha(atributos.ActiveTo,'field_title',values.controller ~ '[ActiveTo]',values.controller ~ '_ActiveTo',datos.ActiveTo,'19','datepicker',105) }}                
             </p>
         </div>
+        {% endif %}
         
         {# META #}
-        {% if values.varEnvMod.metatagTitleManagement > '0' or user.IdPerfil == '1' %}
-        <h3>Meta</h3>
+        {% if values.varEnvMod.metatagTitleManagement > '0' or user.IdPerfil.Id == '1' %}
+        <h3>Posicionamiento (SEO)</h3>
         <div>
             <p>
             {{ macro.input(atributos.LockMetatagTitle,'field_title','checkbox',values.controller ~ '[LockMetatagTitle]',values.controller ~ '_LockMetatagTitle',datos.LockMetatagTitle.IDTipo,'255','CampoTextoLargo','12') }}
@@ -58,13 +62,14 @@
             {{ macro.textarea(atributos.MetatagKeywords, 'field_title', values.controller ~ '[MetatagKeywords]', values.controller ~ '_MetatagKeywords', datos.MetatagKeywords, none, none, 'textarea',116) }}
             {{ macro.input(atributos.MetatagTitleSimple,'field_title','checkbox',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',datos.MetatagTitleSimple.IDTipo,'255','CampoTextoLargo','12') }}
             {{ macro.select(atributos.MetatagTitlePosition,'field_title',values.controller ~ '[MetatagTitlePosition]',values.controller ~ '_MetatagTitlePosition',none,datos.MetatagTitlePosition.IDTipo,datos.MetatagTitlePosition.fetchAll(none,0),'chzn-select',118)}}                
+            {{ macro.input(atributos.RevisitAfter,'field_title','text',values.controller ~ '[RevisitAfter]',values.controller ~ '_RevisitAfter',datos.RevisitAfter,none,none,'255','CampoTextoLargo','12') }}                    
             </p>
         </div>        
         {% endif %}
         
         {% if datos.getPrimaryKeyValue %}
             {# IMÁGENES #}
-            {% if values.varEnvMod.numberOfImages > '0' or user.IdPerfil == '1' %}
+            {% if values.varEnvMod.numberOfImages > '0' or user.IdPerfil.Id == '1' %}
             <h3>Imágenes ({{datos.getNumberOfDocuments('image%')}})</h3>
             <div>
                 <p>
@@ -149,7 +154,7 @@
             {% endif %}
             
             {# SOLAPA TINY #}
-            {% if values.varEnvMod.withTiny == '1' or user.IdPerfil == '1' %}
+            {% if values.varEnvMod.withTiny == '1' or user.IdPerfil.Id == '1' %}
             <h3>Imágenes para Tiny ({{datos.getNumberOfDocuments('tiny')}})</h3>
             <div id="solapaTiny">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
@@ -159,7 +164,7 @@
             {% endif %}
 
             {# SOLAPA GALERIA #}
-            {% if values.varEnvMod.withGalery == '1' or user.IdPerfil == '1' %}
+            {% if values.varEnvMod.withGalery == '1' or user.IdPerfil.Id == '1' %}
             <h3>Galería de imágenes ({{datos.getNumberOfDocuments('galery','IsThumbnail=0')}})</h3>
             <div id="solapaGalery">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
@@ -169,7 +174,7 @@
             {% endif %}
 
             {# SOLAPA DOCUMENTOS #}
-            {% if values.varEnvMod.withDocuments == '1' or user.IdPerfil == '1' %}
+            {% if values.varEnvMod.withDocuments == '1' or user.IdPerfil.Id == '1' %}
             <h3>Documentos ({{datos.getNumberOfDocuments('document')}})</h3>
             <div id="solapaDocuments">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
@@ -179,7 +184,7 @@
             {% endif %}
 
             {# SOLAPA VIDEOS #}
-            {% if values.varEnvMod.withVideos == '1' or user.IdPerfil == '1' %}
+            {% if values.varEnvMod.withVideos == '1' or user.IdPerfil.Id == '1' %}
             <h3>Vídeos ({{datos.getNumberOfDocuments('video')}})</h3>
             <div id="solapaVideos">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
@@ -189,7 +194,7 @@
             {% endif %}
 
             {# SOLAPA AUDIOS #}
-            {% if values.varEnvMod.withAudios == '1' or user.IdPerfil == '1' %}
+            {% if values.varEnvMod.withAudios == '1' or user.IdPerfil.Id == '1' %}
             <h3>Audios ({{datos.getNumberOfDocuments('audio')}})</h3>
             <div id="solapaAudios">
                 <iframe width='100%' height='380' scrolling='yes' style='border: 0px dotted grey;' 
@@ -199,8 +204,8 @@
             {% endif %}
 
             {# SOLAPA URLS #}
-            {% if values.varEnvMod.urlFriendlyManagement == '1' or user.IdPerfil == '1' %}            
-            <h3>Url Amigable (http:/{{app.path}}{{datos.UrlFriendly}})</h3>
+            {% if user.IdPerfil.Id == '1' or values.varEnvMod.urlFriendlyManagement == '1' %}            
+            <h3>Url Amigable {% if datos.UrlFriendly %}({{datos.UrlFriendly}}){% endif %}</h3>
             <div>
                 {{ macro.input(atributos.LockUrlPrefix,'field_title','checkbox',values.controller ~ '[LockUrlPrefix]',values.controller ~ '_LockUrlPrefix',datos.LockUrlPrefix.IDTipo,'255','CampoTextoLargo','12') }}
                 {% if datos.LockUrlPrefix.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
@@ -214,7 +219,7 @@
                 {# SI EL USUARIO ES SUPER, SE MUESTRAN LOS CAMPOS CONTROLLER, ACTION, TEMPLATE y PARAMETERS
                    QUE ESTAN EN LA TABLA CpanUrlAmigables
                 #}
-                {% if user.idPerfil == 1 %}
+                {% if user.IdPerfil.Id == 1 %}
                     {% set objetoUrlAmigable = datos.getObjetoUrlAmigable %}
                     <input name="objetoUrlAmigable[Id]" value="{{objetoUrlAmigable.Id}}" type="hidden" />
                     {{ macro.input({'caption':'Controller','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Controller]','CpanUrlAmigables_Controller',objetoUrlAmigable.Controller,'255','CampoTextoLargo','12') }}
@@ -223,9 +228,11 @@
                     {{ macro.input({'caption':'Parameters','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Parameters]','CpanUrlAmigables_Parameters',objetoUrlAmigable.Parameters,'255','CampoTextoLargo','12') }}
                 {% endif %}
             </div>
-
+            {% endif %}
+            
             {# SOLAPA URL DESTINO #}
-            <h3>Url Destino</h3>
+            {% if user.IdPerfil.Id == 1 or atributos.UrlTarget.visible == 1 or atributos.UrlParameters.visible == 1 or atributos.UrlRequestMethod.visible == 1 or atributos.UrlOrigin.visible == 1 or atributos.UrlTargetBlank.visible == 1 or atributos.UrlIsHttps.visible == 1 %}
+            <h3>Url Destino {% if datos.UrlTarget %}({{datos.UrlTarget}}){% endif %}</h3>
             <div>
                 {{ macro.input(atributos.UrlTarget,'field_title','text',values.controller ~ '[UrlTarget]',values.controller ~ '_UrlTarget',datos.UrlTarget,'255','CampoTextoLargo',112) }}
                 {{ macro.input(atributos.UrlParameters,'field_title','text',values.controller ~ '[UrlParameters]',values.controller ~ '_UrlParameters',datos.UrlParameters,'255','CampoTextoLargo',112) }}
@@ -237,7 +244,7 @@
             {% endif %}
             
             {# SOLAPA SITEMAP #}
-            {% if values.varEnvMod.showSiteMapManagement == '1' or user.IdPerfil == '1' %}              
+            {% if user.IdPerfil.Id == '1' or values.varEnvMod.showSiteMapManagement == '1' %}              
             <h3>Site Map</h3>
             <div>
                 {{ macro.input(atributos.ShowOnSitemap,'field_title','checkbox',values.controller ~ '[ShowOnSitemap]',values.controller ~ '_ShowOnSitemap',datos.ShowOnSitemap.IDTipo,'255','CampoTextoLargo','12') }}
@@ -247,6 +254,7 @@
             {% endif %}
             
             {# SOLAPA AUDITORIA #}
+            {% if user.IdPerfil.Id == 1 or atributos.Checked.visible == 1 or atributos.Privacy.visible == 1 or atributos.AccessProfileList.visible == 1 or atributos.NumberVisits.visible == 1 or atributos.DateTimeLastVisit.visible == 1 %}
             <h3>Auditoría</h3>
             <div>
                 {{ macro.input(atributos.Checked,'field_title','checkbox',values.controller ~ '[Checked]',values.controller ~ '_Checked',datos.Checked.IDTipo,'255','CampoTextoLargo','12') }}
@@ -270,8 +278,10 @@
                     {% endif %}
                 {% endif %}
             </div>
+            {% endif %}
 
             {# SOLAPA MOSTRAR... #}
+            {% if user.IdPerfil.Id == 1 or atributos.ShowGalery.visible == 1 or atributos.ShowDocuments.visible == 1 or atributos.ShowRelatedLinks.visible == 1 or atributos.ShowRelatedContents == 1 or atributos.ShowPublishedAt.visible == 1 %}
             <h3>Mostrar ...</h3>
             <div>
                 {{ macro.input(atributos.ShowGalery,'field_title','checkbox',values.controller ~ '[ShowGalery]',values.controller ~ '_ShowGalery',datos.ShowGalery.IDTipo,'255','CampoTextoLargo','12') }}
@@ -279,7 +289,8 @@
                 {{ macro.input(atributos.ShowRelatedLinks,'field_title','checkbox',values.controller ~ '[ShowRelatedLinks]',values.controller ~ '_ShowRelatedLinks',datos.ShowRelatedLinks.IDTipo,'255','CampoTextoLargo','12') }}
                 {{ macro.input(atributos.ShowRelatedContents,'field_title','checkbox',values.controller ~ '[ShowRelatedContents]',values.controller ~ '_ShowRelatedContents',datos.ShowRelatedContents.IDTipo,'255','CampoTextoLargo','12') }}
                 {{ macro.input(atributos.ShowPublishedAt,'field_title','checkbox',values.controller ~ '[ShowPublishedAt]',values.controller ~ '_ShowPublishedAt',datos.ShowPublishedAt.IDTipo,'255','CampoTextoLargo','12') }}
-            </div>            
+            </div>
+            {% endif %}
         {% endif %}
     </div>
     

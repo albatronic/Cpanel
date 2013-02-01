@@ -1,13 +1,5 @@
-# Module: CommBancosOficinas
-# Document : modules/CommBancosOficinas/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 04.11.2012 20:25:21
-#
----
 CommBancosOficinas:
-  app: 'Comm'
+  app: Comm
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -46,7 +38,7 @@ CommBancosOficinas:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Oficinas Bancarias
+  title: 'Oficinas Bancarias'
   id_video: commbancosoficinas
   url_video: null
   feature_list: YES
@@ -54,7 +46,7 @@ CommBancosOficinas:
   entity: CommBancosOficinas
   table: CommBancosOficinas
   primarykey: Id
-  linkBy: 'IdBanco'
+  linkBy: IdBanco
   records_per_page: 15
   order_by:
     -
@@ -758,3 +750,10 @@ CommBancosOficinas:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

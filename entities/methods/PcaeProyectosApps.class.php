@@ -17,7 +17,8 @@ class PcaeProyectosApps extends PcaeProyectosAppsEntity {
 
     /**
      * Asigna una app a un proyecto
-     * y le da permisos de acceso al usuario en curso
+     * y le da permisos de acceso al usuario en curso y 
+     * todos los usuarios adscritos a la empresa
      * 
      * @return boolean
      */
@@ -25,13 +26,30 @@ class PcaeProyectosApps extends PcaeProyectosAppsEntity {
         $id = parent::create();
 
         if ($id) {
+            $idEmpresa = $this->getIdProyecto()->getIdEmpresa()->getId();
+            $idProyecto = $this->getIdProyecto()->getId();
+
             // Asignar permiso de acceso al usuario en curso
             $permiso = new PcaePermisos();
             $permiso->setIdUsuario($_SESSION['USER']['user']['Id']);
-            $permiso->setIdEmpresa($this->getIdProyecto()->getIdEmpresa()->getId());
-            $permiso->setIdProyecto($this->getIdProyecto()->getId());
+            $permiso->setIdEmpresa($idEmpresa);
+            $permiso->setIdProyecto($idProyecto);
             $permiso->setIdApp($this->IdApp);
             $permiso->create();
+
+            // Asignar permiso de acceso a todos los usuarios adscritos a la empresa
+            $usuario = new PcaeEmpresasUsuarios();
+            $rows = $usuario->cargaCondicion("IdUsuario", "IdEmpresa='{$idEmpresa}'");
+            unset($usuario);
+            foreach ($rows as $row)
+                if ($row['IdUsuario'] != $_SESSION['USER']['user']['Id']) {
+                    $permiso = new PcaePermisos();
+                    $permiso->setIdUsuario($row['IdUsuario']);
+                    $permiso->setIdEmpresa($idEmpresa);
+                    $permiso->setIdProyecto($idProyecto);
+                    $permiso->setIdApp($this->IdApp);
+                    $permiso->create();
+                }
         }
 
         return $id;

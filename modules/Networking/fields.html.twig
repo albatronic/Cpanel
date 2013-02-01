@@ -4,16 +4,20 @@
 
   author: Sergio Pérez <sergio.perez@albatronic.com>
   copyright: INFORMATICA ALBATRONIC SL
-  date 16.01.2013 19:04:53
+  date 18.01.2013 11:37:50
 #}
-
-{{ macro.foco(values.controller ~ '_Titulo') }}
 <div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul>
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
             <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Red Social{%endif%}</a>
             {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}            
         </li>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'facebook'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#facebook" onclick='$( "#solapaActiva" ).val("facebook");'>Facebook</a>         
+        </li> 
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'tweeter'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#tweeter" onclick='$( "#solapaActiva" ).val("tweeter");'>Tweeter</a>         
+        </li>          
         {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
             <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
@@ -25,11 +29,27 @@
         {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'50','CampoTextoLargo','1') }}
         {{ macro.input(atributos.IdUsuario,'field_title','text',values.controller ~ '[IdUsuario]',values.controller ~ '_IdUsuario',datos.IdUsuario,'50','CampoTextoLargo','2') }}
         {{ macro.input(atributos.Url,'field_title','text',values.controller ~ '[Url]',values.controller ~ '_Url',datos.Url,'255','CampoTextoLargo','3') }}
-        {{ macro.input(atributos.NumeroTweets,'field_title','text',values.controller ~ '[NumeroTweets]',values.controller ~ '_NumeroTweets',datos.NumeroTweets,'4','CampoUnidades','4') }}
-        {{ macro.select(atributos.ConAvatar,'field_title',values.controller ~ '[ConAvatar]',values.controller ~ '_ConAvatar',none,datos.ConAvatar.ConAvatar,datos.ConAvatar.fetchAll('Descripcion',0),'chzn-select','5')}}
+        {{ macro.input(atributos.NumeroItems,'field_title','text',values.controller ~ '[NumeroItems]',values.controller ~ '_NumeroItems',datos.NumeroItems,'4','CampoUnidades','4') }}
+        {{ macro.input(atributos.MostrarAvatar,'field_title','checkbox',values.controller ~ '[MostrarAvatar]',values.controller ~ '_MostrarAvatar',datos.MostrarAvatar.IDTipo,'255','CampoTextoLargo','5') }}
         {{ macro.input(atributos.Mensaje,'field_title','text',values.controller ~ '[Mensaje]',values.controller ~ '_Mensaje',datos.Mensaje,'255','CampoTextoLargo','6') }}
-    </div>      
-            
+        {{ macro.select(atributos.Font,'field_title',values.controller ~ '[Font]',values.controller ~ '_Font',none,datos.Font.Font,datos.Font.fetchAll('IDTipo'),'chzn-select','9')}}
+        {{ macro.input(atributos.Class,'field_title','text',values.controller ~ '[Class]',values.controller ~ '_Class',datos.Class,'50','CampoTextoLargo','10') }}
+        {{ macro.input(atributos.Ancho,'field_title','text',values.controller ~ '[Ancho]',values.controller ~ '_Ancho',datos.Ancho,'4','CampoUnidades','13') }}
+        {{ macro.input(atributos.Alto,'field_title','text',values.controller ~ '[Alto]',values.controller ~ '_Alto',datos.Alto,'4','CampoUnidades','14') }}
+        {{ macro.select(atributos.Size,'field_title',values.controller ~ '[Size]',values.controller ~ '_Size',none,datos.Size.Size,datos.Size.fetchAll('IDTipo'),'chzn-select','15')}}
+    </div> 
+        
+    <div id="facebook" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input(atributos.BotonEnviar,'field_title','checkbox',values.controller ~ '[BotonEnviar]',values.controller ~ '_BotonEnviar',datos.BotonEnviar.IDTipo,'255','CampoTextoLargo','7') }}
+        {{ macro.select(atributos.ModoMostrar,'field_title',values.controller ~ '[ModoMostrar]',values.controller ~ '_ModoMostrar',none,datos.ModoMostrar.ModoMostrar,datos.ModoMostrar.fetchAll('IDTipo'),'chzn-select','8')}}
+        {{ macro.select(atributos.Action,'field_title',values.controller ~ '[Action]',values.controller ~ '_Action',none,datos.Action.Action,datos.Action.fetchAll('IDTipo'),'chzn-select','11')}}            
+        {{ macro.select(atributos.ColorFondo,'field_title',values.controller ~ '[ColorFondo]',values.controller ~ '_ColorFondo',none,datos.ColorFondo.ColorFondo,datos.ColorFondo.fetchAll('IDTipo'),'chzn-select','16')}}
+        {{ macro.input(atributos.ColorBorde,'field_title','text',values.controller ~ '[ColorBorde]',values.controller ~ '_ColorBorde',datos.ColorBorde,'25','CampoTextoCorto','17') }}                 
+    </div>
+        
+    <div id="tweeter" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.select(atributos.Count,'field_title',values.controller ~ '[Count]',values.controller ~ '_Count',none,datos.Count.Count,datos.Count.fetchAll('IDTipo'),'chzn-select','12')}}        
+    </div>        
     {% include '_global/fieldsComunes.html.twig' %}        
 </div>
 {{ macro.foco(values.controller ~ '_Titulo') }}

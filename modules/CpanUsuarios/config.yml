@@ -1,13 +1,5 @@
-# Module: CpanUsuarios
-# Document : modules/CpanUsuarios/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 07.12.2012 23:55:49
-#
----
 CpanUsuarios:
-  app: 'Cpan'
+  app: Cpan
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -41,7 +33,7 @@ CpanUsuarios:
   parametros: ''
   includesHead:
     twigCss: _global/css.html.twig
-    twigJs: _global/js.html.twig  
+    twigJs: _global/js.html.twig
   login_required: YES
   permission_control: YES
   favourite_control: NO
@@ -707,3 +699,10 @@ CpanUsuarios:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

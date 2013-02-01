@@ -293,9 +293,7 @@
                    tabindex="{{ tabindex }}"
                    onchange="{{ _self.alertSave }}"
                    {% if atributos.updatable == '0' %} disabled {% endif %}
-                   >
-        {{value}}
-        </textarea>
+                   >{{value}}</textarea>
     </div>
 </div>
 </li>
@@ -541,4 +539,24 @@ $('.title_icon span').css('background','url({{appPath}}/images/alert.png)');
        allowFullScreen='true'
 />
 {% endif %}
+{% endmacro %}
+
+{#
+    MACRO PARA RECORTAR TEXTOS
+
+    Pinta los primeros 'nCaracteres' del 'texto' y si la longitud del texto
+    es mayor al número de caracteres recortados, pinta también puntos suspensivos
+
+    USO:    
+        {{ macro.recortaTexto('Hola buenos días',6)}}
+        esto pinta: Hola b ...
+
+    @param string texto El texto a recortar
+    @param int nCaracteres el número de caracteres a mostrar
+#}
+{% macro recortaTexto (texto, nCaracteres) %}
+    {% if texto|length > nCaracteres %}
+        {% set puntos = "..." %}
+    {% endif %}
+    {{ texto|slice(0,nCaracteres) }} {{puntos}}
 {% endmacro %}

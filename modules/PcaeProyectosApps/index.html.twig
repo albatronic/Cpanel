@@ -30,6 +30,16 @@
                 {% include '_global/linkList.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
             {% endif %}
 
+            {% if values.datos.Id %}
+                <div id="testConexion">
+                    <a href="#" onclick="
+                        $('#action_{{ values.controller }}').val('ProbarConexion');
+                        loading('testConexion');
+                        submitForm('manto_{{ values.controller }}');" 
+                    >Probar Conexión</a>
+                </div>
+                <a href="#" onclick="window.open('{{app.path}}/{{values.controller}}/Permisos/{{values.datos.PrimaryKeyMD5}}','Permisos','width=400,height=600');">Permisos</a>     
+            {% endif %}
 	{% endblock %}
         </div>
 

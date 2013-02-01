@@ -1,13 +1,5 @@
-# Module: SldZonas
-# Document : modules/SldZonas/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 10.12.2012 17:38:03
-#
----
 SldZonas:
-  app: 'Sld'
+  app: Sld
   isModuleRoot: 1
   linkModule:
     fromColumn: ''
@@ -46,7 +38,7 @@ SldZonas:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Zonas de Sliders
+  title: 'Zonas de Sliders'
   id_video: sldzonas
   url_video: null
   feature_list: YES
@@ -95,7 +87,7 @@ SldZonas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     NumeroMaximoSliders:
-      title: Número Máximo de Sliders
+      title: 'Número Máximo de Sliders'
       filter: YES
       list: YES
       visible: true
@@ -106,7 +98,7 @@ SldZonas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
     NumeroPosicionesSliders:
-      title: Número posiciones de Sliders
+      title: 'Número posiciones de Sliders'
       filter: YES
       list: YES
       visible: true
@@ -115,7 +107,7 @@ SldZonas:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }      
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
     Observations:
       title: Observations
       filter: NO
@@ -701,3 +693,10 @@ SldZonas:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

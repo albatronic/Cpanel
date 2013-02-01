@@ -1,13 +1,5 @@
-# Module: EvenEventos
-# Document : modules/EvenEventos/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 08.12.2012 01:14:51
-#
----
 EvenEventos:
-  app: 'Even'
+  app: Even
   isModuleRoot: 1
   linkModule:
     fromColumn: ''
@@ -118,7 +110,7 @@ EvenEventos:
       aditional_filter: { order: 1, caption: Fecha, type: range, operator: '>=' }
       validator: { nullable: NO, type: date, length: 10, min: null, max: null, message: 'Valor Requerido' }
     HoraInicio:
-      title: Hora Inicio
+      title: 'Hora Inicio'
       filter: YES
       list: YES
       visible: true
@@ -129,7 +121,7 @@ EvenEventos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: null, length: false, min: null, max: null, message: 'Valor Requerido' }
     HoraFin:
-      title: Hora Fin
+      title: 'Hora Fin'
       filter: YES
       list: YES
       visible: true
@@ -724,3 +716,10 @@ EvenEventos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

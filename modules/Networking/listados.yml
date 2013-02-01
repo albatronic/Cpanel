@@ -3,7 +3,7 @@
 #
 # @author: Sergio Pérez <sergio.perez@albatronic.com>
 # @copyright: INFORMATICA ALBATRONIC SL
-# @date 16.01.2013 19:04:53
+# @date 18.01.2013 11:37:50
 #
 ---
 listados:
@@ -24,6 +24,17 @@ listados:
       Titulo: { title: Titulo, length: '50', align: L, type: string, total: NO, formula: null, format: null }
       IdUsuario: { title: IdUsuario, length: '50', align: L, type: string, total: NO, formula: null, format: null }
       Url: { title: Url, length: '255', align: L, type: string, total: NO, formula: null, format: null }
-      NumeroTweets: { title: NumeroTweets, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
-      ConAvatar: { title: ConAvatar, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      NumeroItems: { title: NumeroItems, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
+      MostrarAvatar: { title: MostrarAvatar, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
       Mensaje: { title: Mensaje, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      BotonEnviar: { title: BotonEnviar, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      ModoMostrar: { title: ModoMostrar, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      Font: { title: Font, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      Class: { title: Class, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Action: { title: Action, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      Ancho: { title: Ancho, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
+      Alto: { title: Alto, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
+      Size: { title: Size, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      ColorFondo: { title: ColorFondo, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }
+      ColorBorde: { title: ColorBorde, length: '25', align: L, type: string, total: NO, formula: null, format: null }
+      Count: { title: Count, length: '1', align: L, type: tinyint, total: NO, formula: null, format: null }

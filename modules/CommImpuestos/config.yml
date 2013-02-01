@@ -1,13 +1,5 @@
-# Module: CommImpuestos
-# Document : modules/CommImpuestos/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 23.10.2012 03:07:42
-#
----
 CommImpuestos:
-  app: 'Comm'
+  app: Comm
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -508,3 +500,10 @@ CommImpuestos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

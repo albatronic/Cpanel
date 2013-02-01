@@ -1,0 +1,14 @@
+{#
+  Module: ErpUnidadesMedida
+  Document : modules\ErpUnidadesMedida\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 26.01.2013 23:24:50
+#}
+
+{{ macro.input(atributos.UnidadMedida,'field_title','text',values.controller ~ '[UnidadMedida]',values.controller ~ '_UnidadMedida',datos.UnidadMedida,'10','CampoTextoCorto','1') }}
+
+{% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_UnidadMedida') }}

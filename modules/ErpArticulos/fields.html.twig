@@ -1,0 +1,129 @@
+{#
+  Module: ErpArticulos
+  Document : modules\ErpArticulos\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 26.01.2013 19:57:09
+#}
+
+<script type="text/javascript">
+function RecalculaPrecios(campo)
+{
+    if ((campo=='Pvd') || (campo=='Margen')) 
+        $('#{{values.controller}}_Pvp').val( Redondear($('#{{values.controller}}_Pmc').val()*(1+$('#{{values.controller}}_Margen').val()/100),2) );
+    if (campo=='Pvp'){
+        if ($('#{{values.controller}}_Pmc').val()!=0) 
+            $('#{{values.controller}}_Margen').val( Redondear(100*($('#{{values.controller}}_Pvp').val() - $('#{{values.controller}}_Pmc').val())/$('#{{values.controller}}_Pmc').val(),2) );
+        else $('#{{values.controller}}_Margen').val('100');
+    }
+    $('#pvpconiva').val( Redondear($('#{{values.controller}}_Pvp').val()*(1+$('#valoriva').val()/100),2) );
+}
+
+function VerDatosLogisticos(seccion,SiNo){
+    if (SiNo=='S'){seccion.style.display=""}
+    else{seccion.style.display="none"}
+}
+</script>
+
+{% if user.Rol.IDTipo != '9'%}
+    {% set tipo = 'hidden' %}
+    {% set readOnly = 'READONLY' %}
+{% else %}
+    {% set tipo = 'text' %}
+    {% set readOnly = '' %}
+{% endif %}
+
+{% set pvpconiva = datos.Pvp * (1 + datos.IDIva.Valor/100)%}
+
+<input id="valoriva" type="hidden" value="{{datos.IDIva.Valor}}" />
+
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Descripcion%}<b>{{datos.Descripcion|slice(0,40)}}</b> ...{%else%}Producto{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
+        </li>
+        {% if datos.Id %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'stock'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#stock" onclick='$( "#solapaActiva" ).val("stock");'>Stock</a>
+        </li> 
+        {% if atributos.UMB.visible.IDTipo %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'unidadesMedida'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#unidadesMedida" onclick='$( "#solapaActiva" ).val("unidadesMedida");'>Udes. de Medida</a>
+        </li>
+        {% endif %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'caracteristicas'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#caracteristicas" onclick='$( "#solapaActiva" ).val("caracteristicas");'>Características</a>
+        </li>        
+        {% endif %}
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}                      
+    </ul>
+        
+    <div id="general">
+        {{ macro.input(atributos.Vigente,'field_title','checkbox',values.controller ~ '[Vigente]',values.controller ~ '_Vigente',datos.Vigente.IDTipo,'255','CampoTextoLargo','0')}}
+        {{ macro.input(atributos.Codigo,'field_title','text',values.controller ~ '[Codigo]',values.controller ~ '_Codigo',datos.Codigo,'25','CampoTextoCorto','1') }}
+        {{ macro.input(atributos.Descripcion,'field_title','text',values.controller ~ '[Descripcion]',values.controller ~ '_Descripcion',datos.Descripcion,'255','CampoTextoLargo','2') }}
+        {{ macro.select(atributos.IDMarca,'field_title',values.controller ~ '[IDMarca]',values.controller ~ '_IDMarca',none,datos.IDMarca.Id,datos.IDMarca.fetchAll('Titulo',0),'chzn-select','3')}}
+        {{ macro.input(atributos.IDCategoria,'field_title','text',values.controller ~ '[IDCategoria]',values.controller ~ '_IDCategoria',datos.IDCategoria.Id,'255','CampoTextoLargo','4','','',['categorias','Titulo',datos.IDCategoria.Titulo]) }}            
+        {{ macro.input(atributos.IDFamilia,'field_title','text',values.controller ~ '[IDFamilia]',values.controller ~ '_IDFamilia',datos.IDFamilia.Id,'255','CampoTextoLargo','5','','',['familias','Titulo',datos.IDFamilia.Titulo,values.controller ~ '_IDCategoria'])}}
+        {{ macro.input(atributos.IDSubfamilia,'field_title','text',values.controller ~ '[IDSubfamilia]',values.controller ~ '_IDSubfamilia',datos.IDSubfamilia.Id,'255','CampoTextoLargo','6','','',['subfamilias','Titulo',datos.IDSubfamilia.Titulo,values.controller ~ '_IDFamilia'])}}
+        {{ macro.input(atributos.Pvd,'field_title','text',values.controller ~ '[Pvd]',values.controller ~ '_Pvd',datos.Pvd|number_format(2, '.', ','),'10','CampoImporte','7',none,'RecalculaPrecios("Pvd");') }}
+        {{ macro.input(atributos.Pmc,'field_title','text',values.controller ~ '[Pmc]',values.controller ~ '_Pmc',datos.Pmc|number_format(2, '.', ','),'10','CampoImporte','8','READONLY') }}
+        {{ macro.input(atributos.Margen,'field_title','text',values.controller ~ '[Margen]',values.controller ~ '_Margen',datos.Margen,'10','CampoImporte','9',none,'RecalculaPrecios("Margen");') }}
+        {{ macro.input(atributos.Pvp,'field_title','text',values.controller ~ '[Pvp]',values.controller ~ '_Pvp',datos.Pvp|number_format(2, '.', ','),'10','CampoImporte','10',none,'RecalculaPrecios("Pvp");') }}
+        {{ macro.select(atributos.IDIva,'field_title',values.controller ~ '[IDIva]',values.controller ~ '_IDIva',none,datos.IDIva.Id,datos.IDIva.fetchAll('Nombre',0),'chzn-select','11')}}
+        {{ macro.input({'caption':'PVP C/Iva','visible':'1','varEnv':'0'},'field_title','text','pvpconiva','pvpconiva',pvpconiva|number_format(2, '.', ','),'10','CampoImporte','12','READONLY') }}
+        {{ macro.input(atributos.Etiqueta,'field_title','text',values.controller ~ '[Etiqueta]',values.controller ~ '_Etiqueta',datos.Etiqueta,'30','CampoTextoLargo','13') }}
+        {{ macro.input(atributos.CodigoEAN,'field_title','text',values.controller ~ '[CodigoEAN]',values.controller ~ '_CodigoEAN',datos.CodigoEAN,'13','CampoTextoCorto','14') }}
+        {{ macro.fecha(atributos.FechaUltimoPrecio,'field_title',values.controller ~ '[FechaUltimoPrecio]',values.controller ~ '_FechaUltimoPrecio',datos.FechaUltimoPrecio,'15','datepicker','19')}}
+        {{ macro.select(atributos.IDEstado,'field_title',values.controller ~ '[IDEstado]',values.controller ~ '_IDEstado',none,datos.IDEstado.Id,datos.IDEstado.fetchAll('Estado'),'chzn-select','16')}}
+        {{ macro.input(atributos.Garantia,'field_title','text',values.controller ~ '[Garantia]',values.controller ~ '_Garantia',datos.Garantia,'10','CampoTextoCorto','17') }}
+        {{ macro.input(atributos.RecargoEnergetico,'field_title','checkbox',values.controller ~ '[RecargoEnergetico]',values.controller ~ '_RecargoEnergetico',datos.RecargoEnergetico.IDTipo,'255','CampoTextoLargo','18')}}
+    </div>
+
+    {% if datos.Id %}
+    <div id="stock">
+        {{ macro.input(atributos.BajoPedido,'field_title','checkbox',values.controller ~ '[BajoPedido]',values.controller ~ '_BajoPedido',datos.BajoPedido.IDTipo,'255','CampoTextoLargo','20')}}
+        {{ macro.input(atributos.Inventario,'field_title','checkbox',values.controller ~ '[Inventario]',values.controller ~ '_Inventario',datos.Inventario.IDTipo,'255','CampoTextoLargo','20')}}
+        {{ macro.input(atributos.BloqueoStock,'field_title','checkbox',values.controller ~ '[BloqueoStock]',values.controller ~ '_BloqueoStock',datos.BloqueoStock.IDTipo,'255','CampoTextoLargo','20')}}
+        {{ macro.input(atributos.Trazabilidad,'field_title','checkbox',values.controller ~ '[Trazabilidad]',values.controller ~ '_Trazabilidad',datos.Trazabilidad.IDTipo,'255','CampoTextoLargo','20')}}
+        {{ macro.input(atributos.StockMinimo,'field_title','text',values.controller ~ '[StockMinimo]',values.controller ~ '_StockMinimo',datos.StockMinimo,'10','CampoImporte','29') }}
+        {{ macro.input(atributos.StockMaximo,'field_title','text',values.controller ~ '[StockMaximo]',values.controller ~ '_StockMaximo',datos.StockMaximo,'10','CampoImporte','30') }}
+        {{ macro.input(atributos.PackingCompras,'field_title','text',values.controller ~ '[PackingCompras]',values.controller ~ '_PackingCompras',datos.PackingCompras,'10','CampoImporte','24') }}
+        {{ macro.input(atributos.PackingVentas,'field_title','text',values.controller ~ '[PackingVentas]',values.controller ~ '_PackingVentas',datos.PackingVentas,'10','CampoImporte','25') }}
+        {{ macro.input(atributos.Merma,'field_title','text',values.controller ~ '[Merma]',values.controller ~ '_Merma',datos.Merma,'10','CampoImporte','26') }}     
+        {{ macro.input(atributos.MinimoVentaAlto,'field_title','text',values.controller ~ '[MinimoVentaAlto]',values.controller ~ '_MinimoVentaAlto',datos.MinimoVentaAlto,'10','CampoImporte','31') }}
+        {{ macro.input(atributos.MinimoVentaAncho,'field_title','text',values.controller ~ '[MinimoVentaAncho]',values.controller ~ '_MinimoVentaAncho',datos.MinimoVentaAncho,'10','CampoImporte','32') }}
+        {{ macro.input(atributos.MinimoVenta,'field_title','text',values.controller ~ '[MinimoVenta]',values.controller ~ '_MinimoVenta',datos.MinimoVenta,'10','CampoImporte','33') }}
+        {{ macro.input(atributos.MultiploAlto,'field_title','text',values.controller ~ '[MultiploAlto]',values.controller ~ '_MultiploAlto',datos.MultiploAlto,'10','CampoImporte','34') }}
+        {{ macro.input(atributos.MultiploAncho,'field_title','text',values.controller ~ '[MultiploAncho]',values.controller ~ '_MultiploAncho',datos.MultiploAncho,'10','CampoImporte','35') }}
+        {{ macro.input(atributos.Caducidad,'field_title','text',values.controller ~ '[Caducidad]',values.controller ~ '_Caducidad',datos.Caducidad,'4','CampoUnidades','14') }}
+        {{ macro.input(atributos.Peso,'field_title','text',values.controller ~ '[Peso]',values.controller ~ '_Peso',datos.Peso,'10','CampoImporte','16') }}
+        {{ macro.input(atributos.Volumen,'field_title','text',values.controller ~ '[Volumen]',values.controller ~ '_Volumen',datos.Volumen,'10','CampoImporte','17') }}
+    </div>
+        
+    {% if atributos.UMB.visible.IDTipo %}        
+    <div id="unidadesMedida">
+        {{ macro.select(atributos.UMB,'field_title',values.controller ~ '[UMB]',values.controller ~ '_UMB',none,datos.UMB.UMB,datos.UMB.fetchAll('Id'),'chzn-select','37')}}
+        {{ macro.select(atributos.UMC,'field_title',values.controller ~ '[UMC]',values.controller ~ '_UMC',none,datos.UMC.UMC,datos.UMC.fetchAll('Id'),'chzn-select','38')}}
+        {{ macro.input(atributos.CUMC,'field_title','text',values.controller ~ '[CUMC]',values.controller ~ '_CUMC',datos.CUMC,'10','CampoImporte','39') }}
+        {{ macro.select(atributos.UMA,'field_title',values.controller ~ '[UMA]',values.controller ~ '_UMA',none,datos.UMA.UMA,datos.UMA.fetchAll('Id'),'chzn-select','40')}}
+        {{ macro.input(atributos.CUMA,'field_title','text',values.controller ~ '[CUMA]',values.controller ~ '_CUMA',datos.CUMA,'10','CampoImporte','41') }}
+        {{ macro.select(atributos.UMV,'field_title',values.controller ~ '[UMV]',values.controller ~ '_UMV',none,datos.UMV.UMV,datos.UMV.fetchAll('Id'),'chzn-select','42')}}
+        {{ macro.input(atributos.CUMV,'field_title','text',values.controller ~ '[CUMV]',values.controller ~ '_CUMV',datos.CUMV,'10','CampoImporte','43') }}        
+    </div>
+    {% endif %}    
+        
+    <div id="caracteristicas">
+        {{ macro.textarea(atributos.Caracteristicas,'field_title',values.controller ~ '[Caracteristicas]',values.controller ~ '_Caracteristicas',datos.Caracteristicas,none,none,'textarea','18')}}        
+    </div>
+    {% endif%}
+    {% include '_global/fieldsComunes.html.twig' %}
+</div>
+
+{{ macro.foco(values.controller ~ '_Codigo') }}

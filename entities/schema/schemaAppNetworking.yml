@@ -4,11 +4,22 @@
 
 Networking:
   columns:
-    Titulo:       { type: string(50), notnull: true}
-    IdUsuario:    { type: string(50), notnull: true}
-    Url:          { type: string(255), notnull: true }
-    NumeroTweets: { type: int(4), notnull: true, default: 0 }
-    ConAvatar:    { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' } 
-    Mensaje:      { type: string(255), notnull: false, default: NULL }
+    Titulo:        { type: string(50),  notnull: true}
+    IdUsuario:     { type: string(50),  notnull: true}
+    Url:           { type: string(255), notnull: true }
+    NumeroItems:   { type: int(4),      notnull: true, default: 0 }
+    MostrarAvatar: { type: tinyint(1),  notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' } 
+    Mensaje:       { type: string(255), notnull: false, default: NULL }
+    BotonEnviar:   { type: tinyint(1),  notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }    
+    ModoMostrar:   { type: tinyint(1),  notnull: true, default: 0, index: index, comment: 'abstract,RedesSocialesModosMostrar,IDTipo'}
+    Font:          { type: tinyint(1),  notnull: true, default: 0, index: index, comment: 'abstract,RedesSocialesFonts,IDTipo'}
+    Class:         { type: string(50),  notnull: false }
+    Action:        { type: tinyint(1),  notnull: true, default: 0, index: index, comment: 'abstract,RedesSocialesActions,IDTipo'}
+    Ancho:         { type: int(4),      notnull: true, default: 0 }
+    Alto:          { type: int(4),      notnull: true, default: 0 }
+    Size:          { type: tinyint(1),  notnull: true, default: 0, index: index, comment: 'abstract,RedesSocialesSizes,IDTipo'}
+    ColorFondo:    { type: tinyint(1),  notnull: true, default: 0, index: index, comment: 'abstract,RedesSocialesColoresFondo,IDTipo'}
+    ColorBorde:    { type: string(25),  notnull: false }
+    Count:         { type: tinyint(1),  notnull: true, default: 0, index: index, comment: 'abstract,RedesSocialesCounts,IDTipo'}
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:

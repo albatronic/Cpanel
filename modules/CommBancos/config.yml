@@ -1,13 +1,5 @@
-# Module: CommBancos
-# Document : modules/CommBancos/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 23.10.2012 03:16:42
-#
----
 CommBancos:
-  app: 'Comm'
+  app: Comm
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -43,7 +35,7 @@ CommBancos:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Entidades Bancarias
+  title: 'Entidades Bancarias'
   id_video: commbancos
   url_video: null
   feature_list: YES
@@ -479,3 +471,10 @@ CommBancos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

@@ -7,7 +7,7 @@
 #
 ---
 AlbmSecciones:
-  app: 'Almb'
+  app: Almb
   isModuleRoot: 1
   linkModule:
     fromColumn: ''
@@ -46,7 +46,7 @@ AlbmSecciones:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Secciones de Álbumes
+  title: 'Secciones de Álbumes'
   id_video: albmsecciones
   url_video: null
   feature_list: YES
@@ -713,3 +713,10 @@ AlbmSecciones:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

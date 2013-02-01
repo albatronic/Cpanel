@@ -1,13 +1,5 @@
-# Module: CommMunicipios
-# Document : modules/CommMunicipios/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 23.10.2012 03:02:09
-#
----
 CommMunicipios:
-  app: 'Comm'
+  app: Comm
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -65,7 +57,7 @@ CommMunicipios:
       criteria: 'IdProvincia,Municipio ASC'
     -
       title: 'Provincia z-a'
-      criteria: 'IdProvincia,Municipio DESC'      
+      criteria: 'IdProvincia,Municipio DESC'
   search_default: Id
   referenced_entities:
     - CommPaises
@@ -121,7 +113,7 @@ CommMunicipios:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '5', min: null, max: null, message: 'Valor Requerido' }
     DigitoControl:
-      title: Dígito Control
+      title: 'Dígito Control'
       filter: YES
       list: YES
       visible: true
@@ -516,3 +508,10 @@ CommMunicipios:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

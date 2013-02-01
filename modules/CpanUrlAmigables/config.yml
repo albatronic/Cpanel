@@ -1,13 +1,5 @@
-# Module: CpanUrlAmigables
-# Document : modules/CpanUrlAmigables/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 06.10.2012 19:34:00
-#
----
 CpanUrlAmigables:
-  app: 'Cpan'
+  app: Cpan
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -45,7 +37,7 @@ CpanUrlAmigables:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Urls Amigables
+  title: 'Urls Amigables'
   id_video: cpanurlamigables
   url_video: null
   feature_list: YES
@@ -80,7 +72,7 @@ CpanUrlAmigables:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
     UrlFriendly:
-      title: Url Amigable
+      title: 'Url Amigable'
       filter: YES
       list: YES
       visible: true
@@ -146,7 +138,7 @@ CpanUrlAmigables:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     IdEntity:
-      title: Id Entidad
+      title: 'Id Entidad'
       filter: NO
       list: YES
       visible: true
@@ -519,3 +511,10 @@ CpanUrlAmigables:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

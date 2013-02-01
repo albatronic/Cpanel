@@ -1,13 +1,5 @@
-# Module: VidVideos
-# Document : modules/VidVideos/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 05.12.2012 01:09:10
-#
----
 VidVideos:
-  app: 'Vid'
+  app: Vid
   isModuleRoot: 1
   linkModule:
     fromColumn: ''
@@ -15,7 +7,7 @@ VidVideos:
     toColumn: ''
   showCommonFields: true
   numMaxRecords: ''
-  numberOfImages: '3'
+  numberOfImages: '1'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0
@@ -41,7 +33,7 @@ VidVideos:
   parametros: ''
   includesHead:
     twigCss: _global/css.html.twig
-    twigJs: _global/js.html.twig    
+    twigJs: _global/js.html.twig
   login_required: YES
   permission_control: YES
   favourite_control: NO
@@ -67,7 +59,7 @@ VidVideos:
   ordenes_web:
     MostrarEnPortada:
       columnaMostrar: Titulo
-      filtro: MostrarEnPortada='1'
+      filtro: 'MostrarEnPortada=''1'''
       columnaOrden: OrdenPortada
   referenced_entities:
     - ValoresSN
@@ -99,7 +91,7 @@ VidVideos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 1, caption: IdSeccion, entity: VidSecciones, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: integer, length: '30', min: null, max: null, message: 'Valor Requerido' }      
+      validator: { nullable: NO, type: integer, length: '30', min: null, max: null, message: 'Valor Requerido' }
     Titulo:
       title: Título
       filter: YES
@@ -145,7 +137,7 @@ VidVideos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnPortada:
-      title: Mostrar en Portada
+      title: 'Mostrar en Portada'
       filter: NO
       list: YES
       visible: true
@@ -157,7 +149,7 @@ VidVideos:
       aditional_filter: { order: 0, caption: MostrarEnPortada, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: 2, min: null, max: null, message: 'Valor Requerido' }
     OrdenPortada:
-      title: Orden Portada
+      title: 'Orden Portada'
       filter: YES
       list: NO
       visible: true
@@ -168,7 +160,7 @@ VidVideos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
     UrlVideo:
-      title: Url del vídeo
+      title: 'Url del vídeo'
       filter: YES
       list: YES
       visible: true
@@ -179,7 +171,7 @@ VidVideos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
     IdTipo:
-      title: Tipo de vídeo
+      title: 'Tipo de vídeo'
       filter: NO
       list: YES
       visible: true
@@ -189,7 +181,7 @@ VidVideos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 1, caption: Tipo, entity: TiposVideos, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: tinyint, length: 2, min: null, max: null, message: 'Valor Requerido' }      
+      validator: { nullable: NO, type: tinyint, length: 2, min: null, max: null, message: 'Valor Requerido' }
     Observations:
       title: Observations
       filter: NO
@@ -775,3 +767,10 @@ VidVideos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

@@ -114,3 +114,14 @@ CpanVariables:
     Yml:             { type: text}
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
+
+# RELACIONES N A M ENTRE ENTIDADES
+CpanRelaciones:
+  comment: Relaciones entre entidades
+  columns:
+    EntidadOrigen: { type: string(50), notnull: true, index: index }
+    IdEntidadOrigen: { type: bigint(11), notnull: true, default: 0 }
+    EntidadDestino: { type: string(50), notnull: true, index: index }
+    IdEntidadDestino: { type: bigint(11), notnull: true, default: 0 }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:

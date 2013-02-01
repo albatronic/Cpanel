@@ -1,0 +1,29 @@
+# Module: ErpMarcas
+# Document : modules\ErpMarcas\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 26.01.2013 19:57:09
+#
+---
+listados:
+  -
+    title: ErpMarcas
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      Titulo: { title: Titulo, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Descripcion1: { title: Descripcion1, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Descripcion2: { title: Descripcion2, length: '255', align: L, type: string, total: NO, formula: null, format: null }
+      Telefono: { title: Telefono, length: '30', align: L, type: string, total: NO, formula: null, format: null }
+      Web: { title: Web, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Email: { title: Email, length: '100', align: L, type: string, total: NO, formula: null, format: null }

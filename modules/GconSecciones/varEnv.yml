@@ -7,6 +7,10 @@
 #
 # ejemplo:
 #
-# nombreVariable: el texto del caption
+# nombreVariable:
+#   caption: el texto del caption
+#   value: el valor por defecto
 ---
-numMenus: Número de menús
+numMenus:
+  caption: Número de menús
+  value: 1

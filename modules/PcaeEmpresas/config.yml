@@ -1,13 +1,5 @@
-# Module: PcaeEmpresas
-# Document : modules/PcaeEmpresas/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 23.10.2012 02:05:11
-#
----
 PcaeEmpresas:
-  app: 'Pcae'
+  app: Pcae
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -34,8 +26,8 @@ PcaeEmpresas:
   fieldGeneratorMetatagTitle: IdGrupo
   controller: Proyectos
   action: Index
-  template: 
-  parametros: 
+  template: null
+  parametros: null
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
@@ -43,7 +35,7 @@ PcaeEmpresas:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Empresas, Proyectos y Apps
+  title: 'Empresas, Proyectos y Apps'
   id_video: pcaeempresas
   url_video: null
   feature_list: YES
@@ -97,7 +89,7 @@ PcaeEmpresas:
       aditional_filter: { order: 1, caption: Grupo, entity: PcaeGruposEmpresas, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '25', min: null, max: null, message: 'Valor Requerido' }
     RazonSocial:
-      title: Razón Social
+      title: 'Razón Social'
       filter: YES
       list: YES
       visible: true
@@ -141,7 +133,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     CodigoPostal:
-      title: Código Postal
+      title: 'Código Postal'
       filter: YES
       list: NO
       visible: true
@@ -231,7 +223,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdOficina:
-      title: Oficina Bancaria
+      title: 'Oficina Bancaria'
       filter: NO
       list: NO
       visible: true
@@ -242,7 +234,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     DigitoControl:
-      title: Dígito de Control
+      title: 'Dígito de Control'
       filter: YES
       list: NO
       visible: true
@@ -275,7 +267,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '34', min: null, max: null, message: 'Valor Requerido' }
     SufijoRemesas:
-      title: Sufijo Remesas
+      title: 'Sufijo Remesas'
       filter: YES
       list: NO
       visible: true
@@ -286,7 +278,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '2', min: null, max: null, message: 'Valor Requerido' }
     DigitosCuentaContable:
-      title: Dígitos cuenta contable
+      title: 'Dígitos cuenta contable'
       filter: YES
       list: NO
       visible: true
@@ -306,10 +298,10 @@ PcaeEmpresas:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 7, caption: CNAE (%), entity: CommCnae, method: fetchAll, params: Actividad, type: input }
+      aditional_filter: { order: 7, caption: 'CNAE (%)', entity: CommCnae, method: fetchAll, params: Actividad, type: input }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     RegistroMercantil:
-      title: Registro Mercantil
+      title: 'Registro Mercantil'
       filter: YES
       list: NO
       visible: true
@@ -320,7 +312,7 @@ PcaeEmpresas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
     LicenciaActividad:
-      title: Licencia Actividad
+      title: 'Licencia Actividad'
       filter: YES
       list: NO
       visible: true
@@ -704,3 +696,10 @@ PcaeEmpresas:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

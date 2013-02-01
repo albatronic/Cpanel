@@ -1,11 +1,3 @@
-# Module: CpanAplicaciones
-# Document : modules/CpanAplicaciones/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 06.10.2012 19:33:59
-#
----
 CpanAplicaciones:
   app: ''
   isModuleRoot: 0
@@ -497,3 +489,10 @@ CpanAplicaciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 13, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

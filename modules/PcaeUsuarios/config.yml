@@ -1,11 +1,3 @@
-# Module: PcaeUsuarios
-# Document : modules/PcaeUsuarios/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 23.10.2012 01:02:46
-#
----
 PcaeUsuarios:
   app: ''
   isModuleRoot: 0
@@ -136,7 +128,7 @@ PcaeUsuarios:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     CodigoPostal:
-      title: Código Postal
+      title: 'Código Postal'
       filter: YES
       list: NO
       visible: true
@@ -156,7 +148,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 2, caption: Provincia, entity: CommProvincias, method: fetchAll, params: Provincia, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdPais:
       title: Pais
@@ -168,7 +159,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 3, caption: Pais, entity: CommPaises, method: fetchAll, params: Pais, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Telefono:
       title: Teléfono
@@ -204,7 +194,7 @@ PcaeUsuarios:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
     NLogin:
-      title: Número de Login
+      title: 'Número de Login'
       filter: YES
       list: YES
       visible: true
@@ -215,7 +205,7 @@ PcaeUsuarios:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
     UltimoLogin:
-      title: Fecha último login
+      title: 'Fecha último login'
       filter: YES
       list: YES
       visible: true
@@ -257,7 +247,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 4, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     Checked:
       title: Checked
@@ -269,7 +258,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 5, caption: Checked, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     Publish:
       title: Publish
@@ -281,7 +269,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 6, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     BelongsTo:
       title: BelongsTo
@@ -348,7 +335,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 7, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     DeletedBy:
       title: DeletedBy
@@ -382,7 +368,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 8, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     SortOrder:
       title: SortOrder
@@ -449,7 +434,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 9, caption: LockUrlPrefix, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     Slug:
       title: Slug
@@ -472,7 +456,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 10, caption: LockSlug, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     UrlFriendly:
       title: UrlFriendly
@@ -495,7 +478,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 11, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
       title: NumberVisits
@@ -529,7 +511,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 12, caption: LockMetatagTitle, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     MetatagKeywords:
       title: MetatagKeywords
@@ -563,7 +544,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 13, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     MetatagTitlePosition:
       title: MetatagTitlePosition
@@ -575,7 +555,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 14, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     ShowOnSitemap:
       title: ShowOnSitemap
@@ -587,7 +566,6 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 15, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: false, min: null, max: null, message: 'Valor Requerido' }
     ImportanceSitemap:
       title: ImportanceSitemap
@@ -610,5 +588,11 @@ PcaeUsuarios:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 16, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

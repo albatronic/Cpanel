@@ -66,3 +66,4 @@
     IdSeccionEnlaces:     { type: bigint(11), notnull: false, default: NULL }
     IdSeccionVideos:      { type: bigint(11), notnull: false, default: NULL }      
     DateTimeLastVisit:    { type: bigint(11), notnull: true, default: 0 }
+    RevisitAfter:         { type: string(25), notnull: false, default: NULL }

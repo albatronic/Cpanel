@@ -1,0 +1,44 @@
+{# MANTENIMIENTO DE VALORES PREDETERMINADOS DE
+   LAS PROPIEDADES DE LOS PRODUCTOS
+#}
+
+{% extends '_global/layoutPopup.html.twig' %}
+
+{% block content %}
+
+{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
+{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
+
+<table class="Listado">
+    <tr class='Titulos'>
+        <td class='Item'>VALOR</td>
+        <td>&nbsp;</td>
+    </tr>    
+
+    <tbody class="Cuerpo">
+    {% for key,valor in values.valores %}
+            
+        <form name="linea{{key}}" id="linea{{key}}" action="" method="POST">
+            <input name="controller" value="{{values.controller}}" type="hidden" />
+            <input name="action" id="action" value="edit" type="hidden" />
+            <input name="accion" id="accion{{key}}" value="" type="hidden" />
+            <input name="{{values.controller}}[IdPropiedad]" value="{{valor.IdPropiedad}}" type="hidden" />
+            <input name="{{values.controller}}[Id]" value="{{valor.Id}}" type="hidden" />
+        <tr>
+            <td><input name="{{values.controller}}[Valor]" value="{{valor.Valor}}" type="text"/></td>
+
+            <td align="center">
+                {% if valor.Id > 0 %}
+                <input type="image" src="{{app.path}}/images/botonsave.png" onclick="$('#accion{{key}}').val('G');" alt="Guardar" title="Guardar Valor" />
+                <input type="image" src="{{app.path}}/images/papelera.gif" onclick="if (!confirm('Desea eliminar el valor?')) {return false;} else {$('#accion{{key}}').val('B');}" alt="Borrar" title="Borrar Valor" />
+                {% else %}
+                <input type="image" src="{{app.path}}/images/nuevo.png" onclick="$('#action').val('new');" alt="Nuevo" title="Crear Valor" />
+                {% endif %}            
+            </td>
+        </tr>
+        </form>
+
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

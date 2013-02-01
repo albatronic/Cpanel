@@ -1,13 +1,5 @@
-# Module: CpanDocs
-# Document : modules/CpanDocs/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 06.10.2012 19:33:59
-#
----
 CpanDocs:
-  app: 'Cpan'
+  app: Cpan
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -65,13 +57,13 @@ CpanDocs:
       criteria: 'Type ASC'
     -
       title: 'Tipo z-a'
-      criteria: 'Type DESC' 
+      criteria: 'Type DESC'
     -
       title: 'PathName a-z'
       criteria: 'PathName ASC'
     -
       title: 'PathName z-a'
-      criteria: 'PathName DESC'      
+      criteria: 'PathName DESC'
   search_default: Id
   referenced_entities:
     - TiposDocs
@@ -102,7 +94,7 @@ CpanDocs:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     IdEntity:
-      title: Id de Entidad
+      title: 'Id de Entidad'
       filter: YES
       list: YES
       visible: true
@@ -125,7 +117,7 @@ CpanDocs:
       aditional_filter: { order: 1, caption: Type, entity: TiposDocs, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '10', min: null, max: null, message: 'Valor Requerido' }
     IsThumbnail:
-      title: Es Thumbnail
+      title: 'Es Thumbnail'
       filter: NO
       list: YES
       visible: true
@@ -623,3 +615,10 @@ CpanDocs:
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 16, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

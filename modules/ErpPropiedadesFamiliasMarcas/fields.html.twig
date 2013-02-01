@@ -1,0 +1,17 @@
+{#
+  Module: ErpPropiedadesFamiliasMarcas
+  Document : modules\ErpPropiedadesFamiliasMarcas\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 26.01.2013 19:57:09
+#}
+
+{{ macro.select(atributos.IdFamilia,'field_title',values.controller ~ '[IdFamilia]',values.controller ~ '_IdFamilia',none,datos.IdFamilia.IdFamilia,datos.IdFamilia.fetchAll('Id'),'chzn-select','1')}}
+{{ macro.select(atributos.IdMarca,'field_title',values.controller ~ '[IdMarca]',values.controller ~ '_IdMarca',none,datos.IdMarca.IdMarca,datos.IdMarca.fetchAll('Id'),'chzn-select','2')}}
+{{ macro.select(atributos.IdPropiedad,'field_title',values.controller ~ '[IdPropiedad]',values.controller ~ '_IdPropiedad',none,datos.IdPropiedad.IdPropiedad,datos.IdPropiedad.fetchAll('Id'),'chzn-select','3')}}
+{{ macro.input(atributos.Valor,'field_title','text',values.controller ~ '[Valor]',values.controller ~ '_Valor',datos.Valor,'20','CampoTextoCorto','4') }}
+
+{% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_IdFamilia') }}

@@ -53,7 +53,7 @@
     </div>
         
     <div id="general">
-        {{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.IdSeccion,datos.IdSeccion.fetchAll('Titulo',0),'chzn-select','1')}}
+        {{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.Id,datos.IdSeccion.fetchAll('Titulo',0),'chzn-select','1')}}
         {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
         {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
         {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','4')}}

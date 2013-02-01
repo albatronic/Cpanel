@@ -16,7 +16,7 @@
 
     {# VARIABLES WEB GLOBALES A TODOS LOS MODULOS #}
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {% if user.IdPerfil == '1' %} {% set prefijo = '[globales][webName]' %} {% else %} {% set prefijo = '' %} {% endif %}
+        {% if user.IdPerfil.Id == '1' %} {% set prefijo = '[globales][webName]' %} {% else %} {% set prefijo = '' %} {% endif %}
         {{ macro.input(
             {'caption':prefijo~' Nombre de la Web','visible':'1','varEnv':'0'},
             'field_title',
@@ -33,7 +33,7 @@
     {# VARIABLES WEB ESPECIFICAS AL MODULO EN CURSO nombreModulo/varWeb.yml #}
     <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {% for nombre,atributos in values.datos.especificas %}
-            {% if user.IdPerfil == '1' %} {% set prefijo = '[especificas]['~nombre~']' %} {% else %} {% set prefijo = '' %} {% endif %}
+            {% if user.IdPerfil.Id == '1' %} {% set prefijo = '[especificas]['~nombre~']' %} {% else %} {% set prefijo = '' %} {% endif %}
             {{ macro.input(
                 {'caption':prefijo~' '~atributos.caption,'visible':'1','varEnv':'0'},
                 'field_title',

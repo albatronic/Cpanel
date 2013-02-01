@@ -27,10 +27,9 @@
         {{ macro.input(atributos.CodigoPostal,'field_title','text',values.controller ~ '[CodigoPostal]',values.controller ~ '_CodigoPostal',datos.CodigoPostal,'10','CampoTextoCorto','8') }}
         {{ macro.input(atributos.Telefono,'field_title','text',values.controller ~ '[Telefono]',values.controller ~ '_Telefono',datos.Telefono,'50','CampoTextoLargo','9') }}
         {{ macro.input(atributos.EMail,'field_title','text',values.controller ~ '[EMail]',values.controller ~ '_EMail',datos.EMail,'100','CampoTextoLargo','10') }}
-        {{ macro.input(atributos.Password,'field_title','text',values.controller ~ '[Password]',values.controller ~ '_Password',datos.Password,'100','CampoTextoLargo','11') }}
+        {{ macro.input(atributos.Password,'field_title','text',values.controller ~ '[Password]',values.controller ~ '_Password',none,'100','CampoTextoLargo','11') }}
         {{ macro.input(atributos.NLogin,'field_title','text',values.controller ~ '[NLogin]',values.controller ~ '_NLogin',datos.NLogin,'4','CampoUnidades','12') }}
-        {{ macro.fecha(atributos.UltimoLogin,'field_title',values.controller ~ '[UltimoLogin]',values.controller ~ '_UltimoLogin',datos.UltimoLogin,'19','datepicker','13')}}
-        
+        {{ macro.fecha(atributos.UltimoLogin,'field_title',values.controller ~ '[UltimoLogin]',values.controller ~ '_UltimoLogin',datos.UltimoLogin,'19','datepicker','13')}}      
         {# include '_global/fieldsComunes.html.twig' #}
     </div>
         

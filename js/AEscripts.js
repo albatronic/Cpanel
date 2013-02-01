@@ -361,6 +361,13 @@ function loading(idDiv) {
     $('#'+idDiv).html("<img src='" + appPath + "/images/loading.gif'>");
 }
 
+function Redondear(cantidad, decimales) {
+    var vcantidad = parseFloat(cantidad);
+    var vdecimales = parseFloat(decimales);
+    vdecimales = (!vdecimales ? 2 : vdecimales);
+    return Math.round(vcantidad * Math.pow(10, vdecimales)) / Math.pow(10, vdecimales);
+}
+
 /*
  * ----------------------------------------------------------------
  * FUNCIONES AJAX
@@ -434,7 +441,21 @@ function actualizaColumna(entidad,idEntidad,columna,valor) {
     });
 }
 
-function actualizaContenidoRelacionado(idDiv,idContenidoOrigen,idContenidoRelacionado,onOff) {
+/**
+ * Asigna/Quita permiso de acceso a las apps del Cpanel
+ */
+function actualizaPermiso(idUsuario,idEmpresa,idProyecto,idApp,permiso) {
+    var parametros = 'idUsuario='+idUsuario+'&idEmpresa='+idEmpresa+'&idProyecto='+idProyecto+'&idApp='+idApp+'&permiso='+permiso;
+
+    $.ajax({
+        url: appPath + "/lib/actualizaPermiso.php",
+        type: 'GET',
+        async: true,
+        data: parametros
+    });    
+}
+
+function actualizaContenidoRelacionado(idContenidoOrigen,idContenidoRelacionado,onOff) {
 
     var parametros = 'idContenidoOrigen='+idContenidoOrigen+'&idContenidoRelacionado='+idContenidoRelacionado+'&onOff='+onOff;
 

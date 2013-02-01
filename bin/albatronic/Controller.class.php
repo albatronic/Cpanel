@@ -377,8 +377,8 @@ class Controller {
      * Muestra la vista mediante la que se pueden enlazar
      * entidades a la entidad actual ($this->entity)
      * 
-     * Las entitdades destino del enlace se definen para cada
-     * controlador en la clase entities/abstract/<NOMBRECONTROLADOR>Enlaces.class.php
+     * Las entitdades destino del enlace para cada controlador se definen 
+     * en la clase entities/abstract/<NOMBRECONTROLADOR>Enlaces.class.php
      * 
      * @param string $primaryKeyMD5 El valor de la primaryKey en formato MD5 de la entidad
      * a la que se va a realizar el enlace
@@ -781,7 +781,7 @@ class Controller {
      *
      * @param array $datos
      */
-    private function gestionUrlMeta($datos) {
+    protected function gestionUrlMeta($datos) {
 
         $objetoAuxuliar = new $this->entity($datos->getPrimaryKeyValue());
 

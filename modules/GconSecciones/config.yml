@@ -7,12 +7,12 @@
 #
 ---
 GconSecciones:
-  app: 'Gcon'
+  app: Gcon
   isModuleRoot: 1
   linkModule:
-    fromColumn:
-    toEntity:
-    toColumn:
+    fromColumn: null
+    toEntity: null
+    toColumn: null
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'
@@ -38,7 +38,7 @@ GconSecciones:
   controller: Secciones
   action: Index
   template: index.html.twig
-  parametros: 
+  parametros: null
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
@@ -63,29 +63,27 @@ GconSecciones:
     -
       title: 'Título z-a'
       criteria: 'Titulo DESC'
-      
   ordenes_web:
     MostrarEnMenu1:
       columnaMostrar: Titulo
-      filtro: MostrarEnMenu1='1' and Publish='1'
-      columnaOrden: OrdenMenu1   
+      filtro: 'MostrarEnMenu1=''1'' and Publish=''1'''
+      columnaOrden: OrdenMenu1
     MostrarEnMenu2:
       columnaMostrar: Titulo
-      filtro: MostrarEnMenu2='1' and Publish='1'
+      filtro: 'MostrarEnMenu2=''1'' and Publish=''1'''
       columnaOrden: OrdenMenu2
     MostrarEnMenu3:
       columnaMostrar: Titulo
-      filtro: MostrarEnMenu3='1' and Publish='1'
-      columnaOrden: OrdenMenu3        
+      filtro: 'MostrarEnMenu3=''1'' and Publish=''1'''
+      columnaOrden: OrdenMenu3
     MostrarEnMenu4:
       columnaMostrar: Titulo
-      filtro: MostrarEnMenu4='1' and Publish='1'
+      filtro: 'MostrarEnMenu4=''1'' and Publish=''1'''
       columnaOrden: OrdenMenu4
     MostrarEnMenu5:
       columnaMostrar: Titulo
-      filtro: MostrarEnMenu5='1' and Publish='1'
-      columnaOrden: OrdenMenu5        
-
+      filtro: 'MostrarEnMenu5=''1'' and Publish=''1'''
+      columnaOrden: OrdenMenu5
   search_default: Id
   referenced_entities:
     - ValoresSN
@@ -142,43 +140,43 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: false, min: null, max: null, message: 'Valor Requerido' }
     MostrarTitulo:
-      title: Mostrar título
+      title: 'Mostrar título'
       filter: NO
       list: YES
       visible: true
       updatable: true
-      default: '1'
+      default: '0'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 1, caption: MostrarTitulo, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarSubtitulo:
-      title: Mostrar subtítulo
+      title: 'Mostrar subtítulo'
       filter: NO
       list: YES
       visible: true
       updatable: true
-      default: '1'
+      default: '0'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 2, caption: MostrarSubtitulo, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarIntroduccion:
-      title: Mostrar introducción
+      title: 'Mostrar introducción'
       filter: NO
       list: NO
       visible: true
       updatable: true
-      default: '1'
+      default: '0'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 3, caption: MostrarIntroduccion, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnMenu1:
-      title: Mostrar en menú principal
+      title: 'Menú principal'
       filter: NO
       list: YES
       visible: true
@@ -190,7 +188,7 @@ GconSecciones:
       aditional_filter: { order: 4, caption: MostrarEnMenu1, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnMenu2:
-      title: MostrarEnMenu2
+      title: 'Menú Cabecera'
       filter: NO
       list: YES
       visible: true
@@ -202,7 +200,7 @@ GconSecciones:
       aditional_filter: { order: 5, caption: MostrarEnMenu2, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnMenu3:
-      title: MostrarEnMenu3
+      title: 'Menú Pie de Página'
       filter: NO
       list: YES
       visible: true
@@ -238,7 +236,7 @@ GconSecciones:
       aditional_filter: { order: 8, caption: MostrarEnMenu5, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     EtiquetaWeb1:
-      title: Etiqueta menú principal
+      title: 'Etiqueta menú principal'
       filter: YES
       list: NO
       visible: true
@@ -249,10 +247,10 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     SubetiquetaWeb1:
-      title: Subetiqueta menú principal
+      title: 'Subetiqueta menú principal'
       filter: YES
       list: NO
-      visible: true
+      visible: false
       updatable: true
       default: null
       help: null
@@ -274,7 +272,7 @@ GconSecciones:
       title: Subetiqueta2
       filter: YES
       list: NO
-      visible: true
+      visible: false
       updatable: true
       default: null
       help: null
@@ -296,7 +294,7 @@ GconSecciones:
       title: Subetiqueta3
       filter: YES
       list: NO
-      visible: true
+      visible: false
       updatable: true
       default: null
       help: null
@@ -318,7 +316,7 @@ GconSecciones:
       title: Subetiqueta4
       filter: YES
       list: NO
-      visible: true
+      visible: false
       updatable: true
       default: null
       help: null
@@ -340,7 +338,7 @@ GconSecciones:
       title: Subetiqueta5
       filter: YES
       list: NO
-      visible: true
+      visible: false
       updatable: true
       default: null
       help: null
@@ -403,7 +401,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
     ModoMostrarContenidos:
-      title: Modo mostrar contenidos
+      title: 'Modo mostrar contenidos'
       filter: NO
       list: NO
       visible: true
@@ -415,7 +413,7 @@ GconSecciones:
       aditional_filter: { order: 9, caption: ModoMostrarContenidos, entity: ModosMostrarContenidos, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     CriterioOrdenContenidosHijos:
-      title: Criterio orden contenidos hijos
+      title: 'Criterio orden contenidos hijos'
       filter: NO
       list: NO
       visible: true
@@ -427,12 +425,12 @@ GconSecciones:
       aditional_filter: { order: 10, caption: CriterioOrdenContenidosHijos, entity: CriteriosOrdenContenidosHijos, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     MostrarSubsecciones:
-      title: Mostrar subsecciones
+      title: 'Mostrar subsecciones'
       filter: NO
       list: NO
       visible: true
       updatable: true
-      default: '1'
+      default: '0'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
@@ -461,7 +459,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
     IsDefault:
-      title: Valor por defecto
+      title: 'Valor por defecto'
       filter: NO
       list: NO
       visible: true
@@ -473,7 +471,7 @@ GconSecciones:
       aditional_filter: { order: 12, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     IsSuper:
-      title: Uso Super
+      title: 'Uso Super'
       filter: NO
       list: NO
       visible: true
@@ -509,7 +507,7 @@ GconSecciones:
       aditional_filter: { order: 15, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     BelongsTo:
-      title: Pertenece a ...
+      title: 'Pertenece a ...'
       filter: NO
       list: NO
       visible: true
@@ -520,7 +518,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     AllowsChildren:
-      title: Permite hijos
+      title: 'Permite hijos'
       filter: NO
       list: NO
       visible: true
@@ -532,7 +530,7 @@ GconSecciones:
       aditional_filter: { order: 16, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     CreatedBy:
-      title: Creado por
+      title: 'Creado por'
       filter: NO
       list: NO
       visible: true
@@ -543,7 +541,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
     CreatedAt:
-      title: Creado el
+      title: 'Creado el'
       filter: NO
       list: NO
       visible: true
@@ -554,7 +552,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
     ModifiedBy:
-      title: Modificado por
+      title: 'Modificado por'
       filter: NO
       list: NO
       visible: true
@@ -565,7 +563,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
     ModifiedAt:
-      title: Modificado el
+      title: 'Modificado el'
       filter: NO
       list: NO
       visible: true
@@ -588,7 +586,7 @@ GconSecciones:
       aditional_filter: { order: 17, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     DeletedBy:
-      title: Borrado por
+      title: 'Borrado por'
       filter: NO
       list: NO
       visible: true
@@ -599,7 +597,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
     DeletedAt:
-      title: Borrado el
+      title: 'Borrado el'
       filter: NO
       list: NO
       visible: true
@@ -633,7 +631,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     PublishedAt:
-      title: Publicado el
+      title: 'Publicado el'
       filter: NO
       list: NO
       visible: true
@@ -644,7 +642,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
     ActiveFrom:
-      title: Vigente desde
+      title: 'Vigente desde'
       filter: NO
       list: NO
       visible: true
@@ -655,7 +653,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
     ActiveTo:
-      title: Vigente hasta
+      title: 'Vigente hasta'
       filter: NO
       list: NO
       visible: true
@@ -721,7 +719,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     UrlHeritable:
-      title: Url heredable
+      title: 'Url heredable'
       filter: NO
       list: NO
       visible: true
@@ -733,7 +731,7 @@ GconSecciones:
       aditional_filter: { order: 19, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
-      title: Número de visitas
+      title: 'Número de visitas'
       filter: NO
       list: NO
       visible: true
@@ -1023,7 +1021,7 @@ GconSecciones:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdSeccionVideos:
-      title: Sección de vídeos asociada
+      title: 'Sección de vídeos asociada'
       filter: NO
       list: NO
       visible: true
@@ -1033,3 +1031,10 @@ GconSecciones:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

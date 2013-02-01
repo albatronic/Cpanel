@@ -1,13 +1,5 @@
-# Module: EtiqRelaciones
-# Document : modules/EtiqRelaciones/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 02.01.2013 17:48:04
-#
----
 EtiqRelaciones:
-  app: 'Etiq'
+  app: Etiq
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -717,3 +709,10 @@ EtiqRelaciones:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

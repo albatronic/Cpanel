@@ -1,13 +1,5 @@
-# Module: BannBanners
-# Document : modules/BannBanners/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 09.12.2012 08:36:04
-#
----
 BannBanners:
-  app: 'Bann'
+  app: Bann
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -67,9 +59,8 @@ BannBanners:
   ordenes_web:
     MostrarEnListado:
       columnaMostrar: Titulo
-      filtro: MostrarEnListado='1'
+      filtro: 'MostrarEnListado=''1'''
       columnaOrden: OrdenMostrarEnListado
-        
   referenced_entities:
     - BannZonas
     - ValoresSN
@@ -136,7 +127,7 @@ BannBanners:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: false, min: null, max: null, message: 'Valor Requerido' }
     IdTipo:
-      title: Tipo de Banner
+      title: 'Tipo de Banner'
       filter: NO
       list: YES
       visible: true
@@ -148,7 +139,7 @@ BannBanners:
       aditional_filter: { order: 2, caption: Tipo, entity: TiposBanners, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: 10, min: null, max: null, message: 'Valor Requerido' }
     MostrarEnListado:
-      title: Mostrar en Listado 
+      title: 'Mostrar en Listado'
       filter: NO
       list: NO
       visible: true
@@ -160,7 +151,7 @@ BannBanners:
       aditional_filter: { order: 1, caption: MostrarEnListado, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     OrdenMostrarEnListado:
-      title: Orden Listado
+      title: 'Orden Listado'
       filter: YES
       list: NO
       visible: true
@@ -169,7 +160,7 @@ BannBanners:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }      
+      validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
     Entidad:
       title: Entidad
       filter: YES
@@ -191,7 +182,7 @@ BannBanners:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }      
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Observations:
       title: Observations
       filter: NO
@@ -777,3 +768,10 @@ BannBanners:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

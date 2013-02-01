@@ -10,48 +10,19 @@
 {% extends values.controller  ~ '/index.html.twig' %}
 
 {% block listado %}
-        <ul class="arbol">
-        {% for padre in values.datos %}
-            {% include values.controller ~ '/secciones.html.twig' with {'seccion': padre, 'templateContenidos':'contenidosEditar.html.twig'} %}
+<ul class="arbol">
+{% for padre in values.datos %}
+    {% include values.controller ~ '/secciones.html.twig' with {'seccion': padre, 'templateContenidos':'contenidosEditar.html.twig'} %}
+    <ul class="arbol">
+        {% for hijo in padre.hijos %}
+            {% include values.controller ~ '/secciones.html.twig' with {'seccion': hijo, 'templateContenidos':'contenidosEditar.html.twig'} %}
             <ul class="arbol">
-                {% for hijo in padre.hijos %}
-                    {% include values.controller ~ '/secciones.html.twig' with {'seccion': hijo, 'templateContenidos':'contenidosEditar.html.twig'} %}
-                    <ul class="arbol">
-                        {% for nieto in hijo.hijos %}
-                            {% include values.controller ~ '/secciones.html.twig' with {'seccion': nieto, 'templateContenidos':'contenidosEditar.html.twig'} %}
-                        {% endfor %}
-                    </ul>                        
+                {% for nieto in hijo.hijos %}
+                    {% include values.controller ~ '/secciones.html.twig' with {'seccion': nieto, 'templateContenidos':'contenidosEditar.html.twig'} %}
                 {% endfor %}
-            </ul>
+            </ul>                        
         {% endfor %}
-        </ul>
-
-<div class=''>
-    <div id="accordion">
-    {% for idseccion,seccion in values.datos %}
-        <h3>{{seccion.titulo}}</h3>
-        <div>
-
-                {% for contenido in seccion.contenidos%}
-
-                    <div id="contenidoRelacionado{{contenido.Id}}" class="contenidoRelacionado{{contenido.Id}}" style="float: left;">
-                    <input
-                        id="check{{contenido.Id}}"
-                        type="checkbox"
-                        value="{{contenido.estaRelacionado}}"
-                        {% if (contenido.estaRelacionado == '1') %} checked {% endif %}
-                        onchange="
-                          if ($('#check{{contenido.Id}}').is(':checked')) {$('#check{{contenido.Id}}').val('1');} else {$('#check{{contenido.Id}}').val('0');}
-                          actualizaContenidoRelacionado('contenidoRelacionado{{contenido.Id}}','{{values.idContenidoOrigen}}','{{contenido.Id}}',$('#check{{contenido.Id}}').val());
-                        "
-                    />
-                    </div>
-                    <div style="float: left;">{{contenido.Value}}</div>
-                    <div style="clear: both;"></div>
-                {% endfor %}
-
-        </div>
-    {% endfor %}
-    </div>
-</div>
+    </ul>
+{% endfor %}
+</ul>
 {% endblock %}

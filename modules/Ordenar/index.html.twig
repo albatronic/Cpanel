@@ -39,12 +39,13 @@
             {% endfor %}
         </div>
 
-        <div id="botonSubmit" style="margin-top: 10px; text-align: center;">
+        <div style="margin-top: 10px; text-align: center;">
+            <div id="botonSubmit"></div>
             <input value="Guardar nuevo orden" type="submit" 
-                   onclick="
-                       loading('botonSubmit');
-                       $('#action').val('Reordenar'); 
-                       submitForm('form{{values.controller}}');"/>    
+                   onclick="loading('botonSubmit');  
+                       $('#action').val('Reordenar');                      
+                       submitForm('form{{values.controller}}'); "
+                       />    
         </div>
     {% else %}
         <p>No hay elementos para ordenar</p>

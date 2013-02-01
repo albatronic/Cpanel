@@ -1,13 +1,5 @@
-# Module: GconContenidosRelacionados
-# Document : modules/GconContenidosRelacionados/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 01.11.2012 00:08:45
-#
----
 GconContenidosRelacionados:
-  app: 'Gcon'
+  app: Gcon
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -667,3 +659,10 @@ GconContenidosRelacionados:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

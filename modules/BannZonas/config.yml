@@ -1,13 +1,5 @@
-# Module: BannZonas
-# Document : modules/BannZonas/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: ARTICO ESTUDIO SL
-# @date 09.12.2012 08:35:28
-#
----
 BannZonas:
-  app: 'Bann'
+  app: Bann
   isModuleRoot: 1
   linkModule:
     fromColumn: ''
@@ -46,7 +38,7 @@ BannZonas:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: Zonas de Banners
+  title: 'Zonas de Banners'
   id_video: bannzonas
   url_video: null
   feature_list: YES
@@ -84,7 +76,7 @@ BannZonas:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
     Titulo:
-      title: Nombre de la Zona
+      title: 'Nombre de la Zona'
       filter: YES
       list: YES
       visible: true
@@ -95,7 +87,7 @@ BannZonas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     NumeroMaximoBanners:
-      title: Número Máximo Banners
+      title: 'Número Máximo Banners'
       filter: YES
       list: YES
       visible: true
@@ -106,7 +98,7 @@ BannZonas:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '4', min: null, max: null, message: 'Valor Requerido' }
     NumeroPosicionesBanners:
-      title: Número posiciones de Banners
+      title: 'Número posiciones de Banners'
       filter: YES
       list: YES
       visible: true
@@ -701,3 +693,10 @@ BannZonas:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

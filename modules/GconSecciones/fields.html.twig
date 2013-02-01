@@ -79,7 +79,7 @@
         {{ macro.radio(atributos.ModoMostrarContenidos,'field_title',values.controller ~ '[ModoMostrarContenidos]',values.controller ~ '_ModoMostrarContenidos',datos.ModoMostrarContenidos.IDTipo,datos.ModoMostrarContenidos.fetchAll(Descripcion,0),'chzn-radio','22')}}
         {{ macro.select(atributos.CriterioOrdenContenidosHijos,'field_title',values.controller ~ '[CriterioOrdenContenidosHijos]',values.controller ~ '_CriterioOrdenContenidosHijos',none,datos.CriterioOrdenContenidosHijos.CriterioOrdenContenidosHijos,datos.CriterioOrdenContenidosHijos.fetchAll(none,0),'chzn-select','23')}}
         
-        {% if values.varEnvMod.especificas.numMenus > 0  or user.IdPerfil == 1 %}
+        {% if values.varEnvMod.especificas.numMenus > 0  or user.IdPerfil.Id == 1 %}
             {# 
                 Solapas de MOSTRAR EN MENU N 
 

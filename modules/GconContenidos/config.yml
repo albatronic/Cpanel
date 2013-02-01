@@ -1,18 +1,10 @@
-# Module: GconContenidos
-# Document : modules/GconContenidos/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.10.2012 18:45:39
-#
----
 GconContenidos:
-  app: 'Gcon'
+  app: Gcon
   isModuleRoot: 0
   linkModule:
-    fromColumn: 'IdSeccion'
-    toEntity: 'GconSecciones'
-    toColumn: 'Id'
+    fromColumn: IdSeccion
+    toEntity: GconSecciones
+    toColumn: Id
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'
@@ -37,8 +29,8 @@ GconContenidos:
   fieldGeneratorMetatagTitle: Titulo
   controller: Contenidos
   action: Index
-  template: 
-  parametros: 
+  template: null
+  parametros: null
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
@@ -67,12 +59,12 @@ GconContenidos:
   ordenes_web:
     BlogMostrarEnPortada:
       columnaMostrar: Titulo
-      filtro: BlogMostrarEnPortada='1' and Publish='1'
+      filtro: 'BlogMostrarEnPortada=''1'' and Publish=''1'''
       columnaOrden: BlogOrden
     NoticiaMostrarEnPortada:
       columnaMostrar: Titulo
-      filtro: NoticiaMostrarEnPortada='1' and Publish='1'
-      columnaOrden: NoticiaOrden        
+      filtro: 'NoticiaMostrarEnPortada=''1'' and Publish=''1'''
+      columnaOrden: NoticiaOrden
   referenced_entities:
     - GconSecciones
     - ValoresSN
@@ -150,7 +142,7 @@ GconContenidos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: false, min: null, max: null, message: 'Valor Requerido' }
     MostrarTituloPortada:
-      title: Mostrar título en portada
+      title: 'Mostrar título en portada'
       filter: NO
       list: YES
       visible: true
@@ -174,7 +166,7 @@ GconContenidos:
       aditional_filter: { order: 3, caption: MostrarTituloContenido, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarSubtituloPortada:
-      title: Mostrar subtitulo en portada
+      title: 'Mostrar subtitulo en portada'
       filter: NO
       list: NO
       visible: true
@@ -198,7 +190,7 @@ GconContenidos:
       aditional_filter: { order: 5, caption: MostrarSubtituloContenido, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarResumenPortada:
-      title: Mostrar resumen en portada
+      title: 'Mostrar resumen en portada'
       filter: NO
       list: NO
       visible: true
@@ -222,7 +214,7 @@ GconContenidos:
       aditional_filter: { order: 7, caption: MostrarResumenContenido, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     BlogPublicar:
-      title: Publicar en blog
+      title: 'Publicar en blog'
       filter: NO
       list: YES
       visible: true
@@ -234,7 +226,7 @@ GconContenidos:
       aditional_filter: { order: 8, caption: BlogPublicar, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     BlogMostrarEnPortada:
-      title: Mostrar en portada del blog
+      title: 'Mostrar en portada del blog'
       filter: NO
       list: NO
       visible: true
@@ -246,7 +238,7 @@ GconContenidos:
       aditional_filter: { order: 9, caption: BlogMostrarEnPortada, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     BlogPermitirComentarios:
-      title: Permitir comentarios en blog
+      title: 'Permitir comentarios en blog'
       filter: NO
       list: NO
       visible: true
@@ -269,7 +261,7 @@ GconContenidos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     NoticiaPublicar:
-      title: Publicar noticia
+      title: 'Publicar noticia'
       filter: NO
       list: YES
       visible: true
@@ -281,7 +273,7 @@ GconContenidos:
       aditional_filter: { order: 11, caption: NoticiaPublicar, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     NoticiaMostrarEnPortada:
-      title: Mostrar noticia en portada
+      title: 'Mostrar noticia en portada'
       filter: NO
       list: NO
       visible: true
@@ -304,7 +296,7 @@ GconContenidos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     EsEvento:
-      title: Es evento
+      title: 'Es evento'
       filter: NO
       list: YES
       visible: true
@@ -338,7 +330,7 @@ GconContenidos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
     IsDefault:
-      title: Valor por defecto
+      title: 'Valor por defecto'
       filter: NO
       list: NO
       visible: true
@@ -374,7 +366,7 @@ GconContenidos:
       aditional_filter: { order: 16, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     BelongsTo:
-      title: Pertenece a ...
+      title: 'Pertenece a ...'
       filter: NO
       list: NO
       visible: true
@@ -383,10 +375,10 @@ GconContenidos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 17, caption: Pertenece a ..., entity: GconContenidos, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }      
+      aditional_filter: { order: 17, caption: 'Pertenece a ...', entity: GconContenidos, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     AllowsChildren:
-      title: Permite hijos
+      title: 'Permite hijos'
       filter: NO
       list: NO
       visible: true
@@ -856,7 +848,7 @@ GconContenidos:
       aditional_filter: { order: 37, caption: UrlIsHttps, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     CodigoAppAsociada:
-      title: App asociada
+      title: 'App asociada'
       filter: NO
       list: NO
       visible: true
@@ -868,7 +860,7 @@ GconContenidos:
       aditional_filter: { order: 38, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: NombreApp, type: select, operator: '=', event: null }
       validator: { nullable: YES, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
-      title: Álbum externo
+      title: 'Álbum externo'
       filter: NO
       list: NO
       visible: true
@@ -876,10 +868,10 @@ GconContenidos:
       default: null
       help: null
       permission: null
-      link: { route: null, param: null, title: null, target: null, link: null }     
+      link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdSliderAsociado:
-      title: Slider asociado
+      title: 'Slider asociado'
       filter: NO
       list: NO
       visible: true
@@ -890,18 +882,7 @@ GconContenidos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdSeccionEnlaces:
-      title: Sección de enlaces asociada
-      filter: NO
-      list: NO
-      visible: true
-      updatable: true
-      default: null
-      help: null
-      permission: null
-      link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }      
-    IdSeccionVideos:
-      title: Sección de vídeos asociada
+      title: 'Sección de enlaces asociada'
       filter: NO
       list: NO
       visible: true
@@ -911,3 +892,21 @@ GconContenidos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IdSeccionVideos:
+      title: 'Sección de vídeos asociada'
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''

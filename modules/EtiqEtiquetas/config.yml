@@ -1,13 +1,5 @@
-# Module: EtiqEtiquetas
-# Document : modules/EtiqEtiquetas/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.10.2012 18:46:08
-#
----
 EtiqEtiquetas:
-  app: 'Etiq'
+  app: Etiq
   isModuleRoot: 1
   linkModule:
     fromColumn: ''
@@ -38,7 +30,7 @@ EtiqEtiquetas:
   controller: Etiquetas
   action: Index
   template: index
-  parametros: 
+  parametros: null
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
@@ -646,3 +638,10 @@ EtiqEtiquetas:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    RevisitAfter:
+      title: RevisitAfter
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''
