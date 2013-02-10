@@ -5,9 +5,9 @@ CpanFuncionalidades:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
-  showCommonFields: true
+  showCommonFields: false
   numMaxRecords: ''
-  numberOfImages: '3'
+  numberOfImages: '0'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0
@@ -23,9 +23,9 @@ CpanFuncionalidades:
     generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
-  urlFriendlyManagement: true
+  urlFriendlyManagement: false
   fieldGeneratorUrlFriendly: Codigo
-  metatagTitleManagement: true
+  metatagTitleManagement: false
   fieldGeneratorMetatagTitle: Codigo
   controller: CpanFuncionalidades
   action: Index
@@ -76,7 +76,7 @@ CpanFuncionalidades:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
     Codigo:
-      title: Codigo
+      title: Código
       filter: YES
       list: YES
       visible: true

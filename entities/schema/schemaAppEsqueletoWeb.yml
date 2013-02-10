@@ -1,0 +1,11 @@
+# ESQUELETO WEB TIENDAS ONLINES
+CpanEsqueletoWeb:
+  comment: Esqueleto de zonas de la web
+  columns:
+    Controller: { type: string(50), notnull: true, index: index }
+    Zona:       { type: integer(2), notnull: true, default: 0 }
+    IdEstado:   { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulosEstados,Id' }
+    IdFamilia:  { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpFamilias,Id' }
+    NItems:     { type: integer(2), notnull: true, default: 0 }
+     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations: 

@@ -5,9 +5,9 @@ CpanUsuarios:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
-  showCommonFields: true
+  showCommonFields: false
   numMaxRecords: ''
-  numberOfImages: '3'
+  numberOfImages: '0'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0
@@ -665,7 +665,7 @@ CpanUsuarios:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 27, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: YES, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
       title: IdAlbumExterno
       filter: NO

@@ -22,51 +22,8 @@
     </ul>
 
     <div id="arbol">
-        <ul>
-        {% for key,padre in datos.getArbolHijos %}
-            <li>
-                {{ macro.ordenarPopup(values.controller,'BelongsTo',0)}}
-                {{ macro.actualizaColumna(values.controller,padre.id,'Publish',padre.publish,'Publicar/Despublicar')}}                      
-                <a href="{{app.path}}/{{values.controller}}/edit/{{key}}">{{padre.titulo}}</a>
-                {% if padre.nContenidos %}
-                    <img src="{{app.path}}/images/list-icons/pin.png" title="{{padre.nContenidos}} contenidos"/>
-                {% endif %}
-                {% if padre.nHijos %}
-                <ul>
-                {% for keyHijo,hijo in padre.hijos %}
-                    <li style="margin-left: 30px;">
-                        {% if padre.nHijos > 1 %}
-                            {{ macro.ordenarPopup(values.controller,'BelongsTo',padre.id)}}
-                        {% endif %}
-                        {{ macro.actualizaColumna(values.controller,hijo.id,'Publish',hijo.publish,'Publicar/Despublicar')}}        
-                        <a href="{{app.path}}/{{values.controller}}/edit/{{keyHijo}}">{{hijo.titulo}}</a>
-                        {% if hijo.nContenidos %}
-                            <img src="{{app.path}}/images/list-icons/pin.png" title="{{hijo.nContenidos}} contenidos"/>
-                        {% endif %}
-                        {% if hijo.nHijos %}
-                        <ul>
-                        {% for keyNieto,nieto in hijo.hijos %}
-                            <li style="margin-left: 60px;">
-                                {% if hijo.nHijos > 1 %}
-                                    {{ macro.ordenarPopup(values.controller,'BelongsTo',hijo.id)}}
-                                {% endif %}
-                                {{ macro.actualizaColumna(values.controller,nieto.id,'Publish',nieto.publish,'Publicar/Despublicar')}}                                     
-                                <a href="{{app.path}}/{{values.controller}}/edit/{{keyNieto}}">{{nieto.titulo}}</a>
-                                {% if nieto.nContenidos %}
-                                    <img src="{{app.path}}/images/list-icons/pin.png" title="{{nieto.nContenidos}} contenidos"/>
-                                {% endif %}                            
-                            </li>
-                        {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-                </ul>
-                {% endif %}
-            </li>
-        {% endfor %}
-        </ul>
-    </div>
+        {% include values.controller ~ '/arbol.html.twig' with {'arbol': datos.getArbolHijos, 'subtemplate':'arbolEditar.html.twig'} %}        
+    </div> 
         
     <div id="general">
         {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}

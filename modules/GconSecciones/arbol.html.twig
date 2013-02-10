@@ -1,33 +1,24 @@
-{# 
-    Arbol recursivo de SECCIONES de contenidos
-
-    Muestra tres niveles jerárquicos
-
- #}
-{% extends '_global/layoutPopup.html.twig' %}
-
-{% block content %}
-<form name="formEnlace" id="formEnlace" action="" method="POST" class="form_container left_label">
-    <input name="controller" value="{{values.controller}}" type="hidden" />
-    <input name="action" id="action" value="enlazar" type="hidden" />
-    <input name="accion" id="accion" value="" type="hidden" />
-    <input name="idEntidadOrigen" value="{{values.idEntidadOrigen}}" type="hidden" />
-    <input name="entidadDestino" id="entidadDestino" value="{{values.entidadDestino.getClassName}}" type="hidden" />
-    <input name="idEntidadDestino" id="idEntidadDestino" value="{{values.idEntidadDestino}}" type="hidden" />  
+{#
+    GconSecciones/arbol.html.twig
+#}
+<ul class="arbol">
+{% for keyPadre,padre in arbol %}
+    <li class="arbol">
+        {% include 'GconSecciones/' ~ subtemplate with {'key':keyPadre,'item':padre} %}
+    </li>
     <ul class="arbol">
-    {% for padre in values.entidadDestino.getArbolHijos %}
-        {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': padre} %}
-        <ul class="arbol">
-            {% for hijo in padre.hijos %}
-                {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': hijo} %}
-                <ul class="arbol">
-                    {% for nieto in hijo.hijos %}
-                        {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': nieto} %}
-                    {% endfor %}
-                </ul>                        
-            {% endfor %}
-        </ul>
-    {% endfor %}
+        {% for keyHijo,hijo in padre.hijos %}
+            <li class="arbol">
+                {% include 'GconSecciones/' ~ subtemplate with {'key':keyHijo,'item':hijo, 'nHermanos': padre.nHijos} %}
+            </li>
+            <ul class="arbol">
+                {% for keyNieto,nieto in hijo.hijos %}
+                    <li class="arbol">
+                        {% include 'GconSecciones/' ~ subtemplate with {'key':keyNieto,'item':nieto, 'nHermanos': hijo.nHijos} %}
+                    </li>
+                {% endfor %}
+            </ul>                        
+        {% endfor %}
     </ul>
-</form>
-{% endblock %}
+{% endfor %}
+</ul>

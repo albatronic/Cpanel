@@ -50,15 +50,6 @@ class GconSecciones extends GconSeccionesEntity {
             if ($this->OrdenMenu5 == 0)
                 $this->setOrdenMenu5($this->SortOrder);
 
-            // Asignar el nivel Jerárquico
-            $nivelPadre = 0;
-            if ($this->BelongsTo != 0) {
-                $seccion = new GconSecciones($this->BelongsTo);
-                $nivelPadre = $seccion->getNivelJerarquico();
-                unset($seccion);
-            }
-
-            $this->setNivelJerarquico($nivelPadre + 1);
         }
     }
 
@@ -66,14 +57,23 @@ class GconSecciones extends GconSeccionesEntity {
      * Devuelve un array con los contenidos correspondientes
      * a la sección indicada, o en su defecto a la sección actual.
      *
-     * Si se indica $idContenido, se añade un elmento más que indica
-     * si cada contenido está relacionado con el contenido $idContenido
+     * Si se indica $entidadRelacionada e $idEntidadRelacionada, se añade un elmento más que indica
+     * si cada contenido está relacionado con $entidadRelacionada e $idEntidadRelacionada
      *
+     * El arrau tiene los siguientes elementos:
+     * 
+     * - Id: El id del contenido
+     * - Value: El titulo del contenido
+     * - PrimaryKeyMD5: la primarykey MD5
+     * - Publish: TRUE/FALSE
+     * - estaRelacionado: El id de la eventual relacion
+     * 
      * @param integer $idSeccion El id de la seccion
-     * @param integer $idContenido El id del contenido
+     * @param string $idEntidadRelacionada La entidad con la que existe una posible relación
+     * @param integer $idEntidadRelacionada El id de entidad con la que existe una posible relación
      * @return array Array Id, Value de contenidos
      */
-    public function getContenidos($idSeccion = '', $idContenido = '') {
+    public function getContenidos($idSeccion = '', $entidadRelacionada = '', $idEntidadRelacionada = '') {
 
         if ($idSeccion == '')
             $idSeccion = $this->Id;
@@ -82,10 +82,10 @@ class GconSecciones extends GconSeccionesEntity {
         $contenidos = $contenido->cargaCondicion('Id as Id,Titulo as Value,PrimaryKeyMD5,Publish', "IdSeccion='{$idSeccion}'", "SortOrder ASC");
         unset($contenido);
 
-        if ($idContenido) {
+        if ($entidadRelacionada) {
             foreach ($contenidos as $key => $contenido) {
-                $relacion = new GconContenidosRelacionados();
-                $contenidos[$key]['estaRelacionado'] = $relacion->estanRelacionados($idContenido, $contenido['Id']);
+                $relacion = new CpanRelaciones();
+                $contenidos[$key]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada,$idEntidadRelacionada,'GconContenidos', $contenido['Id']);
             }
             unset($relacion);
         }
@@ -104,35 +104,45 @@ class GconSecciones extends GconSeccionesEntity {
      * - id => el id de la seccion
      * - titulo => el titulo de la seccion
      * - nivelJerarquico => el nivel jerárquico dentro del árbol de secciones
+     * - publish => Publicar TRUE/FALSE
+     * - belongsTo => El id del padre al que pertenece
+     * - nHijos => El número de secciones hijas
      * - hijos => array de secciones hijas (belongsTo) con la misma estructura
      * - nContenidos => el número de contenidos que posee la sección
      * - contenidos => array de contenidos de la seccion
      * 
-     * @param integer $idContenidoRelacionado 
+     * @param boolean $conContenidos
+     * @param string $entidadRelacionada
+     * @param integer $idEntidadRelacionada 
      * @return array Array de secciones
      */
-    public function getArbolHijos($idContenidoRelacionado = '') {
+    public function getArbolHijos($conContenidos = FALSE, $entidadRelacionada = '',$idEntidadRelacionada = '') {
 
         $arbol = array();
 
         $objeto = new $this();
-        $rows = $objeto->cargaCondicion("Id,PrimaryKeyMD5,NivelJerarquico,Publish", "BelongsTo='0'", "SortOrder ASC");
+        $rows = $objeto->cargaCondicion("Id,PrimaryKeyMD5,NivelJerarquico,Publish,BelongsTo", "BelongsTo='0'", "SortOrder ASC");
         unset($objeto);
 
         foreach ($rows as $row) {
             $objeto = new $this($row['Id']);
-            $arrayContenidos = $this->getContenidos($row['Id'], $idContenidoRelacionado);
-            $arrayHijos = $objeto->getHijos();
+            $arrayContenidos = ($conContenidos) ? $this->getContenidos($row['Id'], $entidadRelacionada, $idEntidadRelacionada) : array();
+            $arrayHijos = $objeto->getHijos('',$conContenidos, $entidadRelacionada, $idEntidadRelacionada);
             $arbol[$row['PrimaryKeyMD5']] = array(
                 'id' => $row['Id'],
                 'titulo' => $objeto->getTitulo(),
                 'nivelJerarquico' => $row['NivelJerarquico'],
                 'publish' => $row['Publish'],
+                'belongsTo' => $row['BelongsTo'],
                 'nHijos' => count($arrayHijos),
                 'hijos' => $arrayHijos,
                 'nContenidos' => count($arrayContenidos),
                 'contenidos' => $arrayContenidos,
             );
+            if ($entidadRelacionada) {
+                $relacion = new CpanRelaciones(); 
+                $arbol[$row['PrimaryKeyMD5']]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada,'GconSecciones', $row['Id']);
+            }            
         }
 
         unset($objeto);
@@ -151,12 +161,12 @@ class GconSecciones extends GconSeccionesEntity {
      * @param integer $idPadre El id de la entidad padre
      * @return array
      */
-    public function getHijos($idPadre = '') {
+    public function getHijos($idPadre = '', $conContenidos = FALSE, $entidadRelacionada = '', $idEntidadRelacionada = '') {
 
         if ($idPadre == '')
             $idPadre = $this->getPrimaryKeyValue();
 
-        $this->getChildrens($idPadre);
+        $this->getChildrens($idPadre,$conContenidos, $entidadRelacionada, $idEntidadRelacionada);
         return $this->_hijos[$idPadre];
     }
 
@@ -167,25 +177,30 @@ class GconSecciones extends GconSeccionesEntity {
      * @param integer $idPadre El id de la entidad padre
      * @return array Array con los objetos hijos
      */
-    private function getChildrens($idPadre) {
+    private function getChildrens($idPadre, $conContenidos, $entidadRelacionada, $idEntidadRelacionada) {
 
         // Obtener todos los hijos del padre actual
-        $hijos = $this->cargaCondicion('Id,PrimaryKeyMD5,NivelJerarquico,Publish', "BelongsTo='{$idPadre}'", "SortOrder ASC");
+        $hijos = $this->cargaCondicion('Id,PrimaryKeyMD5,NivelJerarquico,Publish,BelongsTo', "BelongsTo='{$idPadre}'", "SortOrder ASC");
 
         foreach ($hijos as $hijo) {
             $aux = new $this($hijo['Id']);
-            $arrayContenidos = $this->getContenidos($hijo['Id']);
-            $arrayHijos = $this->getChildrens($hijo['Id']);
+            $arrayContenidos = ($conContenidos) ? $this->getContenidos($hijo['Id']) : array();
+            $arrayHijos = $this->getChildrens($hijo['Id'], $conContenidos, $entidadRelacionada, $idEntidadRelacionada);
             $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']] = array(
                 'id' => $hijo['Id'],
                 'titulo' => $aux->getTitulo(),
                 'nivelJerarquico' => $hijo['NivelJerarquico'],
                 'publish' => $hijo['Publish'],
+                'belongsTo' => $hijo['BelongsTo'],                
                 'nHijos' => count($arrayHijos),
                 'hijos' => $arrayHijos,
                 'nContenidos' => count($arrayContenidos),
                 'contenidos' => $arrayContenidos,
             );
+            if ($entidadRelacionada) {
+                $relacion = new CpanRelaciones(); 
+                $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada,'GconSecciones', $hijo['Id']);
+            }                
             unset($hijo);
         }
 

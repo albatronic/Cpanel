@@ -13,8 +13,7 @@ CpanRoles:
   1: { Id: 1, Rol: Estandar }
 
 CpanUsuarios:
-  1: { IdPerfil: 1, IdRol: 1, IdTipoUsuario: 1 }
-  2: { IdPerfil: 2, IdRol: 1, IdTipoUsuario: 1 }
+  1: { IdUsuario: 1, IdPerfil: 1, IdRol: 1, IdTipoUsuario: 1 }
 
 CpanFuncionalidades:
   AC: { Codigo: AC, Titulo: Acceder,       Descripcion: Permiso de Acceso, EsEstandar: 1}
@@ -36,6 +35,8 @@ CpanUrlAmigables:
   7: { UrlFriendly: '/olvido',      Controller: Olvido,     Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 7 }  
   8: { UrlFriendly: '/contacto',    Controller: Contacto,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 8 }
   9: { UrlFriendly: '/politica-de-privacidad',    Controller: PoliticaPrivacidad,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 9 }      
+  10: { UrlFriendly: '/noticias',   Controller: Noticias,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 10 }      
+  11: { UrlFriendly: '/eventos',    Controller: Eventos,    Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 11 }      
   
 GconSecciones:
   1: { Id: 1, Titulo: Inicio, Publish: 1, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: '', LockSlug: 1, UrlFriendly: '/' }
@@ -47,3 +48,5 @@ GconSecciones:
   7: { Id: 7, Titulo: Olvido, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'olvido', LockSlug: 1, UrlFriendly: '/olvido' }
   8: { Id: 8, Titulo: Contacto, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'contacto', LockSlug: 1, UrlFriendly: '/contacto' }
   9: { Id: 9, Titulo: Politica de privacidad, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'politica-de-privacidad', LockSlug: 1, UrlFriendly: '/politica-de-privacidad' }  
+  10: { Id: 10, Titulo: Noticias, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'noticias', LockSlug: 1, UrlFriendly: '/noticias' }  
+  11: { Id: 11, Titulo: Eventos, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'eventos', LockSlug: 1, UrlFriendly: '/eventos' }  

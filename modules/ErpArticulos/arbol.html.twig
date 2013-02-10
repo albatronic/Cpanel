@@ -1,0 +1,23 @@
+{# ARBOL DE FAMILIAS DE PRODUCTOS Y PRODUCTOS#}
+
+<ul class="arbol">
+{% for padre in arbol %}
+    <li class="arbol">
+        {% include 'ErpArticulos/arbolFamilias.html.twig' with {'familia': padre, 'subtemplate':subtemplate} %}        
+    </li>
+    <ul class="arbol">
+        {% for hijo in padre.hijos %}
+            <li class="arbol">
+                {% include 'ErpArticulos/arbolFamilias.html.twig' with {'familia': hijo, 'subtemplate':subtemplate} %}                  
+            </li>
+            <ul class="arbol">
+                {% for nieto in hijo.hijos %}
+                    <li class="arbol">
+                        {% include 'ErpArticulos/arbolFamilias.html.twig' with {'familia': nieto, 'subtemplate':subtemplate} %}                          
+                    </li>
+                {% endfor %}
+            </ul>                        
+        {% endfor %}
+    </ul>
+{% endfor %}
+</ul>

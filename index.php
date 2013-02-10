@@ -223,7 +223,9 @@ if ($_SESSION['isMobile']) {
 }
 
 // Renderizo el template y los valores devueltos por el método
-$twig->addGlobal('user', new CpanUsuarios($_SESSION['USER']['user']['Id']));
+$usuario = new CpanUsuarios();
+$usuario = $usuario->find('IdUsuario',$_SESSION['USER']['user']['Id']);
+$twig->addGlobal('user',$usuario);
 $twig->addGlobal('appPath', $app['path']);
 $twig->addGlobal('varEnvMod', $result['values']['varEnvMod']);
 $twig->loadTemplate($result['template'])
@@ -231,9 +233,7 @@ $twig->loadTemplate($result['template'])
             'values' => $result['values'],
             'app' => $app,
             'layout' => $layout,
-            //'user'    => new CpanUsuarios($_SESSION['USER']['user']['Id']),
             'menu' => $_SESSION['USER']['menu'],
-            //'projects' => $_SESSION['projects'],
             'project' => $_SESSION['project'],
         ));
 
@@ -244,6 +244,7 @@ unset($con);
 unset($loader);
 unset($twig);
 unset($config);
+unset($usuario);
 
 /**
  * Devuelve el nombre del archivo css asociado al template

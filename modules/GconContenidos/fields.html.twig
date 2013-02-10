@@ -17,20 +17,10 @@
             {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
         </li>
         
-        {% if (values.datos.getPrimaryKeyValue) %}
-            <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'contenidosRelacionados'%}  ui-tabs-selected ui-state-active{%endif%}">
-                <a href="#contenidosRelacionados" onclick="cargaTab('contenidosRelacionados','GconContenidosRelacionados');">Contenidos Relacionados</a>
+        {% if (values.datos.getPrimaryKeyValue and values.datos.EsEvento.IDTipo) %}
+            <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'eventos'%}  ui-tabs-selected ui-state-active{%endif%}">
+                <a href="#eventos" onclick="cargaEventos('eventos');">Eventos</a>
             </li>
-            {% if datos.getTieneEtiquetas() %}
-            <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'etiquetas'%}  ui-tabs-selected ui-state-active{%endif%}">
-                <a href="#etiquetas" onclick="cargaEtiquetasRelacionadas('etiquetas','{{values.controller}}','{{datos.primaryKeyValue}}');">Etiquetas</a>
-            </li>
-            {% endif %}
-            {% if values.datos.EsEvento.IDTipo %}
-                <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'eventos'%}  ui-tabs-selected ui-state-active{%endif%}">
-                    <a href="#eventos" onclick="cargaEventos('eventos');">Eventos</a>
-                </li>
-            {% endif %}
         {% endif %}
                 
         {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
@@ -41,33 +31,8 @@
     </ul>
         
     {# ARBOL DE SECCIONES Y CONTENIDOS, TRES NIVELES #}
-    <div id="arbol">
-        <ul class="arbol">
-        {% set nivel = '' %}
-        {% for padre in values.datos.getArbolHijos %}
-                
-            <li class="arbol">
-                {% include values.controller ~ '/secciones.html.twig' with {'seccion': padre, 'templateContenidos':'contenidosEditar.html.twig'} %}
-            </li>
-            
-            <ul class="arbol">
-                {% for hijo in padre.hijos %}
-                    
-                    <li class="arbol">
-                        {% include values.controller ~ '/secciones.html.twig' with {'seccion': hijo, 'templateContenidos':'contenidosEditar.html.twig'} %}
-                    </li>
-                    
-                    <ul class="arbol">
-                        {% for nieto in hijo.hijos %}
-                            <li class="arbol">
-                                {% include values.controller ~ '/secciones.html.twig' with {'seccion': nieto, 'templateContenidos':'contenidosEditar.html.twig'} %}
-                            </li>
-                        {% endfor %}
-                    </ul>                        
-                {% endfor %}
-            </ul>
-        {% endfor %}
-        </ul>
+    <div id="arbol">        
+        {% include values.controller ~ '/arbol.html.twig' with {'arbol': values.datos.getArbolHijos, 'subtemplate':'arbolEditar.html.twig'} %}
     </div>
         
     <div id="general">     
@@ -92,12 +57,8 @@
         {{ macro.input(atributos.EsEvento,'field_title','checkbox',values.controller ~ '[EsEvento]',values.controller ~ '_EsEvento',datos.EsEvento.IDTipo,'255','CampoTextoLargo','12') }}
     </div>
     
-    {% if (values.datos.getPrimaryKeyValue) %}
-        <div id="contenidosRelacionados" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
-        <div id="etiquetas" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
-        {% if values.datos.EsEvento.IDTipo %}
-            <div id="eventos" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
-        {% endif%}
+    {% if (values.datos.getPrimaryKeyValue) and (values.datos.EsEvento.IDTipo) %}
+        <div id="eventos" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
     {% endif %}
 
     {% include '_global/fieldsComunes.html.twig' %}            

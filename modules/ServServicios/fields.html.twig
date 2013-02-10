@@ -1,0 +1,46 @@
+{#
+  Module: ServServicios
+  Document : modules\ServServicios\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 04.02.2013 23:09:18
+#}
+
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'arbol'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#arbol" onclick='$( "#solapaActiva" ).val("arbol");'>Árbol de Servicios</a>
+        </li>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Servicio{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}            
+        </li>
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}
+    </ul>
+
+    <div id="arbol">        
+        {% include values.controller ~ '/arbol.html.twig' with {'arbol': values.datos.getArbolHijos, 'subtemplate':'arbolEditar.html.twig'} %}
+    </div>
+        
+    <div id="general" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.select(atributos.IdFamilia,'field_title',values.controller ~ '[IdFamilia]',values.controller ~ '_IdFamilia',none,datos.IdFamilia.Id,datos.IdFamilia.fetchAll('Titulo'),'chzn-select','1')}}
+        {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
+        {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
+        {{ macro.input(atributos.ResumenBreve,'field_title','text',values.controller ~ '[ResumenBreve]',values.controller ~ '_ResumenBreve',datos.ResumenBreve,'255','CampoTextoLargo','4') }}
+        {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','5')}}
+        {{ macro.input(atributos.MostrarPortada,'field_title','checkbox',values.controller ~ '[MostrarPortada]',values.controller ~ '_MostrarPortada',datos.MostrarPortada.IDTipo,'255','CampoTextoLargo','6') }}
+        {# macro.input(atributos.MostrarPortadaOrden,'field_title','text',values.controller ~ '[MostrarPortadaOrden]',values.controller ~ '_MostrarPortadaOrden',datos.MostrarPortadaOrden,'11','CampoImporte','7') #}
+        {{ macro.input(atributos.MostrarEnListado,'field_title','checkbox',values.controller ~ '[MostrarEnListado]',values.controller ~ '_MostrarEnListado',datos.MostrarEnListado.IDTipo,'255','CampoTextoLargo','8') }}
+        {# macro.input(atributos.MostrarEnListadoOrden,'field_title','text',values.controller ~ '[MostrarEnListadoOrden]',values.controller ~ '_MostrarEnListadoOrden',datos.MostrarEnListadoOrden,'11','CampoImporte','9') #}
+        {{ macro.input(atributos.TieneDesarrollo,'field_title','checkbox',values.controller ~ '[TieneDesarrollo]',values.controller ~ '_TieneDesarrollo',datos.TieneDesarrollo.IDTipo,'255','CampoTextoLargo','10') }}
+        {{ macro.input(atributos.MuestraEjemplos,'field_title','checkbox',values.controller ~ '[MuestraEjemplos]',values.controller ~ '_MuestraEjemplos',datos.MuestraEjemplos.IDTipo,'255','CampoTextoLargo','11') }}
+    </div>      
+            
+    {% include '_global/fieldsComunes.html.twig' %}        
+</div>
+{{ macro.foco(values.controller ~ '_IdFamilia') }}

@@ -1,6 +1,8 @@
-{# Muestra los contenidos #}
+{# Muestra los contenidos para enlazar#}
 
-<span class="arbol" title="Ver/Ocultar contenidos de esta sección" onclick="switchDisplay('contenidosDe_{{contenidos.id}}');">
+<span class="arbol" 
+      title="Ver/Ocultar contenidos de esta sección" 
+      onclick="switchDisplay('contenidosDe_{{contenidos.id}}');">
     <img src="{{app.path}}/images/js-tree/folder-closed.gif"/>
     {{contenidos.titulo}} ({{ contenidos.nContenidos}})
 </span>

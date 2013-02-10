@@ -20,6 +20,12 @@ class CpanUsuariosEntity extends EntityComunes {
     protected $Id;
 
     /**
+     * @var integer
+     * @assert NotBlank(groups="CpanUsuarios")
+     */
+    protected $IdUsuario;
+
+    /**
      * @var entities\CpanPerfiles
      * @assert NotBlank(groups="CpanUsuarios")
      */
@@ -86,9 +92,17 @@ class CpanUsuariosEntity extends EntityComunes {
     }
 
     public function getId() {
-        if (!($this->Id instanceof PcaeUsuarios))
-            $this->Id = new PcaeUsuarios($this->Id);
         return $this->Id;
+    }
+
+    public function setIdUsuario($IdUsuario) {
+        $this->IdUsuario = $IdUsuario;
+    }
+
+    public function getIdUsuario() {
+        if (!($this->IdUsuario instanceof PcaeUsuarios))
+            $this->IdUsuario = new PcaeUsuarios($this->IdUsuario);
+        return $this->IdUsuario;
     }
 
     public function setIdPerfil($IdPerfil) {

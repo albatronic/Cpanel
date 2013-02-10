@@ -30,7 +30,8 @@ $(function(){
                 // Enviar el formulario por ajax
                 var $formulario = $('#filtro');
                 $(formulario).submit(function(e){
-                    var valores = $formulario.serialize();alert(valores);
+                    var valores = $formulario.serialize();
+                    alert(valores);
                     var $envio = $.ajax({
                         url: appPath + '/GconContenidos/list',
                         data: valores,
@@ -100,23 +101,23 @@ $(function(){
     });
     
     $( "#acordeonOrden" )
-        .accordion({
-            header: "> div > h3",
-            active: false,
-            collapsible: true            
-        })
-        .sortable({
-            axis: "y",
-            handle: "h3",
-            cursor: "move",
-            opacity: 0.5,
-            stop: function( event, ui ) {
-                // IE doesn't register the blur when sorting
-                // so trigger focusout handlers to remove .ui-state-focus
-                ui.item.children( "h3" ).triggerHandler( "focusout" );
-            }
-        });
-    
+    .accordion({
+        header: "> div > h3",
+        active: false,
+        collapsible: true            
+    })
+    .sortable({
+        axis: "y",
+        handle: "h3",
+        cursor: "move",
+        opacity: 0.5,
+        stop: function( event, ui ) {
+            // IE doesn't register the blur when sorting
+            // so trigger focusout handlers to remove .ui-state-focus
+            ui.item.children( "h3" ).triggerHandler( "focusout" );
+        }
+    });
+
     $("#usersSelector").change(function () {
         submitForm('layoutForm');
     });
@@ -129,7 +130,7 @@ $(function(){
 
 function solapaActiva(solapa) {
     alert(solapa);
-    //$("#solapaActiva").val(solapa);
+//$("#solapaActiva").val(solapa);
 }
 
 function AcordeonActivo(acordeon) {
@@ -403,8 +404,10 @@ function DesplegableAjax(iddiv,idselect,nameselect,tipo,filtro) {
  */
 function autoCompletar(campoAutoCompletar,campoId,campoTexto,entidad,columna,filtroAdicional,desplegableAjax) {
 
+    var url = appPath + "/lib/autoCompletar.php?entidad=" + entidad + "&columna=" + columna + "&filtroAdicional=" + filtroAdicional;
+
     $("#"+campoAutoCompletar).autocomplete({
-        source: appPath + "/lib/autoCompletar.php?filtroAdicional=" + filtroAdicional + "&entidad=" + entidad + "&columna=" + columna,
+        source: url,
         minLength: 2,
         select: function( event, ui ) {
             devuelve( campoId, ui.item.id, campoTexto, ui.item.value, desplegableAjax );
@@ -449,6 +452,20 @@ function actualizaPermiso(idUsuario,idEmpresa,idProyecto,idApp,permiso) {
 
     $.ajax({
         url: appPath + "/lib/actualizaPermiso.php",
+        type: 'GET',
+        async: true,
+        data: parametros
+    });    
+}
+
+/**
+ * Crear o borra la relación entre una entidad-id y otra entidad-id
+ */
+function actualizaRelacion(entidadOrigen,idOrigen,entidadDestino,idDestino,onOff) {
+    var parametros = 'entidadOrigen='+entidadOrigen+'&idOrigen='+idOrigen+'&entidadDestino='+entidadDestino+'&idDestino='+idDestino+'&onOff='+onOff;
+
+    $.ajax({
+        url: appPath + '/lib/actualizaRelacion.php',
         type: 'GET',
         async: true,
         data: parametros

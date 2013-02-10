@@ -141,9 +141,9 @@ class Controller {
 
         $this->values['atributos'] = $this->form->getAtributos($this->entity); //$this->values['permisos']['enCurso']['modulo']);
         // Poner la solapa activa del formulario
-        ($this->request['solapaActiva'] == '') ? $this->values['solapaActiva'] = 'general' : $this->values['solapaActiva'] = $this->request['solapaActiva'];
+        $this->values['solapaActiva'] = ($this->request['solapaActiva'] == '') ? 'general' : $this->request['solapaActiva'];
         // Poner el acordeon activo de los campos comunes
-        ($this->request['acordeonActivo'] == '') ? $this->values['acordeonActivo'] = '' : $this->values['acordeonActivo'] = $this->request['acordeonActivo'];        
+        $this->values['acordeonActivo'] = ($this->request['acordeonActivo'] == '') ?  '' :  $this->request['acordeonActivo'];        
     }
 
     public function IndexAction() {
@@ -279,6 +279,83 @@ class Controller {
     }
 
     /**
+     * Crea un registro nuevo hijo asociándolo al
+     * campo que viene en el request[2] y al valor que
+     * viene en el request[3]
+     *
+     * @return array con el template y valores a renderizar
+     */    
+    public function deAction() {
+        
+        if ($this->values['permisos']['permisosModulo']['IN']) {
+
+            switch ($this->request["METHOD"]) {
+                case 'GET':
+                    if ($this->request['3'] != '') {
+                        $this->values['linkBy']['value'] = $this->request['3'];
+                        $entidad = new $this->request['2'];
+                        $padre = $entidad->find("PrimaryKeyMD5",$this->request['4']);
+                        $idPadre = $padre->getId();
+                        unset($padre);
+                        unset($entidad);
+                    }                    
+                    $columnaAsociar = $this->request[3];
+                    $datos = new $this->entity();
+                    $datos->setDefaultValues((array) $this->varEnvMod['columns']);
+                    $datos->{"set$columnaAsociar"}($idPadre);
+                    $this->values['datos'] = $datos;
+                    $this->values['errores'] = array();
+                    $template = $this->entity . '/form.html.twig'; 
+                    break;
+
+            }
+        } else {
+            $template = '_global/forbiden.html.twig';
+        }
+
+        return array('template' => $template, 'values' => $this->values);        
+    }
+    
+    /**
+     * Crea un registro nuevo hijo (belongsTo)
+     *
+     * @return array con el template y valores a renderizar
+     */    
+    public function belongsToAction() {
+        
+        if ($this->values['permisos']['permisosModulo']['IN']) {
+
+            switch ($this->request["METHOD"]) {
+                case 'GET': //MOSTRAR FORMULARIO VACIO                
+                    //SI EN LA POSICION 2 DEL REQUEST VIENE ALGO,
+                    //SE ENTIENDE QUE ES EL VALOR DE LA CLAVE PARA LINKAR CON LA ENTIDAD PADRE
+                    //ESTO SE UTILIZA PARA LOS FORMULARIOS PADRE->HIJO
+                    if ($this->request['2'] != '') {
+                        $this->values['linkBy']['value'] = $this->request['2'];
+                        $entidad = new $this->entity;
+                        $padre = $entidad->find("PrimaryKeyMD5",$this->request['2']);
+                        $idPadre = $padre->getId();
+                        unset($padre);
+                        unset($entidad);
+                    }
+
+                    $datos = new $this->entity();
+                    $datos->setDefaultValues((array) $this->varEnvMod['columns']);
+                    $datos->setBelongsTo($idPadre);
+                    $this->values['datos'] = $datos;
+                    $this->values['errores'] = array();
+                    $template = $this->entity . '/form.html.twig'; 
+                    break;
+
+            }
+        } else {
+            $template = '_global/forbiden.html.twig';
+        }
+
+        return array('template' => $template, 'values' => $this->values);        
+    }
+    
+    /**
      * Crea un registro nuevo
      *
      * Si viene por GET muestra un template vacio
@@ -291,7 +368,7 @@ class Controller {
         if ($this->values['permisos']['permisosModulo']['IN']) {
 
             switch ($this->request["METHOD"]) {
-                case 'GET': //MOSTRAR FORMULARIO VACIO
+                case 'GET': //MOSTRAR FORMULARIO VACIO                
                     //SI EN LA POSICION 2 DEL REQUEST VIENE ALGO,
                     //SE ENTIENDE QUE ES EL VALOR DE LA CLAVE PARA LINKAR CON LA ENTIDAD PADRE
                     //ESTO SE UTILIZA PARA LOS FORMULARIOS PADRE->HIJO
@@ -302,7 +379,7 @@ class Controller {
                     $datos->setDefaultValues((array) $this->varEnvMod['columns']);
                     $this->values['datos'] = $datos;
                     $this->values['errores'] = array();
-                    $template = $this->entity . '/form.html.twig';
+                    $template = $this->entity . '/form.html.twig'; 
                     break;
 
                 case 'POST': //CREAR NUEVO REGISTRO
@@ -437,7 +514,7 @@ class Controller {
                 $this->values['entidadEnlazada'] = $entidadEnlazada;
 
                 return array(
-                    'template' => $entidadDestino . '/arbol.html.twig',
+                    'template' => $entidadDestino . '/formEnlazar.html.twig',
                     'values' => $this->values,
                 );
                 break;
@@ -460,7 +537,7 @@ class Controller {
         $this->values['entidadEnlazada'] = $rows[0]['Entidad'];
 
         return array(
-            'template' => $entidadDestino . '/arbol.html.twig',
+            'template' => $entidadDestino . '/formEnlazar.html.twig',
             'values' => $this->values,
         );
     }

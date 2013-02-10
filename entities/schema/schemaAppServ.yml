@@ -1,0 +1,31 @@
+# ESQUEMA DE LA APP Serv. APLICACIÓN DE SERVICIOS
+
+# FAMILIAS DE SERVICIOS
+ServFamilias:
+  comment: Familias de Servicios
+  columns:
+    Titulo: { type: string(255), notnull: true }
+    Subtitulo: { type: string(255), notnull: false }
+    Resumen: { type: text, notnull: false }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+
+# SERVICIOS
+ServServicios:
+  comment: Servicios
+  columns:
+    IdFamilia:   { type: bigint(11), notnull: true, index: index, comment: 'db,ServFamilias,Id'}
+    Titulo: { type: string(255), notnull: true }
+    Subtitulo: { type: string(255), notnull: false }
+    Resumen: { type: text, notnull: false }
+    ResumenBreve: { type: string(255), notnull: false }
+    MostrarPortada: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    MostrarPortadaOrden: { type: integer(11), notnull: true, default: 0, index: index }
+    MostrarEnListado: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    MostrarEnListadoOrden: { type: integer(11), notnull: true, default: 0, index: index }
+    TieneDesarrollo: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    MuestraEjemplos: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IdEtiqueta : { ForeignEntity: ServFamilias, ForeignId: Id }    
+    

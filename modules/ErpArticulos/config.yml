@@ -387,8 +387,8 @@ ErpArticulos:
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 10, caption: 'Bloqueo de Stock', entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
-    IDEstado:
-      title: Estado
+    IDEstado1:
+      title: Estado1
       filter: NO
       list: NO
       visible: true
@@ -397,7 +397,55 @@ ErpArticulos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 11, caption: Estado, entity: ErpArticulosEstados, method: fetchAll, params: Estado, type: select, operator: '=', event: null }
+      aditional_filter: { order: 11, caption: Estado1, entity: ErpArticulosEstados, method: fetchAll, params: Estado, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IDEstado2:
+      title: Estado2
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 11, caption: Estado2, entity: ErpArticulosEstados, method: fetchAll, params: Estado, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IDEstado3:
+      title: Estado3
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 11, caption: Estado3, entity: ErpArticulosEstados, method: fetchAll, params: Estado, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IDEstado4:
+      title: Estado4
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 11, caption: Estado4, entity: ErpArticulosEstados, method: fetchAll, params: Estado, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+    IDEstado5:
+      title: Estado5
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      aditional_filter: { order: 11, caption: Estado5, entity: ErpArticulosEstados, method: fetchAll, params: Estado, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     StockMinimo:
       title: 'Stock Mínimo'
@@ -1132,7 +1180,7 @@ ErpArticulos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       aditional_filter: { order: 41, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: YES, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
       title: IdAlbumExterno
       filter: NO

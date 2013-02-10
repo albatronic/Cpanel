@@ -1,7 +1,0 @@
-{# empty Twig template #}
-
-{% if seccion.nContenidos > 0 %}
-    {% include 'GconContenidos/' ~ templateContenidos with {'contenidos': seccion} %}
-{% else %}
-    <span>{{seccion.titulo}}</span>  
-{% endif %}

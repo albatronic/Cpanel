@@ -21,3 +21,4 @@
 <?php include '../Cpanel/entities/schema/schemaAppSld.yml'; echoln('');?>
 <?php include '../Cpanel/entities/schema/schemaAppVid.yml'; echoln('');?>
 <?php include '../Cpanel/entities/schema/schemaAppVisit.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/schemaAppServ.yml'; echoln('');?>

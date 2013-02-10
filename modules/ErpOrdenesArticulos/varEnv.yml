@@ -1,0 +1,11 @@
+# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO ErpOrdenesArticulos
+#
+# Module: ErpOrdenesArticulos
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright ARTICO ESTUDIO, SL
+# date 09-02-2013 11:28:32
+#
+# ejemplo:
+#
+# nombreVariable: el texto del caption
+---

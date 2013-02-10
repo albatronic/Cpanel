@@ -80,8 +80,26 @@ function VerDatosLogisticos(seccion,SiNo){
         {{ macro.input({'caption':'PVP C/Iva','visible':'1','varEnv':'0'},'field_title','text','pvpconiva','pvpconiva',pvpconiva|number_format(2, '.', ','),'10','CampoImporte','12','READONLY') }}
         {{ macro.input(atributos.Etiqueta,'field_title','text',values.controller ~ '[Etiqueta]',values.controller ~ '_Etiqueta',datos.Etiqueta,'30','CampoTextoLargo','13') }}
         {{ macro.input(atributos.CodigoEAN,'field_title','text',values.controller ~ '[CodigoEAN]',values.controller ~ '_CodigoEAN',datos.CodigoEAN,'13','CampoTextoCorto','14') }}
+
+        {% if (atributos.IDEstado1.visible == '1') or (atributos.IDEstado2.visible == '1') or (atributos.IDEstado3.visible == '1') or (atributos.IDEstado4.visible == '1') or (atributos.IDEstado4.visible == '1') %}
+            {% set valores = datos.IDEstado1.fetchAll('Estado') %}
+        <li>
+            <div class="form_grid_12" id="div_ErpArticulos_Estados">
+
+            <label class="field_title">Estados</label>
+
+            <div class="form_input">
+                {% include values.controller ~ '/estados.html.twig' with {'nombre':'IDEstado1','atributos':atributos.IDEstado1,'valores':valores,'defecto':datos.IDEstado1.Id} %}
+                {% include values.controller ~ '/estados.html.twig' with {'nombre':'IDEstado2','atributos':atributos.IDEstado2,'valores':valores,'defecto':datos.IDEstado2.Id} %}
+                {% include values.controller ~ '/estados.html.twig' with {'nombre':'IDEstado3','atributos':atributos.IDEstado3,'valores':valores,'defecto':datos.IDEstado3.Id} %}
+                {% include values.controller ~ '/estados.html.twig' with {'nombre':'IDEstado4','atributos':atributos.IDEstado4,'valores':valores,'defecto':datos.IDEstado4.Id} %}
+                {% include values.controller ~ '/estados.html.twig' with {'nombre':'IDEstado5','atributos':atributos.IDEstado5,'valores':valores,'defecto':datos.IDEstado5.Id} %}                    
+            </div>          
+            </div>
+        </li>
+        {% endif %}
+
         {{ macro.fecha(atributos.FechaUltimoPrecio,'field_title',values.controller ~ '[FechaUltimoPrecio]',values.controller ~ '_FechaUltimoPrecio',datos.FechaUltimoPrecio,'15','datepicker','19')}}
-        {{ macro.select(atributos.IDEstado,'field_title',values.controller ~ '[IDEstado]',values.controller ~ '_IDEstado',none,datos.IDEstado.Id,datos.IDEstado.fetchAll('Estado'),'chzn-select','16')}}
         {{ macro.input(atributos.Garantia,'field_title','text',values.controller ~ '[Garantia]',values.controller ~ '_Garantia',datos.Garantia,'10','CampoTextoCorto','17') }}
         {{ macro.input(atributos.RecargoEnergetico,'field_title','checkbox',values.controller ~ '[RecargoEnergetico]',values.controller ~ '_RecargoEnergetico',datos.RecargoEnergetico.IDTipo,'255','CampoTextoLargo','18')}}
     </div>

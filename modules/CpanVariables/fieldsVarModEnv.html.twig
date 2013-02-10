@@ -46,6 +46,7 @@
         <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-ordenesWeb">Órdenes Web</a></li>        
         <li class="ui-state-default ui-corner-top"><a href="#tabs-controller">Controller</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-relaciones">Relacionar con ...</a></li>        
         <li class="ui-state-default ui-corner-top"><a href="#tabs-editorTiny">Editor Tiny</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-varWeb">Visibilidad Var Web</a></li>
     </ul>
@@ -244,7 +245,12 @@
         {{ macro.input({'caption':'[template] Template','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[template]','datos_template',values.datos.template,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[parametros] Parametros','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[parametros]','datos_parametros',values.datos.parametros,'50','CampoTextoCorto','1') }}
      </div>
-
+        
+    {# RELACIONAR CON ... #}
+    <div id="tabs-relaciones" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input({'caption':'[modulosRelacionables] Módulos relacionables seperados por coma','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[modulosRelacionables]','datos_modulosRelacionables',values.datos.modulosRelacionables,'100','CampoTextoCorto','1') }}
+    </div>
+        
     {# EDITOR TINY #}
     <div id="tabs-editorTiny" class="ui-tabs-panel ui-widget-content ui-corner-bottom"> 
         {{ macro.input({'caption':'[editorTiny][biu] Bold,Italic,Underline','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[editorTiny][bui]','datos_editorTiny_bui',values.datos.editorTiny.bui)}}

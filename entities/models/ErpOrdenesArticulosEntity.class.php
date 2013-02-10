@@ -3,33 +3,33 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 06.11.2012 23:55:15
+ * @date 08.02.2013 13:00:03
  */
 
 /**
- * @orm:Entity(GconContenidosRelacionados)
+ * @orm:Entity(ErpOrdenesArticulos)
  */
-class GconContenidosRelacionadosEntity extends EntityComunes {
+class ErpOrdenesArticulosEntity extends EntityComunes {
 
     /**
      * @orm GeneratedValue
      * @orm Id
      * @var integer
-     * @assert NotBlank(groups="GconContenidosRelacionados")
+     * @assert NotBlank(groups="ErpOrdenesArticulos")
      */
     protected $Id;
 
     /**
      * @var integer
-     * @assert NotBlank(groups="GconContenidosRelacionados")
+     * @assert NotBlank(groups="ErpOrdenesArticulos")
      */
-    protected $IdOrigen;
+    protected $IdRegla = '0';
 
     /**
-     * @var integer
-     * @assert NotBlank(groups="GconContenidosRelacionados")
+     * @var entities\ErpArticulos
+     * @assert NotBlank(groups="ErpOrdenesArticulos")
      */
-    protected $IdRelacionado;
+    protected $IdArticulo = '0';
 
     /**
      * Nombre de la conexion a la BD
@@ -41,7 +41,7 @@ class GconContenidosRelacionadosEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'GconContenidosRelacionados';
+    protected $_tableName = 'ErpOrdenesArticulos';
 
     /**
      * Nombre de la PrimaryKey
@@ -61,6 +61,7 @@ class GconContenidosRelacionadosEntity extends EntityComunes {
      * @var string
      */
     protected $_childEntities = array(
+        'ErpArticulos',
         'ValoresSN',
         'ValoresPrivacy',
         'ValoresDchaIzq',
@@ -81,23 +82,25 @@ class GconContenidosRelacionadosEntity extends EntityComunes {
         return $this->Id;
     }
 
-    public function setIdOrigen($IdOrigen) {
-        $this->IdOrigen = $IdOrigen;
+    public function setIdRegla($IdRegla) {
+        $this->IdRegla = $IdRegla;
     }
 
-    public function getIdOrigen() {
-        return $this->IdOrigen;
+    public function getIdRegla() {
+        return $this->IdRegla;
     }
 
-    public function setIdRelacionado($IdRelacionado) {
-        $this->IdRelacionado = $IdRelacionado;
+    public function setIdArticulo($IdArticulo) {
+        $this->IdArticulo = $IdArticulo;
     }
 
-    public function getIdRelacionado() {
-        return $this->IdRelacionado;
+    public function getIdArticulo() {
+        if (!($this->IdArticulo instanceof ErpArticulos))
+            $this->IdArticulo = new ErpArticulos($this->IdArticulo);
+        return $this->IdArticulo;
     }
 
 }
 
-// END class GconContenidosRelacionados
+// END class ErpOrdenesArticulos
 ?>

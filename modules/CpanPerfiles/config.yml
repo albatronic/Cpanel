@@ -5,9 +5,9 @@ CpanPerfiles:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
-  showCommonFields: true
+  showCommonFields: false
   numMaxRecords: ''
-  numberOfImages: '3'
+  numberOfImages: '0'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0

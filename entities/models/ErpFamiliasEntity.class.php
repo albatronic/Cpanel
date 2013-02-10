@@ -41,12 +41,6 @@ class ErpFamiliasEntity extends EntityComunes {
     protected $Descripcion2;
 
     /**
-     * @var integer
-     * @assert NotBlank(groups="ErpFamilias")
-     */
-    protected $NivelJerarquico = '1';
-
-    /**
      * @var tinyint
      * @assert NotBlank(groups="ErpFamilias")
      */
@@ -160,14 +154,6 @@ class ErpFamiliasEntity extends EntityComunes {
 
     public function getDescripcion2() {
         return $this->Descripcion2;
-    }
-
-    public function setNivelJerarquico($NivelJerarquico) {
-        $this->NivelJerarquico = $NivelJerarquico;
-    }
-
-    public function getNivelJerarquico() {
-        return $this->NivelJerarquico;
     }
 
     public function setInventario($Inventario) {

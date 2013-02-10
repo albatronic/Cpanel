@@ -30,9 +30,9 @@ class GconContenidos extends GconContenidosEntity {
                 $this->BlogOrden = $this->SortOrder;
             if ($this->NoticiaOrden == 0)
                 $this->NoticiaOrden = $this->SortOrder;
-            
+
             // Si no es evento, borrar los posibles eventos asociados
-            if ( ($this->Id) and (!$this->EsEvento) ) {
+            if (($this->Id) and (!$this->EsEvento)) {
                 $em = new EntityManager($this->getConectionName());
                 if ($em->getDbLink()) {
                     $query = "delete from EvenEventos where Entidad='GconContenidos' and IdEntidad='{$this->Id}'";
@@ -45,48 +45,21 @@ class GconContenidos extends GconContenidosEntity {
     }
 
     /**
-     * Devuelve un array con los ids de las etiquetas relacionadas
-     * con el contenido $idContenido.
-     *
-     * Si no se indica contenido, se toma el actual.
-     *
-     * @param integer $idContenido El id del contenido, opcional
-     * @return array Array
-     */
-    public function getEtiquetas($idContenido = '') {
-
-        if ($idContenido == '')
-            $idContenido = $this->Id;
-
-        $etiqueta = new GconEtiquetas();
-        $etiquetas = $etiqueta->fetchAll();
-        unset($etiqueta);
-
-        $relacion = new GconContenidosEtiquetas();
-        $etiquetasRelacionadas = $relacion->cargaCondicion('IdEtiqueta', "IdContenido='{$idContenido}'");
-        unset($relacion);
-
-        foreach ($etiquetas as $key => $etiqueta) {
-            if ($etiqueta['Id'] == '1')
-                ;
-        }
-
-        return $rows;
-    }
-
-    /**
      * Devuelve un array anidado de secciones de contenidos
      * 
      * @return array Array de zonas y banners
      */
-    public function getArbolHijos() {
+    public function getArbolHijos($conContenidos = true, $entidadRelacionada = '', $idEntidadRelacionada = '') {
+
+        if ($conContenidos == '') $conContenidos = true;
         
         $secciones = new GconSecciones();
-        $arbolSecciones = $secciones->getArbolHijos();
+        $arbolSecciones = $secciones->getArbolHijos($conContenidos, $entidadRelacionada, $idEntidadRelacionada);
         unset($secciones);
-        
+
         return $arbolSecciones;
-    } 
+    }
+
 }
 
 ?>

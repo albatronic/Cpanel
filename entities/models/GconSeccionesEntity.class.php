@@ -182,12 +182,6 @@ class GconSeccionesEntity extends EntityComunes {
     protected $MostrarSubsecciones = '1';
 
     /**
-     * @var integer
-     * @assert NotBlank(groups="GconSecciones")
-     */
-    protected $NivelJerarquico = '1';
-
-    /**
      * Nombre de la conexion a la BD
      * @var string
      */
@@ -492,14 +486,6 @@ class GconSeccionesEntity extends EntityComunes {
         if (!($this->MostrarSubsecciones instanceof ValoresSN))
             $this->MostrarSubsecciones = new ValoresSN($this->MostrarSubsecciones);
         return $this->MostrarSubsecciones;
-    }
-
-    public function setNivelJerarquico($NivelJerarquico) {
-        $this->NivelJerarquico = $NivelJerarquico;
-    }
-
-    public function getNivelJerarquico() {
-        return $this->NivelJerarquico;
     }
 
 }

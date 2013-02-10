@@ -1,0 +1,26 @@
+{# Subtemplate para mostrar el desplegable de estos de articulos #}
+
+{% if atributos.visible %}
+{% if (atributos.updatable == '0') %}
+    <input type="hidden" name="{{values.controller}}[{{nombre}}]" value="{{ defecto }}" />
+{% endif %}
+<select data-placeholder="Indique un valor"
+        {% if (atributos.updatable == '1') %}
+        name="{{values.controller}}[{{nombre}}]"
+        {% endif %}
+        {% if (atributos.updatable == '0') %}
+        disabled
+        {% endif %}
+        style="width:150px;"
+        class="chzn-select"
+        onchange="{{onchange}}"
+        onblur="{{onblur}} {{ _self.alertSave }}"
+        tabindex="16"
+>
+    {% for value in valores %}
+    <option value="{{ value.Id }}" {% if (value.Id==defecto) %} SELECTED {% endif %}>
+        {{value.Value}}
+    </option>
+    {% endfor %}
+</select>
+{% endif %}

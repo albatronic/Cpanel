@@ -96,7 +96,8 @@ class IndexController extends Controller {
 
             // Establece el perfil del usuario para el proyecto y carga
             // el menú en base a su perfil
-            $usuario = new CpanUsuarios($_SESSION['USER']['user']['Id']);
+            $usuario = new CpanUsuarios();
+            $usuario = $usuario->find("IdUsuario", $_SESSION['USER']['user']['Id']);
             if ($usuario->getStatus()) {
                 $_SESSION['USER']['user']['IdPerfil'] = $usuario->getIdPerfil()->getId();
                 $_SESSION['USER']['menu'] = $usuario->getArrayMenu();

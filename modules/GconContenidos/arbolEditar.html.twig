@@ -4,6 +4,7 @@
       title="Ver/Ocultar contenidos de esta sección" 
       onclick="switchDisplay('contenidosDe_{{contenidos.id}}');">
     {{contenidos.titulo}} ({{ contenidos.nContenidos}})
+    <a href="{{app.path}}/{{values.controller}}/de/GconSecciones/IdSeccion/{{key}}" alt="Añadir contenido" title="Añadir contenido"><img src="{{app.path}}/images/detalle.png"/></a>            
 </span>
 
 <div id='contenidosDe_{{contenidos.id}}' style="display: none;">

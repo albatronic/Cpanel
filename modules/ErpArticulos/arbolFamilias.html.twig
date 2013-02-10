@@ -1,0 +1,6 @@
+-- {{familia.nArticulos}} --
+{% if familia.nArticulos > 0 %}
+    {% include 'ErpArticulos/' ~ subtemplate with {'articulos': familia.articulos} %}
+{% else %}
+    <span>{{familia.titulo}}</span>  
+{% endif %}

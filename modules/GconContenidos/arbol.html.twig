@@ -1,43 +1,23 @@
-{#
-    Arbol recursivo de CONTENIDOS
+{# ARBOL DE CONTENIDOS #}
 
-    Se muestran las secciones de contenidos y los eventuales contenidos de cada una,
-    ya que para acceder a un contenido, se muestra el árbol de secciones
-
-    Se muestran tres niveles jerárquivos de secciones
-
-#}
-{% extends '_global/layoutPopup.html.twig' %}
-
-{% block content %}
-<form name="formEnlace" id="formEnlace" action="" method="POST" class="form_container left_label">
-    <input name="controller" value="{{values.controller}}" type="hidden" />
-    <input name="action" id="action" value="enlazar" type="hidden" />
-    <input name="accion" id="accion" value="" type="hidden" />
-    <input name="idEntidadOrigen" value="{{values.idEntidadOrigen}}" type="hidden" />
-    <input name="entidadDestino" id="entidadDestino" value="{{values.entidadDestino.getClassName}}" type="hidden" />
-    <input name="idEntidadDestino" id="idEntidadDestino" value="{{values.idEntidadDestino}}" type="hidden" />
+<ul class="arbol">
+{% for keyPadre,padre in arbol %}
+    <li class="arbol">
+        {% include 'GconContenidos/arbolPadre.html.twig' with {'key':keyPadre,'seccion': padre, 'subtemplate':subtemplate} %}
+    </li>
     <ul class="arbol">
-    {% for padre in values.entidadDestino.getArbolHijos %}
-        <li class="arbol">
-            {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': padre, 'templateContenidos':'contenidosEnlazar.html.twig'} %}
-        </li>
-        <ul class="arbol">
-            {% for hijo in padre.hijos %}
-                <li class="arbol">
-                    {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': hijo, 'templateContenidos':'contenidosEnlazar.html.twig'} %}
-                </li>
-                <ul class="arbol">
-                    {% for nieto in hijo.hijos %}
-                        <li class="arbol">
-                            {% include values.entidadDestino.getClassName ~ '/secciones.html.twig' with {'seccion': nieto, 'templateContenidos':'contenidosEnlazar.html.twig'} %}
-                        </li>
-                    {% endfor %}
-                </ul>                        
-            {% endfor %}
-        </ul>
-    {% endfor %}
+        {% for keyHijo,hijo in padre.hijos %}
+            <li class="arbol">
+                {% include 'GconContenidos/arbolPadre.html.twig' with {'key':keyHijo,'seccion': hijo, 'subtemplate':subtemplate} %}
+            </li>
+            <ul class="arbol">
+                {% for keyNieto,nieto in hijo.hijos %}
+                    <li class="arbol">
+                        {% include 'GconContenidos/arbolPadre.html.twig' with {'key':keyNieto,'seccion': nieto, 'subtemplate':subtemplate} %}
+                    </li>
+                {% endfor %}
+            </ul>                        
+        {% endfor %}
     </ul>
-</form>
-{% endblock %}
-
+{% endfor %}
+</ul>

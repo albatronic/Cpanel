@@ -7,11 +7,24 @@
   date 07.12.2012 23:55:49
 #}
 
-<h3>{{datos.Id.getNombreApellidos}}</h3> <h5>{{datos.Id.getEmail}}</h5>
-{{ macro.select(atributos.IdPerfil,'field_title',values.controller ~ '[IdPerfil]',values.controller ~ '_IdPerfil',none,datos.IdPerfil.Id,datos.IdPerfil.fetchAll('Perfil',0),'chzn-select','1')}}
-{{ macro.select(atributos.IdTipoUsuario,'field_title',values.controller ~ '[IdTipoUsuario]',values.controller ~ '_IdTipoUsuario',none,datos.IdTipoUsuario.Id,datos.IdTipoUsuario.fetchAll('Descripcion',0),'chzn-select','2')}}
-{{ macro.select(atributos.IdRol,'field_title',values.controller ~ '[IdRol]',values.controller ~ '_IdRol',none,datos.IdRol.Id,datos.IdRol.fetchAll('Rol',0),'chzn-select','3')}}
+{{ macro.input({'caption':'Nombre','visible':1},'field_title','text','PcaeUsuarios[Nombre]','PcaeUsuarios_Nombre',datos.IdUsuario.Nombre,'50','CampoTextoLargo','1') }}
+{{ macro.input({'caption':'Apellidos','visible':1},'field_title','text','PcaeUsuarios[Apellidos]','PcaeUsuarios_Apellidos',datos.IdUsuario.Apellidos,'50','CampoTextoLargo','2') }}
+{{ macro.input({'caption':'DNI','visible':1},'field_title','text','PcaeUsuarios[DNI]','PcaeUsuarios_DNI',datos.IdUsuario.DNI,'15','CampoTextoCorto','3') }}
+{{ macro.input({'caption':'Dirección','visible':1},'field_title','text','PcaeUsuarios[Direccion]','PcaeUsuarios_Direccion',datos.IdUsuario.Direccion,'100','CampoTextoLargo','4') }}
+{{ macro.input({'caption':'País','visible':1},'field_title','text','PcaeUsuarios[IdPais]','PcaeUsuarios_IdPais',datos.IdUsuario.IdPais.Id,'255','CampoTextoLargo','5','','',['paises','Pais',datos.IdUsuario.IdPais.Pais]) }}
+{{ macro.input({'caption':'Provincia','visible':1},'field_title','text','PcaeUsuarios[IdProvincia]','PcaeUsuarios_IdProvincia',datos.IdUsuario.IdProvincia.Id,'255','CampoTextoLargo','6','','',['provincias','Provincia',datos.IdUsuario.IdProvincia.Provincia,'PcaeUsuarios_IdPais']) }}
+{{ macro.input({'caption':'Municipio','visible':1},'field_title','text','PcaeUsuarios[IdMunicipio]','PcaeUsuarios_IdMunicipio',datos.IdUsuario.IdMunicipio.Id,'255','CampoTextoLargo','7','','',['municipios','Municipio',datos.IdUsuario.IdMunicipio.Municipio,'PcaeUsuarios_IdProvincia']) }}
+{{ macro.input({'caption':'Código Postal','visible':1},'field_title','text','PcaeUsuarios[CodigoPostal]','PcaeUsuarios_CodigoPostal',datos.IdUsuario.CodigoPostal,'10','CampoTextoCorto','8') }}
+{{ macro.input({'caption':'Teléfono','visible':1},'field_title','text','PcaeUsuarios[Telefono]','PcaeUsuarios_Telefono',datos.IdUsuario.Telefono,'50','CampoTextoLargo','9') }}
+{{ macro.input({'caption':'Email','visible':1},'field_title','text','PcaeUsuarios[EMail]','PcaeUsuarios_EMail',datos.IdUsuario.EMail,'100','CampoTextoLargo','10') }}
+{{ macro.input({'caption':'Password','visible':1},'field_title','text','PcaeUsuarios[Password]','PcaeUsuarios_Password',none,'100','CampoTextoLargo','11') }}
+{{ macro.input({'caption':'Número de Logins','visible':1,'updatable':0},'field_title','text','PcaeUsuarios[NLogin]','PcaeUsuarios_NLogin',datos.IdUsuario.NLogin,'4','CampoUnidades','12') }}
+{{ macro.input({'caption':'Último Login','visible':1,'updatable':0},'field_title','text','PcaeUsuarios[UltimoLogin]','PcaeUsuarios_UltimoLogin',datos.IdUsuario.UltimoLogin,'19','CampoUnidades','13')}}      
 
-{% include '_global/fieldsComunes.html.twig' %}
+{{ macro.select(atributos.IdPerfil,'field_title',values.controller ~ '[IdPerfil]',values.controller ~ '_IdPerfil',none,datos.IdPerfil.Id,datos.IdPerfil.fetchAll('Perfil',0),'chzn-select','14')}}
+{{ macro.select(atributos.IdTipoUsuario,'field_title',values.controller ~ '[IdTipoUsuario]',values.controller ~ '_IdTipoUsuario',none,datos.IdTipoUsuario.Id,datos.IdTipoUsuario.fetchAll('Descripcion',0),'chzn-select','15')}}
+{{ macro.select(atributos.IdRol,'field_title',values.controller ~ '[IdRol]',values.controller ~ '_IdRol',none,datos.IdRol.Id,datos.IdRol.fetchAll('Rol',0),'chzn-select','16')}}
 
-{{ macro.foco(values.controller ~ '_IdPerfil') }}
+{# include '_global/fieldsComunes.html.twig' #}
+
+{{ macro.foco('PcaeUsuarios_Nombre') }}

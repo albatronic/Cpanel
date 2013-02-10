@@ -1,0 +1,8 @@
+# ESQUELETO WEB TIENDAS ONLINES
+ErpOrdenesArticulos:
+  comment: Ordenedes de articulos y zonas
+  columns:
+    IdRegla:    { type: bigint(11), notnull: true, default: 0, index: index }
+    IdArticulo: { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulos,Id' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:   

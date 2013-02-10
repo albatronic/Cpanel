@@ -1,8 +1,9 @@
 <?php
+
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 26.01.2013 19:57:09
+ * @date 07.02.2013 10:50:03
  */
 
 /**
@@ -93,7 +94,7 @@ class ErpArticulosEntity extends EntityComunes {
      * @var string
      * @assert NotBlank(groups="ErpArticulos")
      */
-    protected $CodigoEAN = '';
+    protected $CodigoEAN;
 
     /**
      * @var integer
@@ -105,7 +106,7 @@ class ErpArticulosEntity extends EntityComunes {
      * @var string
      * @assert NotBlank(groups="ErpArticulos")
      */
-    protected $Garantia = '';
+    protected $Garantia;
 
     /**
      * @var integer
@@ -181,7 +182,31 @@ class ErpArticulosEntity extends EntityComunes {
      * @var entities\ErpArticulosEstados
      * @assert NotBlank(groups="ErpArticulos")
      */
-    protected $IDEstado = '0';
+    protected $IDEstado1 = '0';
+
+    /**
+     * @var entities\ErpArticulosEstados
+     * @assert NotBlank(groups="ErpArticulos")
+     */
+    protected $IDEstado2 = '0';
+
+    /**
+     * @var entities\ErpArticulosEstados
+     * @assert NotBlank(groups="ErpArticulos")
+     */
+    protected $IDEstado3 = '0';
+
+    /**
+     * @var entities\ErpArticulosEstados
+     * @assert NotBlank(groups="ErpArticulos")
+     */
+    protected $IDEstado4 = '0';
+
+    /**
+     * @var entities\ErpArticulosEstados
+     * @assert NotBlank(groups="ErpArticulos")
+     */
+    protected $IDEstado5 = '0';
 
     /**
      * @var integer
@@ -296,7 +321,12 @@ class ErpArticulosEntity extends EntityComunes {
      * @var string
      */
     protected $_parentEntities = array(
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpExistencias', 'ParentColumn' => 'IDArticulo'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado1'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado2'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado3'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado4'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado5'),
     );
 
     /**
@@ -565,14 +595,54 @@ class ErpArticulosEntity extends EntityComunes {
         return $this->BloqueoStock;
     }
 
-    public function setIDEstado($IDEstado) {
-        $this->IDEstado = $IDEstado;
+    public function setIDEstado1($IDEstado1) {
+        $this->IDEstado1 = $IDEstado1;
     }
 
-    public function getIDEstado() {
-        if (!($this->IDEstado instanceof ErpArticulosEstados))
-            $this->IDEstado = new ErpArticulosEstados($this->IDEstado);
-        return $this->IDEstado;
+    public function getIDEstado1() {
+        if (!($this->IDEstado1 instanceof ErpArticulosEstados))
+            $this->IDEstado1 = new ErpArticulosEstados($this->IDEstado1);
+        return $this->IDEstado1;
+    }
+
+    public function setIDEstado2($IDEstado2) {
+        $this->IDEstado2 = $IDEstado2;
+    }
+
+    public function getIDEstado2() {
+        if (!($this->IDEstado2 instanceof ErpArticulosEstados))
+            $this->IDEstado2 = new ErpArticulosEstados($this->IDEstado2);
+        return $this->IDEstado2;
+    }
+
+    public function setIDEstado3($IDEstado3) {
+        $this->IDEstado3 = $IDEstado3;
+    }
+
+    public function getIDEstado3() {
+        if (!($this->IDEstado3 instanceof ErpArticulosEstados))
+            $this->IDEstado3 = new ErpArticulosEstados($this->IDEstado3);
+        return $this->IDEstado3;
+    }
+
+    public function setIDEstado4($IDEstado4) {
+        $this->IDEstado4 = $IDEstado4;
+    }
+
+    public function getIDEstado4() {
+        if (!($this->IDEstado4 instanceof ErpArticulosEstados))
+            $this->IDEstado4 = new ErpArticulosEstados($this->IDEstado4);
+        return $this->IDEstado4;
+    }
+
+    public function setIDEstado5($IDEstado5) {
+        $this->IDEstado5 = $IDEstado5;
+    }
+
+    public function getIDEstado5() {
+        if (!($this->IDEstado5 instanceof ErpArticulosEstados))
+            $this->IDEstado5 = new ErpArticulosEstados($this->IDEstado5);
+        return $this->IDEstado5;
     }
 
     public function setStockMinimo($StockMinimo) {

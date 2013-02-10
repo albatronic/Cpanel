@@ -1,0 +1,11 @@
+# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO CpanEsqueletoWeb
+#
+# Module: CpanEsqueletoWeb
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright ARTICO ESTUDIO, SL
+# date 07-02-2013 15:32:56
+#
+# ejemplo:
+#
+# nombreVariable: el texto del caption
+---

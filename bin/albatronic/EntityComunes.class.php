@@ -311,6 +311,7 @@ class EntityComunes extends Entity {
     protected $IdSeccionEnlaces = NULL;
     protected $IdSeccionVideos = NULL;
     protected $RevisitAfter = '';
+    protected $NivelJerarquico = 1;
 
     /**
      * Fecha y hora última visita en formato UNIX
@@ -453,8 +454,11 @@ class EntityComunes extends Entity {
     }
 
     public function getCreatedBy() {
-        if (!($this->CreatedBy instanceof CpanUsuarios))
-            $this->CreatedBy = new CpanUsuarios($this->CreatedBy);
+        if (!($this->CreatedBy instanceof CpanUsuarios)) {
+            $usuario = new CpanUsuarios();
+            $this->CreatedBy = $usuario->find("IdUsuario", $this->CreatedBy);
+            unset($usuario);
+        }
         return $this->CreatedBy;
     }
 
@@ -471,8 +475,11 @@ class EntityComunes extends Entity {
     }
 
     public function getModifiedBy() {
-        if (!($this->ModifiedBy instanceof CpanUsuarios))
-            $this->ModifiedBy = new CpanUsuarios($this->ModifiedBy);
+        if (!($this->ModifiedBy instanceof CpanUsuarios)) {
+            $usuario = new CpanUsuarios();
+            $this->ModifiedBy = $usuario->find("IdUsuario", $this->ModifiedBy);
+            unset($usuario);
+        }
         return $this->ModifiedBy;
     }
 
@@ -499,8 +506,11 @@ class EntityComunes extends Entity {
     }
 
     public function getDeletedBy() {
-        if (!($this->DeletedBy instanceof CpanUsuarios))
-            $this->DeletedBy = new CpanUsuarios($this->DeletedBy);
+        if (!($this->DeletedBy instanceof CpanUsuarios)) {
+            $usuario = new CpanUsuarios();
+            $this->DeletedBy = $usuario->find("IdUsuario", $this->DeletedBy);
+            unset($usuario);
+        }
         return $this->DeletedBy;
     }
 
@@ -911,6 +921,14 @@ class EntityComunes extends Entity {
 
     public function getRevisitAfter() {
         return $this->RevisitAfter;
+    }
+
+    public function setNivelJerarquico($NivelJerarquico) {
+        $this->NivelJerarquico = $NivelJerarquico;
+    }
+
+    public function getNivelJerarquico() {
+        return $this->NivelJerarquico;
     }
 
 }

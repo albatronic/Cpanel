@@ -1,0 +1,21 @@
+{# Muestra los ARTICULOS de una familia #}
+
+<span class="arbol conContenido" 
+      title="Ver/Ocultar productos de esta familia" 
+      onclick="switchDisplay('contenidosDe_{{familia.id}}');">
+    <img src="{{app.path}}/images/js-tree/folder-closed.gif"/>
+    {{familia.titulo}} ({{ familia.nArticulos}})
+</span>
+
+<div id='contenidosDe_{{articulos.id}}' style="display: none;">
+    <ul>
+
+    {% for articulos in articulos %}
+        <li>
+            {{ macro.actualizaRelacion(values.entidadOrigen,values.idOrigen,'ErpArticulos',articulo.Id,articulo.estaRelacionado) }}
+            {{articulo.Value}}    
+        </li>
+    {% endfor%}
+       
+    </ul>
+</div>

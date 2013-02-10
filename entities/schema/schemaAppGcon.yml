@@ -69,14 +69,3 @@ GconContenidos:
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdSeccion: { ForeignEntity: GconSecciones, ForeignId: Id }
-
-# RELACION 1 A N ENTRE CONTENIDOS.
-# UN CONTENIDO PUEDE ESTAR RELACIONADO CON N CONTENIDOS
-GconContenidosRelacionados:
-  comment: Tabla auxiliar para la relacion 1 a n entre contenidos
-  columns:
-    IdOrigen:      {type: bigint(11), notnull: true, index: index }
-    IdRelacionado: {type: bigint(11), notnull: true, index: index }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
-  relations:
-

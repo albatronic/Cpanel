@@ -14,16 +14,47 @@ class ErpArticulos extends ErpArticulosEntity {
     public function __toString() {
         return $this->getId();
     }
-   /**
-     * Pongo el precio medio de compra igual al precio de costo
-     *
+
+    /**
+     * Pongo el precio medio de compra igual al precio de costo y
+     * Aplico las reglas de ordenacion si está vigente y Publish
+     * 
      * @return integer El id del ultimo articulo creado
      */
     public function create() {
 
         $this->Pmc = $this->Pvd;
 
-        return parent::create();
+        $ok = parent::create();
+        if (($ok) and ($this->Vigente == '1') and ($this->Publish == '1')) {
+            $reglas = new CpanEsqueletoWeb();
+            $reglas->aplicaReglasArticulo($this);
+            unset($reglas);
+        }
+        return $ok;
+    }
+
+    /**
+     * Guardo y aplico las reglas de ordenacion
+     * 
+     * @return boolean
+     */
+    public function save() {
+
+        $ok = parent::save();
+        if ($ok) {
+            // Borro los eventuales ordenes que existieran para el artículo
+            $ordenes = new ErpOrdenesArticulos();
+            $ordenes->borraOrdenesArticulo($this->Id);
+            unset($ordenes);
+            
+            // Aplico las reglas de ordenes 
+            $reglas = new CpanEsqueletoWeb();
+            $reglas->aplicaReglasArticulo($this);
+            unset($reglas);
+        }
+
+        return $ok;
     }
 
     /**
@@ -77,7 +108,30 @@ class ErpArticulos extends ErpArticulosEntity {
         if ($this->Etiqueta == '')
             $this->setEtiqueta($this->Descripcion);
 
+        // Valido que no se dupliquen los estados
+        $valida = array();
+        for ($i = 1; $i <= 5; $i++) {
+            $idEstado = $this->{"IDEstado$i"};
+            if (isset($valida[$idEstado]))
+                $this->{"IDEstado$i"} = 0; else
+                $valida[$idEstado] = '1';
+        }
+
+
         unset($exi);
+    }
+
+    /**
+     * Devuelve un array anidado de familias y productos
+     * @return array Array de familias y articulos
+     */
+    public function getArbolHijos($conArticulos = true, $entidadRelacionada = '', $idEntidadRelacionada = '') {
+
+        $familias = new ErpFamilias();
+        $arbol = $familias->getArbolHijos($conArticulos, $entidadRelacionada, $idEntidadRelacionada);
+        unset($familias);
+
+        return $arbol;
     }
 
 }

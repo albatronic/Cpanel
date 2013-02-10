@@ -1,0 +1,11 @@
+# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO ServServicios
+#
+# Module: ServServicios
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright ARTICO ESTUDIO, SL
+# date 04-02-2013 23:09:18
+#
+# ejemplo:
+#
+# nombreVariable: el texto del caption
+---

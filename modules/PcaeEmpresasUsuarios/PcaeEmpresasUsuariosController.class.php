@@ -68,7 +68,7 @@ class PcaeEmpresasUsuariosController extends Controller {
 
     /**
      * Devuelve todas los usuarios de una empresa
-     * indicada en la posicion 2 del request.
+     * indicada en la posicion 2 del request, excepto el Super (IdUsuario=1)
      * 
      * No muestra al usuario super
      * 

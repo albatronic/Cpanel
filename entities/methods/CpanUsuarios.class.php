@@ -17,7 +17,7 @@ class CpanUsuarios extends CpanUsuariosEntity {
 
     public function getNombreApellidos() {
 
-        $usuario = new PcaeUsuarios($this->Id);
+        $usuario = new PcaeUsuarios($this->IdUsuario);
         $nombreApellidos = $usuario->getNombre() . " " . $usuario->getApellidos();
         unset($usuario);
 
@@ -41,7 +41,7 @@ class CpanUsuarios extends CpanUsuariosEntity {
                 from CpanPermisos as p, CpanModulos as m
                 where  m.NombreModulo = p.NombreModulo and
                 p.IdPerfil = '" . $this->getIdPerfil()->getId() . "'
-                order by m.SortOrder ASC";
+                order by m.CodigoApp ASC ,m.SortOrder ASC";
             $em->query($query);
             $rows = $em->fetchResult();
             $em->desConecta();

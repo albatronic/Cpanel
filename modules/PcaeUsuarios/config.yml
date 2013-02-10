@@ -1,5 +1,5 @@
 PcaeUsuarios:
-  app: ''
+  app: 'Pcae'
   isModuleRoot: 0
   linkModule:
     fromColumn: ''
@@ -22,7 +22,9 @@ PcaeUsuarios:
     generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
+  urlFriendlyManagement: false
   fieldGeneratorUrlFriendly: Nombre
+  metatagTitleManagement: false
   fieldGeneratorMetatagTitle: Nombre
   controller: CONTROLADOR
   action: ACTION
@@ -150,7 +152,7 @@ PcaeUsuarios:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdPais:
-      title: Pais
+      title: País
       filter: NO
       list: YES
       visible: true

@@ -1,0 +1,21 @@
+{# Muestra los contenidos #}
+
+<span class="arbol conContenido" 
+      title="Ver/Ocultar contenidos de esta sección" 
+      onclick="switchDisplay('contenidosDe_{{contenidos.id}}');">
+    <img src="{{app.path}}/images/js-tree/folder-closed.gif"/>
+    {{contenidos.titulo}} ({{ contenidos.nContenidos}})
+</span>
+
+<div id='contenidosDe_{{contenidos.id}}' style="display: none;">
+    <ul>
+
+    {% for contenido in contenidos.contenidos %}
+        <li>
+            {{ macro.actualizaRelacion(values.entidadOrigen,values.idOrigen,'GconContenidos',contenido.Id,contenido.estaRelacionado) }}
+            {{contenido.Value}}    
+        </li>
+    {% endfor%}
+       
+    </ul>
+</div>

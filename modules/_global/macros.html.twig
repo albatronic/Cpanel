@@ -80,6 +80,21 @@
 /> 
 {% endmacro%}
 
+{# ACTUALIZA VIA AJAX LA RELACION N A M entre entidades e id de entidades #}
+{% macro actualizaRelacion(entidadOrigen,idOrigen,entidadDestino,idDestino,valor) %}
+<input
+    title="Poner/Quitar relación"
+    id="check{{entidadDestino}}{{idDestino}}"
+    type="checkbox"
+    value="{{valor}}"
+    {% if (valor != '') %} checked {% endif %}
+    onchange="
+      if ($('#check{{entidadDestino}}{{idDestino}}').is(':checked')) {$('#check{{entidadDestino}}{{idDestino}}').val('1');} else {$('#check{{entidadDestino}}{{idDestino}}').val('0');}
+      actualizaRelacion('{{entidadOrigen}}','{{idOrigen}}','{{entidadDestino}}','{{idDestino}}',$('#check{{entidadDestino}}{{idDestino}}').val());
+    "
+/> 
+{% endmacro%}
+
 {% macro publicar(atributos,name,id,value) %}
 {% if atributos.visible == '1' %}
 <input name="{{name}}" id="{{ id|default(name)}}" type="hidden" value="{{value}}" />

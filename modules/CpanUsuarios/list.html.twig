@@ -12,7 +12,42 @@
 {% block listado %}
 
 <div class='Listado'>
-	{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'izq'}%}
-	{% include '_global/listGenerico.html.twig' with {'listado': values.listado, 'controller': values.controller} %}
+
+    {% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'izq'}%}
+    
+    <div id="Listado">
+    <table width='100%'>
+        <tr class='Titulos'>
+            <td width='16px'>&nbsp;</td>
+            <td class='Item'>Nombre</td>
+            <td class='Item'>Email</td> 
+            <td class='Item'>Perfil</td> 
+            <td class='Item'>Rol</td>            
+            <td class='Item'>Tipo</td>            
+        </tr>
+
+        <tbody class='Cuerpo'>
+        {% for key,objeto in values.listado.data %}
+            {% if objeto.IdUsuario.Id != 1 %}
+            <tr>
+                <td>
+                    <a href='{{app.path}}/{{values.controller}}/Edit/{{objeto.getPrimaryKeyMD5}}' title='Editar ...'>
+                        <img src="{{app.path}}/images/botoneditar.png" width="16px" height="16px" />
+                    <a>
+                </td>
+                <td>{{objeto.IdUsuario.getApellidosNombre}}</td>
+                <td>{{objeto.IdUsuario.Email}}</td>
+                <td>{{objeto.IdPerfil.Perfil}}</td>
+                <td>{{objeto.IdRol.Rol}}</td>
+                <td>{{objeto.IdTipoUsuario.Descripcion}}</td>
+            </tr>
+            {% endif %}
+            {% else %}
+            <tr><td colspan='8'>No hay información que cumpla esos criterios</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    
 </div>
 {% endblock %}

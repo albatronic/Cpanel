@@ -425,8 +425,9 @@ class Entity {
      * Este método lo debe implementar la entidad que lo necesite
      */
     protected function validaLogico() {
+
         if ($this->BelongsTo == $this->getPrimaryKeyValue()) {
-            $this->BelongsTo = '';
+            $this->BelongsTo = 0;
             $this->_alertas[] = "El objeto no puede pertenecer a el mismo";
         }
 
@@ -447,6 +448,15 @@ class Entity {
             $urlAmigable->borraUrl($this->getClassName(), $this->getPrimaryKeyValue(), FALSE);
             unset($urlAmigable);
         }
+
+        // Asignar el nivel Jerárquico
+        $nivelPadre = 0;
+        if ($this->BelongsTo != 0) {
+            $objetoPadre = new $this($this->BelongsTo);
+            $nivelPadre = $objetoPadre->getNivelJerarquico();
+            unset($objetoPadre);
+        }
+        $this->setNivelJerarquico($nivelPadre + 1);
     }
 
     /**
@@ -729,7 +739,7 @@ class Entity {
         $arbol = array();
 
         $objeto = new $this();
-        $rows = $objeto->cargaCondicion("Id,Titulo,Publish,PrimaryKeyMD5", "BelongsTo='0'", "SortOrder ASC");
+        $rows = $objeto->cargaCondicion("Id,Titulo,Publish,PrimaryKeyMD5,BelongsTo", "BelongsTo='0'", "SortOrder ASC");
         unset($objeto);
 
         foreach ($rows as $row) {
@@ -739,6 +749,7 @@ class Entity {
                 'id' => $row['Id'],
                 'titulo' => $row['Titulo'],
                 'publish' => $row['Publish'],
+                'belongsTo' => $row['BelongsTo'],
                 'nHijos' => count($hijos),
                 'hijos' => $hijos,
             );
@@ -799,7 +810,7 @@ class Entity {
     private function getChildrens($idPadre) {
 
         // Obtener todos los hijos del padre actual
-        $hijos = $this->cargaCondicion('Id,Titulo,Publish,PrimaryKeyMD5', "BelongsTo='{$idPadre}'", "SortOrder ASC");
+        $hijos = $this->cargaCondicion('Id,Titulo,Publish,PrimaryKeyMD5,BelongsTo', "BelongsTo='{$idPadre}'", "SortOrder ASC");
 
         foreach ($hijos as $hijo) {
             $descencientes = $this->getChildrens($hijo['Id']);
@@ -807,6 +818,7 @@ class Entity {
                 'id' => $hijo['Id'],
                 'titulo' => $hijo['Titulo'],
                 'publish' => $hijo['Publish'],
+                'belongsTo' => $hijo['BelongsTo'],
                 'nHijos' => count($descencientes),
                 'hijos' => $descencientes,
             );
@@ -982,6 +994,10 @@ class Entity {
             $this->_conectionName = $_SESSION['project']['conection'];
         }
         return $this->_conectionName;
+    }
+
+    public function setConectionName(array $conection) {
+        $this->_conectionName = $conection;
     }
 
     /**

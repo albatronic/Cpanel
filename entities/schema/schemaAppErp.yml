@@ -97,7 +97,11 @@ ErpArticulos:
     PackingVentas:     { type: decimal(), notnull: true, default: 1 } 
     Merma:             { type: decimal(), notnull: true, default: 0 } 
     BloqueoStock:      { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' } 
-    IDEstado:          { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulosEstados,Id' }
+    IDEstado1:         { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulosEstados,Id' }
+    IDEstado2:         { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulosEstados,Id' }
+    IDEstado3:         { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulosEstados,Id' }
+    IDEstado4:         { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulosEstados,Id' }
+    IDEstado5:         { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulosEstados,Id' }
     StockMinimo:       { type: decimal(), notnull: true, default: 0 } 
     StockMaximo:       { type: decimal(), notnull: true, default: 0 }
     MinimoVentaAlto:   { type: decimal(), notnull: true, default: 0 }

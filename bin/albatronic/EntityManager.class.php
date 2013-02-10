@@ -108,7 +108,7 @@ class EntityManager {
 
         switch ($this->dbEngine) {
             case 'mysql':
-                $this->dbLink = @mysql_connect($this->getHost(), $this->getUser(), $this->getPassword());
+                $this->dbLink = mysql_connect($this->getHost(), $this->getUser(), $this->getPassword());
                 if (is_resource($this->dbLink))
                     mysql_select_db($this->getDataBase(), $this->dbLink);
                 break;
