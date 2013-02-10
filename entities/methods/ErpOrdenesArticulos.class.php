@@ -19,12 +19,12 @@ class ErpOrdenesArticulos extends ErpOrdenesArticulosEntity {
         $this->Publish = 1;
         return parent::save();
     }
-    
+
     public function create() {
         $this->Publish = 1;
         return parent::create();
     }
-    
+
     /**
      * Devuelve un array con los id's de las reglas a las
      * que está sujeto el artículo
@@ -42,7 +42,7 @@ class ErpOrdenesArticulos extends ErpOrdenesArticulosEntity {
 
         return $array;
     }
-    
+
     /**
      * Borra todas las entradas de la regla $idRegla en los
      * órdenes de articulos
@@ -73,6 +73,37 @@ class ErpOrdenesArticulos extends ErpOrdenesArticulosEntity {
             $em->desConecta();
         }
         unset($em);
+    }
+
+    /**
+     * Devuelve un array de objetos articulos que cumplen la
+     * regla $idRegla, ordenados por SortOrder ASC
+     * 
+     * @param int $idRegla El id de la regla
+     * @return \ErpArticulos array de objetos Articulos
+     */
+    public function getArticulos($idRegla) {
+
+        $array = array();
+
+        $em = new EntityManager($this->getConectionName());
+        if ($em->getDbLink()) {
+            $query = "
+                SELECT a.Id as Id
+                FROM {$em->getDataBase()}.ErpOrdenesArticulos r, {$em->getDataBase()}.ErpArticulos a
+                WHERE r.IdRegla='{$idRegla}' AND r.IdArticulo=a.Id AND a.Publish='1' AND a.Vigente='1' AND a.Deleted='0'
+                ORDER BY r.SortOrder ASC";
+            $em->query($query);
+            $rows = $em->fetchResult();
+            $em->desConecta();
+        }
+        unset($em);
+
+        if (is_array($rows))
+            foreach ($rows as $row)
+                $array[] = new ErpArticulos($row['Id']);
+
+        return $array;
     }
 
 }

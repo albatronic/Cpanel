@@ -54,7 +54,7 @@ ErpPropiedades:
       criteria: 'Titulo ASC'
     -
       title: 'Título z-a'
-      criteria: 'Titulo DESC'
+      criteria: 'Titulo DESC'      
   search_default: Id
   referenced_entities:
     - ValoresSN

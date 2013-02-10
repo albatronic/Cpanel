@@ -5,7 +5,7 @@ ErpPropiedadesValores:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
-  showCommonFields: true
+  showCommonFields: false
   numMaxRecords: ''
   numberOfImages: '3'
   withGalery: '0'
@@ -23,9 +23,9 @@ ErpPropiedadesValores:
     generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
-  urlFriendlyManagement: true
+  urlFriendlyManagement: false
   fieldGeneratorUrlFriendly: IdPropiedad
-  metatagTitleManagement: true
+  metatagTitleManagement: false
   fieldGeneratorMetatagTitle: IdPropiedad
   controller: ErpPropiedadesValores
   action: Index
@@ -38,7 +38,7 @@ ErpPropiedadesValores:
   permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
-  title: ErpPropiedadesValores
+  title: Valores de la Propiedades
   id_video: erppropiedadesvalores
   url_video: null
   feature_list: YES
@@ -55,6 +55,11 @@ ErpPropiedadesValores:
     -
       title: 'Id z-a'
       criteria: 'Id DESC'
+  ordenes_web:
+    Orden:
+      columnaMostrar: Valor
+      filtro: '1'
+      columnaOrden: SortOrder       
   search_default: Id
   referenced_entities:
     - ErpPropiedades

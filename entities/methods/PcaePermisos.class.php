@@ -62,6 +62,9 @@ class PcaePermisos extends PcaePermisosEntity {
                     } else {
                         $query = "insert into {$connection['dataBase']}.CpanUsuarios (IdUsuario,IdPerfil,IdRol,IdTipoUsuario) values ('{$this->IdUsuario}','{$idPerfil}','1','1');";
                         $em->query($query);
+                        $lastId = $em->getInsertId();
+                        $query = "update {$connection['dataBase']}.CpanUsuarios set SortOrder='{$lastId}', PrimaryKeyMD5='".md5($lastId)."' WHERE Id='{$lastId}'";
+                        $em->query($query);
                     }
                     $em->desConecta();
                 }

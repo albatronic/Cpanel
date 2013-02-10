@@ -59,11 +59,13 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
     /**
      * Devuelve un array con los id's de reglas aplicables al artículo
      * 
-     * @param ErpArticulos $articulo Un objeto artículo
+     * @param int $idArticulo El id del articulo
      * @return array Array de reglas aplicables
      */
-    public function getReglasArticulo(ErpArticulos $articulo) {
+    public function getReglasArticulo($idArticulo) {
 
+        $articulo = new ErpArticulos($idArticulo);
+        
         $array = array();
 
         $idEstado1 = $articulo->getIDEstado1()->getId();
@@ -76,7 +78,8 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
         $idCategoria = $articulo->getIDCategoria()->getId();
         $idFamilia = $articulo->getIDFamilia()->getId();
         $idSubfamilia = $articulo->getIDSubfamilia()->getId();
-
+        unset($articulo);
+        
         $filtroEstado = "IdEstado='0'";
         if ($idEstado1 > 0)
             $filtroEstado .= " OR IdEstado='{$idEstado1}'";
@@ -113,9 +116,18 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
         return $array;
     }
 
-    public function aplicaReglasArticulo(ErpArticulos $articulo) {
+    /**
+     * Genera los ordenes del articulo $idArticulo en base
+     * a todas las reglas aplicables al mismo
+     * 
+     * @param int $idArticulo El id del artículo
+     * @return void
+     */
+    public function aplicaReglasArticulo($idArticulo) {
 
-        $reglas = $this->getReglasArticulo($articulo);
+        $articulo = new ErpArticulos($idArticulo);
+        
+        $reglas = $this->getReglasArticulo($idArticulo);
 
         foreach ($reglas as $regla) {
             $orden = new ErpOrdenesArticulos();
@@ -128,16 +140,21 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
                 $orden->create();
             }
         }
+        unset($articulo);
     }
 
     /**
      * Aplica la regla $idRegla, que consiste
      * en crear las entradas en la tabla ErpOrdenesArticulos de los articulos
-     * que estén vigentes, publish y cumplan las condiciones de la regla
+     * que cumplan las condiciones de la regla
+     * 
+     * La regla no se aplicará a los artículos que no estén vigentes
+     * La regla se aplicará a los artículos publish si y publish no
      * 
      * Si no se indica $idRegla, se aplicará la regla en curso
      * 
      * @param int $idRegla El id de la regla a aplicar
+     * @return void
      */
     public function aplicaRegla($idRegla = '') {
 
@@ -162,7 +179,7 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
                 "({$filtroAdicional})" :
                 "(1)";
 
-        $filtro = "(Vigente='1') AND (Publish='1') AND {$filtroEstado} AND {$filtroMarca} AND {$filtroCategoria} AND {$filtroFamilia} AND {$filtroSubfamilia} AND {$filtroAdicional}";
+        $filtro = "(Vigente='1') AND {$filtroEstado} AND {$filtroMarca} AND {$filtroCategoria} AND {$filtroFamilia} AND {$filtroSubfamilia} AND {$filtroAdicional}";
         $articulo = new ErpArticulos();
         $rows = $articulo->cargaCondicion("Id,Descripcion", $filtro);
         unset($articulo);

@@ -33,6 +33,7 @@
                 <input type="image" src="{{app.path}}/images/papelera.gif" onclick="if (!confirm('Desea eliminar el valor?')) {return false;} else {$('#accion{{key}}').val('B');}" alt="Borrar" title="Borrar Valor" />
                 {% else %}
                 <input type="image" src="{{app.path}}/images/nuevo.png" onclick="$('#action').val('new');" alt="Nuevo" title="Crear Valor" />
+                {{ macro.ordenarPopup(values.controller,'IdPropiedad',valor.IdPropiedad,'Valor')}}                
                 {% endif %}            
             </td>
         </tr>
@@ -41,4 +42,5 @@
     {% endfor %}
     </tbody>
 </table>
+
 {% endblock %}

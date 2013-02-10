@@ -15,6 +15,7 @@
     <input name="filtro" id="filtro" value="{{values.filtro}}" type="hidden" />
     <input name="columnaMostrar" id="columnaMostrar" value="{{values.columnaMostrar}}" type="hidden" />
 
+    {% if values.criteriosOrden|length > 1%}
     <div style="margin-bottom: 10px; text-align: center;">
         Ordenar por:
         <select name="criterioOrden" id="criterioOrden">
@@ -24,6 +25,9 @@
         </select>
         <img src="{{app.path}}/images/lupa.png" onclick="$('#action').val('Index'); submitForm('form{{values.controller}}');"/>
     </div>
+    {% else %}
+        <input name="criterioOrden" value="{{values.criterioOrden}}" type="hidden"/>
+    {% endif%}
     
     {% if values.datos is not empty %}
         <p style="padding: 5px;">Pincha y desplaza los elementos a la ubicación deseada</p>

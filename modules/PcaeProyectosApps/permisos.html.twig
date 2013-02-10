@@ -6,10 +6,10 @@
 {% extends '_global/layoutPopup.html.twig' %}
 
 {% block content %}
-<h2>Permisos de acceso a '{{values.tituloApp}}'</h2>
+<h4>Permisos de acceso a '{{values.tituloApp}}'</h4>
 
 <div id="Listado">
-<table width='100%'>
+<table class="Listado" width='100%'>
     <tr class='Titulos'>
         <td class="Item">Usuario</td>
         <td class='Item'>Permiso</td>
@@ -22,7 +22,7 @@
             {% set classFila = 'Par' %}
         {% endif %}
         <tr class="{{classFila}}">
-            <td>{{usuario.idUsuario}} {{usuario.nombre}} ({{usuario.email}})</td>
+            <td>{{usuario.nombre}} ({{usuario.email}})</td>
             <td style="text-align: center;">
                 <input
                     id="check{{usuario.idUsuario}}"

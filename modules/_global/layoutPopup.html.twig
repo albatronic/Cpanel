@@ -16,12 +16,14 @@
     <body id="theme-default" class="full_block">
 
 
-            <div id="content">
-                {% block content %}
-                {% endblock %}
-            </div>
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
 
-
+        <div id="dialogoVarEnv" title="Propiedades del elemento"></div>
+        <div id="dialogOrdenar" title="Cambiar orden"></div>
+        
         {# PARA HACER DEBUGER EN ENTORNO DE DESARROLLO #}        
         {% if values._debugMode %}
             {% include '_global/debuger.html.twig' %}

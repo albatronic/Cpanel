@@ -14,7 +14,7 @@ $(function(){
     $( "#tabs" ).tabs();
     $( "#tabs1" ).tabs(); 
     $( "#tabsMostrarEnMenu" ).tabs();
-    
+
     /**
      * Diálogo popup variables de entorno
      */

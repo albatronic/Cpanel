@@ -322,11 +322,11 @@ class ErpArticulosEntity extends EntityComunes {
      */
     protected $_parentEntities = array(
         array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpExistencias', 'ParentColumn' => 'IDArticulo'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado1'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado2'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado3'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado4'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado5'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulosEstados', 'ParentColumn' => 'IDEstado1'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulosEstados', 'ParentColumn' => 'IDEstado2'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulosEstados', 'ParentColumn' => 'IDEstado3'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulosEstados', 'ParentColumn' => 'IDEstado4'),
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulosEstados', 'ParentColumn' => 'IDEstado5'),
     );
 
     /**

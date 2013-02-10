@@ -122,14 +122,20 @@ class ErpPropiedadesValoresController extends Controller {
         switch ($this->request['accion']) {
             case 'G': //GUARDAR DATOS
                 if ($this->values['permisos']['permisosModulo']['UP']) {
+                    $rules = $this->form->getRules();
                     $datos = new $this->entity($this->request[$this->entity]['Id']);
                     $datos->bind($this->request[$this->entity]);
-                    if ($datos->save()) {
+                    if ($datos->valida($rules)) {
+                        if ($datos->save()) {
+                            $this->values['errores'] = $datos->getErrores();
+                            $this->values['alertas'] = $datos->getAlertas();
+                        } else
+                            $this->values['errores'] = $datos->getErrores();
+                    } else {
+                        $this->values['datos'] = $datos;
                         $this->values['errores'] = $datos->getErrores();
                         $this->values['alertas'] = $datos->getAlertas();
-                    } else
-                        $this->values['errores'] = $datos->getErrores();
-
+                    }
                     unset($datos);
                     return $this->listPopupAction($this->request[$this->entity]['IdPropiedad']);
                 } else {
@@ -164,7 +170,7 @@ class ErpPropiedadesValoresController extends Controller {
         $valor->setIdPropiedad($idPropiedad);
         $lineas[] = $valor;
 
-        $valores = $valor->cargaCondicion("Id", "IdPropiedad='{$idPropiedad}'", "Valor ASC");
+        $valores = $valor->cargaCondicion("Id", "IdPropiedad='{$idPropiedad}'", "SortOrder ASC");
         unset($valor);
 
         foreach ($valores as $valor) {

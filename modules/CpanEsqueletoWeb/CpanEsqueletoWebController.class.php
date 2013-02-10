@@ -96,6 +96,12 @@ class CpanEsqueletoWebController extends Controller {
         }
     }
 
+    /**
+     * Devuelve un array con los objetos zonas web
+     * añadiendo uno vacio para crear una zona nueva
+     * 
+     * @return array Array template, values
+     */
     public function listAction() {
 
         $item = new CpanEsqueletoWeb();

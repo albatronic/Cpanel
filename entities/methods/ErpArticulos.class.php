@@ -17,7 +17,7 @@ class ErpArticulos extends ErpArticulosEntity {
 
     /**
      * Pongo el precio medio de compra igual al precio de costo y
-     * Aplico las reglas de ordenacion si está vigente y Publish
+     * Aplico las reglas de ordenacion si está vigente
      * 
      * @return integer El id del ultimo articulo creado
      */
@@ -25,17 +25,17 @@ class ErpArticulos extends ErpArticulosEntity {
 
         $this->Pmc = $this->Pvd;
 
-        $ok = parent::create();
-        if (($ok) and ($this->Vigente == '1') and ($this->Publish == '1')) {
+        $id = parent::create();
+        if (($id) and ($this->Vigente == '1')) {
             $reglas = new CpanEsqueletoWeb();
-            $reglas->aplicaReglasArticulo($this);
+            $reglas->aplicaReglasArticulo($id);
             unset($reglas);
         }
-        return $ok;
+        return $id;
     }
 
     /**
-     * Guardo y aplico las reglas de ordenacion
+     * Guardo y aplico las reglas de ordenación si está vigente
      * 
      * @return boolean
      */
@@ -47,13 +47,32 @@ class ErpArticulos extends ErpArticulosEntity {
             $ordenes = new ErpOrdenesArticulos();
             $ordenes->borraOrdenesArticulo($this->Id);
             unset($ordenes);
-            
             // Aplico las reglas de ordenes 
-            $reglas = new CpanEsqueletoWeb();
-            $reglas->aplicaReglasArticulo($this);
-            unset($reglas);
+            if ($this->Vigente == '1') {
+                $reglas = new CpanEsqueletoWeb();
+                $reglas->aplicaReglasArticulo($this->Id);
+                unset($reglas);
+            }
         }
+        return $ok;
+    }
 
+    /**
+     * Marco de borrado el artículo y borro sus eventuales órdenes
+     * @return boolean
+     */
+    public function delete() {
+
+        $id = $this->Id;
+
+        $ok = parent::delete();
+
+        if ($ok) {
+            // Borro los eventuales ordenes que existieran para el artículo
+            $ordenes = new ErpOrdenesArticulos();
+            $ordenes->borraOrdenesArticulo($id);
+            unset($ordenes);
+        }
         return $ok;
     }
 
@@ -116,7 +135,6 @@ class ErpArticulos extends ErpArticulosEntity {
                 $this->{"IDEstado$i"} = 0; else
                 $valida[$idEstado] = '1';
         }
-
 
         unset($exi);
     }
