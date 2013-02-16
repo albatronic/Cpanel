@@ -263,7 +263,13 @@ class EntityComunes extends Entity {
      * @orm Column(type="string")
      * @var string(100)
      */
-    protected $AccessProfileList = '1,2';
+    protected $AccessProfileList = "perfiles: {'1':'1','2':'2'}";
+
+    /**
+     * @orm Column(type="string")
+     * @var string(100)
+     */
+    protected $AccessProfileListWeb = "perfiles: {'1':'1'}";
 
     /**
      * @orm Column(type="string")
@@ -780,11 +786,23 @@ class EntityComunes extends Entity {
     }
 
     public function setAccessProfileList($AccessProfileList) {
-        $this->AccessProfileList = trim($AccessProfileList);
+        $this->AccessProfileList = (is_array($AccessProfileList)) ?
+                sfYaml::dump($AccessProfileList) :
+                trim($AccessProfileList);
     }
 
     public function getAccessProfileList() {
-        return $this->AccessProfileList;
+        return sfYaml::load($this->AccessProfileList);
+    }
+
+    public function setAccessProfileListWeb($AccessProfileListWeb) {
+        $this->AccessProfileListWeb = (is_array($AccessProfileListWeb)) ?
+                sfYaml::dump($AccessProfileListWeb) :
+                trim($AccessProfileListWeb);
+    }
+
+    public function getAccessProfileListWeb() {
+        return sfYaml::load($this->AccessProfileListWeb);
     }
 
     public function setUrlTarget($UrlTarget) {
@@ -929,6 +947,36 @@ class EntityComunes extends Entity {
 
     public function getNivelJerarquico() {
         return $this->NivelJerarquico;
+    }
+
+    public function getArrayPerfilesCpanel() {
+        // Cargar los perfiles del cpanel
+        $perfiles = new CpanPerfiles();
+        $cpanPerfiles = $perfiles->fetchAll('Perfil', false);
+        unset($perfiles);
+
+        $objetoPerfiles = $this->getAccessProfileList();
+
+        foreach ($cpanPerfiles as $key => $perfil) {
+            $cpanPerfiles[$key]['Valor'] = array_search($perfil['Id'], $objetoPerfiles['perfiles']);
+        }
+
+        return $cpanPerfiles;
+    }
+
+    public function getArrayPerfilesWeb() {
+        // Cargar los perfiles de la web
+        $perfiles = new WebPerfiles();
+        $webPerfiles = $perfiles->fetchAll('Perfil', false);
+        unset($perfiles);
+
+        $objetoPerfiles = $this->getAccessProfileListWeb();
+
+        foreach ($webPerfiles as $key => $perfil) {
+            $webPerfiles[$key]['Valor'] = array_search($perfil['Id'], $objetoPerfiles['perfiles']);
+        }
+
+        return $webPerfiles;
     }
 
 }

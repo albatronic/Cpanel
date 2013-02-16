@@ -1,11 +1,3 @@
-# Module: GconSecciones
-# Document : modules/GconSecciones/config.yml
-#
-# @author: Sergio Pérez <sergio.perez@albatronic.com>
-# @copyright: INFORMATICA ALBATRONIC SL
-# @date 30.10.2012 18:44:56
-#
----
 GconSecciones:
   app: Gcon
   isModuleRoot: 1
@@ -149,7 +141,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: MostrarTitulo, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 1, caption: MostrarTitulo, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarSubtitulo:
       title: 'Mostrar subtítulo'
@@ -161,7 +153,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 2, caption: MostrarSubtitulo, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 2, caption: MostrarSubtitulo, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarIntroduccion:
       title: 'Mostrar introducción'
@@ -173,7 +165,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 3, caption: MostrarIntroduccion, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 3, caption: MostrarIntroduccion, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnMenu1:
       title: 'Menú principal'
@@ -185,7 +177,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 4, caption: MostrarEnMenu1, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 4, caption: MostrarEnMenu1, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnMenu2:
       title: 'Menú Cabecera'
@@ -197,7 +189,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 5, caption: MostrarEnMenu2, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 5, caption: MostrarEnMenu2, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnMenu3:
       title: 'Menú Pie de Página'
@@ -209,7 +201,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 6, caption: MostrarEnMenu3, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 6, caption: MostrarEnMenu3, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnMenu4:
       title: MostrarEnMenu4
@@ -221,7 +213,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 7, caption: MostrarEnMenu4, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 7, caption: MostrarEnMenu4, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarEnMenu5:
       title: MostrarEnMenu5
@@ -233,7 +225,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 8, caption: MostrarEnMenu5, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 8, caption: MostrarEnMenu5, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     EtiquetaWeb1:
       title: 'Etiqueta menú principal'
@@ -410,7 +402,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 9, caption: ModoMostrarContenidos, entity: ModosMostrarContenidos, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 9, caption: ModoMostrarContenidos, entity: ModosMostrarContenidos, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     CriterioOrdenContenidosHijos:
       title: 'Criterio orden contenidos hijos'
@@ -422,7 +414,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 10, caption: CriterioOrdenContenidosHijos, entity: CriteriosOrdenContenidosHijos, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 10, caption: CriterioOrdenContenidosHijos, entity: CriteriosOrdenContenidosHijos, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     MostrarSubsecciones:
       title: 'Mostrar subsecciones'
@@ -434,7 +426,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 11, caption: MostrarSubsecciones, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 11, caption: MostrarSubsecciones, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Observations:
       title: Observaciones
@@ -468,7 +460,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 12, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 12, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     IsSuper:
       title: 'Uso Super'
@@ -480,7 +472,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 13, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 13, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Checked:
       title: Chequeado
@@ -492,7 +484,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 14, caption: Checked, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 14, caption: Checked, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Publish:
       title: Publicar
@@ -504,7 +496,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 15, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 15, caption: Publish, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     BelongsTo:
       title: 'Pertenece a ...'
@@ -527,7 +519,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 16, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 16, caption: IsDefault, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     CreatedBy:
       title: 'Creado por'
@@ -583,7 +575,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 17, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 17, caption: Deleted, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     DeletedBy:
       title: 'Borrado por'
@@ -617,7 +609,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 18, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 18, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     SortOrder:
       title: SortOrder
@@ -728,7 +720,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 19, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 19, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
       title: 'Número de visitas'
@@ -762,7 +754,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 20, caption: LockMetatagTitle, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 20, caption: LockMetatagTitle, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MetatagKeywords:
       title: MetatagKeywords
@@ -796,7 +788,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 21, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 21, caption: MetatagTitleSimple, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MetatagTitlePosition:
       title: MetatagTitlePosition
@@ -808,7 +800,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 22, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 22, caption: MetatagTitlePosition, entity: ValoresDchaIzq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ShowOnSitemap:
       title: ShowOnSitemap
@@ -820,7 +812,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 23, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 23, caption: ShowOnSitemap, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ImportanceSitemap:
       title: ImportanceSitemap
@@ -843,7 +835,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 24, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 24, caption: ChangeFreqSitemap, entity: ValoresChangeFreq, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
     ShowGalery:
       title: ShowGalery
@@ -855,7 +847,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 25, caption: ShowGalery, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 25, caption: ShowGalery, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ShowDocuments:
       title: ShowDocuments
@@ -867,7 +859,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 26, caption: ShowDocuments, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 26, caption: ShowDocuments, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ShowRelatedLinks:
       title: ShowRelatedLinks
@@ -879,7 +871,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 27, caption: ShowRelatedLinks, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 27, caption: ShowRelatedLinks, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ShowRelatedContents:
       title: ShowRelatedContents
@@ -891,7 +883,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 28, caption: ShowRelatedContents, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 28, caption: ShowRelatedContents, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     ShowPublishedAt:
       title: ShowPublishedAt
@@ -903,7 +895,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 29, caption: ShowPublishedAt, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 29, caption: ShowPublishedAt, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     AccessProfileList:
       title: AccessProfileList
@@ -948,7 +940,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 30, caption: UrlRequestMethod, entity: RequestMethods, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 30, caption: UrlRequestMethod, entity: RequestMethods, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     UrlOrigin:
       title: UrlOrigin
@@ -960,7 +952,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 31, caption: UrlOrigin, entity: RequestOrigins, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 31, caption: UrlOrigin, entity: RequestOrigins, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     UrlTargetBlank:
       title: UrlTargetBlank
@@ -972,7 +964,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 32, caption: UrlTargetBlank, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 32, caption: UrlTargetBlank, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     UrlIsHttps:
       title: UrlIsHttps
@@ -984,7 +976,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 33, caption: UrlIsHttps, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 33, caption: UrlIsHttps, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     CodigoAppAsociada:
       title: CodigoAppAsociada
@@ -996,7 +988,7 @@ GconSecciones:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 34, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: NombreApp, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 34, caption: CodigoAppAsociada, entity: CpanAplicaciones, method: fetchAll, params: NombreApp, type: select, operator: '=', event: null }
       validator: { nullable: YES, type: string, length: '15', min: null, max: null, message: 'Valor Requerido' }
     IdAlbumExterno:
       title: IdAlbumExterno
@@ -1038,3 +1030,10 @@ GconSecciones:
       visible: true
       updatable: true
       default: ''
+    AccessProfileListWeb:
+      title: 'Perfiles Web'
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: "perfiles:\n  - 1\n"

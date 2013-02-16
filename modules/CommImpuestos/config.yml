@@ -80,7 +80,7 @@ CommImpuestos:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: Pais, entity: CommPaises, method: fetchAll, params: Pais, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 1, caption: Pais, entity: CommPaises, method: fetchAll, params: Pais, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Nombre:
       title: Nombre
@@ -507,3 +507,10 @@ CommImpuestos:
       visible: true
       updatable: true
       default: ''
+    AccessProfileListWeb:
+      title: 'Perfiles Web'
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: "perfiles:\n  - 1\n"

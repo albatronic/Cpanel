@@ -34,11 +34,11 @@ class CpanEsqueletoWebController extends Controller {
                     $datos = new $this->entity();
                     $datos->bind($this->request[$this->entity]);
 
-                    if ($datos->create()) {
-                        $this->values['alertas'] = $datos->getAlertas();
-                    } else {
-                        $this->values['errores'] = $datos->getErrores();
-                    }
+                    if ($datos->valida($this->form->getRules()))
+                        $datos->create();
+
+                    $this->values['alertas'] = $datos->getAlertas();
+                    $this->values['errores'] = $datos->getErrores();
                     unset($datos);
                     return $this->listAction();
                     break;
@@ -65,11 +65,11 @@ class CpanEsqueletoWebController extends Controller {
                 if ($this->values['permisos']['permisosModulo']['UP']) {
                     $datos = new $this->entity($this->request[$this->entity]['Id']);
                     $datos->bind($this->request[$this->entity]);
-                    if ($datos->save()) {
-                        $this->values['errores'] = $datos->getErrores();
-                        $this->values['alertas'] = $datos->getAlertas();
-                    } else
-                        $this->values['errores'] = $datos->getErrores();
+                    if ($datos->valida($this->form->getRules()))
+                        $datos->save();
+
+                    $this->values['errores'] = $datos->getErrores();
+                    $this->values['alertas'] = $datos->getAlertas();
 
                     unset($datos);
                     return $this->listAction();

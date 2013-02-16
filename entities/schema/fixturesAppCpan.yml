@@ -1,6 +1,9 @@
 # SECCIONES DE CONTENIDOS Y URLS AMIGABLES POR DEFECTO
 #
 
+WebPerfiles:
+  1: { Id: 1, Perfil: Estándar }
+  
 CpanPerfiles:
   1: { Id: 1, Perfil: SuperAdministrador }
   2: { Id: 2, Perfil: Administrador }
@@ -16,14 +19,16 @@ CpanUsuarios:
   1: { IdUsuario: 1, IdPerfil: 1, IdRol: 1, IdTipoUsuario: 1 }
 
 CpanFuncionalidades:
-  AC: { Codigo: AC, Titulo: Acceder,       Descripcion: Permiso de Acceso, EsEstandar: 1}
-  IN: { Codigo: IN, Titulo: Insertar,      Descripcion: Insertar nuevos valores, EsEstandar: 1}
-  UP: { Codigo: UP, Titulo: Actualizar,    Descripcion: Actualizar información, EsEstandar: 1}
-  DE: { Codigo: DE, Titulo: Borrar,        Descripcion: Eliminar información, EsEstandar: 1}
-  LI: { Codigo: LI, Titulo: Listar,        Descripcion: Listado, EsEstandar: 1}
-  CO: { Codigo: CO, Titulo: Consultar,     Descripcion: Consultar información, EsEstandar: 1}
-  MO: { Codigo: MO, Titulo: Modifcar Orden,Descripcion: Modificar Orden Estandar, EsEstandar: 1}
-  VW: { Codigo: VW, Titulo: Variables WEB, Descripcion: Variables WEB, EsEstandar: 1}
+  AC: { Codigo: AC, Titulo: Acceder,        Descripcion: Permiso de Acceso, EsEstandar: 1}
+  IN: { Codigo: IN, Titulo: Insertar,       Descripcion: Insertar nuevos valores, EsEstandar: 1}
+  UP: { Codigo: UP, Titulo: Actualizar,     Descripcion: Actualizar información, EsEstandar: 1}
+  DE: { Codigo: DE, Titulo: Borrar,         Descripcion: Eliminar información, EsEstandar: 1}
+  LI: { Codigo: LI, Titulo: Listar,         Descripcion: Listado, EsEstandar: 1}
+  CO: { Codigo: CO, Titulo: Consultar,      Descripcion: Consultar información, EsEstandar: 1}
+  MO: { Codigo: MO, Titulo: Modifcar Orden, Descripcion: Modificar Orden Estandar, EsEstandar: 1}
+  VW: { Codigo: VW, Titulo: Variables WEB,  Descripcion: Variables WEB, EsEstandar: 1}
+  PC: { Codigo: PC, Titulo: Permisos Cpanel,Descripcion: Poder asignar permisos de acceso a nivel registro para los perfiles de usuario del CPanel, EsEstandar: 1}
+  PW: { Codigo: PW, Titulo: Permisos Web,   Descripcion: Poder asignar permisos de acceso a nivel registro para los perfiles de usuario de la web, EsEstandar: 1}
   
 CpanUrlAmigables:
   1: { UrlFriendly: '/',            Controller: Index,      Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 1 }

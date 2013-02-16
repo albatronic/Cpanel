@@ -180,7 +180,7 @@ class PcaeProyectosAppsController extends Controller {
             
             $permisos[] = array(
                 'idUsuario' => $usuario->getId(),
-                'nombre' => $usuario->getNombre(),
+                'nombreApellidos' => $usuario->getApellidosNombre(),
                 'email' => $usuario->getEMail(),
                 'tienePermiso' => isset($permiso[$usuario->getId()]),
             );

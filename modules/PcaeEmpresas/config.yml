@@ -86,7 +86,7 @@ PcaeEmpresas:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: Grupo, entity: PcaeGruposEmpresas, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 1, caption: Grupo, entity: PcaeGruposEmpresas, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '25', min: null, max: null, message: 'Valor Requerido' }
     RazonSocial:
       title: 'Razón Social'
@@ -153,7 +153,7 @@ PcaeEmpresas:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 3, caption: Provincia, entity: CommProvincias, method: fetchAll, params: Provincia, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 3, caption: Provincia, entity: CommProvincias, method: fetchAll, params: Provincia, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdPais:
       title: País
@@ -165,7 +165,7 @@ PcaeEmpresas:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 4, caption: Pais, entity: CommPaises, method: fetchAll, params: Pais, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 4, caption: Pais, entity: CommPaises, method: fetchAll, params: Pais, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Telefono:
       title: Teléfono
@@ -298,7 +298,7 @@ PcaeEmpresas:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 7, caption: 'CNAE (%)', entity: CommCnae, method: fetchAll, params: Actividad, type: input }
+      #aditional_filter: { order: 7, caption: 'CNAE (%)', entity: CommCnae, method: fetchAll, params: Actividad, type: input }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     RegistroMercantil:
       title: 'Registro Mercantil'
@@ -703,3 +703,10 @@ PcaeEmpresas:
       visible: true
       updatable: true
       default: ''
+    AccessProfileListWeb:
+      title: 'Perfiles Web'
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: "perfiles:\n  - 1\n"

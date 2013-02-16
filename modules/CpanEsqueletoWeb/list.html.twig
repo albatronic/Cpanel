@@ -24,7 +24,7 @@
         <td class='Item'>Familia</td>  
         <td class='Item'>Subfamilia</td> 
         <td class='Item'>N. Items</td> 
-        <td class='Item'>Filtro Adicional</td>        
+        <td class='Item'>Items/Pág</td>        
         <td>&nbsp;</td>
     </tr>    
 
@@ -84,7 +84,7 @@
                 />             
             </td>
             <td><input name="{{values.controller}}[NItems]" value="{{zona.NItems}}" type="text" style="width: 30px;"/></td>
-            <td><input name="{{values.controller}}[Filtro]" value="{{zona.Filtro}}" type="text"/></td>           
+            <td><input name="{{values.controller}}[ItemsPagina]" value="{{zona.ItemsPagina}}" type="text" style="width: 30px;"/></td>           
             <td align="center">
                 {% if zona.Id > 0 %}
                 <input type="image" src="{{app.path}}/images/botonsave.png" onclick="$('#accion{{key}}').val('G');" alt="Guardar" title="Guardar Zona Web" />

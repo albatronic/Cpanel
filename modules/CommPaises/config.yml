@@ -103,7 +103,7 @@ CommPaises:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 1, caption: Moneda, entity: CommMonedas, method: fetchAll, params: Moneda, type: select, operator: '=', event: null }
+      ##aditional_filter: { order: 1, caption: Moneda, entity: CommMonedas, method: fetchAll, params: Moneda, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     IdZonaHoraria:
       title: 'Zona Horaria'
@@ -115,7 +115,7 @@ CommPaises:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      aditional_filter: { order: 2, caption: 'Zona Horaria', entity: CommZonasHorarias, method: fetchAll, params: Zona, type: select, operator: '=', event: null }
+      ##aditional_filter: { order: 2, caption: 'Zona Horaria', entity: CommZonasHorarias, method: fetchAll, params: Zona, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Latitud:
       title: Latitud
@@ -520,3 +520,10 @@ CommPaises:
       visible: true
       updatable: true
       default: ''
+    AccessProfileListWeb:
+      title: 'Perfiles Web'
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: "perfiles:\n  - 1\n"

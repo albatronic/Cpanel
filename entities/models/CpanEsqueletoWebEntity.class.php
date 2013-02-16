@@ -73,6 +73,12 @@ class CpanEsqueletoWebEntity extends EntityComunes {
     protected $NItems = '0';
 
     /**
+     * @var integer
+     * @assert NotBlank(groups="CpanEsqueletoWeb")
+     */
+    protected $ItemsPagina = '0';
+
+    /**
      * Nombre de la conexion a la BD
      * @var string
      */
@@ -207,6 +213,13 @@ class CpanEsqueletoWebEntity extends EntityComunes {
         return $this->NItems;
     }
 
+    public function setItemsPagina($ItemsPagina) {
+        $this->ItemsPagina = $ItemsPagina;
+    }
+
+    public function getItemsPagina() {
+        return $this->ItemsPagina;
+    }
 }
 
 // END class CpanEsqueletoWeb

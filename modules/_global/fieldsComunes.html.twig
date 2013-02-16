@@ -12,6 +12,32 @@
 
 <div id="fieldsComunes">
         
+        {# PERFILES CON PERMISO DE ACCESO DESDE CPANEL#}
+        {% if (user.IdPerfil.Id == '1') or ((values.permisos.permisosModulo['PC'] and atributos.AccessProfileList.visible == 1)) %}
+        <div>
+            <h3>Perfiles acceso panel de control</h3>
+            <div>
+                <p>Marque los perfiles de usuarios que tendrán acceso a esta información desde el Cpanel</p>
+                {% for perfil in datos.getArrayPerfilesCpanel %}
+                    <input type="checkbox" name="{{values.controller}}[AccessProfileList][perfiles][{{perfil.Id}}]" value="{{perfil.Id}}" {% if perfil.Valor|length %}CHECKED{% endif %} /> {{perfil.Value}}<br/>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    
+        {# PERFILES CON PERMISO DE ACCESO DESDE LA WEB #}
+        {% if (user.IdPerfil.Id == '1') or ((values.permisos.permisosModulo['PW'] and atributos.AccessProfileListWeb.visible == 1)) %}    
+        <div>
+            <h3>Perfiles acceso web</h3>
+            <div>
+                <p>Marque los perfiles de usuarios que tendrán acceso a esta información desde la web</p>                
+                {% for perfil in datos.getArrayPerfilesWeb %}
+                    <input type="checkbox" name="{{values.controller}}[AccessProfileListWeb][perfiles][{{perfil.Id}}]" value="{{perfil.Id}}" {% if perfil.Valor|length %}CHECKED{% endif %} /> {{perfil.Value}}<br/>
+                {% endfor %}
+            </div>           
+        </div>
+        {% endif %}
+    
         {# GENERAL #}
         {% if user.IdPerfil.Id == '1' or atributos.AllowsChildren.visible or atributos.BelongsTo.visible or atributos.CodigoAppAsociada.visible or atributos.IdAlbumExterno.visible or atributos.IdSliderAsociado.visible or atributos.IdSeccionEnlaces.visible or atributos.IdSeccionVideos.visible or atributos.Observations.visible %}        
         <div>
@@ -75,7 +101,7 @@
             {# IMÁGENES #}
             {% if values.varEnvMod.numberOfImages > '0' or user.IdPerfil.Id == '1' %}
             <div>
-            <h3>Imágenes ({{datos.getNumberOfDocuments('image%')}})</h3>
+            <h3>Imágenes ({{datos.getNumberOfDocuments('image%','IsThumbnail=0')}})</h3>
             <div>
                 <p>
                 <input name="idImagenEnviar" id="idImagenEnviar" value="" type="hidden" />
@@ -123,7 +149,7 @@
                             <input name="image{{puntero}}" id="imagen_{{puntero}}_Doc" type="file"/>
                         </td>
                         <td style="vertical-align: top !important;">
-                            <h1>{{values.varEnvMod.images[puntero].caption}}</h1>
+                            <h4>{{values.varEnvMod.images[puntero].caption}}</h4>
                             <input name="image[{{puntero}}][Tipo]" id="image_{{puntero}}_Tipo" value="{{imagen.Type}}" type="hidden" />
                             <input name="image[{{puntero}}][Id]" id="image_{{puntero}}_Id" value="{{imagen.Id}}" type="hidden" />
                             <input name="image[{{puntero}}][SortOrder]" id="image_{{puntero}}_SortOrder" value="{{imagen.SortOrder}}" type="hidden" />
@@ -265,13 +291,12 @@
             {% endif %}
             
             {# SOLAPA AUDITORIA #}
-            {% if user.IdPerfil.Id == 1 or atributos.Checked.visible == 1 or atributos.Privacy.visible == 1 or atributos.AccessProfileList.visible == 1 or atributos.NumberVisits.visible == 1 or atributos.DateTimeLastVisit.visible == 1 %}
+            {% if user.IdPerfil.Id == 1 or atributos.Checked.visible == 1 or atributos.Privacy.visible == 1 or atributos.NumberVisits.visible == 1 or atributos.DateTimeLastVisit.visible == 1 %}
             <div>
                 <h3>Auditoría</h3>
                 <div>
                     {{ macro.input(atributos.Checked,'field_title','checkbox',values.controller ~ '[Checked]',values.controller ~ '_Checked',datos.Checked.IDTipo,'255','CampoTextoLargo','12') }}
                     {{ macro.radio(atributos.Privacy,'field_title',values.controller ~ '[Privacy]',values.controller ~ '_Privacy',datos.Privacy.IDTipo,datos.Privacy.fetchAll(none,0),'chzn-radio',109)}}
-                    {{ macro.input(atributos.AccessProfileList,'field_title','text',values.controller ~ '[AccessProfileList]',values.controller ~ '_AccessProfileList',datos.AccessProfileList,none,none,107) }}
                     {% if datos.getPrimaryKeyValue %}
                         {% if values.varEnvMod.showNumberVisits %}
                         {{ macro.input(atributos.NumberVisits,'field_title','text',values.controller ~ '[NumberVisits]',values.controller ~ '_NumberVisits',datos.NumberVisits,none,'CampoImporte',113, 'disabled') }}

@@ -1,8 +1,14 @@
+WebPerfiles:
+  1: { Id: 1, Perfil: Estándar }
+  
 # ESQUELETO WEB TIENDAS ONLINES
-ErpOrdenesArticulos:
-  comment: Ordenedes de articulos y zonas
-  columns:
-    IdRegla:    { type: bigint(11), notnull: true, default: 0, index: index }
-    IdArticulo: { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulos,Id' }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
-  relations:   
+#CpanFuncionalidades:
+#  PC: { Codigo: PC, Titulo: Permisos Cpanel,Descripcion: Poder asignar permisos de acceso a nivel registro para los perfiles de usuario del CPanel, EsEstandar: 1}
+#  PW: { Codigo: PW, Titulo: Permisos Web,   Descripcion: Poder asignar permisos de acceso a nivel registro para los perfiles de usuario de la web, EsEstandar: 1}  
+#PERFILES PARA LOS USUARIOS WEB
+#WebPerfiles:
+#  columns:
+#    Perfil: { type: string(50), notnull: true }
+#    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+#  relations: 
+  

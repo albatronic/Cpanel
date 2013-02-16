@@ -228,6 +228,7 @@ $usuario = $usuario->find('IdUsuario',$_SESSION['USER']['user']['Id']);
 $twig->addGlobal('user',$usuario);
 $twig->addGlobal('appPath', $app['path']);
 $twig->addGlobal('varEnvMod', $result['values']['varEnvMod']);
+$twig->addGlobal('permisosModulo', $result['values']['permisos']['permisosModulo']);
 $twig->loadTemplate($result['template'])
         ->display(array(
             'values' => $result['values'],

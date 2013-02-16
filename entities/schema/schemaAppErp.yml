@@ -133,10 +133,7 @@ ErpUnidadesMedida:
   comment: Unidades de medida de los articulos
   columns:
     UnidadMedida: { type: string(10), notnull: true }
-    CreatedBy:  { type: int(4), notnull: true, default: 0 }
-    CreatedAt:  { type: datetime, notnull: true, }
-    ModifiedBy: { type: int(4), notnull: true, default: 0 }    
-    ModifiedAt: { type: datetime, notnull: true }    
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>   
   relations:    
     
 # Almacenes
@@ -153,10 +150,7 @@ ErpAlmacenes:
     EMail:              { type: string(50), notnull: true, default: '' }
     Tipo:               { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ErpAlmacenesTipos,IDTipo' }
     ControlUbicaciones: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }    
-    CreatedBy:  { type: int(4), notnull: true, default: 0 }
-    CreatedAt:  { type: datetime, notnull: true }
-    ModifiedBy: { type: int(4), notnull: true, default: 0 }    
-    ModifiedAt: { type: datetime, notnull: true, }    
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>    
   relations:
     
 # Mapas de almacenes
@@ -171,14 +165,21 @@ ErpAlmacenesMapas:
     Alto:      { type: decimal(), notnull: true, default: 0 }
     Ancho:     { type: decimal(), notnull: true, default: 0 }
     Fondo:     { type: decimal(), notnull: true, default: 0 }   
-    CreatedBy:  { type: int(4), notnull: true, default: 0 }
-    CreatedAt:  { type: datetime, notnull: true }
-    ModifiedBy: { type: int(4), notnull: true, default: 0 }    
-    ModifiedAt: { type: datetime, notnull: true }        
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>         
   relations:
     
 # Lotes
-
+ErpLotes:
+  comment: Lotes
+  columns:  
+    IDArticulo:       { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulos,Id'}
+    Lote:             { type: string(25), notnull: true}
+    FechaFabricacion: { type: date }
+    FechaCaducidad:   { type: date }
+    Vigente:          { type: tinyint(1), notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>       
+  relations:
+    
 # Existencias
 ErpExistencias:
   comment: Existencias
@@ -195,8 +196,105 @@ ErpExistencias:
     Maximo:      { type: decimal(), notnull: true, defautl: 0 }  
     Minimo:      { type: decimal(), notnull: true, defautl: 0 }    
     EnDeposito:  { type: tinyint(1), notnull: true, defautl: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }    
-    CreatedBy:  { type: int(4), notnull: true, default: 0 }
-    CreatedAt:  { type: datetime, notnull: true }
-    ModifiedBy: { type: int(4), notnull: true, default: 0 }    
-    ModifiedAt: { type: datetime, notnull: true}        
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>          
   relations:
+
+# Tipos de movimientos de almacen
+ErpTiposMvtosAlmacen:
+  comment: Tipos de movimientos de almacen
+  columns:
+    Descripcion:   { type: string(50), notnull: true }
+    Signo:         { type: char(1), notnull: true, default: 'E', index: index, comment: 'Abstract,SignosMvtosAlmacen,IDTipo' }
+    Uso:           { type: char(1), notnull: true, default: 'A', index: index, comment: 'Abstract,UsosMvtosAlmacen,IDTipo' }
+    TipoDocumento: { type: string(25), notnull: true }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>       
+  relations:
+    
+# Sucursales
+ErpSucursales:
+  comment: Sucursales/Delegaciones de la empresa
+  columns:
+    Nombre:             { type: string(50), notnull: true }
+    Direccion:          { type: string(50), notnull: true }
+    Poblacion:          { type: string(50), notnull: true }
+    IDProvincia:        { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpProvincias,Id' }
+    CodigoPostal:       { type: string(10), notnull: false }
+    Telefono:           { type: string(30), notnull: false, default: NULL }
+    Fax:                { type: string(30), notnull: false, default: NULL }
+    EMail:              { type: string(50), notnull: false, default: NULL }
+    IDResponsable:      { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,CpanUsuarios,Id' }
+    CtaContableVentas:  { type: string(10), notnull: true, default: ''}
+    CtaContableCompras: { type: string(10), notnull: true, default: ''}
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>     
+  relations:
+
+# Agencias de transporte
+ErpAgencias:
+  comment: Agencias de transporte
+  columns:
+    Agencia:       { type: string(50), notnull: false, default: NULL }
+    Telefono:      { type: string(30), notnull: false, default: NULL }
+    Fax:           { type: string(30), notnull: false, default: NULL }
+    Web:           { type: string(50), notnull: false, default: NULL }    
+    EMail:         { type: string(50), notnull: false, default: NULL }
+    CosteEstandar: { type: decimal, notnull: true, default: '0.00' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>      
+  relations:
+
+# Zonas de transporte
+ErpZonasTransporte:
+  comment: Zonas de transporte
+  columns:
+    Zona:       { type: string(50), notnull: true }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>      
+  relations:    
+
+# Tabla de portes
+ErpTablaPortes:
+  comment: Tarifas de portes
+  columns:
+    IDZona:    { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpZonasTransporte,Id' }
+    IDAgencia: { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpAgencias,Id' }    
+    Kilos:     { type: int(4), notnull: true, default: 0 }
+    Importe:   { type: decimal, notnull: true, default: 0 }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>     
+  relations:
+    
+# Contadores
+ErpContadores:
+  comment: Contadores de facturas, pedidos, etc
+  columns:
+    IDSucursal:  { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpSucursales,Id' }
+    IDTipo:      { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ErpTiposContadores,IDTipo' }
+    Serie:       { type: char(2), notnull: true }
+    Contador:    { type: int(8), notnull: true, default: 0 }
+    Predefinido: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>     
+  relations:
+    
+# TPVS
+ErpTpvs:
+  comment: Tpvs de cada sucursal
+  columns:
+    IDSucursal:    { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpSucursales,Id' }
+    Nombre:        { type: string(50), notnull: true }
+    AperturaCajon: { type: string(50), notnull: true }
+    SaltoPagina:   { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    Estilo:        { type: string(50), notnull: true }
+    IDDataFono1:   { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpDatafonos,Id' }
+    IDDataFono2:   { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpDatafonos,Id' }
+    IDDataFono3:   { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpDatafonos,Id' }
+    IDDataFono4:   { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpDatafonos,Id' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>     
+  relations: 
+   
+# Datafonos
+ErpDatafonos:
+  comment: Datafonos
+  columns:
+    Datafono: { type: string(50), notnull: true }
+    Comision: { type: decimal, notnull: true, default: '0.00'}
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommonErp.yml'; echoln('');?>     
+  relations:     
+     
+   

@@ -198,9 +198,21 @@ class Entity {
             } else {
                 $lastId = $this->_em->getInsertId();
                 $this->setPrimaryKeyValue($lastId);
+                // Calcular la clave md5
                 $this->setPrimaryKeyMD5(md5($lastId));
+                // Poner el orden
                 if ($this->getSortOrder() == '0')
                     $this->setSortOrder($lastId);
+                // Pongo el perfil del usuario actual
+                if ($this->BelongsTo != 0) {
+                    $objetoPadre = new $this($this->BelongsTo);
+                    $perfilesCpan = $objetoPadre->getAccessProfileList();
+                    unset($objetoPadre);
+                } else
+                    $perfilesCpan = $this->getAccessProfileList();
+
+                $perfilesCpan['perfiles'][$_SESSION['USER']['user']['IdPerfil']] = $_SESSION['USER']['user']['IdPerfil'];
+                $this->setAccessProfileList($perfilesCpan);
                 $this->save();
             }
         }
@@ -732,6 +744,34 @@ class Entity {
         unset($docs);
 
         return $nDocs;
+    }
+
+    /**
+     * Devuelve el pathname de la imagen de diseño (no el thumbnail) $nImagen
+     * 
+     * @param integer $nImagen El número de imagén de diseño. Opcional, defecto la 1
+     * @return string el path de la imagen
+     */
+    public function getPathNameImagenN($nImagen = 1) {
+
+        $imagenes = $this->getDocuments('image' . $nImagen, "IsThumbnail='0'");
+
+        $pathName = (count($imagenes)) ? $imagenes[0]->getPathName() : "";
+        return $pathName;
+    }
+
+    /**
+     * Devuelve el pathname del thumbnail de la imagen de diseño $nImagen
+     * 
+     * @param integer $nImagen El número de imagén de diseño. Opcional, defecto la 1
+     * @return string el path de la imagen
+     */
+    public function getPathNameThumbnailN($nImagen = 1) {
+
+        $imagenes = $this->getDocuments('image' . $nImagen, "IsThumbnail='1'");
+
+        $pathName = (count($imagenes)) ? $imagenes[0]->getPathName() : "";
+        return $pathName;
     }
 
     public function getArbolHijos() {

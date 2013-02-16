@@ -23,25 +23,6 @@ CpanModulos:
   relations:
     CodigoApp : { ForeignEntity: CpanAplicaciones, ForeignId: CodigoApp }
 
-CpanDocs:
-  columns:
-    Entity:      { type: string(255), notnull: true}
-    IdEntity:    { type: integer(11), notnull: true}
-    Type:        { type: string(10), notnull: true, index: index, comment: 'Abstract,TiposDocs,IDTipo' }
-    IsThumbnail: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
-    PathName:    { type: string(255), notnull: true, default: ''}
-    Name:        { type: string(255), notnull: true, default: ''}
-    Extension:   { type: string(10), notnull: false, default: ''}
-    Title:       { type: string(255), notnull: false}
-    ShowCaption: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
-    MimeType:    { type: string(50), notnull: false }
-    Size:        { type: int(11), notnull: true, default: 0}
-    Height:      { type: int(11), notnull: true, default: 0}
-    Width:       { type: int(11), notnull: true, default: 0}
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
-  relations:
-    IdMimeType: { ForeignEntity: TiposMime, ForeignId: IDTipo }
-
 CpanPerfiles:
   columns:
     Perfil: { type: string(50), notnull: true }
@@ -126,6 +107,25 @@ CpanRelaciones:
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
+CpanDocs:
+  columns:
+    Entity:      { type: string(255), notnull: true}
+    IdEntity:    { type: integer(11), notnull: true}
+    Type:        { type: string(10), notnull: true, index: index, comment: 'Abstract,TiposDocs,IDTipo' }
+    IsThumbnail: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    PathName:    { type: string(255), notnull: true, default: ''}
+    Name:        { type: string(255), notnull: true, default: ''}
+    Extension:   { type: string(10), notnull: false, default: ''}
+    Title:       { type: string(255), notnull: false}
+    ShowCaption: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    MimeType:    { type: string(50), notnull: false }
+    Size:        { type: int(11), notnull: true, default: 0}
+    Height:      { type: int(11), notnull: true, default: 0}
+    Width:       { type: int(11), notnull: true, default: 0}
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IdMimeType: { ForeignEntity: TiposMime, ForeignId: IDTipo }
+    
 # ESQUELETO WEB TIENDAS ONLINES
 CpanEsqueletoWeb:
   comment: Esqueleto de zonas de la web
@@ -139,5 +139,13 @@ CpanEsqueletoWeb:
     IdSubfamilia: { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpFamilias,Id' }
     Filtro:       { type: string(255), notnull: false }
     NItems:       { type: integer(2), notnull: true, default: 0 }
+    ItemsPagina:  { type: integer(2), notnull: true, default: 0 }    
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
-  relations:  
+  relations:
+
+# PERFILES PARA LOS USUARIOS WEB
+WebPerfiles:
+  columns:
+    Perfil: { type: string(50), notnull: true }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:    

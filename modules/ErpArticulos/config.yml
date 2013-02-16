@@ -27,7 +27,7 @@ ErpArticulos:
   fieldGeneratorUrlFriendly: Descripcion
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Descripcion
-  controller: Articulos
+  controller: Producto
   action: Index
   template: index.html.twig
   parametros: ''

@@ -152,6 +152,38 @@ class ErpArticulos extends ErpArticulosEntity {
         return $arbol;
     }
 
+    /**
+     * Devuelve el PVP CON impuestos correspondiente a la unidad de medida indicada.
+     * Por defecto la Unidad de Venta.
+     *
+     * Devuelve el importe redondeado a $decimales cifras decimales (por defecto 2)
+     *
+     * @param string La Unidad de Medida.Por defecto la de venta
+     * @param integer El número de decimales
+     * @return decimal El PVP con impuestos.
+     */
+    public function getPrecioVentaConImpuestos($um = 'UMV', $decimales = 2) {
+
+        $um = strtoupper($um);
+
+        $pvp = $this->Pvp * $this->{"getC$um"}() * (1 + $this->getIDIva()->getValor() / 100);
+
+        return round($pvp, $decimales);
+    }
+
+    /**
+     * Devuelve el Pmc sin impuestos correspondiente a la unidad de medida indicada.
+     * Por defecto la Unidad de Compra.
+     *
+     * @param string La Unidad de Medida. Por defecto la de compra
+     * @return float El Precio Medio de Compra sin impuestos.
+     */
+    public function getPrecioCosto($um = 'UMC') {
+
+        $um = strtoupper($um);
+
+        return $this->Pmc * $this->{"getC$um"}();
+    }    
 }
 
 ?>

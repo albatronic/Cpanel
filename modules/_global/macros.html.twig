@@ -58,11 +58,13 @@
 </li>        
 {% endmacro %}
 
-{# MUESTRA EL DIALOGO DE ORDENAR #}
+{# MUESTRA EL DIALOGO DE ORDENAR SI EL PERFIL TIENE PERMISO #}
 {% macro ordenarPopup(controller,columna,key,columnaMostrar) %}
+{% if permisosModulo['MO'] %}
 <a href="javascript:;" onclick="popUpOrdenar('{{controller}}','{{columna}}','{{key}}','{{columnaMostrar|default('Titulo')}}');">
     <img src="{{appPath}}/images/boton-ordenar.png" alt="Ordenar" title="Ordenar"/>
 </a>
+{% endif %}
 {% endmacro%}
 
 {# ACTUALIZA VIA AJAX LA columna DE LA entidad E idEntidad PONIENDO EL VALOR valor #}

@@ -22,7 +22,7 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
      * @return boolean
      */
     public function save() {
-        
+
         $ok = parent::save();
         if ($ok) {
             $ordenes = new ErpOrdenesArticulos();
@@ -32,7 +32,7 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
         }
         return $ok;
     }
-    
+
     /**
      * Marca de borrado la zona y borra fisícamente los
      * ordenes de articulos involucrados en dicha zona
@@ -56,6 +56,15 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
         return $ok;
     }
 
+    public function validaLogico() {
+        parent::validaLogico();
+
+        if ($this->NItems < 0)
+            $this->NItems = 0;
+        if ($this->ItemsPagina < 0)
+            $this->ItemsPagina = 0;
+    }
+
     /**
      * Devuelve un array con los id's de reglas aplicables al artículo
      * 
@@ -65,7 +74,7 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
     public function getReglasArticulo($idArticulo) {
 
         $articulo = new ErpArticulos($idArticulo);
-        
+
         $array = array();
 
         $idEstado1 = $articulo->getIDEstado1()->getId();
@@ -79,7 +88,7 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
         $idFamilia = $articulo->getIDFamilia()->getId();
         $idSubfamilia = $articulo->getIDSubfamilia()->getId();
         unset($articulo);
-        
+
         $filtroEstado = "IdEstado='0'";
         if ($idEstado1 > 0)
             $filtroEstado .= " OR IdEstado='{$idEstado1}'";
@@ -126,7 +135,7 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
     public function aplicaReglasArticulo($idArticulo) {
 
         $articulo = new ErpArticulos($idArticulo);
-        
+
         $reglas = $this->getReglasArticulo($idArticulo);
 
         foreach ($reglas as $regla) {
@@ -158,8 +167,8 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
      */
     public function aplicaRegla($idRegla = '') {
 
-        $regla = ($idRegla == '') ? $this: new CpanEsqueletoWeb($idRegla);
-        
+        $regla = ($idRegla == '') ? $this : new CpanEsqueletoWeb($idRegla);
+
         $filtroEstado = ($regla->IdEstado > 0) ?
                 "(IdEstado1='{$regla->IdEstado}' OR IdEstado2='{$regla->IdEstado}' OR IdEstado3='{$regla->IdEstado}'  OR IdEstado4='{$regla->IdEstado}'  OR IdEstado5='{$regla->IdEstado}')" :
                 "(1)";
@@ -183,7 +192,7 @@ class CpanEsqueletoWeb extends CpanEsqueletoWebEntity {
         $articulo = new ErpArticulos();
         $rows = $articulo->cargaCondicion("Id,Descripcion", $filtro);
         unset($articulo);
-        
+
         foreach ($rows as $row) {
             $orden = new ErpOrdenesArticulos();
             $orden->setIdRegla($regla->Id);

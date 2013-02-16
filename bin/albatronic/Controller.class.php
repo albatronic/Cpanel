@@ -143,7 +143,7 @@ class Controller {
         // Poner la solapa activa del formulario
         $this->values['solapaActiva'] = ($this->request['solapaActiva'] == '') ? 'general' : $this->request['solapaActiva'];
         // Poner el acordeon activo de los campos comunes
-        $this->values['acordeonActivo'] = ($this->request['acordeonActivo'] == '') ?  '' :  $this->request['acordeonActivo'];        
+        $this->values['acordeonActivo'] = ($this->request['acordeonActivo'] == '') ? '' : $this->request['acordeonActivo'];
     }
 
     public function IndexAction() {
@@ -235,7 +235,8 @@ class Controller {
                                             unset($objetoUrl);
                                         }
                                     }
-                                } else $this->values['errores'] = $datos->getErrores ();
+                                } else
+                                    $this->values['errores'] = $datos->getErrores();
 
                                 //Recargo el objeto para refrescar las propiedas que
                                 //hayan podido ser objeto de algun calculo durante el proceso
@@ -284,9 +285,9 @@ class Controller {
      * viene en el request[3]
      *
      * @return array con el template y valores a renderizar
-     */    
+     */
     public function deAction() {
-        
+
         if ($this->values['permisos']['permisosModulo']['IN']) {
 
             switch ($this->request["METHOD"]) {
@@ -294,35 +295,34 @@ class Controller {
                     if ($this->request['3'] != '') {
                         $this->values['linkBy']['value'] = $this->request['3'];
                         $entidad = new $this->request['2'];
-                        $padre = $entidad->find("PrimaryKeyMD5",$this->request['4']);
+                        $padre = $entidad->find("PrimaryKeyMD5", $this->request['4']);
                         $idPadre = $padre->getId();
                         unset($padre);
                         unset($entidad);
-                    }                    
+                    }
                     $columnaAsociar = $this->request[3];
                     $datos = new $this->entity();
                     $datos->setDefaultValues((array) $this->varEnvMod['columns']);
                     $datos->{"set$columnaAsociar"}($idPadre);
                     $this->values['datos'] = $datos;
                     $this->values['errores'] = array();
-                    $template = $this->entity . '/form.html.twig'; 
+                    $template = $this->entity . '/form.html.twig';
                     break;
-
             }
         } else {
             $template = '_global/forbiden.html.twig';
         }
 
-        return array('template' => $template, 'values' => $this->values);        
+        return array('template' => $template, 'values' => $this->values);
     }
-    
+
     /**
      * Crea un registro nuevo hijo (belongsTo)
      *
      * @return array con el template y valores a renderizar
-     */    
+     */
     public function belongsToAction() {
-        
+
         if ($this->values['permisos']['permisosModulo']['IN']) {
 
             switch ($this->request["METHOD"]) {
@@ -333,7 +333,7 @@ class Controller {
                     if ($this->request['2'] != '') {
                         $this->values['linkBy']['value'] = $this->request['2'];
                         $entidad = new $this->entity;
-                        $padre = $entidad->find("PrimaryKeyMD5",$this->request['2']);
+                        $padre = $entidad->find("PrimaryKeyMD5", $this->request['2']);
                         $idPadre = $padre->getId();
                         unset($padre);
                         unset($entidad);
@@ -344,17 +344,16 @@ class Controller {
                     $datos->setBelongsTo($idPadre);
                     $this->values['datos'] = $datos;
                     $this->values['errores'] = array();
-                    $template = $this->entity . '/form.html.twig'; 
+                    $template = $this->entity . '/form.html.twig';
                     break;
-
             }
         } else {
             $template = '_global/forbiden.html.twig';
         }
 
-        return array('template' => $template, 'values' => $this->values);        
+        return array('template' => $template, 'values' => $this->values);
     }
-    
+
     /**
      * Crea un registro nuevo
      *
@@ -379,7 +378,7 @@ class Controller {
                     $datos->setDefaultValues((array) $this->varEnvMod['columns']);
                     $this->values['datos'] = $datos;
                     $this->values['errores'] = array();
-                    $template = $this->entity . '/form.html.twig'; 
+                    $template = $this->entity . '/form.html.twig';
                     break;
 
                 case 'POST': //CREAR NUEVO REGISTRO
@@ -462,13 +461,13 @@ class Controller {
      * @return array Array template, value
      */
     public function EnlazarAction($primaryKeyMD5 = '') {
-        
+
         // Obtener las entidades con las que se pueden enlazar la entidad actual
         $entidadActual = $this->entity . "Enlaces";
         $enlaces = new $entidadActual();
         $this->enlazarCon = $enlaces->fetchAll('Descripcion', 0);
         unset($enlaces);
-        
+
         switch ($this->request['METHOD']) {
             case 'GET':
                 if ($primaryKeyMD5 == '')

@@ -26,30 +26,18 @@ class GconSecciones extends GconSeccionesEntity {
         parent::validaLogico();
 
         if (count($this->_errores) == 0) {
-            // Poner las etiquetas web
-            if ($this->EtiquetaWeb1 == '')
-                $this->setEtiquetaWeb1($this->Titulo);
-            if ($this->EtiquetaWeb2 == '')
-                $this->setEtiquetaWeb2($this->Titulo);
-            if ($this->EtiquetaWeb3 == '')
-                $this->setEtiquetaWeb3($this->Titulo);
-            if ($this->EtiquetaWeb4 == '')
-                $this->setEtiquetaWeb4($this->Titulo);
-            if ($this->EtiquetaWeb5 == '')
-                $this->setEtiquetaWeb5($this->Titulo);
 
-            // Poner el orden de los menus
-            if ($this->OrdenMenu1 == 0)
-                $this->setOrdenMenu1($this->SortOrder);
-            if ($this->OrdenMenu2 == 0)
-                $this->setOrdenMenu2($this->SortOrder);
-            if ($this->OrdenMenu3 == 0)
-                $this->setOrdenMenu3($this->SortOrder);
-            if ($this->OrdenMenu4 == 0)
-                $this->setOrdenMenu4($this->SortOrder);
-            if ($this->OrdenMenu5 == 0)
-                $this->setOrdenMenu5($this->SortOrder);
-
+            for ($i = 1; $i <= 5; $i++) {
+                // Poner las etiquetas web
+                if ($this->{"EtiquetaWeb$i"} == '')
+                    $this->{"setEtiquetaWeb$i"}($this->Titulo);
+                // Poner las subetiquetas web                    
+                if ($this->{"SubetiquetaWeb$i"} == '')
+                    $this->{"setSubetiquetaWeb$i"}($this->Titulo);
+                // Poner el orden de los menus                    
+                if ($this->{"OrdenMenu$i"} == 0)
+                    $this->{"setOrdenMenu$i"}($this->SortOrder);
+            }
         }
     }
 
@@ -85,7 +73,7 @@ class GconSecciones extends GconSeccionesEntity {
         if ($entidadRelacionada) {
             foreach ($contenidos as $key => $contenido) {
                 $relacion = new CpanRelaciones();
-                $contenidos[$key]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada,$idEntidadRelacionada,'GconContenidos', $contenido['Id']);
+                $contenidos[$key]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada, 'GconContenidos', $contenido['Id']);
             }
             unset($relacion);
         }
@@ -116,7 +104,7 @@ class GconSecciones extends GconSeccionesEntity {
      * @param integer $idEntidadRelacionada 
      * @return array Array de secciones
      */
-    public function getArbolHijos($conContenidos = FALSE, $entidadRelacionada = '',$idEntidadRelacionada = '') {
+    public function getArbolHijos($conContenidos = FALSE, $entidadRelacionada = '', $idEntidadRelacionada = '') {
 
         $arbol = array();
 
@@ -127,7 +115,7 @@ class GconSecciones extends GconSeccionesEntity {
         foreach ($rows as $row) {
             $objeto = new $this($row['Id']);
             $arrayContenidos = ($conContenidos) ? $this->getContenidos($row['Id'], $entidadRelacionada, $idEntidadRelacionada) : array();
-            $arrayHijos = $objeto->getHijos('',$conContenidos, $entidadRelacionada, $idEntidadRelacionada);
+            $arrayHijos = $objeto->getHijos('', $conContenidos, $entidadRelacionada, $idEntidadRelacionada);
             $arbol[$row['PrimaryKeyMD5']] = array(
                 'id' => $row['Id'],
                 'titulo' => $objeto->getTitulo(),
@@ -140,9 +128,9 @@ class GconSecciones extends GconSeccionesEntity {
                 'contenidos' => $arrayContenidos,
             );
             if ($entidadRelacionada) {
-                $relacion = new CpanRelaciones(); 
-                $arbol[$row['PrimaryKeyMD5']]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada,'GconSecciones', $row['Id']);
-            }            
+                $relacion = new CpanRelaciones();
+                $arbol[$row['PrimaryKeyMD5']]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada, 'GconSecciones', $row['Id']);
+            }
         }
 
         unset($objeto);
@@ -166,7 +154,7 @@ class GconSecciones extends GconSeccionesEntity {
         if ($idPadre == '')
             $idPadre = $this->getPrimaryKeyValue();
 
-        $this->getChildrens($idPadre,$conContenidos, $entidadRelacionada, $idEntidadRelacionada);
+        $this->getChildrens($idPadre, $conContenidos, $entidadRelacionada, $idEntidadRelacionada);
         return $this->_hijos[$idPadre];
     }
 
@@ -191,16 +179,16 @@ class GconSecciones extends GconSeccionesEntity {
                 'titulo' => $aux->getTitulo(),
                 'nivelJerarquico' => $hijo['NivelJerarquico'],
                 'publish' => $hijo['Publish'],
-                'belongsTo' => $hijo['BelongsTo'],                
+                'belongsTo' => $hijo['BelongsTo'],
                 'nHijos' => count($arrayHijos),
                 'hijos' => $arrayHijos,
                 'nContenidos' => count($arrayContenidos),
                 'contenidos' => $arrayContenidos,
             );
             if ($entidadRelacionada) {
-                $relacion = new CpanRelaciones(); 
-                $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada,'GconSecciones', $hijo['Id']);
-            }                
+                $relacion = new CpanRelaciones();
+                $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada, 'GconSecciones', $hijo['Id']);
+            }
             unset($hijo);
         }
 

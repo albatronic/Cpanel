@@ -48,10 +48,11 @@
     ShowRelatedContents:  {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
     ShowPublishedAt:      {type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo'}
 
-    # Los Ids de perfiles de usuario separados por coma que tienen acceso al contenido
+    # Los Ids de perfiles de usuario en formato YAML que tienen acceso al contenido
     # por defecto el super y el administrador
-    AccessProfileList:    {type: string(100), notnull: true, default: '1,2'}
-
+    AccessProfileList:    {type: string(100), notnull: true, default: "perfiles: {'1':'1','2':'2'}"}
+    AccessProfileListWeb: {type: string(100), notnull: true, default: "perfiles: {'1':'1'}"}
+    
     # Url destino
     UrlTarget:            {type: string(255), default: NULL}
     UrlParameters:        {type: string(255), default: NULL}

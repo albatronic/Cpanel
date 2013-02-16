@@ -79,12 +79,18 @@ class ErpOrdenesArticulos extends ErpOrdenesArticulosEntity {
      * Devuelve un array de objetos articulos que cumplen la
      * regla $idRegla, ordenados por SortOrder ASC
      * 
+     * El array tendrá $nItems elementos.
+     * 
      * @param int $idRegla El id de la regla
+     * @param int $nItems El número máximo de elementos a devolver. Opcional, por defecto todos.
      * @return \ErpArticulos array de objetos Articulos
      */
-    public function getArticulos($idRegla) {
+    public function getArticulos($idRegla, $nItems = 999999) {
 
         $array = array();
+
+        if ($nItems <= 0)
+            $nItems = 999999;
 
         $em = new EntityManager($this->getConectionName());
         if ($em->getDbLink()) {
@@ -92,7 +98,8 @@ class ErpOrdenesArticulos extends ErpOrdenesArticulosEntity {
                 SELECT a.Id as Id
                 FROM {$em->getDataBase()}.ErpOrdenesArticulos r, {$em->getDataBase()}.ErpArticulos a
                 WHERE r.IdRegla='{$idRegla}' AND r.IdArticulo=a.Id AND a.Publish='1' AND a.Vigente='1' AND a.Deleted='0'
-                ORDER BY r.SortOrder ASC";
+                ORDER BY r.SortOrder ASC
+                LIMIT {$nItems}";
             $em->query($query);
             $rows = $em->fetchResult();
             $em->desConecta();
@@ -101,7 +108,7 @@ class ErpOrdenesArticulos extends ErpOrdenesArticulosEntity {
 
         if (is_array($rows))
             foreach ($rows as $row)
-                $array[] = new ErpArticulos($row['Id']);
+                $array[$row['Id']] = new ErpArticulos($row['Id']);
 
         return $array;
     }

@@ -142,11 +142,11 @@ class CpanUsuariosController extends Controller {
                         $lastIdUsuario = $usuario->create();
                         if ($lastIdUsuario) {
                             // Se ha creado el usuario en Pcae, creo el vínculo con la empresa
-                            // poniéndole perfil 2 (adm)
+                            // poniéndole perfil 3 (acceso)
                             $empresaUsuario = new PcaeEmpresasUsuarios();
                             $empresaUsuario->setIdEmpresa($_SESSION['project']['IdEmpresa']);
                             $empresaUsuario->setIdUsuario($lastIdUsuario);
-                            $empresaUsuario->setIdPerfil(2);
+                            $empresaUsuario->setIdPerfil(3);
                             $empresaUsuario->create();
                             unset($empresaUsuario);
                             
