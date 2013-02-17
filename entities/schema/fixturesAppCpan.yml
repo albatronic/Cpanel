@@ -17,7 +17,8 @@ CpanRoles:
 
 CpanUsuarios:
   1: { IdUsuario: 1, IdPerfil: 1, IdRol: 1, IdTipoUsuario: 1 }
-
+  2: { IdUsuario: 2, IdPerfil: 2, IdRol: 1, IdTipoUsuario: 1 }
+  
 CpanFuncionalidades:
   AC: { Codigo: AC, Titulo: Acceder,        Descripcion: Permiso de Acceso, EsEstandar: 1}
   IN: { Codigo: IN, Titulo: Insertar,       Descripcion: Insertar nuevos valores, EsEstandar: 1}

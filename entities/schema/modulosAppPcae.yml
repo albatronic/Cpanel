@@ -15,9 +15,3 @@ CpanPermisos:
   Pcae3: { IdPerfil: 1, NombreModulo: PcaeGruposEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Pcae4: { IdPerfil: 1, NombreModulo: PcaeEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Pcae5: { IdPerfil: 1, NombreModulo: PcaeUsuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-
-  Pcae11: { IdPerfil: 2, NombreModulo: Pcae, Funcionalidades: 'AC,VW' }
-  Pcae12: { IdPerfil: 2, NombreModulo: PcaeApps, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Pcae13: { IdPerfil: 2, NombreModulo: PcaeGruposEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Pcae14: { IdPerfil: 2, NombreModulo: PcaeEmpresas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Pcae15: { IdPerfil: 2, NombreModulo: PcaeUsuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
