@@ -5,6 +5,8 @@ ServServicios:
     fromColumn: IdFamilia
     toEntity: ServFamilias
     toColumn: Id
+  translatable: true
+  searchable: true  
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'
@@ -27,7 +29,7 @@ ServServicios:
   fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Titulo
-  controller: ServServicios
+  controller: Servicios
   action: Index
   template: index.html.twig
   parametros: ''
@@ -103,6 +105,7 @@ ServServicios:
       list: YES
       visible: true
       updatable: true
+      searchable: true      
       default: null
       help: null
       permission: null
@@ -114,6 +117,7 @@ ServServicios:
       list: NO
       visible: true
       updatable: true
+      searchable: true      
       default: null
       help: null
       permission: null
@@ -125,6 +129,7 @@ ServServicios:
       list: NO
       visible: true
       updatable: true
+      searchable: true      
       default: null
       help: null
       permission: null
@@ -136,6 +141,7 @@ ServServicios:
       list: NO
       visible: true
       updatable: true
+      searchable: true      
       default: null
       help: null
       permission: null

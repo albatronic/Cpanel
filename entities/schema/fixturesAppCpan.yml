@@ -2,11 +2,11 @@
 #
 
 WebPerfiles:
-  1: { Id: 1, Perfil: Estándar }
+  1: { Id: 1, Perfil: 'Estándar' }
   
 CpanPerfiles:
-  1: { Id: 1, Perfil: SuperAdministrador }
-  2: { Id: 2, Perfil: Administrador }
+  1: { Id: 1, Perfil: 'SuperAdministrador' }
+  2: { Id: 2, Perfil: 'Administrador' }
 
 CpanUsuariosTipos:
   1: { Id: 1, Descripcion: Usuario Cpanel }
@@ -32,17 +32,18 @@ CpanFuncionalidades:
   PW: { Codigo: PW, Titulo: Permisos Web,   Descripcion: Poder asignar permisos de acceso a nivel registro para los perfiles de usuario de la web, EsEstandar: 1}
   
 CpanUrlAmigables:
-  1: { UrlFriendly: '/',            Controller: Index,      Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 1 }
-  2: { UrlFriendly: '/error404',    Controller: Error404,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 2 }
-  3: { UrlFriendly: '/oldbrowser',  Controller: OldBrowser, Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 3 }
-  4: { UrlFriendly: '/return',      Controller: Index,      Action: Return, Template: Index, Entity: GconSecciones, IdEntity: 4 }  
-  5: { UrlFriendly: '/logout',      Controller: Index,      Action: Logout, Template: Index, Entity: GconSecciones, IdEntity: 5 }  
-  6: { UrlFriendly: '/aviso-legal', Controller: AvisoLegal, Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 6 }  
-  7: { UrlFriendly: '/olvido',      Controller: Olvido,     Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 7 }  
-  8: { UrlFriendly: '/contacto',    Controller: Contacto,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 8 }
-  9: { UrlFriendly: '/politica-de-privacidad',    Controller: PoliticaPrivacidad,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 9 }      
-  10: { UrlFriendly: '/noticias',   Controller: Noticias,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 10 }      
-  11: { UrlFriendly: '/eventos',    Controller: Eventos,    Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 11 }      
+  1: { UrlFriendly: '/',            Controller: Index,      Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 1, Publish: 1 }
+  2: { UrlFriendly: '/error404',    Controller: Error404,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 2, Publish: 1 }
+  3: { UrlFriendly: '/oldbrowser',  Controller: OldBrowser, Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 3, Publish: 1 }
+  4: { UrlFriendly: '/return',      Controller: Index,      Action: Return, Template: Index, Entity: GconSecciones, IdEntity: 4, Publish: 1, Privacy: 2 }  
+  5: { UrlFriendly: '/logout',      Controller: Index,      Action: Logout, Template: Index, Entity: GconSecciones, IdEntity: 5, Publish: 1, Privacy: 2 }  
+  6: { UrlFriendly: '/aviso-legal', Controller: AvisoLegal, Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 6, Publish: 1 }  
+  7: { UrlFriendly: '/olvido',      Controller: Olvido,     Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 7, Publish: 1 }  
+  8: { UrlFriendly: '/contacto',    Controller: Contacto,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 8, Publish: 1 }
+  9: { UrlFriendly: '/politica-de-privacidad',    Controller: PoliticaPrivacidad,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 9, Publish: 1 }      
+  10: { UrlFriendly: '/noticias',   Controller: Noticias,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 10, Publish: 1 }      
+  11: { UrlFriendly: '/eventos',    Controller: Eventos,    Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 11, Publish: 1 }      
+  12: { UrlFriendly: '/acs',Controller: Proyectos, Action: Index, Template: Index, Entity: PcaeEmpresas, IdEntity: 1, Publish: 1}
   
 GconSecciones:
   1: { Id: 1, Titulo: Inicio, Publish: 1, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: '', LockSlug: 1, UrlFriendly: '/' }

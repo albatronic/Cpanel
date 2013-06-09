@@ -128,7 +128,7 @@ class NetworkingEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'Networking';
+    protected $_tableName = 'Networking*';
 
     /**
      * Nombre de la PrimaryKey

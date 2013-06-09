@@ -1,0 +1,30 @@
+# Module: EncargosCab
+# Document : modules\EncargosCab\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 20.02.2013 15:47:22
+#
+---
+listados:
+  -
+    title: EncargosCab
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      RazonSocial: { title: RazonSocial, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Nif: { title: Nif, length: '20', align: L, type: string, total: NO, formula: null, format: null }
+      Direccion: { title: Direccion, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Poblacion: { title: Poblacion, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      CodigoPostal: { title: CodigoPostal, length: '10', align: L, type: string, total: NO, formula: null, format: null }
+      EMail: { title: EMail, length: '100', align: L, type: string, total: NO, formula: null, format: null }
+      Telefono: { title: Telefono, length: '30', align: L, type: string, total: NO, formula: null, format: null }

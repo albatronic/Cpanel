@@ -533,7 +533,7 @@ class Form {
 
         $atributos = array();
 
-        // PRIMERO LEO LOS ATRIBUTOS DE LAS COLUMNAS QUE ESTÁN EN  CONFIG.YML
+        // PRIMERO LEO LOS ATRIBUTOS DE LAS COLUMNAS QUE ESTÁN EN CONFIG.YML
         $columnasConfig = $this->getNode('columns');
 
         // LUEGO LOS SUSTITUYO POR LOS ESPECIFICOS QUE ESTAN EN LAS VAR DE ENTORNO DE PROYECTO
@@ -566,10 +566,13 @@ class Form {
         // Si el usuario es super pongo la visibilidad a TRUE
         if ($_SESSION['USER']['user']['Id'] == '1')
             foreach ($atributos as $key => $value)
+                ++$atributos[$key]['visible'];
+                /**
                 if (!$atributos[$key]['visible']) {
                     $atributos[$key]['visible'] = '1';
                     $atributos[$key]['caption'] .= " (oculta)";
                 }
+                 */
 
         return $atributos;
     }

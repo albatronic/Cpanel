@@ -221,11 +221,11 @@ PcaeProyectosApps:
       list: NO
       visible: true
       updatable: true
-      default: null
+      default: ''
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Database:
       title: Database
       filter: YES

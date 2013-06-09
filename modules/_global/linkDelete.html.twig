@@ -1,0 +1,28 @@
+{# Template el comando Borrar registro #}
+{% if values.permisos.permisosModulo['DE'] %}
+<script>
+$(function() {    
+    $("#confirmacionBorrado").dialog({
+        autoOpen: false,
+        dialogClass: "",
+        resizable: false,
+        height: 150,
+        modal: true,
+        buttons: {
+            Aceptar: function() {
+                $('#accion_{{values.controller}}').val('Borrar');
+                submitForm('manto_{{ values.controller}}');                
+                $( this ).dialog( "close" );
+            },          
+            Cancelar: function() {
+                $( this ).dialog( "close" );
+            }
+        }
+    });
+});
+</script>
+<div id="confirmacionBorrado" title="Borrar registro"><p>¿Realmente desea borrar el registro?</p></div>
+<a href="javascript:;" title="Borrar" onclick="$('#confirmacionBorrado').dialog('open');">
+    <img src="{{app.path}}/images/barraherramientas/trash_cmd.png" alt="Borrar" title="Borrar" />
+</a>
+{% endif %}

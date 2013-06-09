@@ -21,6 +21,46 @@ class ErpFamilias extends ErpFamiliasEntity {
         return parent::fetchAll($column, $default);
     }
 
+    /**
+     * Guardo la familia y actualizo sus articulos
+     * haciendo que hereden ciertas características.
+     * 
+     * @return boolean
+     */
+    public function save() {
+
+        $ok = parent::save();
+
+        if ($ok) {
+            $this->conecta();
+
+            $articulo = new ErpArticulos();
+            $dbName = $articulo->getDataBaseName();
+            $tableName = $articulo->getTableName();
+            unset($articulo);
+
+            if (is_resource($this->_dbLink)) {
+                $query = "UPDATE {$dbName}.{$tableName} set
+                            Inventario='{$this->Inventario}',
+                            Trazabilidad='{$this->Trazabilidad}',
+                            Publish='{$this->Publish}',
+                            ActiveFrom = CASE
+                              WHEN ActiveFrom<'{$this->ActiveFrom}' THEN '{$this->ActiveFrom}' ELSE ActiveFrom
+                            END,
+                            ActiveTo = CASE
+                              WHEN ActiveTo>'{$this->ActiveTo}' THEN '{$this->ActiveTo}' ELSE ActiveTo
+                            END
+                            where (IDCategoria='{$this->Id}') 
+                                or (IDFamilia='{$this->Id}') 
+                                or (IDSubfamilia='{$this->Id}');";
+                $this->_em->query($query);
+                $this->_em->desConecta();
+            }
+            unset($this->_em);
+        }
+
+        return $ok;
+    }
 
     /**
      * Devuelve un array con los articulos correspondientes
@@ -96,23 +136,23 @@ class ErpFamilias extends ErpFamiliasEntity {
         foreach ($rows as $row) {
             $objeto = new $this($row['Id']);
             $arrayArticulos = ($conArticulos) ? $this->getArticulos($row['Id'], $entidadRelacionada, $idEntidadRelacionada) : array();
-            $arrayHijos = $objeto->getHijos('',$conArticulos, $entidadRelacionada, $idEntidadRelacionada);
+            $arrayHijos = $objeto->getHijos('', $conArticulos, $entidadRelacionada, $idEntidadRelacionada);
 
             $arbol[$row['PrimaryKeyMD5']] = array(
                 'id' => $row['Id'],
                 'titulo' => $objeto->getTitulo(),
                 'nivelJerarquico' => $row['NivelJerarquico'],
                 'publish' => $row['Publish'],
-                'belongsTo' => $row['BelongsTo'],                
+                'belongsTo' => $row['BelongsTo'],
                 'nHijos' => count($arrayHijos),
                 'hijos' => $arrayHijos,
                 'nArticulos' => count($arrayArticulos),
                 'articulos' => $arrayArticulos,
             );
             if ($entidadRelacionada) {
-                $relacion = new CpanRelaciones(); 
-                $arbol[$row['PrimaryKeyMD5']]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada,'ErpFamilias', $row['Id']);
-            }            
+                $relacion = new CpanRelaciones();
+                $arbol[$row['PrimaryKeyMD5']]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada, 'ErpFamilias', $row['Id']);
+            }
         }
 
         unset($objeto);
@@ -161,16 +201,16 @@ class ErpFamilias extends ErpFamiliasEntity {
                 'titulo' => $aux->getTitulo(),
                 'nivelJerarquico' => $hijo['NivelJerarquico'],
                 'publish' => $hijo['Publish'],
-                'belongsTo' => $hijo['BelongsTo'],                
+                'belongsTo' => $hijo['BelongsTo'],
                 'nHijos' => count($arrayHijos),
                 'hijos' => $arrayHijos,
                 'nArticulos' => count($arrayArticulos),
                 'articulos' => $arrayArticulos,
             );
             if ($entidadRelacionada) {
-                $relacion = new CpanRelaciones(); 
-                $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada,'ErpFamilias', $hijo['Id']);
-            }              
+                $relacion = new CpanRelaciones();
+                $this->_hijos[$idPadre][$hijo['PrimaryKeyMD5']]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada, 'ErpFamilias', $hijo['Id']);
+            }
             unset($hijo);
         }
 

@@ -5,6 +5,7 @@ ErpArticulos:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
+  translatable: true    
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'
@@ -92,7 +93,7 @@ ErpArticulos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
     Descripcion:
-      title: Descripción
+      title: Nombre Producto
       filter: YES
       list: YES
       visible: true
@@ -102,6 +103,50 @@ ErpArticulos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
+    Subtitulo:
+      title: Subtítulo
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: '' }    
+    Resumen:
+      title: Resumen
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '500', min: null, max: null, message: '' }    
+    ReclamoCorto:
+      title: Reclamo Corto
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: '' }
+    ReclamoLargo:
+      title: Reclamo Largo
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: YES, type: string, length: '500', min: null, max: null, message: '' }      
     IDCategoria:
       title: Categoría
       filter: NO

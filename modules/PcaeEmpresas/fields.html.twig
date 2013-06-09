@@ -31,9 +31,9 @@
         {{ macro.input(atributos.Fax,'field_title','text',values.controller ~ '[Fax]',values.controller ~ '_Fax',datos.Fax,'50','CampoTextoLargo','10') }}
         {{ macro.input(atributos.Web,'field_title','text',values.controller ~ '[Web]',values.controller ~ '_Web',datos.Web,'50','CampoTextoLargo','11') }}
         {{ macro.input(atributos.EMail,'field_title','text',values.controller ~ '[EMail]',values.controller ~ '_EMail',datos.EMail,'50','CampoTextoLargo','12') }}
-        {{ macro.select(atributos.IdBanco,'field_title',values.controller ~ '[IdBanco]',values.controller ~ '_IdBanco',none,datos.IdBanco.Id,datos.IdBanco.fetchAll('Nombre'),'chzn-select','13')}}
-        {{ macro.input(atributos.IdOficina,'field_title','text',values.controller ~ '[IdOficina]',values.controller ~ '_IdOficina',datos.IdOficina.Id,'255','CampoTextoLargo','14','','',['oficinasBancarias','Codigo',datos.IdOficina,values.controller ~ '_IdBanco']) }}
-        {{ macro.input(atributos.DigitoControl,'field_title','text',values.controller ~ '[DigitoControl]',values.controller ~ '_DigitoControl',datos.DigitoControl,'2','CampoTextoCorto','15') }}
+        {{ macro.select(atributos.Banco,'field_title',values.controller ~ '[Banco]',values.controller ~ '_Banco',none,datos.Banco.Id,datos.Banco.fetchAll('Nombre'),'chzn-select','13')}}
+        {{ macro.input(atributos.Oficina,'field_title','text',values.controller ~ '[Oficina]',values.controller ~ '_Oficina',datos.Oficina.Id,'255','CampoTextoLargo','14','','',['oficinasBancarias','Codigo',datos.Oficina,values.controller ~ '_Banco']) }}
+        {{ macro.input(atributos.Digito,'field_title','text',values.controller ~ '[Digito]',values.controller ~ '_Digito',datos.Digito,'2','CampoTextoCorto','15') }}
         {{ macro.input(atributos.Cuenta,'field_title','text',values.controller ~ '[Cuenta]',values.controller ~ '_Cuenta',datos.Cuenta,'10','CampoTextoCorto','16') }}
         {{ macro.input(atributos.IBAN,'field_title','text',values.controller ~ '[IBAN]',values.controller ~ '_IBAN',datos.IBAN,'34','CampoTextoLargo','17') }}
         {{ macro.input(atributos.SufijoRemesas,'field_title','text',values.controller ~ '[SufijoRemesas]',values.controller ~ '_SufijoRemesas',datos.SufijoRemesas,'2','CampoTextoCorto','18') }}

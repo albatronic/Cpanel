@@ -1,0 +1,11 @@
+# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO AnmAnimales
+#
+# Module: AnmAnimales
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright ARTICO ESTUDIO, SL
+# date 18-03-2013 10:33:06
+#
+# ejemplo:
+#
+# nombreVariable: el texto del caption
+---

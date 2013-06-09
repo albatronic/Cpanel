@@ -7,7 +7,7 @@
   date 26.01.2013 19:57:09
 #}
 
-<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="width:100%; float:left;">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
             <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Propiedad{%endif%}</a>
@@ -24,14 +24,21 @@
         {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'30','CampoTextoLargo','1') }}
 
         {% if datos.Id %}
-        <div style="text-align: center;">
-            <iframe width="100%" height="330" scrolling="yes" style="margin-top:5px; border:0;"
-                src="{{app.path}}/ErpPropiedadesValores/listPopup/{{datos.Id}}">
-            </iframe>
+        <div style="width: 100%; float:left;">
+            <div style="width: 25%; float: left;">
+                <iframe width="100%" height="500" scrolling="yes" style="margin-top:5px; border:0; float:left;"
+                    src="{{app.path}}/ErpPropiedadesValores/listPopup/{{datos.Id}}">
+                </iframe>
+            </div>
+            <div style="width: 70%; float: left;">
+                <iframe width="100%" height="500" scrolling="yes" style="margin-top:5px; border:0; float:left;"
+                    src="{{app.path}}/ErpPropiedadesValores/listPopup/{{datos.Id}}">
+                </iframe>
+            </div>                
         </div>
         {% endif %}
     </div>
-
+        
     {% include '_global/fieldsComunes.html.twig' %}
 </div>
 

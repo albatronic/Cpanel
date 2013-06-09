@@ -8,7 +8,7 @@
  *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @date 1-feb-2013
- * @copyright (c) Artico Estudio, sl
+ * @copyright (c) Informática Albatronic, sl
  */
 class RelacionesController extends Controller {
 
@@ -54,8 +54,8 @@ class RelacionesController extends Controller {
         // Cargas las variables del modulo origen
         $this->cargaVariables($this->entidadOrigen);
         
-        // Hacer el array de las entidades que son elacionables
-        // con la entidad origen. Estas están definidas, separads por coma, en la variable
+        // Hacer el array de las entidades que son relacionables
+        // con la entidad origen. Estas están definidas, separadas por coma, en la variable
         // de entorno 'modulosRelacionables' del módulo origen
         $modulosRelacionables = array();
         $entidades = explode(",", trim($this->varEnvMod['modulosRelacionables']));

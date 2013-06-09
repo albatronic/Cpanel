@@ -44,7 +44,7 @@ class ErpArticulos extends ErpArticulosEntity {
         $ok = parent::save();
         if ($ok) {
             // Borro los eventuales ordenes que existieran para el artículo
-            $ordenes = new ErpOrdenesArticulos();
+            $ordenes = new OrdenesArticulos();
             $ordenes->borraOrdenesArticulo($this->Id);
             unset($ordenes);
             // Aplico las reglas de ordenes 
@@ -58,13 +58,21 @@ class ErpArticulos extends ErpArticulosEntity {
     }
 
     /**
-     * Marco de borrado el artículo y borro sus eventuales órdenes
+     * Marco de borrado el artículo y borro sus eventuales órdenes.
+     * 
+     * Cuando borramos un artículo cambiamos el código para poder reutilizarlo.
+     * De forma que si el código era 043, ahora se llama deleted043,
+     * y entonces podemos volver a dar de alta otro artículo con código 043. 
+     * 
      * @return boolean
      */
     public function delete() {
 
         $id = $this->Id;
 
+        $this->setCodigo("deleted_{$this->Id}_{$this->Codigo}");
+        $this->save();
+        
         $ok = parent::delete();
 
         if ($ok) {
@@ -136,6 +144,10 @@ class ErpArticulos extends ErpArticulosEntity {
                 $valida[$idEstado] = '1';
         }
 
+        // Si no está vigente, entonces tampoco se publica
+        if (!$this->Vigente)
+            $this->Publish = 0;
+
         unset($exi);
     }
 
@@ -183,7 +195,8 @@ class ErpArticulos extends ErpArticulosEntity {
         $um = strtoupper($um);
 
         return $this->Pmc * $this->{"getC$um"}();
-    }    
+    }
+
 }
 
 ?>

@@ -10,7 +10,7 @@ PcaeGruposEmpresas:
   relations:
 
 PcaeEmpresas:
-  comment: Los clientes de AE
+  comment: Los clientes de ALbatronic
   columns:
     IdGrupo:               { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db, PcaeGruposEmpresas, Id' }
     RazonSocial:           { type: string(100), notnull: true, index: index }
@@ -24,9 +24,9 @@ PcaeEmpresas:
     Fax:                   { type: string(50), notnull: false, default: NULL }
     Web:                   { type: string(50), notnull: false, default: NULL }
     EMail:                 { type: string(50), notnull: false, default: NULL }
-    IdBanco:               { type: bigint(11), notnull: false, default: 0, index: index, comment: 'db, CommBancos, Id' }
-    IdOficina:             { type: bigint(11), notnull: false, default: 0, index: index, comment: 'db, CommBancosOficinas, Id' }
-    DigitoControl:         { type: string(2), notnull: true, default: '00' }
+    Banco:                 { type: string(4), notnull: false, default: '0000' }
+    Oficina:               { type: string(4), notnull: false, default: '0000' }
+    Digito:                { type: string(2), notnull: true, default: '00' }
     Cuenta:                { type: string(10), notnull: true, default: '0000000000' }
     IBAN:                  { type: string(34), notnul: true, default: NULL }
     SufijoRemesas:         { type: string(2), notnull: false, default: '00' }
@@ -61,7 +61,7 @@ PcaeProyectos:
     IdEmpresa: { ForeignEntity: PcaeEmpresas, ForeignId: Id }
 
 PcaeApps:
-  comment: Aplicaciones del repositirio de AE
+  comment: Aplicaciones del repositirio de Albatronic
   columns:
     Aplicacion: { type: string(100), notnull: true }
     Url:        { type: string(255), notnull: true }

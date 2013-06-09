@@ -1,16 +1,67 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es-ES" lang="es-ES">
+{% import "_global/macros.html.twig" as macro %}
+
+<!DOCTYPE HTML>
+<html>
+
     <head>
-        {% include '_global/meta.twig'%}
-        {% include  values.archivoCss %}
-        {% include values.archivoJs %}
+    	{% include "_global/metaInformacion.html.twig" %}
+	{% include values.twigCss %}
+
+        <!-- Para que esté disponible el path de la app en todos los java scripts -->
+        <script type="text/javascript">var appPath = "{{appPath}}";</script>
+
+	{% include values.twigJs %}
     </head>
 
-    <body>
+    <body id="theme-default" class="full_block"/>
+
+        <div id="header" class="blue_lin">
+            <div class="header_left">
+                <img src="{{app.path}}/images/logo.png"  alt="Albatronic Cloud Solutions | Páginas Web">
+            </div>
+
+            {% block cabeceraDerecha %}
+            <div class="header_right">
+                {% include "_global/headerRight.html.twig" %}
+            </div>
+            {% endblock %}
+        </div>
+
+        
+        {% block izquierda %}
+        <div id="left_bar">
+
+            {% include "_global/menuIconosIzquierda.html.twig" %}
+            {% include "_global/menuInferiorIzquierda.html.twig" %}
+            {% include "_global/menuIzquierda.html.twig" %}
+
+        </div>
+        {% endblock %}
+
+        <div id="container">
+
+                {% block navegador %}
+                <div class="page_title">
+                    {% include '_global/menuNavegador.html.twig' %}
+                </div>
+                {% endblock %}
+
+                <div id="content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+
+        </div>
+
+        <div id="notificacion"></div>
+        
+        <div id="dialogoVarEnv" title="Propiedades del elemento"></div>
+        <div id="dialogOrdenar" title="Cambiar orden"></div>
         
         {# PARA HACER DEBUGER EN ENTORNO DE DESARROLLO #}        
         {% if values._debugMode %}
             {% include '_global/debuger.html.twig' %}
         {% endif %}
+
     </body>
 </html>

@@ -55,6 +55,8 @@ class Fecha {
     public function __construct($fecha = '') {
         $formatoCorrecto = 0;
 
+        $fecha = trim($fecha);
+        
         if ($fecha == '')
             $fecha = date('d-m-Y H:i:s');
 
@@ -191,6 +193,7 @@ class Fecha {
                     break;
             }
             $this->fecha = $this->anio . "-" . $this->mes . "-" . $this->dia;
+            $this->fecha = str_replace("--", "", $this->fecha);
         } else
             $this->fecha = false;
     }

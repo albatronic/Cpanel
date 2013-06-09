@@ -57,8 +57,8 @@ $(function(){
     $( "#dialogoVarEnv" ).dialog({
         autoOpen: false,
         modal: false,
-        width: 350,
-        height: 540,
+        width: 410,
+        height: 525,
         position: ['right','center'],
         closeOnEscape: true
     });
@@ -445,6 +445,20 @@ function actualizaColumna(entidad,idEntidad,columna,valor) {
 }
 
 /**
+ * Actualiza las variables de entorno de las columnas de las entidades
+ */
+function actualizaVarEntorno(entidadColumnaPropiedad,valor) {
+    var parametros = 'entidadColumnaPropiedad='+entidadColumnaPropiedad+'&valor='+valor;
+
+    $.ajax({
+        url: appPath + "/lib/actualizaVarEntorno.php",
+        type: 'GET',
+        async: true,
+        data: parametros
+    });    
+}
+
+/**
  * Asigna/Quita permiso de acceso a las apps del Cpanel
  */
 function actualizaPermiso(idUsuario,idEmpresa,idProyecto,idApp,permiso) {
@@ -470,19 +484,6 @@ function actualizaRelacion(entidadOrigen,idOrigen,entidadDestino,idDestino,onOff
         async: true,
         data: parametros
     });    
-}
-
-function actualizaContenidoRelacionado(idContenidoOrigen,idContenidoRelacionado,onOff) {
-
-    var parametros = 'idContenidoOrigen='+idContenidoOrigen+'&idContenidoRelacionado='+idContenidoRelacionado+'&onOff='+onOff;
-
-    $.ajax({
-        url: appPath + '/lib/contenidosRelacionados.php',
-        type: 'GET',
-        async: true,
-        data: parametros
-    });
-
 }
 
 function actualizaEtiquetasRelacionadas(idModulo,idEntidad,idEtiqueta,onOff) {

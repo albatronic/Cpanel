@@ -1,0 +1,11 @@
+# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO EncargosLineas
+#
+# Module: EncargosLineas
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright ARTICO ESTUDIO, SL
+# date 20-02-2013 15:47:58
+#
+# ejemplo:
+#
+# nombreVariable: el texto del caption
+---

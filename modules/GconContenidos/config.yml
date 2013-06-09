@@ -5,6 +5,8 @@ GconContenidos:
     fromColumn: IdSeccion
     toEntity: GconSecciones
     toColumn: Id
+  translatable: true
+  searchable: true
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'
@@ -86,7 +88,7 @@ GconContenidos:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
     IdSeccion:
-      title: Seccion
+      title: Sección
       filter: NO
       list: YES
       visible: true
@@ -106,6 +108,8 @@ GconContenidos:
       default: null
       help: null
       permission: null
+      translatable: true
+      searchable: true      
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Subtitulo:
@@ -114,9 +118,11 @@ GconContenidos:
       list: YES
       visible: true
       updatable: true
+      searchable: true      
       default: null
       help: null
       permission: null
+      translatable: true      
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     Resumen:
@@ -125,9 +131,11 @@ GconContenidos:
       list: NO
       visible: true
       updatable: true
+      searchable: true
       default: null
       help: null
       permission: null
+      translatable: true      
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '500', min: null, max: null, message: 'Valor Requerido' }
     Desarrollo:
@@ -139,6 +147,8 @@ GconContenidos:
       default: null
       help: null
       permission: null
+      translatable: true
+      searchable: true      
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: false, min: null, max: null, message: 'Valor Requerido' }
     MostrarTituloPortada:
@@ -202,7 +212,7 @@ GconContenidos:
       #aditional_filter: { order: 6, caption: MostrarResumenPortada, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     MostrarResumenContenido:
-      title: MostrarResumenContenido
+      title: Mostrar Resumen Contenido
       filter: NO
       list: NO
       visible: true
@@ -250,7 +260,7 @@ GconContenidos:
       #aditional_filter: { order: 10, caption: BlogPermitirComentarios, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     BlogOrden:
-      title: BlogOrden
+      title: Orden Blog
       filter: YES
       list: NO
       visible: true
@@ -285,7 +295,7 @@ GconContenidos:
       #aditional_filter: { order: 12, caption: NoticiaMostrarEnPortada, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     NoticiaOrden:
-      title: NoticiaOrden
+      title: Orden Noticia
       filter: YES
       list: NO
       visible: true
@@ -307,6 +317,18 @@ GconContenidos:
       link: { route: null, param: null, title: null, target: null, link: null }
       #aditional_filter: { order: 13, caption: EsEvento, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+    EsWiki:
+      title: 'Es Wiki'
+      filter: NO
+      list: YES
+      visible: true
+      updatable: true
+      default: '0'
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      #aditional_filter: { order: 13, caption: EsWiki, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     Observations:
       title: Observaciones
       filter: NO
@@ -316,6 +338,7 @@ GconContenidos:
       default: null
       help: null
       permission: null
+      translatable: true      
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: false, min: null, max: null, message: 'Valor Requerido' }
     PrimaryKeyMD5:
@@ -554,6 +577,7 @@ GconContenidos:
       default: null
       help: null
       permission: null
+      translatable: true
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     LockSlug:
@@ -577,6 +601,7 @@ GconContenidos:
       default: null
       help: null
       permission: null
+      translatable: true
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     UrlHeritable:
@@ -772,7 +797,7 @@ GconContenidos:
       list: NO
       visible: true
       updatable: true
-      default: '1,2'
+      default: "perfiles: 1: 1 2: 2"    
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
@@ -916,4 +941,4 @@ GconContenidos:
       list: NO
       visible: true
       updatable: true
-      default: "perfiles:\n  - 1\n"
+      default: "perfiles: 1: 1"

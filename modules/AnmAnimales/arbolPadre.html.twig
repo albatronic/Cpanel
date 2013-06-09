@@ -1,0 +1,8 @@
+{# empty Twig template #}
+
+{% if categoria.nAnimales > 0 %}
+    {% include 'AnmAnimales/' ~ subtemplate with {'categoria': categoria} %}
+{% else %}
+    <span>{{categoria.titulo}}</span>
+    <a href="{{app.path}}/{{values.controller}}/de/AnmCategorias/IdCategoria/{{key}}" alt="Añadir animal" title="Añadir animal"><img src="{{app.path}}/images/detalle.png"/></a>
+{% endif %}

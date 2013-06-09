@@ -19,8 +19,16 @@ class Textos {
     static function limpia($texto) {
 
         $tabla = array(
-            '-' => '',
             ' ' => '-',
+            '_' => '-',
+            '.' => '',
+            ',' => '',
+            ':' => '',
+            ';' => '',
+            '!' => '',
+            '¡' => '',
+            '(' => '',
+            ')' => '',
             'á' => 'a',
             'é' => 'e',
             'í' => 'i',
@@ -31,23 +39,49 @@ class Textos {
             'ì' => 'i',
             'ò' => 'o',
             'ù' => 'u',
+            'ä' => 'a',
+            'ë' => 'e',
+            'ï' => 'i',
+            'ö' => 'o',
+            'ü' => 'u',
+            'â' => 'a',
+            'ê' => 'e',
+            'î' => 'i',
+            'ô' => 'o',
+            'û' => 'u',            
             'ñ' => 'n',
-            'Ñ' => 'N',
+            'Ñ' => 'n',
+            'ç' => 'c',
+            'Ç' => 'c',
+            'Á' => 'a',
+            'É' => 'e',
+            'Í' => 'i',
+            'Ó' => 'o',
+            'Ú' => 'u',
+            '?' => '',
+            '¿' => '',
+            '!' => '',
+            '¡' => '',
+            '$' => '',
+            '%' => '',
+            '#' => '',
+            '"' => '',
+            '|' => '',            
         );
-
 
         // Pasar a minúsculas
         $texto = strtolower($texto);
 
-        // Sustituir caracteres po su correspondencias según $tabla
+        // Sustituir caracteres por su correspondencias según $tabla
         foreach ($tabla as $key => $value)
             $texto = str_replace($key, $value, $texto);
 
-        // Eliminamos y Reemplazamos demás caracteres especiales
-        $find = array('/[^a-z0-9-<>]/', '/[-]+/', '/<[^>]*>/');
-        $repl = array('', '-', '');
-        $texto = preg_replace($find, $repl, $texto);
-
+        // Eliminamos todo lo que no sean letras, número o guión
+        //$texto = preg_replace("/[^A-Za-z0-9-]+/","", $texto);
+        
+        // Quitar eventuales dobles guiones
+        $texto = str_replace("--", "-", $texto);
+        
         // Quito el eventual primer guión
         if ($texto[0] == "-") $texto = substr($texto, 1);
 

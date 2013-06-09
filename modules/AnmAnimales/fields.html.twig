@@ -1,0 +1,66 @@
+{#
+  Module: AnmAnimales
+  Document : modules\AnmAnimales\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 18.03.2013 10:33:06
+#}
+
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'arbol'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#arbol" onclick='$( "#solapaActiva" ).val("arbol");'>Árbol de Animales</a>
+        </li>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Raza%}<b>{{datos.Raza|slice(0,40)}}</b> ...{%else%}Animal{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
+        </li>
+                
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}              
+    </ul>
+        
+    {# ARBOL DE CATEGORIAS DE ANIMALES Y ANIMALES, TRES NIVELES #}
+    <div id="arbol">        
+        {% include values.controller ~ '/arbol.html.twig' with {'arbol': values.datos.getArbolHijos, 'subtemplate':'arbolEditar.html.twig'} %}
+    </div>
+        
+    <div id="general">     
+        {{ macro.select(atributos.IdCategoria,'field_title',values.controller ~ '[IdCategoria]',values.controller ~ '_IdCategoria',none,datos.IdCategoria.Id,datos.IdCategoria.fetchAll('Titulo',0),'chzn-select','1')}}
+        {{ macro.input(atributos.Raza,'field_title','text',values.controller ~ '[Raza]',values.controller ~ '_Raza',datos.Raza,'50','CampoTextoLargo','2') }}
+        {{ macro.input(atributos.NombreComun,'field_title','text',values.controller ~ '[NombreComun]',values.controller ~ '_NombreComun',datos.NombreComun,'50','CampoTextoLargo','3') }}
+        {{ macro.input(atributos.NombreCientifico,'field_title','text',values.controller ~ '[NombreCientifico]',values.controller ~ '_NombreCientifico',datos.NombreCientifico,'50','CampoTextoLargo','4') }}
+        {{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea','5')}}
+        {{ macro.input(atributos.Longevidad,'field_title','text',values.controller ~ '[Longevidad]',values.controller ~ '_Longevidad',datos.Longevidad,'50','CampoTextoLargo','6') }}
+        {{ macro.input(atributos.Peso1,'field_title','text',values.controller ~ '[Peso1]',values.controller ~ '_Peso1',datos.Peso1,'50','CampoTextoLargo','7') }}
+        {{ macro.input(atributos.Peso2,'field_title','text',values.controller ~ '[Peso2]',values.controller ~ '_Peso2',datos.Peso2,'50','CampoTextoLargo','8') }}
+        {{ macro.input(atributos.TemperaturaCorporal,'field_title','text',values.controller ~ '[TemperaturaCorporal]',values.controller ~ '_TemperaturaCorporal',datos.TemperaturaCorporal,'50','CampoTextoLargo','9') }}
+        {{ macro.input(atributos.FreqRespiratoria,'field_title','text',values.controller ~ '[FreqRespiratoria]',values.controller ~ '_FreqRespiratoria',datos.FreqRespiratoria,'50','CampoTextoLargo','10') }}
+        {{ macro.input(atributos.FreqCardiaca,'field_title','text',values.controller ~ '[FreqCardiaca]',values.controller ~ '_FreqCardiaca',datos.FreqCardiaca,'50','CampoTextoLargo','11') }}
+        {{ macro.input(atributos.Gestacion,'field_title','text',values.controller ~ '[Gestacion]',values.controller ~ '_Gestacion',datos.Gestacion,'50','CampoTextoLargo','12') }}
+        {{ macro.input(atributos.EdadDestete,'field_title','text',values.controller ~ '[EdadDestete]',values.controller ~ '_EdadDestete',datos.EdadDestete,'50','CampoTextoLargo','13') }}
+        {{ macro.input(atributos.MadurezSexual,'field_title','text',values.controller ~ '[MadurezSexual]',values.controller ~ '_MadurezSexual',datos.MadurezSexual,'50','CampoTextoLargo','14') }}
+        {{ macro.input(atributos.TamanoPuesta,'field_title','text',values.controller ~ '[TamanoPuesta]',values.controller ~ '_TamanoPuesta',datos.TamanoPuesta,'50','CampoTextoLargo','15') }}
+        {{ macro.input(atributos.PeriodoIncubacion,'field_title','text',values.controller ~ '[PeriodoIncubacion]',values.controller ~ '_PeriodoIncubacion',datos.PeriodoIncubacion,'50','CampoTextoLargo','16') }}
+        {{ macro.input(atributos.EdadSalidaNido,'field_title','text',values.controller ~ '[EdadSalidaNido]',values.controller ~ '_EdadSalidaNido',datos.EdadSalidaNido,'50','CampoTextoLargo','17') }}
+    </div>
+
+    {% include '_global/fieldsComunes.html.twig' %}            
+</div>
+
+<script>
+function cargaTab(idDiv,controller) {
+    
+    $( "#solapaActiva" ).val(idDiv);
+    
+    var url = "<iframe src='{{appPath}}/" + controller + "/list/{{datos.getPrimaryKeyValue}}' width='100%' height='520'><p>Tu navegador no soporta iframes</p></iframe>";
+
+    $('#'+idDiv).html(url);
+}
+</script>
+
+{{ macro.foco(values.controller ~ '_IdCategoria') }}

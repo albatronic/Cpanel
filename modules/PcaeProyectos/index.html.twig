@@ -25,7 +25,8 @@
             {% endif %}
 
             {% if action == 'edit' %}
-                {% include '_global/linkSaveDelete.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
+                {% include '_global/linkSave.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
+                {% include '_global/linkDelete.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
                 {% include '_global/linkNew.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
                 {% include '_global/linkList.html.twig' with {'controller': values.controller,'linkValue':values.linkBy.value} %}
             {% endif %}

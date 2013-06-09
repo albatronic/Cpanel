@@ -21,6 +21,32 @@ class GconContenidos extends GconContenidosEntity {
         return parent::fetchAll($column, $default);
     }
 
+    /**
+     * Marco de borrado el contenido y borro físicamente
+     * sus eventuales eventos
+     * 
+     * @return boolean
+     */
+    public function delete() {
+        
+        $id = $this->getId();
+        $ok = parent::delete();
+        
+        if ($ok) {
+            $eventos = new EvenEventos();
+            $em = new EntityManager($this->getConectionName());
+            if (is_resource($em->getDbLink())) {
+                $query = "delete from {$eventos->getDataBaseName()}.{$eventos->getTableName()} where Entidad='GconContenidos' and IdEntidad='{$id}'";
+                $em->query($query);
+                $em->desConecta();               
+            }
+            unset($eventos);
+            unset($em);          
+        }
+        
+        return $ok;
+    }
+    
     public function validaLogico() {
 
         parent::validaLogico();

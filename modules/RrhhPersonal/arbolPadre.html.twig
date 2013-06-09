@@ -1,0 +1,8 @@
+{# empty Twig template #}
+
+{% if dpto.nEmpleados > 0 %}
+    {% include 'RrhhPersonal/' ~ subtemplate with {'dpto': dpto} %}
+{% else %}
+    <span>{{dpto.titulo}}</span>
+    <a href="{{app.path}}/{{values.controller}}/de/RrhhDptos/IdDpto/{{key}}" alt="Añadir persona" title="Añadir persona"><img src="{{app.path}}/images/detalle.png"/></a>
+{% endif %}

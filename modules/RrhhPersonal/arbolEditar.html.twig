@@ -1,0 +1,30 @@
+{# Muestra las personas #}
+
+<span class="arbol conContenido" 
+      title="Ver/Ocultar personas de este dpto" 
+      onclick="switchDisplay('personasDe_{{dpto.id}}');">
+    {{dpto.titulo}} ({{ dpto.nEmpleados}})
+    <a href="{{app.path}}/{{values.controller}}/de/RrhhDptos/IdDpto/{{key}}" alt="Añadir persona" title="Añadir persona"><img src="{{app.path}}/images/detalle.png"/></a>            
+</span>
+
+<div id='personasDe_{{dpto.id}}' style="display: none;">
+    <ul>
+
+    {% for persona in dpto.empleados %}
+        <li>
+            {% if dpto.nEmpleados > 1%}
+                {{ macro.ordenarPopup(values.controller,'IdDpto',dpto.id,'Apellidos') }}
+            {% endif %}
+            {{ macro.actualizaColumna(values.controller,persona.Id,'Publish',persona.Publish,'Publicar/Despublicar')}}               
+          
+            {% if (persona.Id == values.datos.Id) %}
+                <img class="arbol" src="{{app.path}}/images/botoneditar.png"/>
+                <script>switchDisplay('personasDe_{{dpto.id}}');</script>
+            {% endif %}
+                
+            <a href="{{app.path}}/{{values.controller}}/edit/{{persona.PrimaryKeyMD5}}" title="Editar..." class="arbol">{{persona.Value}}</a>  
+        </li>
+    {% endfor%}
+       
+    </ul>
+</div>

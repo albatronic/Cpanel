@@ -1,0 +1,30 @@
+{#
+  Module: EncargosCab
+  Document : modules\EncargosCab\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 20.02.2013 15:47:22
+#}
+
+{{ macro.input(atributos.TiempoUnix,'field_title','text',values.controller ~ '[TiempoUnix]',values.controller ~ '_TiempoUnix',datos.TiempoUnix,'30','CampoTextoLargo','10') }}
+{{ macro.input(atributos.RazonSocial,'field_title','text',values.controller ~ '[RazonSocial]',values.controller ~ '_RazonSocial',datos.RazonSocial,'50','CampoTextoLargo','1') }}
+{{ macro.input(atributos.Nif,'field_title','text',values.controller ~ '[Nif]',values.controller ~ '_Nif',datos.Nif,'20','CampoTextoCorto','2') }}
+{{ macro.input(atributos.Direccion,'field_title','text',values.controller ~ '[Direccion]',values.controller ~ '_Direccion',datos.Direccion,'100','CampoTextoLargo','3') }}
+{{ macro.input(atributos.Poblacion,'field_title','text',values.controller ~ '[Poblacion]',values.controller ~ '_Poblacion',datos.Poblacion,'100','CampoTextoLargo','4') }}
+{{ macro.input(atributos.CodigoPostal,'field_title','text',values.controller ~ '[CodigoPostal]',values.controller ~ '_CodigoPostal',datos.CodigoPostal,'10','CampoTextoCorto','5') }}
+{{ macro.input(atributos.EMail,'field_title','text',values.controller ~ '[EMail]',values.controller ~ '_EMail',datos.EMail,'100','CampoTextoLargo','6') }}
+{{ macro.input(atributos.Telefono,'field_title','text',values.controller ~ '[Telefono]',values.controller ~ '_Telefono',datos.Telefono,'30','CampoTextoLargo','7') }}
+{{ macro.input(atributos.IpAddress,'field_title','text',values.controller ~ '[IpAddress]',values.controller ~ '_IpAddress',datos.IpAddress,'15','CampoTextoLargo','8') }}
+{{ macro.input(atributos.Session,'field_title','text',values.controller ~ '[Session]',values.controller ~ '_Session',datos.Session,'50','CampoTextoLargo','9') }}
+
+<iframe 
+    width="100%" height="150px" 
+    src="{{app.path}}/EncargosLineas/list/{{datos.Id}}">
+</iframe>
+
+{{ macro.textarea(atributos.Observations,'field_title',values.controller ~ '[Observations]',values.controller ~ '_Observations',datos.Observations,none,none,'textarea','8') }}
+
+{# include '_global/fieldsComunes.html.twig' #}
+
+{{ macro.foco(values.controller ~ '_RazonSocial') }}

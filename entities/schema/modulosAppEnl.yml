@@ -1,4 +1,9 @@
 # MODULOS DE LA APP Enl. ENLACES DE INTERÉS
+
+# Crear la zona de álbumes predeterminada
+EnlSecciones:
+  1 : { Titulo: 'Sección Predeterminada', IsDefault: true, IsSuper: true}
+  
 CpanAplicaciones:
   Enl  : { CodigoApp: Enl,   NombreApp: Enlaces de Interés }
 

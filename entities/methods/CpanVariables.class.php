@@ -29,7 +29,7 @@ class CpanVariables extends CpanVariablesEntity {
      * @param string $tipo El tipo de variable: Env, Web
      * @param string $nombre El nombre de la app o del modulo según $ambito
      */
-    public function __construct($ambito, $tipo, $nombre = '') {
+    public function __construct($ambito='', $tipo='', $nombre = '') {
 
         if ($this->valida($ambito, $tipo, $nombre)) {
 
@@ -173,7 +173,7 @@ class CpanVariables extends CpanVariablesEntity {
     }
 
     /**
-     * Almacena las variables en un archivo en base a
+     * Almacena las variables en base a
      * lo contenido en $this->_objeto
      *
      * Si son variables Web de Módulo, también pone la visibilidad
@@ -186,6 +186,8 @@ class CpanVariables extends CpanVariablesEntity {
         if (is_array($this->_objeto['datos']))
             $this->setYml(sfYaml::dump($this->_objeto['datos'], 3));
 
+        $this->Publish = '1';
+        
         if ($this->Id)
             $ok = parent::save();
         else {
@@ -255,7 +257,8 @@ class CpanVariables extends CpanVariablesEntity {
             }
 
             $variable .= "_{$tipo}";
-            $filtro = "IdProyectosApps='{$_SESSION['project']['Id']}' AND Variable='{$variable}'";
+            //$filtro = "IdProyectosApps='{$_SESSION['project']['Id']}' AND Variable='{$variable}'";
+            $filtro = "Variable='{$variable}'";
             $rows = $this->cargaCondicion('*', $filtro);
 
             if ($rows[0])

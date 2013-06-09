@@ -1,0 +1,39 @@
+# Module: AnmAnimales
+# Document : modules\AnmAnimales\listados.yml
+#
+# @author: Sergio Pérez <sergio.perez@albatronic.com>
+# @copyright: INFORMATICA ALBATRONIC SL
+# @date 18.03.2013 10:33:06
+#
+---
+listados:
+  -
+    title: AnmAnimales
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      IdCategoria: { title: IdCategoria, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+      Raza: { title: Raza, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      NombreComun: { title: NombreComun, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      NombreCientifico: { title: NombreCientifico, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Longevidad: { title: Longevidad, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Peso1: { title: Peso1, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Peso2: { title: Peso2, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      TemperaturaCorporal: { title: TemperaturaCorporal, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      FreqRespiratoria: { title: FreqRespiratoria, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      FreqCardiaca: { title: FreqCardiaca, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      Gestacion: { title: Gestacion, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      EdadDestete: { title: EdadDestete, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      MadurezSexual: { title: MadurezSexual, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      TamanoPuesta: { title: TamanoPuesta, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      PeriodoIncubacion: { title: PeriodoIncubacion, length: '50', align: L, type: string, total: NO, formula: null, format: null }
+      EdadSalidaNido: { title: EdadSalidaNido, length: '50', align: L, type: string, total: NO, formula: null, format: null }

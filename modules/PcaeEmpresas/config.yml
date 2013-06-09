@@ -48,10 +48,10 @@ PcaeEmpresas:
   order_by:
     -
       title: 'Razón Social a-z'
-      criteria: 'RazonSocial ASC'
+      criteria: 'IDGrupo, RazonSocial ASC'
     -
       title: 'Razón Social z-a'
-      criteria: 'RazonSocial DESC'
+      criteria: 'IdGrupo, RazonSocial DESC'
   search_default: Id
   referenced_entities:
     - PcaeGruposEmpresas
@@ -211,7 +211,7 @@ PcaeEmpresas:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
-    IdBanco:
+    Banco:
       title: Banco
       filter: NO
       list: NO
@@ -222,7 +222,7 @@ PcaeEmpresas:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
-    IdOficina:
+    Oficina:
       title: 'Oficina Bancaria'
       filter: NO
       list: NO
@@ -233,7 +233,7 @@ PcaeEmpresas:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
-    DigitoControl:
+    Digito:
       title: 'Dígito de Control'
       filter: YES
       list: NO

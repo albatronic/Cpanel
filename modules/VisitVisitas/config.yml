@@ -50,11 +50,11 @@ VisitVisitas:
   records_per_page: 20
   order_by:
     -
+      title: 'Fecha z-a'
+      criteria: 'TiempoUnix DESC'    
+    -
       title: 'Fecha a-z'
       criteria: 'TiempoUnix ASC'
-    -
-      title: 'Fecha z-a'
-      criteria: 'TiempoUnix DESC'
   search_default: Id
   referenced_entities:
     - ValoresSN

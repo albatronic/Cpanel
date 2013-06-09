@@ -68,7 +68,7 @@ function VerDatosLogisticos(seccion,SiNo){
         {{ macro.input(atributos.Vigente,'field_title','checkbox',values.controller ~ '[Vigente]',values.controller ~ '_Vigente',datos.Vigente.IDTipo,'255','CampoTextoLargo','0')}}
         {{ macro.input(atributos.Codigo,'field_title','text',values.controller ~ '[Codigo]',values.controller ~ '_Codigo',datos.Codigo,'25','CampoTextoCorto','1') }}
         {{ macro.input(atributos.Descripcion,'field_title','text',values.controller ~ '[Descripcion]',values.controller ~ '_Descripcion',datos.Descripcion,'255','CampoTextoLargo','2') }}
-        {{ macro.select(atributos.IDMarca,'field_title',values.controller ~ '[IDMarca]',values.controller ~ '_IDMarca',none,datos.IDMarca.Id,datos.IDMarca.fetchAll('Titulo',0),'chzn-select','3')}}
+        {{ macro.select(atributos.IDMarca,'field_title',values.controller ~ '[IDMarca]',values.controller ~ '_IDMarca',none,datos.IDMarca.Id,datos.IDMarca.fetchAll('Titulo'),'chzn-select','3')}}
         {{ macro.input(atributos.IDCategoria,'field_title','text',values.controller ~ '[IDCategoria]',values.controller ~ '_IDCategoria',datos.IDCategoria.Id,'255','CampoTextoLargo','4','','',['categorias','Titulo',datos.IDCategoria.Titulo]) }}            
         {{ macro.input(atributos.IDFamilia,'field_title','text',values.controller ~ '[IDFamilia]',values.controller ~ '_IDFamilia',datos.IDFamilia.Id,'255','CampoTextoLargo','5','','',['familias','Titulo',datos.IDFamilia.Titulo,values.controller ~ '_IDCategoria'])}}
         {{ macro.input(atributos.IDSubfamilia,'field_title','text',values.controller ~ '[IDSubfamilia]',values.controller ~ '_IDSubfamilia',datos.IDSubfamilia.Id,'255','CampoTextoLargo','6','','',['subfamilias','Titulo',datos.IDSubfamilia.Titulo,values.controller ~ '_IDFamilia'])}}
@@ -138,7 +138,11 @@ function VerDatosLogisticos(seccion,SiNo){
     {% endif %}    
         
     <div id="caracteristicas">
-        {{ macro.textarea(atributos.Caracteristicas,'field_title',values.controller ~ '[Caracteristicas]',values.controller ~ '_Caracteristicas',datos.Caracteristicas,none,none,'textarea','18')}}        
+        {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoCorto','1') }}
+        {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','2')}}        
+        {{ macro.textarea(atributos.ReclamoCorto,'field_title',values.controller ~ '[ReclamoCorto]',values.controller ~ '_ReclamoCorto',datos.ReclamoCorto,none,none,'textarea','3')}}          
+	{{ macro.textarea(atributos.ReclamoLargo,'field_title',values.controller ~ '[ReclamoLargo]',values.controller ~ '_ReclamoLargo',datos.ReclamoLargo,none,none,'textarea','4')}}          
+	{{ macro.textarea(atributos.Caracteristicas,'field_title',values.controller ~ '[Caracteristicas]',values.controller ~ '_Caracteristicas',datos.Caracteristicas,none,none,'textarea','5')}}        
     </div>
     {% endif%}
     {% include '_global/fieldsComunes.html.twig' %}

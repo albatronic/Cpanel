@@ -5,6 +5,7 @@ EtiqEtiquetas:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
+  translatable: true    
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'

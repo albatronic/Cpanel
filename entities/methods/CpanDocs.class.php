@@ -55,10 +55,20 @@ class CpanDocs extends CpanDocsEntity {
 
         $id = parent::create();
 
-        if ($id) {
+        if (($id) and ($this->Idioma == 0)) {
             $this->actualizaNombreAmigable();
-            if ($this->subeDocumento())
+            if ($this->subeDocumento()) {
                 $this->save();
+                foreach ($_SESSION['idiomas']['disponibles'] as $key => $value) {
+                    if ($key > 0) {
+                        $doc = new CpanDocs($this->Id);
+                        $doc->setId('');
+                        $doc->setPrimaryKeyMD5('');
+                        $doc->setIdioma($key);
+                        $doc->create();
+                    }
+                }
+            }
         }
 
         return $id;
@@ -81,7 +91,8 @@ class CpanDocs extends CpanDocsEntity {
                 $this->_errores = $this->_em->getError();
             else {
                 // Borrar el archivo asociado al registro
-                $this->borraArchivo();
+                if ($this->Idioma == 0)
+                    $this->borraArchivo();
             }
             $this->_em->desConecta();
         } else
@@ -109,7 +120,8 @@ class CpanDocs extends CpanDocsEntity {
                 $this->_errores = $this->_em->getError();
             else {
                 // Borrar el archivo asociado al registro
-                $this->borraArchivo();
+                if ($this->Idioma == 0)
+                    $this->borraArchivo();
             }
             $this->_em->desConecta();
         } else
@@ -152,7 +164,6 @@ class CpanDocs extends CpanDocsEntity {
      * Borra las entradas en la tabla de documentos y
      * los archivos físicos del disco duro
      *
-     *
      * @param string $entidad
      * @param integer $idEntidad
      * @param string $tipo El tipo de documento
@@ -177,21 +188,21 @@ class CpanDocs extends CpanDocsEntity {
     }
 
     /**
-     * Devuelve un array de objetos documentos que cumplen
+     * Devuelve un array de objetos documentos del idioma actual que cumplen
      * los criterios indicados en los parámetros recibidos por el método
      *
-     * @param string $entidad
-     * @param integer $idEntidad
+     * @param string $entidad EL nombre de la entidad
+     * @param integer $idEntidad El id de la entidad
      * @param string $tipo El tipo de documento
-     * @param string $criterio Expresión lógica a incluir en el criterio de borrado
-     * $param string $orderCriteria El criterio de ordenación
+     * @param string $criterio Expresión lógica a incluir en el criterio de filtro
+     * @param string $orderCriteria El criterio de ordenación
      * @return array El array con los objetos documentos
      */
     public function getDocs($entidad, $idEntidad, $tipo, $criterio = '1', $orderCriteria = 'SortOrder ASC') {
 
         $arrayDocs = array();
 
-        $filtro = "(Entity='{$entidad}') AND (IdEntity='{$idEntidad}') AND (Type LIKE '{$tipo}') AND ({$criterio})";
+        $filtro = "(Idioma='{$_SESSION['idiomas']['actual']}') AND (Entity='{$entidad}') AND (IdEntity='{$idEntidad}') AND (Type LIKE '{$tipo}') AND ({$criterio})";
         $rows = $this->cargaCondicion('Id', $filtro, $orderCriteria);
 
         foreach ($rows as $row)
@@ -202,7 +213,7 @@ class CpanDocs extends CpanDocsEntity {
 
     /**
      * Devuelve el número de documentos asociados a la entidad
-     * indicada en los parámetros
+     * indicada en los parámetros y del idioma actual
      *
      * @param string $tipo El tipo de documento, se admite '%'
      * @param string $criterio Expresión lógica a incluir en el criterio de filtro
@@ -210,7 +221,8 @@ class CpanDocs extends CpanDocsEntity {
      */
     public function getNumberOfDocs($entidad, $idEntidad, $tipo, $criterio = '1') {
 
-        $rows = $this->cargaCondicion('Id', "(Entity='{$entidad}') AND (IdEntity='{$idEntidad}') AND (Type LIKE '{$tipo}') AND ({$criterio})");
+        $filtro = "(Idioma='{$_SESSION['idiomas']['actual']}') AND (Entity='{$entidad}') AND (IdEntity='{$idEntidad}') AND (Type LIKE '{$tipo}') AND ({$criterio})";
+        $rows = $this->cargaCondicion('Id', $filtro);
 
         return count($rows);
     }
@@ -228,6 +240,9 @@ class CpanDocs extends CpanDocsEntity {
 
         $archivo = pathinfo($this->_ArrayDoc['name']);
         $extension = strtolower($archivo['extension']);
+        $aux = pathinfo($this->Name);
+        $this->Name = str_replace($aux['extension'], "", $this->Name);
+
         $this->setName(Textos::limpia($this->Name) . ".{$extension}");
         $this->setPathName("docs/{$this->Entity}/{$this->Name}");
         $this->setExtension($extension);
@@ -280,6 +295,7 @@ class CpanDocs extends CpanDocsEntity {
         if ($this->_ArrayDoc['error'] == '0') {
 
             // Comprar que no excede el número máximo de documentos permitidos
+
             if ($rules['numMaxDocs'] > 0) {
                 $doc = new CpanDocs();
                 $nDocs = $doc->getNumberOfRecords("Type = '{$rules['type']}' and IsThumbNail='0'");
@@ -395,14 +411,15 @@ class CpanDocs extends CpanDocsEntity {
                 // Tratamiento de la imagen antes de subirla
                 list($ancho, $alto) = getimagesize($this->_ArrayDoc['tmp_name']);
 
-                if (($this->_ArrayDoc['maxWidth']) and ($ancho > $this->_ArrayDoc['maxWidth']))
+                if (($this->_ArrayDoc['maxWidth']>0) and ($ancho > $this->_ArrayDoc['maxWidth']))
                     $ancho = $this->_ArrayDoc['maxWidth'];
-                if (($this->_ArrayDoc['maxHeight']) and ($alto > $this->_ArrayDoc['maxHeight']))
+                if (($this->_ArrayDoc['maxHeight']>0) and ($alto > $this->_ArrayDoc['maxHeight']))
                     $alto = $this->_ArrayDoc['maxHeight'];
 
                 $img = new Gd();
                 $img->loadImage($this->_ArrayDoc['tmp_name']);
-                $img->crop($ancho, $alto);
+                //$img->crop($ancho, $alto,$this->_ArrayDoc['modoRecortar']);
+                $img->crop($this->_ArrayDoc['maxWidth'], $this->_ArrayDoc['maxHeight'],$this->_ArrayDoc['modoRecortar']);
                 $imagenRecortada = "tmp/" . md5($this->_ArrayDoc['tmp_name']);
                 $ok = $img->save($imagenRecortada);
                 unset($img);
@@ -426,8 +443,11 @@ class CpanDocs extends CpanDocsEntity {
                 $ok = $ftp->upLoad($carpetaDestino, $archivoSubir, $this->Name);
                 $this->_errores = $ftp->getErrores();
                 $ftp->close();
-            } else
+            } else {
                 $this->_errores[] = "Fallo al conectar vía FTP";
+                foreach ($_SESSION['project']['ftp'] as $item)
+                    $this->_errores[] = $item;
+            }
 
             unset($ftp);
             $ok = ( count($this->_errores) == 0);

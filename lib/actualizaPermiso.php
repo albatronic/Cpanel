@@ -57,7 +57,8 @@ if ($v['permiso']) {
         $permiso->setIdUsuario($v['idUsuario']);
         $permiso->setIdEmpresa($v['idEmpresa']);
         $permiso->setIdProyecto($v['idProyecto']);
-        $permiso->setIdApp($v['idApp']);        
+        $permiso->setIdApp($v['idApp']);
+        $permiso->setPublish(1);
         $permiso->create();
     }
 } else {

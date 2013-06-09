@@ -35,7 +35,7 @@ class ErpPropiedadesEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'ErpPropiedades';
+    protected $_tableName = 'ErpPropiedades*';
 
     /**
      * Nombre de la PrimaryKey

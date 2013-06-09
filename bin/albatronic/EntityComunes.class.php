@@ -104,6 +104,30 @@ class EntityComunes extends Entity {
     protected $DeletedAt = '0000-00-00 00:00:00';
 
     /**
+     * @orm Column(type="integer")
+     * @var entities\CpanUsuarios
+     */
+    protected $PrintedBy = '0';
+
+    /**
+     * @orm Column(type="datetime")
+     * @var datetime
+     */
+    protected $PrintedAt = '0000-00-00 00:00:00';
+
+    /**
+     * @orm Column(type="integer")
+     * @var entities\CpanUsuarios
+     */
+    protected $EmailedBy = '0';
+
+    /**
+     * @orm Column(type="datetime")
+     * @var datetime
+     */
+    protected $EmailedAt = '0000-00-00 00:00:00';
+
+    /**
      * @orm Column(type="tinyint")
      * @var entities\ValoresPrivacy
      */
@@ -263,13 +287,13 @@ class EntityComunes extends Entity {
      * @orm Column(type="string")
      * @var string(100)
      */
-    protected $AccessProfileList = "perfiles: {'1':'1','2':'2'}";
+    protected $AccessProfileList = "perfiles: 1: 1 2: 2";
 
     /**
      * @orm Column(type="string")
      * @var string(100)
      */
-    protected $AccessProfileListWeb = "perfiles: {'1':'1'}";
+    protected $AccessProfileListWeb = "perfiles: 1: 1";
 
     /**
      * @orm Column(type="string")
@@ -316,7 +340,7 @@ class EntityComunes extends Entity {
     protected $IdSliderAsociado = NULL;
     protected $IdSeccionEnlaces = NULL;
     protected $IdSeccionVideos = NULL;
-    protected $RevisitAfter = '';
+    protected $RevisitAfter = '1';
     protected $NivelJerarquico = 1;
 
     /**
@@ -335,7 +359,7 @@ class EntityComunes extends Entity {
     public function getObjetoUrlAmigable() {
 
         $url = new CpanUrlAmigables();
-        $rows = $url->cargaCondicion("Id", "Entity='{$this->getClassName()}' and IdEntity='{$this->getPrimaryKeyValue()}'");
+        $rows = $url->cargaCondicion("Id", "Idioma='{$_SESSION['idiomas']['actual']}' and Entity='{$this->getClassName()}' and IdEntity='{$this->getPrimaryKeyValue()}'");
         unset($url);
 
         return new CpanUrlAmigables($rows[0]['Id']);
@@ -528,6 +552,42 @@ class EntityComunes extends Entity {
         return date_format(date_create($this->DeletedAt), 'd-m-Y H:i:s');
     }
 
+    public function setPrintedBy($PrintedBy) {
+        $this->PrintedBy = $PrintedBy;
+    }
+
+    public function getPrintedBy() {
+        if (!($this->PrintedBy instanceof CpanUsuarios))
+            $this->PrintedBy = new CpanUsuarios($this->PrintedBy);
+        return $this->PrintedBy;
+    }
+
+    public function setPrintedAt($PrintedAt) {
+        $this->PrintedAt = $PrintedAt;
+    }
+
+    public function getPrintedAt() {
+        return date_format(date_create($this->PrintedAt), 'd-m-Y H:i:s');
+    }
+
+    public function setEmailedBy($EmailedBy) {
+        $this->EmailedBy = $EmailedBy;
+    }
+
+    public function getEmailedBy() {
+        if (!($this->EmailedBy instanceof CpanUsuarios))
+            $this->EmailedBy = new CpanUsuarios($this->EmailedBy);
+        return $this->EmailedBy;
+    }
+
+    public function setEmailedAt($EmailedAt) {
+        $this->EmailedAt = $EmailedAt;
+    }
+
+    public function getEmailedAt() {
+        return date_format(date_create($this->EmailedAt), 'd-m-Y H:i:s');
+    }
+
     public function setPrivacy($Privacy) {
         $this->Privacy = $Privacy;
     }
@@ -547,8 +607,12 @@ class EntityComunes extends Entity {
     }
 
     public function setPublishedAt($PublishedAt) {
-        $date = new Fecha($PublishedAt);
-        $this->PublishedAt = $date->getFechaTime();
+        if ($PublishedAt != '0000-00-00 00:00:00') {
+            $date = new Fecha($PublishedAt);
+            $this->PublishedAt = $date->getFechaTime();
+        } else {
+            $this->PublishedAt = date('Y-m-d H:i:s');
+        }
         unset($date);
     }
 
@@ -557,6 +621,7 @@ class EntityComunes extends Entity {
         $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
         unset($date);
         return $ddmmaaaahhmmss;
+        //return date_format(date_create($this->PublishedAt), 'd-m-Y H:i:s');        
     }
 
     public function setActiveFrom($ActiveFrom) {

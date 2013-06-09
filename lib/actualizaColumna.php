@@ -50,11 +50,41 @@ $entidad = $v['entidad'];
 $idEntidad = $v['idEntidad'];
 $columna = $v['columna'];
 
-$objeto = new $entidad($idEntidad);
 
+// Actualiza la columna en el idioma actual
+$objeto = new $entidad($idEntidad);
 $objeto->{"set$columna"}($v['valor']);
 $objeto->save();
+
+// Actualiza la tabla de búsquedas
+if ($_SESSION['VARIABLES']['EnvMod']['searchable']) {
+    $search = new CpanSearch();
+    $search->actualiza($objeto);
+    unset($search);
+}
 unset($objeto);
+
+// Actualiza la columna en el resto de idiomas
+if ($_SESSION['idiomas']['actual'] == 0) {
+
+    // Recorro los idiomas adicionales
+    foreach ($_SESSION['idiomas']['disponibles'] as $key => $value) {
+        if ($key > 0) {
+            $_SESSION['idiomas']['actual'] = $key;
+            $objeto = new $entidad($idEntidad);
+            $objeto->{"set$columna"}($v['valor']);
+            $objeto->save();
+            // Actualiza la tabla de búsquedas
+            if ($_SESSION['VARIABLES']['EnvMod']['searchable']) {
+                $search = new CpanSearch();
+                $search->actualiza($objeto);
+                unset($search);
+            }
+            unset($objeto);
+        }
+    }
+    $_SESSION['idiomas']['actual'] = 0;
+}
 
 $tag = "";
 

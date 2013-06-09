@@ -20,8 +20,6 @@ class IndexController extends Controller {
         // Cargar la configuracion del modulo (modules/moduloName/config.yml)
         $this->form = new Form($this->entity);
 
-        $this->cargaValores();
-
         // Cargar los permisos.
         // Si la entidad no está sujeta a control de permisos, se habilitan todos
         if ($this->form->getPermissionControl()) {
@@ -54,64 +52,16 @@ class IndexController extends Controller {
      */
     public function IndexAction() {
 
-        $template = $this->entity . "/index.html.twig";
+        switch ($this->request[1]) {
+            case '':
+                // No ha selecionado ninguna app, muestro todas las disponibles                
+                $this->setAplicaciones();
+                $template = $this->entity . "/index.html.twig";
+                break;
 
-        return array(
-            'template' => $template,
-            'values' => $this->values,
-        );
-    }
-
-    protected function cargaValores() {
-        if (!isset($_SESSION['USER']['menu'])) {
-            // Está logeado (viene del portal), pero es la primera vez que entra
-            unset($_SESSION['USER']['accesosPortal']);
-
-            // Carga la cadena de conexion a la base de datos del proyecto
-            $proyectoApp = new PcaeProyectosApps();
-            $proyectoApp = $proyectoApp->find('PrimaryKeyMD5', $this->request[1]);
-            $_SESSION['project']['Id'] = $proyectoApp->getId();
-            $_SESSION['project']['IdEmpresa'] = $proyectoApp->getIdProyecto()->getIdEmpresa()->getId();
-            $_SESSION['project']['empresa'] = $proyectoApp->getIdProyecto()->getIdEmpresa()->getRazonSocial();
-            $_SESSION['project']['title'] = $proyectoApp->getIdProyecto()->getProyecto();
-            $_SESSION['project']['url'] = $proyectoApp->getUrl();
-            $_SESSION['project']['conection'] = array(
-                'dbEngine' => $proyectoApp->getDbEngine(),
-                'host' => $proyectoApp->getHost(),
-                'user' => $proyectoApp->getUser(),
-                'password' => $proyectoApp->getPassword(),
-                'database' => $proyectoApp->getDatabase(),
-            );
-            // Carga la cadena de conexión al servidor ftp del proyecto
-            $_SESSION['project']['ftp'] = array(
-                'server' => $proyectoApp->getFtpServer(),
-                'port' => $proyectoApp->getFtpPort(),
-                'timeout' => $proyectoApp->getFtpTimeout(),
-                'folder' => $proyectoApp->getFtpFolder(),
-                'user' => $proyectoApp->getFtpUser(),
-                'password' => $proyectoApp->getFtpPassword(),
-            );
-
-            unset($proyectoApp);
-
-            // Establece el perfil del usuario para el proyecto y carga
-            // el menú en base a su perfil
-            $usuario = new CpanUsuarios();
-            $usuario = $usuario->find("IdUsuario", $_SESSION['USER']['user']['Id']);
-            if ($usuario->getStatus()) {
-                $_SESSION['USER']['user']['IdPerfil'] = $usuario->getIdPerfil()->getId();
-                $_SESSION['USER']['menu'] = $usuario->getArrayMenu();
-            } else
-                $template = $this->entity . "/noLoged.html.twig";
-            unset($usuario);
-
-            // Carga las variables de entorno y web del proyecto
-            $this->cargaVariables();
-        } else {
-
-            $aplicacion = $this->request[1];
-            if ($aplicacion != '') {
+            case 'app':
                 // Ha seleccionado una app, hay que mostrar sus modulos públicos (Publicar = 1)
+                $aplicacion = $this->request[2];
                 $permisos = new ControlAcceso($aplicacion);
                 $this->values['permisos'] = $permisos->getPermisos();
                 unset($permisos);
@@ -123,24 +73,91 @@ class IndexController extends Controller {
                 foreach ($_SESSION['USER']['menu'][$aplicacion]['modulos'] as $key => $value)
                     if ($value['publicar'])
                         $this->values['menu']['modulos'][$key] = $value;
-            } else {
-                // No ha seleccionado ninguna app, hay que mostrar todas las apps públicas (Publicar = 1)
 
-                $this->values['permisos'] = array(
-                    'VW' => true,
-                );
+                $template = $this->entity . "/index.html.twig";
+                break;
 
-                $this->values['titulo'] = 'Apps disponibles';
-                $this->values['menu']['tipo'] = 'apps';
-                foreach ($_SESSION['USER']['menu'] as $key => $value)
-                    if ($value['publicar']) {
-                        $this->values['menu']['apps'][$key] = array(
-                            'titulo' => $value['titulo'],
-                            'descripcion' => $value['descripcion'],
-                        );
-                    }
-            }
+            default:
+                if (!isset($_SESSION['USER']['menu'])) {
+
+                    // Está logeado (viene del portal), pero es la primera vez que entra
+                    unset($_SESSION['USER']['accesosPortal']);
+
+                    // Carga la cadena de conexion a la base de datos del proyecto
+                    $proyectoApp = new PcaeProyectosApps();
+                    $proyectoApp = $proyectoApp->find('PrimaryKeyMD5', $this->request[1]);
+                    $_SESSION['project']['Id'] = $proyectoApp->getId();
+                    $_SESSION['project']['IdEmpresa'] = $proyectoApp->getIdProyecto()->getIdEmpresa()->getId();
+                    $_SESSION['project']['empresa'] = $proyectoApp->getIdProyecto()->getIdEmpresa()->getRazonSocial();
+                    $_SESSION['project']['title'] = $proyectoApp->getIdProyecto()->getProyecto();
+                    $_SESSION['project']['url'] = $proyectoApp->getUrl();
+                    $_SESSION['project']['conection'] = array(
+                        'dbEngine' => $proyectoApp->getDbEngine(),
+                        'host' => $proyectoApp->getHost(),
+                        'user' => $proyectoApp->getUser(),
+                        'password' => $proyectoApp->getPassword(),
+                        'database' => $proyectoApp->getDatabase(),
+                    );
+                    // Carga la cadena de conexión al servidor ftp del proyecto
+                    $_SESSION['project']['ftp'] = array(
+                        'server' => $proyectoApp->getFtpServer(),
+                        'port' => $proyectoApp->getFtpPort(),
+                        'timeout' => $proyectoApp->getFtpTimeout(),
+                        'folder' => $proyectoApp->getFtpFolder(),
+                        'user' => $proyectoApp->getFtpUser(),
+                        'password' => $proyectoApp->getFtpPassword(),
+                    );
+                    unset($proyectoApp);
+
+                    // Establece el perfil del usuario para el proyecto y carga
+                    // el menú en base a su perfil
+                    $usuarios = new CpanUsuarios();
+                    $usuario = $usuarios->find("IdUsuario", $_SESSION['USER']['user']['Id']);
+                    unset($usuarios);
+                    if ($usuario->getStatus()) {
+                        $_SESSION['USER']['user']['IdPerfil'] = $usuario->getIdPerfil()->getId();
+                        $_SESSION['USER']['menu'] = $usuario->getArrayMenu();
+                        // Carga las variables de entorno y web del proyecto
+                        $this->cargaVariables();
+
+                        // Establece los idiomas en base a la varible web del proyecto
+                        $langs = trim($_SESSION['VARIABLES']['WebPro']['globales']['lang']);
+                        $_SESSION['idiomas']['disponibles'] = ($langs == '') ? array('0' => 'es') : explode(",", $langs);
+
+                        if (!isset($_SESSION['idiomas']['actual']))
+                            $_SESSION['idiomas']['actual'] = 0;
+
+                        $this->setAplicaciones();
+                        $template = $this->entity . "/index.html.twig";
+                    } else
+                        $template = $this->entity . "/noLoged.html.twig";
+                    unset($usuario);
+                }
+                $template = $this->entity . "/index.html.twig";
+                break;
         }
+
+        return array(
+            'template' => $template,
+            'values' => $this->values,
+        );
+    }
+
+    public function setAplicaciones() {
+
+        $this->values['permisos'] = array(
+            'VW' => true,
+        );
+
+        $this->values['titulo'] = 'Apps disponibles';
+        $this->values['menu']['tipo'] = 'apps';
+        foreach ($_SESSION['USER']['menu'] as $key => $value)
+            if ($value['publicar']) {
+                $this->values['menu']['apps'][$key] = array(
+                    'titulo' => $value['titulo'],
+                    'descripcion' => $value['descripcion'],
+                );
+            }
     }
 
     /**

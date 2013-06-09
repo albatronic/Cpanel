@@ -5,6 +5,7 @@ BannBanners:
     fromColumn: IdZona
     toEntity: BannZonas
     toColumn: Id
+  translatable: true    
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '1'

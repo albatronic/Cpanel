@@ -15,6 +15,12 @@ class PcaeEmpresasUsuarios extends PcaeEmpresasUsuariosEntity {
         return $this->getId();
     }
 
+    public function create() {
+        
+        $this->setPublish(1);
+        return parent::create();
+    }
+    
     /**
      * Comprueba la unicidad de IdEmpresa-IdUsuario
      */

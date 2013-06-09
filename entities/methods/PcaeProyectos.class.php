@@ -35,6 +35,10 @@ class PcaeProyectos extends PcaeProyectosEntity {
         return $apps;
     }
 
+    public function create(){
+        $this->Publish = 1;
+        return parent::create();
+    }      
 }
 
 ?>

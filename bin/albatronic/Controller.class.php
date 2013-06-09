@@ -45,12 +45,6 @@ class Controller {
     protected $app;
 
     /**
-     * Indica si es el módulo raiz de la app
-     * @var boolean
-     */
-    protected $isModuleRoot;
-
-    /**
      * Array de entidades enlazables a la actual
      * @var array
      */
@@ -86,6 +80,12 @@ class Controller {
      */
     protected $varEnvPro;
 
+    /**
+     * Array con las variables web del proyecto
+     * @var array
+     */
+    protected $varWebPro;
+
     public function __construct($request) {
 
         // Cargar lo que viene en el request, incluidos los eventuales
@@ -97,9 +97,6 @@ class Controller {
 
         // Pongo la app a la que pertenece
         $this->app = $this->form->getNode('app');
-
-        // Pongo si es o no el modulo raiz de la app
-        $this->isModuleRoot = $this->form->getNode('isModuleRoot');
 
         // Instanciar el objeto listado con los parametros del modulo
         // y los eventuales valores del filtro enviados en el request
@@ -235,6 +232,15 @@ class Controller {
                                             unset($objetoUrl);
                                         }
                                     }
+
+                                    // Si estoy en el idioma principal, tengo que
+                                    // repercutir los cambios a los demás idiomas
+                                    if ($_SESSION['idiomas']['actual'] == '0')
+                                        $this->ActualizaIdiomas($datos->getPrimaryKeyValue());
+
+                                    // Si ex buscable, actualizar la tabla de búsquedas
+                                    if ($this->varEnvMod['searchable'] == '1')
+                                        $this->ActualizaBusquedas($datos);
                                 } else
                                     $this->values['errores'] = $datos->getErrores();
 
@@ -258,6 +264,11 @@ class Controller {
                             $datos = new $this->entity($this->request[$this->entity][$this->form->getPrimaryKey()]);
 
                             if ($datos->delete()) {
+                                
+                                // Si ex buscable, actualizar la tabla de búsquedas
+                                if ($this->varEnvMod['searchable'] == '1')
+                                    $this->ActualizaBusquedas($datos);
+                                
                                 $datos = new $this->entity();
                                 $this->values['datos'] = $datos;
                                 $this->values['errores'] = array();
@@ -296,7 +307,7 @@ class Controller {
                         $this->values['linkBy']['value'] = $this->request['3'];
                         $entidad = new $this->request['2'];
                         $padre = $entidad->find("PrimaryKeyMD5", $this->request['4']);
-                        $idPadre = $padre->getId();
+                        $idPadre = $padre->getPrimaryKeyValue();
                         unset($padre);
                         unset($entidad);
                     }
@@ -334,7 +345,7 @@ class Controller {
                         $this->values['linkBy']['value'] = $this->request['2'];
                         $entidad = new $this->entity;
                         $padre = $entidad->find("PrimaryKeyMD5", $this->request['2']);
-                        $idPadre = $padre->getId();
+                        $idPadre = $padre->getPrimaryKeyValue();
                         unset($padre);
                         unset($entidad);
                     }
@@ -408,6 +419,11 @@ class Controller {
                             $this->values['errores'] = $datos->getErrores();
                             $this->values['alertas'] = $datos->getAlertas();
                         }
+
+                        // Si ex buscable, actualizar la tabla de búsquedas
+                        if (($lastId) and ($this->varEnvMod['searchable'] == '1'))
+                            $this->ActualizaBusquedas($datos);
+
                         $this->values['datos'] = $datos;
 
                         $template = $this->entity . '/form.html.twig';
@@ -667,7 +683,7 @@ class Controller {
     public function ImagenAction() {
 
         $rules = array(
-            'allowTypes' => split(",", $this->varEnvPro['allowTypes']),
+            'allowTypes' => explode(",", $this->varEnvPro['allowTypes']),
             'maxFileSize' => $this->varEnvMod['maxSizes']['image'], // Tamaño expresado en bytes
         );
 
@@ -699,7 +715,8 @@ class Controller {
 
                                 $_FILES['imagenMaster']['maxWidth'] = $value['width'];
                                 $_FILES['imagenMaster']['maxHeight'] = $value['height'];
-
+                                $_FILES['imagenMaster']['modoRecortar'] = $this->request['modoRecortar'];
+                                
                                 $doc = new CpanDocs();
                                 $doc->setEntity($this->entity);
                                 $doc->setIdEntity($idEntidad);
@@ -709,6 +726,7 @@ class Controller {
                                 $doc->setType('image' . $key);
                                 $doc->setArrayDoc($_FILES['imagenMaster']);
                                 $doc->setIsThumbnail(0);
+                                $doc->setPublish($value['valorDefectoPublicar']);
                                 if ($doc->valida($rules))
                                     $lastId = $doc->create();
                                 $this->values['errores'] = $doc->getErrores();
@@ -731,6 +749,7 @@ class Controller {
                                     $doc->setType('image' . $key);
                                     $doc->setArrayDoc($_FILES['imagenMaster']);
                                     $doc->setIsThumbnail(1);
+                                    $doc->setPublish($value['valorDefectoPublicar']);
                                     $doc->setBelongsTo($lastId);
                                     if ($doc->valida($rules))
                                         $ok = $doc->create();
@@ -762,7 +781,8 @@ class Controller {
                     $documento = $this->request['FILES'][$tipo];
                     $documento['maxWidth'] = $this->varEnvMod['images'][$idImagen]['width'];
                     $documento['maxHeight'] = $this->varEnvMod['images'][$idImagen]['height'];
-
+                    $documento['modoRecortar'] = $this->request['image'][$idImagen]['modoRecortar'];
+                    
                     $doc = new CpanDocs($id);
                     $doc->setTitle($title);
                     $doc->setName($slug);
@@ -791,7 +811,6 @@ class Controller {
 
                                 $ok = $thumbNail->actualiza();
                             }
-
 
                             unset($thumbNail);
                         }
@@ -853,6 +872,48 @@ class Controller {
     }
 
     /**
+     * Cambia de idioma
+     * @return type
+     */
+    public function langAction() {
+
+        // En la posición 2 del resquest viene el número de idioma seleccionado
+        $idiomaNuevo = $this->request[2];
+        $PrimaryKeyMD5 = $this->request[3];
+
+        $_SESSION['idiomas']['actual'] = $idiomaNuevo;
+
+        // Si en la posición 3 del request viene algo, es el primaryKeyMD5
+        // del registro a editar.
+        if ($PrimaryKeyMD5 != '') {
+
+            $this->request[2] = $PrimaryKeyMD5;
+
+            // Busco el objeto en el idioma nuevo
+            $datos = new $this->entity();
+            $datos = $datos->find('PrimaryKeyMD5', $PrimaryKeyMD5);
+            if ($datos->getStatus()) {
+                // Si existe, lo edito (en el idioma nuevo)
+                $this->request['METHOD'] = 'GET';
+                return $this->editAction();
+            } else {
+                // No existe en el idioma nuevo, hay que crearlo
+                $this->request['METHOD'] = 'POST';
+                // Busco el objeto en el idioma principal
+                $_SESSION['idiomas']['actual'] = 0;
+                $datos = new $this->entity();
+                $datos = $datos->find('PrimaryKeyMD5', $PrimaryKeyMD5);
+                // Vuelco al request las propiedades del objeto
+                $this->request[$this->entity] = $datos->iterator();
+                // Cambio el idioma y creo el objeto nuevo
+                $_SESSION['idiomas']['actual'] = $idiomaNuevo;
+                return $this->newAction();
+            }
+        } else
+            return $this->IndexAction();
+    }
+
+    /**
      * Crea o actualiza la url amigable y el metatagTitle
      *
      * @param array $datos
@@ -907,11 +968,11 @@ class Controller {
             // Si está bloqueado el prefijo, se calcula
             if ($bloqueoUrlPrefix) {
 
-                if ($this->isModuleRoot) {
+                if ($this->varEnvMod['isModuleRoot']) {
                     // Es el módulo padre de la app
                     if ($perteneceA) {
                         $objetoPadre = new $this->entity($perteneceA);
-                        if ($objetoPadre->getUrlHeritable() == '1') {
+                        if ($objetoPadre->getUrlHeritable()->getIDTipo() == '1') {
                             $urlPrefix = $objetoPadre->getUrlFriendly();
                         } else {
                             $urlPrefix = "/" . $this->varEnvApp['globales']['urlPrefix'];
@@ -923,13 +984,16 @@ class Controller {
                 } else {
                     // No es el módulo padre de la app. Miro a ver si
                     // está linkado con otro módulo
-                    $linkModule = $this->form->getNode('linkModule');
-                    if (($linkModule['fromColumn'] != '') and ($linkModule['toEntity'] != '') and ($linkModule['toColumn'] != '')) {
+                    $linkModule = $this->varWebMod['globales'];
+                    if (($linkModule['linkFromColumn'] != '') and ($linkModule['linkToEntity'] != '') and ($linkModule['linkToColumn'] != '')) {
                         // Está linkado con otro módulo. El prefijo será la url amigable
-                        // del padre si es heradable
+                        // del padre si es heredable
+                        $idToLink = $datos->getColumnValue($linkModule['linkFromColumn']);
+                        if (is_object($idToLink))
+                            $idToLink = $idToLink->getPrimaryKeyValue();
 
-                        $moduloPadre = new $linkModule['toEntity']($datos->getColumnValue($linkModule['fromColumn']));
-                        if ($moduloPadre->getUrlHeritable() == '1') {
+                        $moduloPadre = new $linkModule['linkToEntity']($idToLink);
+                        if ($moduloPadre->getUrlHeritable()->getIDTipo() == '1') {
                             $urlPrefix = $moduloPadre->getUrlFriendly();
                         } else {
                             $urlPrefix = "/" . $this->varEnvApp['globales']['urlPrefix'];
@@ -961,25 +1025,60 @@ class Controller {
             if ($urlPrefix != '')
                 $urlAmigable = $urlPrefix;
             $urlAmigable .= "/{$slug}";
+
             $urlAmigable = str_replace("//", "/", $urlAmigable);
-            $urlAmigable = substr($urlAmigable, 0, $this->varEnvPro['maxLengthUrlsFriendly']);
+            if ($this->varEnvPro['maxLengthUrlsFriendly'])
+                $urlAmigable = substr($urlAmigable, 0, $this->varEnvPro['maxLengthUrlsFriendly']);
+            if ($this->varEnvMod['parametros'] != '')
+                $urlAmigable .= "/" . $this->varEnvMod['parametros'];
 
             $urls = new CpanUrlAmigables();
-            $rows = $urls->cargaCondicion("Id", "Entity='{$this->entity}' and IdEntity='{$datos->getPrimaryKeyValue()}'");
+            $filtro = "Idioma='{$_SESSION['idiomas']['actual']}' and Entity='{$this->entity}' and IdEntity='{$datos->getPrimaryKeyValue()}'";
+            $rows = $urls->cargaCondicion("Id", $filtro);
             $idUrl = $rows[0]['Id'];
-
             if (!$idUrl) {
+                if ($_SESSION['idiomas']['actual'] == 0) {
+                    // Pongo el controlador, action, template y parametros con las variables de entorno, pero...
+                    $urls->setController($this->varEnvMod['controller']);
+                    $urls->setAction($this->varEnvMod['action']);
+                    $urls->setTemplate($this->varEnvMod['template']);
+                    $urls->setParameters($this->varEnvMod['parametros']);
+                } else {
+                    $filtro = "Idioma='0' and Entity='{$this->entity}' and IdEntity='{$datos->getPrimaryKeyValue()}'";
+                    $rows = $urls->cargaCondicion("Controller,Action,Template,Parameters", $filtro);
+                    $row = $rows[0];
+                    if ($row) {
+                        // Si la entidad tiene padre (belongsto), pongo el controller del padre
+                        $urls->setController($row['Controller']);
+                        $urls->setAction($row['Action']);
+                        $urls->setTemplate($row['Template']);
+                        $urls->setParameters($row['Parameters']);
+                    }
+                }
+
+                // Si el objeto es hijo (belongsTo), pongo el del objeto padre
+                if ($datos->getBelongsTo()->getPrimaryKeyValue() > 0) {
+                    $clasePadre = $datos->getClassName();
+                    $urlPadre = new CpanUrlAmigables();
+                    $filtro = "Idioma='{$_SESSION['idiomas']['actual']}' and Entity='{$clasePadre}' and IdEntity='{$datos->getBelongsTo()->getPrimaryKeyValue()}'";
+                    $rows = $urlPadre->cargaCondicion("Controller,Action,Template,Parameters", $filtro);
+                    $row = $rows[0];
+                    if ($row) {
+                        // Si la entidad tiene padre (belongsto), pongo el controller del padre
+                        $urls->setController($row['Controller']);
+                        $urls->setAction($row['Action']);
+                        $urls->setTemplate($row['Template']);
+                        $urls->setParameters($row['Parameters']);
+                    }
+                }
+                $urls->setIdioma($_SESSION['idiomas']['actual']);
                 $urls->setUrlFriendly($this->entity . $datos->getPrimaryKeyValue());
-                $urls->setController($this->varEnvMod['controller']);
-                $urls->setAction($this->varEnvMod['action']);
-                $urls->setTemplate($this->varEnvMod['template']);
-                $urls->setParameters($this->varEnvMod['parametros']);
                 $urls->setEntity($this->entity);
                 $urls->setIdEntity($datos->getPrimaryKeyValue());
                 $idUrl = $urls->create();
             }
 
-            $rows = $urls->cargaCondicion("Id, Entity, IdEntity", "(UrlFriendly='{$urlAmigable}')");
+            $rows = $urls->cargaCondicion("Id, Entity, IdEntity", "Idioma='{$_SESSION['idiomas']['actual']}' and UrlFriendly='{$urlAmigable}'");
             $row = $rows[0];
             if (($row['Id']) and ($row['Entity'] != "{$this->entity}" or $row['IdEntity'] != "{$datos->getPrimaryKeyValue()}")) {
                 // Ya existe esa url amigable, le pongo al final el id
@@ -988,10 +1087,6 @@ class Controller {
             }
             $urls = new CpanUrlAmigables($idUrl);
             $urls->setUrlFriendly($urlAmigable);
-            $urls->setController($this->varEnvMod['controller']);
-            $urls->setAction($this->varEnvMod['action']);
-            $urls->setTemplate($this->varEnvMod['template']);
-            $urls->setParameters($this->varEnvMod['parametros']);
             $urls->setEntity($this->entity);
             $urls->setIdEntity($datos->getPrimaryKeyValue());
             $urls->save();
@@ -1026,6 +1121,54 @@ class Controller {
         return $metatagTitle;
     }
 
+    /**
+     * Repercute los cambios realizados en el objeto del
+     * idioma principal en el resto de idiomas.
+     * 
+     * Solo actualiza los campos que no son traducibles y los
+     * traducibles que estén vacios
+     * 
+     * @param int $idEntidad
+     * @return void
+     */
+    private function ActualizaIdiomas($idEntidad) {
+
+        $objetoPrincipal = new $this->entity($idEntidad);
+        // Array de columnas y valores del objeto principal
+        // Utilizo este array para no utilizar los metodos getters
+        // que me pueden devolver objetos relacionados
+        $valoresObjetoPrincipal = $objetoPrincipal->iterator();
+        unset($objetoPrincipal);
+
+        $idiomasAdicionales = $_SESSION['idiomas']['disponibles'];
+
+        // Recorro los idiomas adicionales
+        foreach ($idiomasAdicionales as $key => $value) {
+            if ($key > 0) {
+                $_SESSION['idiomas']['actual'] = $key;
+
+                $objetoSecundario = new $this->entity($idEntidad);
+
+                foreach ($objetoSecundario->iterator() as $column => $value) {
+                    $esTraducible = $this->varEnvMod['columns'][$column]['translatable'];
+                    // Actualizo las columnas no traducibles y las traducibles que
+                    // estén vacías.
+                    if ((!$esTraducible) or ($value == '')) {
+                        $objetoSecundario->{"set$column"}($valoresObjetoPrincipal[$column]);
+                    }
+                }
+                $objetoSecundario->save();
+            }
+        }
+
+        unset($objetoSecundario);
+        $_SESSION['idiomas']['actual'] = 0;
+    }
+
+    /**
+     * Carga las variables web y de entorno del proyecto, app y módulo
+     * @return void
+     */
     protected function cargaVariables() {
 
         // Variables de entorno del proyecto
@@ -1039,10 +1182,22 @@ class Controller {
         if (count($this->values['varEnvPro']) == 0)
             $this->values['errores'][] = "No se han definido las variables de entorno del proyecto";
 
+        // Variables web del proyecto
+        if (!isset($_SESSION['VARIABLES']['WebPro'])) {
+            $variables = new CpanVariables('Pro', 'Web');
+            $this->varWebPro = $variables->getValores();
+            $_SESSION['VARIABLES']['WebPro'] = $this->varWebPro;
+        } else
+            $this->varWebPro = $_SESSION['VARIABLES']['WebPro'];
+        $this->values['varWebPro'] = $this->varWebPro;
+        if (count($this->values['varWebPro']) == 0)
+            $this->values['errores'][] = "No se han definido las variables web del proyecto";
+
         // Variables de entorno del modulo
         $variables = new CpanVariables('Mod', 'Env', $this->entity);
         $this->varEnvMod = $variables->getValores();
         $this->values['varEnvMod'] = $this->varEnvMod;
+        $_SESSION['VARIABLES']['EnvMod'] = $this->varEnvMod;
         if (count($this->values['varEnvMod']) == 0)
             $this->values['errores'][] = "No se han definido las variables de entorno del módulo '{$this->entity}'";
 
@@ -1080,6 +1235,17 @@ class Controller {
             $this->values['errores'][] = "No se han definido las variables web de la App '{$this->app}'";
 
         unset($variables);
+    }
+
+    /**
+     * Actualiza la tabla de búsquedas
+     * @param type $objeto
+     */
+    protected function ActualizaBusquedas($objeto) {
+
+        $search = new CpanSearch();
+        $search->actualiza($objeto);
+        unset($search);
     }
 
 }

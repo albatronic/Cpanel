@@ -24,6 +24,8 @@ class PcaePermisos extends PcaePermisosEntity {
      */
     public function create() {
 
+        $this->Publish = 1;
+        
         $id = parent::create();
 
         if ($id) {

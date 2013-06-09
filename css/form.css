@@ -302,7 +302,7 @@ div.uploader span.action {
 	text-align: center;
 	text-shadow: #fff 0px 1px 0px;
 	background-color: #fff;
-	font-size: 11px;
+	font-size: 10px;
 	font-weight: bold;
 }
 div.uploader span.filename {
@@ -411,9 +411,11 @@ div.radio input {
 /* Uploader */
 
 div.uploader {
+	cursor: default;
+	float: left;
+	margin-bottom: 10px;
 	position: relative;
 	overflow: hidden;
-	cursor: default;
 }
 div.uploader span.action {
 	float: left;
@@ -421,6 +423,7 @@ div.uploader span.action {
 	padding: 2px 0px;
 	overflow: hidden;
 	cursor: pointer;
+	font-size: 10px;
 }
 div.uploader span.filename {
 	padding: 0px 10px;

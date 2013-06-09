@@ -1,0 +1,42 @@
+## ESQUEMA DE LA APLICACIONES ANIMALES
+---
+AnmCategorias:
+  comment: Categorias de animales
+  columns:
+    Titulo:      { type: string(255), notnull: true, index: index }
+    Subtitulo:   { type: string(255), notnull: false, default: NULL }
+    Resumen:     { type: text, notnull: false }
+    EsExotico:   { type: tinyint, notnull: true, defatul: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+  relations:
+    
+AnmAnimales:
+  comment: Animales
+  columns:
+    IdCategoria:         { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,AnmCategorias,Id' }
+    Raza:                { type: string(50), notnull: true, index: index }
+    NombreComun:         { type: string(50), notnull: false }
+    NombreCientifico:    { type: string(50), notnull: false }
+    Longevidad:          { type: string(50), notnull: false }
+    Peso1:               { type: string(50), notnull: false }
+    Peso2:               { type: string(50), notnull: false }    
+    TemperaturaCorporal: { type: string(50), notnull: false }
+    FreqRespiratoria:    { type: string(50), notnull: false }
+    FreqCardiaca:        { type: string(50), notnull: false }
+    Gestacion:           { type: string(50), notnull: false }
+    EdadDestete:         { type: string(50), notnull: false }
+    MadurezSexual:       { type: string(50), notnull: false }
+    TamanoPuesta:        { type: string(50), notnull: false }
+    PeriodoIncubacion:   { type: string(50), notnull: false }
+    EdadSalidaNido:      { type: string(50), notnull: false }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+  relations:
+    
+AnmEnfermedades:
+  comment: Enfermedades por categorias de animales
+  columns:
+    Titulo:      { type: string(255), notnull: true, index: index }
+    Subtitulo:   { type: string(255), notnull: false, default: NULL }
+    Resumen:     { type: text, notnull: false }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+  relations:      

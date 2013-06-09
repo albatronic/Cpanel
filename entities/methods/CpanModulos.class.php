@@ -39,6 +39,7 @@ class CpanModulos extends CpanModulosEntity {
         
         $variables = new CpanVariables('Pro', 'Env');
         $modulosConEtiquetas = explode(",", trim($variables->getNode('modulosConEtiquetas')));
+
         unset($variables);
 
         $objetoModulo = new CpanModulos();

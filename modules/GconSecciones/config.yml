@@ -5,6 +5,8 @@ GconSecciones:
     fromColumn: null
     toEntity: null
     toColumn: null
+  translatable: true
+  searchable: true  
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'
@@ -104,6 +106,7 @@ GconSecciones:
       list: YES
       visible: true
       updatable: true
+      searchable: true
       default: null
       help: null
       permission: null
@@ -115,6 +118,7 @@ GconSecciones:
       list: NO
       visible: true
       updatable: true
+      searchable: true      
       default: null
       help: null
       permission: null
@@ -126,6 +130,7 @@ GconSecciones:
       list: NO
       visible: true
       updatable: true
+      searchable: true      
       default: null
       help: null
       permission: null
@@ -686,6 +691,7 @@ GconSecciones:
       default: null
       help: null
       permission: null
+      translatable: true
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     LockSlug:
@@ -708,6 +714,7 @@ GconSecciones:
       default: null
       help: null
       permission: null
+      translatable: true      
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
     UrlHeritable:

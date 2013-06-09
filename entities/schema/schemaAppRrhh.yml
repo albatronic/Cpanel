@@ -1,0 +1,52 @@
+# ------------------------
+# APP Recursos Humanos
+#
+# DATE: 12-03-2013
+# AUTHOR: SERGIO PEREZ
+# COMPANY: ARTICO ESTUDIO
+# ------------------------
+
+# Departamentos
+RrhhDptos:
+  comment: Departamentos
+  columns:
+    Titulo:    { type: string(255), notnull: true }
+    Subtitulo: { type: string(255), notnull: false, default: NULL }
+    Resumen:   { type: text, notnull: false }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+
+# Puestos de trabajo
+RrhhPuestos:
+  comment: Puestos de trabajo
+  columns:
+    Titulo:    { type: string(255), notnull: true }
+    Subtitulo: { type: string(255), notnull: false, default: NULL }
+    Resumen:   { type: string(500), notnull: false, default: NULL }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+
+# Personal
+RrhhPersonal:
+  comment: Personal
+  columns:
+    IdDpto:   { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,RrhhDptos,Id' }
+    IdPuesto: { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,RrhhPuestos,Id' }
+    Nombre: { type: string(50), notnull: true }
+    Apellidos: { type: string(50), notnull: true, index: index}
+    Funciones: { type: text, notnull: false }
+    DatosPersonales: { type: text, notnull: false }
+    DatosContacto: { type: text, notnull: false }
+    Sexo: { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,Sexos,IDTipo' }
+    MostrarEnPortada: { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
+    OrdenPortada: { type: int(4), notnull: true, default: 0, index: index }
+    Telefono1: { type: string(50), notnull: false }
+    Telefono2: { type: string(50), notnull: false }
+    FechaAntiguedad: { type: date, notnull: true, default: '0000-00-00' }
+    Web: { type: string(100), notnull: false }
+    Email: { type: string(100), notnull: false }
+    Facebook: { type: string(100), notnull: false }
+    Twitter: { type: string(100), notnull: false }
+    Linkedin: { type: string(100), notnull: false }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations: 

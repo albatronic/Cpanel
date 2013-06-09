@@ -35,7 +35,7 @@ class ErpUnidadesMedidaEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'ErpUnidadesMedida';
+    protected $_tableName = 'ErpUnidadesMedida*';
 
     /**
      * Nombre de la PrimaryKey

@@ -30,7 +30,7 @@ class EvenEventosController extends Controller {
         if ($this->values['permisos']['permisosModulo']['IN']) {
             switch ($this->request["METHOD"]) {
 
-                case 'GET': ECHO "ASDFASDF ASDFASDFASDF";
+                case 'GET':
                 case 'POST': //CREAR NUEVO REGISTRO
                     $datos = new $this->entity();
                     $datos->bind($this->request[$this->entity]);
@@ -105,10 +105,13 @@ class EvenEventosController extends Controller {
             $idEntidad = $this->request[3];
 
         $evento = new EvenEventos();
-        $evento->setEntidad($entidad);
-        $evento->setIdEntidad($idEntidad);
-        $evento->setFecha(date('d-m-Y'));
-        $lineas[] = $evento;
+
+        if ($this->values['permisos']['permisosModulo']['IN']) {
+            $evento->setEntidad($entidad);
+            $evento->setIdEntidad($idEntidad);
+            $evento->setFecha(date('d-m-Y'));
+            $lineas[] = $evento;
+        }
 
         $eventos = $evento->cargaCondicion("Id", "Entidad='{$entidad}' AND IdEntidad='{$idEntidad}'", "Fecha DESC,HoraInicio DESC");
         unset($evento);

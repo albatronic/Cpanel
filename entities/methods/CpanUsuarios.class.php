@@ -40,7 +40,8 @@ class CpanUsuarios extends CpanUsuariosEntity {
                 select m.CodigoApp ,p.NombreModulo, p.Funcionalidades, m.Publish
                 from CpanPermisos as p, CpanModulos as m
                 where  m.NombreModulo = p.NombreModulo and
-                p.IdPerfil = '" . $this->getIdPerfil()->getId() . "'
+                p.IdPerfil = '{$this->getIdPerfil()->getId()}' AND
+                LOCATE('AC',p.Funcionalidades)
                 order by m.CodigoApp ASC ,m.SortOrder ASC";
             $em->query($query);
             $rows = $em->fetchResult();

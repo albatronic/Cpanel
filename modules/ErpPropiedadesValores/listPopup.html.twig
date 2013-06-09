@@ -11,7 +11,7 @@
 
 <table class="Listado">
     <tr class='Titulos'>
-        <td class='Item'>VALOR</td>
+        <td class='Item'>VALORES POSIBLES</td>
         <td>&nbsp;</td>
     </tr>    
 
@@ -25,7 +25,7 @@
             <input name="{{values.controller}}[IdPropiedad]" value="{{valor.IdPropiedad}}" type="hidden" />
             <input name="{{values.controller}}[Id]" value="{{valor.Id}}" type="hidden" />
         <tr>
-            <td><input name="{{values.controller}}[Valor]" value="{{valor.Valor}}" type="text"/></td>
+            <td><input name="{{values.controller}}[Valor]" id="{{values.controller}}_Valor" value="{{valor.Valor}}" type="text"/></td>
 
             <td align="center">
                 {% if valor.Id > 0 %}
@@ -42,5 +42,5 @@
     {% endfor %}
     </tbody>
 </table>
-
+{{ macro.foco(values.controller ~ '_Valor') }}
 {% endblock %}

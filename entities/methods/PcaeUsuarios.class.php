@@ -15,6 +15,12 @@ class PcaeUsuarios extends PcaeUsuariosEntity {
         return $this->getId();
     }
 
+    public function create() {
+
+        $this->setPublish(1);
+        return parent::create();
+    }
+
     /**
      * Recalcula el passw y guarda
      * @return boolean
@@ -22,10 +28,10 @@ class PcaeUsuarios extends PcaeUsuariosEntity {
     public function save() {
         $config = sfYaml::load('config/config.yml');
         $this->Password = md5($this->Password . $config['config']['semillaMD5']);
-        
+
         return parent::save();
     }
-    
+
     /**
      * Devuelve el nombre concatenado con los apellidos
      * @return string

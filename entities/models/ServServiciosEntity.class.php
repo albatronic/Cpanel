@@ -92,7 +92,7 @@ class ServServiciosEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'ServServicios';
+    protected $_tableName = 'ServServicios*';
 
     /**
      * Nombre de la PrimaryKey

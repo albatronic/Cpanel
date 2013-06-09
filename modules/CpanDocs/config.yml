@@ -48,7 +48,7 @@ CpanDocs:
   order_by:
     -
       title: 'Entidad a-z'
-      criteria: 'Entity ASC'
+      criteria: 'Entity ASC,Idioma DESC'
     -
       title: 'Entidad z-a'
       criteria: 'Entity DESC'
@@ -82,6 +82,17 @@ CpanDocs:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
+    Idioma:
+      title: Idioma
+      filter: YES
+      list: YES
+      visible: true
+      updatable: true
+      default: null
+      help: null
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: integer, length: '1', min: 0, max: 9999, message: 'Valor Requerido' }      
     Entity:
       title: Entidad
       filter: YES

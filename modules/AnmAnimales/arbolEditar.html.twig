@@ -1,0 +1,30 @@
+{# Muestra los animales #}
+
+<span class="arbol conContenido" 
+      title="Ver/Ocultar animales de esta categoría" 
+      onclick="switchDisplay('animalesDe_{{categoria.id}}');">
+    {{categoria.titulo}} ({{ categoria.nAnimales}})
+    <a href="{{app.path}}/{{values.controller}}/de/AnmCategorias/IdCategoria/{{key}}" alt="Añadir animal" title="Añadir animal"><img src="{{app.path}}/images/detalle.png"/></a>            
+</span>
+
+<div id='animalesDe_{{categoria.id}}' style="display: none;">
+    <ul>
+
+    {% for animal in categoria.animales %}
+        <li>
+            {% if categoria.nAnimales > 1%}
+                {{ macro.ordenarPopup(values.controller,'IdCategoria',categoria.id,'Raza') }}
+            {% endif %}
+            {{ macro.actualizaColumna(values.controller,animal.Id,'Publish',animal.Publish,'Publicar/Despublicar')}}               
+          
+            {% if (animal.Id == values.datos.Id) %}
+                <img class="arbol" src="{{app.path}}/images/botoneditar.png"/>
+                <script>switchDisplay('animalesDe_{{categoria.id}}');</script>
+            {% endif %}
+                
+            <a href="{{app.path}}/{{values.controller}}/edit/{{animal.PrimaryKeyMD5}}" title="Editar..." class="arbol">{{animal.Value}}</a>  
+        </li>
+    {% endfor%}
+       
+    </ul>
+</div>

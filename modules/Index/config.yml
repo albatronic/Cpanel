@@ -5,7 +5,7 @@ Index:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig
   login_required: YES
-  permission_control: NO
+  permission_control: YES
   favourite_control: NO
   help_file: help.html.twig
   title: Menú Prinpical

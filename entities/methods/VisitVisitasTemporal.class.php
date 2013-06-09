@@ -15,6 +15,11 @@ class VisitVisitasTemporal extends VisitVisitasTemporalEntity {
         return $this->getId();
     }
 
+    public function create() {
+        $this->Publish = 1;
+        return parent::create();
+    }
+
     /**
      * Borra registros antiguos en la tabla temporal de visitas
      * 
@@ -73,8 +78,7 @@ class VisitVisitasTemporal extends VisitVisitasTemporalEntity {
 
             // Incrementar las visitas de la url amigable
             $url = new CpanUrlAmigables($idUrlAmigable);
-            $url->setNumberVisits($url->getNumberVisits() + 1);
-            $url->save();
+            $url->IncrementaVisitas();
             unset($url);
         }
     }

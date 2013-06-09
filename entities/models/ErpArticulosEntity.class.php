@@ -32,6 +32,30 @@ class ErpArticulosEntity extends EntityComunes {
     protected $Descripcion;
 
     /**
+     * @var string
+     * @assert NotBlank(groups="ErpArticulos")
+     */
+    protected $Subtitulo;
+
+    /**
+     * @var string
+     * @assert NotBlank(groups="ErpArticulos")
+     */
+    protected $Resumen;
+
+    /**
+     * @var string
+     * @assert NotBlank(groups="ErpArticulos")
+     */
+    protected $ReclamoCorto;
+
+    /**
+     * @var string
+     * @assert NotBlank(groups="ErpArticulos")
+     */
+    protected $ReclamoLargo;
+
+    /**
      * @var entities\ErpFamilias
      * @assert NotBlank(groups="ErpArticulos")
      */
@@ -53,7 +77,7 @@ class ErpArticulosEntity extends EntityComunes {
      * @var entities\ErpMarcas
      * @assert NotBlank(groups="ErpArticulos")
      */
-    protected $IDMarca = '0';
+    protected $IDFabricate = '0';
 
     /**
      * @var integer
@@ -308,7 +332,7 @@ class ErpArticulosEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'ErpArticulos';
+    protected $_tableName = 'ErpArticulos*';
 
     /**
      * Nombre de la PrimaryKey
@@ -322,11 +346,6 @@ class ErpArticulosEntity extends EntityComunes {
      */
     protected $_parentEntities = array(
         array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpExistencias', 'ParentColumn' => 'IDArticulo'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulosEstados', 'ParentColumn' => 'IDEstado1'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulosEstados', 'ParentColumn' => 'IDEstado2'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulosEstados', 'ParentColumn' => 'IDEstado3'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulosEstados', 'ParentColumn' => 'IDEstado4'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulosEstados', 'ParentColumn' => 'IDEstado5'),
     );
 
     /**
@@ -373,6 +392,38 @@ class ErpArticulosEntity extends EntityComunes {
 
     public function getDescripcion() {
         return $this->Descripcion;
+    }
+
+    public function setSubtitulo($Subtitulo) {
+        $this->Subtitulo = trim($Subtitulo);
+    }
+
+    public function getSubtitulo() {
+        return $this->Subtitulo;
+    }
+
+    public function setResumen($Resumen) {
+        $this->Resumen = trim($Resumen);
+    }
+
+    public function getResumen() {
+        return $this->Resumen;
+    }
+
+    public function setReclamoCorto($ReclamoCorto) {
+        $this->ReclamoCorto = trim($ReclamoCorto);
+    }
+
+    public function getReclamoCorto() {
+        return $this->ReclamoCorto;
+    }
+
+    public function setReclamoLargo($ReclamoLargo) {
+        $this->ReclamoLargo = trim($ReclamoLargo);
+    }
+
+    public function getReclamoLargo() {
+        return $this->ReclamoLargo;
     }
 
     public function setIDCategoria($IDCategoria) {

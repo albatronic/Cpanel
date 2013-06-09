@@ -18,14 +18,19 @@
 
     {# MUESTRO LAS APLICACIONES #}
     {% for key,value in values.menu.apps %}
-        <a href="{{app.path}}/index/{{key}}"><img src="{{app.path}}/images/iconos/{{key}}.jpg" alt="{{value.titulo}}" title="{{value.titulo}}" /></a>
+        <a href="{{app.path}}/index/app/{{key}}" class="iconosIndex">
+            <img src="{{app.path}}/images/iconos/{{key}}XL.png" alt="{{value.titulo}}" title="{{value.titulo}}" />
+            <span>{{value.titulo}}</span>
+        </a>
     {% endfor %}
 
 {% else %}
 
     {# MUESTRO LOS MODULOS DE LA APLICACION EN CURSO #}
     {% for key,value in values.menu.modulos %}
-        <a href="{{app.path}}/{{value.controller}}"><img src="{{app.path}}/images/iconos/{{key}}.jpg" alt="{{value.titulo}}" title="{{value.titulo}}" /></a>
+        <a href="{{app.path}}/{{value.controller}}" class="listadoApp">
+            {{value.titulo}}
+        </a>
     {% endfor %}
 
 {% endif %}

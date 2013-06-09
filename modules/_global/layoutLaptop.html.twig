@@ -15,6 +15,19 @@
 
     <body id="theme-default" class="full_block"/>
 
+        <div id="header" class="blue_lin">
+            <div class="header_left">
+                <img src="{{app.path}}/images/logo-albatronic-cpanel.png" style="height: 38px;" alt="Albatronic Cloud Solutions | Páginas Web">
+            </div>
+
+            {% block cabeceraDerecha %}
+            <div class="header_right">
+                {% include "_global/headerRight.html.twig" %}
+            </div>
+            {% endblock %}
+        </div>
+
+        
         {% block izquierda %}
         <div id="left_bar">
 
@@ -25,25 +38,7 @@
         </div>
         {% endblock %}
 
-        <div class="page_title_user">
-            {{ project.empresa}} - {{ project.title }} {% if user.IdPerfil.Id == '1' %}(Id:{{project.Id}}){% endif %}
-	</div>
-
         <div id="container">
-
-                <div id="header" class="blue_lin">
-                    <div class="header_left">
-                        <div class="logo">
-                            <img src="{{app.path}}/images/logo.png"  alt="">
-                        </div>
-                    </div>
-
-                    {% block cabeceraDerecha %}
-                    <div class="header_right">
-                    {% include "_global/headerRight.html.twig" %}
-                    </div>
-                    {% endblock %}
-                </div>
 
                 {% block navegador %}
                 <div class="page_title">

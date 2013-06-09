@@ -25,8 +25,9 @@
 
     {# VARIABLES WEB GLOBALES A TODOS LOS MODULOS #}
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {% if user.IdPerfil.Id == '1' %} {% set visibilidad = 1%} {% else %} {% set visibilidad = values.visibilidad.globales.linkFromColumn %} {% endif %}
         {{ macro.input(
-            {'caption': 'linkFromColumn','visible':'1','varEnv':'0'},
+            {'caption': 'linkFromColumn','visible':visibilidad,'varEnv':'0'},
             'field_title',
             'text',
             'datos[globales][linkFromColumn]',
@@ -36,8 +37,10 @@
             'CampoTextoCorto'
             )
         }}
+            
+        {% if user.IdPerfil.Id == '1' %} {% set visibilidad = 1%} {% else %} {% set visibilidad = values.visibilidad.globales.linkToEntity %} {% endif %}            
         {{ macro.input(
-            {'caption': 'linktoEntity','visible':'1','varEnv':'0'},
+            {'caption': 'linkToEntity','visible':visibilidad,'varEnv':'0'},
             'field_title',
             'text',
             'datos[globales][linkToEntity]',
@@ -47,8 +50,10 @@
             'CampoTextoCorto'
             )
         }} 
+            
+        {% if user.IdPerfil.Id == '1' %} {% set visibilidad = 1%} {% else %} {% set visibilidad = values.visibilidad.globales.linkToColumn %} {% endif %}            
         {{ macro.input(
-            {'caption': 'linkToColumn','visible':'1','varEnv':'0'},
+            {'caption': 'linkToColumn','visible':visibilidad,'varEnv':'0'},
             'field_title',
             'text',
             'datos[globales][linkToColumn]',
@@ -63,7 +68,7 @@
 
     {# VARIABLES WEB ESPECIFICAS AL MODULO EN CURSO #}
     {% if values.datos.especificas %}
-    <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="margin-bottom: 100px;">
         {% for nombre,atributos in values.datos.especificas %}
             {% if user.IdPerfil.Id == '1' %} 
                 {% set prefijo = '['~nombre~']' %}

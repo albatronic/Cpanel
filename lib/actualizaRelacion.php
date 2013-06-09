@@ -57,6 +57,7 @@ if ($v['onOff']) {
         $relacion->setIdEntidadOrigen($v['idOrigen']);
         $relacion->setEntidadDestino($v['entidadDestino']);
         $relacion->setIdEntidadDestino($v['idDestino']);
+        $relacion->setPublish(1);
         $relacion->create();
     }
 } else {

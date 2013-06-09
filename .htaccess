@@ -13,9 +13,8 @@
     RewriteRule .* - [L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
-
-    # EXCEPCIONES
-    #-----------------------------------
+    # EXCEPCION A LA CARPETA Pcae
+    RewriteCond %{REQUEST_URI} !/Pcae/
 
     RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>

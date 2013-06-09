@@ -1,10 +1,10 @@
 # MODULOS DE LA APP Cpan. GESTOR DEL PANEL DE CONTROL
   
 CpanAplicaciones:
-  Cpan  : { CodigoApp: Cpan, NombreApp: Gestor del Panel de Control }
+  Cpan  : { CodigoApp: Cpan, NombreApp: Gestor Panel Control }
 
 CpanModulos:
-  Cpan0: { CodigoApp: Cpan, NombreModulo: Cpan,                Nivel: 0, Publish: 1, Titulo: Gestor del Panel de Control, Funcionalidades: AC }
+  Cpan0: { CodigoApp: Cpan, NombreModulo: Cpan,                Nivel: 0, Publish: 1, Titulo: Gestor Panel Control, Funcionalidades: AC }
   Cpan1: { CodigoApp: Cpan, NombreModulo: CpanPerfiles,        Nivel: 1, Publish: 1, Titulo: Perfiles de Usuarios Cpanel, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Cpan2: { CodigoApp: Cpan, NombreModulo: CpanUsuariosTipos,   Nivel: 1, Publish: 1, Titulo: Tipos de Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Cpan3: { CodigoApp: Cpan, NombreModulo: CpanRoles,           Nivel: 1, Publish: 1, Titulo: Roles de Usuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
@@ -29,14 +29,15 @@ CpanPermisos:
   Cpan10: { IdPerfil: 1, NombreModulo: CpanUrlAmigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
   Cpan11: { IdPerfil: 1, NombreModulo: CpanEsqueletoWeb, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
 
-  Cpan11: { IdPerfil: 2, NombreModulo: Cpan, Funcionalidades: 'AC,VW' }
-  Cpan21: { IdPerfil: 2, NombreModulo: CpanPerfiles, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan31: { IdPerfil: 2, NombreModulo: CpanUsuariosTipos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan41: { IdPerfil: 2, NombreModulo: CpanRoles, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan51: { IdPerfil: 2, NombreModulo: CpanUsuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan61: { IdPerfil: 2, NombreModulo: WebPerfiles, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan71: { IdPerfil: 2, NombreModulo: Clientes, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan81: { IdPerfil: 2, NombreModulo: CpanFuncionalidades, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan91: { IdPerfil: 2, NombreModulo: CpanDocs, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan101: { IdPerfil: 2, NombreModulo: CpanUrlAmigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Cpan111: { IdPerfil: 2, NombreModulo: CpanEsqueletoWeb, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan20: { IdPerfil: 2, NombreModulo: VARWEBPRO, Funcionalidades: 'AC' }
+  Cpan21: { IdPerfil: 2, NombreModulo: Cpan, Funcionalidades: 'AC,VW' }
+  Cpan22: { IdPerfil: 2, NombreModulo: CpanPerfiles, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan23: { IdPerfil: 2, NombreModulo: CpanUsuariosTipos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan24: { IdPerfil: 2, NombreModulo: CpanRoles, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan25: { IdPerfil: 2, NombreModulo: CpanUsuarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan25: { IdPerfil: 2, NombreModulo: WebPerfiles, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan27: { IdPerfil: 2, NombreModulo: Clientes, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan28: { IdPerfil: 2, NombreModulo: CpanFuncionalidades, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan29: { IdPerfil: 2, NombreModulo: CpanDocs, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan30: { IdPerfil: 2, NombreModulo: CpanUrlAmigables, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Cpan31: { IdPerfil: 2, NombreModulo: CpanEsqueletoWeb, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}

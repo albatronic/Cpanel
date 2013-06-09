@@ -20,6 +20,11 @@ class PcaeApps extends PcaeAppsEntity {
             $column = 'Aplicacion';
         return parent::fetchAll($column, $default);
     }
+    
+    public function create(){
+        $this->Publish = 1;
+        return parent::create();
+    }    
 }
 
 ?>

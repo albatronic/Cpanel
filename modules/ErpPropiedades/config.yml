@@ -5,6 +5,7 @@ ErpPropiedades:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
+  translatable: true    
   showCommonFields: false
   numMaxRecords: ''
   numberOfImages: 0

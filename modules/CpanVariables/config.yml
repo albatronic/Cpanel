@@ -1,4 +1,5 @@
 CpanVariables:
+  translatable: false
   includesHead:
     twigCss: _global/css.html.twig
     twigJs: _global/js.html.twig

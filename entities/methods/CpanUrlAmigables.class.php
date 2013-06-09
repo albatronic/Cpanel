@@ -16,6 +16,30 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
     }
 
     /**
+     * Incrementa en 1 el número de visitas
+     * de la url amigable y de su entidad asociada
+     */
+    public function IncrementaVisitas() {
+
+        $this->setNumberVisits($this->getNumberVisits() + 1);
+        if ($this->save()) {
+            // Incremento el número de visitas de la entidad asociada
+            if (class_exists($this->Entity)) {
+                $entidadAsociada = new $this->Entity($this->IdEntity);
+                $entidadAsociada->setNumberVisits($entidadAsociada->getNumberVisits() + 1);
+                $entidadAsociada->save();
+                unset($entidadAsociada);
+            }
+        }
+    }
+    
+    public function create() {
+        
+        $this->setPublish(1);
+        return parent::create();
+    }
+    
+    /**
      * LLama al método erase
      *
      * @return bollean
@@ -69,9 +93,9 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
     public function validaLogico() {
 
         $url = new CpanUrlAmigables();
-        $url = $url->find('UrlFriendly', $this->UrlFriendly);
+        $rows = $url->cargaCondicion("Id","Idioma='{$_SESSION['idiomas']['actual']}' and UrlFriendly='{$this->UrlFriendly}'");
 
-        if ($url->getPrimaryKeyValue() != $this->getPrimaryKeyValue()) {
+        if ($rows[0]['Id'] != $this->getPrimaryKeyValue()) {
             if (!$this->getPrimaryKeyValue())
                 $this->_errores[] = "Ya existe un objeto con esa Url. Entidad = {$url->getEntity()}, IdEntidad= {$url->getIdEntity()}";
         }
@@ -96,15 +120,16 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
     }
 
     /**
-     * Borrar el registro de urlamigables correspondiente a $entidad y $idEntidad
+     * Borrar el registro de urlamigables correspondiente al $idioma, $entidad y $idEntidad
      *
+     * @param int $idioma
      * @param string $entidad
      * @param integer $idEntidad
      * @return boolean TRUE si el borrado se hizo con éxito
      */
-    public function borraUrl($entidad, $idEntidad) {
+    public function borraUrl($idioma, $entidad, $idEntidad) {
 
-        $row = $this->cargaCondicion("Id", "Entity='{$entidad}' and IdEntity='{$idEntidad}'");
+        $row = $this->cargaCondicion("Id", "Idioma='{$idioma}' and Entity='{$entidad}' and IdEntity='{$idEntidad}'");
         $url = new CpanUrlAmigables($row[0]['Id']);
         $ok = $url->erase();
         unset($url);

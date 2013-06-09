@@ -1,0 +1,16 @@
+# MODULOS DE LA APP Encargos.
+  
+CpanAplicaciones:
+  1: { CodigoApp: Encargos, NombreApp: Encargos }
+
+CpanModulos:
+  1: { CodigoApp: Encargos, NombreModulo: Encargos,     Nivel: 0, BelongsTo: 0,         Publish: 1, Titulo: Encargos, Funcionalidades: AC }
+  2: { CodigoApp: Encargos, NombreModulo: EncargosCab,  Nivel: 1, BelongsTo: Encargos,  Publish: 1, Titulo: Encargos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
+
+CpanPermisos:
+  1: { IdPerfil: 1, NombreModulo: Encargos,    Funcionalidades: 'AC,VW' }
+  2: { IdPerfil: 1, NombreModulo: EncargosCab, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
+
+  11: { IdPerfil: 2, NombreModulo: Encargos, Funcionalidades: 'AC,VW' }
+  21: { IdPerfil: 2, NombreModulo: EncargosCab, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}    
+

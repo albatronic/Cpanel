@@ -23,6 +23,8 @@ class PcaeProyectosApps extends PcaeProyectosAppsEntity {
      * @return boolean
      */
     public function create() {
+        
+        $this->Publish = 1;
         $id = parent::create();
 
         if ($id) {

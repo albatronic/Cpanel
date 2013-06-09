@@ -34,7 +34,7 @@
         {{ macro.input(atributos.MostrarIntroduccion,'field_title','checkbox',values.controller ~ '[MostrarIntroduccion]',values.controller ~ '_MostrarIntroduccion',datos.MostrarIntroduccion.IDTipo,'255','CampoTextoLargo','12') }}
         {{ macro.input(atributos.MostrarSubsecciones,'field_title','checkbox',values.controller ~ '[MostrarSubsecciones]',values.controller ~ '_MostrarSubsecciones',datos.MostrarSubsecciones.IDTipo,'255','CampoTextoLargo','12') }}
         {{ macro.radio(atributos.ModoMostrarContenidos,'field_title',values.controller ~ '[ModoMostrarContenidos]',values.controller ~ '_ModoMostrarContenidos',datos.ModoMostrarContenidos.IDTipo,datos.ModoMostrarContenidos.fetchAll(Descripcion,0),'chzn-radio','22')}}
-        {{ macro.select(atributos.CriterioOrdenContenidosHijos,'field_title',values.controller ~ '[CriterioOrdenContenidosHijos]',values.controller ~ '_CriterioOrdenContenidosHijos',none,datos.CriterioOrdenContenidosHijos.CriterioOrdenContenidosHijos,datos.CriterioOrdenContenidosHijos.fetchAll(none,0),'chzn-select','23')}}
+        {{ macro.select(atributos.CriterioOrdenContenidosHijos,'field_title',values.controller ~ '[CriterioOrdenContenidosHijos]',values.controller ~ '_CriterioOrdenContenidosHijos',none,datos.CriterioOrdenContenidosHijos.IDTipo,datos.CriterioOrdenContenidosHijos.fetchAll(none,0),'chzn-select','23')}}
         
         {% if values.varEnvMod.especificas.numMenus > 0  or user.IdPerfil.Id == 1 %}
             {# 

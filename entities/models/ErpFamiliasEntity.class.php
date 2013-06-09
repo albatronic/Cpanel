@@ -80,7 +80,7 @@ class ErpFamiliasEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'ErpFamilias';
+    protected $_tableName = 'ErpFamilias*';
 
     /**
      * Nombre de la PrimaryKey

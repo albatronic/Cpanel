@@ -5,17 +5,19 @@
     {# SI ES SUPER MUESTRO VARIABLES DE ENTORNO #}
 
     {# VARIABLES DE ENTORNO Y WEB DEL PROYECTO#}
+    {% if idiomas.actual == 0 %}
+
     {% if user.idPerfil.Id == 1 %}
-        <li><a href="{{app.path}}/CpanVariables/Env/Pro/{{project.name}}" title="Variables de Entorno Proyecto {{project.name}}"><span class="icon_block m_dashboard">Variables de Entorno del Proyecto {{project.name}}</span></a></li>
+        <li><a href="{{app.path}}/CpanVariables/Env/Pro/{{project.name}}" title="Variables de Entorno Proyecto {{project.name}}"><span class="icon_block m_dashboardOver">Variables de Entorno del Proyecto {{project.name}}</span></a></li>
     {% endif %}
-    {% if values.permisos.permisosModulo['VW'] %}
-        <li><a href="{{app.path}}/CpanVariables/Web/Pro/{{project.name}}" title="Variables Web Proyecto {{project.name}}"><span class="icon_block m_events">Variables Web del Proyecto {{project.name}}</span></a></li>
+    {% if values.permisos.permisosProyecto['AC'] or (user.idPerfil.Id == 1) %}
+        <li><a href="{{app.path}}/CpanVariables/Web/Pro/{{project.name}}" title="Variables Web Proyecto {{project.name}}"><span class="icon_block m_dashboard">Variables Web del Proyecto {{project.name}}</span></a></li>
     {% endif %}
 
     {# VARIABLES DE ENTORNO Y WEB DE LA APP #}
     {% if ( (values.enCurso.app != '') and (values.enCurso.app != 'Index') and (values.enCurso.app != 'CpanVariables') ) %}
         {% if user.idPerfil.Id == 1 %}
-            <li><a href="{{app.path}}/CpanVariables/Env/App/{{values.enCurso.app}}" title="Variables de Entorno App {{values.enCurso.app}}"><span class="icon_block m_dashboard">Variables de Entorno de la App {{values.enCurso.app}}</span></a></li>
+            <li><a href="{{app.path}}/CpanVariables/Env/App/{{values.enCurso.app}}" title="Variables de Entorno App {{values.enCurso.app}}"><span class="icon_block m_eventsOver">Variables de Entorno de la App {{values.enCurso.app}}</span></a></li>
         {% endif %}
         {% if values.permisos.permisosApp['VW'] %}
             <li><a href="{{app.path}}/CpanVariables/Web/App/{{values.enCurso.app}}" title="Variables Web App {{values.enCurso.app}}"><span class="icon_block m_events">Variables Web de la App {{values.enCurso.app}}</span></a></li>
@@ -26,11 +28,13 @@
     {% if ( (values.enCurso.modulo != '') and (values.enCurso.modulo != 'Index') and (values.enCurso.modulo != 'CpanVariables') ) %}
         {# VARIABLES WEB DEL MODULO #}
         {% if user.idPerfil.Id == 1 %}
-            <li><a href="{{app.path}}/CpanVariables/Env/Mod/{{values.enCurso.modulo}}" title="Variables de Entorno Modulo {{values.enCurso.modulo}}"><span class="icon_block m_dashboard">Variables de Entorno del Módulo {{values.enCurso.modulo}}</span></a></li>
+            <li><a href="{{app.path}}/CpanVariables/Env/Mod/{{values.enCurso.modulo}}" title="Variables de Entorno Modulo {{values.enCurso.modulo}}"><span class="icon_block p_bookOver">Variables de Entorno del Módulo {{values.enCurso.modulo}}</span></a></li>
         {% endif %}
         {% if values.permisos.permisosModulo['VW'] %}
-            <li><a href="{{app.path}}/CpanVariables/Web/Mod/{{values.enCurso.modulo}}" title="Variables Web Modulo {{values.enCurso.modulo}}"><span class="icon_block m_events">Variables Web del Módulo {{values.enCurso.modulo}}</span></a></li>
+            <li><a href="{{app.path}}/CpanVariables/Web/Mod/{{values.enCurso.modulo}}" title="Variables Web Modulo {{values.enCurso.modulo}}"><span class="icon_block p_book">Variables Web del Módulo {{values.enCurso.modulo}}</span></a></li>
         {% endif %}
+    {% endif %}
+            
     {% endif %}
 
 {#

@@ -30,15 +30,50 @@
 {# label: MUESTRA UN <DIV> CONTENIENDO EL TEXTO value Y APLICANDO LA CLASE class #}
 {# ----------------------------------------------------------------------------- #}
 {% macro label(atributos, class, name, id) %}
-<label class="{{ class|default('field_title') }}"
-    {% if (atributos.varEnv == '') and (user.getIdPerfil.Id == '1') %}
-         style="cursor: pointer;"
-         onclick="popUpVariablesEnv('Env','Mod','{{id}}');"
-    {% endif %}
-    title='{{atributos.help}}'
-    >
-    {{ atributos.caption }}
-</label>
+<span class="{{ class|default('field_title') }}" title="{{atributos.help}}">  
+    {% if (atributos.varEnv == '') and (user.getIdPerfil.Id == '1') and (idiomas.actual == 0) %}
+        <input
+            title="Poner/Quitar visibilidad"
+            id="checkVisibilidad{{id}}"
+            type="checkbox"
+            value="{{atributos.visible}}"
+            {% if (atributos.visible > '1') %} checked {% endif %}
+            onchange="
+              if ($('#checkVisibilidad{{id}}').is(':checked')) {
+                  $('#checkVisibilidad{{id}}').val('1');
+                  $('#spanVisibilidad{{id}}').removeClass('invisible');
+              } else {
+                  $('#checkVisibilidad{{id}}').val('0');
+                  $('#spanVisibilidad{{id}}').addClass('invisible');
+              }
+              actualizaVarEntorno('{{id}}_visible',$('#checkVisibilidad{{id}}').val());
+            "
+        />
+        <input
+            title="Poner/Quitar multi idioma"
+            id="checkMultiIdioma{{id}}"
+            type="checkbox"
+            value="{{atributos.translatable}}"
+            {% if (atributos.translatable > '0') %} checked {% endif %}
+            onchange="
+              if ($('#checkMultiIdioma{{id}}').is(':checked')) {
+                  $('#checkMultiIdioma{{id}}').val('1');
+              } else {
+                  $('#checkMultiIdioma{{id}}').val('0');
+              }
+              actualizaVarEntorno('{{id}}_translatable',$('#checkMultiIdioma{{id}}').val());
+            "
+        />           
+    {% endif %}            
+    <span id="spanVisibilidad{{id}}" 
+        {% if (user.getIdPerfil.Id == '1') and (atributos.visible == '1') and (atributos.varEnv == '') %} class="invisible"{% endif %}
+        {% if (atributos.varEnv == '') and (user.getIdPerfil.Id == '1') and (idiomas.actual == 0) %}
+             style="cursor: pointer;"
+             onclick="popUpVariablesEnv('Env','Mod','{{id}}');"
+        {% endif %}              >            
+        {{ atributos.caption }}
+    </span>
+</span>
 {% endmacro %}
 
 {% macro labelPopup(caption, url, objetoEnlazado, ancho, alto, class) %}
@@ -67,7 +102,7 @@
 {% endif %}
 {% endmacro%}
 
-{# ACTUALIZA VIA AJAX LA columna DE LA entidad E idEntidad PONIENDO EL VALOR valor #}
+{# ACTUALIZA VIA AJAX LA columna DE LA entidad e idEntidad PONIENDO EL VALOR valor #}
 {% macro actualizaColumna(entidad,idEntidad,columna,valor,titulo) %}
 <input
     title="{{titulo}}"
@@ -98,17 +133,18 @@
 {% endmacro%}
 
 {% macro publicar(atributos,name,id,value) %}
-{% if atributos.visible == '1' %}
+{% if (atributos.visible > 0) and (atributos.translatable == '1' or idiomas.actual == '0') %}
 <input name="{{name}}" id="{{ id|default(name)}}" type="hidden" value="{{value}}" />
 <input type="checkbox"
        name="checkbox_{{ name }}"
        id="checkbox_{{ id|default(name)}}"
        value="{{ value }}"
         {% if (value == '1') %} CHECKED {% endif %}
-       class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
+       class="tip_top" title="{{ atributos.help }}"
        onchange="
-            {{ onchange }} {{ _self.alertSave }}
+            {{ _self.alertSave }}
             if ($('#checkbox_{{ id|default(name)}}').is(':checked')) {$('#{{ id|default(name)}}').val('1');} else {$('#{{ id|default(name)}}').val('0');}
+            actualiza
        "
        {{extra}}
        {% if atributos.updatable == '0' %} disabled {% endif %}
@@ -136,8 +172,8 @@
 #}
 {% macro input(atributos, classLabel, type, name, id, value, maxLength, class, tabIndex, extra, onchange, autoComplete) %}
 {% if atributos.editorTiny != '1' %}
-    {% if atributos.visible == '1' %}
-    <li>
+    
+    <li {% if ((atributos.visible > 0)) and (atributos.translatable or idiomas.actual == 0) %}class=""{% else %}class="oculto"{% endif %}>
         <div class="form_grid_12" id="div_{{id|default(name)}}">
 
         {% if atributos.caption %}
@@ -149,7 +185,7 @@
             {% if (type == 'checkbox') %}
             <input name="{{name}}" id="{{ id|default(name)}}" type="hidden" value="{{value}}" />
             <input type="checkbox"
-                   name="checkbox_{{ name }}"
+                   {#name="checkbox_{{ name }}"#}
                    id="checkbox_{{ id|default(name)}}"
                    value="{{ value }}"
                     {% if (value == '1') %} CHECKED {% endif %}
@@ -189,7 +225,6 @@
         </div>
         </div>
     </li>
-    {% endif %}
 {% else %}
     {{ _self.textarea(atributos, classLabel, name, id, value, rows, cols, 'elm1', tabindex) }}
 {% endif %}
@@ -199,8 +234,8 @@
    INPUT RADIO 
 ---------------------------#}
 {% macro radio(atributos, classLabel, name, id, valueSelected, arrayOptions, class, tabIndex, extra, onchange) %}
-{% if atributos.visible == '1' %}
-<li>
+
+<li {% if (atributos.visible > 0) and (atributos.translatable or idiomas.actual == 0) %}class=""{% else %}class="oculto"{% endif %}>
 <div class="form_grid_12" id="div_{{id|default(name)}}">
 
     {% if atributos.caption %}
@@ -225,7 +260,7 @@
     </div>
 </div>
 </li>
-{% endif %}   
+   
 {% endmacro %}
     
 {# cc: CUENTA CORRIENTE #}
@@ -264,7 +299,7 @@
 {# cif: MUESTRA UN <INPUT> #}
 {# ------------------------- #}
 {% macro cif(atributos,classLabel, type, name, id, value, class) %}
-{% if atributos.visible == '1'%}
+{% if (atributos.visible > 0) and (atributos.translatable or idiomas.actual == 0)%}
 <li>
     <div class="form_grid_12" id="div_{{id|default(name)}}">
 
@@ -276,7 +311,7 @@
         <input type="{{ type|default('text') }}" name="{{ name }}" id="{{ id|default(name)}}"
            value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
            class="tip_top" title="{{ tip }}" tabindex="{{ tabIndex }}"
-           onchange="ValidaNif('manto','{{name}}'); {{ _self.alertSave }}"
+           onchange="ValidaNif('manto','{{name}}');" />
            {{extra}}
         />
     </div>
@@ -288,13 +323,12 @@
 {# textarea: MUESTRA UN <TEXTAREA> #}
 {# ------------------------------- #}
 {% macro textarea(atributos, classLabel, name, id, value, rows, cols, class, tabindex) %}
-{% if atributos.visible == '1' %}
-{% if atributos.editorTiny == '1'%}
+{% if (atributos.visible > 0) and atributos.editorTiny == '1' and (atributos.translatable or idiomas.actual == 0) %}
     <script>
         tinyMCE.execCommand("mceAddControl", true, "{{ id|default(name)}}");
     </script>
 {% endif %}
-<li>
+<li {% if (atributos.visible > 0) and (atributos.translatable or idiomas.actual == 0) %}class=""{% else %}class="oculto"{% endif %}>
 <div class="form_grid_12" id="div_{{id|default(name)}}">
 
     {% if atributos.caption %}
@@ -314,14 +348,13 @@
     </div>
 </div>
 </li>
-{% endif %}
 {% endmacro %}
 
 {# select: MUESTRA UN <SELECT> #}
 {# --------------------------- #}
 {% macro select(atributos, classLabel, name, id, width, defecto, opciones, class, tabindex, popup, onchange, onblur) %}
-{% if atributos.visible == '1' %}
-<li>
+
+<li {% if (atributos.visible > 0) and (atributos.translatable or idiomas.actual == 0) %}class=""{% else %}class="oculto"{% endif %}>
     <div class="form_grid_12" id="div_{{id|default(name)}}">
 
     {% if atributos.caption %}
@@ -358,14 +391,14 @@
     </div>
     </div>
 </li>
-{% endif %}
+
 {% endmacro %}
 
 {# selectGroup: MUESTRA UN <SELECT> AGRUPADO #}
 {# --------------------------- #}
 {% macro selectGroup(atributos, classLabel, name, id, width, defecto, opciones, class, tabindex, popup, onchange, onblur) %}
-{% if atributos.visible == '1' %}
-<li>
+
+<li {% if (atributos.visible > 0) and (atributos.translatable or idiomas.actual == 0) %}class=""{% else %}class="oculto"{% endif %}>
     <div class="form_grid_12" id="div_{{id|default(name)}}">
 
     {% if atributos.caption %}
@@ -406,7 +439,7 @@
     </div>
     </div>
 </li>
-{% endif %}
+
 {% endmacro %}
 
 {# img: MUESTRA UNA IMAGEN #}
@@ -429,8 +462,8 @@
 
 {# fecha: MUESTRA UN INPUT DE TIPO FECHA. UTILIZA UN POPUP DE CALENDARIO #}
 {% macro fecha(atributos, classLabel, name, id, value, size, class, tabindex, extra) %}
-{% if atributos.visible == '1' %}
-<li>
+
+<li {% if (atributos.visible > 0) and (atributos.translatable or idiomas.actual == 0) %}class=""{% else %}class="oculto"{% endif %}>
     <div class="form_grid_12" id="div_{{id|default(name)}}">
 
     {% if atributos.caption %}
@@ -456,7 +489,7 @@
         </div>
     </div>
 </li>
-{% endif%}
+
 {% endmacro %}
 
 {# foco: PONE EL FOCO EN EL ID INDICADO #}

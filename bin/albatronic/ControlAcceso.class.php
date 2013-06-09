@@ -63,14 +63,23 @@ class ControlAcceso {
 
     private function load() {
 
+        // PERMISOS DEL PROYECTO
         $permiso = new CpanPermisos();
-        $rows = $permiso->cargaCondicion("Funcionalidades", "IdPerfil='{$this->idPerfil}' AND NombreModulo='{$this->controller}'");
+        $filtro = "IdPerfil='{$this->idPerfil}' AND NombreModulo='VARWEBPRO'";
+        $rows = $permiso->cargaCondicion("Funcionalidades", $filtro);
+        $aux = explode(",", $rows[0]['Funcionalidades']);
+        foreach ($aux as $value)
+            $this->permisos['permisosProyecto'][$value] = TRUE;
+
+        $filtro = "IdPerfil='{$this->idPerfil}' AND NombreModulo='{$this->controller}'";
+        $rows = $permiso->cargaCondicion("Funcionalidades", $filtro);
         unset($permiso);
 
         if ($rows[0]['Funcionalidades'] != '') {
 
-            $modulo = new CpanModulos();
-            $modulo = $modulo->find('NombreModulo', $this->controller);
+            $modulos = new CpanModulos();
+            $modulo = $modulos->find('NombreModulo', $this->controller);
+            unset($modulos);
             $this->permisos['enCurso'] = array(
                 'app' => $modulo->getCodigoApp(),
                 'modulo' => $modulo->getNombreModulo(),
@@ -81,6 +90,11 @@ class ControlAcceso {
             $aux = explode(',', $rows[0]['Funcionalidades']);
             foreach ($aux as $value)
                 $this->permisos['permisosModulo'][$value] = TRUE;
+
+            // SI NO TIENE PERMISOS DE ACCESO AL MODULO, DESHABILITO TODOS LOS
+            // PERMISOS DEL MODULO
+            //if (!isset($this->permisos['permisosModulo']['AC']))
+            //    unset($this->permisos['permisosModulo']);
 
             // Permisos de la app
             $permiso = new CpanPermisos();

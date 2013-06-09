@@ -1,0 +1,21 @@
+{#
+  Module: BlogComentarios
+  Document : modules\BlogComentarios\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 21.02.2013 21:32:01
+#}
+
+{{ macro.input(atributos.Entidad,'field_title','text',values.controller ~ '[Entidad]',values.controller ~ '_Entidad',datos.Entidad,'50','CampoTextoLargo','1') }}
+{{ macro.select(atributos.IdEntidad,'field_title',values.controller ~ '[IdEntidad]',values.controller ~ '_IdEntidad',none,datos.IdEntidad.IdEntidad,datos.IdEntidad.fetchAll('Id'),'chzn-select','2')}}
+{{ macro.input(atributos.IpAddress,'field_title','text',values.controller ~ '[IpAddress]',values.controller ~ '_IpAddress',datos.IpAddress,'15','CampoTextoCorto','3') }}
+{{ macro.select(atributos.IdUsuario,'field_title',values.controller ~ '[IdUsuario]',values.controller ~ '_IdUsuario',none,datos.IdUsuario.IdUsuario,datos.IdUsuario.fetchAll('Id'),'chzn-select','4')}}
+{{ macro.input(atributos.Nombre,'field_title','text',values.controller ~ '[Nombre]',values.controller ~ '_Nombre',datos.Nombre,'50','CampoTextoLargo','5') }}
+{{ macro.input(atributos.Email,'field_title','text',values.controller ~ '[Email]',values.controller ~ '_Email',datos.Email,'100','CampoTextoLargo','6') }}
+{{ macro.input(atributos.TiempoUnix,'field_title','text',values.controller ~ '[TiempoUnix]',values.controller ~ '_TiempoUnix',datos.TiempoUnix,'20','CampoImporte','7') }}
+{{ macro.textarea(atributos.Comentario,'field_title',values.controller ~ '[Comentario]',values.controller ~ '_Comentario',datos.Comentario,none,none,'textarea','8')}}
+
+{% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_Entidad') }}

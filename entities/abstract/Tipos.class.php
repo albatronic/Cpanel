@@ -72,6 +72,9 @@ class Tipos {
         return $this->Descripcion;
     }
 
+    public function getPrimaryKeyValue() {
+        return $this->IDTipo;
+    }
 }
 
 ?>

@@ -1,0 +1,29 @@
+## APP Encargos
+EncargosCab:
+  engine:
+  charSet:
+  comment: Cabeceras de los encargos
+  columns:
+    RazonSocial:  { type: string(50), notnull: true, index: index }
+    Nif:          { type: string(20), notnull: false }
+    Direccion:    { type: string(100), notnull: false }
+    Poblacion:    { type: string(100), notnull: false }
+    CodigoPostal: { type: string(10), notnull: false}
+    EMail:        { type: string(100), notnull: true}
+    Telefono:     { type: string(30), notnull: true}
+    IpAddress:    { type: string(15), notnull: true, default: '' }
+    Session:      { type: string(50), notnull: true, default: '' }
+    TiempoUnix:   { type: bigint(20), notnull: true, default: 0 }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    
+EncargosLineas:
+  comment: Líneas de detalle de encargos
+  columns:
+    IdEncargo: { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,EncargosCab,Id' }
+    IdArticulo: { type: string(25), notnull: true, default: '' }
+    Descripcion: { type: string(255), notnull: true, default: '' }
+    Unidades: { type: decimal(2), notnull: true, default: '0.00' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+  relations:
+  

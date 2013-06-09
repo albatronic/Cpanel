@@ -26,7 +26,6 @@ class GconSecciones extends GconSeccionesEntity {
         parent::validaLogico();
 
         if (count($this->_errores) == 0) {
-
             for ($i = 1; $i <= 5; $i++) {
                 // Poner las etiquetas web
                 if ($this->{"EtiquetaWeb$i"} == '')
@@ -37,7 +36,7 @@ class GconSecciones extends GconSeccionesEntity {
                 // Poner el orden de los menus                    
                 if ($this->{"OrdenMenu$i"} == 0)
                     $this->{"setOrdenMenu$i"}($this->SortOrder);
-            }
+            }         
         }
     }
 
@@ -48,7 +47,7 @@ class GconSecciones extends GconSeccionesEntity {
      * Si se indica $entidadRelacionada e $idEntidadRelacionada, se añade un elmento más que indica
      * si cada contenido está relacionado con $entidadRelacionada e $idEntidadRelacionada
      *
-     * El arrau tiene los siguientes elementos:
+     * El array tiene los siguientes elementos:
      * 
      * - Id: El id del contenido
      * - Value: El titulo del contenido

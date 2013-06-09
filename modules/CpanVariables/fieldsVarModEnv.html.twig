@@ -29,19 +29,35 @@
         <li class="ui-state-default ui-corner-top"><a href="#tabs-siteMap">SiteMap</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-meta">Meta</a></li>
 
-        {% for i in 1..values.datos.numberOfImages %}
-        <li class="ui-state-default ui-corner-tope">
-            <a href="#tabs-imagen{{i}}">
-            {% if values.datos.images[i].caption %}
-                {{values.datos.images[i].caption}}
-            {% else %}
-                Imagen {{i}}
-            {% endif %}
-            </a>
-        </li>
-        {% endfor %}
-
+        {% if values.datos.numberOfImages > 0 %}
+            {% for i in 1..values.datos.numberOfImages %}
+            <li class="ui-state-default ui-corner-tope">
+                <a href="#tabs-imagen{{i}}">
+                {% if values.datos.images[i].caption %}
+                    {{values.datos.images[i].caption}}
+                {% else %}
+                    Imagen {{i}}
+                {% endif %}
+                </a>
+            </li>
+            {% endfor %}
+        {% endif %}
+            
+        {% if values.datos.withGalery > 0 %}
         <li class="ui-state-default ui-corner-top"><a href="#tabs-galeria">Galería</a></li>
+        {% endif %}
+        {% if values.datos.withTiny > 0 %}
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-tiny">Imágenes Tiny</a></li>   
+        {% endif %}    
+        {% if values.datos.withDocuments > 0 %}
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-document">Documentos</a></li>
+        {% endif %}
+        {% if values.datos.withVideos > 0 %}
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-video">Vídeos</a></li>   
+        {% endif %}  
+        {% if values.datos.withAudios > 0 %}
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-audio">Audios</a></li>   
+        {% endif %}           
         <li class="ui-state-default ui-corner-top"><a href="#tabs-columnas">Columnas</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-ordenesWeb">Órdenes Web</a></li>        
@@ -54,9 +70,10 @@
     {# GLOBAL #}
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.input({'caption':'[isModuleRoot] Es el módulo padre','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[isModuleRoot]','datos_isModuleRoot',values.datos.isModuleRoot)}}
+        {{ macro.input({'caption':'[translatable] Es multi idioma','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[translatable]','datos_translatable',values.datos.translatable)}}
+        {{ macro.input({'caption':'[searchable] Es buscable','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[searchable]','datos_searchable',values.datos.searchable)}}
         {{ macro.input({'caption':'[showCommonFields] Mostrar campos comunes','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showCommonFields]','datos_showCommonFields',values.datos.showCommonFields)}}
         {{ macro.input({'caption':'[numMaxRecords] Número máximo registros','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[numMaxRecords]','datos_numMaxRecords',values.datos.numMaxRecords,'15','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[showNumberVisits] Mostrar número visitas','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showNumberVisits]','datos_showNumberVisits',values.datos.showNumberVisits)}}
         {{ macro.input({'caption':'[numberOfImages] Número de imágenes de diseño (0=sin imágenes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[numberOfImages]','datos_numberOfImages',values.datos.numberOfImages,'3','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[withTiny] Hay imágenes Tiny','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[withTiny]','datos_withTiny',values.datos.withTiny)}}
         {{ macro.input({'caption':'[withGalery] Hay Galeria','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[withGalery]','datos_withGalery',values.datos.withGalery)}}
@@ -67,34 +84,34 @@
         {{ macro.input({'caption':'[maxSizes][document] Tamaño máximo documento (bytes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[maxSizes][document]','datos_maxSizes_document',values.datos.maxSizes.document,'10','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[maxSizes][video] Tamaño máximo video (bytes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[maxSizes][video]','datos_maxSizes_video',values.datos.maxSizes.video,'10','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[maxSizes][audio] Tamaño máximo Audio (bytes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[maxSizes][audio]','datos_maxSizes_audio',values.datos.maxSizes.audio,'10','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[maxSizes][audio] Tamaño máximo Audio (bytes)','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[maxSizes][audio]','datos_maxSizes_audio',values.datos.maxSizes.audio,'10','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[video][ancho] Anchura video','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[video][ancho]','datos_video_ancho',values.datos.video.ancho,'10','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[video][alto] Altura video','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[video][alto]','datos_video_alto',values.datos.video.alto,'10','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[video][borde] Borde video','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[video][borde]','datos_video_borde',values.datos.video.borde,'10','CampoTextoCorto','1') }}
     </div>
 
     {# URL AMIGABLE #}
     <div id="tabs-urlAmigable" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.input({'caption':'[urlFriendlyManagement] Gestionar URL amigables','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[urlFriendlyManagement]','datos_urlFriendlyManagement',values.datos.urlFriendlyManagement)}}
-        {{ macro.select({'caption':'[fieldGeneratorUrlFriendly] Campo generador URL amigable','visible':'1','updatable':'1','varEnv':'0'},'field_title','datos[fieldGeneratorUrlFriendly]','datos_fieldGeneratorUrlFriendly',none,values.datos.fieldGeneratorUrlFriendly,values.columnas,'chzn-select')}}
-        {{ macro.input({'caption':'[showSlugManagement] Mostrar gestión Slug','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSlugManagement]','datos_showSlugManagement',values.datos.showSlugManagement)}}
+        {{ macro.input({'caption':'[showUrlFriendlyManagement] Mostrar gestión URLs amigables','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showUrlFriendlyManagement]','datos_showUrlFriendlyManagement',values.datos.showUrlFriendlyManagement)}}            
+        {{ macro.select({'caption':'[fieldGeneratorUrlFriendly] Campo generador URL amigable','visible':'1','updatable':'1','varEnv':'0'},'field_title','datos[fieldGeneratorUrlFriendly]','datos_fieldGeneratorUrlFriendly',none,values.datos.fieldGeneratorUrlFriendly,values.columnas,'chzn-select')}}   
         {{ macro.input({'caption':'[showUrlFriendly] Mostrar Url amigable','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showUrlFriendly]','datos_showUrlFriendly',values.datos.showUrlFriendly)}}
     </div>
 
     {# MOSTAR GESTION SITEMAP #}
     <div id="tabs-siteMap" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-        {{ macro.input({'caption':'[showSiteMapManagement][show] Mostrar gestión Sitemap','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSiteMapManagement][show]','datos_showSiteMapManagement_show',values.datos.showSiteMapManagement.show)}}
-        {{ macro.input({'caption':'[showSiteMapManagement][showAtSiteMap] Mostrar en Sitemap','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSiteMapManagement][showAtSiteMap]','datos_showSiteMapManagement_showAtSiteMap',values.datos.showSiteMapManagement.showAtSiteMap)}}
-        {{ macro.input({'caption':'[showSiteMapManagement][showImportanceSiteMap] Mostrar importancia Sitemap','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSiteMapManagement][showImportanceSiteMap]','datos_showSiteMapManagement_showImportanceSiteMap',values.datos.showSiteMapManagement.showImportanceSiteMap)}}
-        {{ macro.input({'caption':'[showSiteMapManagement][frecuencyChange] Frecuencia de cambio','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[showSiteMapManagement][frecuencyChange]','datos_showSiteMapManagement_frecuencyChange',values.datos.showSiteMapManagement.frecuencyChange,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[showSiteMapManagement] Mostrar gestión Sitemap','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showSiteMapManagement]','datos_showSiteMapManagement',values.datos.showSiteMapManagement)}}
     </div>
 
     {# MOSTAR GESTION META #}
     <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom">     
         {{ macro.input({'caption':'[metatagTitleManagement] Gestionar MetatagTitles','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[metatagTitleManagement]','datos_metatagTitleManagement',values.datos.metatagTitleManagement)}}
+        {{ macro.input({'caption':'[showMetaManagement] Mostrar gestión Meta','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showMetaManagement]','datos_showMetaManagement',values.datos.showMetaManagement)}}
         {{ macro.select({'caption':'[fieldGeneratorMetatagTitle] Campo generador Metatag Title','visible':'1','updatable':'1','varEnv':'0'},'field_title','datos[fieldGeneratorMetatagTitle]','datos_fieldGeneratorMetatagTitle',none,values.datos.fieldGeneratorMetatagTitle,values.columnas,'chzn-select')}}
-        {{ macro.input({'caption':'[showMetaManagement][show] Mostrar gestión Meta','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showMetaManagement][show]','datos_showMetaManagement_show',values.datos.showMetaManagement.show)}}
-        {{ macro.select({'caption':'[showMetaManagement][titlePosition] Posición del title','visible':'1','updatable':'1','varEnv':'0'},'field_title','datos[showMetaManagement][titlePosition]','datos_showMetaManagement_titlePosition',none,values.datos.showMetaManagement.titlePosition,ValoresIzqDcha,'chzn-select')}}
-        {{ macro.input({'caption':'[showMetaManagement][titleSimple] Title Simple','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[showMetaManagement][titleSimple]','datos_showMetaManagement_titleSimple',values.datos.showMetaManagement.titleSimple)}}
     </div>
 
     {# IMAGENES #}
+    {% if values.datos.numberOfImages > 0 %}
     {% for i in 1..values.datos.numberOfImages %}
     <div id="tabs-imagen{{i}}" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.input({'caption':'[images]['~i~'][visible] Visible','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][visible]','datos_images_' ~ i ~ '_visible',values.datos.images[i].visible)}}
@@ -108,10 +125,13 @@
         {{ macro.input({'caption':'[images]['~i~'][mostrarNombre] Mostrar Nombre','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][mostrarNombre]','datos_images_' ~ i ~ 'mostrarNombre',values.datos.images[i].mostrarNombre)}}
         {{ macro.input({'caption':'[images]['~i~'][mostrarPieDeFoto] Mostrar Pie de Foto','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][mostrarPieDeFoto]','datos_images_' ~ i ~ 'mostrarPieDeFoto',values.datos.images[i].mostrarPieDeFoto)}}
         {{ macro.input({'caption':'[images]['~i~'][mostrarPublicar] Mostrar Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][mostrarPublicar]','datos_images_' ~ i ~ 'mostrarPublicar',values.datos.images[i].mostrarPublicar)}}        
+        {{ macro.input({'caption':'[images]['~i~'][valorDefectoPublicar] Valor defecto Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[images]['~i~'][valorDefectoPublicar]','datos_images_' ~ i ~ 'valorDefectoPublicar',values.datos.images[i].valorDefectoPublicar)}}        
     </div>
     {% endfor %}
+    {% endif %}
 
     {# GALERIA #}
+    {% if values.datos.withGalery > 0 %}        
     <div id="tabs-galeria" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.input({'caption':'[galery][maxWidthImage] Anchura máxima imágenes','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[galery][maxWidthImage]','datos_galery_maxWidthImage',values.datos.galery.maxWidthImage,'15','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[galery][maxHeightImage] Altura máxima imágenes','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[galery][maxHeightImage]','datos_galery_maxHeightImage',values.datos.galery.maxHeightImage,'15','CampoTextoCorto','1') }}
@@ -122,8 +142,56 @@
         {{ macro.input({'caption':'[galery][mostrarNombre] Mostrar Nombre','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[galery][mostrarNombre]','datos_galery_mostrarNombre',values.datos.galery.mostrarNombre)}}
         {{ macro.input({'caption':'[galery][mostrarPieDeFoto] Mostrar Pie de Foto','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[galery][mostrarPieDeFoto]','datos_galery_mostrarPieDeFoto',values.datos.galery.mostrarPieDeFoto)}}
         {{ macro.input({'caption':'[galery][mostrarPublicar] Mostrar Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[galery][mostrarPublicar]','datos_galery_mostrarPublicar',values.datos.galery.mostrarPublicar)}}        
+        {{ macro.input({'caption':'[galery][valorDefectoPublicar] Valor defecto Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[galery][valorDefectoPublicar]','datos_galery_valorDefectoPublicar',values.datos.galery.valorDefectoPublicar)}}        
     </div>
-
+    {% endif %}
+        
+    {# IMÁGENES TINY #}
+    {% if values.datos.withTiny > 0 %}         
+    <div id="tabs-tiny" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input({'caption':'[tiny][maxWidthImage] Anchura máxima imágenes','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[tiny][maxWidthImage]','datos_tiny_maxWidthImage',values.datos.tiny.maxWidthImage,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[tiny][maxHeightImage] Altura máxima imágenes','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','datos[tiny][maxHeightImage]','datos_tiny_maxHeightImage',values.datos.tiny.maxHeightImage,'15','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[tiny][mostrarTitulo] Mostrar Título','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[tiny][mostrarTitulo]','datos_tiny_mostrarTitulo',values.datos.tiny.mostrarTitulo)}}            
+        {{ macro.input({'caption':'[tiny][mostrarNombre] Mostrar Nombre','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[tiny][mostrarNombre]','datos_tiny_mostrarNombre',values.datos.tiny.mostrarNombre)}}
+        {{ macro.input({'caption':'[tiny][mostrarPieDeFoto] Mostrar Pie de Foto','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[tiny][mostrarPieDeFoto]','datos_tiny_mostrarPieDeFoto',values.datos.tiny.mostrarPieDeFoto)}}
+        {{ macro.input({'caption':'[tiny][mostrarPublicar] Mostrar Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[tiny][mostrarPublicar]','datos_tiny_mostrarPublicar',values.datos.tiny.mostrarPublicar)}}   
+        {{ macro.input({'caption':'[tiny][valorDefectoPublicar] Valor defecto Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[tiny][valorDefectoPublicar]','datos_tiny_valorDefectoPublicar',values.datos.tiny.valorDefectoPublicar)}}            
+    </div>
+    {% endif %}
+        
+     {# DOCUMENTOS #}
+    {% if values.datos.withDocuments > 0 %}         
+    <div id="tabs-document" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input({'caption':'[document][mostrarTitulo] Mostrar Título','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[document][mostrarTitulo]','datos_document_mostrarTitulo',values.datos.document.mostrarTitulo)}}            
+        {{ macro.input({'caption':'[document][mostrarNombre] Mostrar Nombre','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[document][mostrarNombre]','datos_document_mostrarNombre',values.datos.document.mostrarNombre)}}
+        {{ macro.input({'caption':'[document][mostrarPieDeFoto] Mostrar Pie de Foto','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[document][mostrarPieDeFoto]','datos_document_mostrarPieDeFoto',values.datos.document.mostrarPieDeFoto)}}
+        {{ macro.input({'caption':'[document][mostrarPublicar] Mostrar Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[document][mostrarPublicar]','datos_document_mostrarPublicar',values.datos.document.mostrarPublicar)}}   
+        {{ macro.input({'caption':'[document][valorDefectoPublicar] Valor defecto Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[document][valorDefectoPublicar]','datos_document_valorDefectoPublicar',values.datos.document.valorDefectoPublicar)}}            
+    </div>
+    {% endif %} 
+        
+     {# VÍDEOS #}
+    {% if values.datos.withVideos > 0 %}         
+    <div id="tabs-video" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input({'caption':'[video][mostrarTitulo] Mostrar Título','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[video][mostrarTitulo]','datos_video_mostrarTitulo',values.datos.video.mostrarTitulo)}}            
+        {{ macro.input({'caption':'[video][mostrarNombre] Mostrar Nombre','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[video][mostrarNombre]','datos_video_mostrarNombre',values.datos.video.mostrarNombre)}}
+        {{ macro.input({'caption':'[video][mostrarPieDeFoto] Mostrar Pie de Foto','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[video][mostrarPieDeFoto]','datos_video_mostrarPieDeFoto',values.datos.video.mostrarPieDeFoto)}}
+        {{ macro.input({'caption':'[video][mostrarPublicar] Mostrar Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[video][mostrarPublicar]','datos_video_mostrarPublicar',values.datos.video.mostrarPublicar)}}   
+        {{ macro.input({'caption':'[video][valorDefectoPublicar] Valor defecto Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[video][valorDefectoPublicar]','datos_video_valorDefectoPublicar',values.datos.video.valorDefectoPublicar)}}            
+    </div>
+    {% endif %}   
+        
+     {# AUDIOS #}
+    {% if values.datos.withAudios > 0 %}         
+    <div id="tabs-audio" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+        {{ macro.input({'caption':'[audio][mostrarTitulo] Mostrar Título','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[audio][mostrarTitulo]','datos_audio_mostrarTitulo',values.datos.audio.mostrarTitulo)}}            
+        {{ macro.input({'caption':'[audio][mostrarNombre] Mostrar Nombre','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[audio][mostrarNombre]','datos_audio_mostrarNombre',values.datos.audio.mostrarNombre)}}
+        {{ macro.input({'caption':'[audio][mostrarPieDeFoto] Mostrar Pie de Foto','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[audio][mostrarPieDeFoto]','datos_audio_mostrarPieDeFoto',values.datos.audio.mostrarPieDeFoto)}}
+        {{ macro.input({'caption':'[audio][mostrarPublicar] Mostrar Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[audio][mostrarPublicar]','datos_audio_mostrarPublicar',values.datos.audio.mostrarPublicar)}}   
+        {{ macro.input({'caption':'[audio][valorDefectoPublicar] Valor defecto Publicar','visible':'1','updatable':'1','varEnv':'0'},'field_title','checkbox','datos[audio][valorDefectoPublicar]','datos_audio_valorDefectoPublicar',values.datos.audio.valorDefectoPublicar)}}            
+    </div>
+    {% endif %} 
+        
     {# VARIABLES DE ENTORNO DE CADA COLUMNA DE LA ENTIDAD DE DATOS #}
     <div id="tabs-columnas" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
 
@@ -139,7 +207,7 @@
                     {% for variable,valor in variables %}
                         {% if variable != 'listaValores' %}
                         <p>
-                        {% if ( (hayListaValores and (variable == 'default') ) or ( (variable == 'visible') or (variable == 'updatable') or (variable == 'editorTiny') ) ) %}
+                        {% if ( (hayListaValores and (variable == 'default') ) or ( (variable == 'visible') or (variable == 'updatable') or (variable == 'translatable') or (variable == 'searchable') or (variable == 'editorTiny') or (variable == 'filter') or (variable == 'list') ) ) %}
 
                             {% if (variable == 'default') %}
                                 {% set listaValores = variables.listaValores %}

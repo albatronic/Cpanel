@@ -121,6 +121,36 @@ class OrdenarController extends Controller {
         }
         unset($em);
 
+        // Si estoy en el idioma principal, también cambio el orden en el resto de idiomas
+        if ($_SESSION['idiomas']['actual'] == 0) {
+
+            // Recorro los idiomas adicionales
+            foreach ($_SESSION['idiomas']['disponibles'] as $key => $value) {
+                if ($key > 0) {
+                    $_SESSION['idiomas']['actual'] = $key;
+                    
+                    $objeto = new $entidad();
+                    $dbName = $objeto->getDataBaseName();
+                    $tableName = $objeto->getTableName();
+                    $primaryKeyName = $objeto->getPrimaryKeyName();
+
+                    $em = new EntityManager($objeto->getConectionName());
+                    if ($em->getDbLink()) {
+                        // Recorro los elementos que vienen en el acordeon, y los reordeno
+                        $orden = 0;
+                        foreach ($this->request['acordeon'] as $elemento) {
+                            $query = "UPDATE {$dbName}.{$tableName} SET {$columnaOrden} = '{$orden}' WHERE ({$filtro}) AND ({$primaryKeyName} = '{$elemento}')";
+                            $em->query($query);
+                            $orden += 1;
+                        }
+                        $em->desConecta();
+                    }
+                    unset($em);
+                }
+            }
+            $_SESSION['idiomas']['actual'] = 0;
+        }
+
         return $this->IndexAction();
     }
 

@@ -4,7 +4,7 @@
  * Description of Entidades enlazables desde los sliders
  *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
- * @copyright Ártico Estudio, SL
+ * @copyright Informática Albatronic, SL
  * @date 12-12-2012 9:32
  */
 class SldSlidersEnlaces extends Tipos {

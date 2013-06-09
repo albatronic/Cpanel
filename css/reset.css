@@ -21,9 +21,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 body {
 	line-height: 1;
 }
-a{ text-decoration:none; color:#06C;} 
-a:hover{ text-decoration:none; color: #03F;} 
-ol, ul {
+a{ text-decoration:none; color:#003c71;} 
+/*a:hover{ text-decoration:underline;} 
+*/ol, ul {
 	list-style: none;
 }
 blockquote, q {
@@ -52,4 +52,9 @@ del {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+.oculto {
+    display: none;
+    text-indent: -9999px;
 }

@@ -1,0 +1,14 @@
+# VARIABLES WEB ESPECIFICAS DEL MODULO RrhhDptos
+#
+# Module: RrhhDptos
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright ARTICO ESTUDIO, SL
+# date 12-03-2013 21:48:35
+#
+# ejemplo:
+#
+# nombreVariable:
+#   caption: el texto del caption
+#   values: array Id, Value con los valores posibles de la variable (opcional)
+#   default: valor por defecto
+---

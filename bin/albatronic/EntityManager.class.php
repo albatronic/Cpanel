@@ -42,7 +42,7 @@ class EntityManager {
     private $error = array();
 
     /**
-     * Estable la conexion a la base de datos.
+     * Establece la conexion a la base de datos.
      * Abre el fichero de configuracion '$fileConfig', o en su defecto config/config.yml
      * y lee el nodo $conection donde se definen los parametros de conexion.
      * 
@@ -62,7 +62,6 @@ class EntityManager {
     public function __construct($conection, $fileConfig = '') {
 
         if (is_array($conection)) {
-
             $this->dbEngine = $conection['dbEngine'];
             $this->host = $conection['host'];
             $this->user = $conection['user'];
@@ -81,15 +80,16 @@ class EntityManager {
                 $this->dbEngine = $params['dbEngine'];
                 $this->host = $params['host'];
                 
-                if ($_SESSION['EntornoDesarrollo']) {
+                /**if ($_SESSION['EntornoDesarrollo']) {
                     $this->user = $conection;
                     $this->password = $conection;
                     $this->dataBase = $conection;
-                } else {
+                } else {*/
                     $this->user = $params['user'];
                     $this->password = $params['password'];
                     $this->dataBase = $params['database'];
-                }
+                //}
+                   
                 $this->conecta();
             } else {
                 $this->error[] = "EntityManager []: ERROR AL LEER EL ARCHIVO DE CONFIGURACION. " . $fileConfig . " NO EXISTE\n";

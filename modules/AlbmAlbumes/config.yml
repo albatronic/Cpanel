@@ -5,6 +5,7 @@ AlbmAlbumes:
     fromColumn: IdSeccion
     toEntity: AlbmSecciones
     toColumn: Id
+  translatable: true
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '1'

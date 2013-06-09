@@ -1,0 +1,42 @@
+{#
+  Module: AnmCategorias
+  Document : modules\AnmCategorias\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 18.03.2013 13:04:51
+#}
+
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top"><a href="#arbol">Árbol de Categorías</a></li>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Sección{%endif%}</a>
+            {{ macro.publicar(atributos.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
+        </li>     
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}                      
+    </ul>
+
+    <div id="arbol">
+        {% include values.controller ~ '/arbol.html.twig' with {'arbol': datos.getArbolHijos, 'subtemplate':'arbolEditar.html.twig'} %}        
+    </div> 
+        
+    <div id="general">        
+        {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
+        {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','2') }}
+        {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','3')}}
+        {{ macro.input(atributos.EsExotico,'field_title','checkbox',values.controller ~ '[EsExotico]',values.controller ~ '_EsExotico',datos.EsExotico.IDTipo,'255','CampoTextoLargo','4') }}
+    
+        <div style="clear: both;"></div>
+        <p>Para indicar las enfermedades asociadas a esta categoría, vaya al apartado "Relacionar con ..." de la solapa "Más Detalles..." </p>    
+            
+    </div>
+
+    {% include '_global/fieldsComunes.html.twig' %}
+</div>
+
+{{ macro.foco(values.controller ~ '_Titulo') }}

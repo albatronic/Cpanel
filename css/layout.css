@@ -1,14 +1,17 @@
 /*==STRUCTURE==*/
 #header {
-	height:60px;
-	clear:both;
-	z-index:99999;
-	top:35px;
+	clear: both;
+	float: left;
+	/*height:60px;*/
+	padding: 0.5em 0;
 	position:fixed;
-	right:0px;
-	width:100%;
-	border-bottom:#000 1px solid;
+	right: 0;
+	top: 0;
+	width: 100%;
+	z-index: 99999;
+	/*border-bottom:#000 1px solid;*/
 }
+
 #left_bar {
 	width:290px;
 	float:left;
@@ -19,8 +22,9 @@
 }
 #container {
 	overflow:hidden;
-	margin-top:81px;
+	margin-top:61px;
 }
+
 #content {
 	margin:20px 1% 20px 1%;
 	position:relative;
@@ -35,10 +39,10 @@
 	height:100%;
 	width:70px;
 	position:fixed;
-        top:90px;
+    top:74px;
 }
 #primary_nav ul li {
-	height:70px;
+	height:72px;
 	position:relative;
 }
 #primary_nav li a {
@@ -49,7 +53,9 @@
 #sidebar {
 	width:200px;
 	margin-left:70px;
+	/*margin-top: -10px;*/
 }
+
 #secondary_nav {
 	margin-top:20px;
         margin-left:10px;
@@ -66,17 +72,24 @@
 
 #secondary_nav ul li a {
 	/*height:27px;*/
-padding-top:8px;
-min-height:27px;
-line-height:20px;
+	padding-top:8px;
+	min-height:27px;
+	line-height:20px;
 	display:block;
-	padding-left:28px;
-padding-right:15px;
+	padding-left:10px;
+	padding-right:15px;
 	text-decoration:none;
 
 }
 
+.iconoMenu {
+	margin-right: 5px;
+}
 
+.textoMenu {
+	position: relative;
+	top: -7px;
+}
 .top_search {
 	height:49px;
 	width:270px;
@@ -619,4 +632,16 @@ margin:10px !important;
 .item_block:last-child {
 float:left !important;
 }
+}
+
+.invisible {
+	color: red;
+	float: left;
+	margin-right: 15px;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+}
+
+#div_CpanDocs_Publish0 {
+	margin-bottom: 15px;
 }

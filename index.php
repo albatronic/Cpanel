@@ -59,9 +59,9 @@ include_once $app['framework'] . "Autoloader.class.php";
 Autoloader::setCacheFilePath(APP_PATH . 'tmp/class_path_cache.txt');
 Autoloader::excludeFolderNamesMatchingRegex('/^CVS|\..*$/');
 Autoloader::setClassPaths(array(
-    $app['framework'],
-    'entities/',
-    'lib/',
+    APP_PATH . $app['framework'],
+    APP_PATH . 'entities/',
+    APP_PATH . 'lib/',
 ));
 spl_autoload_register(array('Autoloader', 'loadClass'));
 
@@ -120,15 +120,14 @@ $rq = new Request();
 $_SESSION['EntornoDesarrollo'] = $rq->isDevelopment();
 
 // ----------------------------------------------------------------
-// ACTIVAR EL FORMATO DE LA MONEDA
+// ACTIVAR EL FORMATO LOCAL EN BASE AL IDIOMA EN CURSO
 // ----------------------------------------------------------------
-setlocale(LC_MONETARY, $rq->getLanguage());
+setlocale(LC_ALL, $rq->getLanguage());
 
 if ($rq->isOldBrowser()) {
     $controller = 'OldBrowser';
     $action = 'Index';
 } else {
-
     //-----------------------------------------------------------------
     // INSTANCIAR UN OBJETO DE LA CLASE REQUEST PARA TENER DISPONIBLES
     // TODOS LOS VALORES QUE CONSTITUYEN LA PETICION E IDENTIFICAR
@@ -157,11 +156,8 @@ if ($rq->isOldBrowser()) {
         // No está logeado
         $controller = "Index";
         $action = "NoLoged";
-
     }
-
 }
-
 
 // Validar que el controlador requerido exista.
 // En caso contrario fuerzo el controlador Index
@@ -185,20 +181,13 @@ include_once $fileController;
 $con = new $clase($request);
 if (!method_exists($con, $metodo))
     $metodo = "IndexAction";
+
 $result = $con->{$metodo}();
 
 $result['values']['controller'] = $controller;
 
 $result['values']['archivoCss'] = getArchivoCss($result['template']);
 $result['values']['archivoJs'] = getArchivoJs($result['template']);
-
-// Cargar las variables Web del Proyecto
-if (!isset($_SESSION['varPro_Web'])) {
-    $var = new CpanVariables('Pro','Web');
-    $rows = $var->cargaCondicion('Yml', "Variable='varPro_Web'");
-    unset($var);
-    $_SESSION['varPro_Web'] = sfYaml::load($rows[0]['Yml']);
-}
 $result['values']['varPro_Web'] = $_SESSION['varPro_Web'];
 
 // Cargo los valores para el modo debuger
@@ -206,7 +195,7 @@ if ($config['debug_mode']) {
     $result['values']['_debugMode'] = true;
     $result['values']['_auditMode'] = (string) $config['audit_mode'];
     $result['values']['_user'] = sfYaml::dump($_SESSION['USER'], 5);
-    $result['values']['_debugValues'] = sfYaml::Dump($result['values'],100);
+    $result['values']['_debugValues'] = sfYaml::Dump($result['values'], 100);
 }
 
 // Si el método no devuelve template o no exite, muestro un template de error.
@@ -223,12 +212,15 @@ if ($_SESSION['isMobile']) {
 }
 
 // Renderizo el template y los valores devueltos por el método
-$usuario = new CpanUsuarios();
-$usuario = $usuario->find('IdUsuario',$_SESSION['USER']['user']['Id']);
-$twig->addGlobal('user',$usuario);
+$usuarios = new CpanUsuarios();
+$usuario = $usuarios->find('IdUsuario', $_SESSION['USER']['user']['Id']);
+unset($usuarios);
+
+$twig->addGlobal('user', $usuario);
 $twig->addGlobal('appPath', $app['path']);
 $twig->addGlobal('varEnvMod', $result['values']['varEnvMod']);
 $twig->addGlobal('permisosModulo', $result['values']['permisos']['permisosModulo']);
+$twig->addGlobal('idiomas', $_SESSION['idiomas']);
 $twig->loadTemplate($result['template'])
         ->display(array(
             'values' => $result['values'],
@@ -257,7 +249,7 @@ function getArchivoCss($template) {
     $archivoTemplate = str_replace('html', 'css', $template);
 
     if (!file_exists($archivoTemplate)) {
-        $archivoTemplate = "_global/css.twig";
+        $archivoTemplate = "_global/css.html.twig";
     }
 
     return $archivoTemplate;
@@ -273,7 +265,7 @@ function getArchivoJs($template) {
     $archivoTemplate = str_replace('html', 'js', $template);
 
     if (!file_exists($archivoTemplate)) {
-        $archivoTemplate = "_global/js.twig";
+        $archivoTemplate = "_global/js.html.twig";
     }
 
     return $archivoTemplate;

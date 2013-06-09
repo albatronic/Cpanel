@@ -68,6 +68,11 @@ class Entity {
      * CONSTRUCTOR
      */
     public function __construct($primaryKeyValue = '', $showDeleted = FALSE) {
+
+        $this->_tableName = ($_SESSION['idiomas']['actual'] > 0) ?
+                str_replace("*", $_SESSION['idiomas']['actual'], $this->_tableName) :
+                str_replace("*", "", $this->_tableName);
+
         $this->setPrimaryKeyValue($primaryKeyValue);
         $this->load($showDeleted);
     }
@@ -182,7 +187,7 @@ class Entity {
             foreach ($this as $key => $value) {
                 if (substr($key, 0, 1) != '_') {
                     $columns .= "`" . $key . "`,";
-                    if (($key == $this->getPrimaryKeyName()) or (is_null($value)))
+                    if (( ($key == $this->getPrimaryKeyName()) and ($_SESSION['idiomas']['actual'] == 0)) or (is_null($value)))
                         $values .= "NULL,";
                     else
                         $values .= "'" . mysql_real_escape_string($value, $this->_dbLink) . "',";
@@ -242,9 +247,10 @@ class Entity {
                 if (!$this->_em->query($query))
                     $this->_errores = $this->_em->getError();
                 else {
+                    $this->Deleted = 1;
                     // Borrar la eventual url amigable
                     $url = new CpanUrlAmigables();
-                    $url->borraUrl($this->getClassName(), $this->getPrimaryKeyValue());
+                    $url->borraUrl($_SESSION['idiomas']['actual'], $this->getClassName(), $this->getPrimaryKeyValue());
                     unset($url);
                     // Borrar los eventuales documentos
                     $doc = new CpanDocs();
@@ -282,7 +288,7 @@ class Entity {
                 else {
                     // Borrar la eventual url amigable
                     $url = new CpanUrlAmigables();
-                    $url->borraUrl($this->getClassName(), $this->getPrimaryKeyValue());
+                    $url->borraUrl($_SESSION['idiomas']['actual'], $this->getClassName(), $this->getPrimaryKeyValue());
                     unset($url);
                     // Borrar los eventuales documentos
                     $doc = new CpanDocs();
@@ -313,9 +319,62 @@ class Entity {
      * @param array $datos
      */
     public function bind(array $datos) {
-        foreach ($datos as $key => $value) {
-            $this->{"set$key"}($value);
+        foreach ($datos as $key => $value)
+            if (method_exists($this, "set{$key}"))
+                $this->{"set$key"}($value);
+    }
+
+    /**
+     * Ejecuta una sentencia update sobre la entidad
+     * 
+     * @param array $array Array de parejas columna, valor
+     * @param string $condicion Condicion del where (sin el where)
+     * @return int El número de filas afectadas
+     */
+    public function queryUpdate($array, $condicion = '1') {
+
+        $filasAfectadas = 0;
+
+        $this->conecta();
+        if (is_resource($this->_dbLink)) {
+
+            foreach ($array as $key => $value)
+                $valores .= "{$key}='{$value}',";
+
+            // Quito la coma final
+            $valores = substr($valores, 0, -1);
+
+            $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET {$valores} WHERE ({$condicion})";
+            $this->_em->query($query);
+            $filasAfectadas = $this->_em->getAffectedRows();
+            $this->_em->desConecta();
         }
+        unset($this->_em);
+
+        return $filasAfectadas;
+    }
+
+    /**
+     * Ejecuta una sentencia update sobre la entidad
+     * 
+     * @param string $condicion Condicion del where (sin el where)
+     * @return int El número de filas afectadas
+     */
+    public function queryDelete($condicion) {
+
+        $filasAfectadas = 0;
+
+        $this->conecta();
+        if (is_resource($this->_dbLink)) {
+
+            $query = "DELETE FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE ({$condicion})";
+            $this->_em->query($query);
+            $filasAfectadas = $this->_em->getAffectedRows();
+            $this->_em->desConecta();
+        }
+        unset($this->_em);
+
+        return $filasAfectadas;
     }
 
     /**
@@ -457,7 +516,7 @@ class Entity {
             $this->Slug = '';
             $this->UrlFriendly = '';
             $urlAmigable = new CpanUrlAmigables();
-            $urlAmigable->borraUrl($this->getClassName(), $this->getPrimaryKeyValue(), FALSE);
+            $urlAmigable->borraUrl($_SESSION['idiomas']['actual'], $this->getClassName(), $this->getPrimaryKeyValue());
             unset($urlAmigable);
         }
 
@@ -708,6 +767,27 @@ class Entity {
         }
 
         return $row[0]['NumeroDeRegistros'];
+    }
+
+    public function getGalery($nItems = 0) {
+
+        $docs = new CpanDocs();
+        $rows = $docs->getDocs($this->getClassName(), $this->getPrimaryKeyValue(), "galery", "IsThumbnail='1'");
+        unset($docs);
+
+        if ($nItems > 0) {
+            $rows = array_chunk($rows, $nItems);
+            $rows = $rows[0];
+        }
+
+        foreach ($rows as $row) {
+            $array[] = array(
+                'thumbnail' => $row,
+                'foto' => $row->getBelongsTo(),
+            );
+        }
+
+        return $array;
     }
 
     /**
@@ -1011,6 +1091,15 @@ class Entity {
      */
     public function getPrimaryKeyName() {
         return $this->_primaryKeyName;
+    }
+
+    /**
+     * Cambia el nombre físico de la tabla
+     * 
+     * @param string $TableName El nombre físico de la tabla
+     */
+    public function setTableName($TableName) {
+        $this->_tableName = $TableName;
     }
 
     /**

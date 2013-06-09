@@ -57,11 +57,8 @@ class CpanDocsController extends Controller {
             unset($objetoNuevo);
 
             $lis = new CpanDocs();
-            $filtro = "Entity='{$entidad}' AND IdEntity='{$idEntidad}' AND Type='{$tipo}' AND IsThumbnail='0'";
-            $rows = $lis->cargaCondicion('Id', $filtro, 'SortOrder ASC');
-            foreach ($rows as $row) {
-                $lineas[] = new CpanDocs($row['Id']);
-            }
+            foreach ($lis->getDocs($entidad, $idEntidad, $tipo, "IsThumbnail='0'") as $doc)
+                array_push($lineas, $doc);
 
             unset($lis);
 
@@ -83,9 +80,8 @@ class CpanDocsController extends Controller {
             $template = 'CpanDocs/form.html.twig';
 
             return array('template' => $template, 'values' => $this->values);
-        } else {
+        } else
             return array('template' => '_global/forbiden.html.twig');
-        }
     }
 
     /**
@@ -123,6 +119,8 @@ class CpanDocsController extends Controller {
                                 $documento = $datos->getArrayDoc();
                                 $documento['maxWidth'] = $this->varEnvMod['galery']['maxWidthImage'];
                                 $documento['maxHeight'] = $this->varEnvMod['galery']['maxHeightImage'];
+                                $documento['modoRecortar'] = $this->request['modoRecortar'];
+
                                 $datos->setArrayDoc($documento);
                                 $lastId = $datos->create();
                                 if (!$lastId)
@@ -152,6 +150,7 @@ class CpanDocsController extends Controller {
                                 $documento = $datos->getArrayDoc();
                                 $documento['maxWidth'] = $this->varEnvMod['galery']['maxWidthImage'];
                                 $documento['maxHeight'] = $this->varEnvMod['galery']['maxHeightImage'];
+                                $documento['modoRecortar'] = $this->request['modoRecortar'];
                                 $datos->setArrayDoc($documento);
                                 $lastId = $datos->create();
                                 if (!$lastId)
@@ -163,7 +162,7 @@ class CpanDocsController extends Controller {
 
                         case 'document':
                         case 'video':
-                        case 'audio': 
+                        case 'audio':
                             if ($datos->valida($rules)) {
 
                                 $lastId = $datos->create();
@@ -222,11 +221,12 @@ class CpanDocsController extends Controller {
                     $documento = $this->request['FILES']['documento'];
                     $documento['maxWidth'] = $this->varEnvMod['galery']['maxWidthImage'];
                     $documento['maxHeight'] = $this->varEnvMod['galery']['maxHeightImage'];
-
+                    $documento['modoRecortar'] = $this->request['modoRecortar'];
                     $rules = $this->getRules($this->request[$this->entity]['Type']);
                     // Para que deje actualizar aunque estemos en el límite del
                     // número máximo de documentos
-                    $rules['numMaxDocs']++;
+                    if ($rules['numMaxDocs'] > 0)
+                        $rules['numMaxDocs']++;
 
                     $doc = new CpanDocs($id);
                     $doc->setTitle($title);
@@ -326,7 +326,7 @@ class CpanDocsController extends Controller {
 
     private function getRules($tipoDocumento) {
 
-        $rules['allowTypes'] = split(",", $this->varEnvPro['allowTypes']);
+        $rules['allowTypes'] = explode(",", $this->varEnvPro['allowTypes']);
         $rules['type'] = $tipoDocumento;
 
         switch ($tipoDocumento) {

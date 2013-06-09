@@ -1,0 +1,13 @@
+## TODAS LAS FIXTURES
+---
+<?php include '../Cpanel/entities/schema/fixturesAppCommBancosOficinas.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/fixturesAppCommCnae.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/fixturesAppCommIdiomas.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/fixturesAppCommImpuestos.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/fixturesAppCommMonedas.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/fixturesAppCommMunicipiosSpain.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/fixturesAppCommPaises.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/fixturesAppCommProvinciasSpain.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/fixturesAppCommZonasHorarias.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/fixturesAppCpan.yml'; echoln('');?>
+<?php include '../Cpanel/entities/schema/fixturesAppPcae.yml'; echoln('');?>

@@ -66,6 +66,7 @@ class Request {
      * @var array
      */
     private $oldBrowsers = array(
+        'MSIE 8',
         'MSIE 7',
         'MSIE 6',
     );
@@ -104,7 +105,7 @@ class Request {
      */
     public function getUrlFriendly($appPath) {
         // Cojo la url, incluido el path a la aplicacion
-        $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $url = parse_url(urldecode($_SERVER['REQUEST_URI']), PHP_URL_PATH);           
         // A la url le quito la parte del path a la aplicacion
         $urlSinPath = str_replace($appPath, "", $url);
 

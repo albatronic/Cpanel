@@ -1,15 +1,29 @@
 {# _global/headerRight.html.twig #}
 
 <div id="top_notification">
+        <div class="page_title_user">
+            {{ project.empresa}} - {{ project.title }} {% if user.IdPerfil.Id == '1' %}(Id:{{project.Id}}){% endif %}
+	   </div>
 
-{% if action == '' %} {% include '_global/linkNew.html.twig' %} {% endif %}
-{% if action == 'new' %} {% include '_global/linkCreate.html.twig' %} {% endif %}
-{% if action == 'edit' %}
-    {% include '_global/linkSaveDelete.html.twig' %}
-    {% include '_global/linkNew.html.twig' %}
-{% endif %}
+	<div id="botonesCabecera">
+		{{idiomas.actual}}
+		{% if action == '' and idiomas.actual == 0 %}
+		    {% include '_global/linkNew.html.twig' %}
+		{% endif %}
+		        
+		{% if action == 'new' and idiomas.actual == 0 %}
+		    {% include '_global/linkCreate.html.twig' %}
+		{% endif %}
+		        
+		{% if action == 'edit' %}
+		    {% include '_global/linkSave.html.twig' %}
+		    {% if idiomas.actual == 0 %}        
+		        {% include '_global/linkDelete.html.twig' %} 
+		    {% endif %}
+		    {% include '_global/linkNew.html.twig' %}
+		{% endif %}
 
-{% include '_global/linkHelp.html.twig' %}
-{% include '_global/linkLogout.html.twig' %}
-
+		{% include '_global/linkHelp.html.twig' %}
+		{% include '_global/linkLogout.html.twig' %}
+	</div>	
 </div>

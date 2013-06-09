@@ -13,7 +13,7 @@
 <div id="fieldsComunes">
         
         {# PERFILES CON PERMISO DE ACCESO DESDE CPANEL#}
-        {% if (user.IdPerfil.Id == '1') or ((values.permisos.permisosModulo['PC'] and atributos.AccessProfileList.visible == 1)) %}
+        {% if (idiomas.actual == 0) and ((user.IdPerfil.Id == '1') or ((values.permisos.permisosModulo['PC'] and atributos.AccessProfileList.visible == 1))) %}
         <div>
             <h3>Perfiles acceso panel de control</h3>
             <div>
@@ -26,7 +26,7 @@
         {% endif %}
     
         {# PERFILES CON PERMISO DE ACCESO DESDE LA WEB #}
-        {% if (user.IdPerfil.Id == '1') or ((values.permisos.permisosModulo['PW'] and atributos.AccessProfileListWeb.visible == 1)) %}    
+        {% if (idiomas.actual == 0) and ((user.IdPerfil.Id == '1') or ((values.permisos.permisosModulo['PW'] and atributos.AccessProfileListWeb.visible == 1))) %}    
         <div>
             <h3>Perfiles acceso web</h3>
             <div>
@@ -39,7 +39,7 @@
         {% endif %}
     
         {# GENERAL #}
-        {% if user.IdPerfil.Id == '1' or atributos.AllowsChildren.visible or atributos.BelongsTo.visible or atributos.CodigoAppAsociada.visible or atributos.IdAlbumExterno.visible or atributos.IdSliderAsociado.visible or atributos.IdSeccionEnlaces.visible or atributos.IdSeccionVideos.visible or atributos.Observations.visible %}        
+        {% if (idiomas.actual == 0) and (user.IdPerfil.Id == '1' or atributos.AllowsChildren.visible or atributos.BelongsTo.visible or atributos.CodigoAppAsociada.visible or atributos.IdAlbumExterno.visible or atributos.IdSliderAsociado.visible or atributos.IdSeccionEnlaces.visible or atributos.IdSeccionVideos.visible or atributos.Observations.visible) %}        
         <div>
             <h3>General</h3>
             <div>
@@ -50,8 +50,10 @@
                     {{ macro.input(atributos.IsDefault,'field_title','checkbox',values.controller ~ '[IsDefault]',values.controller ~ '_IsDefault',datos.IsDefault.IDTipo,'255','CampoTextoLargo','12') }}
                     {{ macro.input(atributos.IsSuper,'field_title','checkbox',values.controller ~ '[IsSuper]',values.controller ~ '_IsSuper',datos.IsSuper.IDTipo,'255','CampoTextoLargo','12') }}
                 {% endif %}
-                {{ macro.input(atributos.AllowsChildren,'field_title','checkbox',values.controller ~ '[AllowsChildren]',values.controller ~ '_AllowsChildren',datos.AllowsChildren.IDTipo,'255','CampoTextoLargo','12') }}    
-                {{ macro.select(atributos.BelongsTo,'field_title',values.controller ~ '[BelongsTo]',values.controller ~ '_BelongsTo',none,datos.BelongsTo.getPrimaryKeyValue,datos.BelongsTo.fetchAll(none),'chzn-select',110) }}
+                {{ macro.input(atributos.AllowsChildren,'field_title','checkbox',values.controller ~ '[AllowsChildren]',values.controller ~ '_AllowsChildren',datos.AllowsChildren.IDTipo,'255','CampoTextoLargo','12') }}
+                {% if datos.AllowsChildren.IDTipo == '1' %}       
+                    {{ macro.select(atributos.BelongsTo,'field_title',values.controller ~ '[BelongsTo]',values.controller ~ '_BelongsTo',none,datos.BelongsTo.getPrimaryKeyValue,datos.BelongsTo.fetchAll(none),'chzn-select',110) }}
+                {% endif %}
                 {# macro.input(atributos.SortOrder,'field_title','text',values.controller ~ '[SortOrder]',values.controller ~ '_SortOrder',datos.SortOrder,none,none,110) #}
                 {{ macro.select(atributos.CodigoAppAsociada,'field_title',values.controller ~ '[CodigoAppAsociada]',values.controller ~ '_CodigoAppAsociada',none,datos.CodigoAppAsociada.Id,datos.CodigoAppAsociada.fetchAll('NombreApp',1),'chzn-select',101)}}
                 {{ macro.selectGroup(atributos.IdAlbumExterno,'field_title',values.controller ~ '[IdAlbumExterno]',values.controller ~ '_IdAlbumExterno',none,datos.IdAlbumExterno.Id,datos.IdAlbumExterno.fetchAll(),'chzn-select',110) }}
@@ -65,12 +67,13 @@
         {% endif %}
         
         {# FECHAS #}
-        {% if user.IdPerfil.Id == '1' or atributos.PublishedAt.visible or atributos.ActiveFrom.visible or atributos.ActiveTo.visible %}
+        {% if (idiomas.actual == 0) and (user.IdPerfil.Id == '1' or atributos.PublishedAt.visible or atributos.ActiveFrom.visible or atributos.ActiveTo.visible) %}
         <div>
             <h3>Fechas</h3>
             <div>
                 <p>
                 {{ macro.fecha(atributos.PublishedAt,'field_title',values.controller ~ '[PublishedAt]',values.controller ~ '_PublishedAt',datos.PublishedAt,'19','datepicker',111) }}
+                {{ macro.input(atributos.ShowPublishedAt,'field_title','checkbox',values.controller ~ '[ShowPublishedAt]',values.controller ~ '_ShowPublishedAt',datos.ShowPublishedAt.IDTipo,'255','CampoTextoLargo','12') }}
                 {{ macro.fecha(atributos.ActiveFrom,'field_title',values.controller ~ '[ActiveFrom]',values.controller ~ '_ActiveFrom',datos.ActiveFrom,'19','datepicker',104) }}
                 {{ macro.fecha(atributos.ActiveTo,'field_title',values.controller ~ '[ActiveTo]',values.controller ~ '_ActiveTo',datos.ActiveTo,'19','datepicker',105) }}                
                 </p>
@@ -78,8 +81,8 @@
         </div>
         {% endif %}
         
-        {# META #}
-        {% if values.varEnvMod.metatagTitleManagement > '0' or user.IdPerfil.Id == '1' %}
+        {# POSICIONAMIENTO SEO #}
+        {% if user.IdPerfil.Id == '1' or values.varEnvMod.showMetaManagement == '1' %}
         <div>
             <h3>Posicionamiento (SEO)</h3>
             <div>
@@ -103,36 +106,43 @@
             <div>
             <h3>Imágenes ({{datos.getNumberOfDocuments('image%','IsThumbnail=0')}})</h3>
             <div>
-                <p>
+                {% if idiomas.actual == 0 %}
                 <input name="idImagenEnviar" id="idImagenEnviar" value="" type="hidden" />
-
-                <div style="margin-bottom: 20px;">
+                <div class="subirArchivo">
                     <div style="float: left;">
+                        <span>Imagen Master ({{values.varEnvMod.images[1].width}} x {{values.varEnvMod.images[1].height}}):</span>
                         <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
-                        Imágen Master:
+                        
                         <input name="imagenMaster" id="imagenMaster" type="file" />
-                    </div>
-                    <div id="foto" style="float: left;">
-                        <div id="botonSubmitImagen"></div>
-                        <input type="button" value="Enviar"
+                        <br/>Tratamiento de la imagen:&nbsp;
+                        <select name="modoRecortar">
+                            <option value="ajustar">Imagen completa</option>                            
+                            <option value="center">Recortar al centro</option>
+                        </select>
+                        <input type="button" class="comando comEnviar" value="Enviar"
                            onclick="
                                $('#action_{{ values.controller }}').val('Imagen');
                                $('#accion_{{ values.controller }}').val('EnviarMaster');
                                loading('botonSubmitImagen');
                                submitForm('manto_{{ values.controller}}');" 
-                        />
+                        />                        
+                    </div>
+
+                    <div id="foto" style="float: left;">
+                        <div id="botonSubmitImagen"></div>
                     </div>
                 </div>
+                {% endif %}
 
-                <table style="margin-top: 10px; width: 100%;">            
+                <div id="agrupacionImagenes">            
                     {% for key,imagen in values.datos.getDocuments('image%','IsThumbnail=0') %}
                     {% set puntero = key + 1%}
-                    <tr>
-                        <td align="center" style="width: 45%;">
+                    <div class="grupoImagen">
+                        <div class="visualImagen">
                             <div id="foto{{puntero}}">
-                                <img src="{{project.url}}/docs/{{values.controller}}/{{imagen.Name}}" width="150px" />
+                                <img style="border: 1px solid;" src="{{project.url}}/docs/{{values.controller}}/{{imagen.Name}}" width="{% if imagen.Width>350 %}350px{%else%}{{imagen.Width}}px{%endif%}" />
                             </div>
-                            <br />{{imagen.getSize}} 
+                            <br />{{imagen.getSize|number_format(0)}} bytes 
                             (
                             {{imagen.Width}}
                             {% if (imagen.Width != values.varEnvMod.images[puntero].width) %}
@@ -142,45 +152,57 @@
                             {{imagen.Height}}
                             {% if (imagen.Height != values.varEnvMod.images[puntero].height) %}
                             <img src="{{app.path}}/images/icono_exclamacion.gif" title="La altura correcta debería ser {{values.varEnvMod.images[puntero].height}}" />                            
-                            {% endif %}                            
-                            )
-                            <br />
-                            <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
-                            <input name="image{{puntero}}" id="imagen_{{puntero}}_Doc" type="file"/>
-                        </td>
-                        <td style="vertical-align: top !important;">
+                            {% endif %} 
+                            )                                                   
+                        </div>
+
+                        <div class="imagenInfo">
                             <h4>{{values.varEnvMod.images[puntero].caption}}</h4>
+                            <div class="subirNuevoArchivo">
+                                {% if idiomas.actual == 0 %}
+                                    <input name="MAX_FILE_SIZE" value="{{values.varEnvMod.maxSizes.image}}" type="hidden"  />
+                                    <input name="image{{puntero}}" id="imagen_{{puntero}}_Doc" type="file"/>
+                                {% endif %}
+                            </div>
+
                             <input name="image[{{puntero}}][Tipo]" id="image_{{puntero}}_Tipo" value="{{imagen.Type}}" type="hidden" />
                             <input name="image[{{puntero}}][Id]" id="image_{{puntero}}_Id" value="{{imagen.Id}}" type="hidden" />
                             <input name="image[{{puntero}}][SortOrder]" id="image_{{puntero}}_SortOrder" value="{{imagen.SortOrder}}" type="hidden" />
+                            <br/>Tratamiento de la imagen:&nbsp;
+                            <select name="image[{{puntero}}][modoRecortar]" id="image_{{puntero}}_modoRecortar">
+                                <option value="center">Recortar al centro</option>
+                                <option value="ajustar">Imagen completa</option>
+                            </select>
                             {{ macro.input({'caption':'Título','visible':values.varEnvMod.images[puntero].mostrarTitulo,'varEnv':'0'},'field_title','text','image['~puntero~'][Title]','image_'~puntero~'_Title',imagen.Title,255,none) }}
                             {{ macro.input({'caption':'Nombre','visible':values.varEnvMod.images[puntero].mostrarNombre,'varEnv':'0'},'field_title','text','image['~puntero~'][Name]','image_'~puntero~'_Name',imagen.Name,255,none) }}
-                            {{ macro.input({'caption':'Mostrar pie de foto','visible':values.varEnvMod.images[puntero].mostrarPieDeFoto,'varEnv':'0'},'field_title','checkbox','image['~puntero~'][ShowCaption]','image_'~puntero~'_ShowCaption',imagen.ShowCaption.IDTipo,'255','CampoTextoLargo','12') }}
-                            {{ macro.input({'caption':'Publicar','visible':values.varEnvMod.images[puntero].mostrarPublicar,'varEnv':'0'},'field_title','checkbox','image['~puntero~'][Publish]','image_'~puntero~'_Publish',imagen.Publish.IDTipo,'255','CampoTextoLargo','12') }}
-                            <div id="botonera{{puntero}}" style="text-align: center;">
-                            <input type="button" value="Guardar cambios" class="comando"
-                                onclick="
-                                    $('#action_{{ values.controller }}').val('Imagen');
-                                    $('#accion_{{ values.controller }}').val('GuardarCambios');
-                                    $('#idImagenEnviar').val('{{puntero}}');
-                                    loading('botonera{{puntero}}');
-                                    submitForm('manto_{{ values.controller}}');" />
+                            {{ macro.input({'caption':'Mostrar pie de foto','visible':values.varEnvMod.images[puntero].mostrarPieDeFoto,'varEnv':'0'},'field_title','checkbox','image['~puntero~'][ShowCaption]','image_'~puntero~'_ShowCaption',imagen.ShowCaption.IDTipo,'255',none,'12') }}
+                            {{ macro.input({'caption':'Publicar','visible':values.varEnvMod.images[puntero].mostrarPublicar,'varEnv':'0'},'field_title','checkbox','image['~puntero~'][Publish]','image_'~puntero~'_Publish',imagen.Publish.IDTipo,'255',none,'12') }}
 
-                            <input type="button" value="Borrar imagen" class="comando"
-                                onclick="
-                                    if (!confirm('¿Desea borrar la imagen?')) {return false;}
-                                    else {
-                                    $('#action_{{ values.controller }}').val('Imagen');
-                                    $('#accion_{{ values.controller }}').val('Quitar');
-                                    $('#idImagenEnviar').val('{{puntero}}');
-                                    submitForm('manto_{{ values.controller}}');
-                                    }" />
+                            <div class="botonera" id="botonera{{puntero}}">
+                                <input type="button" value="Guardar cambios" class="comando"
+                                    onclick="
+                                        $('#action_{{ values.controller }}').val('Imagen');
+                                        $('#accion_{{ values.controller }}').val('GuardarCambios');
+                                        $('#idImagenEnviar').val('{{puntero}}');
+                                        loading('botonera{{puntero}}');
+                                        submitForm('manto_{{ values.controller}}');" />
+                                {% if idiomas.actual == 0 %}
+                                <input type="button" value="Borrar imagen" class="comando"
+                                    onclick="
+                                        if (!confirm('¿Desea borrar la imagen?')) {return false;}
+                                        else {
+                                        $('#action_{{ values.controller }}').val('Imagen');
+                                        $('#accion_{{ values.controller }}').val('Quitar');
+                                        $('#idImagenEnviar').val('{{puntero}}');
+                                        submitForm('manto_{{ values.controller}}');
+                                        }" />
                             </div>
-                        </td>
-                    </tr>
-                    <tr style="height: 20px;"></tr>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div style="height: 20px;"></div>
                     {% endfor %}
-                </table>                    
+                </div>                    
                 </p>
             </div>
             </div>
@@ -227,7 +249,7 @@
             {% endif %}
 
             {# SOLAPA URLS #}
-            {% if user.IdPerfil.Id == '1' or values.varEnvMod.urlFriendlyManagement == '1' %}            
+            {% if user.IdPerfil.Id == '1' or values.varEnvMod.showUrlFriendlyManagement == '1' %}            
             <div>
                 <h3>Url Amigable {% if datos.UrlFriendly %}({{datos.UrlFriendly}}){% endif %}</h3>
                 <div>
@@ -246,17 +268,17 @@
                     {% if user.IdPerfil.Id == 1 %}
                         {% set objetoUrlAmigable = datos.getObjetoUrlAmigable %}
                         <input name="objetoUrlAmigable[Id]" value="{{objetoUrlAmigable.Id}}" type="hidden" />
-                        {{ macro.input({'caption':'Controller','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Controller]','CpanUrlAmigables_Controller',objetoUrlAmigable.Controller,'255','CampoTextoLargo','12') }}
-                        {{ macro.input({'caption':'Action','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Action]','CpanUrlAmigables_Action',objetoUrlAmigable.Action,'255','CampoTextoLargo','12') }}
-                        {{ macro.input({'caption':'Template','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Template]','CpanUrlAmigables_Template',objetoUrlAmigable.Template,'255','CampoTextoLargo','12') }}
-                        {{ macro.input({'caption':'Parameters','visible':'1','updatable':'1','varEnv':'0'},'field_title','text','objetoUrlAmigable[Parameters]','CpanUrlAmigables_Parameters',objetoUrlAmigable.Parameters,'255','CampoTextoLargo','12') }}
+                        {{ macro.input({'caption':'Controller','visible':'1','updatable':'1','varEnv':'0','translatable':'1'},'field_title','text','objetoUrlAmigable[Controller]','CpanUrlAmigables_Controller',objetoUrlAmigable.Controller,'255','CampoTextoLargo','12') }}
+                        {{ macro.input({'caption':'Action','visible':'1','updatable':'1','varEnv':'0','translatable':'1'},'field_title','text','objetoUrlAmigable[Action]','CpanUrlAmigables_Action',objetoUrlAmigable.Action,'255','CampoTextoLargo','12') }}
+                        {{ macro.input({'caption':'Template','visible':'1','updatable':'1','varEnv':'0','translatable':'1'},'field_title','text','objetoUrlAmigable[Template]','CpanUrlAmigables_Template',objetoUrlAmigable.Template,'255','CampoTextoLargo','12') }}
+                        {{ macro.input({'caption':'Parameters','visible':'1','updatable':'1','varEnv':'0','translatable':'1'},'field_title','text','objetoUrlAmigable[Parameters]','CpanUrlAmigables_Parameters',objetoUrlAmigable.Parameters,'255','CampoTextoLargo','12') }}
                     {% endif %}
                 </div>
             </div>
             {% endif %}
             
             {# SOLAPA URL DESTINO #}
-            {% if user.IdPerfil.Id == 1 or atributos.UrlTarget.visible == 1 or atributos.UrlParameters.visible == 1 or atributos.UrlRequestMethod.visible == 1 or atributos.UrlOrigin.visible == 1 or atributos.UrlTargetBlank.visible == 1 or atributos.UrlIsHttps.visible == 1 %}
+            {% if (idiomas.actual == 0) and (user.IdPerfil.Id == 1 or atributos.UrlTarget.visible == 1 or atributos.UrlParameters.visible == 1 or atributos.UrlRequestMethod.visible == 1 or atributos.UrlOrigin.visible == 1 or atributos.UrlTargetBlank.visible == 1 or atributos.UrlIsHttps.visible == 1) %}
             <div>
                 <h3>Url Destino {% if datos.UrlTarget %}({{datos.UrlTarget}}){% endif %}</h3>
                 <div>
@@ -271,7 +293,7 @@
             {% endif %}
             
             {# SOLAPA SITEMAP #}
-            {% if user.IdPerfil.Id == '1' or values.varEnvMod.showSiteMapManagement == '1' %}              
+            {% if (idiomas.actual == 0) and (user.IdPerfil.Id == '1' or values.varEnvMod.showSiteMapManagement == '1') %}              
             <div>
                 <h3>Site Map</h3>
                 <div>
@@ -283,7 +305,7 @@
             {% endif %}
             
             {# SOLAPA ENTIDADES RELACIONADAS #}
-            {% if user.IdPerfil.Id == '1' %}       
+            {% if (idiomas.actual == 0) and (user.IdPerfil.Id == '1') %}       
             <div>
                 <h3 id="relacionar">Relacionar con ...</h3>
                 <div id="divRelacionar"></div>
@@ -291,18 +313,15 @@
             {% endif %}
             
             {# SOLAPA AUDITORIA #}
-            {% if user.IdPerfil.Id == 1 or atributos.Checked.visible == 1 or atributos.Privacy.visible == 1 or atributos.NumberVisits.visible == 1 or atributos.DateTimeLastVisit.visible == 1 %}
+            {% if (idiomas.actual == 0) and (user.IdPerfil.Id == 1 or atributos.Checked.visible == 1 or atributos.Privacy.visible == 1 or atributos.NumberVisits.visible == 1 or atributos.DateTimeLastVisit.visible == 1) %}
             <div>
                 <h3>Auditoría</h3>
                 <div>
                     {{ macro.input(atributos.Checked,'field_title','checkbox',values.controller ~ '[Checked]',values.controller ~ '_Checked',datos.Checked.IDTipo,'255','CampoTextoLargo','12') }}
                     {{ macro.radio(atributos.Privacy,'field_title',values.controller ~ '[Privacy]',values.controller ~ '_Privacy',datos.Privacy.IDTipo,datos.Privacy.fetchAll(none,0),'chzn-radio',109)}}
                     {% if datos.getPrimaryKeyValue %}
-                        {% if values.varEnvMod.showNumberVisits %}
                         {{ macro.input(atributos.NumberVisits,'field_title','text',values.controller ~ '[NumberVisits]',values.controller ~ '_NumberVisits',datos.NumberVisits,none,'CampoImporte',113, 'disabled') }}
-                        {% endif %}
                         {{ macro.input(atributos.DateTimeLastVisit,'field_title','text',values.controller ~ '[DateTimeLastVisit]',values.controller ~ '_DateTimeLastVisit',datos.DateTimeLastVisit,none,'CampoImporte',114, 'disabled') }}
-
                         {{ macro.input(atributos.CreatedBy,'field_title','text',values.controller ~ '[CreatedBy]',values.controller ~ '_CreatedBy',datos.CreatedBy,none,none,107,'disabled') }}
                         {{ macro.input(atributos.CreatedAt,'field_title','text',values.controller ~ '[CreatedAt]',values.controller ~ '_CreatedAt',datos.CreatedAt,none,'CampoImporte',108,'disabled') }}
                         {{ macro.input(atributos.ModifiedBy,'field_title','text',values.controller ~ '[ModifiedBy]',values.controller ~ '_ModifiedBy',datos.ModifiedBy,none,none,107,'disabled') }}
@@ -317,21 +336,20 @@
                 </div>
             </div>
             {% endif %}
-
-            {# SOLAPA MOSTRAR... #}
-            {% if user.IdPerfil.Id == 1 or atributos.ShowGalery.visible == 1 or atributos.ShowDocuments.visible == 1 or atributos.ShowRelatedLinks.visible == 1 or atributos.ShowRelatedContents == 1 or atributos.ShowPublishedAt.visible == 1 %}
-            <div>
-                <h3>Mostrar ...</h3>
-                <div>
-                    {{ macro.input(atributos.ShowGalery,'field_title','checkbox',values.controller ~ '[ShowGalery]',values.controller ~ '_ShowGalery',datos.ShowGalery.IDTipo,'255','CampoTextoLargo','12') }}
-                    {{ macro.input(atributos.ShowDocuments,'field_title','checkbox',values.controller ~ '[ShowDocuments]',values.controller ~ '_ShowDocuments',datos.ShowDocuments.IDTipo,'255','CampoTextoLargo','12') }}
-                    {{ macro.input(atributos.ShowRelatedLinks,'field_title','checkbox',values.controller ~ '[ShowRelatedLinks]',values.controller ~ '_ShowRelatedLinks',datos.ShowRelatedLinks.IDTipo,'255','CampoTextoLargo','12') }}
-                    {{ macro.input(atributos.ShowRelatedContents,'field_title','checkbox',values.controller ~ '[ShowRelatedContents]',values.controller ~ '_ShowRelatedContents',datos.ShowRelatedContents.IDTipo,'255','CampoTextoLargo','12') }}
-                    {{ macro.input(atributos.ShowPublishedAt,'field_title','checkbox',values.controller ~ '[ShowPublishedAt]',values.controller ~ '_ShowPublishedAt',datos.ShowPublishedAt.IDTipo,'255','CampoTextoLargo','12') }}
-                </div>
-            </div>
-            {% endif %}
         {% endif %}
+    
+        {# SOLAPA MOSTRAR... #}
+        {% if (idiomas.actual == 0) and (user.IdPerfil.Id == 1 or atributos.ShowGalery.visible == 1 or atributos.ShowDocuments.visible == 1 or atributos.ShowRelatedLinks.visible == 1 or atributos.ShowRelatedContents == 1) %}
+        <div>
+            <h3>Mostrar ...</h3>
+            <div>
+                {{ macro.input(atributos.ShowGalery,'field_title','checkbox',values.controller ~ '[ShowGalery]',values.controller ~ '_ShowGalery',datos.ShowGalery.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.input(atributos.ShowDocuments,'field_title','checkbox',values.controller ~ '[ShowDocuments]',values.controller ~ '_ShowDocuments',datos.ShowDocuments.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.input(atributos.ShowRelatedLinks,'field_title','checkbox',values.controller ~ '[ShowRelatedLinks]',values.controller ~ '_ShowRelatedLinks',datos.ShowRelatedLinks.IDTipo,'255','CampoTextoLargo','12') }}
+                {{ macro.input(atributos.ShowRelatedContents,'field_title','checkbox',values.controller ~ '[ShowRelatedContents]',values.controller ~ '_ShowRelatedContents',datos.ShowRelatedContents.IDTipo,'255','CampoTextoLargo','12') }}
+            </div>
+        </div>
+        {% endif %}    
     
 </div>
 

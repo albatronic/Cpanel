@@ -24,8 +24,13 @@ config:
     framework: bin/albatronic/
     urlParent: http://localhost/Pcae
 
+  # INFORMACION PARA SEO
+  meta:
+    author: 'Informática Albatronic, SL'
+    revisitAfter: 10
+    
   # SEMILLA PARA CONSTRUIR CLAVES MD5
-  semillaMD5: verano
+  semillaMD5: pablo
   
   # SERVICIO PARA CONTROL DE VISITAS  
   visitas:
@@ -35,7 +40,7 @@ config:
   
   # FIRMAS DE LA WEB
   signatures:
-    links: 'www.articoestudio.com'
+    links: 'www.albatronic.com'
     services:
       'es': 'Diseño web,Venta Online,Posicionamiento web'
       'en': 'Web design,eCommerce,SEO'
@@ -68,11 +73,11 @@ config:
     motor: PHPMailer
     socket: smtp
     port: 25
-    host: smtp.articoestudio.com
+    host: mail.albatronic.com
     smtp_auth: true
-    user_name: info@articoestudio.com
-    password: Goanita2012
-    from: info@articoestudio.com
+    user_name: info@albatronic.com
+    password: i1234o
+    from: info@albatronic.com
     from_name: Web Master
     timeout: 30
     mensajeExito: 'Su mensaje ha sido enviado correctamente.'
@@ -100,7 +105,7 @@ config:
     templates_folder: modules
     debug_mode: true
     cache_folder: tmp
-    charset: null
+    charset: utf-8
 
   # PROYECTOS Y CONEXIONES A LAS BASES DE DATOS
   # LA CARPETA DE CADA PROYECTO SE INDICA EL NODO FOLDER Y SE ENTIENDE
@@ -109,11 +114,11 @@ config:
   # EN PRODUCCION EL FOLDER SERÁ "/"
   conections:
     pcae:
-      title: Portal Cloud Ártico Estudio
+      title: Portal Cloud Albatronic
       description:
       folder: /Pcae
       dbEngine: mysql
       host: localhost
-      user: pcae
-      password: pcae
-      database: pcae
+      user: root
+      password: albatronic
+      database: albatro_pacs

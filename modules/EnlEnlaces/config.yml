@@ -5,6 +5,7 @@ EnlEnlaces:
     fromColumn: IdSeccion
     toEntity: EnlSecciones
     toColumn: Id
+  translatable: true    
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '3'
@@ -91,7 +92,7 @@ EnlEnlaces:
     Titulo:
       title: Título
       filter: YES
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: null

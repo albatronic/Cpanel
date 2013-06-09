@@ -33,6 +33,47 @@ class CpanRelaciones extends CpanRelacionesEntity {
 
         return ($row[0]['Id']);
     }
+    
+    /**
+     * Borrar todas las relaciones existentes con la entidad e
+     * id de entidad origen
+     * 
+     * @param integer $entidadOrigen El nombre la entidad origen
+     * @param integer $idOrigen El id de la entidad origen
+     */
+    public function eraseRelaciones($entidadOrigen, $idOrigen) {
+        
+        $em = new EntityManager($this->getConectionName());
+        if ($em->getDbLink()) {
+            $query = "delete from {$this->getDataBaseName()}.{$this->getTableName()} WHERE EntidadOrigen='{$entidadOrigen}' AND IdEntidadOrigen='{$idOrigen}'";
+            $em->query($query);
+            $em->desConecta();
+        }
+        unset($em);
+    }
+    
+    /**
+     * Devuelve un array con objetos relacionados
+     * 
+     * @param string $entidadOrigen El nombre de la entidad origen
+     * @param integer $idOrigen El id de la entidad origen
+     * @param string $entidadDestino El nombre de la entidad destino. Opcional. Por defecto todas
+     * @return array Array de objetos relacionados
+     */
+    public function getObjetosRelacionados($entidadOrigen, $idOrigen, $entidadDestino = '') {
+        
+        $array = array();
+        
+        if ($entidadDestino != '')
+            $filtroDestino = "AND EntidadDestino='{$entidadDestino}'";
+
+        $relaciones = $this->cargaCondicion("EntidadDestino,IdEntidadDestino","EntidadOrigen='{$entidadOrigen}' AND IdEntidadOrigen='{$idOrigen}' {$filtroDestino}","EntidadDestino ASC");
+        
+        foreach ($relaciones as $relacion) 
+            $array[] = new $relacion['EntidadDestino']($relacion['IdEntidadDestino']);
+        
+        return $array;
+    }
 }
 
 ?>

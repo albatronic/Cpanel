@@ -76,6 +76,7 @@ CpanUsuarios:
 
 CpanUrlAmigables:
   columns:
+    Idioma:        { type: tinyint(1),  notnull: true, default: 0 }
     UrlFriendly:   { type: string(255), notnull: true, index: Unique }
     Controller:    { type: string(255), notnull: true }
     Action:        { type: string(255), notnull: true }
@@ -109,8 +110,9 @@ CpanRelaciones:
 
 CpanDocs:
   columns:
+    Idioma:      { type: tinyint(1), notnull: true, default: 0 }
     Entity:      { type: string(255), notnull: true}
-    IdEntity:    { type: integer(11), notnull: true}
+    IdEntity:    { type: bigint(11), notnull: true}
     Type:        { type: string(10), notnull: true, index: index, comment: 'Abstract,TiposDocs,IDTipo' }
     IsThumbnail: { type: boolean, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
     PathName:    { type: string(255), notnull: true, default: ''}
@@ -126,26 +128,18 @@ CpanDocs:
   relations:
     IdMimeType: { ForeignEntity: TiposMime, ForeignId: IDTipo }
     
-# ESQUELETO WEB TIENDAS ONLINES
-CpanEsqueletoWeb:
-  comment: Esqueleto de zonas de la web
-  columns:
-    Controller:   { type: string(50), notnull: true, index: index }
-    Zona:         { type: integer(2), notnull: true, default: 0 }
-    IdEstado:     { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpArticulosEstados,Id' }
-    IdMarca:      { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpMarcas,Id' }
-    IdCategoria:  { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpFamilias,Id' }
-    IdFamilia:    { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpFamilias,Id' }    
-    IdSubfamilia: { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,ErpFamilias,Id' }
-    Filtro:       { type: string(255), notnull: false }
-    NItems:       { type: integer(2), notnull: true, default: 0 }
-    ItemsPagina:  { type: integer(2), notnull: true, default: 0 }    
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
-  relations:
-
 # PERFILES PARA LOS USUARIOS WEB
 WebPerfiles:
   columns:
     Perfil: { type: string(50), notnull: true }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+
+# TABLAS DE BUSQUEDAS
+CpanSearch:
+  columns:
+    Texto:       { type: varchar(500), notnull: true }
+    Entity:      { type: string(255), notnull: true }
+    IdEntity:    { type: bigint(11), notnull: true }    
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:    

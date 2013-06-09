@@ -1,0 +1,24 @@
+{#
+  Module: EncargosLineas
+  Document : modules\EncargosLineas\index.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 20.02.2013 15:47:58
+#}
+
+{% extends '_global/layoutPopup.html.twig' %}
+
+
+{% block content %}
+    {% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
+    {% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
+
+    <div id='div_listado'>
+    {% block listado %}
+    {% endblock %}
+    </div>
+
+    {% block mantenimiento %}
+    {% endblock %}
+{% endblock %}

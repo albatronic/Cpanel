@@ -343,6 +343,30 @@ class CpanVariablesController {
         return array('template' => $template, 'values' => $this->values);
     }
 
+
+    /**
+     * Muestra el template de ayuda asociado al controlador
+     * El nombre del template de ayuda está definido en el
+     * nodo <help_file> del config.yml del controlador
+     * Si no existiera, se muestra un template indicando esta
+     * circunstancia
+     *
+     * @return array con el template a renderizar
+     */
+    public function helpAction() {
+        $template = $this->entity . '/' . $this->form->getHelpFile();
+        $file = "modules/" . $template;
+        if (!is_file($file) or ($this->form->getHelpFile() == '')) {
+            $template = "_help/noFound.html.twig";
+        }
+
+        $values['title'] = $this->form->getTitle();
+        $values['idVideo'] = $this->form->getIdVideo();
+        $values['urlVideo'] = $this->form->getUrlVideo();
+
+        return array('template' => $template, 'values' => $values);
+    }
+    
     /**
      * Pone los valores por defecto de las variables en base a los establecido
      * en el config del proyecto, aplicacion ó módulo
@@ -403,6 +427,11 @@ class CpanVariablesController {
                         foreach ($mail as $key => $value)
                             if ($datos['mail'][$key] == '')
                                 $datos['mail'][$key] = $value;
+                            
+                        $meta = $archivoConfig['config']['meta'];
+                        foreach ($meta as $key => $value)
+                            if ($datos['meta'][$key] == '')
+                                $datos['meta'][$key] = $value;                            
                         break;
                 }
                 break;
@@ -426,6 +455,10 @@ class CpanVariablesController {
 
                     if ($datos['isModuleRoot'] == '')
                         $datos['isModuleRoot'] = $archivoConfig->getNode('isModuleRoot');
+                    if ($datos['translatable'] == '')
+                        $datos['translatable'] = $archivoConfig->getNode('translatable');  
+                    if ($datos['searchable'] == '')
+                        $datos['searchable'] = $archivoConfig->getNode('searchable');                     
                     if ($datos['showCommonFields'] == '')
                         $datos['showCommonFields'] = $archivoConfig->getNode('showCommonFields');
                     if ($datos['numMaxRecords'] == '')
@@ -494,12 +527,12 @@ class CpanVariablesController {
                 if ($tipo == 'Web') {
                     // Variables web globales
                     $linkModule = $archivoConfig->getNode('linkModule');
-                    if ($datos['global']['linkFromColumn'] == '')
-                        $datos['global']['linkFromColumn'] = $linkModule['fromColumn'];
-                    if ($datos['global']['linkToEntity'] == '')
-                        $datos['global']['linkToEntity'] = $linkModule['toEntity'];
-                    if ($datos['global']['linkToColumn'] == '')
-                        $datos['global']['linkToColumn'] = $linkModule['toColumn'];
+                    if ($datos['globales']['linkFromColumn'] == '')
+                        $datos['globales']['linkFromColumn'] = $linkModule['fromColumn'];
+                    if ($datos['globales']['linkToEntity'] == '')
+                        $datos['globales']['linkToEntity'] = $linkModule['toEntity'];
+                    if ($datos['globales']['linkToColumn'] == '')
+                        $datos['globales']['linkToColumn'] = $linkModule['toColumn'];
 
                     // Variables web específicas
                     $varWebEspecificas = sfYaml::load("modules/{$nombre}/varWeb.yml");
@@ -573,7 +606,7 @@ class CpanVariablesController {
     private function getEspecificas($datosEspecificas) {
 
         foreach ($this->variables->getArrayEspecificas() as $key => $especifica) {
-            $valorActual = $datosEspecificas[$key]['value'];
+            $valorActual = $datosEspecificas[$key];
 
             $especificas[$key] = array(
                 'caption' => $especifica['caption'],

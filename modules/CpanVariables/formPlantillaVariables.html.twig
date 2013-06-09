@@ -33,7 +33,7 @@
                     {% for variable,valor in values.datos %}
                         {% if variable != 'listaValores' %}
                         <p>
-                        {% if ( (hayListaValores and (variable == 'default') ) or ( (variable == 'visible') or (variable == 'updatable') or (variable == 'editorTiny') or (variable == 'saveTinyAsFile') ) ) %}
+                        {% if ( (hayListaValores and (variable == 'default') ) or ( (variable == 'visible') or (variable == 'updatable') or (variable == 'translatable') or (variable == 'searchable') or (variable == 'editorTiny') or (variable == 'filter') or (variable == 'list') ) ) %}
 
                             {% if (variable == 'default') %}
                                 {% set listaValores = values.datos.listaValores %}

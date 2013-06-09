@@ -43,7 +43,9 @@ body#theme-default {
 }
 /*=== LAYOUT SPRITE ===*/
  #theme-default .top_search, #theme-default .primary_active, #theme-default #primary_nav li a, #theme-default .widget_top {
-	background:#fff url(../images/layout-sprite.png) repeat-x;
+	border-bottom: #01132a 1px solid;
+	border-top: 1px solid #666;
+	float: left;
 }
 
 #theme-default #secondary_nav ul li a {
@@ -69,9 +71,8 @@ background-color:#eee;
 	-webkit-box-shadow: 0 0 3px#999;
 	box-shadow: 0 0 3px #999;
 */}
-#theme-default #primary_nav {
-	
-	border-right:#0e4169 1px solid;
+#theme-default #primary_nav {	
+	border-right:#444444 1px solid;
 }
 #theme-default #primary_nav ul{ border-bottom:#01132a 1px solid;}
 #theme-default #primary_nav li a {
@@ -150,7 +151,7 @@ background-color:#999;
 
 
 #theme-default #primary_nav .icon_block, #theme-default .search_btn{
-	background:url(../images/sprite-icons/layout-icons.png) no-repeat;
+	background:url(../images/sprite-icons/iconos-menu.png) no-repeat;
 }
 #theme-default .nav_icon, #theme-default .p_dashboard{
 	background:url(../images/sprite-icons/icon-black.png) no-repeat;}

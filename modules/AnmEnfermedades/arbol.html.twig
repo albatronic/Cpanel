@@ -1,0 +1,10 @@
+{# ARBOL DE ENFERMEDADES DE ANIMALES #}
+
+<ul class="arbol">
+{% for enfermedad in arbol %}
+    <li class="arbol">
+        {{ macro.actualizaRelacion(values.entidadOrigen,values.idOrigen,'AnmEnfermedades',enfermedad.id,enfermedad.estaRelacionado) }}
+        {{enfermedad.titulo}} 
+    </li>
+{% endfor %}
+</ul>

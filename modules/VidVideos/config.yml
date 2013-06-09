@@ -5,6 +5,7 @@ VidVideos:
     fromColumn: IdSeccion
     toEntity: VidSecciones
     toColumn: Id
+  translatable: true    
   showCommonFields: true
   numMaxRecords: ''
   numberOfImages: '1'

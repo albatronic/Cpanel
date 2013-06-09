@@ -22,6 +22,10 @@ class VariablesEnv {
         'updatable' => 'updatable',
         'help' => 'help',
         'permission' => 'permission',
+        'translatable' => 'translatable',
+        'searchable' => 'searchable',
+        'filter' => 'filter',
+        'list' => 'list',        
         'editorTiny' => '',
     );
 

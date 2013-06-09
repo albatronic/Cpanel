@@ -8,13 +8,14 @@
 
 {% set numeroContenidosFijos = 4 %}
 {% set esSuper = (user.IdPerfil.Id == '1')%}
+{% set ValoresIzqDcha = { '0':{'Id':'0','Value':'Izquierda'}, '1':{'Id':'1','Value':'Derecha'} }  %}
 
 {% block template %}
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
         <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Global [globales]</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-mail">Mail [mail]</a></li>
-        <li class="ui-state-default ui-corner-top"><a href="#tabs-meta">Meta [meta]</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabs-meta">SEO [meta]</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-firmas">Firmas [signatures]</a></li>
         <li class="ui-state-default ui-corner-top"><a href="#tabs-contenidosFijos">Contenidos fijos [staticContents]</a></li>        
     </ul>
@@ -52,11 +53,14 @@
         
     <div id="tabs-meta" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.input({'caption':'[webName] Nombre de la Web','visible':'1','varEnv':'0'},'field_title','text','datos[meta][webName]','datos_meta_webName',values.datos.meta.webName,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[title] Título','visible':'1','varEnv':'0'},'field_title','text','datos[meta][title]','datos_meta_title',values.datos.meta.title,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[keyWords] Keywords','visible':'1','varEnv':'0'},'field_title','text','datos[meta][keyWords]','datos_meta_keyWords',values.datos.meta.keyWords,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[description] Description','visible':'1','varEnv':'0'},'field_title','text','datos[meta][description]','datos_meta_description',values.datos.meta.description,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[author] Author','visible':'1','varEnv':'0'},'field_title','text','datos[meta][author]','datos_meta_author',values.datos.meta.author,'50','CampoTextoCorto','1') }}
+        {{ macro.textarea({'caption':'[title] Título','visible':'1','varEnv':'0'},'field_title','datos[meta][title]','datos_meta_title',values.datos.meta.title,none,none,'textarea',100)}}              
+        {{ macro.textarea({'caption':'[description] Description','visible':'1','varEnv':'0'},'field_title','datos[meta][description]','datos_meta_description',values.datos.meta.description,none,none,'textarea',100)}}              
+        {{ macro.textarea({'caption':'[keyWords] Keywords (separados por coma)','visible':'1','varEnv':'0'},'field_title','datos[meta][keyWords]','datos_meta_keyWords',values.datos.meta.keyWords,none,none,'textarea',100)}}              
+        {{ macro.input({'caption':'[titleSimple] TitleSimple','visible':'1','varEnv':'0'},'field_title','checkbox','datos[meta][titleSimple]','datos_meta_titleSimple',values.datos.meta.titleSimple,'1','CampoTextoLargo','1') }}
+        {{ macro.select({'caption':'[titlePosition] TitlePosition','visible':'1','updatable':'1','varEnv':'0'},'field_title','datos[meta][titlePosition]','datos_meta_titlePosition',none,values.datos.meta.titlePosition,ValoresIzqDcha,'chzn-select',1)}}                
         {{ macro.input({'caption':'[revisitAfter] revisitAfter','visible':'1','varEnv':'0'},'field_title','text','datos[meta][revisitAfter]','datos_meta_revisitAfter',values.datos.meta.revisitAfter,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[author] Author','visible':'1','varEnv':'0'},'field_title','text','datos[meta][author]','datos_meta_author',values.datos.meta.author,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[owner] Propietario','visible':'1','varEnv':'0'},'field_title','text','datos[meta][owner]','datos_meta_owner',values.datos.meta.owner,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[geoRegion] geoRegion','visible':'1','varEnv':'0'},'field_title','text','datos[meta][geoRegion]','datos_meta_geoRegion',values.datos.meta.geoRegion,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[geoPlaceName] geoPlaceName','visible':'1','varEnv':'0'},'field_title','text','datos[meta][geoPlaceName]','datos_meta_geoPlaceName',values.datos.meta.geoPlaceName,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[geoPositionLongitude] geoPositionLongitude','visible':'1','varEnv':'0'},'field_title','text','datos[meta][geoPositionLongitude]','datos_meta_geoPositionLongitude',values.datos.meta.geoPositionLongitude,'50','CampoTextoCorto','1') }}
@@ -68,7 +72,7 @@
         {{ macro.input({'caption':'[locations] Localizaciones geográficas separadas por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][locations]','datos_signatures_links',values.datos.signatures.locations,'255','CampoTextoCorto','1') }}
 
         {% for language,services in values.datos.signatures.services %}
-            {{ macro.input({'caption':'[services]['~language~'] Servicios separados por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][services]['~language~']','datos_signatures_services_'~language,services,'70','CampoTextoCorto','1') }}
+            {{ macro.input({'caption':'[services]['~language~'] Servicios separados por coma','visible':'1','varEnv':'0'},'field_title','text','datos[signatures][services]['~language~']','datos_signatures_services_'~language,services,'255','CampoTextoCorto','1') }}
         {% endfor %}
     </div>
 
