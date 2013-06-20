@@ -21,6 +21,7 @@ class EntityManager {
      * @var string
      */
     private $file = "config/config.yml";
+    public static $dbLinkInstance = null;
 
     /**
      * Link a la conexión establecida
@@ -108,48 +109,62 @@ class EntityManager {
 
         switch ($this->dbEngine) {
             case 'mysql':
-                $this->dbLink = mysql_connect($this->getHost(), $this->getUser(), $this->getPassword());
-                if (is_resource($this->dbLink))
-                    mysql_select_db($this->getDataBase(), $this->dbLink);
+                if (is_null(self::$dbLinkInstance)) {
+                    self::$dbLinkInstance = mysql_connect($this->getHost(), $this->getUser(), $this->getPassword());
+                    if (is_resource(self::$dbLinkInstance)) {
+                        mysql_select_db($this->getDataBase(), self::$dbLinkInstance);
+                    }
+                }
+                $this->dbLink = self::$dbLinkInstance;
                 break;
 
             case 'mssql':
-                $this->dbLink = mssql_connect($this->getHost(), $this->getUser(), $this->getPassword());
-                if (is_resource($this->dbLink))
-                    mssql_select_db($this->getDataBase(), $this->dbLink);
+                if (is_null(self::$dbLinkInstance)) {
+                    self::$dbLinkInstance = mssql_connect($this->getHost(), $this->getUser(), $this->getPassword());
+                    if (is_resource(self::$dbLinkInstance)) {
+                        mssql_select_db($this->getDataBase(), self::$dbLinkInstance);
+                    }
+                }
+                $this->dbLink = self::$dbLinkInstance;                
                 break;
 
             case 'interbase':
-                $this->dbLink = ibase_connect($this->getHost(), $this->getUser(), $this->getPassword());
+                if (is_null(self::$dbLinkInstance)) {
+                    self::$dbLinkInstance = ibase_connect($this->getHost(), $this->getUser(), $this->getPassword());
+                }                
+                $this->dbLink = self::$dbLinkInstance;
                 break;
             default:
                 $this->error[] = "EntityManager [conecta]: Conexión no realizada. No se ha indicado el tipo de base de datos. " . mysql_errno() . " " . mysql_error();
         }
 
-        if (!$this->dbLink)
-            $this->error[] = "EntityManager [conecta]: No se pudo conectar " . $this->getHost() . ":" . $this->getDataBase() . "Error: " . mysql_errno() . " " . mysql_error();
+        if (!$this->dbLink) {
+            $this->error[] = "EntityManager [conecta]: No se pudo conectar " . $this->getHost() . ":" . $this->getDataBase() . "Error: " . $ex->message;
+        }
     }
 
     /**
      * Cierra la conexión con la base de datos
      */
     public function desConecta() {
-        if (is_resource($this->dbLink)) {
-            switch ($this->dbEngine) {
-                case 'mysql':
-                    mysql_close($this->dbLink);
-                    break;
-                case 'mssql':
-                    mssql_close($this->dbLink);
-                    break;
-                case 'interbase':
-                    ibase_free_result($this->result);
-                    ibase_close($this->dbLink);
-                    break;
-                default:
-                    $this->error[] = "EntityManager [desConecta]: Desconexión no realizada. No se ha indicado el tipo de base de datos";
-            }
-        }
+        /**
+          if (is_resource($this->dbLink)) {
+          switch ($this->dbEngine) {
+          case 'mysql':
+          mysql_close($this->dbLink);
+          break;
+          case 'mssql':
+          mssql_close($this->dbLink);
+          break;
+          case 'interbase':
+          ibase_free_result($this->result);
+          ibase_close($this->dbLink);
+          break;
+          default:
+          $this->error[] = "EntityManager [desConecta]: Desconexión no realizada. No se ha indicado el tipo de base de datos";
+          }
+          }
+         */
     }
 
     /**
