@@ -40,47 +40,47 @@
             <td><input name="{{values.controller}}[Controller]" value="{{zona.Controller}}" type="{% if values.atributos.Controller.visible == '1' or user.IdPerfil.Id == '1' %}text{%else%}hidden{%endif%}" style="width: 90px;"/></td>
             <td><input name="{{values.controller}}[Zona]" value="{{zona.Zona}}" type="text" style="width: 20px;"/></td>
             <td>
-                <select name="{{values.controller}}[IdEstado]" style="width:90px;">
-                    {% for estado in zona.IdEstado.fetchAll('Estado') %}
-                        <option value="{{estado.Id}}" {%if estado.Id==zona.IdEstado.Id%} SELECTED{%endif%}>{{estado.Value}}</option>
+                <select name="{{values.controller}}[IDEstado]" style="width:90px;">
+                    {% for estado in zona.IDEstado.fetchAll('Estado') %}
+                        <option value="{{estado.Id}}" {%if estado.Id==zona.IDEstado.IDEstado%} SELECTED{%endif%}>{{estado.Value}}</option>
                     {% endfor %}
                 </select>
             </td>  
             <td>
-                <select name="{{values.controller}}[IdMarca]" style="width:90px;">
-                    {% for marca in zona.IdMarca.fetchAll('Titulo') %}
-                        <option value="{{marca.Id}}" {%if marca.Id==zona.IDMarca.Id%} SELECTED{%endif%}>{{marca.Value}}</option>
+                <select name="{{values.controller}}[IDFabricante]" style="width:90px;">
+                    {% for marca in zona.IDFabricante.fetchAll('Titulo') %}
+                        <option value="{{marca.Id}}" {%if marca.Id==zona.IDFabricante.IDFabricante%} SELECTED{%endif%}>{{marca.Value}}</option>
                     {% endfor %}
                 </select>
             </td>             
             <td>
-                <input id="{{values.controller}}_IdCategoria{{key}}" type="hidden" value="{{zona.IdCategoria.Id}}" name="{{values.controller}}[IdCategoria]"/>
-                <input id="{{values.controller}}_IdCategoria_autoComplete{{key}}" class="tip_top" type="text"
+                <input id="{{values.controller}}_IDCategoria{{key}}" type="hidden" value="{{zona.IDCategoria.getPrimaryKeyValue}}" name="{{values.controller}}[IDCategoria]"/>
+                <input id="{{values.controller}}_IDCategoria_autoComplete{{key}}" class="tip_top" type="text"
                        style="width: 120px;"
                        onchange=" $('.title_icon span').css('background','url({{app.path}}/images/alert.png)');" 
-                       onkeyup="autoCompletar('{{values.controller}}_IdCategoria_autoComplete{{key}}','{{values.controller}}_IdCategoria{{key}}','{{values.controller}}_IdCategoria_autoComplete{{key}}','categorias','Titulo');" 
-                       onblur="if (this.value == '') $('#{{values.controller}}_IdCategoria{{key}}').val('0');"
-                       maxlength="255" value="{{zona.IdCategoria.Titulo}}"
+                       onkeyup="autoCompletar('{{values.controller}}_IDCategoria_autoComplete{{key}}','{{values.controller}}_IDCategoria{{key}}','{{values.controller}}_IDCategoria_autoComplete{{key}}','categorias','Familia');" 
+                       onblur="if (this.value === '') $('#{{values.controller}}_IDCategoria{{key}}').val('0');"
+                       maxlength="255" value="{{zona.IDCategoria.Familia}}"
                 />
             </td>            
             <td>           
-                <input id="{{values.controller}}_IdFamilia{{key}}" type="hidden" value="{{zona.IdFamilia.Id}}" name="{{values.controller}}[IdFamilia]"/>
-                <input id="{{values.controller}}_IdFamilia_autoComplete{{key}}" class="tip_top" type="text" 
+                <input id="{{values.controller}}_IDFamilia{{key}}" type="hidden" value="{{zona.IDFamilia.Id}}" name="{{values.controller}}[IDFamilia]"/>
+                <input id="{{values.controller}}_IDFamilia_autoComplete{{key}}" class="tip_top" type="text" 
                        style="width: 120px;"
                        onchange=" $('.title_icon span').css('background','url({{app.path}}/images/alert.png)');" 
-                       onkeyup="autoCompletar('{{values.controller}}_IdFamilia_autoComplete{{key}}','{{values.controller}}_IdFamilia{{key}}','{{values.controller}}_IdFamilia_autoComplete{{key}}','familias','Titulo',$('#{{values.controller}}_IdCategoria{{key}}').val());" 
-                       onblur="if (this.value == '') $('#{{values.controller}}_IdFamilia{{key}}').val('0');"                       
-                       maxlength="255" value="{{zona.IdFamilia.Titulo}}"
+                       onkeyup="autoCompletar('{{values.controller}}_IDFamilia_autoComplete{{key}}','{{values.controller}}_IDFamilia{{key}}','{{values.controller}}_IDFamilia_autoComplete{{key}}','familias','Familia',$('#{{values.controller}}_IDCategoria{{key}}').val());" 
+                       onblur="if (this.value === '') $('#{{values.controller}}_IDFamilia{{key}}').val('0');"                       
+                       maxlength="255" value="{{zona.IDFamilia.Familia}}"
                 />                
             </td>           
             <td>
-                <input id="{{values.controller}}_IdSubfamilia{{key}}" type="hidden" value="{{zona.IdSubfamilia.Id}}" name="{{values.controller}}[IdSubfamilia]"/>
-                <input id="{{values.controller}}_IdSubfamilia_autoComplete{{key}}" class="tip_top" type="text" 
+                <input id="{{values.controller}}_IDSubfamilia{{key}}" type="hidden" value="{{zona.IDSubfamilia.Id}}" name="{{values.controller}}[IDSubfamilia]"/>
+                <input id="{{values.controller}}_IDSubfamilia_autoComplete{{key}}" class="tip_top" type="text" 
                        style="width: 120px;"
                        onchange=" $('.title_icon span').css('background','url({{app.path}}/images/alert.png)');" 
-                       onkeyup="autoCompletar('{{values.controller}}_IdSubfamilia_autoComplete{{key}}','{{values.controller}}_IdSubfamilia{{key}}','{{values.controller}}_IdSubfamilia_autoComplete{{key}}','subfamilias','Titulo',$('#{{values.controller}}_IdFamilia{{key}}').val());" 
-                       onblur="if (this.value == '') $('#{{values.controller}}_IdSubfamilia{{key}}').val('0');"                       
-                       maxlength="255" value="{{zona.IdSubfamilia.Titulo}}"
+                       onkeyup="autoCompletar('{{values.controller}}_IDSubfamilia_autoComplete{{key}}','{{values.controller}}_IDSubfamilia{{key}}','{{values.controller}}_IDSubfamilia_autoComplete{{key}}','subfamilias','Familia',$('#{{values.controller}}_IDFamilia{{key}}').val());" 
+                       onblur="if (this.value === '') $('#{{values.controller}}_IDSubfamilia{{key}}').val('0');"                       
+                       maxlength="255" value="{{zona.IDSubfamilia.Familia}}"
                 />             
             </td>
             <td><input name="{{values.controller}}[NItems]" value="{{zona.NItems}}" type="text" style="width: 30px;"/></td>

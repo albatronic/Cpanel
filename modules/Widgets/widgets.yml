@@ -1,0 +1,35 @@
+## DEFINICIÓN DE LOS WIDGETS DISPONIBLES
+---
+widgets:
+  calendarioEventos:
+    titulo: Calendario de eventos
+    descripcion: Calendario con los eventos programados
+    
+  calendarioNoticas:
+    titulo: Calendario de noticias
+    descripcion: Calendario con las noticias
+    
+  busquedaContenidos:
+    titulo: Búsqueda de contenidos
+    descripcion: Formulario de búsqueda de contenidos
+    
+  to_busquedaProductos:
+    titulo: Búsqueda de producto
+    descripcion: Formulario de búsqueda de productos de la tienda online
+    
+  to_categorias:
+    titulo: Categorías
+    descripcion: Menú de categorías de productos
+    
+  to_marcas:
+    titulo: Marcas
+    descripcion: Menú de marcas/fabricantes
+    
+  to_masVendidos:
+    titulo: Más vendidos
+    descripcion: Productos más vendidos
+    
+  to_productosMasVisitados:
+    titulo: Productos más vistos
+    descripcion: Muestra los productos más visitados
+    

@@ -17,13 +17,13 @@ class ErpFamiliasEntity extends EntityComunes {
      * @var integer
      * @assert NotBlank(groups="ErpFamilias")
      */
-    protected $Id;
+    protected $IDFamilia;
 
     /**
      * @var string
      * @assert NotBlank(groups="ErpFamilias")
      */
-    protected $Titulo;
+    protected $Familia;
 
     /**
      * @var string
@@ -41,16 +41,40 @@ class ErpFamiliasEntity extends EntityComunes {
     protected $Descripcion2;
 
     /**
-     * @var tinyint
-     * @assert NotBlank(groups="ErpFamilias")
+     * @orm:Column(type="integer")
+     * @assert:NotBlank(groups="ErpFamilias")
      */
-    protected $Inventario = '1';
+    protected $MostrarPortada = '0';
+
+    /**
+     * @orm:Column(type="integer")
+     * @assert:NotBlank(groups="ErpFamilias")
+     */
+    protected $OrdenPortada = '0';
 
     /**
      * @var tinyint
      * @assert NotBlank(groups="ErpFamilias")
      */
-    protected $Trazabilidad = '1';
+    protected $Inventario = '0';
+
+    /**
+     * @var tinyint
+     * @assert NotBlank(groups="ErpFamilias")
+     */
+    protected $Trazabilidad = '0';
+
+    /**
+     * @var tinyint
+     * @assert NotBlank(groups="ErpFamilias")
+     */
+    protected $BajoPedido = '0';
+
+    /**
+     * @var tinyint
+     * @assert NotBlank(groups="ErpFamilias")
+     */
+    protected $BloqueoStock = '0';
 
     /**
      * @var integer
@@ -86,17 +110,17 @@ class ErpFamiliasEntity extends EntityComunes {
      * Nombre de la PrimaryKey
      * @var string
      */
-    protected $_primaryKeyName = 'Id';
+    protected $_primaryKeyName = 'IDFamilia';
 
     /**
      * Relacion de entidades que dependen de esta
      * @var string
      */
     protected $_parentEntities = array(
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpPropiedadesFamiliasMarcas', 'ParentColumn' => 'IdFamilia'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDCategoria'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDFamilia'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDSubfamilia'),
+        array('SourceColumn' => 'IDFamilia', 'ParentEntity' => 'PropiedadesFamiliasFabricantes', 'ParentColumn' => 'IDFamilia'),
+        array('SourceColumn' => 'IDFamilia', 'ParentEntity' => 'Articulos', 'ParentColumn' => 'IDCategoria'),
+        array('SourceColumn' => 'IDFamilia', 'ParentEntity' => 'Articulos', 'ParentColumn' => 'IDFamilia'),
+        array('SourceColumn' => 'IDFamilia', 'ParentEntity' => 'Articulos', 'ParentColumn' => 'IDSubfamilia'),
     );
 
     /**
@@ -116,20 +140,20 @@ class ErpFamiliasEntity extends EntityComunes {
     /**
      * GETTERS Y SETTERS
      */
-    public function setId($Id) {
-        $this->Id = $Id;
+    public function setIDFamilia($IDFamilia) {
+        $this->IDFamilia = $IDFamilia;
     }
 
-    public function getId() {
-        return $this->Id;
+    public function getIDFamilia() {
+        return $this->IDFamilia;
     }
 
-    public function setTitulo($Titulo) {
-        $this->Titulo = trim($Titulo);
+    public function setFamilia($Familia) {
+        $this->Familia = trim($Familia);
     }
 
-    public function getTitulo() {
-        return $this->Titulo;
+    public function getFamilia() {
+        return $this->Familia;
     }
 
     public function setSubtitulo($Subtitulo) {
@@ -156,6 +180,24 @@ class ErpFamiliasEntity extends EntityComunes {
         return $this->Descripcion2;
     }
 
+    public function setMostrarPortada($MostrarPortada) {
+        $this->MostrarPortada = $MostrarPortada;
+    }
+
+    public function getMostrarPortada() {
+        if (!($this->MostrarPortada instanceof ValoresSN))
+            $this->MostrarPortada = new ValoresSN($this->MostrarPortada);
+        return $this->MostrarPortada;
+    }
+
+    public function setOrdenPortada($OrdenPortada) {
+        $this->OrdenPortada = $OrdenPortada;
+    }
+
+    public function getOrdenPortada() {
+        return $this->OrdenPortada;
+    }
+
     public function setInventario($Inventario) {
         $this->Inventario = $Inventario;
     }
@@ -174,6 +216,26 @@ class ErpFamiliasEntity extends EntityComunes {
         if (!($this->Trazabilidad instanceof ValoresSN))
             $this->Trazabilidad = new ValoresSN($this->Trazabilidad);
         return $this->Trazabilidad;
+    }
+
+    public function setBajoPedido($BajoPedido) {
+        $this->BajoPedido = $BajoPedido;
+    }
+
+    public function getBajoPedido() {
+        if (!($this->BajoPedido instanceof ValoresSN))
+            $this->BajoPedido = new ValoresSN($this->BajoPedido);
+        return $this->BajoPedido;
+    }
+
+    public function setBloqueoStock($BloqueoStock) {
+        $this->BloqueoStock = $BloqueoStock;
+    }
+
+    public function getBloqueoStock() {
+        if (!($this->BloqueoStock instanceof ValoresSN))
+            $this->BloqueoStock = new ValoresSN($this->BloqueoStock);
+        return $this->BloqueoStock;
     }
 
     public function setMargenMinimo($MargenMinimo) {
@@ -202,5 +264,5 @@ class ErpFamiliasEntity extends EntityComunes {
 
 }
 
-// END class ErpFamilias
+// END class Familias
 ?>

@@ -11,13 +11,20 @@
 <span class="title_icon"><span class="list_image"></span></span>
 <h3>
     <a href="{{app.path}}/Index">Home</a> | <img src="{{app.path}}/lang/{{idiomas.disponibles[idiomas.actual]}}.gif"/> {{ values.titulo }}
-    {% if ((varEnvMod.translatable == 1) and (idiomas.disponibles|length > 1) )%}
-        <div style="float: right;">
-        {% for key,idioma in idiomas.disponibles %}
-            {% if key != idiomas.actual %}
-                <a href="{{app.path}}/{{values.controller}}/lang/{{key}}/{{values.datos.getPrimaryKeyMD5}}"><img src="{{app.path}}/lang/{{idioma}}.gif"/></a>
-            {% endif %}
-        {% endfor%}
-        </div>
-    {% endif %}
+    <div style="float: right;">    
+        {% if ((varEnvMod.translatable == 1) and (idiomas.disponibles|length > 1) )%}
+            {% for key,idioma in idiomas.disponibles %}
+                {% if key != idiomas.actual %}
+                    <a href="{{app.path}}/{{values.controller}}/lang/{{key}}/{{values.datos.getPrimaryKeyMD5}}"><img src="{{app.path}}/lang/{{idioma}}.gif"/></a>
+                {% endif %}
+            {% endfor%}                
+
+        {% endif %}
+                
+        {% if values.varEnvPro.url != '' and values.datos.UrlFriendly != ''%}
+            <a href="{{values.varEnvPro.url}}{{values.datos.UrlFriendly}}" target="_blank">
+                <img src='{{app.path}}/images/chrome.png' width="24px" height="24px" alt="Ver en la web" title="Ver en la web"/>
+            </a>        
+        {% endif %} 
+    </div>                
 </h3>

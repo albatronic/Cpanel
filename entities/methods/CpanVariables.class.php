@@ -31,7 +31,7 @@ class CpanVariables extends CpanVariablesEntity {
      */
     public function __construct($ambito='', $tipo='', $nombre = '') {
 
-        if ($this->valida($ambito, $tipo, $nombre)) {
+        if ($this->comprueba($ambito, $tipo, $nombre)) {
 
             $this->_objeto = array(
                 'ambito' => $ambito,
@@ -223,7 +223,7 @@ class CpanVariables extends CpanVariablesEntity {
      *
      * @return boolean TRUE si el ambito y tipo son válidos
      */
-    public function valida($ambito, $tipo, $nombre) {
+    public function comprueba($ambito, $tipo, $nombre) {
 
         $ok = ( (in_array($ambito, $this->_ambitosDeVariables)) and (in_array($tipo, $this->_tiposDeVariables)) );
 

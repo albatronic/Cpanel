@@ -29,7 +29,7 @@ PcaeEmpresas:
     Digito:                { type: string(2), notnull: true, default: '00' }
     Cuenta:                { type: string(10), notnull: true, default: '0000000000' }
     IBAN:                  { type: string(34), notnul: true, default: NULL }
-    SufijoRemesas:         { type: string(2), notnull: false, default: '00' }
+    SufijoRemesas:         { type: string(3), notnull: false, default: '000' }
     DigitosCuentaContable: { type: integer(2), notnul: true, default: 10 }
     IdCNAE:                { type: bigint(11), notnull: false, default: 0, index: index, comment: 'db, CommCnae, Id' }
     RegistroMercantil:     { type: string(100), notnull: false, default: NULL }
@@ -94,19 +94,24 @@ PcaeProyectosApps:
 PcaeUsuarios:
   comment: Usuarios registrados en el portal
   columns:
-    Nombre:       { type: string(50), notnull: true }
-    Apellidos:    { type: string(50), notnull: true }
-    DNI:          { type: string(15), notnull: false }
-    Direccion:    { type: string(100), notnull: false, }
-    IdMunicipio:  { type: bigint(11), notnull: false, default: 0, index: index, comment: 'db, CommMunicipios, Id' }
-    CodigoPostal: { type: string(10), notnull: false, }
-    IdProvincia:  { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db, CommProvincias, Id' }
-    IdPais:       { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db, CommPaises, Id'}
-    Telefono:     { type: string(50), notnull: false, default: NULL }
-    EMail:        { type: string(100), notnull: true, index: unique }
-    Password:     { type: string(100), notnull: true}
-    NLogin:       { type: integer, notnull: true, default: 0 }
-    UltimoLogin:  { type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
+    Nombre:        { type: string(50), notnull: true }
+    Apellidos:     { type: string(50), notnull: true }
+    DNI:           { type: string(15), notnull: false }
+    Direccion:     { type: string(100), notnull: false, }
+    IdMunicipio:   { type: bigint(11), notnull: false, default: 0, index: index, comment: 'db, CommMunicipios, Id' }
+    CodigoPostal:  { type: string(10), notnull: false, }
+    IdProvincia:   { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db, CommProvincias, Id' }
+    IdPais:        { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db, CommPaises, Id'}
+    Telefono:      { type: string(50), notnull: false, default: NULL }
+    EMail:         { type: string(100), notnull: true, index: unique }
+    EMailSocket:   { type: string(25), notnull: true, default: 'smtp' }
+    EMailHost:     { type: string(50), notnull: true, default: '' }
+    EMailPort:     { type: int(2), notnull: true, default: 25 }
+    EMailSmtpAuth: { type: int(1), notnull: true, default: 1 }
+    EMailPassword: { type: string(50), notnull: true, default: '' }    
+    Password:      { type: string(100), notnull: true}
+    NLogin:        { type: integer, notnull: true, default: 0 }
+    UltimoLogin:   { type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdProvincia : { ForeignEntity: CommProvincias, ForeignId: Id }

@@ -107,8 +107,8 @@ CpanEsqueletoWeb:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: integer, length: '2', min: null, max: null, message: 'Valor Requerido' }
-    IdEstado:
-      title: IdEstado
+    IDEstado:
+      title: IDEstado
       filter: NO
       list: NO
       visible: true
@@ -117,10 +117,10 @@ CpanEsqueletoWeb:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 1, caption: IdEstado, entity: ErpArticulosEstados, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 1, caption: Estado, entity: ErpArticulosEstados, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
-    IdMarca:
-      title: IdMarca
+    IDFabricante:
+      title: Marca
       filter: NO
       list: NO
       visible: true
@@ -131,8 +131,8 @@ CpanEsqueletoWeb:
       link: { route: null, param: null, title: null, target: null, link: null }
       #aditional_filter: { order: 1, caption: IdMarca, entity: ErpMarcas, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
-    IdCategoria:
-      title: IdCategoria
+    IDCategoria:
+      title: Categoria
       filter: NO
       list: NO
       visible: true
@@ -141,10 +141,10 @@ CpanEsqueletoWeb:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 2, caption: IdCategoria, entity: ErpFamilias, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 2, caption: Categoria, entity: ErpFamilias, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
-    IdFamilia:
-      title: IdFamilia
+    IDFamilia:
+      title: Familia
       filter: NO
       list: NO
       visible: true
@@ -153,10 +153,10 @@ CpanEsqueletoWeb:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 3, caption: IdFamilia, entity: ErpFamilias, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 3, caption: Familia, entity: ErpFamilias, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
-    IdSubfamilia:
-      title: IdSubfamilia
+    IDSubfamilia:
+      title: Subfamilia
       filter: NO
       list: NO
       visible: true
@@ -165,7 +165,7 @@ CpanEsqueletoWeb:
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 4, caption: IdSubfamilia, entity: ErpFamilias, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      #aditional_filter: { order: 4, caption: Subfamilia, entity: ErpFamilias, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
     Filtro:
       title: Filtro

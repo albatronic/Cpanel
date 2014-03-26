@@ -72,7 +72,7 @@ CommPaises:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
     Codigo:
-      title: Codigo
+      title: Código
       filter: YES
       list: YES
       visible: true
@@ -83,7 +83,7 @@ CommPaises:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '2', min: null, max: null, message: 'Valor Requerido' }
     Pais:
-      title: Pais
+      title: País
       filter: YES
       list: YES
       visible: true

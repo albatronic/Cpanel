@@ -12,7 +12,7 @@
 class WebPerfiles extends WebPerfilesEntity {
 
     public function __toString() {
-        return $this->getId();
+        return $this->getPerfil();
     }
 
 

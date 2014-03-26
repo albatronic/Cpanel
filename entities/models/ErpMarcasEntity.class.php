@@ -13,11 +13,11 @@ class ErpMarcasEntity extends EntityComunes {
 
     /**
      * @orm GeneratedValue
-     * @orm Id
+     * @orm IDFabricante
      * @var integer
      * @assert NotBlank(groups="ErpMarcas")
      */
-    protected $Id;
+    protected $IDFabricante;
 
     /**
      * @var string
@@ -54,6 +54,18 @@ class ErpMarcasEntity extends EntityComunes {
     protected $Email;
 
     /**
+     * @orm:Column(type="integer")
+     * @assert:NotBlank(groups="ErpFamilias")
+     */
+    protected $MostrarPortada = '0';
+
+    /**
+     * @orm:Column(type="integer")
+     * @assert:NotBlank(groups="ErpFamilias")
+     */
+    protected $OrdenPortada = '0';
+
+    /**
      * Nombre de la conexion a la BD
      * @var string
      */
@@ -63,21 +75,21 @@ class ErpMarcasEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'ErpMarcas*';
+    protected $_tableName = 'ErpFabricantes*';
 
     /**
      * Nombre de la PrimaryKey
      * @var string
      */
-    protected $_primaryKeyName = 'Id';
+    protected $_primaryKeyName = 'IDFabricante';
 
     /**
      * Relacion de entidades que dependen de esta
      * @var string
      */
     protected $_parentEntities = array(
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpPropiedadesFamiliasMarcas', 'ParentColumn' => 'IdMarca'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDMarca'),
+        array('SourceColumn' => 'IDFabricante', 'ParentEntity' => 'ErpPropiedadesFamiliasMarcas', 'ParentColumn' => 'IDFabricanteMarca'),
+        array('SourceColumn' => 'IDFabricante', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDMarca'),
     );
 
     /**
@@ -97,12 +109,12 @@ class ErpMarcasEntity extends EntityComunes {
     /**
      * GETTERS Y SETTERS
      */
-    public function setId($Id) {
-        $this->Id = $Id;
+    public function setIDFabricante($IDFabricante) {
+        $this->IDFabricante = $IDFabricante;
     }
 
-    public function getId() {
-        return $this->Id;
+    public function getIDFabricante() {
+        return $this->IDFabricante;
     }
 
     public function setTitulo($Titulo) {
@@ -151,6 +163,24 @@ class ErpMarcasEntity extends EntityComunes {
 
     public function getEmail() {
         return $this->Email;
+    }
+
+    public function setMostrarPortada($MostrarPortada) {
+        $this->MostrarPortada = $MostrarPortada;
+    }
+
+    public function getMostrarPortada() {
+        if (!($this->MostrarPortada instanceof ValoresSN))
+            $this->MostrarPortada = new ValoresSN($this->MostrarPortada);
+        return $this->MostrarPortada;
+    }
+
+    public function setOrdenPortada($OrdenPortada) {
+        $this->OrdenPortada = $OrdenPortada;
+    }
+
+    public function getOrdenPortada() {
+        return $this->OrdenPortada;
     }
 
 }

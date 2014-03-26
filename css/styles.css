@@ -620,7 +620,7 @@ transition: all .3s ease-out;
 	-webkit-box-shadow: 0 0 0 2px #ececec;
 	box-shadow: 0 0 0 2px #ececec;
 */	color:#444;
-	width:80%;
+
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:12px;
 	transition: all 0.25s ease-in-out;

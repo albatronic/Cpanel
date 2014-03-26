@@ -1,0 +1,36 @@
+{# ZONAS DE WIDGETS #}
+<div id="zonas">
+    <h1 class="ui-widget-header" style="padding: 5px;">Zonas de widgets</h1> 
+
+    {% for keyZona,zona in values.zonas %}
+        <div id="zona{{keyZona}}">
+            <h2>{{zona.Title}}</h2>
+            <div class="ui-widget-content">
+                <p style="margin: 10px;">{{zona.Observations}}</p>
+                <ol style="padding: 20px;">
+                    <li style="margin: 10px;" class="placeholder">Arrastre los widgets aquí</li>
+                </ol>
+                <span style="margin: 5px; cursor:pointer;" onclick="borrarZona('{{keyZona}}')">Quitar Zona</span>
+            </div>        
+        </div>
+    {% endfor %}
+      
+    <h2>Nueva zona</h2>
+    <div class="ui-widget-content">
+        <form name="formZona" id="formZona" method="POST" action="">
+            <input name="controller" value="{{values.controller}}" type="hidden" />
+            <input name="action" value="crearZona" type="hidden"/>
+            <div>Nombre: <input id="nombreZona" name="nombre" type="text"/></div>
+            <div>Titulo: <input id="tituloZona" name="titulo" type="text"/></div>
+            <div>Descripción: <input id="descripcion" name="descripcion" type="text"/></div>
+            <div>Aparace en:
+            <select data-placeholder="Seleccione controladores..." id="controladores" class="chosen-select">
+                {% for controller in values.controllers %}
+                    <option value="{{controller}}">{{controller}}</option>
+                {% endfor %}
+            </select>
+            </div>
+            <div><input id="botonCrearZona" type="submit" value="Guardar" /></div>
+        </form>
+    </div>    
+</div>

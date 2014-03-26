@@ -53,7 +53,7 @@ class ServFamilias extends ServFamiliasEntity {
         if ($entidadRelacionada) {
             foreach ($servicios as $key => $servicio) {
                 $relacion = new CpanRelaciones();
-                $servicios[$key]['estaRelacionado'] = $relacion->getIdRelacion('ServServicios', $servicio['Id'], $entidadRelacionada, $idEntidadRelacionada);
+                $servicios[$key]['estaRelacionado'] = $relacion->getIdRelacion($entidadRelacionada, $idEntidadRelacionada,'ServServicios', $servicio['Id']);
             }
             unset($relacion);
         }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
@@ -9,8 +10,11 @@
  * @orm:Entity(ErpArticulosEstados)
  */
 class ErpArticulosEstados extends ErpArticulosEstadosEntity {
-	public function __toString() {
-		return $this->getId();
-	}
+
+    public function __toString() {
+        return $this->getId();
+    }
+
 }
+
 ?>

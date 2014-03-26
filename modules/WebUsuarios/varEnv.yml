@@ -1,0 +1,11 @@
+# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO WebUsuarios
+#
+# Module: WebUsuarios
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright ARTICO ESTUDIO, SL
+# date 07-08-2013 21:27:18
+#
+# ejemplo:
+#
+# nombreVariable: el texto del caption
+---

@@ -115,7 +115,7 @@ class PcaeEmpresasEntity extends EntityComunes {
     /**
      * @var string
      */
-    protected $SufijoRemesas = '00';
+    protected $SufijoRemesas = '000';
 
     /**
      * @var integer

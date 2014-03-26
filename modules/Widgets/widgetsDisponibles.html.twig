@@ -1,0 +1,13 @@
+{# LISTADO DE WIDGETS DISPONIBLES #}
+<div>
+  <h1 class="ui-widget-header" style="padding: 5px;">Widgets Disponibles</h1>
+  <p style="margin: 5px;">Arrastra los widgets de aquí a la barra de la derecha para activarlos. Arrastra los widgets aquí desde la barra de la derecha para desactivarlos y eliminar su configuración.</p>
+    <ul id="widgets">
+        {% for key,widget in values.widgets %}
+            <li style="float:left; width: 49%;">
+                <h4 id="{{key}}"><a href="#">{{widget.titulo}}</a></h4>
+                <p>{{widget.descripcion}}</p>
+            <li>
+        {% endfor %}
+    </ul>
+</div>

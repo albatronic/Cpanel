@@ -51,7 +51,7 @@ class SldSliders extends SldSlidersEntity {
             $zona = new SldZonas($this->IdZona);
             $slider = new SldSliders();
             $rows = $slider->cargaCondicion("count(Id) as nMax", "IdZona='{$this->IdZona}'");
-            if ($zona->getNumeroMaximoSliders() < ($rows[0]['nMax'] + 1))
+            if (($zona->getNumeroMaximoSliders()>0) and ($zona->getNumeroMaximoSliders() < ($rows[0]['nMax'] + 1)))
                 $this->_errores[] = "Se ha superado el número de sliders para la zona {$zona->getTitulo()}. Consulte con el administrador de la web";
             unset($slider);
             unset($zona);
@@ -90,7 +90,7 @@ class SldSliders extends SldSlidersEntity {
                     $em = new EntityManager($this->getConectionName());
                     if ($em->getDbLink()) {
                         $em->query($query);
-                        echo $query;
+                        //echo $query;
                     }
                     $em->desConecta();
                     unset($em);

@@ -58,7 +58,7 @@ $(function(){
         autoOpen: false,
         modal: false,
         width: 410,
-        height: 525,
+        height: 565,
         position: ['right','center'],
         closeOnEscape: true
     });
@@ -356,10 +356,11 @@ function submitForm(formulario) {
 
 /**
  * Pone un gif 'loading' en en div 'idDiv'
+ * @param string idDiv El id del div donde se pondrá la imagen gif de cargando
  */
 function loading(idDiv) {
-
-    $('#'+idDiv).html("<img src='" + appPath + "/images/loading.gif'>");
+    var html = "<img src='" + appPath + "/images/loading.gif'>";
+    $('#'+idDiv).html(html);
 }
 
 function Redondear(cantidad, decimales) {
@@ -369,6 +370,49 @@ function Redondear(cantidad, decimales) {
     return Math.round(vcantidad * Math.pow(10, vdecimales)) / Math.pow(10, vdecimales);
 }
 
+function borraMetadato(entidad,metadato) {
+    var url        = appPath + '/lib/metaDatos.php';
+    var parametros = 'entidad='+entidad+'&metadato='+metadato+'&accion=B';
+    var html;
+    
+    // Coloco un gif "Cargando..." en la capa
+    html = $('#div_metaDato_'+metadato).html();    
+    $('#div_metaDato_'+metadato).html("<img src='"+appPath+"/images/loading.gif'>");
+
+    $('#resultadoMetaDatos').load(url, parametros, function(){
+        if ($('#resultadoMetaDatos').html() === '1') {
+            $('#div_metaDato_'+metadato).html('');        
+        } else {
+            $('#div_metaDato_'+metadato).html(html);        
+        }        
+    });
+
+}
+
+function creaMetadato(entidad,metadato,idEntidad) {
+    metadato = metadato.replace(/ /g,"_");
+    
+    var url        = appPath + '/lib/metaDatos.php';
+    var parametros = 'entidad='+entidad+'&metadato='+metadato+'&idEntidad='+idEntidad+'&accion=C';
+    var html;
+
+    if (metadato !== '') {
+        $('#resultadoMetaDatos').load(url,parametros,function(){
+            if ($('#resultadoMetaDatos').html() === '1') {
+                $('#metaDato_nuevo').val('');
+                html = $('#div_metaDatos').html();
+                htmlNuevo = "<li id='div_metaDato_"+metadato+"'><div class='from_grid_12'><span class='field_title'><span>"+metadato+"</span></span><div class='form_input'><textarea name='metaDato["+metadato+"]' id='metaDato_"+metadato+"' class='tip_top' rows='2' columns='75'></textarea></div></div></li>";
+                html = html + htmlNuevo;
+                $('#div_metaDatos').html(html);
+            }
+            if ($('#resultadoMetaDatos').html() === '2') {
+                alert("Ese campo ya existe");
+            }            
+        });
+    } else {
+        alert('Debe indicar un nombre');
+    }
+}
 /*
  * ----------------------------------------------------------------
  * FUNCIONES AJAX

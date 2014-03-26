@@ -1,4 +1,4 @@
-# MODULOS DE LA APP Blog.
+# MODULOS DE LA APP Blog. 
 CpanAplicaciones:
   Blog : { CodigoApp: Blog,   NombreApp: Blog }
 

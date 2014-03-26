@@ -1,0 +1,89 @@
+{#
+  Module: Widgets
+  Document : modules\Widgets\index.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 25.10.2013 22:32:33
+#}
+
+{% extends layout %}
+
+{% block title parent() ~ ' - '  ~ values.titulo %}
+
+{% block content %}
+    {% include '_global/formErrores.html.twig' with {'errores': values.errores} %}
+    {% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}
+
+    <div style="width: 65%;float:left; margin-right: 30px;">
+        {% include values.controller ~ '/widgetsDisponibles.html.twig' %}
+    </div>
+
+    <div style="width: 30%;float:left;">
+        {% include values.controller ~ '/widgetsZonas.html.twig' %}
+    </div>
+
+
+  <script>
+  $(function() {
+    
+    $('.chosen-select').chosen();
+    
+    $( "#widgets h4" ).draggable({
+      appendTo: "body∫",
+      helper: "clone",
+      cursor: "crosshair"
+    });
+    
+    
+    $( "#zonas ol" ).droppable({
+      activeClass: "ui-state-default",
+      hoverClass: "ui-state-hover",
+      accept: ":not(.ui-sortable-helper)",
+      drop: function( event, ui ) {
+        $( this ).find( ".placeholder" ).remove();
+        var id = ui.draggable.attr('id');
+        var titulo = ui.draggable.text();  
+        $( "<li style='margin: 10px;'></li>" ).text( titulo ).appendTo( this );
+        // salvar en la base de datos
+        $.ajax({
+            url: appPath + "/lib/actualizaWidgets.php",
+            type: 'GET',
+            async: true,
+            data: "accion=update&idZona=1&wId="+id+"&wTitulo="+titulo
+        });
+      }
+    }).sortable({
+      items: "li:not(.placeholder)",
+      sort: function() {
+        // gets added unintentionally by droppable interacting with sortable
+        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+        $( this ).removeClass( "ui-state-default" );
+      }
+    });
+    
+  });
+
+     // Validar el formulario de crear zona
+    $('#botonCrearZona').click(function(){
+        var nombre = $('#nombreZona').val();
+        var titulo = $('#tituloZona').val();
+
+        if ( ( nombre === '') || (titulo === '') ) {
+            alert("Debe indicar un nombre y un título");
+            return false;
+        }
+    }); 
+    
+    function borrarZona(idZona) {
+        $('#zona'+idZona).html('');
+        // añadir la zona en la base de datos
+        $.ajax({
+            url: appPath + "/lib/actualizaWidgets.php",
+            type: 'GET',
+            async: true,
+            data: "accion=remove&idZona="+idZona
+        });        
+    }
+  </script>
+{% endblock %}

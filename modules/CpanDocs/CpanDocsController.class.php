@@ -239,7 +239,7 @@ class CpanDocsController extends Controller {
                     if ($doc->valida($rules)) {
                         $ok = $doc->actualiza();
                         // Subir Miniatura
-                        if (($ok) and ($this->varEnvMod['galery']['generateThumbnail'] == '1')) {
+                        if (($ok) and ($this->varEnvMod['galery']['generateThumbnail'] == '1')) {                           
                             $thumbNail = $doc->getThumbNail();
                             $thumbNail->setTitle($title);
                             $thumbNail->setName($slug);

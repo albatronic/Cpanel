@@ -180,10 +180,65 @@ PcaeUsuarios:
       visible: true
       updatable: true
       default: null
-      help: null
+      help: Contraseña de acceso al portal
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '100', min: null, max: null, message: 'Valor Requerido' }
+    EMailSocket:
+      title: Protocolo
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: smtp
+      help: El protocolo que utiliza tu servidor de correo. Puede ser 'smtp', 'pop', 'pop3'.
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '25', min: null, max: null, message: 'Valor Requerido' }
+    EMailHost:
+      title: Servidor de correo
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''
+      help: El servidor de correo, normalmente es mail.dominio.com. 
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
+    EMailPort:
+      title: Puerto
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: 25
+      help: El puerto, normalmente 25. Para gmail puede ser 25, 465 ó 587
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '3', min: null, max: null, message: 'Valor Requerido' }
+    EMailSmtpAuth:
+      title: Requiere autenticación
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: 1
+      help: Si tu cuenta de correo requiero o no autenticación
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '2', min: null, max: null, message: 'Valor Requerido' }
+    EMailPassword:
+      title: Contraseña del correo
+      filter: NO
+      list: NO
+      visible: true
+      updatable: true
+      default: ''
+      help: La contraseña de la cuenta de correo
+      permission: null
+      link: { route: null, param: null, title: null, target: null, link: null }
+      validator: { nullable: NO, type: string, length: '50', min: null, max: null, message: 'Valor Requerido' }
     Password:
       title: Password
       filter: YES

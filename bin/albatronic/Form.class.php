@@ -493,7 +493,7 @@ class Form {
         $formatos = array();
 
         if ($this->yaml['listados']) {
-            $perfilUsuario = $_SESSION['USER']['user']['IdPerfil'];
+            $perfilUsuario = $_SESSION['usuarioPortal']['IdPerfil'];
             foreach ($this->yaml['listados'] as $value) {
                 $perfiles = (string) $value['idPerfil'];
                 $arrayPerfiles = explode(',', $perfiles);
@@ -564,7 +564,7 @@ class Form {
         unset($variables);
 
         // Si el usuario es super pongo la visibilidad a TRUE
-        if ($_SESSION['USER']['user']['Id'] == '1')
+        if ($_SESSION['usuarioPortal']['Id'] == '1')
             foreach ($atributos as $key => $value)
                 ++$atributos[$key]['visible'];
                 /**

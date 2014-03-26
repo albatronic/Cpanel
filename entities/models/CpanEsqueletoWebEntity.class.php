@@ -152,8 +152,8 @@ class CpanEsqueletoWebEntity extends EntityComunes {
     }
 
     public function getIDEstado() {
-        if (!($this->IDEstado instanceof ArticulosEstados))
-            $this->IDEstado = new ArticulosEstados($this->IDEstado);
+        if (!($this->IDEstado instanceof ErpArticulosEstados))
+            $this->IDEstado = new ErpArticulosEstados($this->IDEstado);
         return $this->IDEstado;
     }
 
@@ -162,8 +162,8 @@ class CpanEsqueletoWebEntity extends EntityComunes {
     }
 
     public function getIDFabricante() {
-        if (!($this->IDFabricante instanceof Fabricantes))
-            $this->IDFabricante = new Fabricantes($this->IDFabricante);
+        if (!($this->IDFabricante instanceof ErpMarcas))
+            $this->IDFabricante = new ErpMarcas($this->IDFabricante);
         return $this->IDFabricante;
     }
 
@@ -172,8 +172,8 @@ class CpanEsqueletoWebEntity extends EntityComunes {
     }
 
     public function getIDCategoria() {
-        if (!($this->IDCategoria instanceof Familias))
-            $this->IDCategoria = new Familias($this->IDCategoria);
+        if (!($this->IDCategoria instanceof ErpFamilias))
+            $this->IDCategoria = new ErpFamilias($this->IDCategoria);
         return $this->IDCategoria;
     }
 
@@ -182,8 +182,8 @@ class CpanEsqueletoWebEntity extends EntityComunes {
     }
 
     public function getIDFamilia() {
-        if (!($this->IDFamilia instanceof Familias))
-            $this->IDFamilia = new Familias($this->IDFamilia);
+        if (!($this->IDFamilia instanceof ErpFamilias))
+            $this->IDFamilia = new ErpFamilias($this->IDFamilia);
         return $this->IDFamilia;
     }
 
@@ -192,8 +192,8 @@ class CpanEsqueletoWebEntity extends EntityComunes {
     }
 
     public function getIDSubfamilia() {
-        if (!($this->IDSubfamilia instanceof Familias))
-            $this->IDSubfamilia = new Familias($this->IDSubfamilia);
+        if (!($this->IDSubfamilia instanceof ErpFamilias))
+            $this->IDSubfamilia = new ErpFamilias($this->IDSubfamilia);
         return $this->IDSubfamilia;
     }
 

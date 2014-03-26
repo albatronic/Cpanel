@@ -142,26 +142,26 @@ switch ($_GET['entidad']) {
     
     case 'categorias':
         $familia = new ErpFamilias();
-        $filtro = "(Titulo LIKE '%{$_GET['term']}%') AND (NivelJerarquico='1')";
-        $rows = $familia->cargaCondicion("Id as Id, Titulo as Value", $filtro, "SortOrder ASC");
+        $filtro = "(Familia LIKE '%{$_GET['term']}%') AND (NivelJerarquico='1')";
+        $rows = $familia->cargaCondicion("IDFamilia as Id, Familia as Value", $filtro, "SortOrder ASC");
         unset($familia);       
         break;
 
     case 'familias':
         $familia = new ErpFamilias();
-        $filtro = "(Titulo LIKE '%{$_GET['term']}%') AND (NivelJerarquico='2')";
+        $filtro = "(Familia LIKE '%{$_GET['term']}%') AND (NivelJerarquico='2')";
         if ($_GET['filtroAdicional'])
             $filtro .= " and BelongsTo='{$_GET['filtroAdicional']}'";        
-        $rows = $familia->cargaCondicion("Id as Id, Titulo as Value", $filtro, "SortOrder ASC");
+        $rows = $familia->cargaCondicion("IDFamilia as Id, Familia as Value", $filtro, "SortOrder ASC");
         unset($familia);       
         break;
 
     case 'subfamilias':
         $familia = new ErpFamilias();
-        $filtro = "(Titulo LIKE '%{$_GET['term']}%') AND (NivelJerarquico='3')";
+        $filtro = "(Familia LIKE '%{$_GET['term']}%') AND (NivelJerarquico='3')";
         if ($_GET['filtroAdicional'])
             $filtro .= " and BelongsTo='{$_GET['filtroAdicional']}'";           
-        $rows = $familia->cargaCondicion("Id as Id, Titulo as Value", $filtro, "SortOrder ASC");
+        $rows = $familia->cargaCondicion("IDFamilia as Id, Familia as Value", $filtro, "SortOrder ASC");
         unset($familia);       
         break;
     

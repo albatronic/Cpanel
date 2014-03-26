@@ -1,0 +1,83 @@
+{#
+  Module: BolBoletines
+  Document : modules\BolBoletines\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 06.07.2013 15:53:44
+#}
+
+<div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'arbol'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#arbol" onclick='$( "#solapaActiva" ).val("arbol");'>Árbol de Boletines</a>
+        </li>
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'general'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#general" onclick='$( "#solapaActiva" ).val("general");'>{%if datos.Titulo%}<b>{{datos.Titulo|slice(0,40)}}</b> ...{%else%}Boletín{%endif%}</a>
+            {{ macro.publicar(values.varEnvMod.columns.Publish,values.controller ~ '[Publish]',values.controller ~ '_Publish',datos.Publish.IDTipo) }}
+        </li>
+        
+        {% if (values.datos.getPrimaryKeyValue) %}
+            {% if datos.getTieneEtiquetas() %}
+            <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'etiquetas'%}  ui-tabs-selected ui-state-active{%endif%}">
+                <a href="#etiquetas" onclick="cargaEtiquetasRelacionadas('etiquetas','{{values.controller}}','{{datos.primaryKeyValue}}');">Etiquetas</a>
+            </li>
+            {% endif %}
+            
+            <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'contenidos'%}  ui-tabs-selected ui-state-active{%endif%}">
+                <a href="#contenidos" onclick='$( "#solapaActiva" ).val("contenidos");'>Contenidos</a>
+            </li>            
+            <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'envios'%}  ui-tabs-selected ui-state-active{%endif%}">
+                <a href="#envios" onclick='$( "#solapaActiva" ).val("envios");'>Envíos</a>
+            </li>            
+        {% endif %} 
+            
+        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
+            <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
+        </li>        
+        {% endif %}
+    </ul>
+
+    <div id="arbol">
+        <ul>
+            {% for keyTipo,tipo in values.objetoController.arbolTiposBoletines %}
+                <li style="font-weight: bold;">{{tipo.titulo}}</li>
+                <ul>
+                    {% for boletin in tipo.boletines %}
+                        <li style="margin-left: 30px;">
+                            {% if tipo.nBoletines > 1%}
+                                {{ macro.ordenarPopup(values.controller,'IDTipo',keyTipo) }}                                                      
+                            {% endif %}                              
+                            {% if values.varEnvMod.columns.Publish.visible == '1' %}
+                                {{ macro.actualizaColumna(values.controller,boletin.Id,'Publish',boletin.Publish.IDTipo,'Publicar/Despublicar')}}
+                            {% endif %}
+                            <a href="{{app.path}}/{{values.controller}}/edit/{{boletin.primaryKeyMD5}}" onclick="$('#solapaActiva').val('1');">{{boletin.titulo}}</a>
+                        </li>
+                    {% endfor %}                       
+                </ul>
+            {% endfor %}
+        </ul>
+    </div>
+        
+    <div id="general">
+        {{ macro.select(atributos.IDTipo,'field_title',values.controller ~ '[IDTipo]',values.controller ~ '_IDTipo',none,datos.IDTipo.Id,datos.IDTipo.fetchAll('Titulo',0),'chzn-select','1')}}
+        {{ macro.select(atributos.IDFormato,'field_title',values.controller ~ '[IDFormato]',values.controller ~ '_IDFormato',none,datos.IDFormato.Id,datos.IDFormato.fetchAll('Titulo',0),'chzn-select','1')}}                        
+        {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
+        {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
+        {{ macro.textarea(atributos.Resumen,'field_title',values.controller ~ '[Resumen]',values.controller ~ '_Resumen',datos.Resumen,none,none,'textarea','4')}}            
+    </div>
+
+    {% if (datos.getPrimaryKeyValue) %}
+        <div id="etiquetas" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>
+        <div id="contenidos" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+            {% include values.controller ~ '/objetosRelacionados.html.twig' %}
+        </div>        
+        <div id="envios" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+            {% include values.controller ~ '/envios.html.twig' %}
+        </div>        
+    {% endif %}
+        
+    {% include '_global/fieldsComunes.html.twig' %}        
+</div>
+{{ macro.foco(values.controller ~ '_IDTipo') }}  

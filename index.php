@@ -35,7 +35,7 @@ if (file_exists("bin/yaml/lib/sfYaml.php"))
     include "bin/yaml/lib/sfYaml.php";
 else
     die("NO EXISTE LA CLASE PARA LEER ARCHIVOS YAML");
-
+//print_r($_SESSION['usuarioPortal']);
 // ---------------------------------------------------------------
 // CARGO LOS PARAMETROS DE CONFIGURACION.
 // ---------------------------------------------------------------
@@ -151,7 +151,7 @@ if ($rq->isOldBrowser()) {
             break;
     }
 
-    if (!isset($_SESSION['USER'])) {
+    if (!isset($_SESSION['usuarioPortal'])) {
 
         // No está logeado
         $controller = "Index";
@@ -194,7 +194,7 @@ $result['values']['varPro_Web'] = $_SESSION['varPro_Web'];
 if ($config['debug_mode']) {
     $result['values']['_debugMode'] = true;
     $result['values']['_auditMode'] = (string) $config['audit_mode'];
-    $result['values']['_user'] = sfYaml::dump($_SESSION['USER'], 5);
+    $result['values']['_user'] = sfYaml::dump($_SESSION['usuarioPortal'], 5);
     $result['values']['_debugValues'] = sfYaml::Dump($result['values'], 100);
 }
 
@@ -213,7 +213,7 @@ if ($_SESSION['isMobile']) {
 
 // Renderizo el template y los valores devueltos por el método
 $usuarios = new CpanUsuarios();
-$usuario = $usuarios->find('IdUsuario', $_SESSION['USER']['user']['Id']);
+$usuario = $usuarios->find('IdUsuario', $_SESSION['usuarioPortal']['Id']);
 unset($usuarios);
 
 $twig->addGlobal('user', $usuario);
@@ -226,7 +226,7 @@ $twig->loadTemplate($result['template'])
             'values' => $result['values'],
             'app' => $app,
             'layout' => $layout,
-            'menu' => $_SESSION['USER']['menu'],
+            'menu' => $_SESSION['usuarioPortal']['menu'],
             'project' => $_SESSION['project'],
         ));
 

@@ -1,0 +1,50 @@
+# ESQUEMA DE LA APP BOLETINES
+
+# Tipos de Boletines
+BolTipos:
+  comment: Tipos de Boletines
+  columns:
+    Titulo: { type: string(255), notnull: true }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+   
+# Formatos de Boletines
+BolFormatos:
+  comment: Formatos html de Boletines
+  columns:
+    Titulo:                { type: string(255), notnull: true }
+    PrivacidadContenidos:  { type: tinyint, notnull: true, default: 0, index: index, comment: 'Abstract,ValoresPrivacy,IDTipo'}
+    PlantillaHtm:          { type: string(255), notnull: true, default: 'plantillaBoletin1.htm' }    
+    Css:                   { type: text, notnull: false }
+    Html:                  { type: text, notnull: false }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    
+# Boletines    
+BolBoletines:
+  comment: Boletines
+  columns:
+    IDTipo:    { type: int(11), notnull: true, index: index, comment: 'db,BolTipos,Id' }
+    Titulo:    { type: string(255), notnull: true }
+    Subtitulo: { type: string(255), notnull: false }
+    Resumen:   { type: text, notnull: false }
+    IDFormato: { type: int(11), notnull: true, index: index, comment: 'db,BolFormatos,Id' }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IDTipo:    { ForeignEntity: BolTipos, ForeignId: Id} 
+    IDFormato: { ForeignEntity: BolFormatos, ForeignId: Id }
+    
+# Relación de envíos de cada boletín
+BolEnvios:
+  comment: Envíos de boletines
+  columns:
+    IDBoletin:    { type: int(11), notnull: true, index: index, comment: 'db,BolBoletines,Id' }
+    Para:         { type: text, notnull: true }
+    Cc:           { type: text, notnull: false }
+    Cco:          { type: text, notnull: false }
+    Estado:       { type: tinyint(1), notnull: true, default: 0 }
+    Errores:      { type: text, notnull: false }
+    ArchivoHtml : { type: string(255), notnull: true }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+    IDBoletin:  { ForeignEntity: BolBoletines, ForeignId: Id}     

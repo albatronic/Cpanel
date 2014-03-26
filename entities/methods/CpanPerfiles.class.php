@@ -41,7 +41,7 @@ class CpanPerfiles extends CpanPerfilesEntity {
         if ($column == '')
             $column = $this->getPrimaryKeyName();
 
-        $filtroPerfil = ($_SESSION['USER']['user']['IdPerfil'] == '1') ? '1' : "Id<>1";
+        $filtroPerfil = ($_SESSION['usuarioPortal']['IdPerfil'] == '1') ? '1' : "Id<>1";
         
         $this->conecta();
 

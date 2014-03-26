@@ -1,0 +1,18 @@
+# MODULOS DE LA APP Idiomas. 
+CpanAplicaciones:
+  - { CodigoApp: Idiomas, NombreApp: Multi-Idioma }
+
+CpanModulos:
+  - { CodigoApp: Idiomas, NombreModulo: Idiomas,    Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Multi-Idioma, Funcionalidades: AC }
+  - { CodigoApp: Idiomas, NombreModulo: CpanTextos,     Nivel: 1, BelongsTo: Idiomas,  Publish: 1, Titulo: Textos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  - { CodigoApp: Idiomas, NombreModulo: CpanPlantillas, Nivel: 1, BelongsTo: Idiomas,  Publish: 1, Titulo: Plantillas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+CpanPermisos:
+  - { IdPerfil: 1, NombreModulo: Idiomas, Funcionalidades: 'AC,VW' }
+  - { IdPerfil: 1, NombreModulo: CpanTextos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  - { IdPerfil: 1, NombreModulo: CpanPlantillas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+  - { IdPerfil: 2, NombreModulo: Idiomas, Funcionalidades: 'AC,VW' }
+  - { IdPerfil: 2, NombreModulo: CpanTextos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  - { IdPerfil: 2, NombreModulo: CpanPlantillas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+

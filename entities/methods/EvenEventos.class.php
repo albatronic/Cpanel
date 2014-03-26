@@ -15,6 +15,19 @@ class EvenEventos extends EvenEventosEntity {
         return $this->getId();
     }
 
+    /**
+     * Devuelve el objeto relacionado con el evento
+     * @return objeto
+     */
+    public function getObjeto() {
+        if ($this->Entidad != '' and $this->IdEntidad != '')
+            $objeto = new $this->Entidad($this->IdEntidad);
+        else
+            $objeto = null;
+
+        return $objeto;
+    }
+
 }
 
 ?>

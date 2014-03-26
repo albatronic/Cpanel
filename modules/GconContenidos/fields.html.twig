@@ -56,7 +56,9 @@
         {# macro.input(atributos.NoticiaOrden,'field_title','text',values.controller ~ '[NoticiaOrden]',values.controller ~ '_NoticiaOrden',datos.NoticiaOrden,'11','CampoImporte','18') #}
         {{ macro.input(atributos.EsEvento,'field_title','checkbox',values.controller ~ '[EsEvento]',values.controller ~ '_EsEvento',datos.EsEvento.IDTipo,'255','CampoTextoLargo','12') }}
         {{ macro.input(atributos.EsWiki,'field_title','checkbox',values.controller ~ '[EsWiki]',values.controller ~ '_EsWiki',datos.EsWiki.IDTipo,'255','CampoTextoLargo','12') }}
-    </div>
+
+        {% include '_global/metaDatos.html.twig' %}       
+        </div>
     
     {% if (values.datos.getPrimaryKeyValue) and (values.datos.EsEvento.IDTipo) %}
         <div id="eventos" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>

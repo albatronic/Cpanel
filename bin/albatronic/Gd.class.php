@@ -192,7 +192,7 @@ class Gd {
      *
      * @param int $cwidth Anchura del thumbnail
      * @param int $cheight Altura del thumbnail
-     * @param string $modo Posición desde donde extraer el thumbnail. Defecto 'center'
+     * @param string $modo Posición desde donde extraer el thumbnail. Defecto 'ajustar'
      */
     public function crop($cwidth, $cheight, $modo = 'ajustar') {
 

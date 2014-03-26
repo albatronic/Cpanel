@@ -46,12 +46,12 @@ class IndexController extends Controller {
     }
 
     /**
-     * Crea la variable de sesion $_SESSION['USER']['menu']
+     * Crea la variable de sesion $_SESSION['usuarioPortal']['menu']
      *
      * @return array Array template, values
      */
     public function IndexAction() {
-
+        
         switch ($this->request[1]) {
             case '':
                 // No ha selecionado ninguna app, muestro todas las disponibles                
@@ -67,21 +67,23 @@ class IndexController extends Controller {
                 unset($permisos);
 
                 $this->values['enCurso']['app'] = $aplicacion;
-                $this->values['titulo'] = $_SESSION['USER']['menu'][$aplicacion]['titulo'];
+                $this->values['titulo'] = $_SESSION['usuarioPortal']['menu'][$aplicacion]['titulo'];
                 $this->values['menu']['tipo'] = "modulos";
                 $this->values['menu']['perteneceA'] = $aplicacion;
-                foreach ($_SESSION['USER']['menu'][$aplicacion]['modulos'] as $key => $value)
-                    if ($value['publicar'])
+                foreach ($_SESSION['usuarioPortal']['menu'][$aplicacion]['modulos'] as $key => $value) {
+                    if ($value['publicar']) {
                         $this->values['menu']['modulos'][$key] = $value;
+                    }
+                }
 
                 $template = $this->entity . "/index.html.twig";
                 break;
 
             default:
-                if (!isset($_SESSION['USER']['menu'])) {
+                if (!isset($_SESSION['usuarioPortal']['menu'])) {
 
                     // Está logeado (viene del portal), pero es la primera vez que entra
-                    unset($_SESSION['USER']['accesosPortal']);
+                    $_SESSION['usuarioPortal']['accesosPortal'] = array();
 
                     // Carga la cadena de conexion a la base de datos del proyecto
                     $proyectoApp = new PcaeProyectosApps();
@@ -112,11 +114,11 @@ class IndexController extends Controller {
                     // Establece el perfil del usuario para el proyecto y carga
                     // el menú en base a su perfil
                     $usuarios = new CpanUsuarios();
-                    $usuario = $usuarios->find("IdUsuario", $_SESSION['USER']['user']['Id']);
+                    $usuario = $usuarios->find("IdUsuario", $_SESSION['usuarioPortal']['Id']);
                     unset($usuarios);
                     if ($usuario->getStatus()) {
-                        $_SESSION['USER']['user']['IdPerfil'] = $usuario->getIdPerfil()->getId();
-                        $_SESSION['USER']['menu'] = $usuario->getArrayMenu();
+                        $_SESSION['usuarioPortal']['IdPerfil'] = $usuario->getIdPerfil()->getId();
+                        $_SESSION['usuarioPortal']['menu'] = $usuario->getArrayMenu();
                         // Carga las variables de entorno y web del proyecto
                         $this->cargaVariables();
 
@@ -124,13 +126,15 @@ class IndexController extends Controller {
                         $langs = trim($_SESSION['VARIABLES']['WebPro']['globales']['lang']);
                         $_SESSION['idiomas']['disponibles'] = ($langs == '') ? array('0' => 'es') : explode(",", $langs);
 
-                        if (!isset($_SESSION['idiomas']['actual']))
+                        if (!isset($_SESSION['idiomas']['actual'])){
                             $_SESSION['idiomas']['actual'] = 0;
+                        }
 
                         $this->setAplicaciones();
                         $template = $this->entity . "/index.html.twig";
-                    } else
+                    } else {
                         $template = $this->entity . "/noLoged.html.twig";
+                    }
                     unset($usuario);
                 }
                 $template = $this->entity . "/index.html.twig";
@@ -151,7 +155,7 @@ class IndexController extends Controller {
 
         $this->values['titulo'] = 'Apps disponibles';
         $this->values['menu']['tipo'] = 'apps';
-        foreach ($_SESSION['USER']['menu'] as $key => $value)
+        foreach ($_SESSION['usuarioPortal']['menu'] as $key => $value)
             if ($value['publicar']) {
                 $this->values['menu']['apps'][$key] = array(
                     'titulo' => $value['titulo'],
@@ -214,7 +218,7 @@ class IndexController extends Controller {
 
         $usuario = new CpanUsuarios($this->request['user']);
         if ($usuario->getLogin() != '') {
-            $_SESSION['USER'] = array(
+            $_SESSION['usuarioPortal'] = array(
                 'user' => array(
                     'Id' => $usuario->getId(),
                     'nombre' => $usuario->getNombreApellidos(),

@@ -7,7 +7,20 @@
     El link de crear el subelemento
 #}
 
-{% if item.nivelJerarquico == 1 or nHermanos > 1 %}
+<a href="#">
+    <span onclick="location.href='{{app.path}}/{{values.controller}}/belongsTo/{{key}}'" alt="Añadir subelemento" title="Añadir subelemento"><img src="{{app.path}}/images/detalle.png" width="16px;"/></span>     
+    <span>
+        {% if item.nivelJerarquico >= 1 or nHermanos > 1 %}
+            <img src="{{appPath}}/images/boton-ordenar.png" width="16px;" alt="Ordenar" title="Ordenar" onclick="popUpOrdenar('{{values.controller}}','BelongsTo','{{item.belongsTo}}','Familia');" />         
+        {% else %}
+            <img src="{{app.path}}/images/espacio.gif" width="22px"/>
+        {% endif %}
+        {{ macro.actualizaColumna(values.controller,item.id,'Publish',item.publish,'Publicar/Despublicar')}}    
+    </span>
+    <span onclick="location.href='{{app.path}}/{{values.controller}}/edit/{{key}}'">{{item.titulo}}</span>
+</a> 
+{#
+{% if item.nivelJerarquico >= 1 or nHermanos > 1 %}
     {{ macro.ordenarPopup(values.controller,'BelongsTo',item.belongsTo)}}
 {% else %}
     <img src="{{app.path}}/images/espacio.gif" width="22px"/>
@@ -16,3 +29,4 @@
 {{ macro.actualizaColumna(values.controller,item.id,'Publish',item.publish,'Publicar/Despublicar')}}                      
 <a href="{{app.path}}/{{values.controller}}/edit/{{key}}">{{item.titulo}}</a>
 <a href="{{app.path}}/{{values.controller}}/belongsTo/{{key}}" alt="Añadir subelemento" title="Añadir subelemento"><img src="{{app.path}}/images/detalle.png"/></a>
+#}

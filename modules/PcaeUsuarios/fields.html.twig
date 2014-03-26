@@ -28,6 +28,13 @@
         {{ macro.input(atributos.Telefono,'field_title','text',values.controller ~ '[Telefono]',values.controller ~ '_Telefono',datos.Telefono,'50','CampoTextoLargo','9') }}
         {{ macro.input(atributos.EMail,'field_title','text',values.controller ~ '[EMail]',values.controller ~ '_EMail',datos.EMail,'100','CampoTextoLargo','10') }}
         {{ macro.input(atributos.Password,'field_title','text',values.controller ~ '[Password]',values.controller ~ '_Password',none,'100','CampoTextoLargo','11') }}
+        <hr>
+        {{ macro.input(atributos.EMailHost,'field_title','text',values.controller ~ '[EMailHost]',values.controller ~ '_EMailHost',datos.EMailHost,'100','CampoTextoLargo','11') }}
+        {{ macro.input(atributos.EMailSocket,'field_title','text',values.controller ~ '[EMailSocket]',values.controller ~ '_EMailSocket',datos.EMailSocket,'25','CampoTextoLargo','11') }}
+        {{ macro.input(atributos.EMailPort,'field_title','text',values.controller ~ '[EMailPort]',values.controller ~ '_EMailPort',datos.EMailPort,'3','CampoTextoCorto','11') }}
+        {{ macro.input(atributos.EMailSmtpAuth,'field_title','checkbox',values.controller ~ '[EMailSmtpAuth]',values.controller ~ '_EMailSmtpAuth',datos.EMailSmtpAuth,'100','CampoTextoLargo','11') }}        
+        {{ macro.input(atributos.EMailPassword,'field_title','text',values.controller ~ '[EMailPassword]',values.controller ~ '_EMailPassword',datos.EMailPassword,'50','CampoTextoLargo','11') }}
+        <hr>
         {{ macro.input(atributos.NLogin,'field_title','text',values.controller ~ '[NLogin]',values.controller ~ '_NLogin',datos.NLogin,'4','CampoUnidades','12') }}
         {{ macro.fecha(atributos.UltimoLogin,'field_title',values.controller ~ '[UltimoLogin]',values.controller ~ '_UltimoLogin',datos.UltimoLogin,'19','datepicker','13')}}      
         {# include '_global/fieldsComunes.html.twig' #}

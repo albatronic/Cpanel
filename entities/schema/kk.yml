@@ -1,0 +1,4 @@
+CpanPermisos:
+  - { IdPerfil: 1, NombreModulo: Idiomas, Funcionalidades: 'AC,VW' }
+  - { IdPerfil: 1, NombreModulo: CpanTextos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  - { IdPerfil: 1, NombreModulo: CpanPlantillas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}

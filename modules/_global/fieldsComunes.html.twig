@@ -40,7 +40,11 @@
     
         {# GENERAL #}
         {% if (idiomas.actual == 0) and (user.IdPerfil.Id == '1' or atributos.AllowsChildren.visible or atributos.BelongsTo.visible or atributos.CodigoAppAsociada.visible or atributos.IdAlbumExterno.visible or atributos.IdSliderAsociado.visible or atributos.IdSeccionEnlaces.visible or atributos.IdSeccionVideos.visible or atributos.Observations.visible) %}        
-        <div>
+            {% set generalClass = '' %}
+        {% else %}
+            {% set generalClass = 'oculto' %}
+        {% endif %}
+        <div class="{{generalClass}}">
             <h3>General</h3>
             <div>
                 <p>
@@ -64,8 +68,7 @@
                 </p>
             </div>
         </div>
-        {% endif %}
-        
+    
         {# FECHAS #}
         {% if (idiomas.actual == 0) and (user.IdPerfil.Id == '1' or atributos.PublishedAt.visible or atributos.ActiveFrom.visible or atributos.ActiveTo.visible) %}
         <div>
@@ -94,7 +97,7 @@
                 {{ macro.textarea(atributos.MetatagKeywords, 'field_title', values.controller ~ '[MetatagKeywords]', values.controller ~ '_MetatagKeywords', datos.MetatagKeywords, none, none, 'textarea',116) }}
                 {{ macro.input(atributos.MetatagTitleSimple,'field_title','checkbox',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',datos.MetatagTitleSimple.IDTipo,'255','CampoTextoLargo','12') }}
                 {{ macro.select(atributos.MetatagTitlePosition,'field_title',values.controller ~ '[MetatagTitlePosition]',values.controller ~ '_MetatagTitlePosition',none,datos.MetatagTitlePosition.IDTipo,datos.MetatagTitlePosition.fetchAll(none,0),'chzn-select',118)}}                
-                {{ macro.input(atributos.RevisitAfter,'field_title','text',values.controller ~ '[RevisitAfter]',values.controller ~ '_RevisitAfter',datos.RevisitAfter,none,none,'255','CampoTextoLargo','12') }}                    
+                {{ macro.input(atributos.RevisitAfter,'field_title','text',values.controller ~ '[RevisitAfter]',values.controller ~ '_RevisitAfter',datos.RevisitAfter,none,none,'255','CampoTextoCorto') }}                    
                 </p>
             </div>
         </div>
@@ -140,7 +143,7 @@
                     <div class="grupoImagen">
                         <div class="visualImagen">
                             <div id="foto{{puntero}}">
-                                <img style="border: 1px solid;" src="{{project.url}}/docs/{{values.controller}}/{{imagen.Name}}" width="{% if imagen.Width>350 %}350px{%else%}{{imagen.Width}}px{%endif%}" />
+                                <img style="border: 1px solid;" src="{{project.url}}/{{imagen.PathName}}" width="{% if imagen.Width>350 %}350px{%else%}{{imagen.Width}}px{%endif%}" />
                             </div>
                             <br />{{imagen.getSize|number_format(0)}} bytes 
                             (
@@ -305,7 +308,7 @@
             {% endif %}
             
             {# SOLAPA ENTIDADES RELACIONADAS #}
-            {% if (idiomas.actual == 0) and (user.IdPerfil.Id == '1') %}       
+            {% if (idiomas.actual == 0) and (user.IdPerfil.Id == '1' or values.varEnvMod.modulosRelacionables ) %}       
             <div>
                 <h3 id="relacionar">Relacionar con ...</h3>
                 <div id="divRelacionar"></div>

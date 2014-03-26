@@ -38,7 +38,7 @@ class CpanUsuarios extends CpanUsuariosEntity {
         if ($em->getDbLink()) {
             $query = "
                 select m.CodigoApp ,p.NombreModulo, p.Funcionalidades, m.Publish
-                from CpanPermisos as p, CpanModulos as m
+                from {$em->getDataBase()}.CpanPermisos as p, {$em->getDataBase()}.CpanModulos as m
                 where  m.NombreModulo = p.NombreModulo and
                 p.IdPerfil = '{$this->getIdPerfil()->getId()}' AND
                 LOCATE('AC',p.Funcionalidades)

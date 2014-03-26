@@ -34,9 +34,9 @@
 
         <div id="acordeonOrden">
             {% for valor in values.datos %}
-            <div style="">
-                <h3><span style="margin-left: 20px;">{{valor.Value}}</span></h3>
-                <div>
+            <div>
+                <h3><span style="margin-left: 20px; cursor: move;">{{valor.Value|slice(0, 50)}}</span></h3>
+                <div style="cursor: move;">
                     <input name="acordeon[{{valor.Id}}]" value="{{valor.Id}}" type="hidden"/>
                 </div>
             </div>

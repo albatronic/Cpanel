@@ -75,7 +75,16 @@ class PcaeUsuariosEntity extends EntityComunes {
     protected $EMail;
 
     /**
-     * @var string
+     * DATOS SERVIDOR DE CORREO
+     */
+    protected $EMailSocket = "smtp";
+    protected $EMailHost;
+    protected $EMailPort = 25;
+    protected $EMailSmtpAuth = true;
+    protected $EMailPassword = '';
+
+    /**
+     * @var string Contraseña de acceso al portal
      * @assert NotBlank(groups="PcaeUsuarios")
      */
     protected $Password;
@@ -229,6 +238,46 @@ class PcaeUsuariosEntity extends EntityComunes {
 
     public function getEMail() {
         return $this->EMail;
+    }
+
+    public function setEMailSocket($EMailSocket) {
+        $this->EMailSocket = trim($EMailSocket);
+    }
+
+    public function getEMailSocket() {
+        return $this->EMailSocket;
+    }
+
+    public function setEMailHost($EMailHost) {
+        $this->EMailHost = trim($EMailHost);
+    }
+
+    public function getEMailHost() {
+        return $this->EMailHost;
+    }
+
+    public function setEMailPort($EMailPort) {
+        $this->EMailPort = trim($EMailPort);
+    }
+
+    public function getEMailPort() {
+        return $this->EMailPort;
+    }
+
+    public function setEMailSmtpAuth($EMailSmtpAuth) {
+        $this->EMailSmtpAuth = trim($EMailSmtpAuth);
+    }
+
+    public function getEMailSmtpAuth() {
+        return $this->EMailSmtpAuth;
+    }
+
+    public function setEMailPassword($EMailPassword) {
+        $this->EMailPassword = trim($EMailPassword);
+    }
+
+    public function getEMailPassword() {
+        return $this->EMailPassword;
     }
 
     public function setPassword($Password) {

@@ -4,8 +4,10 @@
 <ul class="arbol">
 {% for keyPadre,padre in arbol %}
     <li class="arbol">
-        {% include 'GconSecciones/' ~ subtemplate with {'key':keyPadre,'item':padre} %}
+        {% include 'GconSecciones/' ~ subtemplate with {'key':keyPadre,'item':padre} %}              
     </li>
+    {% include 'GconSecciones/arbol.html.twig' with {'arbol': padre.hijos, 'subtemplate':'arbolEditar.html.twig'} %}    
+    {#
     <ul class="arbol">
         {% for keyHijo,hijo in padre.hijos %}
             <li class="arbol">
@@ -20,5 +22,6 @@
             </ul>                        
         {% endfor %}
     </ul>
+    #}
 {% endfor %}
 </ul>

@@ -106,15 +106,15 @@
 {% macro actualizaColumna(entidad,idEntidad,columna,valor,titulo) %}
 <input
     title="{{titulo}}"
-    id="check{{entidad}}{{idEntidad}}"
+    id="check{{entidad}}{{idEntidad}}{{columna}}"
     type="checkbox"
     value="{{valor}}"
     {% if (valor == '1') %} checked {% endif %}
     onchange="
-      if ($('#check{{entidad}}{{idEntidad}}').is(':checked')) {$('#check{{entidad}}{{idEntidad}}').val('1');} else {$('#check{{entidad}}{{idEntidad}}').val('0');}
-      actualizaColumna('{{entidad}}','{{idEntidad}}','{{columna}}',$('#check{{entidad}}{{idEntidad}}').val());
+      if ($('#check{{entidad}}{{idEntidad}}{{columna}}').is(':checked')) {$('#check{{entidad}}{{idEntidad}}{{columna}}').val('1');} else {$('#check{{entidad}}{{idEntidad}}{{columna}}').val('0');}
+      actualizaColumna('{{entidad}}','{{idEntidad}}','{{columna}}',$('#check{{entidad}}{{idEntidad}}{{columna}}').val());
     "
-/> 
+/>
 {% endmacro%}
 
 {# ACTUALIZA VIA AJAX LA RELACION N A M entre entidades e id de entidades #}
@@ -189,7 +189,7 @@
                    id="checkbox_{{ id|default(name)}}"
                    value="{{ value }}"
                     {% if (value == '1') %} CHECKED {% endif %}
-                   class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
+                   class="{{class}}" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
                    onchange="
                         {{ onchange }} {{ _self.alertSave }}
                         if ($('#checkbox_{{ id|default(name)}}').is(':checked')) {$('#{{ id|default(name)}}').val('1');} else {$('#{{ id|default(name)}}').val('0');}
@@ -202,7 +202,7 @@
                    name="{{ name }}"
                    id="{{ id|default(name)}}"
                    value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
-                   class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
+                   class="mid" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
                    onchange="{{ onchange }} {{ _self.alertSave }}"
                    {{extra}}
                    {% if atributos.updatable == '0' %} disabled {% endif %}
@@ -217,9 +217,11 @@
             <input type="{{ type|default('text') }}"
                    id="{{ id|default(name)}}_autoComplete"
                    value="{{ autoComplete[2] }}" maxlength="{{ maxLength|default(20) }}"
-                   class="tip_top" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
+                   class="mid" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
                    onkeyup="autoCompletar('{{ id|default(name)}}_autoComplete','{{ id|default(name)}}','{{ id|default(name)}}_autoComplete','{{autoComplete[0]}}','{{autoComplete[1]}}',$('#{{autoComplete[3]}}').val());"
                    onchange = "{{ onchange}} {{ _self.alertSave }}"
+                   {{extra}}
+                   {% if atributos.updatable == '0' %} disabled {% endif %}
              />
         {% endif %}
         </div>
@@ -338,7 +340,7 @@
     <div class="form_input">
         <textarea  name="{{ name }}"
                    id="{{ id|default(name)}}"
-                   class="{{ class |default('input_grow') }}"
+                   class="large" title="{{ atributos.help }}"                  
                    rows="{{ rows|default(5) }}"
                    cols="{{ cols|default(75) }}"
                    tabindex="{{ tabindex }}"
@@ -377,6 +379,7 @@
                 onchange="{{onchange}}"
                 onblur="{{onblur}} {{ _self.alertSave }}"
                 tabindex="{{tabindex}}"
+                title="{{atributos.help}}"
         >
             {% for value in opciones %}
             <option value="{{ value.Id }}" {% if (value.Id==defecto) %} SELECTED {% endif %}>

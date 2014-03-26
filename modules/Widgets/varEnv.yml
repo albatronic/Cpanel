@@ -1,0 +1,11 @@
+# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO Widgets
+#
+# Module: Widgets
+# author Sergio Pérez <sergio.perez@albatronic.com>
+# copyright ARTICO ESTUDIO, SL
+# date 25-10-2013 22:32:33
+#
+# ejemplo:
+#
+# nombreVariable: el texto del caption
+---

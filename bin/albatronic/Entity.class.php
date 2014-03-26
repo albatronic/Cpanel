@@ -118,11 +118,13 @@ class Entity {
                             $this->{"set$column_name"}($value);
                         }
                     }
-                } else
+                }
+                else
                     $this->_errores[] = $this->_em->getError();
 
                 $this->_em->desConecta();
-            } else
+            }
+            else
                 $this->_errores[] = $this->_em->getError();
 
             unset($this->_em);
@@ -140,7 +142,7 @@ class Entity {
         if (is_resource($this->_dbLink)) {
             // Auditoria
             $this->setModifiedAt(date('Y-m-d H:i:s'));
-            $this->setModifiedBy($_SESSION['USER']['user']['Id']);
+            $this->setModifiedBy($_SESSION['usuarioPortal']['Id']);
 
             // Compongo los valores iterando el objeto
             $values = '';
@@ -179,7 +181,7 @@ class Entity {
         if (is_resource($this->_dbLink)) {
             // Auditoria
             $this->setCreatedAt(date('Y-m-d H:i:s'));
-            $this->setCreatedBy($_SESSION['USER']['user']['Id']);
+            $this->setCreatedBy($_SESSION['usuarioPortal']['Id']);
 
             // Compongo las columnas y los valores iterando el objeto
             $columns = '';
@@ -213,10 +215,11 @@ class Entity {
                     $objetoPadre = new $this($this->BelongsTo);
                     $perfilesCpan = $objetoPadre->getAccessProfileList();
                     unset($objetoPadre);
-                } else
+                }
+                else
                     $perfilesCpan = $this->getAccessProfileList();
 
-                $perfilesCpan['perfiles'][$_SESSION['USER']['user']['IdPerfil']] = $_SESSION['USER']['user']['IdPerfil'];
+                $perfilesCpan['perfiles'][$_SESSION['usuarioPortal']['IdPerfil']] = $_SESSION['usuarioPortal']['IdPerfil'];
                 $this->setAccessProfileList($perfilesCpan);
                 $this->save();
             }
@@ -243,7 +246,7 @@ class Entity {
             if (is_resource($this->_dbLink)) {
                 // Auditoria
                 $fecha = date('Y-m-d H:i:s');
-                $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET `Deleted` = '1', `DeletedAt` = '{$fecha}', `DeletedBy` = '{$_SESSION['USER']['user']['Id']}' WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
+                $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET `Deleted` = '1', `DeletedAt` = '{$fecha}', `DeletedBy` = '{$_SESSION['usuarioPortal']['Id']}' WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
                 if (!$this->_em->query($query))
                     $this->_errores = $this->_em->getError();
                 else {
@@ -258,7 +261,8 @@ class Entity {
                     unset($doc);
                 }
                 $this->_em->desConecta();
-            } else
+            }
+            else
                 $this->_errores = $this->_em->getError();
             unset($this->_em);
             $validacion = (count($this->_errores) == 0);
@@ -296,7 +300,8 @@ class Entity {
                     unset($doc);
                 }
                 $this->_em->desConecta();
-            } else
+            }
+            else
                 $this->_errores = $this->_em->getError();
             unset($this->_em);
             $validacion = (count($this->_errores) == 0);
@@ -504,7 +509,7 @@ class Entity {
 
         if ($this->getPrimaryKeyValue() != '') {
             // Estoy validando antes de actualizar
-            if (($this->IsSuper) and ($_SESSION['USER']['user']['IdPerfil'] != '1'))
+            if (($this->IsSuper) and ($_SESSION['usuarioPortal']['IdPerfil'] != '1'))
                 $this->_errores[] = "No se puede modificar, es un valor reservado";
         }
 
@@ -548,12 +553,12 @@ class Entity {
 
         // No se puede borrar si el objeto es un valor predeterminado y el usuario
         // no es el super
-        if (($this->IsDefault) AND ($_SESSION['USER']['user']['IdPerfil'] != 1))
+        if (($this->IsDefault) AND ($_SESSION['usuarioPortal']['IdPerfil'] != 1))
             $this->_errores[] = "No se puede eliminar. Es un valor predeterminado";
 
         // No se puede borrar si el objeto es un valor SUPER y el usuario
         // no es el super
-        if (($this->IsSuper) AND ($_SESSION['USER']['user']['IdPerfil'] != 1))
+        if (($this->IsSuper) AND ($_SESSION['usuarioPortal']['IdPerfil'] != 1))
             $this->_errores[] = "No se puede eliminar. Es un valor reservado";
 
         // Validacion de integridad referencial respecto a entidades hijas
@@ -602,7 +607,7 @@ class Entity {
                 $condicion .= " AND (Deleted = '0')";
 
             $query = "SELECT {$columnas} FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE ({$condicion}) {$orderBy}";
-            $this->_em->query($query);
+            $this->_em->query($query);//echo $query;
             $this->setStatus($this->_em->numRows());
 
             $rows = $this->_em->fetchResult();
@@ -1049,9 +1054,62 @@ class Entity {
      */
     public function getColumnValue($column, $length = 0) {
         $cadena = $this->{"get$column"}();
+        if (is_object($cadena))
+            $cadena = $cadena->__toString();
         if ($length > 0)
             $cadena = substr($cadena, 0, $length);
         return $cadena;
+    }
+
+    /**
+     * Devuelve el valor del meta dato $name
+     * para la entidad e id de entidad en curso
+     * 
+     * @param string $name El nombre del meta dato
+     * @return string El valor del meta dato
+     */
+    public function getMetaData($name) {
+
+        $name = trim($name);
+
+        $meta = new CpanMetaData();
+        $rows = $meta->cargaCondicion("Value", "Entity='{$this->getClassName()}' and IdEntity='{$this->getPrimaryKeyValue()}' and Name='{$name}'");
+        unset($meta);
+
+        return $rows[0]['Value'];
+    }
+
+    /**
+     * Devuelve un array (Name,Value) con los metadatos
+     * correspondientes a la entidad e id de entidad en curso
+     *  
+     * @return array Array con n ocurrencias de ('Name' => nombre metadato, 'Value' => valor metadato)
+     */
+    public function getMetaDatas() {
+
+        $meta = new CpanMetaData();
+
+        // Coger todos los nombres de metadatos de la entidad
+        $rows = $meta->cargaCondicion("distinct Name", "Entity='{$this->getClassName()}'");
+        unset($meta);
+
+        // Cargar los valores de los metadatos de en la entidad en curso.
+        foreach ($rows as $row) {//print_r($row['Name']);
+            $metaData[] = array(
+                'Name' => $row['Name'],
+                'Value' => $this->getMetaData($row['Name'])
+            );
+        }
+
+        return $metaData;
+    }
+
+    /**
+     * Devuelve el objeto en formato JSON
+     * @return json
+     */
+    public function getJson() {
+        return json_encode($this->iterator());
     }
 
     /**

@@ -5,9 +5,9 @@ VisitVisitas:
     fromColumn: ''
     toEntity: ''
     toColumn: ''
-  showCommonFields: true
+  showCommonFields: false
   numMaxRecords: ''
-  numberOfImages: '3'
+  numberOfImages: '0'
   withGalery: '0'
   withDocuments: '0'
   withVideos: 0
@@ -23,7 +23,7 @@ VisitVisitas:
     generateThumbnail: '0'
     widthThumbnail: '50'
     heightThumbnail: '50'
-  urlFriendlyManagement: true
+  urlFriendlyManagement: false
   fieldGeneratorUrlFriendly: Sesion
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Sesion

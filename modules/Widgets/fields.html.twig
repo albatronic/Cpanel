@@ -1,0 +1,19 @@
+{#
+  Module: Widgets
+  Document : modules\Widgets\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 25.10.2013 22:32:33
+#}
+
+{{ macro.input(atributos.Name,'field_title','text',values.controller ~ '[Name]',values.controller ~ '_Name',datos.Name,'255','CampoTextoLargo','1') }}
+{{ macro.input(atributos.Title,'field_title','text',values.controller ~ '[Title]',values.controller ~ '_Title',datos.Title,'255','CampoTextoLargo','2') }}
+{{ macro.input(atributos.BeforeWidget,'field_title','text',values.controller ~ '[BeforeWidget]',values.controller ~ '_BeforeWidget',datos.BeforeWidget,'500','CampoTextoLargo','3') }}
+{{ macro.input(atributos.AfterWidget,'field_title','text',values.controller ~ '[AfterWidget]',values.controller ~ '_AfterWidget',datos.AfterWidget,'500','CampoTextoLargo','4') }}
+{{ macro.input(atributos.Controllers,'field_title','text',values.controller ~ '[Controllers]',values.controller ~ '_Controllers',datos.Controllers,'500','CampoTextoLargo','5') }}
+{{ macro.textarea(atributos.Widgets,'field_title',values.controller ~ '[Widgets]',values.controller ~ '_Widgets',datos.Widgets,none,none,'textarea','6')}}
+
+{% include '_global/fieldsComunes.html.twig' %}
+
+{{ macro.foco(values.controller ~ '_Name') }}

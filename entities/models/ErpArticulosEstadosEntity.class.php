@@ -17,7 +17,7 @@ class ErpArticulosEstadosEntity extends EntityComunes {
      * @var integer
      * @assert NotBlank(groups="ErpArticulosEstados")
      */
-    protected $Id;
+    protected $IDEstado;
 
     /**
      * @var string
@@ -41,18 +41,18 @@ class ErpArticulosEstadosEntity extends EntityComunes {
      * Nombre de la PrimaryKey
      * @var string
      */
-    protected $_primaryKeyName = 'Id';
+    protected $_primaryKeyName = 'IDEstado';
 
     /**
      * Relacion de entidades que dependen de esta
      * @var string
      */
     protected $_parentEntities = array(
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado1'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado2'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado3'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado4'),
-        array('SourceColumn' => 'Id', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado5'),        
+        array('SourceColumn' => 'IDEstado', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado1'),
+        array('SourceColumn' => 'IDEstado', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado2'),
+        array('SourceColumn' => 'IDEstado', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado3'),
+        array('SourceColumn' => 'IDEstado', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado4'),
+        array('SourceColumn' => 'IDEstado', 'ParentEntity' => 'ErpArticulos', 'ParentColumn' => 'IDEstado5'),        
     );
 
     /**
@@ -72,12 +72,12 @@ class ErpArticulosEstadosEntity extends EntityComunes {
     /**
      * GETTERS Y SETTERS
      */
-    public function setId($Id) {
-        $this->Id = $Id;
+    public function setIDEstado($IDEstado) {
+        $this->IDEstado = $IDEstado;
     }
 
-    public function getId() {
-        return $this->Id;
+    public function getIDEstado() {
+        return $this->IDEstado;
     }
 
     public function setEstado($Estado) {

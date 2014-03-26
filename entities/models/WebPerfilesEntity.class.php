@@ -3,7 +3,7 @@
 /**
  * @author Sergio Perez <sergio.perez@albatronic.com>
  * @copyright INFORMATICA ALBATRONIC SL
- * @date 15.02.2013 17:35:40
+ * @date 07.08.2013 21:52:45
  */
 
 /**
@@ -48,6 +48,7 @@ class WebPerfilesEntity extends EntityComunes {
      * @var string
      */
     protected $_parentEntities = array(
+        array('SourceColumn' => 'Id', 'ParentEntity' => 'WebUsuarios', 'ParentColumn' => 'IdPerfil'),
     );
 
     /**

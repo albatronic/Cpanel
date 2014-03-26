@@ -66,7 +66,9 @@ class Textos {
             '%' => '',
             '#' => '',
             '"' => '',
-            '|' => '',            
+            '|' => '',  
+            '/' => '-',
+            '+' => '',            
         );
 
         // Pasar a minúsculas
@@ -79,7 +81,8 @@ class Textos {
         // Eliminamos todo lo que no sean letras, número o guión
         //$texto = preg_replace("/[^A-Za-z0-9-]+/","", $texto);
         
-        // Quitar eventuales dobles guiones
+        // Quitar eventuales triples y dobles guiones
+        $texto = str_replace("--", "-", $texto);
         $texto = str_replace("--", "-", $texto);
         
         // Quito el eventual primer guión

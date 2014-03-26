@@ -1,0 +1,49 @@
+{# META DATOS #}
+
+{% if user.IdPerfil.Id == '1' or values.varEnvMod.withMetadata == '1' %}
+    <div id="div_metaDatos">
+        {% for metaDato in values.metadatos %}
+        <li id="div_metaDato_{{metaDato.Name}}">
+            <div class="form_grid_12">
+                <span class="field_title">
+                    {% if (user.IdPerfil.Id == '1' or values.varEnvMod.deleteMetadata == '1') %}
+                        <img src="{{app.path}}/images/botonborrar.png" alt="borrar metadato" title="Borrar metadato"
+                             style=cursor:pointer;"
+                             onclick="if (!confirm('Al borrar el campo personalizado {{metaDato.Name}} se eliminarán todos los valores asociados. Está seguro?')) {return false;} else {borraMetadato('{{values.controller}}','{{metaDato.Name}}');}"/>
+                    {% endif %}
+                    <span>{{metaDato.Name}}</span>
+                </span>
+                <div class="form_input">
+                    <textarea name="metaDato[{{metaDato.Name}}]" id="metaDato_{{metaDato.Name}}"
+                              class="tip_top"
+                              rows="2"
+                              columns="75"
+                              >{{metaDato.Value}}</textarea>
+                </div>
+            </div>
+        </li>                  
+        {% endfor %}
+    </div>
+ 
+    {% if (user.IdPerfil.Id == '1' or values.varEnvMod.addMetadata == '1') %}
+        <div style="border: solid grey 1px; margin: 20px; padding: 10px;">
+            <div>
+                <p>Aquí puede definir campos personalizados</p>
+                <li>
+                    <div class="form_grid_12">
+                        <span class="field_title">
+                            <span>Nombre del campo personalizado</span>
+                        </span>
+                        <div class="form_input">
+                            <input id="metaDato_nuevo" type="text" />
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <input type="submit" value="Crear campo" onclick="creaMetadato('{{values.controller}}',$('#metaDato_nuevo').val(),'{{datos.getPrimaryKeyValue()}}'); return false;"/>
+                </li>
+            </div>
+        </div>
+    {% endif %}
+    <div id="resultadoMetaDatos" class="oculto"></div>
+{% endif %} 

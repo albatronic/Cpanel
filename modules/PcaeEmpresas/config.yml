@@ -192,7 +192,7 @@ PcaeEmpresas:
     Web:
       title: Web
       filter: YES
-      list: YES
+      list: NO
       visible: true
       updatable: true
       default: null
@@ -203,7 +203,7 @@ PcaeEmpresas:
     EMail:
       title: EMail
       filter: YES
-      list: YES
+      list: NO
       visible: true
       updatable: true
       default: null
@@ -272,11 +272,11 @@ PcaeEmpresas:
       list: NO
       visible: true
       updatable: true
-      default: '00'
+      default: '000'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      validator: { nullable: YES, type: string, length: '2', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: YES, type: string, length: '3', min: null, max: null, message: 'Valor Requerido' }
     DigitosCuentaContable:
       title: 'Dígitos cuenta contable'
       filter: YES

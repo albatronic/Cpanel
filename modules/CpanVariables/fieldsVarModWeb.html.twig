@@ -17,13 +17,16 @@
 
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        {% if user.IdPerfil.Id == '1' %}
         <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-global">Globales{% if user.IdPerfil.Id == '1' %} [globales]{% endif %}</a></li>
+        {% endif %}
         {% if values.datos.especificas %}
         <li class="ui-state-default ui-corner-top"><a href="#tabs-especificas">Específicas{% if user.IdPerfil.Id == '1' %}  [especificas]{% endif %}</a></li>
         {% endif %}
     </ul>
 
     {# VARIABLES WEB GLOBALES A TODOS LOS MODULOS #}
+    {% if user.IdPerfil.Id == '1' %}
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {% if user.IdPerfil.Id == '1' %} {% set visibilidad = 1%} {% else %} {% set visibilidad = values.visibilidad.globales.linkFromColumn %} {% endif %}
         {{ macro.input(
@@ -65,7 +68,8 @@
         }}
             
     </div>
-
+    {% endif %}
+        
     {# VARIABLES WEB ESPECIFICAS AL MODULO EN CURSO #}
     {% if values.datos.especificas %}
     <div id="tabs-especificas" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="margin-bottom: 100px;">

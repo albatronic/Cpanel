@@ -50,11 +50,11 @@ EvenEventos:
   records_per_page: 15
   order_by:
     -
-      title: 'Id a-z'
-      criteria: 'Id ASC'
+      title: 'Fecha a-z'
+      criteria: 'Fecha ASC'
     -
-      title: 'Id z-a'
-      criteria: 'Id DESC'
+      title: 'Fecha z-a'
+      criteria: 'Fecha DESC'
   search_default: Id
   referenced_entities:
     - ValoresSN

@@ -1,0 +1,18 @@
+{#
+  Module: BolFormatos
+  Document : modules\BolFormatos\fields.html.twig
+
+  author: Sergio Pérez <sergio.perez@albatronic.com>
+  copyright: INFORMATICA ALBATRONIC SL
+  date 11.07.2013 19:17:44
+#}
+
+{{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','1') }}
+{{ macro.select(atributos.PrivacidadContenidos,'field_title',values.controller ~ '[PrivacidadContenidos]',values.controller ~ '_PrivacidadContenidos',none,datos.PrivacidadContenidos.IDTipo,datos.PrivacidadContenidos.fetchAll('Titulo',0),'chzn-select','2')}}
+{{ macro.input(atributos.PlantillaHtm,'field_title','text',values.controller ~ '[PlantillaHtm]',values.controller ~ '_PlantillaHtm',datos.PlantillaHtm,'255','CampoTextoLargo','3') }}
+{{ macro.textarea(atributos.Css,'field_title',values.controller ~ '[Css]',values.controller ~ '_Css',datos.Css,none,none,'textarea','4')}}
+{{ macro.textarea(atributos.Html,'field_title',values.controller ~ '[Html]',values.controller ~ '_Html',datos.Html,none,none,'textarea','5')}}
+
+{# include '_global/fieldsComunes.html.twig' #}
+
+{{ macro.foco(values.controller ~ '_Titulo') }}

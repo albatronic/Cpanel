@@ -87,7 +87,7 @@ class CommBancosOficinasEntity extends EntityComunes {
      * Nombre de la conexion a la BD
      * @var string
      */
-    protected $_conectionName = 'pcae';
+    protected $_conectionName = '';
 
     /**
      * Nombre de la tabla física

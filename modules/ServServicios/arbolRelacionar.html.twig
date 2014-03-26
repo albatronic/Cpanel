@@ -2,18 +2,18 @@
 
 <span class="arbol conContenido" 
       title="Ver/Ocultar contenidos de esta sección" 
-      onclick="switchDisplay('contenidosDe_{{contenidos.id}}');">
+      onclick="switchDisplay('contenidosDe_{{familias.id}}');">
     <img src="{{app.path}}/images/js-tree/folder-closed.gif"/>
-    {{contenidos.titulo}} ({{ contenidos.nContenidos}})
+    {{familias.titulo}} ({{ familias.nServicios}})
 </span>
 
-<div id='contenidosDe_{{contenidos.id}}' style="display: none;">
+<div id='contenidosDe_{{familias.id}}' style="display: none;">
     <ul>
 
-    {% for contenido in contenidos.contenidos %}
+    {% for servicio in familias.servicios %}
         <li>
-            {{ macro.actualizaRelacion(values.entidadOrigen,values.idOrigen,'GconContenidos',contenido.Id,contenido.estaRelacionado) }}
-            {{contenido.Value}}    
+            {{ macro.actualizaRelacion(values.entidadOrigen,values.idOrigen,'ServServicios',servicio.Id,servicio.estaRelacionado) }}
+            {{servicio.Value}}
         </li>
     {% endfor%}
        

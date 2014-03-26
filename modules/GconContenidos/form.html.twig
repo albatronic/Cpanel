@@ -24,7 +24,7 @@
                 <input name="{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]" value="{{values.datos.getPrimaryKeyValue}}" type="hidden" />
 
                 <ul>
-                        {% include values.controller ~ "/fields.html.twig" with {'datos' : values.datos, 'atributos' : values.atributos } %}
+                    {% include values.controller ~ "/fields.html.twig" with {'datos' : values.datos, 'atributos' : values.atributos } %}
                 </ul>
             </form>
             </div>

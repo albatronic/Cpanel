@@ -16,7 +16,7 @@
         
     <div id="tabs-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
         {{ macro.input({'caption':'[title] Título','visible':'1','varEnv':'0'},'field_title','text','datos[title]','datos_title',values.datos.title,'50','CampoTextoCorto','1') }}
-        {{ macro.input({'caption':'[url] Url','visible':'1','varEnv':'0'},'field_title','text','datos[url]','datos_url',values.datos.url,'50','CampoTextoCorto','1') }}
+        {{ macro.input({'caption':'[url] Url de la web (con http://)','visible':'1','varEnv':'0'},'field_title','text','datos[url]','datos_url',values.datos.url,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[eMailWebMaster] EMail WebMaster','visible':'1','varEnv':'0'},'field_title','text','datos[eMailWebMaster]','datos_eMailWebMaster',values.datos.eMailWebMaster,'50','CampoTextoCorto','1') }}
         {{ macro.input({'caption':'[eMailSuperAdministrator] EMail SuperAdministrador','visible':'1','varEnv':'0'},'field_title','text','datos[eMailSuperAdministrator]','datos_eMailSuperAdministrator',values.datos.eMailSuperAdministrator,'50','CampoTextoCorto','1') }}
         {{ macro.fecha({'caption':'[activeFrom] Vigente desde','visible':'1','varEnv':'0'},'field_title','datos[activeFrom]','datos_activeFrom',values.datos.activeFrom,'19','datepicker') }}

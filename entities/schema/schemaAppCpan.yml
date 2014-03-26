@@ -135,6 +135,39 @@ WebPerfiles:
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
+# USUARIOS DE LA WEB
+WebUsuarios:
+  columns:
+    Nombre:       { type: string(50), notnull: true }
+    Apellidos:    { type: string(50), notnull: true }
+    Empresa:      { type: string(50), notnull: false }
+    DNI:          { type: string(15), notnull: false }
+    Direccion:    { type: string(100), notnull: false, }
+    IdMunicipio:  { type: bigint(11), notnull: false, default: 0, index: index, comment: 'db, CommMunicipios, Id' }
+    CodigoPostal: { type: string(10), notnull: false, }
+    IdProvincia:  { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db, CommProvincias, Id' }
+    IdPais:       { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db, CommPaises, Id'}
+    Telefono:     { type: string(50), notnull: false, default: NULL }
+    Fax:          { type: string(50), notnull: false, default: NULL }
+    Movil:        { type: string(50), notnull: false, default: NULL }
+    Web:          { type: string(100), notnull: false }
+    EMail:        { type: string(100), notnull: true, index: unique }
+    Password:     { type: string(100), notnull: true}
+    NLogin:       { type: integer, notnull: true, default: 0 }
+    UltimoLogin:  { type: datetime, notnull: true, default: '0000-00-00 00:00:00'}    
+    IdPerfil:     { type: bigint(11), notnull: true, default: 1, index: index, comment: 'bd,WebPerfiles,Id' }
+    Usuario1:     { type: string(255), notnull: false }
+    Usuario2:     { type: string(255), notnull: false }
+    Usuario3:     { type: string(255), notnull: false }
+    Usuario4:     { type: string(255), notnull: false }
+    Usuario5:     { type: string(255), notnull: false }     
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+  relations:
+    IdPerfil:     { ForeignEntity: WebPerfiles, ForeignId: Id }
+    IdProvincia : { ForeignEntity: CommProvincias, ForeignId: Id }
+    IdMunicipio : { ForeignEntity: CommMunicipios, ForeignId: Id }
+    IdPais :      { ForeignEntity: CommPaises, ForeignId: Id }      
+      
 # TABLAS DE BUSQUEDAS
 CpanSearch:
   columns:
@@ -143,3 +176,38 @@ CpanSearch:
     IdEntity:    { type: bigint(11), notnull: true }    
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:    
+    
+# META DATOS
+CpanMetaData:
+  engine:
+  charSet:
+  comment: Campos personalizados
+  columns:
+    Entity:      { type: string(255), notnull: true }
+    IdEntity:    { type: bigint(11), notnull: true } 
+    Name:        { type: string(100), notnull: true}
+    Value:       { type: text, notnul: false}
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:
+      
+# Traducciones de los textos web
+CpanTextos:
+  comment: Traducciones de los textos web
+  columns:  
+    Lang:       { type: char(2), notnull: true, default: 'es' }      
+    Controller: { type: string(50), notnull: true, default: '' }
+    Clave:      { type: string(50), notnull: true, }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?> 
+  index:
+    Unico: { type: Unique, columns: '`Lang`,`Controller`,`Key`' }   
+      
+# Traducciones de las plantillas web
+CpanPlantillas:
+  comment: Traducciones de las plantillas web
+  columns:  
+    Lang:       { type: char(2), notnull: true, default: 'es' }      
+    Controller: { type: string(50), notnull: true, default: '' }
+    Clave:      { type: string(50), notnull: true, }
+    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?> 
+  index:
+    Unico: { type: Unique, columns: '`Lang`,`Controller`,`Key`' }   

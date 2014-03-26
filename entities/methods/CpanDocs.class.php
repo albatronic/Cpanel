@@ -86,7 +86,7 @@ class CpanDocs extends CpanDocsEntity {
         if (is_resource($this->_dbLink)) {
             // Auditoria
             $fecha = date('Y-m-d H:i:s');
-            $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET `Deleted` = '1', `DeletedAt` = '{$fecha}', `DeletedBy` = '{$_SESSION['USER']['user']['Id']}' WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
+            $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET `Deleted` = '1', `DeletedAt` = '{$fecha}', `DeletedBy` = '{$_SESSION['usuarioPortal']['Id']}' WHERE `{$this->_primaryKeyName}` = '{$this->getPrimaryKeyValue()}'";
             if (!$this->_em->query($query))
                 $this->_errores = $this->_em->getError();
             else {
@@ -242,10 +242,8 @@ class CpanDocs extends CpanDocsEntity {
         $extension = strtolower($archivo['extension']);
         $aux = pathinfo($this->Name);
         $this->Name = str_replace($aux['extension'], "", $this->Name);
-
-        $this->setName(Textos::limpia($this->Name) . ".{$extension}");
-        $this->setPathName("docs/{$this->Entity}/{$this->Name}");
-        $this->setExtension($extension);
+        $this->Name = Textos::limpia($this->Name) . ".{$extension}";
+        $this->Extension = $extension;
 
         $tipos = new TiposDocs($this->Type);
         $tipo = $tipos->getTipo();
@@ -275,8 +273,10 @@ class CpanDocs extends CpanDocsEntity {
         }
 
         unset($doc);
+        
+        $subcarpeta = substr($this->Name,0,3);
+        $this->PathName = "docs/{$this->Entity}/{$subcarpeta}/{$this->Name}";
 
-        $this->setPathName("docs/{$this->Entity}/{$this->Name}");
     }
 
     /**
@@ -419,7 +419,10 @@ class CpanDocs extends CpanDocsEntity {
                 $img = new Gd();
                 $img->loadImage($this->_ArrayDoc['tmp_name']);
                 //$img->crop($ancho, $alto,$this->_ArrayDoc['modoRecortar']);
-                $img->crop($this->_ArrayDoc['maxWidth'], $this->_ArrayDoc['maxHeight'],$this->_ArrayDoc['modoRecortar']);
+                // Si es thumbnail fuerzo el modo a ajustar aunque su imagen padre se
+                // haya subido con modo recortar
+                $modo = ($this->IsThumbnail) ? "ajustar": $this->_ArrayDoc['modoRecortar'];
+                $img->crop($this->_ArrayDoc['maxWidth'], $this->_ArrayDoc['maxHeight'],$modo);
                 $imagenRecortada = "tmp/" . md5($this->_ArrayDoc['tmp_name']);
                 $ok = $img->save($imagenRecortada);
                 unset($img);

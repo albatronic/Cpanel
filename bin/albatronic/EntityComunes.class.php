@@ -131,7 +131,7 @@ class EntityComunes extends Entity {
      * @orm Column(type="tinyint")
      * @var entities\ValoresPrivacy
      */
-    protected $Privacy = '0';
+    protected $Privacy = '2';
 
     /**
      * @orm Column(type="integer")
@@ -191,7 +191,7 @@ class EntityComunes extends Entity {
      * @orm Column(type="string")
      * @var entities\ValoresSN
      */
-    protected $UrlHeritable = '1';
+    protected $UrlHeritable = '0';
 
     /**
      * @orm Column(type="integer")
@@ -209,7 +209,7 @@ class EntityComunes extends Entity {
      * @orm Column(type="tinyint")
      * @var entities\ValoresSN
      */
-    protected $LockMetatagTitle = '';
+    protected $LockMetatagTitle = '1';
 
     /**
      * @orm Column(type="string")
@@ -340,7 +340,7 @@ class EntityComunes extends Entity {
     protected $IdSliderAsociado = NULL;
     protected $IdSeccionEnlaces = NULL;
     protected $IdSeccionVideos = NULL;
-    protected $RevisitAfter = '1';
+    protected $RevisitAfter = '10';
     protected $NivelJerarquico = 1;
 
     /**
@@ -617,43 +617,39 @@ class EntityComunes extends Entity {
     }
 
     public function getPublishedAt() {
-        $date = new Fecha($this->PublishedAt);
-        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
-        unset($date);
-        return $ddmmaaaahhmmss;
-        //return date_format(date_create($this->PublishedAt), 'd-m-Y H:i:s');        
+        return date_format(date_create($this->PublishedAt), 'd-m-Y H:i:s');
     }
 
     public function setActiveFrom($ActiveFrom) {
         if ($ActiveFrom == '0000-00-00 00:00:00')
             $ActiveFrom = $_SESSION['VARIABLES']['EnvPro']['activeFrom'];
 
-        $date = new Fecha($ActiveFrom);
+        if ($ActiveFrom == '')
+            $ActiveFrom = '0000-00-00 00:00:00';
+
+        $date = new Fecha($ActiveFrom,true);
         $this->ActiveFrom = $date->getFechaTime();
         unset($date);
     }
 
     public function getActiveFrom() {
-        $date = new Fecha($this->ActiveFrom);
-        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
-        unset($date);
-        return $ddmmaaaahhmmss;
+        return ($this->ActiveFrom>0) ? date_format(date_create($this->ActiveFrom), 'd-m-Y H:i:s') : '00-00-0000 00:00:00';
     }
 
     public function setActiveTo($ActiveTo) {
         if ($ActiveTo == '0000-00-00 00:00:00')
             $ActiveTo = $_SESSION['VARIABLES']['EnvPro']['activeTo'];
 
-        $date = new Fecha($ActiveTo);
+        if ($ActiveTo == '')
+            $ActiveTo = '0000-00-00 00:00:00';
+
+        $date = new Fecha($ActiveTo,true);
         $this->ActiveTo = $date->getFechaTime();
         unset($date);
     }
 
     public function getActiveTo() {
-        $date = new Fecha($this->ActiveTo);
-        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
-        unset($date);
-        return $ddmmaaaahhmmss;
+        return ($this->ActiveTo>0) ? date_format(date_create($this->ActiveTo), 'd-m-Y H:i:s') : '00-00-0000 00:00:00';
     }
 
     public function setUrlPrefix($UrlPrefix) {

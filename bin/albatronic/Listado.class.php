@@ -160,6 +160,18 @@ class Listado {
         return $this->query;
     }
 
+    public function getArrayQuery() {
+        return $this->arrayQuery;
+    }
+    
+    public function buildQuery() {
+        $this->setQuery("
+                SELECT {$this->arrayQuery['SELECT']}
+                FROM {$this->arrayQuery['FROM']}
+                WHERE {$this->arrayQuery['WHERE']}
+                ORDER BY {$this->arrayQuery['ORDER BY']}
+                ");
+    }
     /**
      * Devuelve un array con los elementos de la sentencia
      * SELECT SQL necesaria para realizar el listado y que
@@ -261,15 +273,22 @@ class Listado {
         if ($aditionalFilter != '')
             $filtro .= " AND (" . $aditionalFilter . ")";
 
-        $arrayQuery = array(
+        // Transformo el array de tablas en un string
+        $listaTablas = "";
+        foreach ($tablas as $key => $value) {
+            if ($listaTablas != '')
+                $listaTablas .= ", ";
+            $listaTablas .= $key;
+        }
+        $this->arrayQuery = array(
             "SELECT" => $this->form->getDataBaseName() . "." . $this->form->getTable() . ".*", // . $this->form->getPrimaryKey(),
-            "FROM" => $tablas,
+            "FROM" => $listaTablas,
             "WHERE" => "({$filtro})",
             "ORDER BY" => $this->filter['orderBy'],
                 //"ORDER BY" => $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $this->filter['orderBy'],
         );
 
-        return $arrayQuery;
+        $this->buildQuery();
     }
 
     /**
@@ -286,10 +305,8 @@ class Listado {
      */
     public function getData($aditionalFilter = '') {
 
-        if ($this->getQuery() == '') {
-            $arrayQuery = $this->makeQuery($aditionalFilter);
-            $this->setQuery("SELECT {$arrayQuery['SELECT']} FROM {$arrayQuery['FROM']} WHERE {$arrayQuery['WHERE']} ORDER BY {$arrayQuery['ORDER BY']}");
-        }
+        if ($this->getQuery() == '')
+            $this->makeQuery($aditionalFilter);
 
         $em = new EntityManager($this->form->getConection());
         $em->query($this->getQuery());
@@ -298,7 +315,7 @@ class Listado {
         $this->filter['records'] = $em->numRows();
         $this->filter['pages'] = floor($this->filter['records'] / $this->filter['recordsPerPage']);
         if (($this->filter['records'] % $this->filter['recordsPerPage']) > 0)
-            $this->filter['pages']++;
+            $this->filter['pages'] ++;
         $offset = ($this->filter['page'] - 1) * $this->filter['recordsPerPage'];
 
         $rows = $em->fetchResultLimit($this->filter['recordsPerPage'], $offset);
@@ -399,15 +416,12 @@ class Listado {
 
         // CREAR EL DOCUMENTO
         $pdf = new ListadoPDF(
-                        $orientation,
-                        $unit,
-                        $format,
-                        array(
-                            'title' => $parametros['title'],
-                            'titleFont' => $bodyFont,
-                            'columns' => $parametros['columns'],
-                            'leyendaFiltro' => $leyendaFiltro,
-                        )
+                $orientation, $unit, $format, array(
+            'title' => $parametros['title'],
+            'titleFont' => $bodyFont,
+            'columns' => $parametros['columns'],
+            'leyendaFiltro' => $leyendaFiltro,
+                )
         );
         $pdf->SetTopMargin($margenes[0]);
         $pdf->SetRightMargin($margenes[1]);
@@ -463,7 +477,7 @@ class Listado {
             $formato = trim((string) $value['format']);
             $total = ( strtoupper(trim((string) $value['total'])) == 'YES' );
 
-            $params = explode(",",trim($value['params']));
+            $params = explode(",", trim($value['params']));
             $parametrosMetodo = "";
             foreach ($params as $valor)
                 $parametrosMetodo .= "{$valor},";
@@ -603,7 +617,8 @@ class Listado {
         }
 
         $archivo = Archivo::getTemporalFileName();
-        if ($archivo) $pdf->Output ($archivo, 'F');
+        if ($archivo)
+            $pdf->Output($archivo, 'F');
 
         unset($objeto);
         unset($pdf);
@@ -848,7 +863,7 @@ class Listado {
         $objPHPExcel->getActiveSheet()->setTitle($parametros['title']);
         $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A1', $parametros['title'])
-                ->setCellValue('A3', 'Generado por ' . $_SESSION['USER']['user']['Nombre'])
+                ->setCellValue('A3', 'Generado por ' . $_SESSION['usuarioPortal']['Nombre'])
                 ->setCellValue('A4', 'Fecha ' . date('d/m/Y H:i:s'));
         // Fila de titulos
         $columna = 'A';
@@ -1019,18 +1034,17 @@ class listadoPDF extends FPDF {
     //Cabecera de página
     function Header() {
         /**
-        $empresa = new Empresas($_SESSION['emp']);
-        $sucursal = new Sucursales($_SESSION['suc']);
+          $empresa = new Empresas($_SESSION['emp']);
+          $sucursal = new Sucursales($_SESSION['suc']);
 
-        $this->Image($empresa->getLogo(), 10, 8, 23);
-        $this->SetFont('Arial', 'B', 12);
-        $this->Cell(0, 5, $empresa->getRazonSocial(), 0, 1, "R");
-        $this->SetFont('Arial', '', 8);
-        $this->Cell(0, 5, $sucursal->getNombre(), 0, 1, "R");
-        $this->SetFont('Arial', 'B', 12);
-        $this->Cell(0, 5, $this->opciones['title'], 0, 1, "C");
+          $this->Image($empresa->getLogo(), 10, 8, 23);
+          $this->SetFont('Arial', 'B', 12);
+          $this->Cell(0, 5, $empresa->getRazonSocial(), 0, 1, "R");
+          $this->SetFont('Arial', '', 8);
+          $this->Cell(0, 5, $sucursal->getNombre(), 0, 1, "R");
+          $this->SetFont('Arial', 'B', 12);
+          $this->Cell(0, 5, $this->opciones['title'], 0, 1, "C");
          */
-
         // Pintar la leyenda del filtro en la primera pagina
         if ($this->page == 1) {
             $this->Ln(5);

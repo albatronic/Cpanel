@@ -6,7 +6,13 @@
   copyright: INFORMATICA ALBATRONIC SL
   date 30.10.2012 18:44:57
 #}
+<script>
 
+    $(function(){
+        $('#menuArbol').menu();      
+    });
+    
+</script> 
 <div id="tabs1" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
     <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
         <li class="ui-state-default ui-corner-top"><a href="#arbol">Árbol de Secciones</a></li>
@@ -35,7 +41,7 @@
         {{ macro.input(atributos.MostrarSubsecciones,'field_title','checkbox',values.controller ~ '[MostrarSubsecciones]',values.controller ~ '_MostrarSubsecciones',datos.MostrarSubsecciones.IDTipo,'255','CampoTextoLargo','12') }}
         {{ macro.radio(atributos.ModoMostrarContenidos,'field_title',values.controller ~ '[ModoMostrarContenidos]',values.controller ~ '_ModoMostrarContenidos',datos.ModoMostrarContenidos.IDTipo,datos.ModoMostrarContenidos.fetchAll(Descripcion,0),'chzn-radio','22')}}
         {{ macro.select(atributos.CriterioOrdenContenidosHijos,'field_title',values.controller ~ '[CriterioOrdenContenidosHijos]',values.controller ~ '_CriterioOrdenContenidosHijos',none,datos.CriterioOrdenContenidosHijos.IDTipo,datos.CriterioOrdenContenidosHijos.fetchAll(none,0),'chzn-select','23')}}
-        
+        {% include '_global/metaDatos.html.twig' %}         
         {% if values.varEnvMod.especificas.numMenus > 0  or user.IdPerfil.Id == 1 %}
             {# 
                 Solapas de MOSTRAR EN MENU N 

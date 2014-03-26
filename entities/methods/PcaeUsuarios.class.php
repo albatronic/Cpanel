@@ -18,6 +18,7 @@ class PcaeUsuarios extends PcaeUsuariosEntity {
     public function create() {
 
         $this->setPublish(1);
+        $this->setPrivacy(0);
         return parent::create();
     }
 

@@ -28,7 +28,11 @@
                         {{ macro.embedMedia(project.url~"/"~objeto.PathName,190,50)}}
                     {% endif %}
                 </div>            
-            {% else %}
+            {% endif %}
+            {% if objeto.type == 'document' %}
+                <div style="margin-left: 25px;">{{objeto.Title}}</div>             
+            {% endif %}
+            {% if objeto.type == 'galery' or objeto.type == 'image1' or objeto.type == 'image2' or objeto.type == 'image3' %}
                 <div style="margin-left: 25px;">
                     <div class="thumbnail">
                         <img src="{{project.url}}/{{objeto.PathName}}" width="50px;" />
@@ -64,7 +68,11 @@
                     {% endif %}
                 </div>            
                 <div style="text-align: center;">{{objeto.getSize}}</div>
-            {% else %}
+            {% endif %}
+            {% if objeto.type == 'document' %}
+                <img onclick="mostrarDocumento('{{project.url}}/{{objeto.PathName}}');" src="{{app.path}}/images/lupa.png" title="Ver documneto" alt="Ver documento" style="cursor: pointer;"/>                
+            {% endif %}
+            {% if objeto.type == 'galery' or objeto.type == 'image1' or objeto.type == 'image2' or objeto.type == 'image3' %}
                 <div id="foto{{key}}" style="text-align: center;">
                     <img style="border: 1px solid;" src="{{project.url}}/{{objeto.PathName}}" width="150px;" />  
                 </div>
@@ -153,4 +161,28 @@
     </form>
 </div>
 {% endif %}
+
+<div id="dialogoPreview" title="Vista Previa"></div>
+
+<script>
+function mostrarDocumento(urlDoc){
+    var url = "http://docs.google.com/gview?url="+urlDoc+"&embedded=true";
+    var html = "<iframe src='"+url+"' style='width:530px; height:530px;' frameborder='0'></iframe>";
+
+    $('#dialogoPreview').html(html);
+    $('#dialogoPreview').dialog("open");
+}   
+$(function(){
+    $('#dialogoPreview').dialog({
+        autoOpen: false,
+        modal: false,
+        width: 570,
+        height: 500,
+        resizable: true,
+        position: ['center','center'],
+        closeOnEscape: true      
+    });
+});
+</script>
+
 {% endblock %}

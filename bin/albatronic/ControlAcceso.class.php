@@ -46,7 +46,7 @@ class ControlAcceso {
 
     public function __construct($controller = '', $idPerfil = '') {
         if ($idPerfil == '') {
-            $this->idPerfil = $_SESSION['USER']['user']['IdPerfil'];
+            $this->idPerfil = $_SESSION['usuarioPortal']['IdPerfil'];
         } else {
             $this->idPerfil = $idPerfil;
         }

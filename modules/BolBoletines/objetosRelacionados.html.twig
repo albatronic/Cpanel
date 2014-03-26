@@ -1,0 +1,32 @@
+{# empty Twig template #}
+    
+    <div style="float: left; width: 48%; margin-left: 10px;">
+        <iframe src='{{app.path}}/Relaciones/{{values.controller}}/{{datos.getPrimaryKeyValue}}' width='100%' height='300px' scrolling='yes'></iframe>
+    </div>
+        
+    {% set objetosRelacionados = values.relaciones.getObjetosRelacionados('BolBoletines',datos.getPrimaryKeyValue) %}
+    {% if objetosRelacionados | length > 0 %}
+    <div style="float: left; width: 49%; margin-left: 10px;">    
+        <p style="padding: 5px;">Pincha y desplaza los elementos a la ubicación deseada</p>
+
+        <div id="acordeonOrden">
+            {% for objeto in objetosRelacionados %}
+            <div style="">
+                <h3><span style="margin-left: 20px;">{{objeto}}</span></h3>
+                <div>
+                    <input name="acordeon[{{objeto.primaryKeyValue}}]" value="{{objeto.primaryKeyValue}}" type="hidden"/>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div style="margin-top: 10px; text-align: center;">
+            <div id="botonSubmit"></div>
+            <input value="Guardar nuevo orden" type="submit" 
+                   onclick="loading('botonSubmit');  
+                       $('#action_{{ values.controller }}').val('Reordenar');                      
+                       submitForm('manto_{{values.controller}}'); "
+                       />    
+        </div>
+    </div> 
+    {% endif %}

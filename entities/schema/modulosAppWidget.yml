@@ -1,0 +1,20 @@
+# MODULOS DE LA APP Widget
+
+# Crear la zona de álbumes predeterminada
+Widgets:
+  1 : { Name: 'zwgPrincipal', Title: 'Zona principal de widgets'}
+  
+CpanAplicaciones:
+  Enl  : { CodigoApp: Widget, NombreApp: Widgets }
+
+CpanModulos:
+  Enl1: { CodigoApp: Widget, NombreModulo: Widget,  Nivel: 0, BelongsTo: 0,  Publish: 1, Titulo: Widget, Funcionalidades: AC }
+  Enl2: { CodigoApp: Widget, NombreModulo: Widgets, Nivel: 1, BelongsTo: Widget,  Publish: 1, Titulo: Widgets, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+CpanPermisos:
+  Enl1: { IdPerfil: 1, NombreModulo: Widget, Funcionalidades: 'AC,VW' }
+  Enl2: { IdPerfil: 1, NombreModulo: Widgets, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+
+  Enl11: { IdPerfil: 2, NombreModulo: Widget, Funcionalidades: 'AC,VW' }
+  Enl21: { IdPerfil: 2, NombreModulo: Widgets, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+

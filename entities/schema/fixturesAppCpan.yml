@@ -44,6 +44,7 @@ CpanUrlAmigables:
   10: { UrlFriendly: '/noticias',   Controller: Noticias,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 10, Publish: 1 }      
   11: { UrlFriendly: '/eventos',    Controller: Eventos,    Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 11, Publish: 1 }      
   12: { UrlFriendly: '/acs',Controller: Proyectos, Action: Index, Template: Index, Entity: PcaeEmpresas, IdEntity: 1, Publish: 1}
+  12: { UrlFriendly: '/favoritos',Controller: Favoritos, Action: Index, Template: Index, Entity: GconSecciones, IdEntity: 12, Publish: 1}
   
 GconSecciones:
   1: { Id: 1, Titulo: Inicio, Publish: 1, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: '', LockSlug: 1, UrlFriendly: '/' }
@@ -57,3 +58,4 @@ GconSecciones:
   9: { Id: 9, Titulo: Politica de privacidad, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'politica-de-privacidad', LockSlug: 1, UrlFriendly: '/politica-de-privacidad' }  
   10: { Id: 10, Titulo: Noticias, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'noticias', LockSlug: 1, UrlFriendly: '/noticias' }  
   11: { Id: 11, Titulo: Eventos, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'eventos', LockSlug: 1, UrlFriendly: '/eventos' }  
+  12: { Id: 12, Titulo: Favoritos, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'favoritos', LockSlug: 1, UrlFriendly: '/favoritos' }  

@@ -182,6 +182,7 @@ class Controller {
                     $datos = $datos->find('PrimaryKeyMD5', $this->request[2]);
                     if ($datos->getStatus()) {
                         $this->values['datos'] = $datos;
+                        $this->values['metadatos'] = $datos->getMetaDatas();
                         $this->values['errores'] = $datos->getErrores();
                     } else {
                         $this->values['errores'] = array("Valor no encontrado. El objeto que busca no existe. Es posible que haya sido eliminado por otro usuario.");
@@ -207,11 +208,14 @@ class Controller {
                             $datos = new $this->entity($this->request[$this->entity][$this->form->getPrimaryKey()]);
                             // Vuelco los datos del request
                             $datos->bind($this->request[$this->entity]);
+                            $metaDatos = $this->request['metaDato'];
 
                             $rules = $this->form->getRules();
                             if ($datos->valida($rules)) {
                                 $this->values['alertas'] = $datos->getAlertas();
                                 if ($datos->save()) {
+                                    if (count($metaDatos))
+                                        $this->saveMetaDatos($datos->getPrimaryKeyValue(), $metaDatos);
 
                                     if ($datos->getUrlTarget() == '') {
                                         $this->gestionUrlMeta($datos);
@@ -233,9 +237,9 @@ class Controller {
                                         }
                                     }
 
-                                    // Si estoy en el idioma principal, tengo que
+                                    // Si el módulo es traducible y estoy en el idioma principal, tengo que
                                     // repercutir los cambios a los demás idiomas
-                                    if ($_SESSION['idiomas']['actual'] == '0')
+                                    if ($this->varEnvMod['translatable'] and ($_SESSION['idiomas']['actual'] == '0'))
                                         $this->ActualizaIdiomas($datos->getPrimaryKeyValue());
 
                                     // Si ex buscable, actualizar la tabla de búsquedas
@@ -253,6 +257,7 @@ class Controller {
                                 $this->values['alertas'] = $datos->getAlertas();
                             }
                             $this->values['datos'] = $datos;
+                            $this->values['metadatos'] = $datos->getMetaDatas();
                             return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                         } else {
                             return array('template' => '_global/forbiden.html.twig', 'values' => $this->values);
@@ -262,20 +267,23 @@ class Controller {
                     case 'Borrar': //MARCA EL OBJETO COMO BORRADO, PERO NO BORRA FÍSICAMENTE
                         if ($this->values['permisos']['permisosModulo']['DE']) {
                             $datos = new $this->entity($this->request[$this->entity][$this->form->getPrimaryKey()]);
-
+                            $primaryKey = $datos->getPrimaryKeyValue();
                             if ($datos->delete()) {
-                                
+                                $this->borraMetaDatos($this->entity, $primaryKey);
+
                                 // Si ex buscable, actualizar la tabla de búsquedas
                                 if ($this->varEnvMod['searchable'] == '1')
                                     $this->ActualizaBusquedas($datos);
-                                
+
                                 $datos = new $this->entity();
                                 $this->values['datos'] = $datos;
+                                $this->values['metadatos'] = $datos->getMetaDatas();
                                 $this->values['errores'] = array();
                                 unset($datos);
                                 return array('template' => $this->entity . '/form.html.twig', 'values' => $this->values);
                             } else {
                                 $this->values['datos'] = $datos;
+                                $this->values['metadatos'] = $datos->getMetaDatas();
                                 $this->values['errores'] = $datos->getErrores();
                                 $this->values['alertas'] = $datos->getAlertas();
                                 unset($datos);
@@ -388,6 +396,7 @@ class Controller {
                     $datos = new $this->entity();
                     $datos->setDefaultValues((array) $this->varEnvMod['columns']);
                     $this->values['datos'] = $datos;
+                    $this->values['metadatos'] = $datos->getMetaDatas();
                     $this->values['errores'] = array();
                     $template = $this->entity . '/form.html.twig';
                     break;
@@ -400,6 +409,7 @@ class Controller {
 
                     $datos = new $this->entity();
                     $datos->bind($this->request[$this->entity]);
+                    $metaDatos = $this->request['metaDato'];
 
                     $rules = $this->form->getRules();
                     $rules['GLOBALES']['numMaxPages'] = $this->varEnvPro['numMaxPages'];
@@ -407,6 +417,9 @@ class Controller {
 
                     if ($datos->valida($rules)) {
                         $lastId = $datos->create();
+                        if (($lastId) and (count($metaDatos)))
+                            $this->saveMetaDatos($lastId, $metaDatos);
+
                         $this->values['errores'] = $datos->getErrores();
                         $this->values['alertas'] = $datos->getAlertas();
 
@@ -425,10 +438,12 @@ class Controller {
                             $this->ActualizaBusquedas($datos);
 
                         $this->values['datos'] = $datos;
+                        $this->values['metadatos'] = $datos->getMetaDatas();
 
                         $template = $this->entity . '/form.html.twig';
                     } else {
                         $this->values['datos'] = $datos;
+                        $this->values['metadatos'] = $datos->getMetaDatas();
                         $this->values['errores'] = $datos->getErrores();
                         $this->values['alertas'] = $datos->getAlertas();
                         $template = $this->entity . '/form.html.twig';
@@ -440,6 +455,42 @@ class Controller {
         }
 
         return array('template' => $template, 'values' => $this->values);
+    }
+
+    /**
+     * Guardar o crea los metadatos
+     * 
+     * @param int $idEntity
+     * @param array $metaDatos
+     */
+    public function saveMetaDatos($idEntity, $metaDatos) {
+
+        foreach ($metaDatos as $key => $value) {
+            $meta = new CpanMetaData();
+            $rows = $meta->cargaCondicion("Id", "Entity='{$this->entity}' and IdEntity='{$idEntity}' and Name='{$key}'");
+            if (count($rows)) {
+                $meta->queryUpdate(array('Value' => $value), "Id='{$rows[0]['Id']}'");
+            } else {
+                $meta = new CpanMetaData();
+                $meta->setEntity($this->entity);
+                $meta->setIdEntity($idEntity);
+                $meta->setName($key);
+                $meta->setValue($value);
+                $meta->create();
+            }
+        }
+        unset($meta);
+    }
+
+    /**
+     * Borra los meta datos
+     * 
+     * @param string $entidad
+     * @param int $idEntidad
+     */
+    public function borraMetaDatos($entidad, $idEntidad) {
+        $meta = new CpanMetaData();
+        $meta->queryDelete("Entity='{$entidad}' and IdEntity='{$idEntidad}'");
     }
 
     /**
@@ -716,7 +767,7 @@ class Controller {
                                 $_FILES['imagenMaster']['maxWidth'] = $value['width'];
                                 $_FILES['imagenMaster']['maxHeight'] = $value['height'];
                                 $_FILES['imagenMaster']['modoRecortar'] = $this->request['modoRecortar'];
-                                
+
                                 $doc = new CpanDocs();
                                 $doc->setEntity($this->entity);
                                 $doc->setIdEntity($idEntidad);
@@ -782,7 +833,7 @@ class Controller {
                     $documento['maxWidth'] = $this->varEnvMod['images'][$idImagen]['width'];
                     $documento['maxHeight'] = $this->varEnvMod['images'][$idImagen]['height'];
                     $documento['modoRecortar'] = $this->request['image'][$idImagen]['modoRecortar'];
-                    
+
                     $doc = new CpanDocs($id);
                     $doc->setTitle($title);
                     $doc->setName($slug);
@@ -914,6 +965,23 @@ class Controller {
     }
 
     /**
+     * Devuelve array (Id,Value) con los idiomas definimos en
+     * la variable Web de Proyecto [globales][lang]
+     * 
+     * Si no se ha definido ninguno, devuelve el español
+     * 
+     * @return array
+     */
+    public function getArrayIdiomas() {
+
+        $idiomas = new CommIdiomas();
+        $array = $idiomas->getArrayIdiomas();
+        unset($idiomas);
+
+        return $array;
+    }
+
+    /**
      * Crea o actualiza la url amigable y el metatagTitle
      *
      * @param array $datos
@@ -985,7 +1053,7 @@ class Controller {
                     // No es el módulo padre de la app. Miro a ver si
                     // está linkado con otro módulo
                     $linkModule = $this->varWebMod['globales'];
-                    if (($linkModule['linkFromColumn'] != '') and ($linkModule['linkToEntity'] != '') and ($linkModule['linkToColumn'] != '')) {
+                    if ((count($linkModule) > 0) and ($linkModule['linkFromColumn'] != '') and ($linkModule['linkToEntity'] != '') and ($linkModule['linkToColumn'] != '')) {
                         // Está linkado con otro módulo. El prefijo será la url amigable
                         // del padre si es heredable
                         $idToLink = $datos->getColumnValue($linkModule['linkFromColumn']);

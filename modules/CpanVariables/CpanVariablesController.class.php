@@ -67,7 +67,7 @@ class CpanVariablesController {
         // --------------------------------------------------------
         //
         // LE DOY PERMISOS SOLO AL SUPER
-        if ($_SESSION['USER']['user']['IdPerfil'] == '1') {
+        if ($_SESSION['usuarioPortal']['IdPerfil'] == '1') {
             $this->values['permisos']['permisosModulo']['IN'] = FALSE;
             $this->values['permisos']['permisosModulo']['DE'] = TRUE;
             $this->values['permisos']['permisosModulo']['UP'] = TRUE;
@@ -126,7 +126,7 @@ class CpanVariablesController {
 
         // PUEDE VER LAS VARIABLES DE ENTORNO Y WEB ÚNICAMENTE SI ES DE PERFIL 1
         // PUEDE VER LAS VARIABLES WEB SI TIENE PERMISO
-        $idPerfil = $_SESSION['USER']['user']['IdPerfil'];
+        $idPerfil = $_SESSION['usuarioPortal']['IdPerfil'];
         $permiso = ( ($idPerfil == '1') or ( ($tipo == 'Web') and ($this->values['permisos']['permisosModulo']['VW'])) );
 
         if ($permiso) {
@@ -277,7 +277,7 @@ class CpanVariablesController {
      */
     public function EditNodeAction() {
 
-        if ($_SESSION['USER']['user']['IdPerfil'] == '1') {
+        if ($_SESSION['usuarioPortal']['IdPerfil'] == '1') {
 
             switch ($this->request['METHOD']) {
 
@@ -453,6 +453,8 @@ class CpanVariablesController {
 
                 if ($tipo == 'Env') {
 
+                    if ($datos['modulosRelacionables'] == '')
+                        $datos['modulosRelacionables'] = $archivoConfig->getNode('modulosRelacionables');
                     if ($datos['isModuleRoot'] == '')
                         $datos['isModuleRoot'] = $archivoConfig->getNode('isModuleRoot');
                     if ($datos['translatable'] == '')
@@ -465,6 +467,12 @@ class CpanVariablesController {
                         $datos['numMaxRecords'] = $archivoConfig->getNode('numMaxRecords');
                     if ($datos['numberOfImages'] == '')
                         $datos['numberOfImages'] = $archivoConfig->getNode('numberOfImages');
+                    if ($datos['withMetadata'] == '')
+                        $datos['withMetadata'] = $archivoConfig->getNode('withMetadata');
+                    if ($datos['addMetadata'] == '')
+                        $datos['addMetadata'] = $archivoConfig->getNode('addMetadata');
+                    if ($datos['deleteMetadata'] == '')
+                        $datos['deleteMetadata'] = $archivoConfig->getNode('deleteMetadata');
                     if ($datos['withGalery'] == '')
                         $datos['withGalery'] = $archivoConfig->getNode('withGalery');
                     if ($datos['withDocuments'] == '')
@@ -512,7 +520,11 @@ class CpanVariablesController {
                         $datos['metatagTitleManagement'] = $archivoConfig->getNode('metatagTitleManagement');
                     if ($datos['fieldGeneratorMetatagTitle'] == '')
                         $datos['fieldGeneratorMetatagTitle'] = $archivoConfig->getNode('fieldGeneratorMetatagTitle');
-
+                    if ($datos['fieldGeneratorMetatagDescription'] == '')
+                        $datos['fieldGeneratorMetatagDescription'] = $archivoConfig->getNode('fieldGeneratorMetatagDescription');
+                    if ($datos['fieldGeneratorMetatagKeywords'] == '')
+                        $datos['fieldGeneratorMetatagKeywords'] = $archivoConfig->getNode('fieldGeneratorMetatagKeywords');
+                    
                     //if ($datos['ordenesWeb'] == '')
                     //    $datos['ordenesWeb'] = $archivoConfig->getNode('ordenes_web');
                     $ordenesWeb = $archivoConfig->getNode('ordenes_web');
