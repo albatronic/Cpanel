@@ -627,13 +627,13 @@ class EntityComunes extends Entity {
         if ($ActiveFrom == '')
             $ActiveFrom = '0000-00-00 00:00:00';
 
-        $date = new Fecha($ActiveFrom,true);
+        $date = new Fecha($ActiveFrom, true);
         $this->ActiveFrom = $date->getFechaTime();
         unset($date);
     }
 
     public function getActiveFrom() {
-        return ($this->ActiveFrom>0) ? date_format(date_create($this->ActiveFrom), 'd-m-Y H:i:s') : '00-00-0000 00:00:00';
+        return ($this->ActiveFrom > 0) ? date_format(date_create($this->ActiveFrom), 'd-m-Y H:i:s') : '00-00-0000 00:00:00';
     }
 
     public function setActiveTo($ActiveTo) {
@@ -643,13 +643,13 @@ class EntityComunes extends Entity {
         if ($ActiveTo == '')
             $ActiveTo = '0000-00-00 00:00:00';
 
-        $date = new Fecha($ActiveTo,true);
+        $date = new Fecha($ActiveTo, true);
         $this->ActiveTo = $date->getFechaTime();
         unset($date);
     }
 
     public function getActiveTo() {
-        return ($this->ActiveTo>0) ? date_format(date_create($this->ActiveTo), 'd-m-Y H:i:s') : '00-00-0000 00:00:00';
+        return ($this->ActiveTo > 0) ? date_format(date_create($this->ActiveTo), 'd-m-Y H:i:s') : '00-00-0000 00:00:00';
     }
 
     public function setUrlPrefix($UrlPrefix) {
@@ -1018,8 +1018,10 @@ class EntityComunes extends Entity {
 
         $objetoPerfiles = $this->getAccessProfileList();
 
-        foreach ($cpanPerfiles as $key => $perfil) {
-            $cpanPerfiles[$key]['Valor'] = array_search($perfil['Id'], $objetoPerfiles['perfiles']);
+        if (is_array($objetoPerfiles)) {
+            foreach ($cpanPerfiles as $key => $perfil) {
+                $cpanPerfiles[$key]['Valor'] = array_search($perfil['Id'], $objetoPerfiles['perfiles']);
+            }
         }
 
         return $cpanPerfiles;
@@ -1033,8 +1035,10 @@ class EntityComunes extends Entity {
 
         $objetoPerfiles = $this->getAccessProfileListWeb();
 
-        foreach ($webPerfiles as $key => $perfil) {
-            $webPerfiles[$key]['Valor'] = array_search($perfil['Id'], $objetoPerfiles['perfiles']);
+        if (is_array($objetoPerfiles)) {
+            foreach ($webPerfiles as $key => $perfil) {
+                $webPerfiles[$key]['Valor'] = array_search($perfil['Id'], $objetoPerfiles['perfiles']);
+            }
         }
 
         return $webPerfiles;

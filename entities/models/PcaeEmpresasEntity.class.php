@@ -110,7 +110,12 @@ class PcaeEmpresasEntity extends EntityComunes {
     /**
      * @var string
      */
-    protected $IBAN;
+    protected $Iban;
+
+    /**
+     * @var string
+     */
+    protected $Bic;
 
     /**
      * @var string
@@ -297,27 +302,23 @@ class PcaeEmpresasEntity extends EntityComunes {
     }
 
     public function setBanco($Banco) {
-        $this->Banco = $Banco;
+        $this->Banco = str_pad(trim($Banco), 4, "0");
     }
 
     public function getBanco() {
-        if (!($this->Banco instanceof CommBancos))
-            $this->Banco = new CommBancos($this->Banco);
         return $this->Banco;
     }
 
     public function setOficina($Oficina) {
-        $this->Oficina = $Oficina;
+        $this->Oficina = str_pad(trim($Oficina), 4, "0");
     }
 
     public function getOficina() {
-        if (!($this->Oficina instanceof CommBancosOficinas))
-            $this->Oficina = new CommBancosOficinas($this->Oficina);
         return $this->Oficina;
     }
 
     public function setDigito($Digito) {
-        $this->Digito = trim($Digito);
+        $this->Digito = str_pad(trim($Digito), 2, "0");
     }
 
     public function getDigito() {
@@ -332,12 +333,20 @@ class PcaeEmpresasEntity extends EntityComunes {
         return $this->Cuenta;
     }
 
-    public function setIBAN($IBAN) {
-        $this->IBAN = trim($IBAN);
+    public function setIban($Iban) {
+        $this->Iban = trim($Iban);
     }
 
-    public function getIBAN() {
-        return $this->IBAN;
+    public function getIban() {
+        return $this->Iban;
+    }
+
+    public function setBic($Bic) {
+        $this->Bic = trim($Bic);
+    }
+
+    public function getBic() {
+        return $this->Bic;
     }
 
     public function setSufijoRemesas($SufijoRemesas) {

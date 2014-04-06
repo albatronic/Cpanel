@@ -12,7 +12,7 @@
 {% block title parent() ~ ' - '  ~ values.titulo %}
 
 {% block content %}
-    {% include '_global/TituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}
+    {% include '_global/tituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}
     {% block filtro %}
     {% if values.permisos.permisosModulo['CO'] and values.tieneListado %}
             {% include values.controller ~ '/filtro.html.twig' with {'filter': values.listado.filter} %}

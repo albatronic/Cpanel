@@ -11,13 +11,14 @@
  */
 class PcaeUsuarios extends PcaeUsuariosEntity {
 
+    protected $Publish = '1';
+
     public function __toString() {
         return $this->getId();
     }
 
     public function create() {
 
-        $this->setPublish(1);
         $this->setPrivacy(0);
         return parent::create();
     }

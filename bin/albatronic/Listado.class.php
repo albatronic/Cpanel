@@ -186,7 +186,7 @@ class Listado {
      *
      * @return array arrayQuery Array con los elementos que componen el query
      */
-    public function makeQuery($aditionalFilter = '') {
+    public function makeQueryXXXX($aditionalFilter = '') {
         //Recorro las columnsSelected del filter para ver
         //qué columnas se han seleccionado y construir el filtro
         $filtro = '';
@@ -291,6 +291,130 @@ class Listado {
         $this->buildQuery();
     }
 
+
+    /**
+     * Devuelve un array con los elementos de la sentencia
+     * SELECT SQL necesaria para realizar el listado y que
+     * se ha generado en base a las condiciones del filtro.
+     * El array es:
+     * array (
+     *      'SELECT'   =>
+     *      'FROM'     =>
+     *      'WHERE'    =>
+     *      'ORDER BY' =>
+     * )
+     *
+     * @return array arrayQuery Array con los elementos que componen el query
+     */
+    public function makeQuery($aditionalFilter = '') {
+        //Recorro las columnsSelected del filter para ver
+        //qué columnas se han seleccionado y construir el filtro
+        // Las tablas involucradas las meto en un array para controlar
+        // que no se repitan en la clausa 'FROM'
+        $filtro = '';
+        $tablas = array();
+        $tablas[$this->form->getDataBaseName() . "." . $this->form->getTable()] = $this->form->getDataBaseName() . "." . $this->form->getTable();
+        foreach ($this->filter['columnsSelected'] as $key => $value) {
+            if ($value != '') {
+                if ($this->filter['valuesSelected'][$key] != '') {
+                    if ($filtro)
+                        $filtro .= " AND ";
+
+                    if ($this->filter['aditional'][$key]['entity']) {
+                        // Es una entidad, es una columna de la tabla que referencia a otra tabla
+                        // ----------------------------------------------------------------------
+                        switch ($this->filter['aditional'][$key]['type']) {
+                            case 'select':
+                                $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " = '" . $this->filter['valuesSelected'][$key] . "')";
+                                break;
+                            case 'input': //Hay que construir join a otra tabla
+                                //Buscar el nombre físico de la BD y de la Tabla y añadirlo
+                                //a la lista de tablas
+                                $entidadReferenciada = new $this->filter['aditional'][$key]['entity'] ( );
+                                $tablaReferenciada = $entidadReferenciada->getDataBaseName() . "." . $entidadReferenciada->getTableName();
+                                $tablas[$tablaReferenciada] = $tablaReferenciada;
+                                //Construir la parte del where para el join
+                                $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $this->filter['columnsSelected'][$key] . "=" . $tablaReferenciada . "." . $entidadReferenciada->getPrimaryKeyName() . ")";
+                                //Construir el filtro de la columna
+                                $filtro .= " AND (" . $tablaReferenciada . "." . $this->filter['aditional'][$key]['params'] . " LIKE '" . $this->filter['valuesSelected'][$key] . "')";
+                                unset($entidadReferenciada);
+                                break;
+                            case 'check':
+                                //No se trata porque no tiene entidad
+                                break;
+                        }
+                    } else {
+                        // No es una entidad, es una columna de la tabla que no referencia a otra tabla
+                        // Puede ser input, range, check. En cualquier otro caso es una de las columnas
+                        // del filtro estándar.
+                        $operador = $this->filter['aditional'][$key]['operator'];
+
+                        switch ($this->filter['aditional'][$key]['type']) {
+                            case "check":
+                                // Es de tipo check pero no viene vacio
+                                if ($this->filter['valuesSelected'][$key] == 'on') {
+                                    $this->filter['valuesSelected'][$key] = '1';
+                                } else {
+                                    $this->filter['valuesSelected'][$key] = '0';
+                                }
+                                $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " = '" . $this->filter['valuesSelected'][$key] . "')";
+                                break;
+
+                            case "input":
+                                // Es de tipo input. Utiliza LIKE en lugar de =
+                                $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " LIKE '" . $this->filter['valuesSelected'][$key] . "')";
+                                break;
+
+                            case "range":
+                                // Es un rango
+                                $fecha = new Fecha($this->filter['valuesSelected'][$key]);
+                                $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " " . $operador . " '" . $fecha->getaaaammdd() . "')";
+                                unset($fecha);
+                                break;
+
+                            default:
+                                // Columna del filtro estándar
+                                $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " LIKE '" . $this->filter['valuesSelected'][$key] . "')";
+                        }
+                    }
+                } else {
+                    //El valor del filtro viene vacio pero puede ser check
+                    if ($this->filter['aditional'][$key]['type'] == "check") {
+                        $this->filter['valuesSelected'][$key] = '0';
+                        if ($filtro) {
+                            $filtro .=" AND ";
+                        }
+
+                        $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " = '" . $this->filter['valuesSelected'][$key] . "')";
+                    }
+                }
+            }
+        }
+
+        if ($filtro == '')
+            $filtro = '(1)';
+
+        if ($aditionalFilter != '')
+            $filtro .= " AND (" . $aditionalFilter . ")";
+
+        // Transformo el array de tablas en un string
+        $listaTablas = "";
+        foreach ($tablas as $key => $value) {
+            if ($listaTablas != '')
+                $listaTablas .= ", ";
+            $listaTablas .= $key;
+        }
+        $this->arrayQuery = array(
+            "SELECT" => $this->form->getDataBaseName() . "." . $this->form->getTable() . ".*", // . $this->form->getPrimaryKey(),
+            "FROM" => $listaTablas,
+            "WHERE" => "({$filtro})",
+            "ORDER BY" => $this->filter['orderBy'],
+                //"ORDER BY" => $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $this->filter['orderBy'],
+        );
+
+        $this->buildQuery();
+    }
+    
     /**
      * Devuelve un array con los datos obtenidos en el listado
      *

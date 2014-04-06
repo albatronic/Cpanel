@@ -11,6 +11,9 @@
  */
 class PcaeProyectos extends PcaeProyectosEntity {
 
+    protected $Publish = 1;
+    protected $Privacy = 1;
+    
     public function __toString() {
         return $this->getProyecto();
     }
@@ -34,11 +37,7 @@ class PcaeProyectos extends PcaeProyectosEntity {
 
         return $apps;
     }
-
-    public function create(){
-        $this->Publish = 1;
-        return parent::create();
-    }      
+     
 }
 
 ?>

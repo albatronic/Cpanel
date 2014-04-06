@@ -11,6 +11,8 @@
  */
 class CpanUrlAmigables extends CpanUrlAmigablesEntity {
 
+    protected $Publish = '1';
+
     public function __toString() {
         return $this->getId();
     }
@@ -38,6 +40,21 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
     }
 
     /**
+     * Actualiza la columna Publish y Privacy con
+     * los mismos valores que el objeto relacionado
+     * @param object $objeto
+     */
+    static function sincroniza($objeto) {
+        $url = new CpanUrlAmigables();
+        $rows = $url->cargaCondicion("Id", "Entity='{$objeto->getClassName()}' and IdEntity='{$objeto->getPrimaryKeyValue()}'");
+        if ($rows[0]['Id']) {
+            $url = new CpanUrlAmigables($rows[0]['Id']);
+            $url->queryUpdate(array("Publish" => $objeto->getPublish()->getIDTipo(), "Privacy" => $objeto->getPrivacy()->getIDTipo()));
+        }
+        unset($url);
+    }
+    
+    /**
      * Incrementa en 1 el número de visitas
      * de la url amigable y de su entidad asociada
      */
@@ -60,11 +77,36 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
         }
     }
 
+    /*
+     * Crea la url amigable, heredando la privacidad y publish de
+     * la entidad asociada
+     */
+
     public function create() {
 
-        $this->setPublish(1);
-        $this->setPrivacy(2); // Ambos (público y privado)
+        if ($this->Entity != '') {
+            $entidadAsociada = new $this->Entity($this->IdEntity);
+            $this->setPrivacy($entidadAsociada->getPrivacy()->getIDTipo());
+            $this->setPublish($entidadAsociada->getPublish()->getIDTipo());
+            unset($entidadAsociada);
+        }
         return parent::create();
+    }
+
+    /*
+     * Guarda la url amigable, heredando la privacidad y publish de
+     * la entidad asociada
+     */
+
+    public function save() {
+
+        if ($this->Entity != '') {
+            $entidadAsociada = new $this->Entity($this->IdEntity);
+            $this->setPrivacy($entidadAsociada->getPrivacy()->getIDTipo());
+            $this->setPublish($entidadAsociada->getPublish()->getIDTipo());
+            unset($entidadAsociada);
+        }
+        return parent::save();
     }
 
     /**
@@ -212,5 +254,4 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
     }
 
 }
-
 ?>

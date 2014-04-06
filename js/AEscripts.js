@@ -359,7 +359,7 @@ function submitForm(formulario) {
  * @param string idDiv El id del div donde se pondrá la imagen gif de cargando
  */
 function loading(idDiv) {
-    var html = "<img src='" + appPath + "/images/loading.gif'>";
+    var html = "<img src='http://" + appPath + "/images/loading.gif'>";
     $('#'+idDiv).html(html);
 }
 

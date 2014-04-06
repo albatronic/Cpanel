@@ -120,5 +120,5 @@ config:
       dbEngine: mysql
       host: localhost
       user: root
-      password: albatronic
+      password: root
       database: albatro_pacs

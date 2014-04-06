@@ -11,6 +11,9 @@
  */
 class PcaePermisos extends PcaePermisosEntity {
 
+    protected $Publish = '1';
+    protected $Privacy = '1';
+
     public function __toString() {
         return $this->getId();
     }
@@ -24,8 +27,6 @@ class PcaePermisos extends PcaePermisosEntity {
      */
     public function create() {
 
-        $this->Publish = 1;
-        
         $id = parent::create();
 
         if ($id) {
@@ -51,30 +52,105 @@ class PcaePermisos extends PcaePermisosEntity {
                     'dataBase' => $row['Database'],
                 );
 
-                $em = new EntityManager($connection);
-                if ($em->getDbLink()) {
-                    $query = "select Id from {$connection['dataBase']}.CpanUsuarios where IdUsuario='{$this->IdUsuario}'";
-                    $em->query($query);
-                    $rows = $em->fetchResult();
-                    $id = $rows[0]['Id'];
+                switch ($this->IdApp) {
+                    case '1': //Cpanel
+                        $em = new EntityManager($connection);
+                        if ($em->getDbLink()) {
+                            $query = "select Id from {$connection['dataBase']}.CpanUsuarios where IdUsuario='{$this->IdUsuario}'";
+                            $em->query($query);
+                            $rows = $em->fetchResult();
+                            $id = $rows[0]['Id'];
 
-                    if ($id) {
-                        $query = "update {$connection['dataBase']}.CpanUsuarios set IdPerfil='{$idPerfil}' where Id='{$id}'";
-                        $em->query($query);
-                    } else {
-                        $query = "insert into {$connection['dataBase']}.CpanUsuarios (IdUsuario,IdPerfil,IdRol,IdTipoUsuario) values ('{$this->IdUsuario}','{$idPerfil}','1','1');";
-                        $em->query($query);
-                        $lastId = $em->getInsertId();
-                        $query = "update {$connection['dataBase']}.CpanUsuarios set SortOrder='{$lastId}', PrimaryKeyMD5='".md5($lastId)."' WHERE Id='{$lastId}'";
-                        $em->query($query);
-                    }
-                    $em->desConecta();
+                            if ($id) {
+                                $query = "update {$connection['dataBase']}.CpanUsuarios set IdPerfil='{$idPerfil}', Publish='1' where Id='{$id}'";
+                                $em->query($query);
+                            } else {
+                                $query = "insert into {$connection['dataBase']}.CpanUsuarios (IdUsuario,IdPerfil,IdRol,IdTipoUsuario,Publish) values ('{$this->IdUsuario}','{$idPerfil}','1','1','1');";
+                                $em->query($query);
+                                $id = $em->getInsertId();
+                                $query = "update {$connection['dataBase']}.CpanUsuarios set SortOrder='{$id}', PrimaryKeyMD5='" . md5($id) . "' WHERE Id='{$id}'";
+                                $em->query($query);
+                            }
+                            $em->desConecta();
+                        }
+                        unset($em);
+                        break;
+
+                    case '2': //Erp
+                        $em = new EntityManager($connection);
+                        if ($em->getDbLink()) {
+                            $query = "select IDAgente from {$connection['dataBase']}.ErpUsuarios where IDAgente='{$this->IdUsuario}'";
+                            $em->query($query);
+                            $rows = $em->fetchResult();
+                            $id = $rows[0]['IDAgente'];
+
+                            if ($id) {
+                                $query = "update {$connection['dataBase']}.ErpUsuarios set IDPerfil='{$idPerfil}', Activo='1', Publish='1' where IDAgente='{$id}'";
+                                $em->query($query);
+                            } else {
+                                $query = "insert into {$connection['dataBase']}.ErpUsuarios (IDAgente,IDPerfil,IDRol,IDTipo,IDSucursal,IDAlmacen,Activo,Publish) values ('{$this->IdUsuario}','{$idPerfil}','1','1','1','1','1','1');";
+                                $em->query($query);
+                                $id = $em->getInsertId();
+                                $query = "update {$connection['dataBase']}.ErpUsuarios set SortOrder='{$this->IdUsuario}', PrimaryKeyMD5='" . md5($this->IdUsuario) . "' WHERE IDAgente='{$this->IdUsuario}'";
+                                $em->query($query);
+                            }
+                            $em->desConecta();
+                        }
+                        unset($em);
+                        break;
                 }
-                unset($em);
             }
         }
-
+        
         return $id;
+    }
+
+    /**
+     * Borra el permiso y deshabilito el usuario
+     * en la app correspondiente
+     */
+    public function erase() {
+
+        $proyectoApp = new PcaeProyectosApps();
+        $filtro = "IdProyecto='{$this->IdProyecto}' AND IdApp='{$this->IdApp}'";
+
+        $rows = $proyectoApp->cargaCondicion("*", $filtro);
+        unset($proyectoApp);
+        $row = $rows[0];
+        if ($row['Id']) {
+            $connection = array(
+                'dbEngine' => $row['DbEngine'],
+                'host' => $row['Host'],
+                'user' => $row['User'],
+                'password' => $row['Password'],
+                'dataBase' => $row['Database'],
+            );
+
+            switch ($this->IdApp) {
+                case '1': //Cpanel
+                    $em = new EntityManager($connection);
+                    if ($em->getDbLink()) {
+                        $query = "update {$connection['dataBase']}.CpanUsuarios set Publish='0' where IdUsuario='{$this->IdUsuario}'";
+                        $em->query($query);
+                        $em->desConecta();
+                    }
+                    unset($em);
+                    break;
+
+                case '2': //Erp
+                    $em = new EntityManager($connection);
+                    if ($em->getDbLink()) {
+                        $query = "update {$connection['dataBase']}.ErpUsuarios set Activo='0' where IDAgente='{$this->IdUsuario}'";
+                        $em->query($query);
+                        $em->desConecta();
+                    }
+                    unset($em);
+                    break;
+            }
+
+            parent::erase();
+        }
+
     }
 
 }

@@ -76,7 +76,7 @@ class Request {
         $this->request = $_REQUEST;
         $this->request['FILES'] = $_FILES;
         $this->acceptLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-        //$this->remoteAddr = $this->getIpReal(); //$_SERVER['REMOTE_ADDR'];
+        $this->remoteAddr = $this->getIpReal();
         $this->userAgent = $_SERVER['HTTP_USER_AGENT'];
         $this->contentType = $_SERVER['CONTENT_TYPE'];
         $this->httpReferer = $_SERVER['HTTP_REFERER'];

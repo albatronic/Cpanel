@@ -11,6 +11,9 @@
  */
 class PcaeEmpresas extends PcaeEmpresasEntity {
 
+    protected $Publish = '1';
+    protected $Privacy = '1';
+    
     public function __toString() {
         return $this->getId();
     }
@@ -59,8 +62,6 @@ class PcaeEmpresas extends PcaeEmpresasEntity {
      * Al crear una empresa, le asigno el usuario SUPER
      */
     public function create() {
-        
-        $this->Publish = 1;
         
         $IdEmpresa = parent::create();
         

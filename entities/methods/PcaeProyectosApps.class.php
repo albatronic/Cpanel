@@ -11,6 +11,9 @@
  */
 class PcaeProyectosApps extends PcaeProyectosAppsEntity {
 
+    protected $Publish = 1;
+    protected $Privacy = 1;
+    
     public function __toString() {
         return $this->getId();
     }
@@ -23,8 +26,7 @@ class PcaeProyectosApps extends PcaeProyectosAppsEntity {
      * @return boolean
      */
     public function create() {
-        
-        $this->Publish = 1;
+
         $id = parent::create();
 
         if ($id) {

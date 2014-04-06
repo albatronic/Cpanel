@@ -10,12 +10,12 @@
 
 <span class="title_icon"><span class="list_image"></span></span>
 <h3>
-    <a href="{{app.path}}/Index">Home</a> | <img src="{{app.path}}/lang/{{idiomas.disponibles[idiomas.actual]}}.gif"/> {{ values.titulo }}
+    <a href="{{app.path}}/Index">Home</a> | <img src="{{app.path}}/lang/{{idiomas.disponibles[idiomas.actual].codigo}}.gif"/> {{ values.titulo }}
     <div style="float: right;">    
         {% if ((varEnvMod.translatable == 1) and (idiomas.disponibles|length > 1) )%}
             {% for key,idioma in idiomas.disponibles %}
                 {% if key != idiomas.actual %}
-                    <a href="{{app.path}}/{{values.controller}}/lang/{{key}}/{{values.datos.getPrimaryKeyMD5}}"><img src="{{app.path}}/lang/{{idioma}}.gif"/></a>
+                    <a href="{{app.path}}/{{values.controller}}/lang/{{key}}/{{values.datos.getPrimaryKeyMD5}}"><img src="{{app.path}}/lang/{{idioma.codigo}}.gif"/></a>
                 {% endif %}
             {% endfor%}                
 

@@ -33,7 +33,7 @@ $app = $config['config']['app'];
 // ---------------------------------------------------------------
 // ACTIVAR EL AUTOLOADER DE CLASES Y FICHEROS A INCLUIR
 // ---------------------------------------------------------------
-define(APP_PATH, $_SERVER['DOCUMENT_ROOT'] . $app['path'] . "/");
+define("APP_PATH", $_SERVER['DOCUMENT_ROOT'] . $app['path'] . "/");
 include_once "../" . $app['framework'] . "Autoloader.class.php";
 Autoloader::setCacheFilePath(APP_PATH . 'tmp/class_path_cache.txt');
 Autoloader::excludeFolderNamesMatchingRegex('/^CVS|\..*$/');
@@ -55,13 +55,18 @@ $columna = $v['columna'];
 $objeto = new $entidad($idEntidad);
 $objeto->{"set$columna"}($v['valor']);
 $objeto->save();
-
-// Actualiza la tabla de búsquedas
-if ($_SESSION['VARIABLES']['EnvMod']['searchable']) {
-    $search = new CpanSearch();
-    $search->actualiza($objeto);
-    unset($search);
+if ($objeto->save() && ($columna == 'Publish' || $columna == 'Privacy')) {
+    // Actualiza la url amigable
+    $urlAmigable = CpanUrlAmigables::sincroniza($objeto);
+    // Actualiza la tabla de búsquedas
+    $variables = new CpanVariables("Mod", "Env", $entidad);
+    if ($variables->getNode('searchable')) {
+        $search = new CpanSearch();
+        $search->actualiza($objeto);
+        unset($search);
+    }
 }
+
 unset($objeto);
 
 // Actualiza la columna en el resto de idiomas
@@ -73,12 +78,16 @@ if ($_SESSION['idiomas']['actual'] == 0) {
             $_SESSION['idiomas']['actual'] = $key;
             $objeto = new $entidad($idEntidad);
             $objeto->{"set$columna"}($v['valor']);
-            $objeto->save();
-            // Actualiza la tabla de búsquedas
-            if ($_SESSION['VARIABLES']['EnvMod']['searchable']) {
-                $search = new CpanSearch();
-                $search->actualiza($objeto);
-                unset($search);
+            if ($objeto->save() && ($columna == 'Publish' || $columna == 'Privacy')) {
+                // Actualiza la url amigable
+                $urlAmigable = CpanUrlAmigables::sincroniza($objeto);
+                // Actualiza la tabla de búsquedas
+                $variables = new CpanVariables("Mod", "Env", $entidad);
+                if ($variables->getNode('searchable')) {
+                    $search = new CpanSearch();
+                    $search->actualiza($objeto);
+                    unset($search);
+                }
             }
             unset($objeto);
         }

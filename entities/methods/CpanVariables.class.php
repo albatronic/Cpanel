@@ -261,9 +261,9 @@ class CpanVariables extends CpanVariablesEntity {
             $filtro = "Variable='{$variable}'";
             $rows = $this->cargaCondicion('*', $filtro);
 
-            if ($rows[0])
+            if (isset($rows[0])) {
                 $this->bind($rows[0]);
-            else {
+            } else {
                 $this->setIdProyectosApps($_SESSION['project']['Id']);
                 $this->setVariable($variable);
             }

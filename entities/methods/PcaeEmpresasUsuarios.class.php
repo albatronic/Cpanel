@@ -11,16 +11,13 @@
  */
 class PcaeEmpresasUsuarios extends PcaeEmpresasUsuariosEntity {
 
+    protected $Publish = '1';
+    protected $Privacy = '1';
+
     public function __toString() {
         return $this->getId();
     }
 
-    public function create() {
-        
-        $this->setPublish(1);
-        return parent::create();
-    }
-    
     /**
      * Comprueba la unicidad de IdEmpresa-IdUsuario
      */
@@ -42,6 +39,7 @@ class PcaeEmpresasUsuarios extends PcaeEmpresasUsuariosEntity {
      * @return boolean TRUE si el borraro se ha hecho con exito
      */
     public function erase() {
+        
         $idEmpresa = $this->IdEmpresa;
         $idUsuario = $this->IdUsuario;
 
@@ -60,8 +58,8 @@ class PcaeEmpresasUsuarios extends PcaeEmpresasUsuariosEntity {
         }
 
         return $ok;
-            
     }
+
 }
 
 ?>

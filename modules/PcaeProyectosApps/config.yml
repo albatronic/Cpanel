@@ -134,7 +134,7 @@ PcaeProyectosApps:
       visible: true
       updatable: true
       default: ''
-      help: null
+      help: Ruta a la carpeta tema usado
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: YES, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
@@ -178,7 +178,7 @@ PcaeProyectosApps:
       visible: true
       updatable: true
       default: null
-      help: null
+      help: Url completa (con http://) a la carpeta tema usado
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: string, length: '255', min: null, max: null, message: 'Valor Requerido' }
