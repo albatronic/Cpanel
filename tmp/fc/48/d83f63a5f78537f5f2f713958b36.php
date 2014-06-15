@@ -105,6 +105,12 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         // line 596
         echo "
 ";
+        // line 616
+        echo "
+";
+        // line 625
+        echo "
+";
     }
 
     // line 32
@@ -123,74 +129,59 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         try {
             // line 33
             echo "<span class=\"";
-            if (isset($context["class"])) { $_class_ = $context["class"]; } else { $_class_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter($_class_, "field_title")) : ("field_title")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter((isset($context["class"]) ? $context["class"] : null), "field_title")) : ("field_title")), "html", null, true);
             echo "\" title=\"";
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_atributos_, "help"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "help"), "html", null, true);
             echo "\">  
     ";
             // line 34
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (isset($context["user"])) { $_user_ = $context["user"]; } else { $_user_ = null; }
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if (((($this->getAttribute($_atributos_, "varEnv") == "") && ($this->getAttribute($this->getAttribute($_user_, "getIdPerfil"), "Id") == "1")) && ($this->getAttribute($_idiomas_, "actual") == 0))) {
+            if (((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "varEnv") == "") && ($this->getAttribute($this->getAttribute((isset($context["user"]) ? $context["user"] : null), "getIdPerfil"), "Id") == "1")) && ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0))) {
                 // line 35
                 echo "        <input
             title=\"Poner/Quitar visibilidad\"
             id=\"checkVisibilidad";
                 // line 37
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "\"
             type=\"checkbox\"
             value=\"";
                 // line 39
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                echo twig_escape_filter($this->env, $this->getAttribute($_atributos_, "visible"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible"), "html", null, true);
                 echo "\"
             ";
                 // line 40
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (($this->getAttribute($_atributos_, "visible") > "1")) {
+                if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > "1")) {
                     echo " checked ";
                 }
                 // line 41
                 echo "            onchange=\"
               if (\$('#checkVisibilidad";
                 // line 42
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "').is(':checked')) {
                   \$('#checkVisibilidad";
                 // line 43
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "').val('1');
                   \$('#spanVisibilidad";
                 // line 44
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "').removeClass('invisible');
               } else {
                   \$('#checkVisibilidad";
                 // line 46
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "').val('0');
                   \$('#spanVisibilidad";
                 // line 47
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "').addClass('invisible');
               }
               actualizaVarEntorno('";
                 // line 49
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "_visible',\$('#checkVisibilidad";
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "').val());
             \"
         />
@@ -198,47 +189,39 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             title=\"Poner/Quitar multi idioma\"
             id=\"checkMultiIdioma";
                 // line 54
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "\"
             type=\"checkbox\"
             value=\"";
                 // line 56
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                echo twig_escape_filter($this->env, $this->getAttribute($_atributos_, "translatable"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable"), "html", null, true);
                 echo "\"
             ";
                 // line 57
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (($this->getAttribute($_atributos_, "translatable") > "0")) {
+                if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") > "0")) {
                     echo " checked ";
                 }
                 // line 58
                 echo "            onchange=\"
               if (\$('#checkMultiIdioma";
                 // line 59
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "').is(':checked')) {
                   \$('#checkMultiIdioma";
                 // line 60
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "').val('1');
               } else {
                   \$('#checkMultiIdioma";
                 // line 62
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "').val('0');
               }
               actualizaVarEntorno('";
                 // line 64
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "_translatable',\$('#checkMultiIdioma";
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "').val());
             \"
         />           
@@ -248,28 +231,21 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "            
     <span id=\"spanVisibilidad";
             // line 68
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            echo twig_escape_filter($this->env, $_id_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
             echo "\" 
         ";
             // line 69
-            if (isset($context["user"])) { $_user_ = $context["user"]; } else { $_user_ = null; }
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (((($this->getAttribute($this->getAttribute($_user_, "getIdPerfil"), "Id") == "1") && ($this->getAttribute($_atributos_, "visible") == "1")) && ($this->getAttribute($_atributos_, "varEnv") == ""))) {
+            if (((($this->getAttribute($this->getAttribute((isset($context["user"]) ? $context["user"] : null), "getIdPerfil"), "Id") == "1") && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") == "1")) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "varEnv") == ""))) {
                 echo " class=\"invisible\"";
             }
             // line 70
             echo "        ";
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (isset($context["user"])) { $_user_ = $context["user"]; } else { $_user_ = null; }
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if (((($this->getAttribute($_atributos_, "varEnv") == "") && ($this->getAttribute($this->getAttribute($_user_, "getIdPerfil"), "Id") == "1")) && ($this->getAttribute($_idiomas_, "actual") == 0))) {
+            if (((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "varEnv") == "") && ($this->getAttribute($this->getAttribute((isset($context["user"]) ? $context["user"] : null), "getIdPerfil"), "Id") == "1")) && ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0))) {
                 // line 71
                 echo "             style=\"cursor: pointer;\"
              onclick=\"popUpVariablesEnv('Env','Mod','";
                 // line 72
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo twig_escape_filter($this->env, $_id_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
                 echo "');\"
         ";
             }
@@ -277,8 +253,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "              >            
         ";
             // line 74
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_atributos_, "caption"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption"), "html", null, true);
             echo "
     </span>
 </span>
@@ -313,44 +288,35 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
     <div class=\"form_grid_12\">
         <label class=\"";
             // line 82
-            if (isset($context["class"])) { $_class_ = $context["class"]; } else { $_class_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter($_class_, "field_title")) : ("field_title")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter((isset($context["class"]) ? $context["class"] : null), "field_title")) : ("field_title")), "html", null, true);
             echo "\"
              style=\"cursor: pointer;\"
              onclick=\"window.open('";
             // line 84
-            if (isset($context["url"])) { $_url_ = $context["url"]; } else { $_url_ = null; }
-            echo twig_escape_filter($this->env, $_url_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["url"]) ? $context["url"] : null), "html", null, true);
             echo "','";
-            if (isset($context["caption"])) { $_caption_ = $context["caption"]; } else { $_caption_ = null; }
-            echo twig_escape_filter($this->env, $_caption_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["caption"]) ? $context["caption"] : null), "html", null, true);
             echo "','width=";
-            if (isset($context["ancho"])) { $_ancho_ = $context["ancho"]; } else { $_ancho_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("ancho", $context)) ? (_twig_default_filter($_ancho_, 400)) : (400)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("ancho", $context)) ? (_twig_default_filter((isset($context["ancho"]) ? $context["ancho"] : null), 400)) : (400)), "html", null, true);
             echo ",height=";
-            if (isset($context["alto"])) { $_alto_ = $context["alto"]; } else { $_alto_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("alto", $context)) ? (_twig_default_filter($_alto_, 580)) : (580)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("alto", $context)) ? (_twig_default_filter((isset($context["alto"]) ? $context["alto"] : null), 580)) : (580)), "html", null, true);
             echo "');\"
              title='";
             // line 85
-            if (isset($context["caption"])) { $_caption_ = $context["caption"]; } else { $_caption_ = null; }
-            echo twig_escape_filter($this->env, $_caption_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["caption"]) ? $context["caption"] : null), "html", null, true);
             echo "'
             >
             ";
             // line 87
-            if (isset($context["caption"])) { $_caption_ = $context["caption"]; } else { $_caption_ = null; }
-            echo twig_escape_filter($this->env, $_caption_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["caption"]) ? $context["caption"] : null), "html", null, true);
             echo "
         </label>
         <div id=\"enlace\" class=\"form_input\">
             <span>";
             // line 90
-            if (isset($context["objetoEnlazado"])) { $_objetoEnlazado_ = $context["objetoEnlazado"]; } else { $_objetoEnlazado_ = null; }
-            echo twig_escape_filter($this->env, $_objetoEnlazado_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["objetoEnlazado"]) ? $context["objetoEnlazado"] : null), "html", null, true);
             echo " (";
-            if (isset($context["objetoEnlazado"])) { $_objetoEnlazado_ = $context["objetoEnlazado"]; } else { $_objetoEnlazado_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_objetoEnlazado_, "UrlFriendly"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["objetoEnlazado"]) ? $context["objetoEnlazado"] : null), "UrlFriendly"), "html", null, true);
             echo ")</span>
         </div>    
     </div>
@@ -380,26 +346,20 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         ob_start();
         try {
             // line 98
-            if (isset($context["permisosModulo"])) { $_permisosModulo_ = $context["permisosModulo"]; } else { $_permisosModulo_ = null; }
-            if ($this->getAttribute($_permisosModulo_, "MO", array(), "array")) {
+            if ($this->getAttribute((isset($context["permisosModulo"]) ? $context["permisosModulo"] : null), "MO", array(), "array")) {
                 // line 99
                 echo "<a href=\"javascript:;\" onclick=\"popUpOrdenar('";
-                if (isset($context["controller"])) { $_controller_ = $context["controller"]; } else { $_controller_ = null; }
-                echo twig_escape_filter($this->env, $_controller_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["controller"]) ? $context["controller"] : null), "html", null, true);
                 echo "','";
-                if (isset($context["columna"])) { $_columna_ = $context["columna"]; } else { $_columna_ = null; }
-                echo twig_escape_filter($this->env, $_columna_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["columna"]) ? $context["columna"] : null), "html", null, true);
                 echo "','";
-                if (isset($context["key"])) { $_key_ = $context["key"]; } else { $_key_ = null; }
-                echo twig_escape_filter($this->env, $_key_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["key"]) ? $context["key"] : null), "html", null, true);
                 echo "','";
-                if (isset($context["columnaMostrar"])) { $_columnaMostrar_ = $context["columnaMostrar"]; } else { $_columnaMostrar_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("columnaMostrar", $context)) ? (_twig_default_filter($_columnaMostrar_, "Titulo")) : ("Titulo")), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("columnaMostrar", $context)) ? (_twig_default_filter((isset($context["columnaMostrar"]) ? $context["columnaMostrar"] : null), "Titulo")) : ("Titulo")), "html", null, true);
                 echo "');\">
     <img src=\"";
                 // line 100
-                if (isset($context["appPath"])) { $_appPath_ = $context["appPath"]; } else { $_appPath_ = null; }
-                echo twig_escape_filter($this->env, $_appPath_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["appPath"]) ? $context["appPath"] : null), "html", null, true);
                 echo "/images/boton-ordenar.png\" alt=\"Ordenar\" title=\"Ordenar\"/>
 </a>
 ";
@@ -432,72 +392,51 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "<input
     title=\"";
             // line 108
-            if (isset($context["titulo"])) { $_titulo_ = $context["titulo"]; } else { $_titulo_ = null; }
-            echo twig_escape_filter($this->env, $_titulo_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["titulo"]) ? $context["titulo"] : null), "html", null, true);
             echo "\"
     id=\"check";
             // line 109
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
-            if (isset($context["idEntidad"])) { $_idEntidad_ = $context["idEntidad"]; } else { $_idEntidad_ = null; }
-            echo twig_escape_filter($this->env, $_idEntidad_, "html", null, true);
-            if (isset($context["columna"])) { $_columna_ = $context["columna"]; } else { $_columna_ = null; }
-            echo twig_escape_filter($this->env, $_columna_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idEntidad"]) ? $context["idEntidad"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["columna"]) ? $context["columna"] : null), "html", null, true);
             echo "\"
     type=\"checkbox\"
     value=\"";
             // line 111
-            if (isset($context["valor"])) { $_valor_ = $context["valor"]; } else { $_valor_ = null; }
-            echo twig_escape_filter($this->env, $_valor_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["valor"]) ? $context["valor"] : null), "html", null, true);
             echo "\"
     ";
             // line 112
-            if (isset($context["valor"])) { $_valor_ = $context["valor"]; } else { $_valor_ = null; }
-            if (($_valor_ == "1")) {
+            if (((isset($context["valor"]) ? $context["valor"] : null) == "1")) {
                 echo " checked ";
             }
             // line 113
             echo "    onchange=\"
       if (\$('#check";
             // line 114
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
-            if (isset($context["idEntidad"])) { $_idEntidad_ = $context["idEntidad"]; } else { $_idEntidad_ = null; }
-            echo twig_escape_filter($this->env, $_idEntidad_, "html", null, true);
-            if (isset($context["columna"])) { $_columna_ = $context["columna"]; } else { $_columna_ = null; }
-            echo twig_escape_filter($this->env, $_columna_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idEntidad"]) ? $context["idEntidad"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["columna"]) ? $context["columna"] : null), "html", null, true);
             echo "').is(':checked')) {\$('#check";
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
-            if (isset($context["idEntidad"])) { $_idEntidad_ = $context["idEntidad"]; } else { $_idEntidad_ = null; }
-            echo twig_escape_filter($this->env, $_idEntidad_, "html", null, true);
-            if (isset($context["columna"])) { $_columna_ = $context["columna"]; } else { $_columna_ = null; }
-            echo twig_escape_filter($this->env, $_columna_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idEntidad"]) ? $context["idEntidad"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["columna"]) ? $context["columna"] : null), "html", null, true);
             echo "').val('1');} else {\$('#check";
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
-            if (isset($context["idEntidad"])) { $_idEntidad_ = $context["idEntidad"]; } else { $_idEntidad_ = null; }
-            echo twig_escape_filter($this->env, $_idEntidad_, "html", null, true);
-            if (isset($context["columna"])) { $_columna_ = $context["columna"]; } else { $_columna_ = null; }
-            echo twig_escape_filter($this->env, $_columna_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idEntidad"]) ? $context["idEntidad"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["columna"]) ? $context["columna"] : null), "html", null, true);
             echo "').val('0');}
       actualizaColumna('";
             // line 115
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "','";
-            if (isset($context["idEntidad"])) { $_idEntidad_ = $context["idEntidad"]; } else { $_idEntidad_ = null; }
-            echo twig_escape_filter($this->env, $_idEntidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idEntidad"]) ? $context["idEntidad"] : null), "html", null, true);
             echo "','";
-            if (isset($context["columna"])) { $_columna_ = $context["columna"]; } else { $_columna_ = null; }
-            echo twig_escape_filter($this->env, $_columna_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["columna"]) ? $context["columna"] : null), "html", null, true);
             echo "',\$('#check";
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
-            if (isset($context["idEntidad"])) { $_idEntidad_ = $context["idEntidad"]; } else { $_idEntidad_ = null; }
-            echo twig_escape_filter($this->env, $_idEntidad_, "html", null, true);
-            if (isset($context["columna"])) { $_columna_ = $context["columna"]; } else { $_columna_ = null; }
-            echo twig_escape_filter($this->env, $_columna_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idEntidad"]) ? $context["idEntidad"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["columna"]) ? $context["columna"] : null), "html", null, true);
             echo "').val());
     \"
 />
@@ -531,60 +470,44 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
     title=\"Poner/Quitar relación\"
     id=\"check";
             // line 124
-            if (isset($context["entidadDestino"])) { $_entidadDestino_ = $context["entidadDestino"]; } else { $_entidadDestino_ = null; }
-            echo twig_escape_filter($this->env, $_entidadDestino_, "html", null, true);
-            if (isset($context["idDestino"])) { $_idDestino_ = $context["idDestino"]; } else { $_idDestino_ = null; }
-            echo twig_escape_filter($this->env, $_idDestino_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidadDestino"]) ? $context["entidadDestino"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idDestino"]) ? $context["idDestino"] : null), "html", null, true);
             echo "\"
     type=\"checkbox\"
     value=\"";
             // line 126
-            if (isset($context["valor"])) { $_valor_ = $context["valor"]; } else { $_valor_ = null; }
-            echo twig_escape_filter($this->env, $_valor_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["valor"]) ? $context["valor"] : null), "html", null, true);
             echo "\"
     ";
             // line 127
-            if (isset($context["valor"])) { $_valor_ = $context["valor"]; } else { $_valor_ = null; }
-            if (($_valor_ != "")) {
+            if (((isset($context["valor"]) ? $context["valor"] : null) != "")) {
                 echo " checked ";
             }
             // line 128
             echo "    onchange=\"
       if (\$('#check";
             // line 129
-            if (isset($context["entidadDestino"])) { $_entidadDestino_ = $context["entidadDestino"]; } else { $_entidadDestino_ = null; }
-            echo twig_escape_filter($this->env, $_entidadDestino_, "html", null, true);
-            if (isset($context["idDestino"])) { $_idDestino_ = $context["idDestino"]; } else { $_idDestino_ = null; }
-            echo twig_escape_filter($this->env, $_idDestino_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidadDestino"]) ? $context["entidadDestino"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idDestino"]) ? $context["idDestino"] : null), "html", null, true);
             echo "').is(':checked')) {\$('#check";
-            if (isset($context["entidadDestino"])) { $_entidadDestino_ = $context["entidadDestino"]; } else { $_entidadDestino_ = null; }
-            echo twig_escape_filter($this->env, $_entidadDestino_, "html", null, true);
-            if (isset($context["idDestino"])) { $_idDestino_ = $context["idDestino"]; } else { $_idDestino_ = null; }
-            echo twig_escape_filter($this->env, $_idDestino_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidadDestino"]) ? $context["entidadDestino"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idDestino"]) ? $context["idDestino"] : null), "html", null, true);
             echo "').val('1');} else {\$('#check";
-            if (isset($context["entidadDestino"])) { $_entidadDestino_ = $context["entidadDestino"]; } else { $_entidadDestino_ = null; }
-            echo twig_escape_filter($this->env, $_entidadDestino_, "html", null, true);
-            if (isset($context["idDestino"])) { $_idDestino_ = $context["idDestino"]; } else { $_idDestino_ = null; }
-            echo twig_escape_filter($this->env, $_idDestino_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidadDestino"]) ? $context["entidadDestino"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idDestino"]) ? $context["idDestino"] : null), "html", null, true);
             echo "').val('0');}
       actualizaRelacion('";
             // line 130
-            if (isset($context["entidadOrigen"])) { $_entidadOrigen_ = $context["entidadOrigen"]; } else { $_entidadOrigen_ = null; }
-            echo twig_escape_filter($this->env, $_entidadOrigen_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidadOrigen"]) ? $context["entidadOrigen"] : null), "html", null, true);
             echo "','";
-            if (isset($context["idOrigen"])) { $_idOrigen_ = $context["idOrigen"]; } else { $_idOrigen_ = null; }
-            echo twig_escape_filter($this->env, $_idOrigen_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idOrigen"]) ? $context["idOrigen"] : null), "html", null, true);
             echo "','";
-            if (isset($context["entidadDestino"])) { $_entidadDestino_ = $context["entidadDestino"]; } else { $_entidadDestino_ = null; }
-            echo twig_escape_filter($this->env, $_entidadDestino_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidadDestino"]) ? $context["entidadDestino"] : null), "html", null, true);
             echo "','";
-            if (isset($context["idDestino"])) { $_idDestino_ = $context["idDestino"]; } else { $_idDestino_ = null; }
-            echo twig_escape_filter($this->env, $_idDestino_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idDestino"]) ? $context["idDestino"] : null), "html", null, true);
             echo "',\$('#check";
-            if (isset($context["entidadDestino"])) { $_entidadDestino_ = $context["entidadDestino"]; } else { $_entidadDestino_ = null; }
-            echo twig_escape_filter($this->env, $_entidadDestino_, "html", null, true);
-            if (isset($context["idDestino"])) { $_idDestino_ = $context["idDestino"]; } else { $_idDestino_ = null; }
-            echo twig_escape_filter($this->env, $_idDestino_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidadDestino"]) ? $context["entidadDestino"] : null), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idDestino"]) ? $context["idDestino"] : null), "html", null, true);
             echo "').val());
     \"
 /> 
@@ -613,48 +536,36 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         ob_start();
         try {
             // line 136
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if ((($this->getAttribute($_atributos_, "visible") > 0) && (($this->getAttribute($_atributos_, "translatable") == "1") || ($this->getAttribute($_idiomas_, "actual") == "0")))) {
+            if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") == "1") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == "0")))) {
                 // line 137
                 echo "<input name=\"";
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\" id=\"";
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "\" type=\"hidden\" value=\"";
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                echo twig_escape_filter($this->env, $_value_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
                 echo "\" />
 <input type=\"checkbox\"
        name=\"checkbox_";
                 // line 139
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\"
        id=\"checkbox_";
                 // line 140
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "\"
        value=\"";
                 // line 141
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                echo twig_escape_filter($this->env, $_value_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
                 echo "\"
         ";
                 // line 142
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                if (($_value_ == "1")) {
+                if (((isset($context["value"]) ? $context["value"] : null) == "1")) {
                     echo " CHECKED ";
                 }
                 // line 143
                 echo "       class=\"tip_top\" title=\"";
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                echo twig_escape_filter($this->env, $this->getAttribute($_atributos_, "help"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "help"), "html", null, true);
                 echo "\"
        onchange=\"
             ";
@@ -663,29 +574,21 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                 echo "
             if (\$('#checkbox_";
                 // line 146
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "').is(':checked')) {\$('#";
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "').val('1');} else {\$('#";
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "').val('0');}
             actualiza
        \"
        ";
                 // line 149
-                if (isset($context["extra"])) { $_extra_ = $context["extra"]; } else { $_extra_ = null; }
-                echo twig_escape_filter($this->env, $_extra_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["extra"]) ? $context["extra"] : null), "html", null, true);
                 echo "
        ";
                 // line 150
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+                if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                     echo " disabled ";
                 }
                 // line 151
@@ -724,15 +627,12 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         ob_start();
         try {
             // line 174
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (($this->getAttribute($_atributos_, "editorTiny") != "1")) {
+            if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "editorTiny") != "1")) {
                 // line 175
                 echo "    
     <li ";
                 // line 176
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-                if ((($this->getAttribute($_atributos_, "visible") > 0) && ($this->getAttribute($_atributos_, "translatable") || ($this->getAttribute($_idiomas_, "actual") == 0)))) {
+                if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                     echo "class=\"\"";
                 } else {
                     echo "class=\"oculto\"";
@@ -740,22 +640,15 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                 echo ">
         <div class=\"form_grid_12\" id=\"div_";
                 // line 177
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "\">
 
         ";
                 // line 179
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if ($this->getAttribute($_atributos_, "caption")) {
+                if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
                     // line 180
                     echo "            ";
-                    if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                    if (isset($context["classLabel"])) { $_classLabel_ = $context["classLabel"]; } else { $_classLabel_ = null; }
-                    if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                    if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                    echo $this->getAttribute($this, "label", array(0 => $_atributos_, 1 => $_classLabel_, 2 => $_name_, 3 => $_id_), "method");
+                    echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                     echo "
         ";
                 }
@@ -764,86 +657,62 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         <div class=\"form_input\">
         ";
                 // line 184
-                if (isset($context["autoComplete"])) { $_autoComplete_ = $context["autoComplete"]; } else { $_autoComplete_ = null; }
-                if ((!$_autoComplete_)) {
+                if ((!(isset($context["autoComplete"]) ? $context["autoComplete"] : null))) {
                     // line 185
                     echo "            ";
-                    if (isset($context["type"])) { $_type_ = $context["type"]; } else { $_type_ = null; }
-                    if (($_type_ == "checkbox")) {
+                    if (((isset($context["type"]) ? $context["type"] : null) == "checkbox")) {
                         // line 186
                         echo "            <input name=\"";
-                        if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                        echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                         echo "\" id=\"";
-                        if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                        if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                         echo "\" type=\"hidden\" value=\"";
-                        if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                        echo twig_escape_filter($this->env, $_value_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
                         echo "\" />
             <input type=\"checkbox\"
                    ";
                         // line 189
                         echo "                   id=\"checkbox_";
-                        if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                        if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                         echo "\"
                    value=\"";
                         // line 190
-                        if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                        echo twig_escape_filter($this->env, $_value_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
                         echo "\"
                     ";
                         // line 191
-                        if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                        if (($_value_ == "1")) {
+                        if (((isset($context["value"]) ? $context["value"] : null) == "1")) {
                             echo " CHECKED ";
                         }
                         // line 192
-                        echo "                   class=\"";
-                        if (isset($context["class"])) { $_class_ = $context["class"]; } else { $_class_ = null; }
-                        echo twig_escape_filter($this->env, $_class_, "html", null, true);
-                        echo "\" title=\"";
-                        if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                        echo twig_escape_filter($this->env, $this->getAttribute($_atributos_, "help"), "html", null, true);
+                        echo "                   class=\"small\" title=\"";
+                        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "help"), "html", null, true);
                         echo "\" tabindex=\"";
-                        if (isset($context["tabIndex"])) { $_tabIndex_ = $context["tabIndex"]; } else { $_tabIndex_ = null; }
-                        echo twig_escape_filter($this->env, $_tabIndex_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["tabIndex"]) ? $context["tabIndex"] : null), "html", null, true);
                         echo "\"
                    onchange=\"
                         ";
                         // line 194
-                        if (isset($context["onchange"])) { $_onchange_ = $context["onchange"]; } else { $_onchange_ = null; }
-                        echo twig_escape_filter($this->env, $_onchange_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["onchange"]) ? $context["onchange"] : null), "html", null, true);
                         echo " ";
                         echo $this->getAttribute($this, "alertSave");
                         echo "
                         if (\$('#checkbox_";
                         // line 195
-                        if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                        if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                         echo "').is(':checked')) {\$('#";
-                        if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                        if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                         echo "').val('1');} else {\$('#";
-                        if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                        if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                         echo "').val('0');}
                    \"
                    ";
                         // line 197
-                        if (isset($context["extra"])) { $_extra_ = $context["extra"]; } else { $_extra_ = null; }
-                        echo twig_escape_filter($this->env, $_extra_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["extra"]) ? $context["extra"] : null), "html", null, true);
                         echo "
                    ";
                         // line 198
-                        if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                        if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+                        if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                             echo " disabled ";
                         }
                         // line 199
@@ -852,52 +721,43 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                     } else {
                         // line 201
                         echo "            <input type=\"";
-                        if (isset($context["type"])) { $_type_ = $context["type"]; } else { $_type_ = null; }
-                        echo twig_escape_filter($this->env, ((array_key_exists("type", $context)) ? (_twig_default_filter($_type_, "text")) : ("text")), "html", null, true);
+                        echo twig_escape_filter($this->env, ((array_key_exists("type", $context)) ? (_twig_default_filter((isset($context["type"]) ? $context["type"] : null), "text")) : ("text")), "html", null, true);
                         echo "\"
                    name=\"";
                         // line 202
-                        if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                        echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                         echo "\"
                    id=\"";
                         // line 203
-                        if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                        if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                        echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                         echo "\"
                    value=\"";
                         // line 204
-                        if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                        echo twig_escape_filter($this->env, $_value_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
                         echo "\" maxlength=\"";
-                        if (isset($context["maxLength"])) { $_maxLength_ = $context["maxLength"]; } else { $_maxLength_ = null; }
-                        echo twig_escape_filter($this->env, ((array_key_exists("maxLength", $context)) ? (_twig_default_filter($_maxLength_, 20)) : (20)), "html", null, true);
+                        echo twig_escape_filter($this->env, ((array_key_exists("maxLength", $context)) ? (_twig_default_filter((isset($context["maxLength"]) ? $context["maxLength"] : null), 20)) : (20)), "html", null, true);
                         echo "\"
-                   class=\"mid\" title=\"";
+                   class=\"";
                         // line 205
-                        if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                        echo twig_escape_filter($this->env, $this->getAttribute($_atributos_, "help"), "html", null, true);
+                        echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter((isset($context["class"]) ? $context["class"] : null), "mid")) : ("mid")), "html", null, true);
+                        echo "\" title=\"";
+                        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "help"), "html", null, true);
                         echo "\" tabindex=\"";
-                        if (isset($context["tabIndex"])) { $_tabIndex_ = $context["tabIndex"]; } else { $_tabIndex_ = null; }
-                        echo twig_escape_filter($this->env, $_tabIndex_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["tabIndex"]) ? $context["tabIndex"] : null), "html", null, true);
                         echo "\"
                    onchange=\"";
                         // line 206
-                        if (isset($context["onchange"])) { $_onchange_ = $context["onchange"]; } else { $_onchange_ = null; }
-                        echo twig_escape_filter($this->env, $_onchange_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["onchange"]) ? $context["onchange"] : null), "html", null, true);
                         echo " ";
                         echo $this->getAttribute($this, "alertSave");
                         echo "\"
                    ";
                         // line 207
-                        if (isset($context["extra"])) { $_extra_ = $context["extra"]; } else { $_extra_ = null; }
-                        echo twig_escape_filter($this->env, $_extra_, "html", null, true);
+                        echo twig_escape_filter($this->env, (isset($context["extra"]) ? $context["extra"] : null), "html", null, true);
                         echo "
                    ";
                         // line 208
-                        if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                        if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+                        if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                             echo " disabled ";
                         }
                         // line 209
@@ -911,90 +771,66 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                     echo "            <input type=\"hidden\"
                    name=\"";
                     // line 213
-                    if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                    echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                    echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                     echo "\"
                    id=\"";
                     // line 214
-                    if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                    if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                    echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                    echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                     echo "\"
                    value=\"";
                     // line 215
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                    echo twig_escape_filter($this->env, $_value_, "html", null, true);
+                    echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
                     echo "\" maxlength=\"";
-                    if (isset($context["maxLength"])) { $_maxLength_ = $context["maxLength"]; } else { $_maxLength_ = null; }
-                    echo twig_escape_filter($this->env, ((array_key_exists("maxLength", $context)) ? (_twig_default_filter($_maxLength_, 20)) : (20)), "html", null, true);
+                    echo twig_escape_filter($this->env, ((array_key_exists("maxLength", $context)) ? (_twig_default_filter((isset($context["maxLength"]) ? $context["maxLength"] : null), 20)) : (20)), "html", null, true);
                     echo "\"
             />
             <input type=\"";
                     // line 217
-                    if (isset($context["type"])) { $_type_ = $context["type"]; } else { $_type_ = null; }
-                    echo twig_escape_filter($this->env, ((array_key_exists("type", $context)) ? (_twig_default_filter($_type_, "text")) : ("text")), "html", null, true);
+                    echo twig_escape_filter($this->env, ((array_key_exists("type", $context)) ? (_twig_default_filter((isset($context["type"]) ? $context["type"] : null), "text")) : ("text")), "html", null, true);
                     echo "\"
                    id=\"";
                     // line 218
-                    if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                    if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                    echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                    echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                     echo "_autoComplete\"
                    value=\"";
                     // line 219
-                    if (isset($context["autoComplete"])) { $_autoComplete_ = $context["autoComplete"]; } else { $_autoComplete_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_autoComplete_, 2, array(), "array"), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["autoComplete"]) ? $context["autoComplete"] : null), 2, array(), "array"), "html", null, true);
                     echo "\" maxlength=\"";
-                    if (isset($context["maxLength"])) { $_maxLength_ = $context["maxLength"]; } else { $_maxLength_ = null; }
-                    echo twig_escape_filter($this->env, ((array_key_exists("maxLength", $context)) ? (_twig_default_filter($_maxLength_, 20)) : (20)), "html", null, true);
+                    echo twig_escape_filter($this->env, ((array_key_exists("maxLength", $context)) ? (_twig_default_filter((isset($context["maxLength"]) ? $context["maxLength"] : null), 20)) : (20)), "html", null, true);
                     echo "\"
                    class=\"mid\" title=\"";
                     // line 220
-                    if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_atributos_, "help"), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "help"), "html", null, true);
                     echo "\" tabindex=\"";
-                    if (isset($context["tabIndex"])) { $_tabIndex_ = $context["tabIndex"]; } else { $_tabIndex_ = null; }
-                    echo twig_escape_filter($this->env, $_tabIndex_, "html", null, true);
+                    echo twig_escape_filter($this->env, (isset($context["tabIndex"]) ? $context["tabIndex"] : null), "html", null, true);
                     echo "\"
                    onkeyup=\"autoCompletar('";
                     // line 221
-                    if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                    if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                    echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                    echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                     echo "_autoComplete','";
-                    if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                    if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                    echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                    echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                     echo "','";
-                    if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                    if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                    echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                    echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                     echo "_autoComplete','";
-                    if (isset($context["autoComplete"])) { $_autoComplete_ = $context["autoComplete"]; } else { $_autoComplete_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_autoComplete_, 0, array(), "array"), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["autoComplete"]) ? $context["autoComplete"] : null), 0, array(), "array"), "html", null, true);
                     echo "','";
-                    if (isset($context["autoComplete"])) { $_autoComplete_ = $context["autoComplete"]; } else { $_autoComplete_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_autoComplete_, 1, array(), "array"), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["autoComplete"]) ? $context["autoComplete"] : null), 1, array(), "array"), "html", null, true);
                     echo "',\$('#";
-                    if (isset($context["autoComplete"])) { $_autoComplete_ = $context["autoComplete"]; } else { $_autoComplete_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_autoComplete_, 3, array(), "array"), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["autoComplete"]) ? $context["autoComplete"] : null), 3, array(), "array"), "html", null, true);
                     echo "').val());\"
                    onchange = \"";
                     // line 222
-                    if (isset($context["onchange"])) { $_onchange_ = $context["onchange"]; } else { $_onchange_ = null; }
-                    echo twig_escape_filter($this->env, $_onchange_, "html", null, true);
+                    echo twig_escape_filter($this->env, (isset($context["onchange"]) ? $context["onchange"] : null), "html", null, true);
                     echo " ";
                     echo $this->getAttribute($this, "alertSave");
                     echo "\"
                    ";
                     // line 223
-                    if (isset($context["extra"])) { $_extra_ = $context["extra"]; } else { $_extra_ = null; }
-                    echo twig_escape_filter($this->env, $_extra_, "html", null, true);
+                    echo twig_escape_filter($this->env, (isset($context["extra"]) ? $context["extra"] : null), "html", null, true);
                     echo "
                    ";
                     // line 224
-                    if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                    if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+                    if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                         echo " disabled ";
                     }
                     // line 225
@@ -1009,15 +845,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             } else {
                 // line 231
                 echo "    ";
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (isset($context["classLabel"])) { $_classLabel_ = $context["classLabel"]; } else { $_classLabel_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                if (isset($context["rows"])) { $_rows_ = $context["rows"]; } else { $_rows_ = null; }
-                if (isset($context["cols"])) { $_cols_ = $context["cols"]; } else { $_cols_ = null; }
-                if (isset($context["tabindex"])) { $_tabindex_ = $context["tabindex"]; } else { $_tabindex_ = null; }
-                echo $this->getAttribute($this, "textarea", array(0 => $_atributos_, 1 => $_classLabel_, 2 => $_name_, 3 => $_id_, 4 => $_value_, 5 => $_rows_, 6 => $_cols_, 7 => "elm1", 8 => $_tabindex_), "method");
+                echo $this->getAttribute($this, "textarea", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null), 4 => (isset($context["value"]) ? $context["value"] : null), 5 => (isset($context["rows"]) ? $context["rows"] : null), 6 => (isset($context["cols"]) ? $context["cols"] : null), 7 => "elm1", 8 => (isset($context["tabindex"]) ? $context["tabindex"] : null)), "method");
                 echo "
 ";
             }
@@ -1054,9 +882,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "
 <li ";
             // line 240
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if ((($this->getAttribute($_atributos_, "visible") > 0) && ($this->getAttribute($_atributos_, "translatable") || ($this->getAttribute($_idiomas_, "actual") == 0)))) {
+            if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 echo "class=\"\"";
             } else {
                 echo "class=\"oculto\"";
@@ -1064,22 +890,15 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo ">
 <div class=\"form_grid_12\" id=\"div_";
             // line 241
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\">
 
     ";
             // line 243
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if ($this->getAttribute($_atributos_, "caption")) {
+            if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
                 // line 244
                 echo "        ";
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (isset($context["classLabel"])) { $_classLabel_ = $context["classLabel"]; } else { $_classLabel_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo $this->getAttribute($this, "label", array(0 => $_atributos_, 1 => $_classLabel_, 2 => $_name_, 3 => $_id_), "method");
+                echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                 echo "
     ";
             }
@@ -1088,68 +907,55 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
     <div class=\"form_input\">
         ";
             // line 248
-            if (isset($context["arrayOptions"])) { $_arrayOptions_ = $context["arrayOptions"]; } else { $_arrayOptions_ = null; }
             $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable($_arrayOptions_);
+            $context['_seq'] = twig_ensure_traversable((isset($context["arrayOptions"]) ? $context["arrayOptions"] : null));
             foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
                 // line 249
                 echo "        <input  
            type=\"radio\"
            name=\"";
                 // line 251
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\"
            id=\"";
                 // line 252
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "\"
            value=\"";
                 // line 253
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                echo twig_escape_filter($this->env, $this->getAttribute($_value_, "Id"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "Id"), "html", null, true);
                 echo "\"
            class=\"";
                 // line 254
-                if (isset($context["class"])) { $_class_ = $context["class"]; } else { $_class_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter($_class_, "input_grow")) : ("input_grow")), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter((isset($context["class"]) ? $context["class"] : null), "input_grow")) : ("input_grow")), "html", null, true);
                 echo "\"
            tabindex=\"";
                 // line 255
-                if (isset($context["tabindex"])) { $_tabindex_ = $context["tabindex"]; } else { $_tabindex_ = null; }
-                echo twig_escape_filter($this->env, $_tabindex_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["tabindex"]) ? $context["tabindex"] : null), "html", null, true);
                 echo "\"
            onchange=\"";
                 // line 256
-                if (isset($context["onchange"])) { $_onchange_ = $context["onchange"]; } else { $_onchange_ = null; }
-                echo twig_escape_filter($this->env, $_onchange_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["onchange"]) ? $context["onchange"] : null), "html", null, true);
                 echo " ";
                 echo $this->getAttribute($this, "alertSave");
                 echo "\"
            ";
                 // line 257
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+                if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                     echo " disabled ";
                 }
                 // line 258
                 echo "           ";
-                if (isset($context["extra"])) { $_extra_ = $context["extra"]; } else { $_extra_ = null; }
-                echo twig_escape_filter($this->env, $_extra_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["extra"]) ? $context["extra"] : null), "html", null, true);
                 echo "
            ";
                 // line 259
-                if (isset($context["valueSelected"])) { $_valueSelected_ = $context["valueSelected"]; } else { $_valueSelected_ = null; }
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                if (($_valueSelected_ == $this->getAttribute($_value_, "Id"))) {
+                if (((isset($context["valueSelected"]) ? $context["valueSelected"] : null) == $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "Id"))) {
                     echo " checked";
                 }
                 // line 260
                 echo "        />&nbsp;";
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                echo twig_escape_filter($this->env, $this->getAttribute($_value_, "Value"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "Value"), "html", null, true);
                 echo "&nbsp;
         ";
             }
@@ -1190,75 +996,59 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         try {
             // line 271
             echo "<div class=\"Item\" id=\"div_";
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            echo twig_escape_filter($this->env, $_id_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
             echo "\">
     ";
             // line 272
-            if (isset($context["label"])) { $_label_ = $context["label"]; } else { $_label_ = null; }
-            if ($_label_) {
+            if ((isset($context["label"]) ? $context["label"] : null)) {
                 // line 273
                 echo "        ";
-                if (isset($context["label"])) { $_label_ = $context["label"]; } else { $_label_ = null; }
-                if (isset($context["classLabel"])) { $_classLabel_ = $context["classLabel"]; } else { $_classLabel_ = null; }
-                echo $this->getAttribute($this, "label", array(0 => $_label_, 1 => $_classLabel_), "method");
+                echo $this->getAttribute($this, "label", array(0 => (isset($context["label"]) ? $context["label"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null)), "method");
                 echo "
     ";
             }
             // line 275
             echo "    <input type=\"text\" name=\"";
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "[IDBanco]\" id=\"";
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "_IDBanco\"
            value=\"";
             // line 276
-            if (isset($context["banco"])) { $_banco_ = $context["banco"]; } else { $_banco_ = null; }
-            echo twig_escape_filter($this->env, $_banco_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["banco"]) ? $context["banco"] : null), "html", null, true);
             echo "\" maxlength=\"4\" class=\"CampoBanco\"
     />-
     <input type=\"text\" name=\"";
             // line 278
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "[IDOficina]\" id=\"";
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "_IDOficina\"
            value=\"";
             // line 279
-            if (isset($context["oficina"])) { $_oficina_ = $context["oficina"]; } else { $_oficina_ = null; }
-            echo twig_escape_filter($this->env, $_oficina_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["oficina"]) ? $context["oficina"] : null), "html", null, true);
             echo "\" maxlength=\"4\" class=\"CampoOficina\"
     />-
     <input type=\"text\" name=\"";
             // line 281
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "[Digito]\" id=\"";
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "_Digito\"
            value=\"";
             // line 282
-            if (isset($context["digitoControl"])) { $_digitoControl_ = $context["digitoControl"]; } else { $_digitoControl_ = null; }
-            echo twig_escape_filter($this->env, $_digitoControl_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["digitoControl"]) ? $context["digitoControl"] : null), "html", null, true);
             echo "\" maxlength=\"2\" class=\"CampoDigitoControl\"
     />-
     <input type=\"text\" name=\"";
             // line 284
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "[Cuenta]\" id=\"";
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "_Cuenta\"
            value=\"";
             // line 285
-            if (isset($context["cuentaCorriente"])) { $_cuentaCorriente_ = $context["cuentaCorriente"]; } else { $_cuentaCorriente_ = null; }
-            echo twig_escape_filter($this->env, $_cuentaCorriente_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["cuentaCorriente"]) ? $context["cuentaCorriente"] : null), "html", null, true);
             echo "\" maxlength=\"10\" class=\"CampoCuentaCorriente\"
     />
 </div>
@@ -1288,28 +1078,22 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         try {
             // line 293
             echo "<div class=\"Item\" id=\"div_";
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            echo twig_escape_filter($this->env, $_id_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
             echo "\">
     ";
             // line 294
-            if (isset($context["label"])) { $_label_ = $context["label"]; } else { $_label_ = null; }
-            if ($_label_) {
+            if ((isset($context["label"]) ? $context["label"] : null)) {
                 // line 295
                 echo "        ";
-                if (isset($context["label"])) { $_label_ = $context["label"]; } else { $_label_ = null; }
-                if (isset($context["classLabel"])) { $_classLabel_ = $context["classLabel"]; } else { $_classLabel_ = null; }
-                echo $this->getAttribute($this, "label", array(0 => $_label_, 1 => $_classLabel_), "method");
+                echo $this->getAttribute($this, "label", array(0 => (isset($context["label"]) ? $context["label"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null)), "method");
                 echo "
     ";
             }
             // line 297
             echo "    <p class=\"";
-            if (isset($context["classText"])) { $_classText_ = $context["classText"]; } else { $_classText_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("classText", $context)) ? (_twig_default_filter($_classText_, "Literal")) : ("Literal")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("classText", $context)) ? (_twig_default_filter((isset($context["classText"]) ? $context["classText"] : null), "Literal")) : ("Literal")), "html", null, true);
             echo "\">";
-            if (isset($context["text"])) { $_text_ = $context["text"]; } else { $_text_ = null; }
-            echo twig_escape_filter($this->env, $_text_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["text"]) ? $context["text"] : null), "html", null, true);
             echo "</p>
 </div>
 ";
@@ -1340,29 +1124,20 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         ob_start();
         try {
             // line 304
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if ((($this->getAttribute($_atributos_, "visible") > 0) && ($this->getAttribute($_atributos_, "translatable") || ($this->getAttribute($_idiomas_, "actual") == 0)))) {
+            if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 // line 305
                 echo "<li>
     <div class=\"form_grid_12\" id=\"div_";
                 // line 306
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "\">
 
     ";
                 // line 308
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if ($this->getAttribute($_atributos_, "caption")) {
+                if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
                     // line 309
                     echo "        ";
-                    if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                    if (isset($context["classLabel"])) { $_classLabel_ = $context["classLabel"]; } else { $_classLabel_ = null; }
-                    if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                    if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                    echo $this->getAttribute($this, "label", array(0 => $_atributos_, 1 => $_classLabel_, 2 => $_name_, 3 => $_id_), "method");
+                    echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                     echo "
     ";
                 }
@@ -1371,41 +1146,31 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
     <div class=\"form_input\">
         <input type=\"";
                 // line 313
-                if (isset($context["type"])) { $_type_ = $context["type"]; } else { $_type_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("type", $context)) ? (_twig_default_filter($_type_, "text")) : ("text")), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("type", $context)) ? (_twig_default_filter((isset($context["type"]) ? $context["type"] : null), "text")) : ("text")), "html", null, true);
                 echo "\" name=\"";
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\" id=\"";
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "\"
            value=\"";
                 // line 314
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                echo twig_escape_filter($this->env, $_value_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
                 echo "\" maxlength=\"";
-                if (isset($context["maxLength"])) { $_maxLength_ = $context["maxLength"]; } else { $_maxLength_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("maxLength", $context)) ? (_twig_default_filter($_maxLength_, 20)) : (20)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("maxLength", $context)) ? (_twig_default_filter((isset($context["maxLength"]) ? $context["maxLength"] : null), 20)) : (20)), "html", null, true);
                 echo "\"
            class=\"tip_top\" title=\"";
                 // line 315
-                if (isset($context["tip"])) { $_tip_ = $context["tip"]; } else { $_tip_ = null; }
-                echo twig_escape_filter($this->env, $_tip_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["tip"]) ? $context["tip"] : null), "html", null, true);
                 echo "\" tabindex=\"";
-                if (isset($context["tabIndex"])) { $_tabIndex_ = $context["tabIndex"]; } else { $_tabIndex_ = null; }
-                echo twig_escape_filter($this->env, $_tabIndex_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["tabIndex"]) ? $context["tabIndex"] : null), "html", null, true);
                 echo "\"
            onchange=\"ValidaNif('manto','";
                 // line 316
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "');\" />
            ";
                 // line 317
-                if (isset($context["extra"])) { $_extra_ = $context["extra"]; } else { $_extra_ = null; }
-                echo twig_escape_filter($this->env, $_extra_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["extra"]) ? $context["extra"] : null), "html", null, true);
                 echo "
         />
     </div>
@@ -1442,25 +1207,19 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         ob_start();
         try {
             // line 328
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if (((($this->getAttribute($_atributos_, "visible") > 0) && ($this->getAttribute($_atributos_, "editorTiny") == "1")) && ($this->getAttribute($_atributos_, "translatable") || ($this->getAttribute($_idiomas_, "actual") == 0)))) {
+            if (((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "editorTiny") == "1")) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 // line 329
                 echo "    <script>
         tinyMCE.execCommand(\"mceAddControl\", true, \"";
                 // line 330
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "\");
     </script>
 ";
             }
             // line 333
             echo "<li ";
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if ((($this->getAttribute($_atributos_, "visible") > 0) && ($this->getAttribute($_atributos_, "translatable") || ($this->getAttribute($_idiomas_, "actual") == 0)))) {
+            if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 echo "class=\"\"";
             } else {
                 echo "class=\"oculto\"";
@@ -1468,22 +1227,15 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo ">
 <div class=\"form_grid_12\" id=\"div_";
             // line 334
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\">
 
     ";
             // line 336
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if ($this->getAttribute($_atributos_, "caption")) {
+            if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
                 // line 337
                 echo "        ";
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (isset($context["classLabel"])) { $_classLabel_ = $context["classLabel"]; } else { $_classLabel_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo $this->getAttribute($this, "label", array(0 => $_atributos_, 1 => $_classLabel_, 2 => $_name_, 3 => $_id_), "method");
+                echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                 echo "
     ";
             }
@@ -1492,34 +1244,27 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
     <div class=\"form_input\">
         <textarea  name=\"";
             // line 341
-            if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-            echo twig_escape_filter($this->env, $_name_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
             echo "\"
                    id=\"";
             // line 342
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\"
                    class=\"large\" title=\"";
             // line 343
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_atributos_, "help"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "help"), "html", null, true);
             echo "\"                  
                    rows=\"";
             // line 344
-            if (isset($context["rows"])) { $_rows_ = $context["rows"]; } else { $_rows_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("rows", $context)) ? (_twig_default_filter($_rows_, 5)) : (5)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("rows", $context)) ? (_twig_default_filter((isset($context["rows"]) ? $context["rows"] : null), 5)) : (5)), "html", null, true);
             echo "\"
                    cols=\"";
             // line 345
-            if (isset($context["cols"])) { $_cols_ = $context["cols"]; } else { $_cols_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("cols", $context)) ? (_twig_default_filter($_cols_, 75)) : (75)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("cols", $context)) ? (_twig_default_filter((isset($context["cols"]) ? $context["cols"] : null), 75)) : (75)), "html", null, true);
             echo "\"
                    tabindex=\"";
             // line 346
-            if (isset($context["tabindex"])) { $_tabindex_ = $context["tabindex"]; } else { $_tabindex_ = null; }
-            echo twig_escape_filter($this->env, $_tabindex_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["tabindex"]) ? $context["tabindex"] : null), "html", null, true);
             echo "\"
                    onchange=\"";
             // line 347
@@ -1527,14 +1272,12 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "\"
                    ";
             // line 348
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+            if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                 echo " disabled ";
             }
             // line 349
             echo "                   >";
-            if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-            echo twig_escape_filter($this->env, $_value_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
             echo "</textarea>
     </div>
 </div>
@@ -1575,9 +1318,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "
 <li ";
             // line 359
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if ((($this->getAttribute($_atributos_, "visible") > 0) && ($this->getAttribute($_atributos_, "translatable") || ($this->getAttribute($_idiomas_, "actual") == 0)))) {
+            if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 echo "class=\"\"";
             } else {
                 echo "class=\"oculto\"";
@@ -1585,22 +1326,15 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo ">
     <div class=\"form_grid_12\" id=\"div_";
             // line 360
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\">
 
     ";
             // line 362
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if ($this->getAttribute($_atributos_, "caption")) {
+            if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
                 // line 363
                 echo "        ";
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (isset($context["classLabel"])) { $_classLabel_ = $context["classLabel"]; } else { $_classLabel_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo $this->getAttribute($this, "label", array(0 => $_atributos_, 1 => $_classLabel_, 2 => $_name_, 3 => $_id_), "method");
+                echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                 echo "
     ";
             }
@@ -1609,15 +1343,12 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
     <div class=\"form_input\">
         ";
             // line 367
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+            if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                 // line 368
                 echo "            <input type=\"hidden\" name=\"";
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\" value=\"";
-                if (isset($context["defecto"])) { $_defecto_ = $context["defecto"]; } else { $_defecto_ = null; }
-                echo twig_escape_filter($this->env, $_defecto_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["defecto"]) ? $context["defecto"] : null), "html", null, true);
                 echo "\" />
         ";
             }
@@ -1625,81 +1356,65 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "        <select data-placeholder=\"Indique un valor\"
                 ";
             // line 371
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (($this->getAttribute($_atributos_, "updatable") == "1")) {
+            if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "1")) {
                 // line 372
                 echo "                name=\"";
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\" id=\"";
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "\"
                 ";
             }
             // line 374
             echo "                ";
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+            if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                 // line 375
                 echo "                disabled
                 ";
             }
             // line 377
             echo "                style=\"width:";
-            if (isset($context["width"])) { $_width_ = $context["width"]; } else { $_width_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter($_width_, 200)) : (200)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter((isset($context["width"]) ? $context["width"] : null), 200)) : (200)), "html", null, true);
             echo "px;\"
                 class=\"";
             // line 378
-            if (isset($context["class"])) { $_class_ = $context["class"]; } else { $_class_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter($_class_, "chzn-select")) : ("chzn-select")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter((isset($context["class"]) ? $context["class"] : null), "chzn-select")) : ("chzn-select")), "html", null, true);
             echo "\"
                 onchange=\"";
             // line 379
-            if (isset($context["onchange"])) { $_onchange_ = $context["onchange"]; } else { $_onchange_ = null; }
-            echo twig_escape_filter($this->env, $_onchange_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["onchange"]) ? $context["onchange"] : null), "html", null, true);
             echo "\"
                 onblur=\"";
             // line 380
-            if (isset($context["onblur"])) { $_onblur_ = $context["onblur"]; } else { $_onblur_ = null; }
-            echo twig_escape_filter($this->env, $_onblur_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["onblur"]) ? $context["onblur"] : null), "html", null, true);
             echo " ";
             echo $this->getAttribute($this, "alertSave");
             echo "\"
                 tabindex=\"";
             // line 381
-            if (isset($context["tabindex"])) { $_tabindex_ = $context["tabindex"]; } else { $_tabindex_ = null; }
-            echo twig_escape_filter($this->env, $_tabindex_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["tabindex"]) ? $context["tabindex"] : null), "html", null, true);
             echo "\"
                 title=\"";
             // line 382
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_atributos_, "help"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "help"), "html", null, true);
             echo "\"
         >
             ";
             // line 384
-            if (isset($context["opciones"])) { $_opciones_ = $context["opciones"]; } else { $_opciones_ = null; }
             $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable($_opciones_);
+            $context['_seq'] = twig_ensure_traversable((isset($context["opciones"]) ? $context["opciones"] : null));
             foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
                 // line 385
                 echo "            <option value=\"";
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                echo twig_escape_filter($this->env, $this->getAttribute($_value_, "Id"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "Id"), "html", null, true);
                 echo "\" ";
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                if (isset($context["defecto"])) { $_defecto_ = $context["defecto"]; } else { $_defecto_ = null; }
-                if (($this->getAttribute($_value_, "Id") == $_defecto_)) {
+                if (($this->getAttribute((isset($context["value"]) ? $context["value"] : null), "Id") == (isset($context["defecto"]) ? $context["defecto"] : null))) {
                     echo " SELECTED ";
                 }
                 echo ">
                 ";
                 // line 386
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                echo twig_escape_filter($this->env, $this->getAttribute($_value_, "Value"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "Value"), "html", null, true);
                 echo "
             </option>
             ";
@@ -1712,12 +1427,10 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
 
         ";
             // line 391
-            if (isset($context["popup"])) { $_popup_ = $context["popup"]; } else { $_popup_ = null; }
-            if ($_popup_) {
+            if ((isset($context["popup"]) ? $context["popup"] : null)) {
                 // line 392
                 echo "            ";
-                if (isset($context["popup"])) { $_popup_ = $context["popup"]; } else { $_popup_ = null; }
-                echo $this->getAttribute($this, "linkimg", array(0 => $_popup_), "method");
+                echo $this->getAttribute($this, "linkimg", array(0 => (isset($context["popup"]) ? $context["popup"] : null)), "method");
                 echo "
         ";
             }
@@ -1762,9 +1475,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "
 <li ";
             // line 404
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if ((($this->getAttribute($_atributos_, "visible") > 0) && ($this->getAttribute($_atributos_, "translatable") || ($this->getAttribute($_idiomas_, "actual") == 0)))) {
+            if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 echo "class=\"\"";
             } else {
                 echo "class=\"oculto\"";
@@ -1772,22 +1483,15 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo ">
     <div class=\"form_grid_12\" id=\"div_";
             // line 405
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\">
 
     ";
             // line 407
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if ($this->getAttribute($_atributos_, "caption")) {
+            if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
                 // line 408
                 echo "        ";
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (isset($context["classLabel"])) { $_classLabel_ = $context["classLabel"]; } else { $_classLabel_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo $this->getAttribute($this, "label", array(0 => $_atributos_, 1 => $_classLabel_, 2 => $_name_, 3 => $_id_), "method");
+                echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                 echo "
     ";
             }
@@ -1796,15 +1500,12 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
     <div class=\"form_input\">
         ";
             // line 412
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+            if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                 // line 413
                 echo "            <input type=\"hidden\" name=\"";
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\" value=\"";
-                if (isset($context["defecto"])) { $_defecto_ = $context["defecto"]; } else { $_defecto_ = null; }
-                echo twig_escape_filter($this->env, $_defecto_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["defecto"]) ? $context["defecto"] : null), "html", null, true);
                 echo "\" />
         ";
             }
@@ -1812,87 +1513,70 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "        <select data-placeholder=\"Indique un valor\"
                 ";
             // line 416
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (($this->getAttribute($_atributos_, "updatable") == "1")) {
+            if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "1")) {
                 // line 417
                 echo "                name=\"";
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, $_name_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\" id=\"";
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
                 echo "\"
                 ";
             }
             // line 419
             echo "                ";
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+            if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                 // line 420
                 echo "                disabled
                 ";
             }
             // line 422
             echo "                style=\"width:";
-            if (isset($context["width"])) { $_width_ = $context["width"]; } else { $_width_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter($_width_, 200)) : (200)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter((isset($context["width"]) ? $context["width"] : null), 200)) : (200)), "html", null, true);
             echo "px;\"
                 class=\"";
             // line 423
-            if (isset($context["class"])) { $_class_ = $context["class"]; } else { $_class_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter($_class_, "chzn-select")) : ("chzn-select")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter((isset($context["class"]) ? $context["class"] : null), "chzn-select")) : ("chzn-select")), "html", null, true);
             echo "\"
                 onchange=\"";
             // line 424
-            if (isset($context["onchange"])) { $_onchange_ = $context["onchange"]; } else { $_onchange_ = null; }
-            echo twig_escape_filter($this->env, $_onchange_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["onchange"]) ? $context["onchange"] : null), "html", null, true);
             echo "\"
                 onblur=\"";
             // line 425
-            if (isset($context["onblur"])) { $_onblur_ = $context["onblur"]; } else { $_onblur_ = null; }
-            echo twig_escape_filter($this->env, $_onblur_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["onblur"]) ? $context["onblur"] : null), "html", null, true);
             echo " ";
             echo $this->getAttribute($this, "alertSave");
             echo "\"
                 tabindex=\"";
             // line 426
-            if (isset($context["tabindex"])) { $_tabindex_ = $context["tabindex"]; } else { $_tabindex_ = null; }
-            echo twig_escape_filter($this->env, $_tabindex_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["tabindex"]) ? $context["tabindex"] : null), "html", null, true);
             echo "\"
         >
             ";
             // line 428
-            if (isset($context["opciones"])) { $_opciones_ = $context["opciones"]; } else { $_opciones_ = null; }
             $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable($_opciones_);
+            $context['_seq'] = twig_ensure_traversable((isset($context["opciones"]) ? $context["opciones"] : null));
             foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
                 // line 429
                 echo "                <optgroup label=\"";
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                echo twig_escape_filter($this->env, $this->getAttribute($_value_, "Titulo"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "Titulo"), "html", null, true);
                 echo "\">
                     ";
                 // line 430
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
                 $context['_parent'] = (array) $context;
-                $context['_seq'] = twig_ensure_traversable($this->getAttribute($_value_, "items"));
+                $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["value"]) ? $context["value"] : null), "items"));
                 foreach ($context['_seq'] as $context["_key"] => $context["opcion"]) {
                     // line 431
                     echo "                        <option value=\"";
-                    if (isset($context["opcion"])) { $_opcion_ = $context["opcion"]; } else { $_opcion_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_opcion_, "Id"), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["opcion"]) ? $context["opcion"] : null), "Id"), "html", null, true);
                     echo "\" ";
-                    if (isset($context["opcion"])) { $_opcion_ = $context["opcion"]; } else { $_opcion_ = null; }
-                    if (isset($context["defecto"])) { $_defecto_ = $context["defecto"]; } else { $_defecto_ = null; }
-                    if (($this->getAttribute($_opcion_, "Id") == $_defecto_)) {
+                    if (($this->getAttribute((isset($context["opcion"]) ? $context["opcion"] : null), "Id") == (isset($context["defecto"]) ? $context["defecto"] : null))) {
                         echo " SELECTED ";
                     }
                     echo ">
                         ";
                     // line 432
-                    if (isset($context["opcion"])) { $_opcion_ = $context["opcion"]; } else { $_opcion_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_opcion_, "Value"), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["opcion"]) ? $context["opcion"] : null), "Value"), "html", null, true);
                     echo "
                         </option>
                     ";
@@ -1912,12 +1596,10 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
 
         ";
             // line 439
-            if (isset($context["popup"])) { $_popup_ = $context["popup"]; } else { $_popup_ = null; }
-            if ($_popup_) {
+            if ((isset($context["popup"]) ? $context["popup"] : null)) {
                 // line 440
                 echo "            ";
-                if (isset($context["popup"])) { $_popup_ = $context["popup"]; } else { $_popup_ = null; }
-                echo $this->getAttribute($this, "linkimg", array(0 => $_popup_), "method");
+                echo $this->getAttribute($this, "linkimg", array(0 => (isset($context["popup"]) ? $context["popup"] : null)), "method");
                 echo "
         ";
             }
@@ -1952,14 +1634,11 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         try {
             // line 450
             echo "    <img src=\"";
-            if (isset($context["url"])) { $_url_ = $context["url"]; } else { $_url_ = null; }
-            echo twig_escape_filter($this->env, $_url_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["url"]) ? $context["url"] : null), "html", null, true);
             echo "\" width=\"";
-            if (isset($context["width"])) { $_width_ = $context["width"]; } else { $_width_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter($_width_, "")) : ("")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter((isset($context["width"]) ? $context["width"] : null), "")) : ("")), "html", null, true);
             echo "\" alt=\"";
-            if (isset($context["alt"])) { $_alt_ = $context["alt"]; } else { $_alt_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("alt", $context)) ? (_twig_default_filter($_alt_, "Image")) : ("Image")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("alt", $context)) ? (_twig_default_filter((isset($context["alt"]) ? $context["alt"] : null), "Image")) : ("Image")), "html", null, true);
             echo "\"/>
 ";
         } catch (Exception $e) {
@@ -1986,23 +1665,17 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "    ";
             // line 463
             echo "    <a class=\"thickbox\" title= \"";
-            if (isset($context["opciones"])) { $_opciones_ = $context["opciones"]; } else { $_opciones_ = null; }
-            echo twig_escape_filter($this->env, (($this->getAttribute($_opciones_, 2, array(), "array", true, true)) ? (_twig_default_filter($this->getAttribute($_opciones_, 2, array(), "array"), "Ventana")) : ("Ventana")), "html", null, true);
+            echo twig_escape_filter($this->env, (($this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 2, array(), "array", true, true)) ? (_twig_default_filter($this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 2, array(), "array"), "Ventana")) : ("Ventana")), "html", null, true);
             echo "\" href=\"";
-            if (isset($context["opciones"])) { $_opciones_ = $context["opciones"]; } else { $_opciones_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_opciones_, 0, array(), "array"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 0, array(), "array"), "html", null, true);
             echo "/";
-            if (isset($context["opciones"])) { $_opciones_ = $context["opciones"]; } else { $_opciones_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_opciones_, 1, array(), "array"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 1, array(), "array"), "html", null, true);
             echo "/list/?TB_iframe=true&height=";
-            if (isset($context["opciones"])) { $_opciones_ = $context["opciones"]; } else { $_opciones_ = null; }
-            echo twig_escape_filter($this->env, (($this->getAttribute($_opciones_, 3, array(), "array", true, true)) ? (_twig_default_filter($this->getAttribute($_opciones_, 3, array(), "array"), "500")) : ("500")), "html", null, true);
+            echo twig_escape_filter($this->env, (($this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 3, array(), "array", true, true)) ? (_twig_default_filter($this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 3, array(), "array"), "500")) : ("500")), "html", null, true);
             echo "&width=";
-            if (isset($context["opciones"])) { $_opciones_ = $context["opciones"]; } else { $_opciones_ = null; }
-            echo twig_escape_filter($this->env, (($this->getAttribute($_opciones_, 4, array(), "array", true, true)) ? (_twig_default_filter($this->getAttribute($_opciones_, 4, array(), "array"), "600")) : ("600")), "html", null, true);
+            echo twig_escape_filter($this->env, (($this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 4, array(), "array", true, true)) ? (_twig_default_filter($this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 4, array(), "array"), "600")) : ("600")), "html", null, true);
             echo "\"><img src=\"";
-            if (isset($context["opciones"])) { $_opciones_ = $context["opciones"]; } else { $_opciones_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_opciones_, 0, array(), "array"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 0, array(), "array"), "html", null, true);
             echo "/images/lupa.png\" width=\"16px\" height=\"16px\" alt=\"Editar...\"></a>
 ";
         } catch (Exception $e) {
@@ -2037,9 +1710,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "
 <li ";
             // line 469
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if ((($this->getAttribute($_atributos_, "visible") > 0) && ($this->getAttribute($_atributos_, "translatable") || ($this->getAttribute($_idiomas_, "actual") == 0)))) {
+            if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 echo "class=\"\"";
             } else {
                 echo "class=\"oculto\"";
@@ -2047,22 +1718,15 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo ">
     <div class=\"form_grid_12\" id=\"div_";
             // line 470
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\">
 
     ";
             // line 472
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if ($this->getAttribute($_atributos_, "caption")) {
+            if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
                 // line 473
                 echo "        ";
-                if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-                if (isset($context["classLabel"])) { $_classLabel_ = $context["classLabel"]; } else { $_classLabel_ = null; }
-                if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-                if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-                echo $this->getAttribute($this, "label", array(0 => $_atributos_, 1 => $_classLabel_, 2 => $_name_, 3 => $_id_), "method");
+                echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                 echo "
     ";
             }
@@ -2072,36 +1736,29 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         <div class=\" form_grid_2 alpha\">
             <input name=\"";
             // line 478
-            if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-            echo twig_escape_filter($this->env, $_name_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
             echo "\"
                        id=\"";
             // line 479
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            if (isset($context["name"])) { $_name_ = $context["name"]; } else { $_name_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter($_id_, $_name_)) : ($_name_)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\"
                        type=\"text\"
                        value=\"";
             // line 481
-            if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-            echo twig_escape_filter($this->env, $_value_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
             echo "\"
                        size=\"";
             // line 482
-            if (isset($context["size"])) { $_size_ = $context["size"]; } else { $_size_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("size", $context)) ? (_twig_default_filter($_size_, 10)) : (10)), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("size", $context)) ? (_twig_default_filter((isset($context["size"]) ? $context["size"] : null), 10)) : (10)), "html", null, true);
             echo "\"
                        class=\"";
             // line 483
-            if (isset($context["class"])) { $_class_ = $context["class"]; } else { $_class_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter($_class_, "datepicker")) : ("datepicker")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter((isset($context["class"]) ? $context["class"] : null), "datepicker")) : ("datepicker")), "html", null, true);
             echo "\"
                        ";
             // line 485
             echo "                       tabindex=\"";
-            if (isset($context["tabindex"])) { $_tabindex_ = $context["tabindex"]; } else { $_tabindex_ = null; }
-            echo twig_escape_filter($this->env, $_tabindex_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["tabindex"]) ? $context["tabindex"] : null), "html", null, true);
             echo "\"
                        onchange = \"";
             // line 486
@@ -2109,13 +1766,11 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "\"
                        ";
             // line 487
-            if (isset($context["extra"])) { $_extra_ = $context["extra"]; } else { $_extra_ = null; }
-            echo twig_escape_filter($this->env, $_extra_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["extra"]) ? $context["extra"] : null), "html", null, true);
             echo "
                        ";
             // line 488
-            if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-            if (($this->getAttribute($_atributos_, "updatable") == "0")) {
+            if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                 echo " disabled ";
             }
             // line 489
@@ -2151,8 +1806,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             echo "<script language='JavaScript' type='text/javascript'>
 document.getElementById('";
             // line 501
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            echo twig_escape_filter($this->env, $_id_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
             echo "').focus();
 </script>
 ";
@@ -2182,28 +1836,21 @@ document.getElementById('";
         try {
             // line 507
             echo "<a class=\"thickbox\" title= \"";
-            if (isset($context["ventanaTitulo"])) { $_ventanaTitulo_ = $context["ventanaTitulo"]; } else { $_ventanaTitulo_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("ventanaTitulo", $context)) ? (_twig_default_filter($_ventanaTitulo_, "Informe")) : ("Informe")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("ventanaTitulo", $context)) ? (_twig_default_filter((isset($context["ventanaTitulo"]) ? $context["ventanaTitulo"] : null), "Informe")) : ("Informe")), "html", null, true);
             echo "\" href=\"";
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/";
-            if (isset($context["ruta"])) { $_ruta_ = $context["ruta"]; } else { $_ruta_ = null; }
-            echo twig_escape_filter($this->env, $_ruta_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["ruta"]) ? $context["ruta"] : null), "html", null, true);
             echo "/?TB_iframe=true&height=";
-            if (isset($context["ventanaAlto"])) { $_ventanaAlto_ = $context["ventanaAlto"]; } else { $_ventanaAlto_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("ventanaAlto", $context)) ? (_twig_default_filter($_ventanaAlto_, "500")) : ("500")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("ventanaAlto", $context)) ? (_twig_default_filter((isset($context["ventanaAlto"]) ? $context["ventanaAlto"] : null), "500")) : ("500")), "html", null, true);
             echo "&width=";
-            if (isset($context["ventanaAncho"])) { $_ventanaAncho_ = $context["ventanaAncho"]; } else { $_ventanaAncho_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("ventanaAncho", $context)) ? (_twig_default_filter($_ventanaAncho_, "600")) : ("600")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("ventanaAncho", $context)) ? (_twig_default_filter((isset($context["ventanaAncho"]) ? $context["ventanaAncho"] : null), "600")) : ("600")), "html", null, true);
             echo "\">
     <img src=\"";
             // line 508
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"";
-            if (isset($context["ventanaTitulo"])) { $_ventanaTitulo_ = $context["ventanaTitulo"]; } else { $_ventanaTitulo_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("ventanaTitulo", $context)) ? (_twig_default_filter($_ventanaTitulo_, "Informe")) : ("Informe")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("ventanaTitulo", $context)) ? (_twig_default_filter((isset($context["ventanaTitulo"]) ? $context["ventanaTitulo"] : null), "Informe")) : ("Informe")), "html", null, true);
             echo "\">
 </a>
 ";
@@ -2234,25 +1881,19 @@ document.getElementById('";
         try {
             // line 514
             echo "<a class=\"thickbox\" title= \"";
-            if (isset($context["ventanaTitulo"])) { $_ventanaTitulo_ = $context["ventanaTitulo"]; } else { $_ventanaTitulo_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("ventanaTitulo", $context)) ? (_twig_default_filter($_ventanaTitulo_, "Informe")) : ("Informe")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("ventanaTitulo", $context)) ? (_twig_default_filter((isset($context["ventanaTitulo"]) ? $context["ventanaTitulo"] : null), "Informe")) : ("Informe")), "html", null, true);
             echo "\" href=\"";
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/";
-            if (isset($context["ruta"])) { $_ruta_ = $context["ruta"]; } else { $_ruta_ = null; }
-            echo twig_escape_filter($this->env, $_ruta_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["ruta"]) ? $context["ruta"] : null), "html", null, true);
             echo "/?height=";
-            if (isset($context["ventanaAlto"])) { $_ventanaAlto_ = $context["ventanaAlto"]; } else { $_ventanaAlto_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("ventanaAlto", $context)) ? (_twig_default_filter($_ventanaAlto_, "500")) : ("500")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("ventanaAlto", $context)) ? (_twig_default_filter((isset($context["ventanaAlto"]) ? $context["ventanaAlto"] : null), "500")) : ("500")), "html", null, true);
             echo "&width=";
-            if (isset($context["ventanaAncho"])) { $_ventanaAncho_ = $context["ventanaAncho"]; } else { $_ventanaAncho_ = null; }
-            echo twig_escape_filter($this->env, ((array_key_exists("ventanaAncho", $context)) ? (_twig_default_filter($_ventanaAncho_, "600")) : ("600")), "html", null, true);
+            echo twig_escape_filter($this->env, ((array_key_exists("ventanaAncho", $context)) ? (_twig_default_filter((isset($context["ventanaAncho"]) ? $context["ventanaAncho"] : null), "600")) : ("600")), "html", null, true);
             echo "\">
     ";
             // line 515
-            if (isset($context["textoLink"])) { $_textoLink_ = $context["textoLink"]; } else { $_textoLink_ = null; }
-            echo twig_escape_filter($this->env, $_textoLink_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["textoLink"]) ? $context["textoLink"] : null), "html", null, true);
             echo "
 </a>
 ";
@@ -2281,22 +1922,17 @@ document.getElementById('";
         try {
             // line 521
             echo "<a href=\"javascript:;\" title= \"Imprimir\" onclick=\"window.open('";
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/_Emergente/formatosDocumentos/";
-            if (isset($context["documento"])) { $_documento_ = $context["documento"]; } else { $_documento_ = null; }
-            echo twig_escape_filter($this->env, $_documento_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["documento"]) ? $context["documento"] : null), "html", null, true);
             echo "/";
-            if (isset($context["controller"])) { $_controller_ = $context["controller"]; } else { $_controller_ = null; }
-            echo twig_escape_filter($this->env, $_controller_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["controller"]) ? $context["controller"] : null), "html", null, true);
             echo "/";
-            if (isset($context["id"])) { $_id_ = $context["id"]; } else { $_id_ = null; }
-            echo twig_escape_filter($this->env, $_id_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
             echo "','Documento','width=690,height=600,status=false,resizable=1');\">
     <img src=\"";
             // line 522
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/print_cmd.png\" width=\"24px\" height=\"24px\" alt=\"Imprimir\">
 </a>
 ";
@@ -2324,19 +1960,15 @@ document.getElementById('";
         try {
             // line 528
             echo "<a href=\"javascript:;\" onClick=\"window.open('";
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/_Emergente/HistoricoVentas/";
-            if (isset($context["idArticulo"])) { $_idArticulo_ = $context["idArticulo"]; } else { $_idArticulo_ = null; }
-            echo twig_escape_filter($this->env, $_idArticulo_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idArticulo"]) ? $context["idArticulo"] : null), "html", null, true);
             echo "/";
-            if (isset($context["idCliente"])) { $_idCliente_ = $context["idCliente"]; } else { $_idCliente_ = null; }
-            echo twig_escape_filter($this->env, $_idCliente_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idCliente"]) ? $context["idCliente"] : null), "html", null, true);
             echo "','HistoricoVentas','width=450,height=500,resizable=yes,scrollbars=yes');\">
     <img src=\"";
             // line 529
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"Historico\" title=\"Historico...\">
 </a>
 ";
@@ -2364,19 +1996,15 @@ document.getElementById('";
         try {
             // line 535
             echo "<a href=\"javascript:;\" onClick=\"window.open('";
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/_Emergente/HistoricoCompras/";
-            if (isset($context["idArticulo"])) { $_idArticulo_ = $context["idArticulo"]; } else { $_idArticulo_ = null; }
-            echo twig_escape_filter($this->env, $_idArticulo_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idArticulo"]) ? $context["idArticulo"] : null), "html", null, true);
             echo "/";
-            if (isset($context["idProveedor"])) { $_idProveedor_ = $context["idProveedor"]; } else { $_idProveedor_ = null; }
-            echo twig_escape_filter($this->env, $_idProveedor_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idProveedor"]) ? $context["idProveedor"] : null), "html", null, true);
             echo "','HistoricoCompras','width=450,height=500,resizable=yes,scrollbars=yes');\">
     <img src=\"";
             // line 536
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"Historico\" title=\"Historico...\">
 </a>
 ";
@@ -2406,15 +2034,12 @@ document.getElementById('";
             echo "<a href=\"javascript:;\" onclick=\"\$('#dialogPromo').dialog('open');\">
     <img src=\"";
             // line 543
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"Promociones\" title=\"Promociones...\">
 </a>
 ";
             // line 545
-            if (isset($context["cliente"])) { $_cliente_ = $context["cliente"]; } else { $_cliente_ = null; }
-            if (isset($context["fecha"])) { $_fecha_ = $context["fecha"]; } else { $_fecha_ = null; }
-            $this->env->loadTemplate("_Emergente/promosVigentesCliente.html.twig")->display(array_merge($context, array("cliente" => $_cliente_, "fecha" => $_fecha_)));
+            $this->env->loadTemplate("_Emergente/promosVigentesCliente.html.twig")->display(array_merge($context, array("cliente" => (isset($context["cliente"]) ? $context["cliente"] : null), "fecha" => (isset($context["fecha"]) ? $context["fecha"] : null))));
         } catch (Exception $e) {
             ob_end_clean();
 
@@ -2438,19 +2063,16 @@ document.getElementById('";
         try {
             // line 550
             echo "<a href=\"javascript:;\" onclick=\"\$('#dialog";
-            if (isset($context["lineaEntidad"])) { $_lineaEntidad_ = $context["lineaEntidad"]; } else { $_lineaEntidad_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_lineaEntidad_, "IDLinea"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["lineaEntidad"]) ? $context["lineaEntidad"] : null), "IDLinea"), "html", null, true);
             echo "').dialog('open');\">
     <img src=\"";
             // line 551
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"Detalle Recepción\" title=\"Detalle Recepción...\">
 </a>
 ";
             // line 553
-            if (isset($context["lineaEntidad"])) { $_lineaEntidad_ = $context["lineaEntidad"]; } else { $_lineaEntidad_ = null; }
-            $this->env->loadTemplate("RecepcionarLineas/detalleRecepcion.html.twig")->display(array_merge($context, array("lineaEntidad" => $_lineaEntidad_)));
+            $this->env->loadTemplate("RecepcionarLineas/detalleRecepcion.html.twig")->display(array_merge($context, array("lineaEntidad" => (isset($context["lineaEntidad"]) ? $context["lineaEntidad"] : null))));
         } catch (Exception $e) {
             ob_end_clean();
 
@@ -2474,19 +2096,16 @@ document.getElementById('";
         try {
             // line 558
             echo "<a href=\"javascript:;\" onclick=\"\$('#dialog";
-            if (isset($context["lineaEntidad"])) { $_lineaEntidad_ = $context["lineaEntidad"]; } else { $_lineaEntidad_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_lineaEntidad_, "IDLinea"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["lineaEntidad"]) ? $context["lineaEntidad"] : null), "IDLinea"), "html", null, true);
             echo "').dialog('open');\">
     <img src=\"";
             // line 559
-            if (isset($context["path"])) { $_path_ = $context["path"]; } else { $_path_ = null; }
-            echo twig_escape_filter($this->env, $_path_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"Detalle Expedición\" title=\"Detalle Expedición...\">
 </a>
 ";
             // line 561
-            if (isset($context["lineaEntidad"])) { $_lineaEntidad_ = $context["lineaEntidad"]; } else { $_lineaEntidad_ = null; }
-            $this->env->loadTemplate("ExpedirLineas/detalleExpedicion.html.twig")->display(array_merge($context, array("lineaEntidad" => $_lineaEntidad_)));
+            $this->env->loadTemplate("ExpedirLineas/detalleExpedicion.html.twig")->display(array_merge($context, array("lineaEntidad" => (isset($context["lineaEntidad"]) ? $context["lineaEntidad"] : null))));
         } catch (Exception $e) {
             ob_end_clean();
 
@@ -2518,14 +2137,11 @@ document.getElementById('";
 <div id=\"Documentos\" style=\"margin-top: 10px;\"></div>
 <script>documentos('";
             // line 572
-            if (isset($context["entidad"])) { $_entidad_ = $context["entidad"]; } else { $_entidad_ = null; }
-            echo twig_escape_filter($this->env, $_entidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "', '";
-            if (isset($context["idEntidad"])) { $_idEntidad_ = $context["idEntidad"]; } else { $_idEntidad_ = null; }
-            echo twig_escape_filter($this->env, $_idEntidad_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["idEntidad"]) ? $context["idEntidad"] : null), "html", null, true);
             echo "', 'Documentos', '";
-            if (isset($context["tipo"])) { $_tipo_ = $context["tipo"]; } else { $_tipo_ = null; }
-            echo twig_escape_filter($this->env, $_tipo_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["tipo"]) ? $context["tipo"] : null), "html", null, true);
             echo "');</script>
 <div style=\"clear:both;\"></div>
 ";
@@ -2549,8 +2165,7 @@ document.getElementById('";
         try {
             // line 579
             echo "\$('.title_icon span').css('background','url(";
-            if (isset($context["appPath"])) { $_appPath_ = $context["appPath"]; } else { $_appPath_ = null; }
-            echo twig_escape_filter($this->env, $_appPath_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["appPath"]) ? $context["appPath"] : null), "html", null, true);
             echo "/images/alert.png)');
 ";
         } catch (Exception $e) {
@@ -2576,27 +2191,23 @@ document.getElementById('";
         ob_start();
         try {
             // line 584
-            if (isset($context["media"])) { $_media_ = $context["media"]; } else { $_media_ = null; }
-            if ($_media_) {
+            if ((isset($context["media"]) ? $context["media"] : null)) {
                 // line 585
                 echo "<embed bgcolor='#505050'
        width='";
                 // line 586
-                if (isset($context["width"])) { $_width_ = $context["width"]; } else { $_width_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter($_width_, "250")) : ("250")), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter((isset($context["width"]) ? $context["width"] : null), "250")) : ("250")), "html", null, true);
                 echo "'
        height='";
                 // line 587
-                if (isset($context["height"])) { $_height_ = $context["height"]; } else { $_height_ = null; }
-                echo twig_escape_filter($this->env, ((array_key_exists("height", $context)) ? (_twig_default_filter($_height_, "250")) : ("250")), "html", null, true);
+                echo twig_escape_filter($this->env, ((array_key_exists("height", $context)) ? (_twig_default_filter((isset($context["height"]) ? $context["height"] : null), "250")) : ("250")), "html", null, true);
                 echo "'
        ";
                 // line 589
                 echo "       allowScriptAccess='always'
        src='";
                 // line 590
-                if (isset($context["media"])) { $_media_ = $context["media"]; } else { $_media_ = null; }
-                echo twig_escape_filter($this->env, $_media_, "html", null, true);
+                echo twig_escape_filter($this->env, (isset($context["media"]) ? $context["media"] : null), "html", null, true);
                 echo "'
        ";
                 // line 592
@@ -2627,9 +2238,7 @@ document.getElementById('";
         try {
             // line 611
             echo "    ";
-            if (isset($context["texto"])) { $_texto_ = $context["texto"]; } else { $_texto_ = null; }
-            if (isset($context["nCaracteres"])) { $_nCaracteres_ = $context["nCaracteres"]; } else { $_nCaracteres_ = null; }
-            if ((twig_length_filter($this->env, $_texto_) > $_nCaracteres_)) {
+            if ((twig_length_filter($this->env, (isset($context["texto"]) ? $context["texto"] : null)) > (isset($context["nCaracteres"]) ? $context["nCaracteres"] : null))) {
                 // line 612
                 echo "        ";
                 $context["puntos"] = "...";
@@ -2638,13 +2247,119 @@ document.getElementById('";
             }
             // line 614
             echo "    ";
-            if (isset($context["texto"])) { $_texto_ = $context["texto"]; } else { $_texto_ = null; }
-            if (isset($context["nCaracteres"])) { $_nCaracteres_ = $context["nCaracteres"]; } else { $_nCaracteres_ = null; }
-            echo twig_escape_filter($this->env, twig_slice($this->env, $_texto_, 0, $_nCaracteres_), "html", null, true);
+            echo twig_escape_filter($this->env, twig_slice($this->env, (isset($context["texto"]) ? $context["texto"] : null), 0, (isset($context["nCaracteres"]) ? $context["nCaracteres"] : null)), "html", null, true);
             echo " ";
-            if (isset($context["puntos"])) { $_puntos_ = $context["puntos"]; } else { $_puntos_ = null; }
-            echo twig_escape_filter($this->env, $_puntos_, "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["puntos"]) ? $context["puntos"] : null), "html", null, true);
             echo "
+";
+        } catch (Exception $e) {
+            ob_end_clean();
+
+            throw $e;
+        }
+
+        return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
+    }
+
+    // line 620
+    public function getform($_controller = null, $_atributos = null, $_datos = null)
+    {
+        $context = $this->env->mergeGlobals(array(
+            "controller" => $_controller,
+            "atributos" => $_atributos,
+            "datos" => $_datos,
+        ));
+
+        $blocks = array();
+
+        ob_start();
+        try {
+            // line 621
+            echo "    ";
+            $context['_parent'] = (array) $context;
+            $context['_seq'] = twig_ensure_traversable((isset($context["atributos"]) ? $context["atributos"] : null));
+            foreach ($context['_seq'] as $context["keyAtributo"] => $context["atributo"]) {
+                // line 622
+                echo "        ";
+                echo $this->getAttribute($this, "formItem", array(0 => (isset($context["controller"]) ? $context["controller"] : null), 1 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null), 2 => (isset($context["atributo"]) ? $context["atributo"] : null), 3 => (isset($context["datos"]) ? $context["datos"] : null)), "method");
+                echo "
+    ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['keyAtributo'], $context['atributo'], $context['_parent'], $context['loop']);
+            $context = array_merge($_parent, array_intersect_key($context, $_parent));
+        } catch (Exception $e) {
+            ob_end_clean();
+
+            throw $e;
+        }
+
+        return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
+    }
+
+    // line 629
+    public function getformItem($_controller = null, $_keyAtributo = null, $_atributo = null, $_datos = null)
+    {
+        $context = $this->env->mergeGlobals(array(
+            "controller" => $_controller,
+            "keyAtributo" => $_keyAtributo,
+            "atributo" => $_atributo,
+            "datos" => $_datos,
+        ));
+
+        $blocks = array();
+
+        ob_start();
+        try {
+            // line 630
+            echo "    ";
+            if ($this->getAttribute((isset($context["atributo"]) ? $context["atributo"] : null), "aditional_filter")) {
+                // line 631
+                echo "        ";
+                if (($this->getAttribute($this->getAttribute((isset($context["atributo"]) ? $context["atributo"] : null), "aditional_filter"), "entity") == "ValoresSN")) {
+                    // line 632
+                    echo "            ";
+                    // line 633
+                    echo "            ";
+                    echo $this->getAttribute($this, "input", array(0 => (isset($context["atributo"]) ? $context["atributo"] : null), 1 => "field_title", 2 => "checkbox", 3 => ((((isset($context["controller"]) ? $context["controller"] : null) . "[") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)) . "]"), 4 => (((isset($context["controller"]) ? $context["controller"] : null) . "_") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), 5 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "getColumnForeignKey", array(0 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), "method"), 6 => "255", 7 => "CampoTextoLargo", 8 => "12"), "method");
+                    echo "                    
+        ";
+                } else {
+                    // line 635
+                    echo "            ";
+                    echo "   
+            ";
+                    // line 636
+                    echo $this->getAttribute($this, "select", array(0 => (isset($context["atributo"]) ? $context["atributo"] : null), 1 => "field_title", 2 => ((((isset($context["controller"]) ? $context["controller"] : null) . "[") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)) . "]"), 3 => (((isset($context["controller"]) ? $context["controller"] : null) . "_") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), 4 => null, 5 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "getColumnForeignKey", array(0 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), "method"), 6 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "getColumnFetchAll", array(0 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null), 1 => "Titulo", 2 => 0), "method"), 7 => "chzn-select", 8 => "1"), "method");
+                    echo "
+        ";
+                }
+                // line 638
+                echo "    ";
+            } else {
+                // line 639
+                echo "        ";
+                if (($this->getAttribute($this->getAttribute((isset($context["atributo"]) ? $context["atributo"] : null), "validator"), "length") > 255)) {
+                    // line 640
+                    echo "            ";
+                    // line 641
+                    echo "            ";
+                    echo $this->getAttribute($this, "textarea", array(0 => (isset($context["atributo"]) ? $context["atributo"] : null), 1 => "field_title", 2 => ((((isset($context["controller"]) ? $context["controller"] : null) . "[") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)) . "]"), 3 => (((isset($context["controller"]) ? $context["controller"] : null) . "_") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), 4 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "getColumnValue", array(0 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), "method"), 5 => null, 6 => null, 7 => "textarea", 8 => "4"), "method");
+                    echo "                    
+        ";
+                } else {
+                    // line 643
+                    echo "            ";
+                    // line 644
+                    echo "            ";
+                    echo $this->getAttribute($this, "input", array(0 => (isset($context["atributo"]) ? $context["atributo"] : null), 1 => "field_title", 2 => "text", 3 => ((((isset($context["controller"]) ? $context["controller"] : null) . "[") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)) . "]"), 4 => (((isset($context["controller"]) ? $context["controller"] : null) . "_") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), 5 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "getColumnValue", array(0 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), "method"), 6 => "255", 7 => "CampoTextoLargo", 8 => "2"), "method");
+                    echo "
+        ";
+                }
+                // line 646
+                echo "    ";
+            }
+            echo "    
 ";
         } catch (Exception $e) {
             ob_end_clean();
@@ -2667,6 +2382,6 @@ document.getElementById('";
 
     public function getDebugInfo()
     {
-        return array (  2640 => 614,  2637 => 613,  2634 => 612,  2629 => 611,  2617 => 610,  2603 => 592,  2598 => 590,  2595 => 589,  2590 => 587,  2585 => 586,  2582 => 585,  2579 => 584,  2566 => 583,  2551 => 579,  2542 => 578,  2521 => 572,  2513 => 566,  2500 => 565,  2488 => 561,  2482 => 559,  2476 => 558,  2464 => 557,  2452 => 553,  2446 => 551,  2440 => 550,  2428 => 549,  2415 => 545,  2409 => 543,  2406 => 542,  2393 => 541,  2378 => 536,  2366 => 535,  2353 => 534,  2338 => 529,  2326 => 528,  2313 => 527,  2298 => 522,  2283 => 521,  2269 => 520,  2254 => 515,  2236 => 514,  2220 => 513,  2202 => 508,  2184 => 507,  2169 => 506,  2154 => 501,  2151 => 500,  2140 => 499,  2122 => 489,  2117 => 488,  2112 => 487,  2108 => 486,  2102 => 485,  2097 => 483,  2092 => 482,  2087 => 481,  2080 => 479,  2075 => 478,  2070 => 475,  2060 => 473,  2057 => 472,  2050 => 470,  2040 => 469,  2037 => 468,  2018 => 467,  1988 => 463,  1986 => 462,  1975 => 461,  1954 => 450,  1940 => 449,  1925 => 442,  1918 => 440,  1915 => 439,  1911 => 437,  1904 => 435,  1894 => 432,  1882 => 431,  1877 => 430,  1871 => 429,  1866 => 428,  1860 => 426,  1853 => 425,  1848 => 424,  1843 => 423,  1837 => 422,  1833 => 420,  1829 => 419,  1818 => 417,  1815 => 416,  1812 => 415,  1802 => 413,  1799 => 412,  1795 => 410,  1785 => 408,  1782 => 407,  1775 => 405,  1765 => 404,  1762 => 403,  1740 => 402,  1725 => 394,  1718 => 392,  1715 => 391,  1711 => 389,  1701 => 386,  1689 => 385,  1684 => 384,  1678 => 382,  1673 => 381,  1666 => 380,  1661 => 379,  1656 => 378,  1650 => 377,  1646 => 375,  1642 => 374,  1631 => 372,  1628 => 371,  1625 => 370,  1615 => 368,  1612 => 367,  1608 => 365,  1598 => 363,  1595 => 362,  1588 => 360,  1578 => 359,  1575 => 358,  1553 => 357,  1535 => 349,  1530 => 348,  1526 => 347,  1521 => 346,  1516 => 345,  1511 => 344,  1506 => 343,  1500 => 342,  1495 => 341,  1491 => 339,  1481 => 337,  1478 => 336,  1471 => 334,  1460 => 333,  1452 => 330,  1449 => 329,  1445 => 328,  1426 => 327,  1407 => 317,  1402 => 316,  1394 => 315,  1386 => 314,  1374 => 313,  1370 => 311,  1360 => 309,  1357 => 308,  1350 => 306,  1347 => 305,  1343 => 304,  1326 => 303,  1307 => 297,  1299 => 295,  1296 => 294,  1290 => 293,  1276 => 292,  1260 => 285,  1252 => 284,  1246 => 282,  1238 => 281,  1232 => 279,  1224 => 278,  1218 => 276,  1209 => 275,  1201 => 273,  1198 => 272,  1192 => 271,  1175 => 270,  1160 => 262,  1150 => 260,  1144 => 259,  1138 => 258,  1133 => 257,  1126 => 256,  1121 => 255,  1116 => 254,  1111 => 253,  1105 => 252,  1100 => 251,  1096 => 249,  1091 => 248,  1087 => 246,  1077 => 244,  1074 => 243,  1067 => 241,  1057 => 240,  1054 => 239,  1034 => 238,  1011 => 231,  1005 => 227,  1001 => 225,  996 => 224,  991 => 223,  984 => 222,  961 => 221,  953 => 220,  945 => 219,  939 => 218,  934 => 217,  925 => 215,  919 => 214,  914 => 213,  911 => 212,  908 => 211,  904 => 209,  899 => 208,  894 => 207,  887 => 206,  879 => 205,  871 => 204,  865 => 203,  860 => 202,  854 => 201,  850 => 199,  845 => 198,  840 => 197,  825 => 195,  818 => 194,  805 => 192,  800 => 191,  795 => 190,  788 => 189,  774 => 186,  770 => 185,  767 => 184,  763 => 182,  753 => 180,  750 => 179,  743 => 177,  733 => 176,  730 => 175,  727 => 174,  705 => 173,  692 => 151,  687 => 150,  682 => 149,  666 => 146,  662 => 145,  655 => 143,  650 => 142,  645 => 141,  639 => 140,  634 => 139,  620 => 137,  616 => 136,  602 => 135,  572 => 130,  555 => 129,  552 => 128,  547 => 127,  542 => 126,  534 => 124,  530 => 122,  515 => 121,  486 => 115,  463 => 114,  460 => 113,  455 => 112,  450 => 111,  440 => 109,  435 => 108,  432 => 107,  417 => 106,  401 => 100,  386 => 99,  383 => 98,  369 => 97,  349 => 90,  342 => 87,  336 => 85,  322 => 84,  316 => 82,  312 => 80,  296 => 79,  280 => 74,  277 => 73,  271 => 72,  268 => 71,  262 => 70,  256 => 69,  251 => 68,  248 => 67,  237 => 64,  231 => 62,  225 => 60,  220 => 59,  217 => 58,  212 => 57,  207 => 56,  201 => 54,  189 => 49,  183 => 47,  178 => 46,  172 => 44,  167 => 43,  162 => 42,  159 => 41,  154 => 40,  149 => 39,  143 => 37,  139 => 35,  134 => 34,  125 => 33,  111 => 32,  106 => 596,  103 => 581,  100 => 575,  97 => 563,  94 => 555,  91 => 547,  88 => 539,  85 => 532,  82 => 525,  79 => 518,  76 => 511,  73 => 504,  70 => 497,  67 => 465,  64 => 452,  61 => 447,  58 => 399,  55 => 354,  52 => 324,  49 => 300,  46 => 289,  43 => 267,  40 => 234,  37 => 154,  34 => 134,  31 => 119,  28 => 104,  25 => 95,  22 => 78,  19 => 29,);
+        return array (  2360 => 646,  2354 => 644,  2352 => 643,  2346 => 641,  2344 => 640,  2341 => 639,  2338 => 638,  2333 => 636,  2329 => 635,  2323 => 633,  2321 => 632,  2318 => 631,  2315 => 630,  2301 => 629,  2283 => 622,  2278 => 621,  2265 => 620,  2249 => 614,  2246 => 613,  2243 => 612,  2240 => 611,  2228 => 610,  2214 => 592,  2210 => 590,  2207 => 589,  2203 => 587,  2199 => 586,  2196 => 585,  2194 => 584,  2181 => 583,  2167 => 579,  2158 => 578,  2140 => 572,  2132 => 566,  2119 => 565,  2108 => 561,  2103 => 559,  2098 => 558,  2086 => 557,  2075 => 553,  2070 => 551,  2065 => 550,  2053 => 549,  2042 => 545,  2037 => 543,  2034 => 542,  2021 => 541,  2007 => 536,  1998 => 535,  1985 => 534,  1971 => 529,  1962 => 528,  1949 => 527,  1935 => 522,  1924 => 521,  1910 => 520,  1896 => 515,  1883 => 514,  1867 => 513,  1851 => 508,  1838 => 507,  1823 => 506,  1809 => 501,  1806 => 500,  1795 => 499,  1777 => 489,  1773 => 488,  1769 => 487,  1765 => 486,  1760 => 485,  1756 => 483,  1752 => 482,  1748 => 481,  1743 => 479,  1739 => 478,  1734 => 475,  1728 => 473,  1726 => 472,  1721 => 470,  1713 => 469,  1710 => 468,  1691 => 467,  1667 => 463,  1665 => 462,  1654 => 461,  1636 => 450,  1622 => 449,  1607 => 442,  1601 => 440,  1599 => 439,  1595 => 437,  1588 => 435,  1579 => 432,  1570 => 431,  1566 => 430,  1561 => 429,  1557 => 428,  1552 => 426,  1546 => 425,  1542 => 424,  1538 => 423,  1533 => 422,  1529 => 420,  1526 => 419,  1518 => 417,  1516 => 416,  1513 => 415,  1505 => 413,  1503 => 412,  1499 => 410,  1493 => 408,  1491 => 407,  1486 => 405,  1478 => 404,  1475 => 403,  1453 => 402,  1438 => 394,  1432 => 392,  1430 => 391,  1426 => 389,  1417 => 386,  1408 => 385,  1404 => 384,  1399 => 382,  1395 => 381,  1389 => 380,  1385 => 379,  1381 => 378,  1376 => 377,  1372 => 375,  1369 => 374,  1361 => 372,  1359 => 371,  1356 => 370,  1348 => 368,  1346 => 367,  1342 => 365,  1336 => 363,  1334 => 362,  1329 => 360,  1321 => 359,  1318 => 358,  1296 => 357,  1279 => 349,  1275 => 348,  1271 => 347,  1267 => 346,  1263 => 345,  1259 => 344,  1255 => 343,  1251 => 342,  1247 => 341,  1243 => 339,  1237 => 337,  1235 => 336,  1230 => 334,  1221 => 333,  1215 => 330,  1212 => 329,  1210 => 328,  1191 => 327,  1173 => 317,  1169 => 316,  1163 => 315,  1157 => 314,  1149 => 313,  1145 => 311,  1139 => 309,  1137 => 308,  1132 => 306,  1129 => 305,  1127 => 304,  1110 => 303,  1093 => 297,  1087 => 295,  1085 => 294,  1080 => 293,  1066 => 292,  1051 => 285,  1045 => 284,  1040 => 282,  1034 => 281,  1029 => 279,  1023 => 278,  1018 => 276,  1011 => 275,  1005 => 273,  1003 => 272,  998 => 271,  981 => 270,  966 => 262,  957 => 260,  953 => 259,  948 => 258,  944 => 257,  938 => 256,  934 => 255,  930 => 254,  926 => 253,  922 => 252,  918 => 251,  914 => 249,  910 => 248,  906 => 246,  900 => 244,  898 => 243,  893 => 241,  885 => 240,  882 => 239,  862 => 238,  847 => 231,  841 => 227,  837 => 225,  833 => 224,  829 => 223,  823 => 222,  809 => 221,  803 => 220,  797 => 219,  793 => 218,  789 => 217,  782 => 215,  778 => 214,  774 => 213,  771 => 212,  768 => 211,  764 => 209,  760 => 208,  756 => 207,  750 => 206,  742 => 205,  736 => 204,  732 => 203,  728 => 202,  723 => 201,  719 => 199,  715 => 198,  711 => 197,  702 => 195,  696 => 194,  688 => 192,  684 => 191,  680 => 190,  675 => 189,  665 => 186,  662 => 185,  660 => 184,  656 => 182,  650 => 180,  648 => 179,  643 => 177,  635 => 176,  632 => 175,  630 => 174,  608 => 173,  595 => 151,  591 => 150,  587 => 149,  577 => 146,  573 => 145,  567 => 143,  563 => 142,  559 => 141,  555 => 140,  551 => 139,  541 => 137,  539 => 136,  525 => 135,  501 => 130,  490 => 129,  487 => 128,  483 => 127,  479 => 126,  473 => 124,  469 => 122,  454 => 121,  431 => 115,  417 => 114,  414 => 113,  410 => 112,  406 => 111,  399 => 109,  395 => 108,  392 => 107,  377 => 106,  362 => 100,  351 => 99,  349 => 98,  335 => 97,  317 => 90,  311 => 87,  306 => 85,  296 => 84,  291 => 82,  287 => 80,  271 => 79,  256 => 74,  253 => 73,  248 => 72,  245 => 71,  242 => 70,  238 => 69,  234 => 68,  231 => 67,  222 => 64,  217 => 62,  212 => 60,  208 => 59,  205 => 58,  201 => 57,  197 => 56,  192 => 54,  182 => 49,  177 => 47,  173 => 46,  168 => 44,  164 => 43,  160 => 42,  157 => 41,  153 => 40,  149 => 39,  144 => 37,  140 => 35,  138 => 34,  131 => 33,  117 => 32,  112 => 625,  109 => 616,  106 => 596,  103 => 581,  100 => 575,  97 => 563,  94 => 555,  91 => 547,  88 => 539,  85 => 532,  82 => 525,  79 => 518,  76 => 511,  73 => 504,  70 => 497,  67 => 465,  64 => 452,  61 => 447,  58 => 399,  55 => 354,  52 => 324,  49 => 300,  46 => 289,  43 => 267,  40 => 234,  37 => 154,  34 => 134,  31 => 119,  28 => 104,  25 => 95,  22 => 78,  19 => 29,);
     }
 }

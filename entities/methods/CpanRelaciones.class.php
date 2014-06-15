@@ -68,8 +68,12 @@ class CpanRelaciones extends CpanRelacionesEntity {
 
         $relaciones = $this->cargaCondicion("EntidadDestino,IdEntidadDestino", "EntidadOrigen='{$entidadOrigen}' AND IdEntidadOrigen='{$idOrigen}' {$filtroDestino}", "SortOrder ASC,EntidadDestino ASC");
 
-        foreach ($relaciones as $relacion)
-            $array[] = new $relacion['EntidadDestino']($relacion['IdEntidadDestino']);
+        foreach ($relaciones as $relacion) {
+            $objeto = new $relacion['EntidadDestino']($relacion['IdEntidadDestino']);
+            if ($objeto->getStatus() == 1) {
+                $array[] = $objeto;
+            }
+        }
 
         return $array;
     }

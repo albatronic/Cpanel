@@ -140,7 +140,7 @@ WebUsuarios:
   columns:
     Nombre:       { type: string(50), notnull: true }
     Apellidos:    { type: string(50), notnull: true }
-    Empresa:      { type: string(50), notnull: false }
+    Empresa:      { type: string(100), notnull: false }
     DNI:          { type: string(15), notnull: false }
     Direccion:    { type: string(100), notnull: false, }
     IdMunicipio:  { type: bigint(11), notnull: false, default: 0, index: index, comment: 'db, CommMunicipios, Id' }

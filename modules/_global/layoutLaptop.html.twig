@@ -6,18 +6,21 @@
     <head>
     	{% include "_global/metaInformacion.html.twig" %}
 	{% include values.twigCss %}
-
         <!-- Para que esté disponible el path de la app en todos los java scripts -->
-        <script type="text/javascript">var appPath = "{{appPath}}";</script>
-
-	{% include values.twigJs %}
+        <script type="text/javascript">
+            var appPath = "{{appPath}}";
+            var controller = "{{values.controller}}";
+        </script>
+        {% include values.twigJs %}
     </head>
 
     <body id="theme-default" class="full_block"/>
 
         <div id="header" class="blue_lin">
             <div class="header_left">
-                <img src="{{app.path}}/images/logo-albatronic-cpanel.png" style="height: 38px;" alt="Albatronic Cloud Solutions | Páginas Web">
+                <a href="{{app.path}}/Index">
+                    <img src="{{app.path}}/images/logo-albatronic-cpanel.png" style="height: 38px;" alt="Albatronic Cloud Solutions | Páginas Web">
+                </a>
             </div>
 
             {% block cabeceraDerecha %}
@@ -40,21 +43,20 @@
 
         <div id="container">
 
-                {% block navegador %}
-                <div class="page_title">
-                    {% include '_global/menuNavegador.html.twig' %}
-                </div>
-                {% endblock %}
+            {% block navegador %}
+            <div class="page_title">
+                {% include '_global/menuNavegador.html.twig' %}
+            </div>
+            {% endblock %}
 
-                <div id="content">
-                    {% block content %}
-                    {% endblock %}
-                </div>
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
 
         </div>
 
-        <div id="notificacion"></div>
-        
+        <div id="notificacion"></div>       
         <div id="dialogoVarEnv" title="Propiedades del elemento"></div>
         <div id="dialogOrdenar" title="Cambiar orden"></div>
         

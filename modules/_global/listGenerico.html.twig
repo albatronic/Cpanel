@@ -3,12 +3,14 @@
 
 <div id="Listado">
 <table width='100%'>
-    <tr class='Titulos'>
-        <td width='16px'>&nbsp;</td>
-        {% for title in listado.titles %}
-            <td class='Item'>{{ title.title }}</td>
-	{% endfor%}
-    </tr>
+    <thead>
+        <tr class='Titulos'>
+            <th width='16px'>&nbsp;</th>
+            {% for title in listado.titles %}
+                <th class='Item'>{{ title.title }}</th>
+            {% endfor%}
+        </tr>
+    </thead>
 
     <tbody class='Cuerpo'>
     {% for key,objeto in listado.data %}

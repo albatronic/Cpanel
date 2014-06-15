@@ -6,4 +6,5 @@
         <input name='action' id='actionFiltro' value='list' type='hidden' />
         {% include '_global/filtroGenerico.html.twig' with {'filter': filter} %}
     </form>
+    {% include "_global/filtroAvanzado.html.twig" with {'filter': filter} %}
 </div>

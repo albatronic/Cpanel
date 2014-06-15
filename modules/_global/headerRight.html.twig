@@ -5,7 +5,7 @@
             {{ project.empresa}} - {{ project.title }} {% if user.IdPerfil.Id == '1' %}(Id:{{project.Id}}){% endif %}
 	   </div>
 
-	<div id="botonesCabecera">
+	<div id="botonesCabecera">{{idiomas.actual}}-{{action}}
 		{% if action == '' and idiomas.actual == 0 %}
 		    {% include '_global/linkNew.html.twig' %}
 		{% endif %}

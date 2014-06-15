@@ -48,5 +48,3 @@ class CommIdiomas extends CommIdiomasEntity {
         return $array;
     }
 }
-
-?>

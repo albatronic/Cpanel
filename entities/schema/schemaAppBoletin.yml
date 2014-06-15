@@ -44,7 +44,7 @@ BolEnvios:
     Cco:          { type: text, notnull: false }
     Estado:       { type: tinyint(1), notnull: true, default: 0 }
     Errores:      { type: text, notnull: false }
-    ArchivoHtml : { type: string(255), notnull: true }
+    ArchivoHtml : { type: string(255), notnull: false }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IDBoletin:  { ForeignEntity: BolBoletines, ForeignId: Id}     

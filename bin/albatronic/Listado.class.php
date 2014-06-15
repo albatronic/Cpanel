@@ -15,49 +15,8 @@ class Listado {
      * @var array
      */
     public $filter = array();
-
-    /**
-     * Columnas que se monstraran en el listado:
-     * títulos, columna física y posibles links
-     * @var array
-     */
-    private $titles = array();
-
-    /**
-     * Datos que componen el listado
-     * @var array Array de objetos
-     */
-    private $data = array();
-
-    /**
-     * Valores del config.xml del modulo en curso
-     * @var form Objeto form
-     */
-    private $form;
-
-    /**
-     * Valores del request
-     * @var request El objeto request
-     */
-    private $request;
-
-    /**
-     * La sentencia SQL generadora del listado
-     * @var string La sentencia SQL
-     */
-    private $query = '';
-
-    /**
-     * La entidad sobre la que se va a generar el listado
-     * @var string La entidad
-     */
-    private $entity;
-
-    /**
-     * El nombre de la clave primaria de la entidad
-     * @var string La clave primaria
-     */
-    private $primaryKey;
+    public $arrayQuery = array();
+    public $query;
 
     public function __construct(Form $form, $request) {
 
@@ -72,7 +31,7 @@ class Listado {
             case 'POST':
                 $this->filter['columnsSelected'] = $this->request['filter']['columnsSelected'];
                 $this->filter['valuesSelected'] = $this->request['filter']['valuesSelected'];
-                $this->filter['flags'] = $this->request['filter']['flags'];
+                $this->filter['flags'] = (isset($this->request['filter']['flags'])) ? $this->request['filter']['flags'] : '';
                 break;
             case 'GET':
                 $this->filter['columnsSelected'] = array();
@@ -88,7 +47,7 @@ class Listado {
         $this->filter['orderBy'] = $this->request['filter']['orderBy'];
         if ($this->filter['orderBy'] == '') {
             $criteriosOrden = $this->form->getListOrderBy();
-            if (is_array($criteriosOrden) and (count($criteriosOrden) > 0))
+            if (is_array($criteriosOrden) and ( count($criteriosOrden) > 0))
                 $this->filter['orderBy'] = $criteriosOrden[0]['criteria'];
             else
                 $this->filter['orderBy'] = $form->getPrimaryKey() . " ASC";
@@ -110,9 +69,11 @@ class Listado {
         // Filtros adicionales
         $this->filter['aditional'] = $this->form->getFilters();
         foreach ($this->filter['aditional'] as $key => $value) {
-            if (($value['entity'] != '') and ($value['type'] == 'select')) {
+            if (($value['entity'] != '') and ( $value['type'] == 'select')) {
                 $claseConId = explode(',', $value['entity']);
-                $objeto = new $claseConId[0]($claseConId[1]);
+                if (class_exists($claseConId[0])) {
+                    $objeto = new $claseConId[0]((isset($claseConId[1])) ? $claseConId[1] : "");
+                }
                 $this->filter['aditional'][$key]['values'] = $objeto->{$value['method']}($value['params']);
                 //$this->filter['aditional'][$key]['values'][] = array('Id' => '', 'Value' => '** Todo **');
             }
@@ -163,7 +124,7 @@ class Listado {
     public function getArrayQuery() {
         return $this->arrayQuery;
     }
-    
+
     public function buildQuery() {
         $this->setQuery("
                 SELECT {$this->arrayQuery['SELECT']}
@@ -172,125 +133,6 @@ class Listado {
                 ORDER BY {$this->arrayQuery['ORDER BY']}
                 ");
     }
-    /**
-     * Devuelve un array con los elementos de la sentencia
-     * SELECT SQL necesaria para realizar el listado y que
-     * se ha generado en base a las condiciones del filtro.
-     * El array es:
-     * array (
-     *      'SELECT'   =>
-     *      'FROM'     =>
-     *      'WHERE'    =>
-     *      'ORDER BY' =>
-     * )
-     *
-     * @return array arrayQuery Array con los elementos que componen el query
-     */
-    public function makeQueryXXXX($aditionalFilter = '') {
-        //Recorro las columnsSelected del filter para ver
-        //qué columnas se han seleccionado y construir el filtro
-        $filtro = '';
-        $tablas = $this->form->getDataBaseName() . "." . $this->form->getTable();
-        foreach ($this->filter['columnsSelected'] as $key => $value) {
-            if ($this->filter['valuesSelected'][$key] != '') {
-                if ($filtro)
-                    $filtro .= " AND ";
-
-                if ($this->filter['aditional'][$key]['entity']) {
-                    // Es una entidad, es una columna de la tabla que referencia a otra tabla
-                    // ----------------------------------------------------------------------
-                    switch ($this->filter['aditional'][$key]['type']) {
-                        case 'select':
-                            $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " = '" . $this->filter['valuesSelected'][$key] . "')";
-                            break;
-                        case 'input': //Hay que construir join a otra tabla
-                            //Buscar el nombre físico de la BD y de la Tabla y añadirlo
-                            //a la lista de tablas
-                            $entidadReferenciada = new $this->filter['aditional'][$key]['entity'] ( );
-                            $tablaReferenciada = $entidadReferenciada->getDataBaseName() . "." . $entidadReferenciada->getTableName();
-                            $tablas .= ", " . $tablaReferenciada;
-                            //Construir la parte del where para el join
-                            $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $this->filter['columnsSelected'][$key] . "=" . $tablaReferenciada . "." . $entidadReferenciada->getPrimaryKeyName() . ")";
-                            //Construir el filtro de la columna
-                            $filtro .= " AND (" . $tablaReferenciada . "." . $this->filter['aditional'][$key]['params'] . " LIKE '" . $this->filter['valuesSelected'][$key] . "')";
-                            unset($entidadReferenciada);
-                            break;
-                        case 'check':
-                            //No se trata porque no tiene entidad
-                            break;
-                    }
-                } else {
-                    // No es una entidad, es una columna de la tabla que no referencia a otra tabla
-                    // Puede ser input, range, check. En cualquier otro caso es una de las columnas
-                    // del filtro estándar.
-                    $operador = $this->filter['aditional'][$key]['operator'];
-
-                    switch ($this->filter['aditional'][$key]['type']) {
-                        case "check":
-                            // Es de tipo check pero no viene vacio
-                            if ($this->filter['valuesSelected'][$key] == 'on') {
-                                $this->filter['valuesSelected'][$key] = '1';
-                            } else {
-                                $this->filter['valuesSelected'][$key] = '0';
-                            }
-                            $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " = '" . $this->filter['valuesSelected'][$key] . "')";
-                            break;
-
-                        case "input":
-                            // Es de tipo input. Utiliza LIKE en lugar de =
-                            $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " LIKE '" . $this->filter['valuesSelected'][$key] . "')";
-                            break;
-
-                        case "range":
-                            // Es un rango
-                            $fecha = new Fecha($this->filter['valuesSelected'][$key]);
-                            $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " " . $operador . " '" . $fecha->getaaaammdd() . "')";
-                            unset($fecha);
-                            break;
-
-                        default:
-                            // Columna del filtro estándar
-                            $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " LIKE '" . $this->filter['valuesSelected'][$key] . "')";
-                    }
-                }
-            } else {
-                //El valor del filtro viene vacio pero puede ser check
-                if ($this->filter['aditional'][$key]['type'] == "check") {
-                    $this->filter['valuesSelected'][$key] = '0';
-                    if ($filtro) {
-                        $filtro .=" AND ";
-                    }
-
-                    $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " = '" . $this->filter['valuesSelected'][$key] . "')";
-                }
-            }
-        }
-
-
-        if ($filtro == '')
-            $filtro = '(1)';
-
-        if ($aditionalFilter != '')
-            $filtro .= " AND (" . $aditionalFilter . ")";
-
-        // Transformo el array de tablas en un string
-        $listaTablas = "";
-        foreach ($tablas as $key => $value) {
-            if ($listaTablas != '')
-                $listaTablas .= ", ";
-            $listaTablas .= $key;
-        }
-        $this->arrayQuery = array(
-            "SELECT" => $this->form->getDataBaseName() . "." . $this->form->getTable() . ".*", // . $this->form->getPrimaryKey(),
-            "FROM" => $listaTablas,
-            "WHERE" => "({$filtro})",
-            "ORDER BY" => $this->filter['orderBy'],
-                //"ORDER BY" => $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $this->filter['orderBy'],
-        );
-
-        $this->buildQuery();
-    }
-
 
     /**
      * Devuelve un array con los elementos de la sentencia
@@ -379,13 +221,15 @@ class Listado {
                     }
                 } else {
                     //El valor del filtro viene vacio pero puede ser check
-                    if ($this->filter['aditional'][$key]['type'] == "check") {
-                        $this->filter['valuesSelected'][$key] = '0';
-                        if ($filtro) {
-                            $filtro .=" AND ";
-                        }
+                    if (isset($this->filter['aditional'][$key])) {
+                        if ($this->filter['aditional'][$key]['type'] == "check") {
+                            $this->filter['valuesSelected'][$key] = '0';
+                            if ($filtro) {
+                                $filtro .=" AND ";
+                            }
 
-                        $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " = '" . $this->filter['valuesSelected'][$key] . "')";
+                            $filtro .= "(" . $this->form->getDataBaseName() . "." . $this->form->getTable() . "." . $value . " = '" . $this->filter['valuesSelected'][$key] . "')";
+                        }
                     }
                 }
             }
@@ -414,7 +258,7 @@ class Listado {
 
         $this->buildQuery();
     }
-    
+
     /**
      * Devuelve un array con los datos obtenidos en el listado
      *
@@ -431,6 +275,7 @@ class Listado {
 
         if ($this->getQuery() == '')
             $this->makeQuery($aditionalFilter);
+
 
         $em = new EntityManager($this->form->getConection());
         $em->query($this->getQuery());
@@ -470,12 +315,15 @@ class Listado {
      * @return array Los componentes del listado
      */
     public function getAll($aditionalFilter = '') {
+        
+        $exportTypes = trim($_SESSION['VARIABLES']['EnvPro']['exportTypes']);
+        
         return array(
             'data' => $this->getData($aditionalFilter),
             'filter' => $this->getFilter(),
             'titles' => $this->getTitles(),
             'formatos' => $this->getFormatos(),
-            'export_types' => $_SESSION['export_types'],
+            'export_types' => (strlen($exportTypes) > 0) ? explode(",",$exportTypes) : array(),
         );
     }
 
@@ -491,13 +339,13 @@ class Listado {
 
         // Orientación de página, unidad de medida y tipo de papel
         $orientation = strtoupper(trim($parametros['orientation']));
-        if (($orientation != 'P') and ($orientation != 'L'))
+        if (($orientation != 'P') and ( $orientation != 'L'))
             $orientation = 'P';
         $unit = strtolower(trim($parametros['unit']));
-        if (($unit != 'pt') and ($unit != 'mm') and ($unit != 'cm') and ($unit != 'in'))
+        if (($unit != 'pt') and ( $unit != 'mm') and ( $unit != 'cm') and ( $unit != 'in'))
             $unit = 'mm';
         $format = strtolower(trim($parametros['format']));
-        if (($format != 'a4') and ($format != 'a3') and ($format != 'a5') and ($format != 'letter') and ($format != 'legal'))
+        if (($format != 'a4') and ( $format != 'a3') and ( $format != 'a5') and ( $format != 'letter') and ( $format != 'legal'))
             $format = 'A4';
 
         // Márgenes: top,right,bottom,left
@@ -560,14 +408,12 @@ class Listado {
         // CUERPO
         $pdf->SetFont($bodyFont[0], $bodyFont[1], $bodyFont[2]);
 
-        // Construyo el array con los datos a listar
+        // Construyo el array con los datos a listar.
+        // Sustituyo el ORDERBY que hay en el filtro por pantalla
+        // con el que viene de los parametros del listado
         if ($this->getQuery() == '') {
-            $arrayQuery = $this->makeQuery($aditionalFilter);
-            $this->setQuery("
-                SELECT {$arrayQuery['SELECT']}
-                FROM {$arrayQuery['FROM']}
-                WHERE {$arrayQuery['WHERE']}
-                ORDER BY {$parametros['order_by']}");
+            $this->filter['orderBy'] = $parametros['order_by'];
+            $this->makeQuery($aditionalFilter);
         }
 
         $em = new EntityManager($this->form->getConection());
@@ -578,10 +424,7 @@ class Listado {
         unset($em);
 
         $breakField = trim((string) $parametros['break_field']);
-        if ($breakField)
-            $breakField = explode(",", $breakField);
-        else
-            $breakField = array();
+        $breakField = ($breakField) ? explode(",", $breakField) : array();
 
         $breakPage = ( strtoupper(trim((string) $parametros['break_page'])) == 'YES' );
 
@@ -596,7 +439,7 @@ class Listado {
             $caracteresLinea += $caracteres;
             $tipo = trim((string) $value['type']);
             $align = strtoupper(trim((string) $value['align']));
-            if (($align != 'R') and ($align != 'C') and ($align != 'L') and ($align != 'J'))
+            if (($align != 'R') and ( $align != 'C') and ( $align != 'L') and ( $align != 'J'))
                 $align = "L";
             $formato = trim((string) $value['format']);
             $total = ( strtoupper(trim((string) $value['total'])) == 'YES' );
@@ -608,8 +451,8 @@ class Listado {
 
             $parametrosMetodo = substr($parametrosMetodo, 0, -1);
 
-            $configLinea[$value['field']] = array(
-                'field' => $value['field'],
+            $configLinea[$key] = array(
+                'field' => $key,
                 'params' => $parametrosMetodo,
                 'caracteres' => $caracteres,
                 'ancho' => $anchoColumna,
@@ -640,7 +483,7 @@ class Listado {
             if (count($breakField)) {
                 // Instancio el objeto por el que se hace el break
                 $objetoBreak = $objeto->{"get$breakField[0]"}();
-                $valorActual = $objetoBreak->__toString();
+                $valorActual = (is_object($objetoBreak)) ? $objetoBreak->__toString() : $objetoBreak;
                 if ($valorAnterior != $valorActual) {
                     if ($valorAnterior != '') {
                         $this->pintaTotales($pdf, $parametros['columns'], $subTotales);
@@ -765,14 +608,12 @@ class Listado {
         $parametros = $formato->getFormatoListado($idFormatoListado);
         unset($formato);
 
-        // Construyo el array con los datos a listar
+        // Construyo el array con los datos a listar.
+        // Sustituyo el ORDERBY que hay en el filtro por pantalla
+        // con el que viene de los parametros del listado
         if ($this->getQuery() == '') {
-            $arrayQuery = $this->makeQuery($aditionalFilter);
-            $this->setQuery("
-                SELECT {$arrayQuery['SELECT']}
-                FROM {$arrayQuery['FROM']}
-                WHERE {$arrayQuery['WHERE']}
-                ORDER BY {$parametros['order_by']}");
+            $this->filter['orderBy'] = $parametros['order_by'];
+            $this->makeQuery($aditionalFilter);
         }
 
         $em = new EntityManager($this->form->getConection());
@@ -782,7 +623,7 @@ class Listado {
         $em->desConecta();
         unset($em);
 
-        $xmlString = "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n<root>\n";
+        $xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root>\n";
 
         // Itero el array con los datos para generar cada renglón del listado
         $objeto = new $this->entity();
@@ -792,29 +633,27 @@ class Listado {
             $objeto->bind($row);
 
             // Recorro las columnas que componen cada renglón
-            foreach ($parametros['columns'] as $value) {
+            foreach ($parametros['columns'] as $key => $value) {
 
                 $formato = trim((string) $value['format']);
 
-                $texto = trim($objeto->{"get$value[field]"}());
-                if ($formato)
-                    $texto = sprintf($formato, $texto);
+                $texto = trim($objeto->{"get$key"}());
+                if ($formato) {
+                    $texto = sprintf($formato, utf8_decode($texto));
+                }
 
-                $xmlString .= "    <{$value['field']}>{$texto}</{$value['field']}>\n";
+                $xmlString .= "    <{$key}>{$texto}</{$key}>\n";
             }
             $xmlString .= "  </{$this->entity}>\n";
         }
         $xmlString .= "</root>\n";
         unset($objeto);
 
-        $archivo = "docs/docs" . $_SESSION['emp'] . "/xml/" . md5(date('d-m-Y H:i:s')) . ".xml";
-        $fp = @fopen($archivo, "w");
-        if ($fp) {
-            fwrite($fp, $xmlString);
-            fclose($fp);
-        }
+        $file = "tmp/" . md5(date('d-m-Y H:i:s'));
+        $archivo = new Archivo($file);
+        $archivoSubido = $archivo->creaYSube($xmlString, "/tmp", date('Y-m-d_H_i_s') . ".xml");
 
-        return $archivo;
+        return $archivoSubido;
     }
 
     /**
@@ -832,14 +671,12 @@ class Listado {
         $parametros = $formato->getFormatoListado($idFormatoListado);
         unset($formato);
 
-        // Construyo el array con los datos a listar
+        // Construyo el array con los datos a listar.
+        // Sustituyo el ORDERBY que hay en el filtro por pantalla
+        // con el que viene de los parametros del listado
         if ($this->getQuery() == '') {
-            $arrayQuery = $this->makeQuery($aditionalFilter);
-            $this->setQuery("
-                SELECT {$arrayQuery['SELECT']}
-                FROM {$arrayQuery['FROM']}
-                WHERE {$arrayQuery['WHERE']}
-                ORDER BY {$parametros['order_by']}");
+            $this->filter['orderBy'] = $parametros['order_by'];
+            $this->makeQuery($aditionalFilter);
         }
 
         $em = new EntityManager($this->form->getConection());
@@ -858,37 +695,33 @@ class Listado {
             $objeto->bind($row);
 
             // Recorro las columnas que componen cada renglón
-            foreach ($parametros['columns'] as $value) {
+            foreach ($parametros['columns'] as $key => $value) {
                 $formato = trim((string) $value['format']);
-                $texto = trim($objeto->{"get$value[field]"}());
-                if ($formato)
-                    $texto = sprintf($formato, $texto);
+                $texto = trim($objeto->{"get$key"}());
+                if ($formato) {
+                    $texto = sprintf($formato, utf8_decode($texto));
+                }
 
-                $item[$value['field']] = $texto;
+                $item[$key] = $texto;
             }
             $arrayYml[$this->entity][] = $item;
         }
         unset($objeto);
 
-        $YamlString = Yaml::dump($arrayYml);
+        $file = "tmp/" . md5(date('d-m-Y H:i:s'));
+        $archivo = new Archivo($file);
+        $archivoSubido = $archivo->creaYSube(sfYaml::dump($arrayYml), "/tmp", date('Y-m-d_H_i_s') . ".yml");
 
-        $archivo = "docs/docs" . $_SESSION['emp'] . "/yml/" . md5(date('d-m-Y H:i:s')) . ".yml";
-        $fp = @fopen($archivo, "w");
-        if ($fp) {
-            fwrite($fp, $YamlString);
-            fclose($fp);
-        }
-
-        return $archivo;
+        return $archivoSubido;
     }
 
     /**
-     * Genera un archivo TXT con el listado
+     * Genera un archivo CSV con el listado
      * @param integer $idFormatoListado
      * @param string $aditionalFilter
      * @return string $archivo El nombre completo (con la ruta) del archivo xml generado
      */
-    public function getCvs($idFormatoListado, $aditionalFilter = '') {
+    public function getCsv($idFormatoListado, $aditionalFilter = '') {
         set_time_limit(0);
 
         // Lee la configuracion del listado $idFormatoListado y
@@ -897,14 +730,12 @@ class Listado {
         $parametros = $formato->getFormatoListado($idFormatoListado);
         unset($formato);
 
-        // Construyo el array con los datos a listar
+        // Construyo el array con los datos a listar.
+        // Sustituyo el ORDERBY que hay en el filtro por pantalla
+        // con el que viene de los parametros del listado
         if ($this->getQuery() == '') {
-            $arrayQuery = $this->makeQuery($aditionalFilter);
-            $this->setQuery("
-                SELECT {$arrayQuery['SELECT']}
-                FROM {$arrayQuery['FROM']}
-                WHERE {$arrayQuery['WHERE']}
-                ORDER BY {$parametros['order_by']}");
+            $this->filter['orderBy'] = $parametros['order_by'];
+            $this->makeQuery($aditionalFilter);
         }
 
         $em = new EntityManager($this->form->getConection());
@@ -916,8 +747,9 @@ class Listado {
 
         // Primer Renglón con los títulos de las columnas
         $cvsString = "";
-        foreach ($parametros['columns'] as $column)
-            $cvsString .= '"' . $column['title'] . '",';
+        foreach ($parametros['columns'] as $column) {
+            $cvsString .= $column['title'] . ';';
+        }
         // Quito la última coma
         $cvsString = substr($cvsString, 0, -1);
         $cvsString .= "\n";
@@ -929,15 +761,15 @@ class Listado {
             $objeto->bind($row);
 
             // Recorro las columnas que componen cada renglón
-            foreach ($parametros['columns'] as $value) {
+            foreach ($parametros['columns'] as $key => $value) {
 
                 $formato = trim((string) $value['format']);
 
-                $texto = trim($objeto->{"get$value[field]"}());
+                $texto = trim($objeto->{"get$key"}());
                 if ($formato)
                     $texto = sprintf($formato, $texto);
 
-                $cvsString .= '"' . $texto . '",';
+                $cvsString .= utf8_decode($texto) . ';';
             }
             // Quito la última coma
             $cvsString = substr($cvsString, 0, -1);
@@ -945,14 +777,11 @@ class Listado {
         }
         unset($objeto);
 
-        $archivo = "docs/docs" . $_SESSION['emp'] . "/cvs/" . md5(date('d-m-Y H:i:s')) . ".txt";
-        $fp = @fopen($archivo, "w");
-        if ($fp) {
-            fwrite($fp, $cvsString);
-            fclose($fp);
-        }
+        $file = "tmp/" . md5(date('d-m-Y H:i:s'));
+        $archivo = new Archivo($file);
+        $archivoSubido = $archivo->creaYSube($cvsString, "/tmp", date('Y-m-d_H_i_s') . ".csv");
 
-        return $archivo;
+        return $archivoSubido;
     }
 
     /**
@@ -996,14 +825,12 @@ class Listado {
             $columna++;
         }
 
-        // Construyo el array con los datos a listar
+        // Construyo el array con los datos a listar.
+        // Sustituyo el ORDERBY que hay en el filtro por pantalla
+        // con el que viene de los parametros del listado
         if ($this->getQuery() == '') {
-            $arrayQuery = $this->makeQuery($aditionalFilter);
-            $this->setQuery("
-                SELECT {$arrayQuery['SELECT']}
-                FROM {$arrayQuery['FROM']}
-                WHERE {$arrayQuery['WHERE']}
-                ORDER BY {$parametros['order_by']}");
+            $this->filter['orderBy'] = $parametros['order_by'];
+            $this->makeQuery($aditionalFilter);
         }
 
         $em = new EntityManager($this->form->getConection());
@@ -1061,11 +888,11 @@ class Listado {
 
             // Recorro las columnas que componen cada renglón
             $fila++;
-            foreach ($parametros['columns'] as $value) {
+            foreach ($parametros['columns'] as $key => $value) {
 
                 $formato = trim((string) $value['format']);
 
-                $texto = trim($objeto->{"get$value[field]"}());
+                $texto = trim($objeto->{"get$key"}());
                 if ($formato)
                     $texto = sprintf($formato, $texto);
 
@@ -1119,7 +946,7 @@ class Listado {
                 $ancho = $pdf->getStringWidth(str_pad(" ", $caracteres)) + 1; //Le sumo 1 para que haya 1 mm de separación entre cada columna
                 $tipo = trim((string) $value['type']);
                 $align = strtoupper(trim((string) $value['align']));
-                if (($align != 'R') and ($align != 'C') and ($align != 'L'))
+                if (($align != 'R') and ( $align != 'C') and ( $align != 'L'))
                     $align = "L";
                 $formato = trim((string) $value['format']);
 
@@ -1157,18 +984,17 @@ class listadoPDF extends FPDF {
 
     //Cabecera de página
     function Header() {
-        /**
-          $empresa = new Empresas($_SESSION['emp']);
-          $sucursal = new Sucursales($_SESSION['suc']);
+        $empresa = new PcaeEmpresas($_SESSION['emp']);
+        $sucursal = new Sucursales($_SESSION['suc']);
 
-          $this->Image($empresa->getLogo(), 10, 8, 23);
-          $this->SetFont('Arial', 'B', 12);
-          $this->Cell(0, 5, $empresa->getRazonSocial(), 0, 1, "R");
-          $this->SetFont('Arial', '', 8);
-          $this->Cell(0, 5, $sucursal->getNombre(), 0, 1, "R");
-          $this->SetFont('Arial', 'B', 12);
-          $this->Cell(0, 5, $this->opciones['title'], 0, 1, "C");
-         */
+        $this->Image($empresa->getLogo(), 10, 8, 23);
+        $this->SetFont('Arial', 'B', 12);
+        $this->Cell(0, 5, $empresa->getRazonSocial(), 0, 1, "R");
+        $this->SetFont('Arial', '', 8);
+        $this->Cell(0, 5, $sucursal->getNombre(), 0, 1, "R");
+        $this->SetFont('Arial', 'B', 12);
+        $this->Cell(0, 5, $this->opciones['title'], 0, 1, "C");
+
         // Pintar la leyenda del filtro en la primera pagina
         if ($this->page == 1) {
             $this->Ln(5);

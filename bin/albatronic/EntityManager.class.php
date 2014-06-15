@@ -21,7 +21,6 @@ class EntityManager {
      * @var string
      */
     private $file = "config/config.yml";
-    
     public static $currentDbHost = null;
     public static $currentDbLinkInstance = null;
 
@@ -82,23 +81,22 @@ class EntityManager {
                 $params = $yaml['config']['conections'][$conection];
                 $this->dbEngine = $params['dbEngine'];
                 $this->host = $params['host'];
-                
+
                 /**if ($_SESSION['EntornoDesarrollo']) {
-                    $this->user = $conection;
-                    $this->password = $conection;
-                    $this->dataBase = $conection;
+                  $this->user = $conection;
+                  $this->password = $conection;
+                  $this->dataBase = $conection;
                 } else {*/
-                    $this->user = $params['user'];
-                    $this->password = $params['password'];
-                    $this->dataBase = $params['database'];
+                $this->user = $params['user'];
+                $this->password = $params['password'];
+                $this->dataBase = $params['database'];
                 //}
-                   
+
                 $this->conecta();
             } else {
                 $this->error[] = "EntityManager []: ERROR AL LEER EL ARCHIVO DE CONFIGURACION. " . $fileConfig . " NO EXISTE\n";
             }
         }
-
     }
 
     /**
@@ -112,7 +110,7 @@ class EntityManager {
         switch ($this->dbEngine) {
             case 'mysql':
                 if (is_null(self::$currentDbLinkInstance) || (self::$currentDbHost != $this->getHost())) {
-                    self::$currentDbHost = $this->getHost();                    
+                    self::$currentDbHost = $this->getHost();
                     self::$currentDbLinkInstance = mysql_connect($this->getHost(), $this->getUser(), $this->getPassword());
                     if (is_resource(self::$currentDbLinkInstance)) {
                         mysql_select_db($this->getDataBase(), self::$currentDbLinkInstance);
@@ -123,21 +121,25 @@ class EntityManager {
 
             case 'mssql':
                 if (is_null(self::$currentDbLinkInstance) || (self::$currentDbHost != $this->getHost())) {
-                    self::$currentDbHost = $this->getHost();  
+                    self::$currentDbHost = $this->getHost();
                     self::$currentDbLinkInstance = mssql_connect($this->getHost(), $this->getUser(), $this->getPassword());
                     if (is_resource(self::$currentDbLinkInstance)) {
                         mssql_select_db($this->getDataBase(), self::$currentDbLinkInstance);
                     }
                 }
-                $this->dbLink = self::$currentDbLinkInstance;                
+                $this->dbLink = self::$currentDbLinkInstance;
                 break;
 
             case 'interbase':
                 if (is_null(self::$currentDbLinkInstance) || (self::$currentDbHost != $this->getHost())) {
-                    self::$currentDbHost = $this->getHost();  
+                    self::$currentDbHost = $this->getHost();
                     self::$currentDbLinkInstance = ibase_connect($this->getHost(), $this->getUser(), $this->getPassword());
-                }                
+                }
                 $this->dbLink = self::$currentDbLinkInstance;
+                break;
+
+            case 'pgsql':
+                self::$dbLinkInstance = pg_connect("host=" . self::$host . " dbname=" . self::$dataBase . " user=" . self::$user . " password=" . self::$password);
                 break;
             default:
                 $this->error[] = "EntityManager [conecta]: Conexión no realizada. No se ha indicado el tipo de base de datos. " . mysql_errno() . " " . mysql_error();
@@ -209,6 +211,14 @@ class EntityManager {
                     $this->affectedRows = ibase_affected_rows($this->dbLink);
                 break;
 
+            case 'pgsql':
+                $query = str_replace("`", "", $query);
+                $this->result = pg_query(self::$dbLinkInstance, $query);
+                if (!$this->result)
+                    $this->setError("query");
+                else
+                    $this->affectedRows = pg_affected_rows(self::$dbLinkInstance);
+                break;
             default:
                 $this->setError("query", "No se ha indicado el tipo de base de datos");
         }
@@ -239,6 +249,11 @@ class EntityManager {
 
             case 'interbase':
                 while ($row = ibase_fetch_assoc($this->result))
+                    $rows[] = $row;
+                break;
+
+            case 'pgsql':
+                while ($row = pg_fetch_assoc($this->result))
                     $rows[] = $row;
                 break;
 
@@ -282,6 +297,16 @@ class EntityManager {
                 while ($row = ibase_fetch_assoc($this->result))
                     $rows[] = $row;
                 break;
+
+            case 'pgsql':
+                $valores = explode(",", $limit);
+                if (count($valores) == 1) {
+                    $limit = "LIMIT {$valores[0]}";
+                } elseif (count($valores) == 2) {
+                    $limit = "LIMIT {$valores[1]} OFFSET {$valores[0]}";
+                }
+                $query = "{$select} WHERE {$filtro} ORDER BY {$orderBy} {$limit}";
+                break;
             default:
                 $this->setError("fetchResultLimit", "No se ha indicado el tipo de base de datos");
                 break;
@@ -305,7 +330,10 @@ class EntityManager {
 
             case 'interbase':
                 return ibase_num_fields($this->result);
-
+                
+            case 'pgsql':
+                return pg_num_fields($this->result);
+                
             default:
                 $this->setError("numFields", "No se ha indicado el tipo de base de datos");
                 break;
@@ -329,7 +357,10 @@ class EntityManager {
             case 'interbase': //NO IMPLEMENTADO
                 return false;
                 break;
-
+            
+            case 'pgsql':
+                return pg_num_rows($this->result);
+                
             default:
                 $this->setError("numRows", "No se ha indicado el tipo de base de datos");
                 break;
@@ -356,7 +387,11 @@ class EntityManager {
                 //No implementado
                 return false;
                 break;
-
+            
+            case 'pgsql':
+                //No implementado
+                return false;
+                
             default:
                 $this->setError("dataSeek", "No se ha indicado el tipo de base de datos");
                 return false;
@@ -372,7 +407,7 @@ class EntityManager {
         switch ($this->dbEngine) {
             case 'mysql':
                 //return mysql_insert_id(self::$dbLinkInstance);
-                $result = mysql_query("SELECT LAST_INSERT_ID()",$this->dbLink);
+                $result = mysql_query("SELECT LAST_INSERT_ID()", $this->dbLink);
                 $row = mysql_fetch_row($result);
                 return $row[0];
                 break;
@@ -386,7 +421,11 @@ class EntityManager {
                 //No implementado
                 return 0;
                 break;
-
+            
+            case 'pgsql':
+                //No implementado
+                return 0;
+                
             default:
                 $this->setError("getInsertId", "No se ha indicado el tipo de base de datos");
                 return 0;

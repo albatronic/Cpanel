@@ -24,6 +24,32 @@ class BolBoletinesController extends Controller {
         return parent::listAction();
     }
 
+    public function GenerarBoletinAction() {
+
+        $boletin = new BolBoletines($this->request['BolBoletines']['Id']);
+        $boletin->generar();
+
+        $this->request["METHOD"] = "GET";
+        $this->request[2] = $boletin->getPrimaryKeyMD5();
+        unset($boletin);
+        
+        return $this->editAction();
+    }
+
+    /**
+     * Envía el boletín
+     * @return type
+     */
+    public function EnviarBoletinAction() {
+
+        $boletin = new BolBoletines($this->request['BolBoletines']['Id']);
+        $boletin->enviar($this->request['destino']);
+        unset($boletin);
+
+        $this->request['accion'] = 'Guardar';
+        return $this->editAction();
+    }
+
     /**
      * Devuelve un array anidado de tipos de boletines con sus boletines
      * 
@@ -60,7 +86,7 @@ class BolBoletinesController extends Controller {
         $relaciones = new CpanRelaciones();
         $dbName = $relaciones->getDataBaseName();
         $tableName = $relaciones->getTableName();
-        
+
         $filtro = "EntidadOrigen='{$this->entity}' and IdEntidadOrigen='{$this->request[$this->entity]['Id']}'";
         $em = new EntityManager($relaciones->getConectionName());
         if ($em->getDbLink()) {
@@ -81,6 +107,5 @@ class BolBoletinesController extends Controller {
         unset($boletin);
         return $this->EditAction();
     }
-}
 
-?>
+}

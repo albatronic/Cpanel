@@ -421,6 +421,43 @@ class Archivo {
     }
 
     /**
+     * Crea un archivo temporal con el contenido indicado en $texto
+     * y a continuación lo sube vía ftp a la carpeta $targetFolder con el
+     * nombre $targetFile del servidor ftp indicado en el array $ftpConnection
+     * 
+     * Si no se indican las credenciales del servidor ftp, se usarán las de la
+     * sesión en curso $_SESSION['project']['ftp']
+     * 
+     * @param string $texto El contenido del archivo
+     * @param string $targetFolder La carpeta destino en el servidor ftp. Debe tener una / al principio y ninguna al final
+     * @param string $targetFile El nombre del archivo a crear en el servidor ftp
+     * @param array $ftpConnection Array con las credenciales del servidor ftp
+     * @return string EL fullpath del archivo creado en caso de éxito, vacío si fallo.
+     */
+    public function creaYSube($texto, $targetFolder, $targetFile, $ftpConnection = array()) {
+        
+        $url = "";
+
+        if (count($ftpConnection) == 0) {
+            $ftpConnection = $_SESSION['project']['ftp'];
+        }
+        
+        $ok = $this->write($texto);
+        if ($ok) {
+            $ftp = new Ftp($ftpConnection);
+            if ($ok) {
+                $ok = $ftp->upLoad($ftpConnection['folder'] . $targetFolder, $this->getFullPath(), $targetFile);
+                //$this->delete();
+                if ($ok) {
+                    $url = $_SESSION['project']['url'] . $targetFolder . "/" . $targetFile;
+                } 
+            }            
+        }
+        
+        return $url;
+    }
+    
+    /**
      * Establece el carácter de separación entre columnas
      * Por defecto el tabulador
      *
@@ -447,7 +484,10 @@ class Archivo {
     public function setEscape($char) {
         $this->escape = $char;
     }
+    
+    public function getFp() {
+        return $this->fp;
+    }
 
 }
 
-?>

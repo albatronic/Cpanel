@@ -14,14 +14,13 @@ class __TwigTemplate_3bc23bc30c6a24438a4ae0ee1c767658 extends Twig_Template
 
     protected function doGetParent(array $context)
     {
-        return $this->env->resolveTemplate(($this->getAttribute($this->getContext($context, "values"), "controller") . "/index.html.twig"));
+        return $this->env->resolveTemplate(($this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller") . "/index.html.twig"));
     }
 
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 12
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        if (($this->getAttribute($this->getAttribute($_values_, "datos"), "getPrimaryKeyValue") == "")) {
+        if (($this->getAttribute($this->getAttribute((isset($context["values"]) ? $context["values"] : null), "datos"), "getPrimaryKeyValue") == "")) {
             $context["action"] = "new";
         } else {
             $context["action"] = "edit";
@@ -34,64 +33,53 @@ class __TwigTemplate_3bc23bc30c6a24438a4ae0ee1c767658 extends Twig_Template
     {
         // line 14
         echo "<div class=\"grid_container\">
-\t<div class=\"grid_12 full_block\">
-\t\t<div class=\"widget_wrap\">
-\t\t<div class=\"widget_content\">
-\t\t<form name=\"manto_";
+    <div class=\"grid_12 full_block\">
+        <div class=\"widget_wrap\">
+        <div class=\"widget_content\">
+        <form name=\"manto_";
         // line 18
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_values_, "controller"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller"), "html", null, true);
         echo "\" id=\"manto_";
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_values_, "controller"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller"), "html", null, true);
         echo "\" action=\"\" method=\"POST\" enctype=\"multipart/form-data\" class=\"form_container left_label\">
-\t\t\t<input name=\"controller\" value=\"";
+            <input name=\"controller\" value=\"";
         // line 19
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_values_, "controller"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller"), "html", null, true);
         echo "\" type=\"hidden\" />
-\t\t\t<input name=\"action\" id=\"action_";
+            <input name=\"action\" id=\"action_";
         // line 20
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_values_, "controller"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller"), "html", null, true);
         echo "\" value=\"";
-        if (isset($context["action"])) { $_action_ = $context["action"]; } else { $_action_ = null; }
-        echo twig_escape_filter($this->env, $_action_, "html", null, true);
+        echo twig_escape_filter($this->env, (isset($context["action"]) ? $context["action"] : null), "html", null, true);
         echo "\" type=\"hidden\" />
-\t\t\t<input name=\"accion\" id=\"accion_";
+            <input name=\"accion\" id=\"accion_";
         // line 21
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_values_, "controller"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller"), "html", null, true);
         echo "\" value=\"\" type=\"hidden\" />
-\t\t\t<input name=\"solapaActiva\" id=\"solapaActiva\" value=\"";
+            <input name=\"solapaActiva\" id=\"solapaActiva\" value=\"";
         // line 22
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_values_, "solapaActiva"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["values"]) ? $context["values"] : null), "solapaActiva"), "html", null, true);
         echo "\" type=\"hidden\" />
-\t\t\t<input name=\"";
+            <input name=\"";
         // line 23
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_values_, "controller"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller"), "html", null, true);
         echo "[";
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($_values_, "datos"), "getPrimaryKeyName"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["values"]) ? $context["values"] : null), "datos"), "getPrimaryKeyName"), "html", null, true);
         echo "]\" value=\"";
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($_values_, "datos"), "getPrimaryKeyValue"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["values"]) ? $context["values"] : null), "datos"), "getPrimaryKeyValue"), "html", null, true);
         echo "\" type=\"hidden\" />
 
-\t\t\t<ul>
-\t\t\t\t";
+            <ul>
+                ";
         // line 26
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        $template = $this->env->resolveTemplate(($this->getAttribute($_values_, "controller") . "/fields.html.twig"));
-        $template->display(array_merge($context, array("datos" => $this->getAttribute($_values_, "datos"), "atributos" => $this->getAttribute($_values_, "atributos"))));
+        $template = $this->env->resolveTemplate(($this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller") . "/fields.html.twig"));
+        $template->display(array_merge($context, array("datos" => $this->getAttribute((isset($context["values"]) ? $context["values"] : null), "datos"), "atributos" => $this->getAttribute((isset($context["values"]) ? $context["values"] : null), "atributos"))));
         // line 27
-        echo "\t\t\t</ul>
-\t\t</form>
-\t\t</div>
-\t\t</div>
-\t</div>
+        echo "            </ul>
+        </form>
+        </div>
+        </div>
+    </div>
 </div>
 ";
     }
@@ -108,6 +96,6 @@ class __TwigTemplate_3bc23bc30c6a24438a4ae0ee1c767658 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  90 => 27,  86 => 26,  73 => 23,  68 => 22,  63 => 21,  55 => 20,  50 => 19,  42 => 18,  36 => 14,  33 => 13,  23 => 12,);
+        return array (  78 => 27,  75 => 26,  65 => 23,  61 => 22,  57 => 21,  51 => 20,  47 => 19,  41 => 18,  35 => 14,  32 => 13,  23 => 12,);
     }
 }

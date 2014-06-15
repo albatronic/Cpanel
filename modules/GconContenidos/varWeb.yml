@@ -35,7 +35,7 @@ NumNoticiasHome:
   default: 2
     
 NumNoticiasPorPagina:
-  caption: Número noticas por página
+  caption: Número noticias por página
   default: 5
     
 NumContenidosPorPaginaListado:

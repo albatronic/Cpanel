@@ -618,9 +618,14 @@ class Controller {
     public function listAction($aditionalFilter = '') {
 
         if ($this->values['permisos']['permisosModulo']['CO']) {
+
+            $objeto = new $this->entity();
+            $tabla = $objeto->getDataBaseName() . "." . $objeto->getTableName();
+            unset($objeto);
+            
             if ($aditionalFilter != '')
                 $aditionalFilter .= " AND ";
-            $aditionalFilter .= "(Deleted='0')";
+            $aditionalFilter .= "({$tabla}.Deleted='0')";
             $this->values['listado'] = $this->listado->getAll($aditionalFilter);
             $template = $this->entity . '/list.html.twig';
         } else {
@@ -713,8 +718,8 @@ class Controller {
                 case 'Yaml':
                     $this->values['export']['file'] = $this->listado->getYaml($this->request['formatoListado'], $aditionalFilter);
                     break;
-                case 'cvs':
-                    $this->values['export']['file'] = $this->listado->getCvs($this->request['formatoListado'], $aditionalFilter);
+                case 'csv':
+                    $this->values['export']['file'] = $this->listado->getCsv($this->request['formatoListado'], $aditionalFilter);
                     break;
             }
 
@@ -1317,5 +1322,3 @@ class Controller {
     }
 
 }
-
-?>

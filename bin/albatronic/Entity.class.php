@@ -1062,6 +1062,46 @@ class Entity {
     }
 
     /**
+     * Devuelve el valor de la primaryKey del
+     * objeto que representa el valor de la columna $column
+     * 
+     * @param type $column
+     * @return int
+     */
+    public function getColumnForeignKey($column) {
+        
+        $foreignKey = 0;
+        
+        $objeto = $this->{"get$column"}();
+        if (is_object($objeto)) {
+            $foreignKey = $objeto->getPrimaryKeyValue();
+        }
+        
+        return $foreignKey;
+    }
+    
+    /**
+     * Devuelve array con todos los valores del objeto
+     * que esta asociado a la columna $columnName
+     * 
+     * @param string $columnName
+     * @param string $columnSelect
+     * @param boolean $default
+     * @return array
+     */
+    public function getColumnFetchAll($columnName,$columnSelect,$default=false) {
+        
+        $array = array();
+        
+        $objeto = $this->{"get$columnName"}();
+        if (is_object($objeto)) {
+            $array = $objeto->fetchAll($columnSelect,$default);
+        }
+
+        return $array;
+    }
+    
+    /**
      * Devuelve el valor del meta dato $name
      * para la entidad e id de entidad en curso
      * 

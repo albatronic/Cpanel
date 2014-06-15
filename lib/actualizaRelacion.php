@@ -68,9 +68,9 @@ if ($v['onOff']) {
     }
 }
 
-unset($relacion);
+$tag = json_encode($relacion->getErrores());
 
-$tag = "";
+unset($relacion);
 
 echo $tag;
 ?>

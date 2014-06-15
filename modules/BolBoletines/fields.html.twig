@@ -29,7 +29,12 @@
             </li>            
             <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'envios'%}  ui-tabs-selected ui-state-active{%endif%}">
                 <a href="#envios" onclick='$( "#solapaActiva" ).val("envios");'>Envíos</a>
-            </li>            
+            </li>
+            {% if datos.Observations != '' %}
+            <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'Boletin'%}  ui-tabs-selected ui-state-active{%endif%}">
+                <a href="#boletin" onclick='$( "#solapaActiva" ).val("boletin");'>Boletín</a>
+            </li>
+            {% endif %}
         {% endif %} 
             
         {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
@@ -75,7 +80,12 @@
         </div>        
         <div id="envios" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
             {% include values.controller ~ '/envios.html.twig' %}
-        </div>        
+        </div> 
+        {% if datos.Observations != '' %}
+        <div id="boletin" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+            {% autoescape false %}{{datos.Observations}}{% endautoescape %}
+        </div>  
+        {% endif %}
     {% endif %}
         
     {% include '_global/fieldsComunes.html.twig' %}        

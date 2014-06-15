@@ -15,10 +15,56 @@ $(function(){
     $( "#tabs1" ).tabs(); 
     $( "#tabsMostrarEnMenu" ).tabs();
 
+    $( "#filtroAvanzado" ).dialog({
+        autoOpen: false,
+        width: 340,
+        //height: 420,
+        position: ['right','center'],
+        closeOnEscape: true,
+        show: 'slide',
+        resizable: false,
+        buttons: {
+            "Consultar" : function() {
+                $('#div_listado').html('<div class=ListadoAnimation><img src='+appPath+'/images/loadingAnimation.gif /></div>');
+                $('#formFiltroAvanzado').submit();
+                },
+            "Cancelar" : function(){
+                $(this).dialog('close');
+            }
+
+        }            
+    });
+    
+    $("#confirmacionBorrado").dialog({
+        autoOpen: false,
+        dialogClass: "",
+        resizable: false,
+        height: 150,
+        modal: true,
+        buttons: {
+            Aceptar: function() {
+                $('#accion_'+controller).val('Borrar');
+                submitForm('manto_'+controller);                
+                $( this ).dialog( "close" );
+            },          
+            Cancelar: function() {
+                $( this ).dialog( "close" );
+            }
+        }
+    });
+    
+    $( "#dialogExportar" ).dialog({
+        autoOpen: false,
+        width: 230,
+        height: 100,
+        position: ['center'],
+        closeOnEscape: true
+    });
+    
     /**
      * Diálogo popup variables de entorno
      */
-    $( "#filtroAvanzado" ).dialog({
+    $( "#filtroAvanzado1" ).dialog({
         autoOpen: false,
         modal: false,
         width: 350,
@@ -359,7 +405,7 @@ function submitForm(formulario) {
  * @param string idDiv El id del div donde se pondrá la imagen gif de cargando
  */
 function loading(idDiv) {
-    var html = "<img src='http://" + appPath + "/images/loading.gif'>";
+    var html = "<img src='" + appPath + "/images/loading.gif'>";
     $('#'+idDiv).html(html);
 }
 

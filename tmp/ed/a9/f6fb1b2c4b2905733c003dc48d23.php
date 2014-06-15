@@ -21,28 +21,27 @@ class __TwigTemplate_eda9f6fb1b2c4b2905733c003dc48d23 extends Twig_Template
         <div class=\"page_title_user\">
             ";
         // line 5
-        if (isset($context["project"])) { $_project_ = $context["project"]; } else { $_project_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_project_, "empresa"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["project"]) ? $context["project"] : null), "empresa"), "html", null, true);
         echo " - ";
-        if (isset($context["project"])) { $_project_ = $context["project"]; } else { $_project_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_project_, "title"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["project"]) ? $context["project"] : null), "title"), "html", null, true);
         echo " ";
-        if (isset($context["user"])) { $_user_ = $context["user"]; } else { $_user_ = null; }
-        if (($this->getAttribute($this->getAttribute($_user_, "IdPerfil"), "Id") == "1")) {
+        if (($this->getAttribute($this->getAttribute((isset($context["user"]) ? $context["user"] : null), "IdPerfil"), "Id") == "1")) {
             echo "(Id:";
-            if (isset($context["project"])) { $_project_ = $context["project"]; } else { $_project_ = null; }
-            echo twig_escape_filter($this->env, $this->getAttribute($_project_, "Id"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["project"]) ? $context["project"] : null), "Id"), "html", null, true);
             echo ")";
         }
         // line 6
         echo "\t   </div>
 
-\t<div id=\"botonesCabecera\">
+\t<div id=\"botonesCabecera\">";
+        // line 8
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual"), "html", null, true);
+        echo "-";
+        echo twig_escape_filter($this->env, (isset($context["action"]) ? $context["action"] : null), "html", null, true);
+        echo "
 \t\t";
         // line 9
-        if (isset($context["action"])) { $_action_ = $context["action"]; } else { $_action_ = null; }
-        if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-        if ((($_action_ == "") && ($this->getAttribute($_idiomas_, "actual") == 0))) {
+        if ((((isset($context["action"]) ? $context["action"] : null) == "") && ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0))) {
             // line 10
             echo "\t\t    ";
             $this->env->loadTemplate("_global/linkNew.html.twig")->display($context);
@@ -53,9 +52,7 @@ class __TwigTemplate_eda9f6fb1b2c4b2905733c003dc48d23 extends Twig_Template
         echo "\t\t        
 \t\t";
         // line 13
-        if (isset($context["action"])) { $_action_ = $context["action"]; } else { $_action_ = null; }
-        if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-        if ((($_action_ == "new") && ($this->getAttribute($_idiomas_, "actual") == 0))) {
+        if ((((isset($context["action"]) ? $context["action"] : null) == "new") && ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0))) {
             // line 14
             echo "\t\t    ";
             $this->env->loadTemplate("_global/linkCreate.html.twig")->display($context);
@@ -66,15 +63,13 @@ class __TwigTemplate_eda9f6fb1b2c4b2905733c003dc48d23 extends Twig_Template
         echo "\t\t        
 \t\t";
         // line 17
-        if (isset($context["action"])) { $_action_ = $context["action"]; } else { $_action_ = null; }
-        if (($_action_ == "edit")) {
+        if (((isset($context["action"]) ? $context["action"] : null) == "edit")) {
             // line 18
             echo "\t\t    ";
             $this->env->loadTemplate("_global/linkSave.html.twig")->display($context);
             // line 19
             echo "\t\t    ";
-            if (isset($context["idiomas"])) { $_idiomas_ = $context["idiomas"]; } else { $_idiomas_ = null; }
-            if (($this->getAttribute($_idiomas_, "actual") == 0)) {
+            if (($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)) {
                 echo "        
 \t\t        ";
                 // line 20
@@ -113,6 +108,6 @@ class __TwigTemplate_eda9f6fb1b2c4b2905733c003dc48d23 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  100 => 27,  97 => 26,  95 => 25,  92 => 24,  89 => 23,  86 => 22,  81 => 20,  75 => 19,  72 => 18,  69 => 17,  66 => 16,  63 => 15,  60 => 14,  56 => 13,  53 => 12,  50 => 11,  47 => 10,  43 => 9,  38 => 6,  24 => 5,  19 => 2,);
+        return array (  95 => 27,  92 => 26,  90 => 25,  87 => 24,  84 => 23,  81 => 22,  76 => 20,  71 => 19,  68 => 18,  66 => 17,  63 => 16,  60 => 15,  57 => 14,  55 => 13,  52 => 12,  49 => 11,  46 => 10,  44 => 9,  38 => 8,  34 => 6,  24 => 5,  19 => 2,);
     }
 }

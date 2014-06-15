@@ -1,0 +1,5 @@
+[27-Mar-2014 00:00:33 Europe/Madrid] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/albatro/public_html/Cpanel/bin/albatronic/EntityManager.class.php on line 219
+[27-Mar-2014 00:04:45 Europe/Madrid] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/albatro/public_html/Cpanel/bin/albatronic/EntityManager.class.php on line 219
+[27-Mar-2014 00:08:23 Europe/Madrid] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/albatro/public_html/Cpanel/bin/albatronic/EntityManager.class.php on line 219
+[27-Mar-2014 00:13:43 Europe/Madrid] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/albatro/public_html/Cpanel/bin/albatronic/EntityManager.class.php on line 219
+[07-May-2014 00:03:06 Europe/Madrid] PHP Warning:  mysql_connect(): Access denied for user 'insgra_instalado'@'serv1.servidordns.com.es' (using password: YES) in /home/albatro/public_html/Cpanel/bin/albatronic/EntityManager.class.php on line 116

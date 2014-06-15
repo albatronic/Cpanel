@@ -815,6 +815,15 @@ input.small {
 input.mid {
 	width:30% !important;
 }
+input.CampoTextoCorto {
+	width:15% !important;
+}
+input.CampoTextoMedio {
+	width:30% !important;
+}
+input.CampoTextoLargo {
+	width:50% !important;
+}
 input.large {
 	width:50% !important;
 }

@@ -7,12 +7,12 @@
   date 23.10.2012 03:02:09
 #}
 
-{{ macro.input(atributos.IdPais,'field_title','text',values.controller ~ '[IdPais]',values.controller ~ '_IdPais',datos.IdPais.Id,'255','CampoTextoLargo','1','','',['paises','Pais',datos.IdPais.Pais]) }}
+{{ macro.select(atributos.IdPais,'field_title',values.controller ~ '[IdPais]',values.controller ~ '_IdPais',none,datos.IdPais.Id,datos.IdPais.fetchAll('Pais',0),'chzn-select','1')}}
 {{ macro.input(atributos.IdProvincia,'field_title','text',values.controller ~ '[IdProvincia]',values.controller ~ '_IdProvincia',datos.IdProvincia.Id,'255','CampoTextoLargo','2','','',['provincias','Provincia',datos.IdProvincia.Provincia,values.controller ~ '_IdPais']) }}
 {{ macro.input(atributos.Codigo,'field_title','text',values.controller ~ '[Codigo]',values.controller ~ '_Codigo',datos.Codigo,'5','CampoTextoCorto','3') }}
 {{ macro.input(atributos.DigitoControl,'field_title','text',values.controller ~ '[DigitoControl]',values.controller ~ '_DigitoControl',datos.DigitoControl,'2','CampoTextoCorto','4') }}
 {{ macro.input(atributos.Municipio,'field_title','text',values.controller ~ '[Municipio]',values.controller ~ '_Municipio',datos.Municipio,'255','CampoTextoLargo','5') }}
 
-{% include '_global/fieldsComunes.html.twig' %}
+{# include '_global/fieldsComunes.html.twig' #}
 
-{{ macro.foco(values.controller ~ '_IdPais') }}
+{{ macro.foco(values.controller ~ '_Municipio') }}

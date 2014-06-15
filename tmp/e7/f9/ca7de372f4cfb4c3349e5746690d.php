@@ -19,23 +19,15 @@ class __TwigTemplate_e7f9ca7de372f4cfb4c3349e5746690d extends Twig_Template
         echo "
 ";
         // line 10
-        if (isset($context["macro"])) { $_macro_ = $context["macro"]; } else { $_macro_ = null; }
-        if (isset($context["atributos"])) { $_atributos_ = $context["atributos"]; } else { $_atributos_ = null; }
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        if (isset($context["datos"])) { $_datos_ = $context["datos"]; } else { $_datos_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_macro_, "input", array(0 => $this->getAttribute($_atributos_, "Zona"), 1 => "field_title", 2 => "text", 3 => ($this->getAttribute($_values_, "controller") . "[Zona]"), 4 => ($this->getAttribute($_values_, "controller") . "_Zona"), 5 => $this->getAttribute($_datos_, "Zona"), 6 => "255", 7 => "CampoTextoLargo", 8 => "1"), "method"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["macro"]) ? $context["macro"] : null), "input", array(0 => $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "Zona"), 1 => "field_title", 2 => "text", 3 => ($this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller") . "[Zona]"), 4 => ($this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller") . "_Zona"), 5 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "Zona"), 6 => "255", 7 => "CampoTextoLargo", 8 => "1"), "method"), "html", null, true);
         echo "
 
 ";
-        // line 12
-        $this->env->loadTemplate("_global/fieldsComunes.html.twig")->display($context);
         // line 13
         echo "
 ";
         // line 14
-        if (isset($context["macro"])) { $_macro_ = $context["macro"]; } else { $_macro_ = null; }
-        if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_macro_, "foco", array(0 => ($this->getAttribute($_values_, "controller") . "_Zona")), "method"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["macro"]) ? $context["macro"] : null), "foco", array(0 => ($this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller") . "_Zona")), "method"), "html", null, true);
         echo "
 ";
     }
@@ -52,6 +44,6 @@ class __TwigTemplate_e7f9ca7de372f4cfb4c3349e5746690d extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  31 => 12,  22 => 10,  19 => 9,  90 => 27,  86 => 26,  73 => 23,  68 => 22,  63 => 21,  55 => 20,  50 => 19,  42 => 18,  36 => 14,  33 => 13,  23 => 12,);
+        return array (  30 => 14,  27 => 13,  22 => 10,  19 => 9,);
     }
 }

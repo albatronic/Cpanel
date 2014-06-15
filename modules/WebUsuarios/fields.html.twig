@@ -24,7 +24,7 @@
         {{ macro.input(atributos.Usuario1,'field_title','text',values.controller ~ '[Usuario1]',values.controller ~ '_Usuario1',datos.Usuario1,'255','CampoTextoLargo','2') }}                        
         {{ macro.input(atributos.Nombre,'field_title','text',values.controller ~ '[Nombre]',values.controller ~ '_Nombre',datos.Nombre,'50','CampoTextoLargo','3') }}
         {{ macro.input(atributos.Apellidos,'field_title','text',values.controller ~ '[Apellidos]',values.controller ~ '_Apellidos',datos.Apellidos,'50','CampoTextoLargo','4') }}
-        {{ macro.input(atributos.Empresa,'field_title','text',values.controller ~ '[Empresa]',values.controller ~ '_Empresa',datos.Empresa,'50','CampoTextoLargo','5') }}
+        {{ macro.input(atributos.Empresa,'field_title','text',values.controller ~ '[Empresa]',values.controller ~ '_Empresa',datos.Empresa,'100','CampoTextoLargo','5') }}
         {{ macro.input(atributos.DNI,'field_title','text',values.controller ~ '[DNI]',values.controller ~ '_DNI',datos.DNI,'15','CampoTextoCorto','6') }}
         {{ macro.input(atributos.Direccion,'field_title','text',values.controller ~ '[Direccion]',values.controller ~ '_Direccion',datos.Direccion,'100','CampoTextoLargo','7') }}
         {{ macro.input(atributos.IdPais,'field_title','text',values.controller ~ '[IdPais]',values.controller ~ '_IdPais',datos.IdPais.Id,'255','CampoTextoLargo','8','','',['paises','Pais',datos.IdPais.Pais]) }}
@@ -36,7 +36,9 @@
         {{ macro.input(atributos.Movil,'field_title','text',values.controller ~ '[Movil]',values.controller ~ '_Movil',datos.Movil,'50','CampoTextoLargo','14') }}
         {{ macro.input(atributos.Web,'field_title','text',values.controller ~ '[Web]',values.controller ~ '_Web',datos.Web,'100','CampoTextoLargo','15') }}
         {{ macro.input(atributos.EMail,'field_title','text',values.controller ~ '[EMail]',values.controller ~ '_EMail',datos.EMail,'100','CampoTextoLargo','16') }}
-        {# macro.input(atributos.Password,'field_title','text',values.controller ~ '[Password]',values.controller ~ '_Password',none,'100','CampoTextoLargo','17') #}
+        {% if not values.datos.getPrimaryKeyValue%}
+        {{ macro.input(atributos.Password,'field_title','text',values.controller ~ '[Password]',values.controller ~ '_Password',none,'100','CampoTextoLargo','17') }}
+        {% endif %}
         {{ macro.input(atributos.NLogin,'field_title','text',values.controller ~ '[NLogin]',values.controller ~ '_NLogin',datos.NLogin,'4','CampoUnidades','18') }}
         {{ macro.fecha(atributos.UltimoLogin,'field_title',values.controller ~ '[UltimoLogin]',values.controller ~ '_UltimoLogin',datos.UltimoLogin,'19','datepicker','15')}}
         {{ macro.input(atributos.Usuario2,'field_title','text',values.controller ~ '[Usuario2]',values.controller ~ '_Usuario2',datos.Usuario2,'255','CampoTextoLargo','2') }}            

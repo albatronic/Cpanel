@@ -18,42 +18,37 @@
  * @copyright Informática ALBATRONIC, SL
  * @since 29.05.2011
  */
-
-
-
 class Mail {
 
     private $mailer;
-    private $mensaje = null;
+    private $mensaje = array();
+    private $config = array();
 
-    public function __construct($mailer='') {
-        if (is_object($mailer))
+    public function __construct($mailer = '') {
+        if (is_object($mailer)) {
             $this->mailer = $mailer;
-        else {
+        } else {
             // Busco el motor para enviar correos, que debe estar
             // indicado en el nodo 'mailer' del fichero de configuracion
-            $config = sfYaml::load('config/config.yml');
-            $config = $config['config']['mailer'];
+            $this->config = sfYaml::load('config/config.yml');
+            $this->config = $this->config['config']['mailer'];
             // Cargo la clase
-            if (file_exists($config['plugin_dir'].$config['plugin_file'])) {
-                include_once $config['plugin_dir'] . $config['plugin_file'];
+            if (file_exists($this->config['plugin_dir'] . $this->config['plugin_file'])) {
+                include_once $this->config['plugin_dir'] . $this->config['plugin_file'];
 
-                // Instancio un objeto de la clase mailer. La clase que se utilizará
-                // debe estar indicada en el subnodo 'motor' del nodo 'mailer'
-                $this->mailer = new $config['motor']();
+                // Create the Transport
+                $transport = Swift_SmtpTransport::newInstance()
+                        ->setHost($mailer['host'])
+                        ->setPort($mailer['port'])
+                        ->setUsername($mailer['user_name'])
+                        ->setPassword($mailer['password'])
+                ;
 
-                // Cargo los parametros que necesita el objeto mailer
-                $this->mailer->PluginDir = $config['plugin_dir'];
-                $this->mailer->Mailer = $config['socket'];
-                $this->mailer->Host = $config['host'];
-                $this->mailer->SMTPAuth = $config['smtp_auth'];
-                $this->mailer->Username = $config['user_name'];
-                $this->mailer->Password = $config['password'];
-                $this->mailer->Timeout = (double) $config['timeout'];
-                $this->mailer->From = $config['from'];
-                $this->mailer->FromName = $config['from_name'];
-                $this->mailer->setLanguage(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2),$config['plugin_dir']."language/");
-            } else $this->mensaje = "Error: no se ha podido crear el objeto mailer.";
+                // Create the Mailer using your created Transport
+                $this->mailer = Swift_Mailer::newInstance($transport);
+            } else {
+                $this->mensaje[] = "Error: no se ha podido crear el objeto mailer.";
+            }
         }
     }
 
@@ -63,34 +58,45 @@ class Mail {
      * @param email_adress $para La dirección del destinatario
      * @param email_adress $de La dirección del remitente
      * @param string $deNombre El nombre del remitente
+     * @param string $conCopia Destinatarios con copia
      * @param string $asunto El texto del asunto
      * @param string $mensaje El texto de mensaje
      * @param array $adjuntos Array con los nombres de los ficheros adjuntos
      * @return string Mensaje de exito o fracaso al enviar
      */
-    public function send($para, $de, $deNombre, $asunto, $mensaje, array $adjuntos) {
+    public function send($para, $de, $deNombre, $conCopia, $conCopiaOculta, $asunto, $mensaje, array $adjuntos = array()) {
 
-        if ( ($this->valida($para, $mensaje) == null) and ($this->mensaje == null) ){
+        if ($this->valida($para, $mensaje)) {
 
             if (trim($de) != '')
                 $this->mailer->From = $de;
             if (trim($deNombre) != '')
                 $this->mailer->FromName = $deNombre;
 
-            $this->mailer->AddAddress($para);
-            foreach ($adjuntos as $adjunto) {
-                $this->mailer->AddAttachment($adjunto);
-            }
-            $this->mailer->Subject = trim($asunto);
-            $this->mailer->Body = trim($mensaje);
-            $this->mailer->IsHTML(true);
+            // Create a message
+            $message = Swift_Message::newInstance($asunto)
+                    ->setContentType('text/html')
+                    ->setFrom(array($de => $deNombre))
+                    ->setTo(array($para))
+                    ->setReadReceiptTo($de)
+                    ->setPriority(2)
+                    ->setBody($mensaje);
+            if ($conCopia)
+                $message->setCc(array($conCopia));
+            if ($conCopiaOculta)
+                $message->setBcc(array($conCopiaOculta));
 
-            if ($this->mailer->Send())
-                $this->mensaje = "Envio con exito.";
-            else
-                $this->mensaje = "Error en el envio: " . $this->mailer->ErrorInfo;
+            foreach ($adjuntos as $adjunto) {
+                $message->attach(Swift_Attachment::fromPath($adjunto));
+            }
+
+            $nEnvios = $this->mailer->send($message);
+            if (!$nEnvios)
+                $this->mensaje[] = "Fallo al enviar a {$para}.";
         }
-        return $this->mensaje;
+        $ok = (count($this->mensaje) === 0);
+
+        return $ok;
     }
 
     /**
@@ -102,12 +108,14 @@ class Mail {
      * @return string
      */
     private function valida($email, $contenido) {
-        if (!$this->compruebaEmail($email))
-            $this->mensaje = "La direccion email indicada no es valida";
-        if (trim($contenido) == "")
-            $this->mensaje = "No ha indicado ningun contenido.";
 
-        return $this->mensaje;
+        $this->compruebaEmail($email);
+
+        if (trim($contenido) == "") {
+            $this->mensaje[] = "No ha indicado ningun contenido.";
+        }
+
+        return (count($this->mensaje) == 0);
     }
 
     /**
@@ -118,32 +126,21 @@ class Mail {
      * @return boolean
      */
     public function compruebaEmail($email) {
-        $mail_correcto = 0;
-        //compruebo unas cosas primeras
-        if ((strlen($email) >= 6) && (substr_count($email, "@") == 1) && (substr($email, 0, 1) != "@") && (substr($email, strlen($email) - 1, 1) != "@")) {
-            if ((!strstr($email, "'")) && (!strstr($email, "\"")) && (!strstr($email, "\\")) && (!strstr($email, "\$")) && (!strstr($email, " "))) {
-                //miro si tiene caracter .
-                if (substr_count($email, ".") >= 1) {
-                    //obtengo la terminacion del dominio
-                    $term_dom = substr(strrchr($email, '.'), 1);
-                    //compruebo que la terminación del dominio sea correcta
-                    if (strlen($term_dom) > 1 && strlen($term_dom) < 5 && (!strstr($term_dom, "@"))) {
-                        //compruebo que lo de antes del dominio sea correcto
-                        $antes_dom = substr($email, 0, strlen($email) - strlen($term_dom) - 1);
-                        $caracter_ult = substr($antes_dom, strlen($antes_dom) - 1, 1);
-                        if ($caracter_ult != "@" && $caracter_ult != ".") {
-                            $mail_correcto = 1;
-                        }
-                    }
-                }
-            }
+
+        $ok = Swift_Validate::email($email);
+        if (!$ok) {
+            $this->mensaje[] = "La direccion email indicada no es valida";
         }
-        if ($mail_correcto)
-            return true;
-        else
-            return false;
+
+        return (count($this->mensaje) == 0);
+    }
+
+    /**
+     * Devuelve un array con los eventuales mensajes de error
+     * @return array Array de mensajes
+     */
+    public function getMensaje() {
+        return $this->mensaje;
     }
 
 }
-
-?>

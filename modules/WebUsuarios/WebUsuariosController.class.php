@@ -33,7 +33,7 @@ class WebUsuariosController extends Controller {
         $archivo = new Archivo($fichero);
         $archivo->open();
         $errores = array();
-        while (($row = $archivo->readLine()) and (count($errores) == 0)) {
+        while (($row = $archivo->readLine()) and ( count($errores) == 0)) {
 
             // Validar email
             $email = trim($row[11]);

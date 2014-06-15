@@ -38,7 +38,7 @@
         <div style="float: right;">
         {% if values.permisos.permisosModulo['EX'] %}
             <img style="float:right; cursor: pointer; margin-left: 3px;" src="{{app.path}}/images/ico_excel.gif" width="18px" height="17px" title="Exportar..." alt="Exportar..."
-                 onclick="$('#dialog').dialog('open');"
+                 onclick="$('#dialogExportar').dialog('open');"
             />
             {% include "_Emergente/dialogoExportar.html.twig" with {'filter': filter, 'export_types': values.listado.export_types} %}
         {%endif%}

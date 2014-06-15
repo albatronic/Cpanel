@@ -17,277 +17,259 @@ class __TwigTemplate_6b56fd67bfa4d81009e23906a529da58 extends Twig_Template
     {
         // line 2
         echo "
-<div id=\"filtroAvanzado\" title=\"Filtro Avanzado\" class=\"FiltrosAdicionales\">
-
 ";
-        // line 5
+        // line 3
         $context["i"] = 0;
+        // line 4
+        echo "<div id=\"filtroAvanzado\" title=\"Filtro Avanzado\" class=\"FiltrosAdicionales\">
+    <form name='formFiltroAvanzado' id='formFiltroAvanzado' action='' method='POST'>
+        <input name='controller' value='";
         // line 6
-        if (isset($context["filter"])) { $_filter_ = $context["filter"]; } else { $_filter_ = null; }
-        $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable($this->getAttribute($_filter_, "aditional"));
-        foreach ($context['_seq'] as $context["key"] => $context["value"]) {
-            // line 7
-            echo "    
-    ";
-            // line 9
-            echo "    ";
-            // line 10
-            echo "    ";
-            // line 11
-            echo "    ";
-            if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-            if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-            if (isset($context["user"])) { $_user_ = $context["user"]; } else { $_user_ = null; }
-            if (($this->getAttribute($this->getAttribute($this->getAttribute($this->getAttribute($_values_, "varEnvMod"), "columns"), $this->getAttribute($_value_, "field"), array(), "array"), "visible") || ($this->getAttribute($this->getAttribute($_user_, "IdPerfil"), "Id") == 1))) {
-                // line 12
-                echo "    
-        ";
-                // line 13
-                if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                $context["i"] = ($_i_ + 1);
-                // line 14
-                echo "        ";
-                if (isset($context["filter"])) { $_filter_ = $context["filter"]; } else { $_filter_ = null; }
-                if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                if ($this->getAttribute($this->getAttribute($_filter_, "valuesSelected"), $_i_, array(), "array")) {
-                    // line 15
-                    echo "            ";
-                    if (isset($context["filter"])) { $_filter_ = $context["filter"]; } else { $_filter_ = null; }
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    $context["valor"] = $this->getAttribute($this->getAttribute($_filter_, "valuesSelected"), $_i_, array(), "array");
-                    // line 16
-                    echo "        ";
-                } else {
-                    // line 17
-                    echo "            ";
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                    $context["valor"] = $this->getAttribute($_value_, "default");
-                    // line 18
-                    echo "        ";
-                }
-                // line 19
-                echo "
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["values"]) ? $context["values"] : null), "controller"), "html", null, true);
+        echo "' type='hidden' />
+        <input name='action' value='list' type='hidden' />  
         <div class=\"FiltroAdicional\">
-            <div style=\"float: left; width: 140px; margin-right: 3px;\">&nbsp;&nbsp;";
-                // line 21
-                if (isset($context["values"])) { $_values_ = $context["values"]; } else { $_values_ = null; }
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getAttribute($_values_, "varEnvMod"), "columns"), $this->getAttribute($_value_, "field"), array(), "array"), "caption"), "html", null, true);
+            <div class=\"FiltroAdicionalEtiqueta\">Ordenar por:</div>            
+            <div style=\"float:left;\">
+            <select name=\"filter[orderBy]\">
+            ";
+        // line 12
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["filter"]) ? $context["filter"] : null), "columnsOrder"));
+        foreach ($context['_seq'] as $context["_key"] => $context["criterio"]) {
+            // line 13
+            echo "                <option value=\"";
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["criterio"]) ? $context["criterio"] : null), "criteria"), "html", null, true);
+            echo "\" ";
+            if (($this->getAttribute((isset($context["criterio"]) ? $context["criterio"] : null), "criteria") == $this->getAttribute((isset($context["filter"]) ? $context["filter"] : null), "orderBy"))) {
+                echo " SELECTED ";
+            }
+            echo ">";
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["criterio"]) ? $context["criterio"] : null), "title"), "html", null, true);
+            echo "</option>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['criterio'], $context['_parent'], $context['loop']);
+        $context = array_merge($_parent, array_intersect_key($context, $_parent));
+        // line 15
+        echo "            </select>
+            </div>
+        </div>
+        <div class=\"FiltroAdicional\">        
+            <div class=\"FiltroAdicionalEtiqueta\">Mostrar:</div>              
+            <div style=\"float:left;\">            
+            <input name=\"filter[recordsPerPage]\" value=\"";
+        // line 21
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["filter"]) ? $context["filter"] : null), "recordsPerPage"), "html", null, true);
+        echo "\" type=\"text\" style=\"width: 25px;\"/>
+            </div>
+        </div>
+        ";
+        // line 24
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["filter"]) ? $context["filter"] : null), "aditional"));
+        foreach ($context['_seq'] as $context["key"] => $context["value"]) {
+            // line 25
+            echo "
+            ";
+            // line 27
+            echo "            ";
+            // line 28
+            echo "            ";
+            // line 29
+            echo "            ";
+            if (($this->getAttribute($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["values"]) ? $context["values"] : null), "varEnvMod"), "columns"), $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "field"), array(), "array"), "visible") || ($this->getAttribute($this->getAttribute((isset($context["user"]) ? $context["user"] : null), "IdPerfil"), "Id") == 1))) {
+                // line 30
+                echo "
+                ";
+                // line 31
+                $context["i"] = ((isset($context["i"]) ? $context["i"] : null) + 1);
+                // line 32
+                echo "                ";
+                if ($this->getAttribute($this->getAttribute((isset($context["filter"]) ? $context["filter"] : null), "valuesSelected"), (isset($context["i"]) ? $context["i"] : null), array(), "array")) {
+                    // line 33
+                    echo "                    ";
+                    $context["valor"] = $this->getAttribute($this->getAttribute((isset($context["filter"]) ? $context["filter"] : null), "valuesSelected"), (isset($context["i"]) ? $context["i"] : null), array(), "array");
+                    // line 34
+                    echo "                ";
+                } else {
+                    // line 35
+                    echo "                    ";
+                    $context["valor"] = $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "default");
+                    // line 36
+                    echo "                ";
+                }
+                // line 37
+                echo "
+                <div class=\"FiltroAdicional\">
+                    <div class=\"FiltroAdicionalEtiqueta\">";
+                // line 39
+                echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["values"]) ? $context["values"] : null), "varEnvMod"), "columns"), $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "field"), array(), "array"), "caption"), "html", null, true);
                 echo ":</div>
 
-            <div style=\"float: left; height: 25px;\">
-            ";
-                // line 24
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                if (($this->getAttribute($_value_, "type") == "select")) {
-                    // line 25
-                    echo "                <input name=\"filter[columnsSelected][";
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                    echo "]\" value=\"";
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_value_, "field"), "html", null, true);
-                    echo "\" type=\"hidden\"/>
-                <select name=\"filter[valuesSelected][";
-                    // line 26
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                    echo "]\" id=\"filter_valuesSelected_";
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                    echo "\" ";
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_value_, "event"), "html", null, true);
-                    echo " style=\"width: 120px;\">
+                    <div style=\"float: left;\">
                     ";
-                    // line 27
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
+                // line 42
+                if (($this->getAttribute((isset($context["value"]) ? $context["value"] : null), "type") == "select")) {
+                    // line 43
+                    echo "                        <input name=\"filter[columnsSelected][";
+                    echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                    echo "]\" value=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "field"), "html", null, true);
+                    echo "\" type=\"hidden\"/>
+                        <select name=\"filter[valuesSelected][";
+                    // line 44
+                    echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                    echo "]\" id=\"filter_valuesSelected_";
+                    echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                    echo "\" ";
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "event"), "html", null, true);
+                    echo " style=\"width: 120px;\">
+                            ";
+                    // line 45
                     $context['_parent'] = (array) $context;
-                    $context['_seq'] = twig_ensure_traversable($this->getAttribute($_value_, "values"));
+                    $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["value"]) ? $context["value"] : null), "values"));
                     foreach ($context['_seq'] as $context["_key"] => $context["objeto"]) {
-                        // line 28
-                        echo "                    <option value=\"";
-                        if (isset($context["objeto"])) { $_objeto_ = $context["objeto"]; } else { $_objeto_ = null; }
-                        echo twig_escape_filter($this->env, $this->getAttribute($_objeto_, "Id"), "html", null, true);
+                        // line 46
+                        echo "                            <option value=\"";
+                        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["objeto"]) ? $context["objeto"] : null), "Id"), "html", null, true);
                         echo "\" ";
-                        if (isset($context["objeto"])) { $_objeto_ = $context["objeto"]; } else { $_objeto_ = null; }
-                        if (isset($context["valor"])) { $_valor_ = $context["valor"]; } else { $_valor_ = null; }
-                        if (($this->getAttribute($_objeto_, "Id") == $_valor_)) {
+                        if (($this->getAttribute((isset($context["objeto"]) ? $context["objeto"] : null), "Id") == (isset($context["valor"]) ? $context["valor"] : null))) {
                             echo " SELECTED ";
                         }
                         echo ">";
-                        if (isset($context["objeto"])) { $_objeto_ = $context["objeto"]; } else { $_objeto_ = null; }
-                        echo twig_escape_filter($this->env, $this->getAttribute($_objeto_, "Value"), "html", null, true);
+                        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["objeto"]) ? $context["objeto"] : null), "Value"), "html", null, true);
                         echo "</option>
-                    ";
+                            ";
                     }
                     $_parent = $context['_parent'];
                     unset($context['_seq'], $context['_iterated'], $context['_key'], $context['objeto'], $context['_parent'], $context['loop']);
                     $context = array_merge($_parent, array_intersect_key($context, $_parent));
-                    // line 30
-                    echo "                </select>
-            ";
-                }
-                // line 32
-                echo "
-            ";
-                // line 33
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                if (($this->getAttribute($_value_, "type") == "input")) {
-                    // line 34
-                    echo "                <input name=\"filter[columnsSelected][";
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                    echo "]\" value=\"";
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_value_, "field"), "html", null, true);
-                    echo "\" type=\"hidden\"/>
-                <input name=\"filter[valuesSelected][";
-                    // line 35
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                    echo "]\" id=\"filter_valuesSelected_";
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                    echo "\" value =\"";
-                    if (isset($context["valor"])) { $_valor_ = $context["valor"]; } else { $_valor_ = null; }
-                    echo twig_escape_filter($this->env, $_valor_, "html", null, true);
-                    echo "\" type=\"text\" size=\"10\" ";
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_value_, "event"), "html", null, true);
-                    echo "/>
-            ";
-                }
-                // line 37
-                echo "
-            ";
-                // line 38
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                if (($this->getAttribute($_value_, "type") == "range")) {
-                    // line 39
-                    echo "                <input name=\"filter[columnsSelected][";
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                    echo "]\" value=\"";
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_value_, "field"), "html", null, true);
-                    echo "\" type=\"hidden\"/>
-                ";
-                    // line 40
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                    if (($this->getAttribute($_value_, "data_type") == "date")) {
-                        // line 41
-                        echo "                    ";
-                        if (isset($context["macro"])) { $_macro_ = $context["macro"]; } else { $_macro_ = null; }
-                        if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                        if (isset($context["valor"])) { $_valor_ = $context["valor"]; } else { $_valor_ = null; }
-                        echo twig_escape_filter($this->env, $this->getAttribute($_macro_, "fecha", array(0 => null, 1 => null, 2 => (("filter[valuesSelected][" . $_i_) . "]"), 3 => ("filter_valuesSelected_" . $_i_), 4 => $_valor_), "method"), "html", null, true);
-                        echo "
-                ";
-                    } else {
-                        // line 43
-                        echo "                    <input name=\"filter[valuesSelected][";
-                        if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                        echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                        echo "]\" id=\"filter_valuesSelected_";
-                        if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                        echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                        echo "\" value =\"";
-                        if (isset($context["valor"])) { $_valor_ = $context["valor"]; } else { $_valor_ = null; }
-                        echo twig_escape_filter($this->env, $_valor_, "html", null, true);
-                        echo "\" type=\"text\" size=\"10\" ";
-                        if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                        echo twig_escape_filter($this->env, $this->getAttribute($_value_, "event"), "html", null, true);
-                        echo "/>
-                ";
-                    }
-                    // line 45
-                    echo "            ";
-                }
-                // line 46
-                echo "
-            ";
-                // line 47
-                if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                if (($this->getAttribute($_value_, "type") == "check")) {
                     // line 48
-                    echo "                <input name=\"filter[columnsSelected][";
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                    echo "]\" value=\"";
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_value_, "field"), "html", null, true);
-                    echo "\" type=\"hidden\"/>
-                <input name=\"filter[valuesSelected][";
-                    // line 49
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                    echo "]\" id=\"filter_valuesSelected_";
-                    if (isset($context["i"])) { $_i_ = $context["i"]; } else { $_i_ = null; }
-                    echo twig_escape_filter($this->env, $_i_, "html", null, true);
-                    echo "\"
-                 ";
-                    // line 50
-                    if (isset($context["valor"])) { $_valor_ = $context["valor"]; } else { $_valor_ = null; }
-                    if (($_valor_ != "")) {
-                        // line 51
-                        echo "                    ";
-                        if (isset($context["valor"])) { $_valor_ = $context["valor"]; } else { $_valor_ = null; }
-                        if (($_valor_ == "1")) {
-                            // line 52
-                            echo "                       checked=\"checked\"
+                    echo "                        </select>
                     ";
-                        }
-                        // line 54
-                        echo "                 ";
-                    } else {
-                        // line 55
-                        echo "                    ";
-                        if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                        if (($this->getAttribute($_value_, "default") == "on")) {
-                            // line 56
-                            echo "                       checked=\"checked\"
-                    ";
-                        }
-                        // line 58
-                        echo "                 ";
-                    }
-                    // line 59
-                    echo "                       type=\"checkbox\" ";
-                    if (isset($context["value"])) { $_value_ = $context["value"]; } else { $_value_ = null; }
-                    echo twig_escape_filter($this->env, $this->getAttribute($_value_, "event"), "html", null, true);
-                    echo "/>
-            ";
                 }
-                // line 61
-                echo "            </div>
-        </div>
-    ";
+                // line 50
+                echo "
+                    ";
+                // line 51
+                if (($this->getAttribute((isset($context["value"]) ? $context["value"] : null), "type") == "input")) {
+                    // line 52
+                    echo "                        <input name=\"filter[columnsSelected][";
+                    echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                    echo "]\" value=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "field"), "html", null, true);
+                    echo "\" type=\"hidden\"/>
+                        <input name=\"filter[valuesSelected][";
+                    // line 53
+                    echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                    echo "]\" id=\"filter_valuesSelected_";
+                    echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                    echo "\" value =\"";
+                    echo twig_escape_filter($this->env, (isset($context["valor"]) ? $context["valor"] : null), "html", null, true);
+                    echo "\" type=\"text\" size=\"10\" ";
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "event"), "html", null, true);
+                    echo "/>
+                    ";
+                }
+                // line 55
+                echo "
+                    ";
+                // line 56
+                if (($this->getAttribute((isset($context["value"]) ? $context["value"] : null), "type") == "range")) {
+                    // line 57
+                    echo "                        <input name=\"filter[columnsSelected][";
+                    echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                    echo "]\" value=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "field"), "html", null, true);
+                    echo "\" type=\"hidden\"/>
+                        ";
+                    // line 58
+                    if (($this->getAttribute((isset($context["value"]) ? $context["value"] : null), "data_type") == "date")) {
+                        // line 59
+                        echo "                            ";
+                        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["macro"]) ? $context["macro"] : null), "fecha", array(0 => null, 1 => null, 2 => (("filter[valuesSelected][" . (isset($context["i"]) ? $context["i"] : null)) . "]"), 3 => ("filter_valuesSelected_" . (isset($context["i"]) ? $context["i"] : null)), 4 => (isset($context["valor"]) ? $context["valor"] : null)), "method"), "html", null, true);
+                        echo "
+                        ";
+                    } else {
+                        // line 61
+                        echo "                            <input name=\"filter[valuesSelected][";
+                        echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                        echo "]\" id=\"filter_valuesSelected_";
+                        echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                        echo "\" value =\"";
+                        echo twig_escape_filter($this->env, (isset($context["valor"]) ? $context["valor"] : null), "html", null, true);
+                        echo "\" type=\"text\" size=\"10\" ";
+                        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "event"), "html", null, true);
+                        echo "/>
+                        ";
+                    }
+                    // line 63
+                    echo "                    ";
+                }
+                // line 64
+                echo "
+                    ";
+                // line 65
+                if (($this->getAttribute((isset($context["value"]) ? $context["value"] : null), "type") == "check")) {
+                    // line 66
+                    echo "                        <input name=\"filter[columnsSelected][";
+                    echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                    echo "]\" value=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "field"), "html", null, true);
+                    echo "\" type=\"hidden\"/>
+                        <input name=\"filter[valuesSelected][";
+                    // line 67
+                    echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                    echo "]\" id=\"filter_valuesSelected_";
+                    echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
+                    echo "\"
+                         ";
+                    // line 68
+                    if (((isset($context["valor"]) ? $context["valor"] : null) != "")) {
+                        // line 69
+                        echo "                            ";
+                        if (((isset($context["valor"]) ? $context["valor"] : null) == "1")) {
+                            // line 70
+                            echo "                               checked=\"checked\"
+                            ";
+                        }
+                        // line 72
+                        echo "                         ";
+                    } else {
+                        // line 73
+                        echo "                            ";
+                        if (($this->getAttribute((isset($context["value"]) ? $context["value"] : null), "default") == "on")) {
+                            // line 74
+                            echo "                               checked=\"checked\"
+                            ";
+                        }
+                        // line 76
+                        echo "                         ";
+                    }
+                    // line 77
+                    echo "                               type=\"checkbox\" ";
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "event"), "html", null, true);
+                    echo "/>
+                    ";
+                }
+                // line 79
+                echo "                    </div>
+                </div>
+            ";
             }
-            // line 64
-            echo "    
-";
+            // line 82
+            echo "
+        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['key'], $context['value'], $context['_parent'], $context['loop']);
         $context = array_merge($_parent, array_intersect_key($context, $_parent));
-        // line 66
+        // line 84
         echo "
-<div style='clear:both'></div>
-
-<div style=\"margin-top: 5px; margin-bottom: 10px; margin-left:43px; width: 290px;\">
-<input class=\"FiltrosAdicionalesComando\" type=\"buttom\" value=\"Consultar\"
-      onclick=\"
-          \$('#div_listado').html('<div class=ListadoAnimation><img src=";
-        // line 72
-        if (isset($context["app"])) { $_app_ = $context["app"]; } else { $_app_ = null; }
-        echo twig_escape_filter($this->env, $this->getAttribute($_app_, "path"), "html", null, true);
-        echo "/images/loadingAnimation.gif /></div>');
-          \$('#filtroAvanzado').dialog('close');
-          \$('#filtro').submit();\"
-/>
-</div>
+        <div style='clear:both'></div>
+    </form>        
 </div>";
     }
 
@@ -303,6 +285,6 @@ class __TwigTemplate_6b56fd67bfa4d81009e23906a529da58 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  284 => 72,  276 => 66,  269 => 64,  264 => 61,  257 => 59,  254 => 58,  250 => 56,  246 => 55,  243 => 54,  239 => 52,  235 => 51,  232 => 50,  224 => 49,  215 => 48,  212 => 47,  209 => 46,  206 => 45,  190 => 43,  181 => 41,  178 => 40,  169 => 39,  166 => 38,  163 => 37,  148 => 35,  139 => 34,  136 => 33,  133 => 32,  129 => 30,  110 => 28,  105 => 27,  94 => 26,  85 => 25,  82 => 24,  74 => 21,  70 => 19,  67 => 18,  63 => 17,  60 => 16,  55 => 15,  50 => 14,  47 => 13,  44 => 12,  38 => 11,  36 => 10,  34 => 9,  31 => 7,  26 => 6,  24 => 5,  19 => 2,);
+        return array (  270 => 84,  263 => 82,  258 => 79,  252 => 77,  249 => 76,  245 => 74,  242 => 73,  239 => 72,  235 => 70,  232 => 69,  230 => 68,  224 => 67,  217 => 66,  215 => 65,  212 => 64,  209 => 63,  197 => 61,  191 => 59,  189 => 58,  182 => 57,  180 => 56,  177 => 55,  166 => 53,  159 => 52,  157 => 51,  154 => 50,  150 => 48,  135 => 46,  131 => 45,  123 => 44,  116 => 43,  114 => 42,  108 => 39,  104 => 37,  101 => 36,  98 => 35,  95 => 34,  89 => 32,  87 => 31,  84 => 30,  81 => 29,  79 => 28,  74 => 25,  70 => 24,  64 => 21,  41 => 13,  37 => 12,  24 => 4,  22 => 3,  111 => 39,  103 => 34,  97 => 31,  92 => 33,  77 => 27,  73 => 25,  67 => 21,  59 => 16,  56 => 15,  54 => 14,  48 => 11,  45 => 10,  26 => 7,  35 => 10,  33 => 9,  30 => 8,  28 => 6,  23 => 5,  19 => 2,);
     }
 }

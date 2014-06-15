@@ -8,7 +8,7 @@
 ---
 listados:
   -
-    title: WebUsuarios
+    title: Listado de Usuarios Web
     order_by: Id
     break_field: null
     idPerfil: null
@@ -35,3 +35,18 @@ listados:
       NLogin: { title: NLogin, length: '4', align: R, type: integer, total: NO, formula: null, format: null }
       UltimoLogin: { title: UltimoLogin, length: 10, align: R, type: datetime, total: NO, formula: null, format: null }
       IdPerfil: { title: IdPerfil, length: '11', align: R, type: integer, total: NO, formula: null, format: null }
+  -
+    title: Exportar lista distribución
+    order_by: Id
+    break_field: null
+    idPerfil: null
+    orientation: P
+    unit: mm
+    format: A4
+    margins: '10, 10, 15, 10'
+    body_font: 'Courier, , 8'
+    line_height: 4
+    print_interline: null
+    legend_bottom: null
+    columns:
+      EMail: { title: EMail, length: '100', align: L, type: string, total: NO, formula: null, format: null }

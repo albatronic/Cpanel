@@ -42,8 +42,6 @@ else
 $yaml = sfYaml::load('config/config.yml');
 $config = $yaml['config'];
 
-$_SESSION['export_types'] = $config['export_types'];
-
 $_SESSION['audit'] = $config['audit_mode'];
 
 $app = $config['app'];
@@ -198,7 +196,7 @@ if ($config['debug_mode']) {
     $result['values']['_debugValues'] = sfYaml::Dump($result['values'], 100);
 }
 
-// Si el método no devuelve template o no exite, muestro un template de error.
+// Si el método no devuelve template o no existe, muestro un template de error.
 if (!file_exists($config['twig']['templates_folder'] . '/' . $result['template']) or ($result['template'] == '')) {
     $result['values']['error'] = 'No existe el template: "' . $result['template'] . '" devuelto por el método "' . $clase . ':' . $action . 'Action"';
     $result['template'] = '_global/error.html.twig';
@@ -270,5 +268,3 @@ function getArchivoJs($template) {
 
     return $archivoTemplate;
 }
-
-?>

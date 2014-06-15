@@ -189,7 +189,7 @@
                    id="checkbox_{{ id|default(name)}}"
                    value="{{ value }}"
                     {% if (value == '1') %} CHECKED {% endif %}
-                   class="{{class}}" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
+                   class="small" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
                    onchange="
                         {{ onchange }} {{ _self.alertSave }}
                         if ($('#checkbox_{{ id|default(name)}}').is(':checked')) {$('#{{ id|default(name)}}').val('1');} else {$('#{{ id|default(name)}}').val('0');}
@@ -202,7 +202,7 @@
                    name="{{ name }}"
                    id="{{ id|default(name)}}"
                    value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
-                   class="mid" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
+                   class="{{class|default('mid')}}" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
                    onchange="{{ onchange }} {{ _self.alertSave }}"
                    {{extra}}
                    {% if atributos.updatable == '0' %} disabled {% endif %}
@@ -612,4 +612,36 @@ $('.title_icon span').css('background','url({{appPath}}/images/alert.png)');
         {% set puntos = "..." %}
     {% endif %}
     {{ texto|slice(0,nCaracteres) }} {{puntos}}
+{% endmacro %}
+
+{#
+    GENERA LOS CAMPOS DE UN FORMULARIO
+#}
+{% macro form(controller,atributos,datos)%}
+    {% for keyAtributo,atributo in atributos %}
+        {{ _self.formItem(controller,keyAtributo,atributo,datos) }}
+    {% endfor %}
+{% endmacro %}
+
+{#
+    GENERA UN ELMENTO DE UN FORMULARIO
+#}
+{% macro formItem(controller,keyAtributo,atributo,datos) %}
+    {% if atributo.aditional_filter %}
+        {% if atributo.aditional_filter.entity == 'ValoresSN' %}
+            {# MOSTRAR CHEKBOX #}
+            {{ _self.input(atributo,'field_title','checkbox',controller ~ '['~keyAtributo~']',controller ~ '_'~keyAtributo,datos.getColumnForeignKey(keyAtributo),'255','CampoTextoLargo','12') }}                    
+        {% else %}
+            {# MOSTRAR SELECT #}   
+            {{ _self.select(atributo,'field_title',controller ~ '['~keyAtributo~']',controller ~ '_'~keyAtributo,none,datos.getColumnForeignKey(keyAtributo),datos.getColumnFetchAll(keyAtributo,'Titulo',0),'chzn-select','1')}}
+        {% endif %}
+    {% else %}
+        {% if atributo.validator.length>255%}
+            {# MOSTRAR TEXTAREA #}
+            {{ _self.textarea(atributo,'field_title',controller ~ '['~keyAtributo~']',controller ~ '_'~keyAtributo,datos.getColumnValue(keyAtributo),none,none,'textarea','4') }}                    
+        {% else %}
+            {# MOSTRAR INPUT #}
+            {{ _self.input(atributo,'field_title','text',controller ~ '['~keyAtributo~']',controller ~ '_'~keyAtributo,datos.getColumnValue(keyAtributo),'255','CampoTextoLargo','2') }}
+        {% endif %}
+    {% endif %}    
 {% endmacro %}

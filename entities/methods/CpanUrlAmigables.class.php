@@ -48,12 +48,17 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
         $url = new CpanUrlAmigables();
         $rows = $url->cargaCondicion("Id", "Entity='{$objeto->getClassName()}' and IdEntity='{$objeto->getPrimaryKeyValue()}'");
         if ($rows[0]['Id']) {
-            $url = new CpanUrlAmigables($rows[0]['Id']);
-            $url->queryUpdate(array("Publish" => $objeto->getPublish()->getIDTipo(), "Privacy" => $objeto->getPrivacy()->getIDTipo()));
+            $url->queryUpdate(
+                    array(
+                        "Publish" => $objeto->getPublish()->getIDTipo(),
+                        "Privacy" => $objeto->getPrivacy()->getIDTipo(),
+                    ), 
+                    "Id='{$rows[0]['Id']}'"
+                    );
         }
         unset($url);
     }
-    
+
     /**
      * Incrementa en 1 el número de visitas
      * de la url amigable y de su entidad asociada
@@ -254,4 +259,5 @@ class CpanUrlAmigables extends CpanUrlAmigablesEntity {
     }
 
 }
+
 ?>

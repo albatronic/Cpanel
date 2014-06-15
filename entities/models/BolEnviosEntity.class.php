@@ -54,7 +54,6 @@ class BolEnviosEntity extends EntityComunes {
 
     /**
      * @var string
-     * @assert NotBlank(groups="BolEnvios")
      */
     protected $ArchivoHtml;
 

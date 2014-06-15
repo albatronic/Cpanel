@@ -23,7 +23,7 @@
             </li>
         {% endif %}
                 
-        {% if values.varEnvMod.showCommonFields == '1'  or user.IdPerfil.Id == '1' %}
+        {% if values.varEnvMod.showCommonFields == '1' or user.IdPerfil.Id == '1' %}
         <li class="ui-state-default ui-corner-top{%if values.solapaActiva == 'fieldsComunes'%}  ui-tabs-selected ui-state-active{%endif%}">
             <a href="#fieldsComunes" onclick='$( "#solapaActiva" ).val("fieldsComunes");'>Más detalles...</a>
         </li>        
@@ -35,7 +35,7 @@
         {% include values.controller ~ '/arbol.html.twig' with {'arbol': values.datos.getArbolHijos, 'subtemplate':'arbolEditar.html.twig'} %}
     </div>
         
-    <div id="general">     
+    <div id="general">              
         {{ macro.select(atributos.IdSeccion,'field_title',values.controller ~ '[IdSeccion]',values.controller ~ '_IdSeccion',none,datos.IdSeccion.Id,datos.IdSeccion.fetchAll('Titulo',0),'chzn-select','1')}}
         {{ macro.input(atributos.Titulo,'field_title','text',values.controller ~ '[Titulo]',values.controller ~ '_Titulo',datos.Titulo,'255','CampoTextoLargo','2') }}
         {{ macro.input(atributos.Subtitulo,'field_title','text',values.controller ~ '[Subtitulo]',values.controller ~ '_Subtitulo',datos.Subtitulo,'255','CampoTextoLargo','3') }}
@@ -58,7 +58,7 @@
         {{ macro.input(atributos.EsWiki,'field_title','checkbox',values.controller ~ '[EsWiki]',values.controller ~ '_EsWiki',datos.EsWiki.IDTipo,'255','CampoTextoLargo','12') }}
 
         {% include '_global/metaDatos.html.twig' %}       
-        </div>
+    </div>
     
     {% if (values.datos.getPrimaryKeyValue) and (values.datos.EsEvento.IDTipo) %}
         <div id="eventos" class="ui-tabs-panel ui-widget-content ui-corner-bottom"></div>

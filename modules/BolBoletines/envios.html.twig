@@ -1,1 +1,53 @@
-{# empty Twig template #}
+{# ENVIOS DE LOS BOLETINES #}
+
+<div>
+    <div>
+        {{ macro.textarea({'caption':'Para','visible':1,'varEnv':'0'},'field_title','destino[para]','destino_para',none,none,none,'textarea',100)}} 
+        {{ macro.textarea({'caption':'Con copia','visible':1,'varEnv':'0'},'field_title','destino[cc]','destino_cc',none,none,none,'textarea',100)}} 
+        {{ macro.textarea({'caption':'Con copia oculta','visible':1,'varEnv':'0'},'field_title','destino[cco]','destino_cco',none,none,none,'textarea',100)}} 
+        <div id="divBotonEnviar"><input type="button" value="Enviar" id="botonEnviar"/></div>
+    </div>
+
+    <div style="margin-top: 30px;">
+    {% if datos.envios | length > 0 %}
+        <h3>Historial de envíos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <td>Para</td>
+                    <td>Con Copia</td>
+                    <td>Con Copia Oculta</td>
+                    <td>Fecha envío</td>
+                    <td>Enviado por</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for envio in datos.getEnvios %}
+                    <tr>
+                        <td>{{envio.Para}}</td>
+                        <td>{{envio.Cc}}</td>
+                        <td>{{envio.Cco}}</td>
+                        <td>{{envio.CreatedAt}}</td>
+                        <td>{{envio.CreatedBy}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aún no se ha envíado el boletín</p>
+    {% endif %}
+    </div>
+</div>
+<script>
+$(function(){
+    $('#botonEnviar').click(function(){
+        if ($.trim($('#destino_para').val()) !== '') {
+            $('#divBotonEnviar').html("Enviando, espere ...");
+            $('#action_{{ values.controller }}').val('EnviarBoletin');
+            $(manto_{{ values.controller }}).submit(); 
+        } else {
+            alert("Debe indicar al menos un destinatario");
+        }
+    });
+});
+</script>
