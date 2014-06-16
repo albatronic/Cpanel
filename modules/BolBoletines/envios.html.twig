@@ -8,27 +8,27 @@
         <div id="divBotonEnviar"><input type="button" value="Enviar" id="botonEnviar"/></div>
     </div>
 
-    <div style="margin-top: 30px;">
+    <div id="Listado" style="margin-top: 30px;">
     {% if datos.envios | length > 0 %}
         <h3>Historial de envíos</h3>
-        <table>
+        <table width='100%'>
             <thead>
-                <tr>
-                    <td>Para</td>
-                    <td>Con Copia</td>
-                    <td>Con Copia Oculta</td>
-                    <td>Fecha envío</td>
-                    <td>Enviado por</td>
+                <tr class="Titulos">
+                    <th class="Item"Para</td>
+                    <th class="Item"Con Copia</td>
+                    <th class="Item"Con Copia Oculta</td>
+                    <th class="Item"Fecha envío</td>
+                    <th class="Item"Enviado por</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="Cuerpo">
                 {% for envio in datos.getEnvios %}
                     <tr>
-                        <td>{{envio.Para}}</td>
-                        <td>{{envio.Cc}}</td>
-                        <td>{{envio.Cco}}</td>
-                        <td>{{envio.CreatedAt}}</td>
-                        <td>{{envio.CreatedBy}}</td>
+                        <td class="Item">{{envio.Para}}</td>
+                        <td class="Item">{{envio.Cc}}</td>
+                        <td class="Item">{{envio.Cco}}</td>
+                        <td class="Item">{{envio.CreatedAt}}</td>
+                        <td class="Item">{{envio.CreatedBy}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
