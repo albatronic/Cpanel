@@ -6,8 +6,8 @@ Widgets:
   columns:
     Name:         { type: string(255), notnull: true}
     Title:        { type: string(255), notnull: true}
-    BeforeWidget: { type: string(500), notnull: false, default: '<aside id="%1$s" class="widget %2$s">' }
-    AfterWidget:  { type: string(500), notnull: false, default: '</aside>' }
+    BeforeWidget: { type: string(500), notnull: false, default: "<aside id='%1$s' class='widget %2$s'>" }
+    AfterWidget:  { type: string(500), notnull: false, default: "</aside>" }
     Controllers:  { type: string(500), notnull: false, default: NULL }
     Widgets:      { type: text, notnull: false, default: NULL }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>

@@ -15,6 +15,13 @@
  */
 class CpanVariables extends CpanVariablesEntity {
 
+    /**
+     * Fuerzo la privacidad a 2 (Ambos) para
+     * que estén disponibles para todos los usuarios
+     * @var type 
+     */
+    protected $Privacy = '2';
+    
     protected $_tiposDeVariables = array('Web', 'Env');
     protected $_ambitosDeVariables = array('Pro', 'App', 'Mod');
     protected $_objeto = array();

@@ -102,9 +102,9 @@ CpanRelaciones:
   comment: Relaciones entre entidades
   columns:
     EntidadOrigen: { type: string(50), notnull: true, index: index }
-    IdEntidadOrigen: { type: bigint(11), notnull: true, default: 0 }
+    IdEntidadOrigen: { type: string(50), notnull: true, default: 0 }
     EntidadDestino: { type: string(50), notnull: true, index: index }
-    IdEntidadDestino: { type: bigint(11), notnull: true, default: 0 }
+    IdEntidadDestino: { type: string(50), notnull: true, default: 0 }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
@@ -199,7 +199,7 @@ CpanTextos:
     Clave:      { type: string(50), notnull: true, }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?> 
   index:
-    Unico: { type: Unique, columns: '`Lang`,`Controller`,`Key`' }   
+    Unico: { type: Unique, columns: '`Lang`,`Controller`,`Clave`' }   
       
 # Traducciones de las plantillas web
 CpanPlantillas:
@@ -210,4 +210,4 @@ CpanPlantillas:
     Clave:      { type: string(50), notnull: true, }
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?> 
   index:
-    Unico: { type: Unique, columns: '`Lang`,`Controller`,`Key`' }   
+    Unico: { type: Unique, columns: '`Lang`,`Controller`,`Clave`' }   

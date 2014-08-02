@@ -12,10 +12,10 @@ config:
   # ENTORNO DE LA APLICACION
   app:
     name: Cpanel
-    url: http://localhost/Cpanel
+    url: http://albatronic.local
     path: /Cpanel
     framework: bin/albatronic/
-    urlParent: http://localhost/Pcae
+    urlParent: http://albatronic.local/Pcae
 
   # INFORMACION PARA SEO
   meta:
