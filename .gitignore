@@ -4,4 +4,3 @@ log/
 docs/
 phpdoc/
 !/docs/
-!/log/
