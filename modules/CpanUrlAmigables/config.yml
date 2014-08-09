@@ -52,8 +52,20 @@ CpanUrlAmigables:
       title: 'Url amigable a-z'
       criteria: 'UrlFriendly ASC'
     -
+      title: 'Url amigable z-a'
+      criteria: 'UrlFriendly DESC'
+    -
+      title: 'Entidad a-z'
+      criteria: 'Entity ASC'
+    -
       title: 'Entidad z-a'
       criteria: 'Entity DESC'
+    -
+      title: 'Visitas a-z'
+      criteria: 'NumberVisits ASC'
+    -
+      title: 'Visitas z-a'
+      criteria: 'NumberVisits DESC'
   search_default: Id
   referenced_entities:
     - ValoresSN
@@ -413,9 +425,9 @@ CpanUrlAmigables:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
-      title: NumberVisits
+      title: Visitas
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'

@@ -64,30 +64,24 @@
 <script type="text/javascript" src="{{app.path}}/js/thickbox.min.js"></script>
 <script type="text/javascript" src="{{app.path}}/js/custom-scripts.min.js"></script>
 <script type="text/javascript" src="{{app.path}}/js/AEscripts.min.js"></script>
-<script type="text/javascript" src="{{app.path}}/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="{{app.path}}/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
-tinyMCE.init({
-        // General options
-        //mode : "textareas",
-        theme : "advanced",
-        language: "en",
-        plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave,visualblocks",
 
-        // Theme options
-        //theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
-        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,forecolor,backcolor",
-        theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,code,|,insertdate,inserttime,preview",
-        theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,fullscreen",
-        //theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft,visualblocks",
-
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-        theme_advanced_statusbar_location : "bottom",
-        theme_advanced_resizing : true,
-
-        // Example content CSS (should be your site CSS)
-        //content_css : "{{app.path}}/css/content.css",
-
+    tinymce.init({
+        selector: "textarea.tiny",
+        theme : "modern",
+        language: "es",
+        spellchecker_language: 'es',
+        browser_spellcheck: true,
+        //width: 300,
+        height: 250,
+        plugins: [
+             "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+             "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+             "save table contextmenu directionality emoticons template paste textcolor"
+        ],        
+        image_advtab: true,
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",       
         // Drop lists for link/image/media/template dialogs
         template_external_list_url : "lists/template_list.js",
         external_link_list_url : "lists/link_list.js",

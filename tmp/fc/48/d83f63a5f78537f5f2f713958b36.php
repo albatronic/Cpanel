@@ -51,64 +51,64 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         // line 324
         echo "
 ";
-        // line 354
+        // line 349
         echo "
 ";
-        // line 399
+        // line 394
+        echo "
+";
+        // line 442
         echo "
 ";
         // line 447
         echo "
 ";
-        // line 452
+        // line 460
         echo "
 ";
-        // line 465
+        // line 492
         echo "
 ";
-        // line 497
+        // line 499
         echo "
 ";
-        // line 504
+        // line 506
         echo "
 ";
-        // line 511
+        // line 513
         echo "
 ";
-        // line 518
+        // line 520
         echo "
 ";
-        // line 525
+        // line 527
         echo "
 ";
-        // line 532
+        // line 534
         echo "
 ";
-        // line 539
+        // line 542
         echo "
 ";
-        // line 547
+        // line 550
         echo "
 ";
-        // line 555
+        // line 558
         echo "
 ";
-        // line 563
+        // line 570
         echo "
 ";
-        // line 575
+        // line 576
         echo "
 ";
-        // line 581
+        // line 591
         echo "
 ";
-        // line 596
+        // line 611
         echo "
 ";
-        // line 616
-        echo "
-";
-        // line 625
+        // line 620
         echo "
 ";
     }
@@ -1207,17 +1207,6 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         ob_start();
         try {
             // line 328
-            if (((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "editorTiny") == "1")) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
-                // line 329
-                echo "    <script>
-        tinyMCE.execCommand(\"mceAddControl\", true, \"";
-                // line 330
-                echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
-                echo "\");
-    </script>
-";
-            }
-            // line 333
             echo "<li ";
             if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 echo "class=\"\"";
@@ -1226,56 +1215,60 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             }
             echo ">
 <div class=\"form_grid_12\" id=\"div_";
-            // line 334
+            // line 329
             echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\">
 
     ";
-            // line 336
+            // line 331
             if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
-                // line 337
+                // line 332
                 echo "        ";
                 echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                 echo "
     ";
             }
-            // line 339
+            // line 334
             echo "
     <div class=\"form_input\">
         <textarea  name=\"";
-            // line 341
+            // line 336
             echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
             echo "\"
                    id=\"";
-            // line 342
+            // line 337
             echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\"
-                   class=\"large\" title=\"";
-            // line 343
+                   class=\"";
+            // line 338
+            if (((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "editorTiny") == "1")) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
+                echo "tiny";
+            }
+            echo "\" title=\"";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "help"), "html", null, true);
             echo "\"                  
                    rows=\"";
-            // line 344
+            // line 339
             echo twig_escape_filter($this->env, ((array_key_exists("rows", $context)) ? (_twig_default_filter((isset($context["rows"]) ? $context["rows"] : null), 5)) : (5)), "html", null, true);
             echo "\"
                    cols=\"";
-            // line 345
+            // line 340
             echo twig_escape_filter($this->env, ((array_key_exists("cols", $context)) ? (_twig_default_filter((isset($context["cols"]) ? $context["cols"] : null), 75)) : (75)), "html", null, true);
             echo "\"
                    tabindex=\"";
-            // line 346
+            // line 341
             echo twig_escape_filter($this->env, (isset($context["tabindex"]) ? $context["tabindex"] : null), "html", null, true);
             echo "\"
                    onchange=\"";
-            // line 347
+            // line 342
             echo $this->getAttribute($this, "alertSave");
             echo "\"
                    ";
-            // line 348
+            // line 343
             if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                 echo " disabled ";
             }
-            // line 349
+            // line 344
             echo "                   >";
             echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
             echo "</textarea>
@@ -1292,7 +1285,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 357
+    // line 352
     public function getselect($_atributos = null, $_classLabel = null, $_name = null, $_id = null, $_width = null, $_defecto = null, $_opciones = null, $_class = null, $_tabindex = null, $_popup = null, $_onchange = null, $_onblur = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1314,10 +1307,10 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
 
         ob_start();
         try {
-            // line 358
+            // line 353
             echo "
 <li ";
-            // line 359
+            // line 354
             if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 echo "class=\"\"";
             } else {
@@ -1325,26 +1318,26 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             }
             echo ">
     <div class=\"form_grid_12\" id=\"div_";
-            // line 360
+            // line 355
             echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\">
 
     ";
-            // line 362
+            // line 357
             if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
-                // line 363
+                // line 358
                 echo "        ";
                 echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                 echo "
     ";
             }
-            // line 365
+            // line 360
             echo "
     <div class=\"form_input\">
         ";
-            // line 367
+            // line 362
             if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
-                // line 368
+                // line 363
                 echo "            <input type=\"hidden\" name=\"";
                 echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\" value=\"";
@@ -1352,12 +1345,12 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                 echo "\" />
         ";
             }
-            // line 370
+            // line 365
             echo "        <select data-placeholder=\"Indique un valor\"
                 ";
-            // line 371
+            // line 366
             if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "1")) {
-                // line 372
+                // line 367
                 echo "                name=\"";
                 echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\" id=\"";
@@ -1365,46 +1358,46 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                 echo "\"
                 ";
             }
-            // line 374
+            // line 369
             echo "                ";
             if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
-                // line 375
+                // line 370
                 echo "                disabled
                 ";
             }
-            // line 377
+            // line 372
             echo "                style=\"width:";
             echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter((isset($context["width"]) ? $context["width"] : null), 200)) : (200)), "html", null, true);
             echo "px;\"
                 class=\"";
-            // line 378
+            // line 373
             echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter((isset($context["class"]) ? $context["class"] : null), "chzn-select")) : ("chzn-select")), "html", null, true);
             echo "\"
                 onchange=\"";
-            // line 379
+            // line 374
             echo twig_escape_filter($this->env, (isset($context["onchange"]) ? $context["onchange"] : null), "html", null, true);
             echo "\"
                 onblur=\"";
-            // line 380
+            // line 375
             echo twig_escape_filter($this->env, (isset($context["onblur"]) ? $context["onblur"] : null), "html", null, true);
             echo " ";
             echo $this->getAttribute($this, "alertSave");
             echo "\"
                 tabindex=\"";
-            // line 381
+            // line 376
             echo twig_escape_filter($this->env, (isset($context["tabindex"]) ? $context["tabindex"] : null), "html", null, true);
             echo "\"
                 title=\"";
-            // line 382
+            // line 377
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "help"), "html", null, true);
             echo "\"
         >
             ";
-            // line 384
+            // line 379
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["opciones"]) ? $context["opciones"] : null));
             foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
-                // line 385
+                // line 380
                 echo "            <option value=\"";
                 echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "Id"), "html", null, true);
                 echo "\" ";
@@ -1413,7 +1406,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                 }
                 echo ">
                 ";
-                // line 386
+                // line 381
                 echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "Value"), "html", null, true);
                 echo "
             </option>
@@ -1422,19 +1415,19 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value'], $context['_parent'], $context['loop']);
             $context = array_merge($_parent, array_intersect_key($context, $_parent));
-            // line 389
+            // line 384
             echo "        </select>
 
         ";
-            // line 391
+            // line 386
             if ((isset($context["popup"]) ? $context["popup"] : null)) {
-                // line 392
+                // line 387
                 echo "            ";
                 echo $this->getAttribute($this, "linkimg", array(0 => (isset($context["popup"]) ? $context["popup"] : null)), "method");
                 echo "
         ";
             }
-            // line 394
+            // line 389
             echo "    </div>
     </div>
 </li>
@@ -1449,7 +1442,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 402
+    // line 397
     public function getselectGroup($_atributos = null, $_classLabel = null, $_name = null, $_id = null, $_width = null, $_defecto = null, $_opciones = null, $_class = null, $_tabindex = null, $_popup = null, $_onchange = null, $_onblur = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1471,10 +1464,10 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
 
         ob_start();
         try {
-            // line 403
+            // line 398
             echo "
 <li ";
-            // line 404
+            // line 399
             if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 echo "class=\"\"";
             } else {
@@ -1482,26 +1475,26 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             }
             echo ">
     <div class=\"form_grid_12\" id=\"div_";
-            // line 405
+            // line 400
             echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\">
 
     ";
-            // line 407
+            // line 402
             if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
-                // line 408
+                // line 403
                 echo "        ";
                 echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                 echo "
     ";
             }
-            // line 410
+            // line 405
             echo "
     <div class=\"form_input\">
         ";
-            // line 412
+            // line 407
             if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
-                // line 413
+                // line 408
                 echo "            <input type=\"hidden\" name=\"";
                 echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\" value=\"";
@@ -1509,12 +1502,12 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                 echo "\" />
         ";
             }
-            // line 415
+            // line 410
             echo "        <select data-placeholder=\"Indique un valor\"
                 ";
-            // line 416
+            // line 411
             if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "1")) {
-                // line 417
+                // line 412
                 echo "                name=\"";
                 echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
                 echo "\" id=\"";
@@ -1522,51 +1515,51 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                 echo "\"
                 ";
             }
-            // line 419
+            // line 414
             echo "                ";
             if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
-                // line 420
+                // line 415
                 echo "                disabled
                 ";
             }
-            // line 422
+            // line 417
             echo "                style=\"width:";
             echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter((isset($context["width"]) ? $context["width"] : null), 200)) : (200)), "html", null, true);
             echo "px;\"
                 class=\"";
-            // line 423
+            // line 418
             echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter((isset($context["class"]) ? $context["class"] : null), "chzn-select")) : ("chzn-select")), "html", null, true);
             echo "\"
                 onchange=\"";
-            // line 424
+            // line 419
             echo twig_escape_filter($this->env, (isset($context["onchange"]) ? $context["onchange"] : null), "html", null, true);
             echo "\"
                 onblur=\"";
-            // line 425
+            // line 420
             echo twig_escape_filter($this->env, (isset($context["onblur"]) ? $context["onblur"] : null), "html", null, true);
             echo " ";
             echo $this->getAttribute($this, "alertSave");
             echo "\"
                 tabindex=\"";
-            // line 426
+            // line 421
             echo twig_escape_filter($this->env, (isset($context["tabindex"]) ? $context["tabindex"] : null), "html", null, true);
             echo "\"
         >
             ";
-            // line 428
+            // line 423
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["opciones"]) ? $context["opciones"] : null));
             foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
-                // line 429
+                // line 424
                 echo "                <optgroup label=\"";
                 echo twig_escape_filter($this->env, $this->getAttribute((isset($context["value"]) ? $context["value"] : null), "Titulo"), "html", null, true);
                 echo "\">
                     ";
-                // line 430
+                // line 425
                 $context['_parent'] = (array) $context;
                 $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["value"]) ? $context["value"] : null), "items"));
                 foreach ($context['_seq'] as $context["_key"] => $context["opcion"]) {
-                    // line 431
+                    // line 426
                     echo "                        <option value=\"";
                     echo twig_escape_filter($this->env, $this->getAttribute((isset($context["opcion"]) ? $context["opcion"] : null), "Id"), "html", null, true);
                     echo "\" ";
@@ -1575,7 +1568,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                     }
                     echo ">
                         ";
-                    // line 432
+                    // line 427
                     echo twig_escape_filter($this->env, $this->getAttribute((isset($context["opcion"]) ? $context["opcion"] : null), "Value"), "html", null, true);
                     echo "
                         </option>
@@ -1584,26 +1577,26 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['opcion'], $context['_parent'], $context['loop']);
                 $context = array_merge($_parent, array_intersect_key($context, $_parent));
-                // line 435
+                // line 430
                 echo "                </optgroup>
             ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value'], $context['_parent'], $context['loop']);
             $context = array_merge($_parent, array_intersect_key($context, $_parent));
-            // line 437
+            // line 432
             echo "        </select>
 
         ";
-            // line 439
+            // line 434
             if ((isset($context["popup"]) ? $context["popup"] : null)) {
-                // line 440
+                // line 435
                 echo "            ";
                 echo $this->getAttribute($this, "linkimg", array(0 => (isset($context["popup"]) ? $context["popup"] : null)), "method");
                 echo "
         ";
             }
-            // line 442
+            // line 437
             echo "    </div>
     </div>
 </li>
@@ -1618,7 +1611,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 449
+    // line 444
     public function getimg($_url = null, $_width = null, $_height = null, $_alt = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1632,7 +1625,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
 
         ob_start();
         try {
-            // line 450
+            // line 445
             echo "    <img src=\"";
             echo twig_escape_filter($this->env, (isset($context["url"]) ? $context["url"] : null), "html", null, true);
             echo "\" width=\"";
@@ -1650,7 +1643,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 461
+    // line 456
     public function getlinkimg($_opciones = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1661,9 +1654,9 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
 
         ob_start();
         try {
-            // line 462
+            // line 457
             echo "    ";
-            // line 463
+            // line 458
             echo "    <a class=\"thickbox\" title= \"";
             echo twig_escape_filter($this->env, (($this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 2, array(), "array", true, true)) ? (_twig_default_filter($this->getAttribute((isset($context["opciones"]) ? $context["opciones"] : null), 2, array(), "array"), "Ventana")) : ("Ventana")), "html", null, true);
             echo "\" href=\"";
@@ -1687,7 +1680,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 467
+    // line 462
     public function getfecha($_atributos = null, $_classLabel = null, $_name = null, $_id = null, $_value = null, $_size = null, $_class = null, $_tabindex = null, $_extra = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1706,10 +1699,10 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
 
         ob_start();
         try {
-            // line 468
+            // line 463
             echo "
 <li ";
-            // line 469
+            // line 464
             if ((($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "visible") > 0) && ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "translatable") || ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0)))) {
                 echo "class=\"\"";
             } else {
@@ -1717,63 +1710,63 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
             }
             echo ">
     <div class=\"form_grid_12\" id=\"div_";
-            // line 470
+            // line 465
             echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\">
 
     ";
-            // line 472
+            // line 467
             if ($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "caption")) {
-                // line 473
+                // line 468
                 echo "        ";
                 echo $this->getAttribute($this, "label", array(0 => (isset($context["atributos"]) ? $context["atributos"] : null), 1 => (isset($context["classLabel"]) ? $context["classLabel"] : null), 2 => (isset($context["name"]) ? $context["name"] : null), 3 => (isset($context["id"]) ? $context["id"] : null)), "method");
                 echo "
     ";
             }
-            // line 475
+            // line 470
             echo "
     <div class=\"form_input\">
         <div class=\" form_grid_2 alpha\">
             <input name=\"";
-            // line 478
+            // line 473
             echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : null), "html", null, true);
             echo "\"
                        id=\"";
-            // line 479
+            // line 474
             echo twig_escape_filter($this->env, ((array_key_exists("id", $context)) ? (_twig_default_filter((isset($context["id"]) ? $context["id"] : null), (isset($context["name"]) ? $context["name"] : null))) : ((isset($context["name"]) ? $context["name"] : null))), "html", null, true);
             echo "\"
                        type=\"text\"
                        value=\"";
-            // line 481
+            // line 476
             echo twig_escape_filter($this->env, (isset($context["value"]) ? $context["value"] : null), "html", null, true);
             echo "\"
                        size=\"";
-            // line 482
+            // line 477
             echo twig_escape_filter($this->env, ((array_key_exists("size", $context)) ? (_twig_default_filter((isset($context["size"]) ? $context["size"] : null), 10)) : (10)), "html", null, true);
             echo "\"
                        class=\"";
-            // line 483
+            // line 478
             echo twig_escape_filter($this->env, ((array_key_exists("class", $context)) ? (_twig_default_filter((isset($context["class"]) ? $context["class"] : null), "datepicker")) : ("datepicker")), "html", null, true);
             echo "\"
                        ";
-            // line 485
+            // line 480
             echo "                       tabindex=\"";
             echo twig_escape_filter($this->env, (isset($context["tabindex"]) ? $context["tabindex"] : null), "html", null, true);
             echo "\"
                        onchange = \"";
-            // line 486
+            // line 481
             echo $this->getAttribute($this, "alertSave");
             echo "\"
                        ";
-            // line 487
+            // line 482
             echo twig_escape_filter($this->env, (isset($context["extra"]) ? $context["extra"] : null), "html", null, true);
             echo "
                        ";
-            // line 488
+            // line 483
             if (($this->getAttribute((isset($context["atributos"]) ? $context["atributos"] : null), "updatable") == "0")) {
                 echo " disabled ";
             }
-            // line 489
+            // line 484
             echo "            />
         </div>
         <span class=\"clear\"></span>
@@ -1791,7 +1784,7 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 499
+    // line 494
     public function getfoco($_id = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1802,10 +1795,10 @@ class __TwigTemplate_fc48d83f63a5f78537f5f2f713958b36 extends Twig_Template
 
         ob_start();
         try {
-            // line 500
+            // line 495
             echo "<script language='JavaScript' type='text/javascript'>
 document.getElementById('";
-            // line 501
+            // line 496
             echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
             echo "').focus();
 </script>
@@ -1819,7 +1812,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 506
+    // line 501
     public function getbotonThickBox($_path = null, $_ruta = null, $_ventanaTitulo = null, $_ventanaAlto = null, $_ventanaAncho = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1834,7 +1827,7 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 507
+            // line 502
             echo "<a class=\"thickbox\" title= \"";
             echo twig_escape_filter($this->env, ((array_key_exists("ventanaTitulo", $context)) ? (_twig_default_filter((isset($context["ventanaTitulo"]) ? $context["ventanaTitulo"] : null), "Informe")) : ("Informe")), "html", null, true);
             echo "\" href=\"";
@@ -1847,7 +1840,7 @@ document.getElementById('";
             echo twig_escape_filter($this->env, ((array_key_exists("ventanaAncho", $context)) ? (_twig_default_filter((isset($context["ventanaAncho"]) ? $context["ventanaAncho"] : null), "600")) : ("600")), "html", null, true);
             echo "\">
     <img src=\"";
-            // line 508
+            // line 503
             echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"";
             echo twig_escape_filter($this->env, ((array_key_exists("ventanaTitulo", $context)) ? (_twig_default_filter((isset($context["ventanaTitulo"]) ? $context["ventanaTitulo"] : null), "Informe")) : ("Informe")), "html", null, true);
@@ -1863,7 +1856,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 513
+    // line 508
     public function getlinkThickBox($_path = null, $_textoLink = null, $_ruta = null, $_ventanaTitulo = null, $_ventanaAlto = null, $_ventanaAncho = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1879,7 +1872,7 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 514
+            // line 509
             echo "<a class=\"thickbox\" title= \"";
             echo twig_escape_filter($this->env, ((array_key_exists("ventanaTitulo", $context)) ? (_twig_default_filter((isset($context["ventanaTitulo"]) ? $context["ventanaTitulo"] : null), "Informe")) : ("Informe")), "html", null, true);
             echo "\" href=\"";
@@ -1892,7 +1885,7 @@ document.getElementById('";
             echo twig_escape_filter($this->env, ((array_key_exists("ventanaAncho", $context)) ? (_twig_default_filter((isset($context["ventanaAncho"]) ? $context["ventanaAncho"] : null), "600")) : ("600")), "html", null, true);
             echo "\">
     ";
-            // line 515
+            // line 510
             echo twig_escape_filter($this->env, (isset($context["textoLink"]) ? $context["textoLink"] : null), "html", null, true);
             echo "
 </a>
@@ -1906,7 +1899,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 520
+    // line 515
     public function getbotonDocumento($_path = null, $_documento = null, $_controller = null, $_id = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1920,7 +1913,7 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 521
+            // line 516
             echo "<a href=\"javascript:;\" title= \"Imprimir\" onclick=\"window.open('";
             echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/_Emergente/formatosDocumentos/";
@@ -1931,7 +1924,7 @@ document.getElementById('";
             echo twig_escape_filter($this->env, (isset($context["id"]) ? $context["id"] : null), "html", null, true);
             echo "','Documento','width=690,height=600,status=false,resizable=1');\">
     <img src=\"";
-            // line 522
+            // line 517
             echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/print_cmd.png\" width=\"24px\" height=\"24px\" alt=\"Imprimir\">
 </a>
@@ -1945,7 +1938,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 527
+    // line 522
     public function gethistoricoVentas($_path = null, $_idArticulo = null, $_idCliente = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1958,7 +1951,7 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 528
+            // line 523
             echo "<a href=\"javascript:;\" onClick=\"window.open('";
             echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/_Emergente/HistoricoVentas/";
@@ -1967,7 +1960,7 @@ document.getElementById('";
             echo twig_escape_filter($this->env, (isset($context["idCliente"]) ? $context["idCliente"] : null), "html", null, true);
             echo "','HistoricoVentas','width=450,height=500,resizable=yes,scrollbars=yes');\">
     <img src=\"";
-            // line 529
+            // line 524
             echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"Historico\" title=\"Historico...\">
 </a>
@@ -1981,7 +1974,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 534
+    // line 529
     public function gethistoricoCompras($_path = null, $_idArticulo = null, $_idProveedor = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -1994,7 +1987,7 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 535
+            // line 530
             echo "<a href=\"javascript:;\" onClick=\"window.open('";
             echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/_Emergente/HistoricoCompras/";
@@ -2003,7 +1996,7 @@ document.getElementById('";
             echo twig_escape_filter($this->env, (isset($context["idProveedor"]) ? $context["idProveedor"] : null), "html", null, true);
             echo "','HistoricoCompras','width=450,height=500,resizable=yes,scrollbars=yes');\">
     <img src=\"";
-            // line 536
+            // line 531
             echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"Historico\" title=\"Historico...\">
 </a>
@@ -2017,7 +2010,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 541
+    // line 536
     public function getpromosVigentesCliente($_path = null, $_cliente = null, $_fecha = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -2030,15 +2023,15 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 542
+            // line 537
             echo "<a href=\"javascript:;\" onclick=\"\$('#dialogPromo').dialog('open');\">
     <img src=\"";
-            // line 543
+            // line 538
             echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"Promociones\" title=\"Promociones...\">
 </a>
 ";
-            // line 545
+            // line 540
             $this->env->loadTemplate("_Emergente/promosVigentesCliente.html.twig")->display(array_merge($context, array("cliente" => (isset($context["cliente"]) ? $context["cliente"] : null), "fecha" => (isset($context["fecha"]) ? $context["fecha"] : null))));
         } catch (Exception $e) {
             ob_end_clean();
@@ -2049,7 +2042,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 549
+    // line 544
     public function getdetalleRecepcionLinea($_path = null, $_lineaEntidad = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -2061,17 +2054,17 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 550
+            // line 545
             echo "<a href=\"javascript:;\" onclick=\"\$('#dialog";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["lineaEntidad"]) ? $context["lineaEntidad"] : null), "IDLinea"), "html", null, true);
             echo "').dialog('open');\">
     <img src=\"";
-            // line 551
+            // line 546
             echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"Detalle Recepción\" title=\"Detalle Recepción...\">
 </a>
 ";
-            // line 553
+            // line 548
             $this->env->loadTemplate("RecepcionarLineas/detalleRecepcion.html.twig")->display(array_merge($context, array("lineaEntidad" => (isset($context["lineaEntidad"]) ? $context["lineaEntidad"] : null))));
         } catch (Exception $e) {
             ob_end_clean();
@@ -2082,7 +2075,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 557
+    // line 552
     public function getdetalleExpedicionLinea($_path = null, $_lineaEntidad = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -2094,17 +2087,17 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 558
+            // line 553
             echo "<a href=\"javascript:;\" onclick=\"\$('#dialog";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["lineaEntidad"]) ? $context["lineaEntidad"] : null), "IDLinea"), "html", null, true);
             echo "').dialog('open');\">
     <img src=\"";
-            // line 559
+            // line 554
             echo twig_escape_filter($this->env, (isset($context["path"]) ? $context["path"] : null), "html", null, true);
             echo "/images/botonreport.png\" width=\"16px\" height=\"16px\" alt=\"Detalle Expedición\" title=\"Detalle Expedición...\">
 </a>
 ";
-            // line 561
+            // line 556
             $this->env->loadTemplate("ExpedirLineas/detalleExpedicion.html.twig")->display(array_merge($context, array("lineaEntidad" => (isset($context["lineaEntidad"]) ? $context["lineaEntidad"] : null))));
         } catch (Exception $e) {
             ob_end_clean();
@@ -2115,7 +2108,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 565
+    // line 560
     public function getdocumentos($_entidad = null, $_idEntidad = null, $_tipo = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -2128,7 +2121,7 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 566
+            // line 561
             echo "<div>
     <input name=\"document\" type=\"file\" id=\"document\" size=\"20\" class=\"Comando\">
     <input name=\"accion\" type=\"submit\" value=\"Enviar\" class=\"Comando\" onclick=\"\$('#action').val('Documento')\">
@@ -2136,7 +2129,7 @@ document.getElementById('";
 </div>
 <div id=\"Documentos\" style=\"margin-top: 10px;\"></div>
 <script>documentos('";
-            // line 572
+            // line 567
             echo twig_escape_filter($this->env, (isset($context["entidad"]) ? $context["entidad"] : null), "html", null, true);
             echo "', '";
             echo twig_escape_filter($this->env, (isset($context["idEntidad"]) ? $context["idEntidad"] : null), "html", null, true);
@@ -2154,7 +2147,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 578
+    // line 573
     public function getalertSave()
     {
         $context = $this->env->getGlobals();
@@ -2163,7 +2156,7 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 579
+            // line 574
             echo "\$('.title_icon span').css('background','url(";
             echo twig_escape_filter($this->env, (isset($context["appPath"]) ? $context["appPath"] : null), "html", null, true);
             echo "/images/alert.png)');
@@ -2177,7 +2170,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 583
+    // line 578
     public function getembedMedia($_media = null, $_width = null, $_height = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -2190,27 +2183,27 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 584
+            // line 579
             if ((isset($context["media"]) ? $context["media"] : null)) {
-                // line 585
+                // line 580
                 echo "<embed bgcolor='#505050'
        width='";
-                // line 586
+                // line 581
                 echo twig_escape_filter($this->env, ((array_key_exists("width", $context)) ? (_twig_default_filter((isset($context["width"]) ? $context["width"] : null), "250")) : ("250")), "html", null, true);
                 echo "'
        height='";
-                // line 587
+                // line 582
                 echo twig_escape_filter($this->env, ((array_key_exists("height", $context)) ? (_twig_default_filter((isset($context["height"]) ? $context["height"] : null), "250")) : ("250")), "html", null, true);
                 echo "'
        ";
-                // line 589
+                // line 584
                 echo "       allowScriptAccess='always'
        src='";
-                // line 590
+                // line 585
                 echo twig_escape_filter($this->env, (isset($context["media"]) ? $context["media"] : null), "html", null, true);
                 echo "'
        ";
-                // line 592
+                // line 587
                 echo "       allowFullScreen='true'
 />
 ";
@@ -2224,7 +2217,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 610
+    // line 605
     public function getrecortaTexto($_texto = null, $_nCaracteres = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -2236,16 +2229,16 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 611
+            // line 606
             echo "    ";
             if ((twig_length_filter($this->env, (isset($context["texto"]) ? $context["texto"] : null)) > (isset($context["nCaracteres"]) ? $context["nCaracteres"] : null))) {
-                // line 612
+                // line 607
                 echo "        ";
                 $context["puntos"] = "...";
-                // line 613
+                // line 608
                 echo "    ";
             }
-            // line 614
+            // line 609
             echo "    ";
             echo twig_escape_filter($this->env, twig_slice($this->env, (isset($context["texto"]) ? $context["texto"] : null), 0, (isset($context["nCaracteres"]) ? $context["nCaracteres"] : null)), "html", null, true);
             echo " ";
@@ -2261,7 +2254,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 620
+    // line 615
     public function getform($_controller = null, $_atributos = null, $_datos = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -2274,12 +2267,12 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 621
+            // line 616
             echo "    ";
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["atributos"]) ? $context["atributos"] : null));
             foreach ($context['_seq'] as $context["keyAtributo"] => $context["atributo"]) {
-                // line 622
+                // line 617
                 echo "        ";
                 echo $this->getAttribute($this, "formItem", array(0 => (isset($context["controller"]) ? $context["controller"] : null), 1 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null), 2 => (isset($context["atributo"]) ? $context["atributo"] : null), 3 => (isset($context["datos"]) ? $context["datos"] : null)), "method");
                 echo "
@@ -2297,7 +2290,7 @@ document.getElementById('";
         return ('' === $tmp = ob_get_clean()) ? '' : new Twig_Markup($tmp, $this->env->getCharset());
     }
 
-    // line 629
+    // line 624
     public function getformItem($_controller = null, $_keyAtributo = null, $_atributo = null, $_datos = null)
     {
         $context = $this->env->mergeGlobals(array(
@@ -2311,52 +2304,52 @@ document.getElementById('";
 
         ob_start();
         try {
-            // line 630
+            // line 625
             echo "    ";
             if ($this->getAttribute((isset($context["atributo"]) ? $context["atributo"] : null), "aditional_filter")) {
-                // line 631
+                // line 626
                 echo "        ";
                 if (($this->getAttribute($this->getAttribute((isset($context["atributo"]) ? $context["atributo"] : null), "aditional_filter"), "entity") == "ValoresSN")) {
-                    // line 632
+                    // line 627
                     echo "            ";
-                    // line 633
+                    // line 628
                     echo "            ";
                     echo $this->getAttribute($this, "input", array(0 => (isset($context["atributo"]) ? $context["atributo"] : null), 1 => "field_title", 2 => "checkbox", 3 => ((((isset($context["controller"]) ? $context["controller"] : null) . "[") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)) . "]"), 4 => (((isset($context["controller"]) ? $context["controller"] : null) . "_") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), 5 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "getColumnForeignKey", array(0 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), "method"), 6 => "255", 7 => "CampoTextoLargo", 8 => "12"), "method");
                     echo "                    
         ";
                 } else {
-                    // line 635
+                    // line 630
                     echo "            ";
                     echo "   
             ";
-                    // line 636
+                    // line 631
                     echo $this->getAttribute($this, "select", array(0 => (isset($context["atributo"]) ? $context["atributo"] : null), 1 => "field_title", 2 => ((((isset($context["controller"]) ? $context["controller"] : null) . "[") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)) . "]"), 3 => (((isset($context["controller"]) ? $context["controller"] : null) . "_") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), 4 => null, 5 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "getColumnForeignKey", array(0 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), "method"), 6 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "getColumnFetchAll", array(0 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null), 1 => "Titulo", 2 => 0), "method"), 7 => "chzn-select", 8 => "1"), "method");
                     echo "
         ";
                 }
-                // line 638
+                // line 633
                 echo "    ";
             } else {
-                // line 639
+                // line 634
                 echo "        ";
                 if (($this->getAttribute($this->getAttribute((isset($context["atributo"]) ? $context["atributo"] : null), "validator"), "length") > 255)) {
-                    // line 640
+                    // line 635
                     echo "            ";
-                    // line 641
+                    // line 636
                     echo "            ";
                     echo $this->getAttribute($this, "textarea", array(0 => (isset($context["atributo"]) ? $context["atributo"] : null), 1 => "field_title", 2 => ((((isset($context["controller"]) ? $context["controller"] : null) . "[") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)) . "]"), 3 => (((isset($context["controller"]) ? $context["controller"] : null) . "_") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), 4 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "getColumnValue", array(0 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), "method"), 5 => null, 6 => null, 7 => "textarea", 8 => "4"), "method");
                     echo "                    
         ";
                 } else {
-                    // line 643
+                    // line 638
                     echo "            ";
-                    // line 644
+                    // line 639
                     echo "            ";
                     echo $this->getAttribute($this, "input", array(0 => (isset($context["atributo"]) ? $context["atributo"] : null), 1 => "field_title", 2 => "text", 3 => ((((isset($context["controller"]) ? $context["controller"] : null) . "[") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)) . "]"), 4 => (((isset($context["controller"]) ? $context["controller"] : null) . "_") . (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), 5 => $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "getColumnValue", array(0 => (isset($context["keyAtributo"]) ? $context["keyAtributo"] : null)), "method"), 6 => "255", 7 => "CampoTextoLargo", 8 => "2"), "method");
                     echo "
         ";
                 }
-                // line 646
+                // line 641
                 echo "    ";
             }
             echo "    
@@ -2382,6 +2375,6 @@ document.getElementById('";
 
     public function getDebugInfo()
     {
-        return array (  2360 => 646,  2354 => 644,  2352 => 643,  2346 => 641,  2344 => 640,  2341 => 639,  2338 => 638,  2333 => 636,  2329 => 635,  2323 => 633,  2321 => 632,  2318 => 631,  2315 => 630,  2301 => 629,  2283 => 622,  2278 => 621,  2265 => 620,  2249 => 614,  2246 => 613,  2243 => 612,  2240 => 611,  2228 => 610,  2214 => 592,  2210 => 590,  2207 => 589,  2203 => 587,  2199 => 586,  2196 => 585,  2194 => 584,  2181 => 583,  2167 => 579,  2158 => 578,  2140 => 572,  2132 => 566,  2119 => 565,  2108 => 561,  2103 => 559,  2098 => 558,  2086 => 557,  2075 => 553,  2070 => 551,  2065 => 550,  2053 => 549,  2042 => 545,  2037 => 543,  2034 => 542,  2021 => 541,  2007 => 536,  1998 => 535,  1985 => 534,  1971 => 529,  1962 => 528,  1949 => 527,  1935 => 522,  1924 => 521,  1910 => 520,  1896 => 515,  1883 => 514,  1867 => 513,  1851 => 508,  1838 => 507,  1823 => 506,  1809 => 501,  1806 => 500,  1795 => 499,  1777 => 489,  1773 => 488,  1769 => 487,  1765 => 486,  1760 => 485,  1756 => 483,  1752 => 482,  1748 => 481,  1743 => 479,  1739 => 478,  1734 => 475,  1728 => 473,  1726 => 472,  1721 => 470,  1713 => 469,  1710 => 468,  1691 => 467,  1667 => 463,  1665 => 462,  1654 => 461,  1636 => 450,  1622 => 449,  1607 => 442,  1601 => 440,  1599 => 439,  1595 => 437,  1588 => 435,  1579 => 432,  1570 => 431,  1566 => 430,  1561 => 429,  1557 => 428,  1552 => 426,  1546 => 425,  1542 => 424,  1538 => 423,  1533 => 422,  1529 => 420,  1526 => 419,  1518 => 417,  1516 => 416,  1513 => 415,  1505 => 413,  1503 => 412,  1499 => 410,  1493 => 408,  1491 => 407,  1486 => 405,  1478 => 404,  1475 => 403,  1453 => 402,  1438 => 394,  1432 => 392,  1430 => 391,  1426 => 389,  1417 => 386,  1408 => 385,  1404 => 384,  1399 => 382,  1395 => 381,  1389 => 380,  1385 => 379,  1381 => 378,  1376 => 377,  1372 => 375,  1369 => 374,  1361 => 372,  1359 => 371,  1356 => 370,  1348 => 368,  1346 => 367,  1342 => 365,  1336 => 363,  1334 => 362,  1329 => 360,  1321 => 359,  1318 => 358,  1296 => 357,  1279 => 349,  1275 => 348,  1271 => 347,  1267 => 346,  1263 => 345,  1259 => 344,  1255 => 343,  1251 => 342,  1247 => 341,  1243 => 339,  1237 => 337,  1235 => 336,  1230 => 334,  1221 => 333,  1215 => 330,  1212 => 329,  1210 => 328,  1191 => 327,  1173 => 317,  1169 => 316,  1163 => 315,  1157 => 314,  1149 => 313,  1145 => 311,  1139 => 309,  1137 => 308,  1132 => 306,  1129 => 305,  1127 => 304,  1110 => 303,  1093 => 297,  1087 => 295,  1085 => 294,  1080 => 293,  1066 => 292,  1051 => 285,  1045 => 284,  1040 => 282,  1034 => 281,  1029 => 279,  1023 => 278,  1018 => 276,  1011 => 275,  1005 => 273,  1003 => 272,  998 => 271,  981 => 270,  966 => 262,  957 => 260,  953 => 259,  948 => 258,  944 => 257,  938 => 256,  934 => 255,  930 => 254,  926 => 253,  922 => 252,  918 => 251,  914 => 249,  910 => 248,  906 => 246,  900 => 244,  898 => 243,  893 => 241,  885 => 240,  882 => 239,  862 => 238,  847 => 231,  841 => 227,  837 => 225,  833 => 224,  829 => 223,  823 => 222,  809 => 221,  803 => 220,  797 => 219,  793 => 218,  789 => 217,  782 => 215,  778 => 214,  774 => 213,  771 => 212,  768 => 211,  764 => 209,  760 => 208,  756 => 207,  750 => 206,  742 => 205,  736 => 204,  732 => 203,  728 => 202,  723 => 201,  719 => 199,  715 => 198,  711 => 197,  702 => 195,  696 => 194,  688 => 192,  684 => 191,  680 => 190,  675 => 189,  665 => 186,  662 => 185,  660 => 184,  656 => 182,  650 => 180,  648 => 179,  643 => 177,  635 => 176,  632 => 175,  630 => 174,  608 => 173,  595 => 151,  591 => 150,  587 => 149,  577 => 146,  573 => 145,  567 => 143,  563 => 142,  559 => 141,  555 => 140,  551 => 139,  541 => 137,  539 => 136,  525 => 135,  501 => 130,  490 => 129,  487 => 128,  483 => 127,  479 => 126,  473 => 124,  469 => 122,  454 => 121,  431 => 115,  417 => 114,  414 => 113,  410 => 112,  406 => 111,  399 => 109,  395 => 108,  392 => 107,  377 => 106,  362 => 100,  351 => 99,  349 => 98,  335 => 97,  317 => 90,  311 => 87,  306 => 85,  296 => 84,  291 => 82,  287 => 80,  271 => 79,  256 => 74,  253 => 73,  248 => 72,  245 => 71,  242 => 70,  238 => 69,  234 => 68,  231 => 67,  222 => 64,  217 => 62,  212 => 60,  208 => 59,  205 => 58,  201 => 57,  197 => 56,  192 => 54,  182 => 49,  177 => 47,  173 => 46,  168 => 44,  164 => 43,  160 => 42,  157 => 41,  153 => 40,  149 => 39,  144 => 37,  140 => 35,  138 => 34,  131 => 33,  117 => 32,  112 => 625,  109 => 616,  106 => 596,  103 => 581,  100 => 575,  97 => 563,  94 => 555,  91 => 547,  88 => 539,  85 => 532,  82 => 525,  79 => 518,  76 => 511,  73 => 504,  70 => 497,  67 => 465,  64 => 452,  61 => 447,  58 => 399,  55 => 354,  52 => 324,  49 => 300,  46 => 289,  43 => 267,  40 => 234,  37 => 154,  34 => 134,  31 => 119,  28 => 104,  25 => 95,  22 => 78,  19 => 29,);
+        return array (  2353 => 641,  2347 => 639,  2345 => 638,  2339 => 636,  2337 => 635,  2334 => 634,  2331 => 633,  2326 => 631,  2322 => 630,  2316 => 628,  2314 => 627,  2311 => 626,  2308 => 625,  2294 => 624,  2276 => 617,  2271 => 616,  2258 => 615,  2242 => 609,  2239 => 608,  2236 => 607,  2233 => 606,  2221 => 605,  2207 => 587,  2203 => 585,  2200 => 584,  2196 => 582,  2192 => 581,  2189 => 580,  2187 => 579,  2174 => 578,  2160 => 574,  2151 => 573,  2133 => 567,  2125 => 561,  2112 => 560,  2101 => 556,  2096 => 554,  2091 => 553,  2079 => 552,  2068 => 548,  2063 => 546,  2058 => 545,  2046 => 544,  2035 => 540,  2030 => 538,  2027 => 537,  2014 => 536,  2000 => 531,  1991 => 530,  1978 => 529,  1964 => 524,  1955 => 523,  1942 => 522,  1928 => 517,  1917 => 516,  1903 => 515,  1889 => 510,  1876 => 509,  1860 => 508,  1844 => 503,  1831 => 502,  1816 => 501,  1802 => 496,  1799 => 495,  1788 => 494,  1770 => 484,  1766 => 483,  1762 => 482,  1758 => 481,  1753 => 480,  1749 => 478,  1745 => 477,  1741 => 476,  1736 => 474,  1732 => 473,  1727 => 470,  1721 => 468,  1719 => 467,  1714 => 465,  1706 => 464,  1703 => 463,  1684 => 462,  1660 => 458,  1658 => 457,  1647 => 456,  1629 => 445,  1615 => 444,  1600 => 437,  1594 => 435,  1592 => 434,  1588 => 432,  1581 => 430,  1572 => 427,  1563 => 426,  1559 => 425,  1554 => 424,  1550 => 423,  1545 => 421,  1539 => 420,  1535 => 419,  1531 => 418,  1526 => 417,  1522 => 415,  1519 => 414,  1511 => 412,  1509 => 411,  1506 => 410,  1498 => 408,  1496 => 407,  1492 => 405,  1486 => 403,  1484 => 402,  1479 => 400,  1471 => 399,  1468 => 398,  1446 => 397,  1431 => 389,  1425 => 387,  1423 => 386,  1419 => 384,  1410 => 381,  1401 => 380,  1397 => 379,  1392 => 377,  1388 => 376,  1382 => 375,  1378 => 374,  1374 => 373,  1369 => 372,  1365 => 370,  1362 => 369,  1354 => 367,  1352 => 366,  1349 => 365,  1341 => 363,  1339 => 362,  1335 => 360,  1329 => 358,  1327 => 357,  1322 => 355,  1314 => 354,  1311 => 353,  1289 => 352,  1272 => 344,  1268 => 343,  1264 => 342,  1260 => 341,  1256 => 340,  1252 => 339,  1244 => 338,  1240 => 337,  1236 => 336,  1232 => 334,  1226 => 332,  1224 => 331,  1219 => 329,  1210 => 328,  1191 => 327,  1173 => 317,  1169 => 316,  1163 => 315,  1157 => 314,  1149 => 313,  1145 => 311,  1139 => 309,  1137 => 308,  1132 => 306,  1129 => 305,  1127 => 304,  1110 => 303,  1093 => 297,  1087 => 295,  1085 => 294,  1080 => 293,  1066 => 292,  1051 => 285,  1045 => 284,  1040 => 282,  1034 => 281,  1029 => 279,  1023 => 278,  1018 => 276,  1011 => 275,  1005 => 273,  1003 => 272,  998 => 271,  981 => 270,  966 => 262,  957 => 260,  953 => 259,  948 => 258,  944 => 257,  938 => 256,  934 => 255,  930 => 254,  926 => 253,  922 => 252,  918 => 251,  914 => 249,  910 => 248,  906 => 246,  900 => 244,  898 => 243,  893 => 241,  885 => 240,  882 => 239,  862 => 238,  847 => 231,  841 => 227,  837 => 225,  833 => 224,  829 => 223,  823 => 222,  809 => 221,  803 => 220,  797 => 219,  793 => 218,  789 => 217,  782 => 215,  778 => 214,  774 => 213,  771 => 212,  768 => 211,  764 => 209,  760 => 208,  756 => 207,  750 => 206,  742 => 205,  736 => 204,  732 => 203,  728 => 202,  723 => 201,  719 => 199,  715 => 198,  711 => 197,  702 => 195,  696 => 194,  688 => 192,  684 => 191,  680 => 190,  675 => 189,  665 => 186,  662 => 185,  660 => 184,  656 => 182,  650 => 180,  648 => 179,  643 => 177,  635 => 176,  632 => 175,  630 => 174,  608 => 173,  595 => 151,  591 => 150,  587 => 149,  577 => 146,  573 => 145,  567 => 143,  563 => 142,  559 => 141,  555 => 140,  551 => 139,  541 => 137,  539 => 136,  525 => 135,  501 => 130,  490 => 129,  487 => 128,  483 => 127,  479 => 126,  473 => 124,  469 => 122,  454 => 121,  431 => 115,  417 => 114,  414 => 113,  410 => 112,  406 => 111,  399 => 109,  395 => 108,  392 => 107,  377 => 106,  362 => 100,  351 => 99,  349 => 98,  335 => 97,  317 => 90,  311 => 87,  306 => 85,  296 => 84,  291 => 82,  287 => 80,  271 => 79,  256 => 74,  253 => 73,  248 => 72,  245 => 71,  242 => 70,  238 => 69,  234 => 68,  231 => 67,  222 => 64,  217 => 62,  212 => 60,  208 => 59,  205 => 58,  201 => 57,  197 => 56,  192 => 54,  182 => 49,  177 => 47,  173 => 46,  168 => 44,  164 => 43,  160 => 42,  157 => 41,  153 => 40,  149 => 39,  144 => 37,  140 => 35,  138 => 34,  131 => 33,  117 => 32,  112 => 620,  109 => 611,  106 => 591,  103 => 576,  100 => 570,  97 => 558,  94 => 550,  91 => 542,  88 => 534,  85 => 527,  82 => 520,  79 => 513,  76 => 506,  73 => 499,  70 => 492,  67 => 460,  64 => 447,  61 => 442,  58 => 394,  55 => 349,  52 => 324,  49 => 300,  46 => 289,  43 => 267,  40 => 234,  37 => 154,  34 => 134,  31 => 119,  28 => 104,  25 => 95,  22 => 78,  19 => 29,);
     }
 }

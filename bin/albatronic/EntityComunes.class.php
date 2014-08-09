@@ -239,19 +239,19 @@ class EntityComunes extends Entity {
      * @orm Column(type="tinyint")
      * @var entities\ValoresSN
      */
-    protected $ShowOnSitemap = '0';
+    protected $ShowOnSitemap = '1';
 
     /**
      * @orm Column(type="string")
      * @var string(5)
      */
-    protected $ImportanceSitemap = '0.5';
+    protected $ImportanceSitemap = '0,5';
 
     /**
      * @orm Column(type="string")
      * @var entities\ValoresChangeFreq
      */
-    protected $ChangeFreqSitemap = 'monthly';
+    protected $ChangeFreqSitemap = 'daily';
 
     /**
      * @orm Column(type="tinyint")

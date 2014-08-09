@@ -25,4 +25,4 @@
 <?php include '../Cpanel/entities/schema/modulosAppSld.yml'; echoln('');?>
 <?php include '../Cpanel/entities/schema/modulosAppVid.yml'; echoln('');?>
 <?php include '../Cpanel/entities/schema/modulosAppVisit.yml'; echoln('');?>
-<?php include '../Cpanel/entities/schema/modulosAppWidget.yml'; echoln('');?>
+<?php //include '../Cpanel/entities/schema/modulosAppWidget.yml'; echoln('');?>

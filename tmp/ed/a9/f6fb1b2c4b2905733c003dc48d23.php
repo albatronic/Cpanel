@@ -33,12 +33,7 @@ class __TwigTemplate_eda9f6fb1b2c4b2905733c003dc48d23 extends Twig_Template
         // line 6
         echo "\t   </div>
 
-\t<div id=\"botonesCabecera\">";
-        // line 8
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual"), "html", null, true);
-        echo "-";
-        echo twig_escape_filter($this->env, (isset($context["action"]) ? $context["action"] : null), "html", null, true);
-        echo "
+\t<div id=\"botonesCabecera\">
 \t\t";
         // line 9
         if ((((isset($context["action"]) ? $context["action"] : null) == "") && ($this->getAttribute((isset($context["idiomas"]) ? $context["idiomas"] : null), "actual") == 0))) {
@@ -108,6 +103,6 @@ class __TwigTemplate_eda9f6fb1b2c4b2905733c003dc48d23 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  95 => 27,  92 => 26,  90 => 25,  87 => 24,  84 => 23,  81 => 22,  76 => 20,  71 => 19,  68 => 18,  66 => 17,  63 => 16,  60 => 15,  57 => 14,  55 => 13,  52 => 12,  49 => 11,  46 => 10,  44 => 9,  38 => 8,  34 => 6,  24 => 5,  19 => 2,);
+        return array (  90 => 27,  87 => 26,  85 => 25,  82 => 24,  79 => 23,  76 => 22,  71 => 20,  66 => 19,  63 => 18,  61 => 17,  58 => 16,  55 => 15,  52 => 14,  50 => 13,  47 => 12,  44 => 11,  41 => 10,  39 => 9,  34 => 6,  24 => 5,  19 => 2,);
     }
 }

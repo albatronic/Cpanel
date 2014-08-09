@@ -239,7 +239,7 @@ class Controller {
 
                                     // Si el módulo es traducible y estoy en el idioma principal, tengo que
                                     // repercutir los cambios a los demás idiomas
-                                    if ($this->varEnvMod['translatable'] and ($_SESSION['idiomas']['actual'] == '0'))
+                                    if ($this->varEnvMod['translatable'] and ( $_SESSION['idiomas']['actual'] == '0'))
                                         $this->ActualizaIdiomas($datos->getPrimaryKeyValue());
 
                                     // Si ex buscable, actualizar la tabla de búsquedas
@@ -417,7 +417,7 @@ class Controller {
 
                     if ($datos->valida($rules)) {
                         $lastId = $datos->create();
-                        if (($lastId) and (count($metaDatos)))
+                        if (($lastId) and ( count($metaDatos)))
                             $this->saveMetaDatos($lastId, $metaDatos);
 
                         $this->values['errores'] = $datos->getErrores();
@@ -426,7 +426,7 @@ class Controller {
                         //Recargo el objeto para refrescar las propiedades que
                         //hayan podido ser objeto de algun calculo durante el proceso
                         //de guardado y pongo valores por defecto (urlamigable, etc)
-                        if (($lastId) and ($datos->getUrlTarget() == '')) {
+                        if (($lastId) and ( $datos->getUrlTarget() == '')) {
                             $datos = new $this->entity($lastId);
                             $this->gestionUrlMeta($datos);
                             $this->values['errores'] = $datos->getErrores();
@@ -434,7 +434,7 @@ class Controller {
                         }
 
                         // Si ex buscable, actualizar la tabla de búsquedas
-                        if (($lastId) and ($this->varEnvMod['searchable'] == '1'))
+                        if (($lastId) and ( $this->varEnvMod['searchable'] == '1'))
                             $this->ActualizaBusquedas($datos);
 
                         $this->values['datos'] = $datos;
@@ -505,7 +505,7 @@ class Controller {
     public function helpAction() {
         $template = $this->entity . '/' . $this->form->getHelpFile();
         $file = "modules/" . $template;
-        if (!is_file($file) or ($this->form->getHelpFile() == '')) {
+        if (!is_file($file) or ( $this->form->getHelpFile() == '')) {
             $template = "_help/noFound.html.twig";
         }
 
@@ -622,7 +622,7 @@ class Controller {
             $objeto = new $this->entity();
             $tabla = $objeto->getDataBaseName() . "." . $objeto->getTableName();
             unset($objeto);
-            
+
             if ($aditionalFilter != '')
                 $aditionalFilter .= " AND ";
             $aditionalFilter .= "({$tabla}.Deleted='0')";
@@ -760,14 +760,13 @@ class Controller {
                     $doc = new CpanDocs();
                     $doc->setArrayDoc($_FILES['imagenMaster']);
                     if ($doc->validaArchivo($rules)) {
-
                         // Borrar las eventuales imagenes que existieran
                         $img = new CpanDocs();
                         $img->borraDocs($this->entity, $idEntidad, 'image%');
                         unset($img);
 
                         foreach ($this->varEnvMod['images'] as $key => $value)
-                            if ($value['visible'] == '1') {
+                            if ($value['visible'] === '1') {
 
                                 $_FILES['imagenMaster']['maxWidth'] = $value['width'];
                                 $_FILES['imagenMaster']['maxHeight'] = $value['height'];
@@ -792,7 +791,7 @@ class Controller {
                                 }
 
                                 // Subir Miniatura
-                                if (($lastId) and ($value['generateThumbnail'] == '1')) {
+                                if (($lastId) and ( $value['generateThumbnail'] == '1')) {
 
                                     $_FILES['imagenMaster']['maxWidth'] = $value['widthThumbnail'];
                                     $_FILES['imagenMaster']['maxHeight'] = $value['heightThumbnail'];
@@ -813,8 +812,9 @@ class Controller {
                                         $this->values['errores'] = $doc->getErrores();
                                 }
                             }
-                    } else
+                    } else {
                         $this->values['errores'] = $doc->getErrores();
+                    }
 
                     $template = $this->entity . '/form.html.twig';
                 } else {
@@ -851,7 +851,7 @@ class Controller {
                     if ($doc->valida($rules)) {
                         $ok = $doc->actualiza();
                         // Subir Miniatura
-                        if (($ok) and ($this->varEnvMod['images'][$idImagen]['generateThumbnail'] == '1')) {
+                        if (($ok) and ( $this->varEnvMod['images'][$idImagen]['generateThumbnail'] == '1')) {
                             $thumbNail = $doc->getThumbNail();
                             $thumbNail->setTitle($title);
                             $thumbNail->setName($slug);
@@ -999,11 +999,11 @@ class Controller {
             $urlAmigable = $this->calculaUrlAmigable($objetoAuxuliar);
 
         if ($this->varEnvMod['metatagTitleManagement'])
-            $metatagTitle = $this->calculaMetatagTitle($objetoAuxuliar);
+            $infoMeta = $this->calculaMetatagTitle($objetoAuxuliar);
 
         unset($objetoAuxuliar);
 
-        if (count($urlAmigable) or ($metatagTitle != '')) {
+        if (count($urlAmigable) or ( count($infoMeta))) {
 
             if ($urlAmigable != '') {
                 $datos->setUrlPrefix($urlAmigable['prefix']);
@@ -1011,8 +1011,14 @@ class Controller {
                 $datos->setUrlFriendly($urlAmigable['url']);
             }
 
-            if ($metatagTitle != '') {
-                $datos->setMetatagTitle($metatagTitle);
+            if ($infoMeta['title'] != '') {
+                $datos->setMetatagTitle($infoMeta['title']);
+            }
+            if ($infoMeta['description'] != '') {
+                $datos->setMetatagDescription($infoMeta['description']);
+            }
+            if ($infoMeta['keywords'] != '') {
+                $datos->setMetatagKeywords($infoMeta['keywords']);
             }
 
             $datos->save();
@@ -1058,7 +1064,7 @@ class Controller {
                     // No es el módulo padre de la app. Miro a ver si
                     // está linkado con otro módulo
                     $linkModule = $this->varWebMod['globales'];
-                    if ((count($linkModule) > 0) and ($linkModule['linkFromColumn'] != '') and ($linkModule['linkToEntity'] != '') and ($linkModule['linkToColumn'] != '')) {
+                    if ((count($linkModule) > 0) and ( $linkModule['linkFromColumn'] != '') and ( $linkModule['linkToEntity'] != '') and ( $linkModule['linkToColumn'] != '')) {
                         // Está linkado con otro módulo. El prefijo será la url amigable
                         // del padre si es heredable
                         $idToLink = $datos->getColumnValue($linkModule['linkFromColumn']);
@@ -1153,7 +1159,7 @@ class Controller {
 
             $rows = $urls->cargaCondicion("Id, Entity, IdEntity", "Idioma='{$_SESSION['idiomas']['actual']}' and UrlFriendly='{$urlAmigable}'");
             $row = $rows[0];
-            if (($row['Id']) and ($row['Entity'] != "{$this->entity}" or $row['IdEntity'] != "{$datos->getPrimaryKeyValue()}")) {
+            if (($row['Id']) and ( $row['Entity'] != "{$this->entity}" or $row['IdEntity'] != "{$datos->getPrimaryKeyValue()}")) {
                 // Ya existe esa url amigable, le pongo al final el id
                 $urlAmigable .= "-" . $idUrl;
                 $slug .= "-" . $idUrl;
@@ -1179,19 +1185,28 @@ class Controller {
 
     protected function calculaMetatagTitle($datos) {
 
-        // Obtener el metatagtitle
-
         $bloqueoMetatagTitle = ($datos->getLockMetatagTitle()->getIDTipo() == '1');
         $datos->setLockMetatagTitle($bloqueoMetatagTitle);
 
         if ($bloqueoMetatagTitle) {
             $columnaMetatagTitle = $this->varEnvMod['fieldGeneratorMetatagTitle'];
-            if ($columnaMetatagTitle != '')
-                $metatagTitle = $datos->{"get$columnaMetatagTitle"}();
-        } else
-            $metatagTitle = $datos->getMetatagTitle();
+            if ($columnaMetatagTitle != '') {
+                $infoMeta['title'] = $datos->{"get$columnaMetatagTitle"}();
+            }
+            $columnaMetatagDescription = $this->varEnvMod['fieldGeneratorMetatagDescription'];
+            if ($columnaMetatagDescription != '') {
+                $infoMeta['description'] = $datos->{"get$columnaMetatagDescription"}();
+            }
+        } else {
+            $infoMeta = array(
+                'title' => $datos->getMetatagTitle(),
+                'description' => $datos->getMetatagDescription(),
+            );
+        }
 
-        return $metatagTitle;
+        $infoMeta['keywords'] = $datos->getMetatagKeywords();
+        
+        return $infoMeta;
     }
 
     /**
@@ -1226,7 +1241,7 @@ class Controller {
                     $esTraducible = $this->varEnvMod['columns'][$column]['translatable'];
                     // Actualizo las columnas no traducibles y las traducibles que
                     // estén vacías.
-                    if ((!$esTraducible) or ($value == '')) {
+                    if ((!$esTraducible) or ( $value == '')) {
                         $objetoSecundario->{"set$column"}($valoresObjetoPrincipal[$column]);
                     }
                 }

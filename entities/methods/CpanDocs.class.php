@@ -448,15 +448,17 @@ class CpanDocs extends CpanDocsEntity {
                 $ftp->close();
             } else {
                 $this->_errores[] = "Fallo al conectar vía FTP";
-                foreach ($_SESSION['project']['ftp'] as $item)
+                foreach ($_SESSION['project']['ftp'] as $item) {
                     $this->_errores[] = $item;
+                }
             }
 
             unset($ftp);
             $ok = ( count($this->_errores) == 0);
 
-            if (file_exists($imagenRecortada))
+            if (file_exists($imagenRecortada)) {
                 @unlink($imagenRecortada);
+            }
         }
 
         return $ok;

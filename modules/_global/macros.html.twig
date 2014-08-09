@@ -325,11 +325,6 @@
 {# textarea: MUESTRA UN <TEXTAREA> #}
 {# ------------------------------- #}
 {% macro textarea(atributos, classLabel, name, id, value, rows, cols, class, tabindex) %}
-{% if (atributos.visible > 0) and atributos.editorTiny == '1' and (atributos.translatable or idiomas.actual == 0) %}
-    <script>
-        tinyMCE.execCommand("mceAddControl", true, "{{ id|default(name)}}");
-    </script>
-{% endif %}
 <li {% if (atributos.visible > 0) and (atributos.translatable or idiomas.actual == 0) %}class=""{% else %}class="oculto"{% endif %}>
 <div class="form_grid_12" id="div_{{id|default(name)}}">
 
@@ -340,7 +335,7 @@
     <div class="form_input">
         <textarea  name="{{ name }}"
                    id="{{ id|default(name)}}"
-                   class="large" title="{{ atributos.help }}"                  
+                   class="{% if (atributos.visible > 0) and atributos.editorTiny == '1' and (atributos.translatable or idiomas.actual == 0) %}tiny{% endif %}" title="{{ atributos.help }}"                  
                    rows="{{ rows|default(5) }}"
                    cols="{{ cols|default(75) }}"
                    tabindex="{{ tabindex }}"

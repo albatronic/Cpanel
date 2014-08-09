@@ -32,6 +32,7 @@ GconContenidos:
   fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Titulo
+  fieldGeneratorMetatagDescription: Subtitulo  
   controller: Contenidos
   action: Index
   template: null
@@ -60,6 +61,12 @@ GconContenidos:
     -
       title: 'Título z-a'
       criteria: 'IdSeccion DESC,Titulo DESC'
+    -
+      title: 'Visitas a-z'
+      criteria: 'NumberVisits ASC'
+    -
+      title: 'Visitas z-a'
+      criteria: 'NumberVisits DESC'      
   search_default: Id
   ordenes_web:
     BlogMostrarEnPortada:
@@ -620,9 +627,9 @@ GconContenidos:
       #aditional_filter: { order: 23, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
-      title: NumberVisits
+      title: Visitas
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'

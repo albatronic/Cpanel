@@ -29,6 +29,7 @@ ServServicios:
   fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Titulo
+  fieldGeneratorMetatagDescription: Subtitulo    
   controller: Servicios
   action: Index
   template: index.html.twig
@@ -57,6 +58,12 @@ ServServicios:
     -
       title: 'Título z-a'
       criteria: 'Titulo DESC'
+    -
+      title: 'Visitas a-z'
+      criteria: 'NumberVisits ASC'
+    -
+      title: 'Visitas z-a'
+      criteria: 'NumberVisits DESC'      
   search_default: Id
   ordenes_web:
     MostrarPortada:

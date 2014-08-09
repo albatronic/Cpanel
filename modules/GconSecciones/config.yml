@@ -29,6 +29,7 @@ GconSecciones:
   fieldGeneratorUrlFriendly: Titulo
   metatagTitleManagement: true
   fieldGeneratorMetatagTitle: Titulo
+  fieldGeneratorMetatagDescription: Subtitulo    
   controller: Secciones
   action: Index
   template: index.html.twig
@@ -57,6 +58,12 @@ GconSecciones:
     -
       title: 'Título z-a'
       criteria: 'Titulo DESC'
+    -
+      title: 'Visitas a-z'
+      criteria: 'NumberVisits ASC'
+    -
+      title: 'Visitas z-a'
+      criteria: 'NumberVisits DESC'      
   ordenes_web:
     MostrarEnMenu1:
       columnaMostrar: Titulo
@@ -730,9 +737,9 @@ GconSecciones:
       #aditional_filter: { order: 19, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
-      title: 'Número de visitas'
+      title: 'Visitas'
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
