@@ -43,8 +43,9 @@ CpanUrlAmigables:
   9: { UrlFriendly: '/politica-de-privacidad',    Controller: PoliticaPrivacidad,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 9, Publish: 1 }      
   10: { UrlFriendly: '/noticias',   Controller: Noticias,   Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 10, Publish: 1 }      
   11: { UrlFriendly: '/eventos',    Controller: Eventos,    Action: Index,  Template: Index, Entity: GconSecciones, IdEntity: 11, Publish: 1 }      
-  12: { UrlFriendly: '/acs',Controller: Proyectos, Action: Index, Template: Index, Entity: PcaeEmpresas, IdEntity: 1, Publish: 1}
   12: { UrlFriendly: '/favoritos',Controller: Favoritos, Action: Index, Template: Index, Entity: GconSecciones, IdEntity: 12, Publish: 1}
+  13: { UrlFriendly: '/rss',Controller: Rss, Action: Index, Template: index.html.twig, Entity: GconSecciones, IdEntity: 13, Publish: 1}
+  14: { UrlFriendly: '/sitemap',Controller: Sitemap, Action: Index, Template: index.html.twig, Entity: GconSecciones, IdEntity: 14, Publish: 1}
   
 GconSecciones:
   1: { Id: 1, Titulo: Inicio, Publish: 1, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: '', LockSlug: 1, UrlFriendly: '/' }
@@ -59,3 +60,5 @@ GconSecciones:
   10: { Id: 10, Titulo: Noticias, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'noticias', LockSlug: 1, UrlFriendly: '/noticias' }  
   11: { Id: 11, Titulo: Eventos, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'eventos', LockSlug: 1, UrlFriendly: '/eventos' }  
   12: { Id: 12, Titulo: Favoritos, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'favoritos', LockSlug: 1, UrlFriendly: '/favoritos' }  
+  13: { Id: 13, Titulo: Rss, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'rss', LockSlug: 1, UrlFriendly: '/rss' }  
+  14: { Id: 14, Titulo: SiteMap, NivelJerarquico: 1, IsDefault: 1, UrlPrefix: '/', LockUrlPrefix: 1, Slug: 'sitemap', LockSlug: 1, UrlFriendly: '/sitemap', ShowOnSitemap: 0 }  
