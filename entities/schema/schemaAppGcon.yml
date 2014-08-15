@@ -66,12 +66,7 @@ GconContenidos:
     NoticiaMostrarEnPortada:      { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
     NoticiaOrden:                 { type: integer(11), notnull: true, default: 0, index: index}
     EsEvento:                     { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
-    EsWiki:                       { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
-    Usuario1:                     { type: string(255), notnull: true }
-    Usuario2:                     { type: string(255), notnull: true }
-    Usuario3:                     { type: string(255), notnull: true }
-    Usuario4:                     { type: string(255), notnull: true }
-    Usuario5:                     { type: string(255), notnull: true }    
+    EsWiki:                       { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' } 
     <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdSeccion: { ForeignEntity: GconSecciones, ForeignId: Id }
