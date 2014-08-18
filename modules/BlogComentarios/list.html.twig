@@ -34,12 +34,12 @@
                         <img src="{{app.path}}/images/botoneditar.png" width="16px" height="16px" />
                     <a>
                 </td>
-#}
-                <td class="item">{{objeto.IdEntidad.Titulo}}</td>  
+                #}
+                <td class="item">{{macro.recortaTexto(objeto.IdEntidad.Titulo,20)}}</td>  
                 <td class="item">{{objeto.Nombre}}</td> 
                 <td class="item">{{objeto.TiempoUnix|date('d-m-Y H:i:s')}}</td>                
                 <td class="item">{{objeto.IpAddress}}</td>                                
-                <td class="item">{{ macro.actualizaColumna(values.controller,objeto.getPrimaryKeyValue,'Publish',objeto.Publish.IDTipo,'Publicar/Despublicar')}} </td>                                              
+                <td class="item">{{ macro.actualizaColumna(values.controller,objeto.getPrimaryKeyValue,'Ckecked',objeto.Ckecked.IDTipo,'Publicar/Despublicar')}} </td>                                              
                 <td class="item">{{objeto.Comentario}}</td>                  
             </tr>
             {% else %}
