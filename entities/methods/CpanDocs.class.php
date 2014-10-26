@@ -55,7 +55,7 @@ class CpanDocs extends CpanDocsEntity {
 
         $id = parent::create();
 
-        if (($id) and ($this->Idioma == 0)) {
+        if (($id) and ( $this->Idioma == 0)) {
             $this->actualizaNombreAmigable();
             if ($this->subeDocumento()) {
                 $this->save();
@@ -253,7 +253,7 @@ class CpanDocs extends CpanDocsEntity {
                 $doc = new CpanDocs();
                 $rows = $doc->cargaCondicion("Id, Entity, IdEntity, Type, IsThumbnail", "(Name='{$this->Name}')");
                 $row = $rows[0];
-                if (($row['Id']) and ($row['Entity'] != "{$this->Entity}" or $row['IdEntity'] != "{$this->IdEntity}" or $row['Type'] != "{$this->Type}" or $row['IsThumbnail'] != "{$this->IsThumbnail}")) {
+                if (($row['Id']) and ( $row['Entity'] != "{$this->Entity}" or $row['IdEntity'] != "{$this->IdEntity}" or $row['Type'] != "{$this->Type}" or $row['IsThumbnail'] != "{$this->IsThumbnail}")) {
                     // Ya existe esa imagen amigable, le pongo al final el id
                     $aux = explode(".", $this->Name);
                     $this->Name = "{$aux[0]}-{$this->Id}.{$aux[1]}";
@@ -264,7 +264,7 @@ class CpanDocs extends CpanDocsEntity {
                 $doc = new CpanDocs();
                 $rows = $doc->cargaCondicion("Id", "(Name='{$this->Name}')");
                 $row = $rows[0];
-                if (($row['Id']) and ($row['Id'] != $this->Id)) {
+                if (($row['Id']) and ( $row['Id'] != $this->Id)) {
                     // Ya existe esa imagen amigable, le pongo al final el id
                     $aux = explode(".", $this->Name);
                     $this->Name = "{$aux[0]}-{$this->Id}.{$aux[1]}";
@@ -273,10 +273,9 @@ class CpanDocs extends CpanDocsEntity {
         }
 
         unset($doc);
-        
-        $subcarpeta = substr($this->Name,0,3);
-        $this->PathName = "docs/{$this->Entity}/{$subcarpeta}/{$this->Name}";
 
+        $subcarpeta = substr($this->Name, 0, 3);
+        $this->PathName = "docs/{$this->Entity}/{$subcarpeta}/{$this->Name}";
     }
 
     /**
@@ -305,7 +304,7 @@ class CpanDocs extends CpanDocsEntity {
 
             if (!$limiteExcedido) {
                 // Comprobacion de tamaño
-                $prohibidoTamano = ( ($rules['maxFileSize'] > 0) and ($this->_ArrayDoc['size'] > $rules['maxFileSize']) );
+                $prohibidoTamano = ( ($rules['maxFileSize'] > 0) and ( $this->_ArrayDoc['size'] > $rules['maxFileSize']) );
 
                 // Comprobación de tipo
                 $path_parts = pathinfo($this->_ArrayDoc['name']);
@@ -368,7 +367,7 @@ class CpanDocs extends CpanDocsEntity {
 
             // Validar que se haya indicado título y nombre, en su defecto
             // se toma el indicado por la variable de entorno
-            if (($this->Title == '') or ($this->Name == '')) {
+            if (($this->Title == '') or ( $this->Name == '')) {
                 $variables = new CpanVariables('Mod', 'Env', $this->getEntity());
                 $varEnv = $variables->getValores();
                 unset($variables);
@@ -411,9 +410,9 @@ class CpanDocs extends CpanDocsEntity {
                 // Tratamiento de la imagen antes de subirla
                 list($ancho, $alto) = getimagesize($this->_ArrayDoc['tmp_name']);
 
-                if (($this->_ArrayDoc['maxWidth']>0) and ($ancho > $this->_ArrayDoc['maxWidth']))
+                if (($this->_ArrayDoc['maxWidth'] > 0) and ( $ancho > $this->_ArrayDoc['maxWidth']))
                     $ancho = $this->_ArrayDoc['maxWidth'];
-                if (($this->_ArrayDoc['maxHeight']>0) and ($alto > $this->_ArrayDoc['maxHeight']))
+                if (($this->_ArrayDoc['maxHeight'] > 0) and ( $alto > $this->_ArrayDoc['maxHeight']))
                     $alto = $this->_ArrayDoc['maxHeight'];
 
                 $img = new Gd();
@@ -421,8 +420,8 @@ class CpanDocs extends CpanDocsEntity {
                 //$img->crop($ancho, $alto,$this->_ArrayDoc['modoRecortar']);
                 // Si es thumbnail fuerzo el modo a ajustar aunque su imagen padre se
                 // haya subido con modo recortar
-                $modo = ($this->IsThumbnail) ? "ajustar": $this->_ArrayDoc['modoRecortar'];
-                $img->crop($this->_ArrayDoc['maxWidth'], $this->_ArrayDoc['maxHeight'],$modo);
+                $modo = ($this->IsThumbnail) ? "ajustar" : $this->_ArrayDoc['modoRecortar'];
+                $img->crop($this->_ArrayDoc['maxWidth'], $this->_ArrayDoc['maxHeight'], $modo);
                 $imagenRecortada = "tmp/" . md5($this->_ArrayDoc['tmp_name']);
                 $ok = $img->save($imagenRecortada);
                 unset($img);
@@ -493,15 +492,17 @@ class CpanDocs extends CpanDocsEntity {
         $this->actualizaNombreAmigable();
         $nombreNuevo = $this->getName();
 
-        $pathInfo = pathinfo($pathName);
+        if ($nombreNuevo !== $nombreAnterior) {
+            $pathInfo = pathinfo($pathName);
 
-        $carpetaDestino = $this->_prePath . $pathInfo['dirname'];
+            $carpetaDestino = $this->_prePath . $pathInfo['dirname'];
 
-        $ftp = new Ftp($_SESSION['project']['ftp']);
-        $ok = $ftp->rename($carpetaDestino, $nombreAnterior, $nombreNuevo);
-        $this->_errores = $ftp->getErrores();
-        $ftp->close();
-        unset($ftp);
+            $ftp = new Ftp($_SESSION['project']['ftp']);
+            $ok = $ftp->rename($carpetaDestino, $nombreAnterior, $nombreNuevo);
+            $this->_errores = $ftp->getErrores();
+            $ftp->close();
+            unset($ftp);
+        }
 
         if ($this->_ArrayDoc['tmp_name'] != '') {
             $ok = $this->subeDocumento();

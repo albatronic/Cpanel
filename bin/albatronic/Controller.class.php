@@ -830,6 +830,7 @@ class Controller {
                     $id = $this->request['image'][$idImagen]['Id'];
                     $tipo = $this->request['image'][$idImagen]['Tipo'];
                     $title = trim($this->request['image'][$idImagen]['Title']);
+                    $alt = trim($this->request['image'][$idImagen]['Alt']);
                     $slug = trim($this->request['image'][$idImagen]['Name']);
                     $showCaption = $this->request['image'][$idImagen]['ShowCaption'];
                     $orden = $this->request['image'][$idImagen]['SortOrder'];
@@ -841,6 +842,7 @@ class Controller {
 
                     $doc = new CpanDocs($id);
                     $doc->setTitle($title);
+                    $doc->setObservations($alt);
                     $doc->setName($slug);
                     $doc->setShowCaption($showCaption);
                     $doc->setSortOrder($orden);
@@ -854,6 +856,7 @@ class Controller {
                         if (($ok) and ( $this->varEnvMod['images'][$idImagen]['generateThumbnail'] == '1')) {
                             $thumbNail = $doc->getThumbNail();
                             $thumbNail->setTitle($title);
+                            $thumbNail->setObservations($alt);
                             $thumbNail->setName($slug);
                             $thumbNail->setShowCaption($showCaption);
                             $thumbNail->setSortOrder($orden);

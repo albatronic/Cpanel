@@ -92,7 +92,7 @@
                 <p>
                 {{ macro.input(atributos.LockMetatagTitle,'field_title','checkbox',values.controller ~ '[LockMetatagTitle]',values.controller ~ '_LockMetatagTitle',datos.LockMetatagTitle.IDTipo,'255','CampoTextoLargo','12') }}
                 {% if datos.LockMetatagTitle.IDTipo == '1' %} {% set disabled = 'DISABLED' %} {% else %} {% set disabled = none %} {% endif %}
-                {{ macro.input(atributos.MetatagTitle,'field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,none,none,110, disabled) }}
+                {{ macro.input(atributos.MetatagTitle,'field_title','text',values.controller ~ '[MetatagTitle]',values.controller ~ '_MetatagTitle',datos.MetatagTitle,100,'x_large',110, disabled) }}
                 {{ macro.textarea(atributos.MetatagDescription, 'field_title', values.controller ~ '[MetatagDescription]', values.controller ~ '_MetatagDescription', datos.MetatagDescription, none, none, 'textarea',115) }}
                 {{ macro.textarea(atributos.MetatagKeywords, 'field_title', values.controller ~ '[MetatagKeywords]', values.controller ~ '_MetatagKeywords', datos.MetatagKeywords, none, none, 'textarea',116) }}
                 {{ macro.input(atributos.MetatagTitleSimple,'field_title','checkbox',values.controller ~ '[MetatagTitleSimple]',values.controller ~ '_MetatagTitleSimple',datos.MetatagTitleSimple.IDTipo,'255','CampoTextoLargo','12') }}
@@ -176,7 +176,8 @@
                                 <option value="center">Recortar al centro</option>
                                 <option value="ajustar">Imagen completa</option>
                             </select>
-                            {{ macro.input({'caption':'Título','visible':values.varEnvMod.images[puntero].mostrarTitulo,'varEnv':'0'},'field_title','text','image['~puntero~'][Title]','image_'~puntero~'_Title',imagen.Title,255,none) }}
+                            {{ macro.input({'caption':'Título','visible':values.varEnvMod.images[puntero].mostrarTitulo,'varEnv':'0'},'field_title','text','image['~puntero~'][Title]','image_'~puntero~'_Title',imagen.Title,255,'CampoTextoLargo') }}
+                            {{ macro.input({'caption':'Alt','visible':values.varEnvMod.images[puntero].mostrarTitulo,'varEnv':'0'},'field_title','text','image['~puntero~'][Alt]','image_'~puntero~'_Alt',imagen.Observations,255,'CampoTextoLargo') }}
                             {{ macro.input({'caption':'Nombre','visible':values.varEnvMod.images[puntero].mostrarNombre,'varEnv':'0'},'field_title','text','image['~puntero~'][Name]','image_'~puntero~'_Name',imagen.Name,255,none) }}
                             {{ macro.input({'caption':'Mostrar pie de foto','visible':values.varEnvMod.images[puntero].mostrarPieDeFoto,'varEnv':'0'},'field_title','checkbox','image['~puntero~'][ShowCaption]','image_'~puntero~'_ShowCaption',imagen.ShowCaption.IDTipo,'255',none,'12') }}
                             {{ macro.input({'caption':'Publicar','visible':values.varEnvMod.images[puntero].mostrarPublicar,'varEnv':'0'},'field_title','checkbox','image['~puntero~'][Publish]','image_'~puntero~'_Publish',imagen.Publish.IDTipo,'255',none,'12') }}

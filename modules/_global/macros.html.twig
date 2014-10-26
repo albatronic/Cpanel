@@ -202,7 +202,7 @@
                    name="{{ name }}"
                    id="{{ id|default(name)}}"
                    value="{{ value }}" maxlength="{{ maxLength|default(20) }}"
-                   class="{{class|default('mid')}}" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
+                   class="{{class|default('large')}}" title="{{ atributos.help }}" tabindex="{{ tabIndex }}"
                    onchange="{{ onchange }} {{ _self.alertSave }}"
                    {{extra}}
                    {% if atributos.updatable == '0' %} disabled {% endif %}

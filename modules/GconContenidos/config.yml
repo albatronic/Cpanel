@@ -500,17 +500,17 @@ GconContenidos:
       link: { route: null, param: null, title: null, target: null, link: null }
       validator: { nullable: NO, type: datetime, length: false, min: null, max: null, message: 'Valor Requerido' }
     Privacy:
-      title: Privacy
+      title: Privacidad
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'
       help: null
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
-      #aditional_filter: { order: 20, caption: Privacy, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
+      aditional_filter: { order: 20, caption: Privacidad, entity: ValoresPrivacy, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
+      validator: { nullable: NO, type: tinyint, length: 7, min: null, max: null, message: 'Valor Requerido' }
     SortOrder:
       title: SortOrder
       filter: NO

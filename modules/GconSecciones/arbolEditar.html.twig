@@ -11,7 +11,7 @@
     <span onclick="location.href='{{app.path}}/{{values.controller}}/belongsTo/{{key}}'" alt="Añadir subelemento" title="Añadir subelemento"><img src="{{app.path}}/images/detalle.png" width="16px;"/></span>     
     <span>
         {% if item.nivelJerarquico >= 1 or nHermanos > 1 %}
-            <img src="{{appPath}}/images/boton-ordenar.png" width="16px;" alt="Ordenar" title="Ordenar" onclick="popUpOrdenar('{{values.controller}}','BelongsTo','{{item.belongsTo}}','Familia');" />         
+            <img src="{{appPath}}/images/boton-ordenar.png" width="16px;" alt="Ordenar" title="Ordenar" onclick="popUpOrdenar('{{values.controller}}','BelongsTo','{{item.belongsTo}}','Titulo');" />         
         {% else %}
             <img src="{{app.path}}/images/espacio.gif" width="22px"/>
         {% endif %}
