@@ -22,7 +22,7 @@
     EmailedAt:            {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}   
     
     Privacy:              {type: tinyint, notnull: true, default: 2, index: index, comment: 'Abstract,ValoresPrivacy,IDTipo'}
-    SortOrder:            {type: integer(11), notnull: true, default: 0, index: index}
+    SortOrder:            {type: bigint(11), notnull: true, default: 0, index: index}
     PublishedAt:          {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     ActiveFrom:           {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
     ActiveTo:             {type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
