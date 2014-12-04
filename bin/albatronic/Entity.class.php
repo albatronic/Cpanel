@@ -158,7 +158,7 @@ class Entity {
             $values = substr($values, 0, -1);
 
             $query = "UPDATE `{$this->_dataBaseName}`.`{$this->_tableName}` SET {$values} WHERE `{$this->getPrimaryKeyName()}` = '{$this->getPrimaryKeyValue()}'";
-
+            //echo $query;
             if (!$this->_em->query($query))
                 $this->_errores = $this->_em->getError();
             $this->_em->desConecta();
@@ -688,7 +688,7 @@ class Entity {
         }
 
         if ($default == TRUE) {
-            $rows[] = array('Id' => '', Value => ':: Indique un Valor');
+            $rows[] = array('Id' => '0', Value => ':: Indique un Valor');
             sort($rows);
         }
 

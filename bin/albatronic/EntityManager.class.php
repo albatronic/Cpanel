@@ -522,4 +522,3 @@ class EntityManager {
 
 }
 
-?>

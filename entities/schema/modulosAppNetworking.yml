@@ -4,7 +4,7 @@ CpanAplicaciones:
 
 CpanModulos:
   Ntwg0: { CodigoApp: Ntwg, NombreModulo: Ntwg, Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Gestor Redes Sociales, Funcionalidades: AC }
-  Ntwg1: { CodigoApp: Ntwg, NombreModulo: Networking, Nivel: 1, BelongsTo: Visit,  Publish: 1, Titulo: Redes Sociales, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Ntwg1: { CodigoApp: Ntwg, NombreModulo: Networking, Nivel: 1, BelongsTo: 0,  Publish: 1, Titulo: Redes Sociales, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Ntwg0: { IdPerfil: 1, NombreModulo: Ntwg, Funcionalidades: 'AC,VW' }
