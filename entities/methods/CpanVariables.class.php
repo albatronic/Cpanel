@@ -275,8 +275,9 @@ class CpanVariables extends CpanVariablesEntity {
                 $this->setVariable($variable);
             }
         }
-        else
+        else {
             $this->errores[] = "Los valores indicados en ambito y/o tipo no son válidos";
+        }
 
         return $ok;
     }

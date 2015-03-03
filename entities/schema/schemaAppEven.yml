@@ -8,5 +8,5 @@ EvenEventos:
     Fecha:      { type: date, notnull: true, default: '0000-00-00' }
     HoraInicio: { type: time, notnull: true, default: '00:00:00' }
     HoraFin:    { type: time, notnull: true, default: '00:00:00' }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:

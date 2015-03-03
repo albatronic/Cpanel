@@ -118,13 +118,11 @@ class Entity {
                             $this->{"set$column_name"}($value);
                         }
                     }
-                }
-                else
+                } else
                     $this->_errores[] = $this->_em->getError();
 
                 $this->_em->desConecta();
-            }
-            else
+            } else
                 $this->_errores[] = $this->_em->getError();
 
             unset($this->_em);
@@ -147,7 +145,7 @@ class Entity {
             // Compongo los valores iterando el objeto
             $values = '';
             foreach ($this as $key => $value) {
-                if ((substr($key, 0, 1) != '_') and ($key != $this->getPrimaryKeyName())) {
+                if ((substr($key, 0, 1) != '_') and ( $key != $this->getPrimaryKeyName())) {
                     if (is_null($value))
                         $values .= "`" . $key . "` = NULL,";
                     else
@@ -189,7 +187,7 @@ class Entity {
             foreach ($this as $key => $value) {
                 if (substr($key, 0, 1) != '_') {
                     $columns .= "`" . $key . "`,";
-                    if (( ($key == $this->getPrimaryKeyName()) and ($_SESSION['idiomas']['actual'] == 0)) or (is_null($value)))
+                    if (( ($key == $this->getPrimaryKeyName()) and ( $_SESSION['idiomas']['actual'] == 0)) or ( is_null($value)))
                         $values .= "NULL,";
                     else
                         $values .= "'" . mysql_real_escape_string($value, $this->_dbLink) . "',";
@@ -215,8 +213,7 @@ class Entity {
                     $objetoPadre = new $this($this->BelongsTo);
                     $perfilesCpan = $objetoPadre->getAccessProfileList();
                     unset($objetoPadre);
-                }
-                else
+                } else
                     $perfilesCpan = $this->getAccessProfileList();
 
                 $perfilesCpan['perfiles'][$_SESSION['usuarioPortal']['IdPerfil']] = $_SESSION['usuarioPortal']['IdPerfil'];
@@ -261,8 +258,7 @@ class Entity {
                     unset($doc);
                 }
                 $this->_em->desConecta();
-            }
-            else
+            } else
                 $this->_errores = $this->_em->getError();
             unset($this->_em);
             $validacion = (count($this->_errores) == 0);
@@ -300,8 +296,7 @@ class Entity {
                     unset($doc);
                 }
                 $this->_em->desConecta();
-            }
-            else
+            } else
                 $this->_errores = $this->_em->getError();
             unset($this->_em);
             $validacion = (count($this->_errores) == 0);
@@ -509,7 +504,7 @@ class Entity {
 
         if ($this->getPrimaryKeyValue() != '') {
             // Estoy validando antes de actualizar
-            if (($this->IsSuper) and ($_SESSION['usuarioPortal']['IdPerfil'] != '1'))
+            if (($this->IsSuper) and ( $_SESSION['usuarioPortal']['IdPerfil'] != '1'))
                 $this->_errores[] = "No se puede modificar, es un valor reservado";
         }
 
@@ -553,12 +548,12 @@ class Entity {
 
         // No se puede borrar si el objeto es un valor predeterminado y el usuario
         // no es el super
-        if (($this->IsDefault) AND ($_SESSION['usuarioPortal']['IdPerfil'] != 1))
+        if (($this->IsDefault) AND ( $_SESSION['usuarioPortal']['IdPerfil'] != 1))
             $this->_errores[] = "No se puede eliminar. Es un valor predeterminado";
 
         // No se puede borrar si el objeto es un valor SUPER y el usuario
         // no es el super
-        if (($this->IsSuper) AND ($_SESSION['usuarioPortal']['IdPerfil'] != 1))
+        if (($this->IsSuper) AND ( $_SESSION['usuarioPortal']['IdPerfil'] != 1))
             $this->_errores[] = "No se puede eliminar. Es un valor reservado";
 
         // Validacion de integridad referencial respecto a entidades hijas
@@ -607,7 +602,7 @@ class Entity {
                 $condicion .= " AND (Deleted = '0')";
 
             $query = "SELECT {$columnas} FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE ({$condicion}) {$orderBy}";
-            $this->_em->query($query);//echo $query;
+            $this->_em->query($query); //echo $query;
             $this->setStatus($this->_em->numRows());
 
             $rows = $this->_em->fetchResult();
@@ -616,6 +611,20 @@ class Entity {
 
         //unset($this->_em);
         return $rows;
+    }
+
+    /**
+     * Borra todos los registros de la tabla
+     * 
+     * @return void
+     */
+    public function truncate() {
+
+        $this->conecta();
+        if (is_resource($this->_dbLink)) {
+            $query = "TRUNCATE TABLE `{$this->_dataBaseName}`.`{$this->_tableName}`";
+            $this->_em->query($query);
+        }
     }
 
     /**
@@ -1069,17 +1078,17 @@ class Entity {
      * @return int
      */
     public function getColumnForeignKey($column) {
-        
+
         $foreignKey = 0;
-        
+
         $objeto = $this->{"get$column"}();
         if (is_object($objeto)) {
             $foreignKey = $objeto->getPrimaryKeyValue();
         }
-        
+
         return $foreignKey;
     }
-    
+
     /**
      * Devuelve array con todos los valores del objeto
      * que esta asociado a la columna $columnName
@@ -1089,18 +1098,18 @@ class Entity {
      * @param boolean $default
      * @return array
      */
-    public function getColumnFetchAll($columnName,$columnSelect,$default=false) {
-        
+    public function getColumnFetchAll($columnName, $columnSelect, $default = false) {
+
         $array = array();
-        
+
         $objeto = $this->{"get$columnName"}();
         if (is_object($objeto)) {
-            $array = $objeto->fetchAll($columnSelect,$default);
+            $array = $objeto->fetchAll($columnSelect, $default);
         }
 
         return $array;
     }
-    
+
     /**
      * Devuelve el valor del meta dato $name
      * para la entidad e id de entidad en curso

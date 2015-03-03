@@ -14,7 +14,7 @@ EncargosCab:
     IpAddress:    { type: string(15), notnull: true, default: '' }
     Session:      { type: string(50), notnull: true, default: '' }
     TiempoUnix:   { type: bigint(20), notnull: true, default: 0 }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     
 EncargosLineas:
@@ -24,6 +24,6 @@ EncargosLineas:
     IdArticulo: { type: string(25), notnull: true, default: '' }
     Descripcion: { type: string(255), notnull: true, default: '' }
     Unidades: { type: decimal(2), notnull: true, default: '0.00' }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
   relations:
   

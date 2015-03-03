@@ -105,7 +105,7 @@ ServServicios:
       permission: null
       link: { route: null, param: null, title: null, target: null, link: null }
       #aditional_filter: { order: 1, caption: IdFamilia, entity: ServFamilias, method: fetchAll, params: Titulo, type: select, operator: '=', event: null }
-      validator: { nullable: NO, type: integer, length: '11', min: null, max: null, message: 'Valor Requerido' }
+      validator: { nullable: NO, type: integer, length: '30', min: null, max: null, message: 'Valor Requerido' }
     Titulo:
       title: Título
       filter: YES
@@ -521,9 +521,9 @@ ServServicios:
       #aditional_filter: { order: 15, caption: UrlHeritable, entity: ValoresSN, method: fetchAll, params: Descripcion, type: select, operator: '=', event: null }
       validator: { nullable: NO, type: tinyint, length: '1', min: null, max: null, message: 'Valor Requerido' }
     NumberVisits:
-      title: NumberVisits
+      title: Visitas
       filter: NO
-      list: NO
+      list: YES
       visible: true
       updatable: true
       default: '0'

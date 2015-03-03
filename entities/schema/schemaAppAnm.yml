@@ -7,7 +7,7 @@ AnmCategorias:
     Subtitulo:   { type: string(255), notnull: false, default: NULL }
     Resumen:     { type: text, notnull: false }
     EsExotico:   { type: tinyint, notnull: true, defatul: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
   relations:
     
 AnmAnimales:
@@ -29,7 +29,7 @@ AnmAnimales:
     TamanoPuesta:        { type: string(50), notnull: false }
     PeriodoIncubacion:   { type: string(50), notnull: false }
     EdadSalidaNido:      { type: string(50), notnull: false }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
   relations:
     
 AnmEnfermedades:
@@ -38,5 +38,5 @@ AnmEnfermedades:
     Titulo:      { type: string(255), notnull: true, index: index }
     Subtitulo:   { type: string(255), notnull: false, default: NULL }
     Resumen:     { type: text, notnull: false }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
   relations:      

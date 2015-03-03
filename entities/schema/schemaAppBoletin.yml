@@ -5,7 +5,7 @@ BolTipos:
   comment: Tipos de Boletines
   columns:
     Titulo: { type: string(255), notnull: true }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
    
 # Formatos de Boletines
@@ -17,7 +17,7 @@ BolFormatos:
     PlantillaHtm:          { type: string(255), notnull: true, default: 'plantillaBoletin1.htm' }    
     Css:                   { type: text, notnull: false }
     Html:                  { type: text, notnull: false }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     
 # Boletines    
@@ -29,7 +29,7 @@ BolBoletines:
     Subtitulo: { type: string(255), notnull: false }
     Resumen:   { type: text, notnull: false }
     IDFormato: { type: int(11), notnull: true, index: index, comment: 'db,BolFormatos,Id' }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IDTipo:    { ForeignEntity: BolTipos, ForeignId: Id} 
     IDFormato: { ForeignEntity: BolFormatos, ForeignId: Id }
@@ -45,6 +45,6 @@ BolEnvios:
     Estado:       { type: tinyint(1), notnull: true, default: 0 }
     Errores:      { type: text, notnull: false }
     ArchivoHtml : { type: string(255), notnull: false }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IDBoletin:  { ForeignEntity: BolBoletines, ForeignId: Id}     

@@ -4,7 +4,7 @@ CommZonasHorarias:
   comment: Zonas Horarias mundiales
   columns:
     Zona: { type: string(255), notnul: true }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
 
 CommMonedas:
   comment: Monedas mundiales
@@ -12,14 +12,14 @@ CommMonedas:
     Codigo:  { type: string(3), notnull: true }
     Moneda:  { type: string(255), notnull: true }
     Simbolo: { type: string(255), notnull: false }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
 
 CommIdiomas:
   comment: Idiomas mundiales
   columns:
     Codigo: { type: string(2), notnull: true }
     Idioma: { type: string(255), notnull: true }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
 
 CommPaises:
   comment: Paises del mundo
@@ -30,7 +30,7 @@ CommPaises:
     IdZonaHoraria: { type: bigint(11), notnull: false, default: 0, index: index, comment: 'db,CommZonasHorarias,Id' }
     Latitud:       { type: float, notnull: true, default: 0 }
     Longitud:      { type: float, notnull: true, default: 0 }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdMoneda:      { ForeignEntity: CommMonedas, ForeignId: Id }
     IdZonaHoraria: { ForeignEntity: CommZonasHorarias, ForeignId: Id }
@@ -41,7 +41,7 @@ CommProvincias:
     IdPais:    { type: bigint(11), notnull: true, default: 0, index: index, comment: 'db,CommPaises,Id' }
     Codigo:    { type: string(5), notnull: true }
     Provincia: { type: string(255), notnull: true }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdPais: { ForeignEntity: CommPaises, ForeignId: Id }
 
@@ -53,7 +53,7 @@ CommMunicipios:
     Codigo:        { type: string(5), notnull: true }
     DigitoControl: { type: string(2), notnull: true }
     Municipio: { type: string(255), notnull: true, index: index }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdPais:      { ForeignEntity: CommPaises, ForeignId: Id }
     IdProvincia: { ForeignEntity: CommProvincias, ForeignId: Id }
@@ -63,7 +63,7 @@ CommBancos:
   columns:
     Codigo: { type: string(4), notnull: true }
     Nombre: { type: string(255), notnull: true }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
 
 CommBancosOficinas:
   comment: Oficinas bancarias
@@ -80,7 +80,7 @@ CommBancosOficinas:
     Fax:          { type: string(50), notnull: false, default: NULL }
     Web:          { type: string(50), notnull: false, default: NULL }
     EMail:        { type: string(50), notnull: false, default: NULL }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdBanco:     { ForeignEntity: CommBancos, ForeignId: Id }
     IdProvincia: { ForeignEntity: CommProvincias, ForeignId: Id }
@@ -94,7 +94,7 @@ CommImpuestos:
     Valor:     { type: decimal(10), notnull: true, default: 0 }
     Recargo:   { type: decimal(10), notnull: true, default: 0 }
     Retencion: { type: decimal(10), notnull: true, default: 0 }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdPais: { ForeignEntity: CommPaises, ForeignId: Id }
 
@@ -103,5 +103,5 @@ CommCnae:
   columns:
     Codigo:    { type: string(10), notnull: true, index: unique }
     Actividad: { type: string(255), notnull: true}
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:

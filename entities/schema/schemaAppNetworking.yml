@@ -21,5 +21,5 @@ Networking:
     ColorFondo:    { type: tinyint(1),  notnull: true, default: 0, index: index, comment: 'abstract,RedesSocialesColoresFondo,IDTipo'}
     ColorBorde:    { type: string(25),  notnull: false }
     Count:         { type: tinyint(1),  notnull: true, default: 0, index: index, comment: 'abstract,RedesSocialesCounts,IDTipo'}
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:

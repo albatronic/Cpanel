@@ -13,4 +13,4 @@ BlogComentarios:
     Email:      { type: string(100), notnull: true }
     TiempoUnix: { type: bigint(20), notnull: true, default: 0 }
     Comentario: { type: text, notnull: true }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>    

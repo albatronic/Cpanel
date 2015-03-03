@@ -1,40 +1,34 @@
 <?php
 
 /**
- * @author Sergio Perez <sergio.perez@albatronic.com>
- * @copyright INFORMATICA ALBATRONIC SL
- * @date 06.11.2012 23:55:15
+ * @copyright GRUPO TREVENQUE
+ * @date 03.03.2015 23:33:14
  */
 
 /**
- * @orm:Entity(CpanVariables)
+ * @orm:Entity(CpanMapeoUrls)
  */
-class CpanVariablesEntity extends EntityComunes {
+class CpanMapeoUrlsEntity extends EntityComunes {
 
     /**
      * @orm GeneratedValue
      * @orm Id
      * @var integer
-     * @assert NotBlank(groups="CpanVariables")
+     * @assert NotBlank(groups="CpanMapeoUrls")
      */
     protected $Id;
 
     /**
-     * @var integer
-     * @assert NotBlank(groups="CpanVariables")
+     * @var string
+     * @assert NotBlank(groups="CpanMapeoUrls")
      */
-    protected $IdProyectosApps;
+    protected $UrlOrigen;
 
     /**
      * @var string
-     * @assert NotBlank(groups="CpanVariables")
+     * @assert NotBlank(groups="CpanMapeoUrls")
      */
-    protected $Variable;
-
-    /**
-     * @var string
-     */
-    protected $Yml;
+    protected $UrlDestino;
 
     /**
      * Nombre de la conexion a la BD
@@ -46,7 +40,7 @@ class CpanVariablesEntity extends EntityComunes {
      * Nombre de la tabla física
      * @var string
      */
-    protected $_tableName = 'CpanVariables';
+    protected $_tableName = 'CpanMapeoUrls';
 
     /**
      * Nombre de la PrimaryKey
@@ -86,28 +80,23 @@ class CpanVariablesEntity extends EntityComunes {
         return $this->Id;
     }
 
-    public function setIdProyectosApps($IdProyectosApps) {
-        $this->IdProyectosApps = $IdProyectosApps;
+    public function setUrlOrigen($UrlOrigen) {
+        $this->UrlOrigen = trim($UrlOrigen);
     }
 
-    public function getIdProyectosApps() {
-        return $this->IdProyectosApps;
+    public function getUrlOrigen() {
+        return $this->UrlOrigen;
     }
 
-    public function setVariable($Variable) {
-        $this->Variable = trim($Variable);
+    public function setUrlDestino($UrlDestino) {
+        $this->UrlDestino = trim($UrlDestino);
     }
 
-    public function getVariable() {
-        return $this->Variable;
-    }
-
-    public function setYml($Yml) {
-        $this->Yml = trim($Yml);
-    }
-
-    public function getYml() {
-        return $this->Yml;
+    public function getUrlDestino() {
+        return $this->UrlDestino;
     }
 
 }
+
+// END class CpanMapeoUrls
+

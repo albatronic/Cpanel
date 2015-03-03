@@ -4,11 +4,11 @@ CpanAplicaciones:
 
 CpanModulos:
   Blog0: { CodigoApp: Blog, NombreModulo: Blog,             Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Gestor del Blog, Funcionalidades: AC }
-  Blog1: { CodigoApp: Blog, NombreModulo: BlogComentarios,  Nivel: 1, BelongsTo: Blog,  Publish: 1, Titulo: Comentarios del Blog, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Blog1: { CodigoApp: Blog, NombreModulo: BlogComentarios,  Nivel: 1, BelongsTo: Blog,  Publish: 1, Titulo: Comentarios del Blog, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Blog0: { IdPerfil: 1, NombreModulo: Blog, Funcionalidades: 'AC,VW' }
-  Blog1: { IdPerfil: 1, NombreModulo: BlogComentarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Blog1: { IdPerfil: 1, NombreModulo: BlogComentarios, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
   Blog10: { IdPerfil: 2, NombreModulo: Blog, Funcionalidades: 'AC,VW' }
-  Blog11: { IdPerfil: 2, NombreModulo: BlogComentarios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Blog11: { IdPerfil: 2, NombreModulo: BlogComentarios, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}

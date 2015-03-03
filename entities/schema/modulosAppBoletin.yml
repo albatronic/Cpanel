@@ -9,18 +9,18 @@ CpanAplicaciones:
 
 CpanModulos:
   Bol0: { CodigoApp: Bol, NombreModulo: Bol,          Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Gestor Boletines, Funcionalidades: AC }
-  Bol1: { CodigoApp: Bol, NombreModulo: BolTipos,     Nivel: 1, BelongsTo: Bol,  Publish: 1, Titulo: Tipos de Boletines, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Bol2: { CodigoApp: Bol, NombreModulo: BolFormatos,  Nivel: 1, BelongsTo: Bol,  Publish: 1, Titulo: Formatos de Boletines, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Bol3: { CodigoApp: Bol, NombreModulo: BolBoletines, Nivel: 1, BelongsTo: Bol,  Publish: 1, Titulo: Boletines, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Bol1: { CodigoApp: Bol, NombreModulo: BolTipos,     Nivel: 1, BelongsTo: Bol,  Publish: 1, Titulo: Tipos de Boletines, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Bol2: { CodigoApp: Bol, NombreModulo: BolFormatos,  Nivel: 1, BelongsTo: Bol,  Publish: 1, Titulo: Formatos de Boletines, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Bol3: { CodigoApp: Bol, NombreModulo: BolBoletines, Nivel: 1, BelongsTo: Bol,  Publish: 1, Titulo: Boletines, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Bol1: { IdPerfil: 1, NombreModulo: Bol, Funcionalidades: 'AC,VW' }
-  Bol2: { IdPerfil: 1, NombreModulo: BolTipos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Bol3: { IdPerfil: 1, NombreModulo: BolFormatos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Bol4: { IdPerfil: 1, NombreModulo: BolBoletines, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Bol2: { IdPerfil: 1, NombreModulo: BolTipos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Bol3: { IdPerfil: 1, NombreModulo: BolFormatos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Bol4: { IdPerfil: 1, NombreModulo: BolBoletines, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
   Bol11: { IdPerfil: 2, NombreModulo: Bol, Funcionalidades: 'AC,VW' }
-  Bol12: { IdPerfil: 2, NombreModulo: BolTipos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Bol13: { IdPerfil: 2, NombreModulo: BolFormatos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Bol14: { IdPerfil: 2, NombreModulo: BolBoletines, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Bol12: { IdPerfil: 2, NombreModulo: BolTipos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Bol13: { IdPerfil: 2, NombreModulo: BolFormatos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Bol14: { IdPerfil: 2, NombreModulo: BolBoletines, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 

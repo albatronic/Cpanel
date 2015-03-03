@@ -4,12 +4,12 @@ CpanAplicaciones:
 
 CpanModulos:
   Visit0: { CodigoApp: Visit, NombreModulo: Visit,             Nivel: 0, BelongsTo: 0,     Publish: 1, Titulo: Gestor Visitas Web, Funcionalidades: AC }
-  Visit1: { CodigoApp: Visit, NombreModulo: VisitVisitas,      Nivel: 1, BelongsTo: Visit,  Publish: 1, Titulo: Visitas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Visit1: { CodigoApp: Visit, NombreModulo: VisitVisitas,      Nivel: 1, BelongsTo: Visit,  Publish: 1, Titulo: Visitas, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Visit1: { IdPerfil: 1, NombreModulo: Visit, Funcionalidades: 'AC,VW' }
-  Visit2: { IdPerfil: 1, NombreModulo: VisitVisitas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Visit2: { IdPerfil: 1, NombreModulo: VisitVisitas, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
   Visit11: { IdPerfil: 2, NombreModulo: Visit, Funcionalidades: 'AC,VW' }
-  Visit12: { IdPerfil: 2, NombreModulo: VisitVisitas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Visit12: { IdPerfil: 2, NombreModulo: VisitVisitas, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 

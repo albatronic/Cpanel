@@ -4,7 +4,7 @@ EtiqEtiquetas:
   columns:
     IdModulo: { type: bigint(11), notnull: true, index: index, comment: 'db,CpanModulos,Id'}
     Etiqueta: { type: string(255), notnull: true, index: unique }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdModulo : { ForeignEntity: CpanModulos, ForeignId: Id }
 
@@ -15,6 +15,6 @@ EtiqRelaciones:
     IdModulo:   { type: bigint(11), notnull: true, index: index, comment: 'db,CpanModulos,Id'}
     IdEntidad:  { type: bigint(11), notnull: true, default: 0 }
     IdEtiqueta: { type: bigint(11), notnull: true, index: index, comment: 'db,EtiqEtiquetas,Id'}
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdEtiqueta : { ForeignEntity: EtiqEtiquetas, ForeignId: Id }    

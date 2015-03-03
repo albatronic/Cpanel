@@ -10,7 +10,7 @@ Widgets:
     AfterWidget:  { type: string(500), notnull: false, default: "</aside>" }
     Controllers:  { type: string(500), notnull: false, default: NULL }
     Widgets:      { type: text, notnull: false, default: NULL }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
    

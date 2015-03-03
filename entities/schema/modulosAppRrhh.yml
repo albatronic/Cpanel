@@ -5,17 +5,17 @@ CpanAplicaciones:
 
 CpanModulos:
   Rrhh1: { CodigoApp: Rrhh,  NombreModulo: Rrhh,         Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Rrhh, Funcionalidades: AC }
-  Rrhh2: { CodigoApp: Rrhh,  NombreModulo: RrhhDptos,    Nivel: 1, BelongsTo: Rrhh,  Publish: 1, Titulo: Departamentos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
-  Rrhh3: { CodigoApp: Rrhh,  NombreModulo: RrhhPuestos,  Nivel: 1, BelongsTo: Rrhh,  Publish: 1, Titulo: Puestos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Rrhh4: { CodigoApp: Rrhh,  NombreModulo: RrhhPersonal, Nivel: 1, BelongsTo: Rrhh,  Publish: 1, Titulo: Personal, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Rrhh2: { CodigoApp: Rrhh,  NombreModulo: RrhhDptos,    Nivel: 1, BelongsTo: Rrhh,  Publish: 1, Titulo: Departamentos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  
+  Rrhh3: { CodigoApp: Rrhh,  NombreModulo: RrhhPuestos,  Nivel: 1, BelongsTo: Rrhh,  Publish: 1, Titulo: Puestos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Rrhh4: { CodigoApp: Rrhh,  NombreModulo: RrhhPersonal, Nivel: 1, BelongsTo: Rrhh,  Publish: 1, Titulo: Personal, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Rrhh1:  { IdPerfil: 1, NombreModulo: Rrhh,         Funcionalidades: 'AC,VW' }
-  Rrhh2:  { IdPerfil: 1, NombreModulo: RrhhDptos,    Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
-  Rrhh3:  { IdPerfil: 1, NombreModulo: RrhhPuestos,  Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Rrhh4:  { IdPerfil: 1, NombreModulo: RrhhPersonal, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Rrhh2:  { IdPerfil: 1, NombreModulo: RrhhDptos,    Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  
+  Rrhh3:  { IdPerfil: 1, NombreModulo: RrhhPuestos,  Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Rrhh4:  { IdPerfil: 1, NombreModulo: RrhhPersonal, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
   Rrhh11: { IdPerfil: 2, NombreModulo: Rrhh,         Funcionalidades: 'AC,VW' }
-  Rrhh12: { IdPerfil: 2, NombreModulo: RrhhDptos,    Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}    
-  Rrhh13: { IdPerfil: 2, NombreModulo: RrhhPuestos,  Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Rrhh14: { IdPerfil: 2, NombreModulo: RrhhPersonal, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Rrhh12: { IdPerfil: 2, NombreModulo: RrhhDptos,    Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}    
+  Rrhh13: { IdPerfil: 2, NombreModulo: RrhhPuestos,  Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Rrhh14: { IdPerfil: 2, NombreModulo: RrhhPersonal, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}

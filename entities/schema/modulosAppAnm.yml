@@ -5,18 +5,18 @@ CpanAplicaciones:
 
 CpanModulos:
   Anm1: { CodigoApp: Anm,  NombreModulo: Anm,             Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Anm, Funcionalidades: AC }
-  Anm2: { CodigoApp: Anm,  NombreModulo: AnmCategorias,   Nivel: 1, BelongsTo: Anm,  Publish: 1, Titulo: Categorías, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Anm3: { CodigoApp: Anm,  NombreModulo: AnmAnimales,     Nivel: 1, BelongsTo: Anm,  Publish: 1, Titulo: Animales, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Anm4: { CodigoApp: Anm,  NombreModulo: AnmEnfermedades, Nivel: 1, BelongsTo: Anm,  Publish: 1, Titulo: Enfermedades, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Anm2: { CodigoApp: Anm,  NombreModulo: AnmCategorias,   Nivel: 1, BelongsTo: Anm,  Publish: 1, Titulo: Categorías, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Anm3: { CodigoApp: Anm,  NombreModulo: AnmAnimales,     Nivel: 1, BelongsTo: Anm,  Publish: 1, Titulo: Animales, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Anm4: { CodigoApp: Anm,  NombreModulo: AnmEnfermedades, Nivel: 1, BelongsTo: Anm,  Publish: 1, Titulo: Enfermedades, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Anm1: { IdPerfil: 1, NombreModulo: Anm, Funcionalidades: 'AC,VW' }
-  Anm2: { IdPerfil: 1, NombreModulo: AnmCategorias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Anm3: { IdPerfil: 1, NombreModulo: AnmAnimales, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Anm4: { IdPerfil: 1, NombreModulo: AnmEnfermedades, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Anm2: { IdPerfil: 1, NombreModulo: AnmCategorias, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Anm3: { IdPerfil: 1, NombreModulo: AnmAnimales, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Anm4: { IdPerfil: 1, NombreModulo: AnmEnfermedades, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
   Anm11: { IdPerfil: 2, NombreModulo: Anm, Funcionalidades: 'AC,VW' }
-  Anm21: { IdPerfil: 2, NombreModulo: AnmCategorias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Anm31: { IdPerfil: 2, NombreModulo: AnmAnimales, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Anm41: { IdPerfil: 2, NombreModulo: AnmEnfermedades, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Anm21: { IdPerfil: 2, NombreModulo: AnmCategorias, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Anm31: { IdPerfil: 2, NombreModulo: AnmAnimales, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Anm41: { IdPerfil: 2, NombreModulo: AnmEnfermedades, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 

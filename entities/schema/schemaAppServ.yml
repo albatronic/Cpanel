@@ -7,7 +7,7 @@ ServFamilias:
     Titulo: { type: string(255), notnull: true }
     Subtitulo: { type: string(255), notnull: false }
     Resumen: { type: text, notnull: false }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
 # SERVICIOS
@@ -25,7 +25,7 @@ ServServicios:
     MostrarEnListadoOrden: { type: integer(11), notnull: true, default: 0, index: index }
     TieneDesarrollo: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
     MuestraEjemplos: { type: tinyint(1), notnull: true, default: 0, index: index, comment: 'Abstract,ValoresSN,IDTipo' }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdEtiqueta : { ForeignEntity: ServFamilias, ForeignId: Id }    
     

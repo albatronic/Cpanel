@@ -40,7 +40,7 @@ GconSecciones:
     CriterioOrdenContenidosHijos: { type: string(255), notnull: true, default: 'SortOrder ASC', index: index, comment: 'abstract,CriteriosOrdenContenidosHijos,IDTipo'}
     MostrarSubsecciones:          { type: tinyint, notnull: true, default: 1, index: index, comment: 'abstract,ValoresSN,IDTipo' }
     NivelJerarquico:              { type: integer(4), notnull: true, default: 1 }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
 # LOS CONTENIDOS PROPIAMENTE DICHOS
@@ -67,6 +67,6 @@ GconContenidos:
     NoticiaOrden:                 { type: integer(11), notnull: true, default: 0, index: index}
     EsEvento:                     { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' }
     EsWiki:                       { type: tinyint, notnull: true, default: 0, index: index, comment: 'abstract,ValoresSN,IDTipo' } 
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdSeccion: { ForeignEntity: GconSecciones, ForeignId: Id }

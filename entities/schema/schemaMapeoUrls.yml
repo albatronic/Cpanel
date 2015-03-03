@@ -1,0 +1,10 @@
+# ------------------------------
+# MAPEADO DE URLS PARA HACER SEO
+# ------------------------------
+
+CpanMapeoUrls:
+  columns:
+    UrlOrigen:    { type: string(255), notnull: true, index: Unique}
+    UrlDestino:   { type: string(255), notnull: true }
+    <?php include '../..//entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+  relations:

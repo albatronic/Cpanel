@@ -9,14 +9,14 @@ CpanAplicaciones:
 
 CpanModulos:
   Serv1: { CodigoApp: Serv,  NombreModulo: Serv,          Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Serv, Funcionalidades: AC }
-  Serv2: { CodigoApp: Serv,  NombreModulo: ServFamilias, Nivel: 1, BelongsTo: Serv,  Publish: 1, Titulo: Familias de Servicios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
-  Serv3: { CodigoApp: Serv,  NombreModulo: ServServicios,    Nivel: 1, BelongsTo: Serv,  Publish: 1, Titulo: Servicios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Serv2: { CodigoApp: Serv,  NombreModulo: ServFamilias, Nivel: 1, BelongsTo: Serv,  Publish: 1, Titulo: Familias de Servicios, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  
+  Serv3: { CodigoApp: Serv,  NombreModulo: ServServicios,    Nivel: 1, BelongsTo: Serv,  Publish: 1, Titulo: Servicios, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Vid1:  { IdPerfil: 1, NombreModulo: Serv, Funcionalidades: 'AC,VW' }
-  Vid2:  { IdPerfil: 1, NombreModulo: ServFamilias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
-  Vid3:  { IdPerfil: 1, NombreModulo: ServServicios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Vid2:  { IdPerfil: 1, NombreModulo: ServFamilias, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  
+  Vid3:  { IdPerfil: 1, NombreModulo: ServServicios, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
   Vid11: { IdPerfil: 2, NombreModulo: Serv, Funcionalidades: 'AC,VW' }
-  Vid12: { IdPerfil: 2, NombreModulo: ServFamilias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}    
-  Vid13: { IdPerfil: 2, NombreModulo: ServServicios, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Vid12: { IdPerfil: 2, NombreModulo: ServFamilias, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}    
+  Vid13: { IdPerfil: 2, NombreModulo: ServServicios, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}

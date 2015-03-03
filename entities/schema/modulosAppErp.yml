@@ -5,23 +5,23 @@ CpanAplicaciones:
 
 CpanModulos:
   Erp0: { CodigoApp: Erp, NombreModulo: Erp,                 Nivel: 0, Publish: 1, Titulo: Catálogo de Productos, Funcionalidades: AC }
-  Erp1: { CodigoApp: Erp, NombreModulo: ErpFamilias,         Nivel: 1, Publish: 1, Titulo: Familias, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Erp2: { CodigoApp: Erp, NombreModulo: ErpMarcas,           Nivel: 1, Publish: 1, Titulo: Marcas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Erp3: { CodigoApp: Erp, NombreModulo: ErpPropiedades,      Nivel: 1, Publish: 1, Titulo: Propiedades de los productos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Erp4: { CodigoApp: Erp, NombreModulo: ErpArticulosEstados, Nivel: 1, Publish: 1, Titulo: Estados de los productos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>} 
-  Erp5: { CodigoApp: Erp, NombreModulo: ErpArticulos,        Nivel: 1, Publish: 1, Titulo: Productos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
+  Erp1: { CodigoApp: Erp, NombreModulo: ErpFamilias,         Nivel: 1, Publish: 1, Titulo: Familias, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Erp2: { CodigoApp: Erp, NombreModulo: ErpMarcas,           Nivel: 1, Publish: 1, Titulo: Marcas, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Erp3: { CodigoApp: Erp, NombreModulo: ErpPropiedades,      Nivel: 1, Publish: 1, Titulo: Propiedades de los productos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Erp4: { CodigoApp: Erp, NombreModulo: ErpArticulosEstados, Nivel: 1, Publish: 1, Titulo: Estados de los productos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>} 
+  Erp5: { CodigoApp: Erp, NombreModulo: ErpArticulos,        Nivel: 1, Publish: 1, Titulo: Productos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  
   
 CpanPermisos:
   Erp1: { IdPerfil: 1, NombreModulo: Erp,                 Funcionalidades: 'AC,VW' }
-  Erp2: { IdPerfil: 1, NombreModulo: ErpFamilias,         Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Erp3: { IdPerfil: 1, NombreModulo: ErpMarcas,           Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Erp4: { IdPerfil: 1, NombreModulo: ErpPropiedades,      Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Erp5: { IdPerfil: 1, NombreModulo: ErpArticulosEstados, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
-  Erp6: { IdPerfil: 1, NombreModulo: ErpArticulos,        Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Erp2: { IdPerfil: 1, NombreModulo: ErpFamilias,         Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Erp3: { IdPerfil: 1, NombreModulo: ErpMarcas,           Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Erp4: { IdPerfil: 1, NombreModulo: ErpPropiedades,      Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Erp5: { IdPerfil: 1, NombreModulo: ErpArticulosEstados, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  
+  Erp6: { IdPerfil: 1, NombreModulo: ErpArticulos,        Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
   
   Erp11: { IdPerfil: 2, NombreModulo: Erp,                 Funcionalidades: 'AC,VW' }
-  Erp21: { IdPerfil: 2, NombreModulo: ErpFamilias,         Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Erp31: { IdPerfil: 2, NombreModulo: ErpMarcas,           Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Erp41: { IdPerfil: 2, NombreModulo: ErpPropiedades,      Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  Erp51: { IdPerfil: 2, NombreModulo: ErpArticulosEstados, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
-  Erp61: { IdPerfil: 2, NombreModulo: ErpArticulos,        Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
+  Erp21: { IdPerfil: 2, NombreModulo: ErpFamilias,         Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Erp31: { IdPerfil: 2, NombreModulo: ErpMarcas,           Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Erp41: { IdPerfil: 2, NombreModulo: ErpPropiedades,      Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  Erp51: { IdPerfil: 2, NombreModulo: ErpArticulosEstados, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  
+  Erp61: { IdPerfil: 2, NombreModulo: ErpArticulos,        Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  

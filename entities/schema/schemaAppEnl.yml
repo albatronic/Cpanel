@@ -7,7 +7,7 @@ EnlSecciones:
     Titulo:      { type: string(255), notnull: true}
     Subtitulo:   { type: string(255), notnull: false, default: NULL }
     Resumen:     { type: text, default: NULL }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
 EnlEnlaces:
@@ -16,6 +16,6 @@ EnlEnlaces:
     Titulo:       { type: string(255), notnull: true }
     Subtitulo:    { type: string(255), notnull: false, default: NULL }
     Resumen:      { type: text, default: NULL }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdSeccion:    { ForeignEntity: EnlSecciones, ForeignId: Id}

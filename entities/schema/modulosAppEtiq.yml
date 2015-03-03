@@ -4,12 +4,12 @@ CpanAplicaciones:
 
 CpanModulos:
   Etiq1: { CodigoApp: Etiq,  NombreModulo: Etiq,     Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Etiq, Funcionalidades: AC }
-  Etiq2: { CodigoApp: Etiq,  NombreModulo: EtiqEtiquetas,  Nivel: 1, BelongsTo: Etiq,  Publish: 1, Titulo: Etiquetas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Etiq2: { CodigoApp: Etiq,  NombreModulo: EtiqEtiquetas,  Nivel: 1, BelongsTo: Etiq,  Publish: 1, Titulo: Etiquetas, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Etiq1:  { IdPerfil: 1, NombreModulo: Etiq, Funcionalidades: 'AC,VW' }
-  Etiq2:  { IdPerfil: 1, NombreModulo: EtiqEtiquetas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Etiq2:  { IdPerfil: 1, NombreModulo: EtiqEtiquetas, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
   Etiq11: { IdPerfil: 2, NombreModulo: Etiq, Funcionalidades: 'AC,VW' }
-  Etiq21: { IdPerfil: 2, NombreModulo: EtiqEtiquetas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Etiq21: { IdPerfil: 2, NombreModulo: EtiqEtiquetas, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 

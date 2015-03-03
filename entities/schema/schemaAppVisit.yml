@@ -33,7 +33,7 @@ VisitVisitas:
     AolVersion:     { type: string(255), notnull: false }
     IsChromeFrame:  { type: tinyint(1), notnull: true, default: 0 }
     Resolution:     { type: string(25), notnull: false }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
     
 # ITINERARIOS VISITAS
 VisitVisitasItinerarios:
@@ -45,7 +45,7 @@ VisitVisitasItinerarios:
     IdEntidad:      { type: bigint(11), notnull: true}
     TiempoUnix:     { type: bigint(20), notnull: true, default: 0 }
     SegundosVisita: { type: integer, notnull: true, default: 0 }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdVisita : { ForeignEntity: CpanVisitas, ForeignId: Id }
 
@@ -56,4 +56,4 @@ VisitVisitasTemporal:
     Sesion:        { type: string(50), notnull: true }
     IdUrlAmigable: { type: bigint(11), notnull: true }
     TiempoUnix:    { type: bigint(20), notnull: true, default: 0 }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>

@@ -13,7 +13,7 @@ RrhhDptos:
     Titulo:    { type: string(255), notnull: true }
     Subtitulo: { type: string(255), notnull: false, default: NULL }
     Resumen:   { type: text, notnull: false }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
 # Puestos de trabajo
@@ -23,7 +23,7 @@ RrhhPuestos:
     Titulo:    { type: string(255), notnull: true }
     Subtitulo: { type: string(255), notnull: false, default: NULL }
     Resumen:   { type: string(500), notnull: false, default: NULL }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
 # Personal
@@ -48,5 +48,5 @@ RrhhPersonal:
     Facebook: { type: string(100), notnull: false }
     Twitter: { type: string(100), notnull: false }
     Linkedin: { type: string(100), notnull: false }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations: 

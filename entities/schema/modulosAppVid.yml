@@ -9,14 +9,14 @@ CpanAplicaciones:
 
 CpanModulos:
   Vid1: { CodigoApp: Vid,  NombreModulo: Vid,          Nivel: 0, BelongsTo: 0,    Publish: 1, Titulo: Vid, Funcionalidades: AC }
-  Vid2: { CodigoApp: Vid,  NombreModulo: VidSecciones, Nivel: 1, BelongsTo: Vid,  Publish: 1, Titulo: Secciones de Vídeos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
-  Vid3: { CodigoApp: Vid,  NombreModulo: VidVideos,    Nivel: 1, BelongsTo: Vid,  Publish: 1, Titulo: Vídeos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Vid2: { CodigoApp: Vid,  NombreModulo: VidSecciones, Nivel: 1, BelongsTo: Vid,  Publish: 1, Titulo: Secciones de Vídeos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  
+  Vid3: { CodigoApp: Vid,  NombreModulo: VidVideos,    Nivel: 1, BelongsTo: Vid,  Publish: 1, Titulo: Vídeos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   Vid1:  { IdPerfil: 1, NombreModulo: Vid, Funcionalidades: 'AC,VW' }
-  Vid2:  { IdPerfil: 1, NombreModulo: VidSecciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
-  Vid3:  { IdPerfil: 1, NombreModulo: VidVideos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Vid2:  { IdPerfil: 1, NombreModulo: VidSecciones, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  
+  Vid3:  { IdPerfil: 1, NombreModulo: VidVideos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
   Vid11: { IdPerfil: 2, NombreModulo: Vid, Funcionalidades: 'AC,VW' }
-  Vid12: { IdPerfil: 2, NombreModulo: VidSecciones, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}    
-  Vid13: { IdPerfil: 2, NombreModulo: VidVideos, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  Vid12: { IdPerfil: 2, NombreModulo: VidSecciones, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}    
+  Vid13: { IdPerfil: 2, NombreModulo: VidVideos, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}

@@ -6,7 +6,7 @@ PcaeGruposEmpresas:
   comment: Agrupaciones de empresas
   columns:
     Descripcion: {type: string(100), notnull: true}
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
 PcaeEmpresas:
@@ -34,7 +34,7 @@ PcaeEmpresas:
     IdCNAE:                { type: bigint(11), notnull: false, default: 0, index: index, comment: 'db, CommCnae, Id' }
     RegistroMercantil:     { type: string(100), notnull: false, default: NULL }
     LicenciaActividad:     { type: string(100), notnull: false, default: NULL }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdGrupo:      { ForeignEntity: PcaeGruposEmpresas, ForeignId: Id }
     IdProvincia : { ForeignEntity: CommProvincias, ForeignId: Id }
@@ -56,7 +56,7 @@ PcaeProyectos:
     FechaFinPrevista:   { type: date, notnull: true, default: '0000-00-00' }
     ResponsableAE:      { type: string(255), notnull: false }
     ResponsableCliente: { type: string(255), notnull: false }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdEmpresa: { ForeignEntity: PcaeEmpresas, ForeignId: Id }
 
@@ -65,7 +65,7 @@ PcaeApps:
   columns:
     Aplicacion: { type: string(100), notnull: true }
     Url:        { type: string(255), notnull: true }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
 PcaeProyectosApps:
@@ -86,7 +86,7 @@ PcaeProyectosApps:
     User:            { type: string(255), notnull: true }
     Password:        { type: string(255), notnull: true }
     Database:        { type: string(255), notnull: true }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdProyecto: { ForeignEntity: PcaeProyectos, ForeignId: Id }
     IdApp:      { ForeignEntity: PcaeApps, ForeignId: Id }
@@ -112,7 +112,7 @@ PcaeUsuarios:
     Password:      { type: string(100), notnull: true}
     NLogin:        { type: integer, notnull: true, default: 0 }
     UltimoLogin:   { type: datetime, notnull: true, default: '0000-00-00 00:00:00'}
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdProvincia : { ForeignEntity: CommProvincias, ForeignId: Id }
     IdMunicipio : { ForeignEntity: CommMunicipios, ForeignId: Id }
@@ -122,7 +122,7 @@ PcaePerfiles:
   comment: Perfiles de usuarios del portal
   columns:
     Perfil: { type: string(25), notnull: true}
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
 
 PcaeEmpresasUsuarios:
@@ -131,7 +131,7 @@ PcaeEmpresasUsuarios:
     IdEmpresa: { type: bigint(11), notnull: true, index: index, comment: 'db, PcaeEmpresas, Id' }
     IdUsuario: { type: bigint(11), notnull: true, index: index, comment: 'db, PcaeUsuarios, Id' }
     IdPerfil:  { type: bigint(11), notnull: true, index: index, comment: 'db, PcaePerfiles, Id' }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdEmpresa: { ForeignEntity: PcaeEmpresas, ForeignId: Id }
     IdUsuario: { ForeignEntity: PcaeUsuarios, ForeignId: Id }
@@ -144,7 +144,7 @@ PcaePermisos:
     IdEmpresa:  { type: bigint(11), notnull: true, index: index, comment: 'db, PcaeEmpresas, Id' }
     IdProyecto: { type: bigint(11), notnull: true, index: index, comment: 'db, PcaeProyectos, Id' }
     IdApp:      { type: bigint(11), notnull: true, index: index, comment: 'db, PcaeApps, Id' }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdUsuario:  { ForeignEntity: PcaeUsuarios, ForeignId: Id }
     IdEmpresa:  { ForeignEntity: PcaeEmpresas, ForeignId: Id }
@@ -157,7 +157,7 @@ PcaeControlAcceso:
     IdUsuario:     { type: bigint(11), notnull: true, index: index, comment: 'db, PcaeUsuarios, Id' }
     IdProyectoApp: { type: bigint(11), notnull: true, index: index, comment: 'db, PcaeProyectosApps, Id' }
     IdSesion:      { type: string(255), notnull: true }
-    <?php include '../Cpanel/entities/schema/schemaColumnsCommon.yml'; echoln('');?>
+    <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>
   relations:
     IdUsuario: { ForeignEntity: PcaeUsuarios, ForeignId: Id }
     IdProyectoApp: { ForeignEntity: PcaeProyectosApps, ForeignId: Id }

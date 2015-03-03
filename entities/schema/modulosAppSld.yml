@@ -9,14 +9,14 @@ CpanAplicaciones:
 
 CpanModulos:
   1: { CodigoApp: Sld,  NombreModulo: Sld,         Nivel: 0, BelongsTo: 0,   Publish: 1, Titulo: Sliders, Funcionalidades: AC }
-  2: { CodigoApp: Sld,  NombreModulo: SldZonas,    Nivel: 1, BelongsTo: Sld, Publish: 1, Titulo: Zonas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  3: { CodigoApp: Sld,  NombreModulo: SldSliders,  Nivel: 1, BelongsTo: Sld, Publish: 1, Titulo: Sliders, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  2: { CodigoApp: Sld,  NombreModulo: SldZonas,    Nivel: 1, BelongsTo: Sld, Publish: 1, Titulo: Zonas, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  3: { CodigoApp: Sld,  NombreModulo: SldSliders,  Nivel: 1, BelongsTo: Sld, Publish: 1, Titulo: Sliders, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
 
 CpanPermisos:
   1:  { IdPerfil: 1, NombreModulo: Sld, Funcionalidades: 'AC,VW' }
-  2:  { IdPerfil: 1, NombreModulo: SldZonas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  3:  { IdPerfil: 1, NombreModulo: SldSliders, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
+  2:  { IdPerfil: 1, NombreModulo: SldZonas, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  3:  { IdPerfil: 1, NombreModulo: SldSliders, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
   
   11: { IdPerfil: 2, NombreModulo: Sld, Funcionalidades: 'AC,VW' }
-  12: { IdPerfil: 2, NombreModulo: SldZonas, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}
-  13: { IdPerfil: 2, NombreModulo: SldSliders, Funcionalidades: <?php include '../Cpanel/entities/schema/defaultFunctionality.yml';?>}  
+  12: { IdPerfil: 2, NombreModulo: SldZonas, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}
+  13: { IdPerfil: 2, NombreModulo: SldSliders, Funcionalidades: <?php include '../../entities/schema/defaultFunctionality.yml';?>}  
