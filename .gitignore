@@ -2,5 +2,7 @@ nbproject/
 tmp/
 log/
 docs/
-phpdoc/
-!/docs/
+config/config.yml
+.DS_Store
+error_log
+lib/error_log

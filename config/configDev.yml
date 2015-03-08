@@ -9,28 +9,21 @@ config:
   # CONTROL DE ACCESO POR IP
   ip_control: true
 
-  # FORMATOS DE EXPORTACION DE INFORMACION
-  export_types:
-    - xls
-    - xml
-    - cvs
-    - Yaml
-
   # ENTORNO DE LA APLICACION
   app:
     name: Cpanel
-    url: http://www.albatronic.com/Cpanel
+    url: http://albatronic.local
     path: /Cpanel
     framework: bin/albatronic/
-    urlParent: http://www.albatronic.com
+    urlParent: http://albatronic.local/Pcae
 
   # INFORMACION PARA SEO
   meta:
-    author: 'Albatronic Cloud Solutions'
+    author: 'Informática Albatronic, SL'
     revisitAfter: 10
     
   # SEMILLA PARA CONSTRUIR CLAVES MD5
-  semillaMD5: verano
+  semillaMD5: pablo
   
   # SERVICIO PARA CONTROL DE VISITAS  
   visitas:
@@ -68,21 +61,8 @@ config:
   
   # MOTOR DE ENVIO DE CORREOS
   mailer:
-    plugin_dir: bin/PHPMailer_5.2.1/
-    plugin_file: class.phpmailer.php
-    motor: PHPMailer
-    socket: smtp
-    port: 25
-    host: mail.albatronic.com
-    smtp_auth: true
-    user_name: info@albatronic.com
-    password: I12#34o
-    from: info@albatronic.com
-    from_name: Web Master
-    timeout: 30
-    mensajeExito: 'Su mensaje ha sido enviado correctamente.'
-    mensajeError: 'Por problemas técnicos, el mensaje no ha podido ser procesado en estos momentos.'
-    textoLOPD: '<p>Este correo electrónico y cualquier fichero adjunto a él son confidenciales y han sido creado exclusivamente para el uso de la persona a la que están dirigidos. Por ello, se informa a quien lo reciba por error que la información contenida en el mismo es reservada y su uso no autorizado está prohibido legalmente, por lo que en tal caso le rogamos nos lo comunique y proceda a borrarlo de inmediato.</p><p>La publicación, uso, diseminación, reenvío, impresión o copia no autorizados de este correo electrónico o cualquiera de los ficheros adjuntos al mismo, están estrictamente prohibidos.</p>'
+    plugin_dir: bin/Swift-5.0.0/lib/
+    plugin_file: swift_required.php
 
   # MOTOR PARA DOCUMENTOS EXCEL
   excel: bin/PHPExcel/PHPExcel.php
@@ -103,9 +83,9 @@ config:
   twig:
     motor: bin/Twig-1.11.1/lib/Twig/Autoloader.php
     templates_folder: modules
-    debug_mode: false
+    debug_mode: true
     cache_folder: tmp
-    charset: null
+    charset: utf-8
 
   # PROYECTOS Y CONEXIONES A LAS BASES DE DATOS
   # LA CARPETA DE CADA PROYECTO SE INDICA EL NODO FOLDER Y SE ENTIENDE
@@ -114,11 +94,11 @@ config:
   # EN PRODUCCION EL FOLDER SERÁ "/"
   conections:
     pcae:
-      title: Albatronic Cloud Solutions
+      title: Portal Cloud Albatronic
       description:
-      folder: /
+      folder: /Pcae
       dbEngine: mysql
       host: localhost
-      user: albatro_pacs
-      password: P12#34s
+      user: root
+      password: 
       database: albatro_pacs
