@@ -3,6 +3,7 @@ tmp/
 log/
 docs/
 config/config.yml
+config/configProd.yml
 .DS_Store
 error_log
 lib/error_log
