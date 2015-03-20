@@ -96,10 +96,17 @@ class BolBoletines extends BolBoletinesEntity {
 
         $ok = FALSE;
 
+        /**
+         * Volver a descomentar esto cuando se pueda acceder vía curl
         $filePlantilla = $_SESSION['project']['url'] . "/modules/Boletin/" . $this->getIDFormato()->getPlantillaHtm();
         $ftp = new Ftp($_SESSION['project']['ftp']);
         $resultado = $ftp->getFileContent($filePlantilla);
         $plantilla = $resultado['result'];
+         *
+         */
+        $filePlantilla = "docs/docscpanel/". $this->getIDFormato()->getPlantillaHtm();
+        $plantilla = file_get_contents($filePlantilla);
+
         if (strlen($plantilla) > 0) {
 
             $plantilla = $this->sustituyeValores($plantilla);
